@@ -1,0 +1,180 @@
+package ca.nerret.emu.emulator;
+
+public class ProgramStatusWord {
+	
+	Bit psw[];
+	
+	private short memory;
+			
+	public final static byte STICKY_BIT = 0x0;
+	public final static byte UNSIGNED = 0x1;
+	public final static byte SIGNED = 0x2;
+	public final static byte CARRY = 0x3;
+	public final static byte OVERFLOW_TRAP = 0x4;
+	public final static byte OVERFLOW = 0x5;
+	public final static byte NEGATIVE = 0x6;
+	public final static byte ZERO = 0x7;
+	public final static byte FIXED_LOGIC_ONE1 = 0x8;
+	public final static byte FIXED_LOGIC_ONE2 = 0x9;
+	public final static byte FIXED_LOGIC_ONE3 = 0xa;
+	public final static byte FIXED_LOGIC_ONE4 = 0xb;
+	public final static byte FIXED_LOGIC_ONE5 = 0xc;
+	public final static byte FIXED_LOGIC_ONE6 = 0xd;
+	public final static byte FIXED_LOGIC_ONE7 = 0xe;
+	public final static byte INTERRUPT_ENABLE = 0xf;
+	
+	public final static boolean SET = true; 
+	public final static boolean CLEAR = false;
+	
+    static final int F_ST = 0x0100;
+    static final int F_I  = 0x0200;
+    static final int F_C  = 0x0800;
+    static final int F_VT = 0x1000;
+    static final int F_V  = 0x2000;
+    static final int F_N  = 0x4000;
+    static final int F_Z  = 0x8000;
+	
+	public ProgramStatusWord()
+	{
+		psw = new Bit[16];
+
+		this.reset();
+	}
+	
+	public void reset()
+	{
+		this.memory = 0x7f00;
+		
+		psw[STICKY_BIT] = new Bit(STICKY_BIT,"ST", "Sticky Bit Flag", false);
+		psw[UNSIGNED] = new Bit(UNSIGNED,"C.!Z", "Unsigned, > Flag", false);
+		psw[SIGNED] = new Bit(SIGNED,"N+Z", "Signed, <= Flag", false);
+		psw[CARRY] = new Bit(CARRY,"C", "Carry Flag", false);
+		psw[OVERFLOW_TRAP] = new Bit(OVERFLOW_TRAP,"VT", "Overflow Trap Flag", false);
+		psw[OVERFLOW] = new Bit(OVERFLOW,"V", "Overflow Flag", false);
+		psw[NEGATIVE] = new Bit(NEGATIVE,"N", "Negative Flag", false);
+		psw[ZERO] = new Bit(ZERO,"Z", "Zero Flag", false);
+		psw[FIXED_LOGIC_ONE1] = new Bit(FIXED_LOGIC_ONE1,"\"1\"", "Fixed Logic One", true);
+		psw[FIXED_LOGIC_ONE2] = new Bit(FIXED_LOGIC_ONE2,"\"1\"", "Fixed Logic One", true);
+		psw[FIXED_LOGIC_ONE3] = new Bit(FIXED_LOGIC_ONE3,"\"1\"", "Fixed Logic One", true);
+		psw[FIXED_LOGIC_ONE4] = new Bit(FIXED_LOGIC_ONE4,"\"1\"", "Fixed Logic One", true);
+		psw[FIXED_LOGIC_ONE5] = new Bit(FIXED_LOGIC_ONE5,"\"1\"", "Fixed Logic One", true);
+		psw[FIXED_LOGIC_ONE6] = new Bit(FIXED_LOGIC_ONE6,"\"1\"", "Fixed Logic One", true);
+		psw[FIXED_LOGIC_ONE7] = new Bit(FIXED_LOGIC_ONE7,"\"1\"", "Fixed Logic One", true);
+		psw[INTERRUPT_ENABLE] = new Bit(INTERRUPT_ENABLE,"I", "Interrupt Enable", false);
+	}
+	
+	public void setBit(byte bit, boolean value)
+	{
+		this.psw[bit].value = value;
+		
+		this.memory = this.getMemory();
+	}
+	
+	public boolean getBit(byte bit) {
+		// TODO Auto-generated method stub
+		return this.psw[bit].value;
+	}
+	
+	public short getMemory()
+	{
+		for (int i = psw.length-1; i >= 0; i--)
+		{
+			this.memory <<= 1;
+			
+			if ( psw[i].value )
+			{
+				this.memory |= 1;
+			}
+			else
+			{
+				this.memory |= 0;
+			}
+		}
+		
+		return this.memory;
+	}
+	
+	
+	public String toString()
+	{
+		String toReturn = "";
+		for (int i = psw.length-1; i >= 0; i--)
+		{
+			//Bit bit : psw) {
+			toReturn += psw[i].toString() + "\n";
+
+		}
+		
+		return toReturn;
+	}
+	
+	public static void main(String[] args)
+	{
+		ProgramStatusWord psw = new ProgramStatusWord();
+		
+		psw.setBit(CARRY, SET);
+		
+		System.out.println(psw.memory);
+		System.out.println(psw);
+		psw.reset();
+		System.out.println(psw.getMemory());
+		
+		
+	}
+
+
+}
+
+class Bit {
+	
+	byte bitNo;
+	String symbol;
+	String meaning;
+	boolean value;
+	
+	public Bit(byte bitNo, String symbol, String meaning, boolean value) {
+		this.bitNo = bitNo;
+		this.symbol = symbol;
+		this.meaning = meaning;
+		this.value = value;
+	}
+	
+	public byte getBitNo() {
+		return bitNo;
+	}
+
+	public void setBitNo(byte bitNo) {
+		this.bitNo = bitNo;
+	}
+
+	public String getSymbol() {
+		return symbol;
+	}
+
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
+	}
+
+	public String getMeaning() {
+		return meaning;
+	}
+
+	public void setMeaning(String meaning) {
+		this.meaning = meaning;
+	}
+
+	public boolean getValue()
+	{
+		return this.value;
+	}
+	
+	public void setValue(boolean value)
+	{
+		this.value = value;
+	}
+	
+	public String toString() {
+		return "0x"+this.bitNo + "\t" + this.symbol + "\t" + this.meaning + "\t" + this.value;
+	}
+	
+}
