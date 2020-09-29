@@ -1,0 +1,361 @@
+200a # ROM_TO is the complement of CHECKSUM |
+200a # d417 -> one's:2be8, two's: 2be9
+
+2034 # stop interrupts
+2036 # save VIP mode
+2053 # restore VIP mode
+2058 # Initialize 4 lists, base pointer
+205c # is it done yet?
+
+2062 # Base address
+2065 # end of list, next address
+
+207b # if error, reset
+207d # next list
+
+2098 # = 1.666 for 6 and 4 cyl
+209c # PIPsC; #= 8 (PIPs per cycle)
+
+20d9 # HSI0, HSI1, HSI2?
+20dc # HSI line select
+
+2101 # error register is initialized to BC1FH on EEC power-up/initialize
+21cd \n# "Task_List_1"
+220b \n# "Task_List_2"
+2231 \n# "Task_List_3"
+
+2381 \n# UART Mode
+2382 # R34 = 1818h (CART_Status = R34 later, may change to 4040 or 9393)
+2386 # R30 = current CART_Status
+
+238b # If the buffer is not full
+238e # message check logic is exited
+
+
+2395 # RECEIVE OVERRUN ERROR
+
+2398 # message check logic is exited
+
+23a1 # BYTE_NUM is 5 or less
+23a3 # BYTE_NUM is not 5
+23a3 \w# BYTE_NUM is 4 or less
+
+23a5 # Increment BYTE_NUM
+23ac # message check logic is exited
+
+23b1 # BYTE_NUM is 5 (5 zeros received)
+23b1 \w# IF new byte = 0 (zero received)   
+23b1 \w# (sync sequence complete)
+23b1 \w# goto 241b
+
+23b3 # (first non-zero received)
+23b8 # Increment BYTE_NUM
+23ba # Store new byte in uart_msg
+
+23be \n\n# SBDS COMMAND LOGIC
+23bf \w# EEC_CHKSUM = EEC_CHKSUM
+23c6 # BYTE_NUM < 11
+23c6 \w# CART_STATUS = 1818H
+23c8 \w#  (update the check sum)
+23c8 \w#  XOR new byte
+23cb \w# exit message check logic
+
+23d1 # EEC_CHKSUM <> SBDS_CHKSUM (bad data in buffer)  
+23da # MODULE_ID <> 01 (EEC not selected) 
+
+23e3 # CMD_CODE = 82 (echo MODULE_ID to SBDS)
+23e5 # uart transmit buffer = MODULE_ID
+
+23ef # CMD_CODE = 80 (go permanently off-line)
+23f1 # CART_Status =  4040h
+
+23fa # CMD_CODE = 4 (go to CART Mode)
+23fc # 0 -> UART mode;
+23fc \w# 1 -> CART mode.
+23ff # 19200 baud
+23ff \w# 00H                2400 baud
+23ff \w# 01H                4800 baud
+23ff \w# 02H                9600 baud
+23ff \w# 03H               19200 baud
+2409 # error register is initialized to BC1FH on EEC power-up/initialize
+240d # XDCL_ERRO = BC1Fh
+240d \w# CART_Status = 9393h
+2411 
+2415 # BYTE_NUM = 0
+2415 \w# EEC_CHKSUM = 0
+
+2424 # Exit message check logic
+
+2425 \n# CART Mode (Custom Asynchronous Receiver Transmitter)
+
+#2481 # <= 3 bit 0 and/or bit 1 set, meaning:
+##2481 \w# 0     Read Bytes           Load Address (low byte) Parity
+2481 \w# 1     Read Bytes           Load Address (high byte) Bad Value
+
+24da # clear request for self test
+
+254a # address of DEFINED EEC-IV DIAGNOSTIC MODES
+254e # 0x11h = 17 DiagModes
+
+25c8 # 13 Slots;
+
+
+
+266d # 28h / 8 = 40 / 8 = 5
+2673 # inc R30 if R31 set
+2677 # KAM reg base address
+267b # clear the four (or five) KAM bytes 
+267b \w# which hold the Continuous Self Test Codes
+
+2686 # clear all bits except bit 12
+
+27a5 # initiate self test
+27a5 \w#The EEC will set a flag DCLST_START after receiving diagnostic mode code 25H.
+27a5 \w#This flag is continuously read by VIP to initiate self test.
+
+28b3 \n# DEFINED EEC-IV DIAGNOSTIC MODES
+28b4 # clear DCL error/flag bits
+28b7 # clear Continuous Self Test codes
+28ba # display status information only
+28bd # transmit PID values
+28c0 # transmit DMR values
+28c3 # transmit PID map
+28c6 # transmit DMR map
+28c9 # run Self Test (K0E0 or K0ER)
+28cc # transmit Continuous Self Test codes
+28cf # transmit PID and DMR values
+28d2 # read Parameter Identification (PID) map
+28d5 # read Direct Memory Reference (DMR) map
+28d8 # read program/data bytes
+28db # read program execution vector
+28de # read A/D substitution values
+
+28e1 # go permanently offline, disable DCL function
+28e4 # Set DCL baud rate
+
+
+2d5c # reset int mask
+2d5c \w# a1 = 1010 0001
+
+2d6e  # Console STATUS check
+2d76  # exit if no console
+2d78 # pop stack address into reg
+2d7a # load byte and zero extend to word
+2d7d # push (e009) to stack
+2d7d \w# 0x0004 + a9d0 = [a9d4] = 0xe009
+
+2da3 |## Initialise the RAM table() from InjTab table()
+2fa6 # Max degrees retard
+
+3b55 # KAMQA = 10101010 BINARY
+3b58 # KAMQB = 11000110 BINARY
+3b5b # KAMQC = 01110101 BINARY
+3b5b \n#                      KAM          KAM
+3b5b \n#                      Register     Address
+3b5b \n#                      ---------    -------
+3b5b \n#                      KAMQA        LOWEST ADDRESS OF KAM
+3b5b \n#                      KAMQB        MIDDLE ADDRESS OF KAM
+3b5b \n#                      KAMQC        HIGHEST ADDRESS OF KAM
+3b5b \n
+
+3bac # Default 80h value.
+3baf # 0x6a all 106 KAM locations.
+
+3bb7 # Loop, all KAM memory locations (106) set to 80h.
+
+3bba # KAM checksum, 0x3500 = 0x80 x 0x6a = (128 * (10*10+6))
+
+3bc2 # 29.875 * 8 = 239 = 0xEF
+
+3bd1 # ?BP?
+3be7 # ISCKAMn = 0.0 (n=0-5)
+
+3bef # clear Idle Speed KAM IPSIBR cells
+
+
+3cfc ||######
+3cfc \w# A/D Definition. 3 byte entries
+3cfc \w# byte 1   = A/D channel no (0-12)
+3cfc \w# byte 2&3 = destination address
+3cfc \w# NB AD Ch 6 (MAF) is read and saved elsewhere, to 0x124?
+3cfc \w# no Speed control system?
+3cfc \w######
+3cfd # Throttle position sensor rate
+3d00 # Voltage Calibration Level?
+3d03 # Voltage level (->793d)?
+3d06 # Open Circuit Check?
+3d09 # Exhaust Gas Oxygen sensor 2? or Speed control system?
+3d0c # Throttle position sensor (->794d)?
+3d0f # Engine Coolant Temperature?
+3d12 # Air charge temperature?
+3d15 # Auto shift posn (neutral/drive) NDS
+3d18 # Exhaust Gas Oxygen sensor 1
+3d1b # EGR Valve position
+3d1e # end of table
+
+4689 # 29.875 * 8 = 239 = 0xEF
+
+5c86 # 1024 = 1 second
+
+6fb5 # 210
+
+70dd \n######################################
+70dd \n# gets jump function index into R3A
+70dd \n#######################################
+
+70de # load diagnostic testing registers
+70e0 # function address index
+70e3 # X 2 - make into word index
+70e6 # original return address
+70e8 # push extra address (save diag vals)
+70eb # Zero 1st time only, This is return address of call x7026
+70ee # jump if first time thru here
+70f0 # return to 1st or 3rd caller
+70f2 # restore return address
+70f4 \n# Diagnostic Proc Table A
+70f5 # Diagnostic Proc Table A proc no 2
+
+7112 \n####################################################################
+7112 \n# Diagnostic proc Table A
+7112 \n# sensor error stack processing - dump out errors?
+7112 \n####################################################################
+
+711e # E11 - System PASS
+7123 # E 00 (end of errors? )
+712a # Hard Trouble Code Error Table
+712e  # load next trouble code byte into word R32
+
+7176 \n#######################################################
+7176 \n# ? DUMPS OUT HARD ERROR CODES?
+7176 \n# R32 byte has trouble code - called for every trouble code in 342 stack
+7176 \n#######################################################
+
+7182  # error code x 16 (left one hex digit)
+718c  # execute this loop error code X 16 + 1? times
+
+71a9 \n#######################################################
+71a9 \n# entry point 1
+71a9 \n# shift D4 right 16 times or until R19 == 0
+71a9 \n######################################################
+
+71c0 \n#######################################################
+71c0 \n# this proc can shortcut returns from stack - to grandcaller
+71c0 \n#######################################################
+
+7bb7 #  R16 = [718 + {2f or 2e}]
+7bbc #  clear Table from 747 or 746 down to 719
+
+7bd1 \n################################################################
+7bd1 \n# copy specified bytes to R1A onwards (77c2)
+1 \n# or where specified in R16 (77be) from GRANDCALLER subroutine.
+1 \n# gets one byte from return address of caller function.
+1 \n# gets reqd bytes from 'Grandcaller' function, and mods return addresses.
+1 \n# IN  - 1 byte (caller subroutine), NumBytes (grandcaller subroutine)
+1 \n# OUT - [R1a] or [x] onwards asigned bytes 
+7bd1 \n################################################################
+
+7bd2 # default destination is R1a onwards
+7bd6 # Caller's (normal) return address
+7bd8 # Get count of bytes, Inc return address
+7bdb # Get GrandCaller's return address
+7be3 # Get no of bytes into dest. addr
+7be8 # and push modded returns back.
+
+7d0b \n############################################################
+7d0b \n# ROM Checksum
+7d0b \n############################################################
+
+7d34 # Start address (0x2000)
+7d36 # End address  (0xdffe)
+
+7fd3 # loop until 5161 IO times have passed(12.4ms)
+
+8754 \n#############################################################
+8754 \n# memory RAM test from 100 to 8FF
+8754 \n# uses odd and even bit patterns (aaaa and 5555)
+8754 \n# and restores stack at end of test
+8754 \n############################################################|
+
+8801 \n################################################################
+8801 \n# Diagnostic proc Table A
+8801 \n# jump Table entry 0xXXXX
+8801 \n# reset lots of stuff and jump back to cycling thru procs
+8801 \n# switch out of self test to run mode ?
+8801 \n## function/maps/scalars
+8801 \n################################################################
+
+a777 # IOTimer delta time since last mSec
+a783 # *128/52083 = 1 mSec
+a7d4 # set "New second" (when R3e = 0)
+a7d7 # OK. start process
+a7dd # All zero - return (exit)
+a836 # Save word timer
+a83b # Save byte timer
+
+a9d7  # Console status
+
+a9e7 # add 5D to current IOTime
+
+a9f4 # request interrupt (in 5D IOtimes)
+
+a9fd # R30=4, a9ca+4 = a9ce, [a9ce]=e006
+
+aa02 # Console Routine, Datalogging patch inserted at 0x
+
+aa0a # R30=4, a9be+4 = a9d2, [a9d2]=c009
+
+aa1c # [2022] = 0xb000
+
+aa28 # R1a = 8
+
+aa30 \w# R1a = 8, R1c = b000, R18 = f0
+aa30 \w# R1a = 7, R1c = b43e, R18 = f2
+aa30 \w# R1a = 6, R1c = b442, R18 = f4
+aa30 \w# R1a = 5, R1c = b914, R18 = f6
+aa30 \w# R1a = 4, R1c = bab0, R18 = f8
+aa30 \w# R1a = 3, R1c = bb7a, R18 = fa
+aa30 \w# R1a = 2, R1c = c0a8, R18 = fb
+aa30 \w# R1a = 1, R1c = cb5a, R18 = fc
+
+
+
+aa64 # Original: 71,ef,45     an2b  R45,ef    Disable_isc = 0;
+
+aa6a # initialise data lists
+aa98 # next data list
+aa9a # Addresses + 0x100 for this list
+
+aa9c # next data list
+aade # next data list
+aae0 # Addresses + 0x200 for this list
+aae2 # next data list
+
+aae8 # next data list
+aaea # Addresses + 0x300 for this list
+aaec # next data list
+
+ab20 # next data list
+ab22 # Addresses + 0x400 for this list
+ab24 # next data list
+
+ab28 # End of all lists
+
+ab2c  # ISCKAMn = 0.0 (n=0-5)
+
+ab85 # KAM checksum, 0x3500 = 0x80 x 0x6a = (128 * (10*10+6))
+
+ac31 \n## Payloads - Datalogging Lists!
+
+
+b000 # Register Rf0 
+b43e # Register Rf2 
+b442 # Register Rf4 
+b914 # Register Rf6 
+bab0 # Register Rf8 
+bb7a # Register Rfa
+c0a8 # Register Rfc 
+
+c1d6 # 11469
+
+
+cb5a # Register Rfe 
