@@ -52,10 +52,10 @@
 2033: ff                  nop                    
 2034: 11,0c               clrb  Rc               HSI_Mask = 0;                     # stop interrupts
 2036: b0,2a,12            ldb   R12,R2a          Tmr_OVF_cnt = VIP_flags;          # save VIP mode
-2039: a1,24,00,14         ldw   R14,24           R14 = 24;
-203d: c2,15,00            stw   R0,[R14++]       [R14++] = 0;
-2040: 17,05               incb  R5               WDG_Timer++;
-2042: 89,ff,06,14         cmpw  R14,6ff          
+2039: a1,24,00,14         ldw   R14,24           R14 = 24;                         # 0x24h = 36
+203d: c2,15,00            stw   R0,[R14++]       [R14++] = 0;                      # set RAM at 0x24 to 0x6ff to zero
+2040: 17,05               incb  R5               WDG_Timer++;                      # increment watchdog timer
+2042: 89,ff,06,14         cmpw  R14,6ff                                            # 0x6FFh = 1791
 2046: d3,f5               jnc   203d             if (R14 < 6ff) goto 203d;
 2048: 51,60,12,14         an3b  R14,R12,60       R14 = Tmr_OVF_cnt & 60;
 204c: d7,05               jne   2053             if (R14 = 0)  {
@@ -75,9 +75,9 @@
 2070: b2,1a,1c            ldb   R1c,[R1a]        R1c = [R1a];
 2073: 92,15,1c            orb   R1c,[R14++]      R1c |= [R14++];
 2076: c6,1a,1c            stb   R1c,[R1a]        [R1a] = R1c;
-2079: 27,ed               sjmp  2068             goto 2068; }
+2079: 27,ed               sjmp  2068             goto 2068; }                      # loop, load bytes from aa68 to aa98
 
-207b: d9,b5               jgtu  2032             if (R1c > 0) goto Reset_All;      # if error, reset
+207b: d9,b5               jgtu  2032             if (R1c > 0) goto Reset_All;      # R14 = R16
 207d: a2,16,14            ldw   R14,[R16]        R14 = [R16];                      # next list
 2080: 27,da               sjmp  205c             goto 205c; }
 
@@ -88,11 +88,11 @@
 208d: ef,b5,51            call  7245             Sub_7245 ();
 2090: b3,f4,18,30         ldb   R30,[Rf4+18]     R30 = [b45a];
 2094: c7,e4,fc,30         stb   R30,[Re4+fc]     [17c] = R30;
-2098: a1,db,b6,42         ldw   R42,b6db         R42 = b6db;                       # = 1.666 for 6 and 4 cyl
-209c: b3,f6,05,30         ldb   R30,[Rf6+5]      R30 = ENGCYL;                     # PIPsC; #= 8 (PIPs per cycle)
+2098: a1,db,b6,42         ldw   R42,b6db         R42 = b6db;                       # = 0xB6DBh / 0x8000h =  1.42857 for 35% duty cycle signature  PIP.
+209c: b3,f6,05,30         ldb   R30,[Rf6+5]      R30 = ENGCYL?;                    # PIPsC; #= 8 (PIPs per cycle)
 20a0: 3b,30,04            jb    B3,R30,20a7      if (B3_R30 = 0)  {
-20a3: a1,55,d5,42         ldw   R42,d555         R42 = d555; }
-20a7: c3,e6,4c,42         stw   R42,[Re6+4c]     [2cc] = R42;
+20a3: a1,55,d5,42         ldw   R42,d555         R42 = d555; }                     # = 0xD555h / 0x8000h 1.66666 for  30%  duty cycle signature PIP 
+20a7: c3,e6,4c,42         stw   R42,[Re6+4c]     SIGKAL = R42;
 20ab: a3,fc,1a,30         ldw   R30,[Rfc+1a]     R30 = [c0c2];
 20af: c3,e8,9c,30         stw   R30,[Re8+9c]     [31c] = R30;
 20b3: c3,e8,9e,30         stw   R30,[Re8+9e]     [31e] = R30;
@@ -100,7 +100,7 @@
 20bc: c7,e8,d5,30         stb   R30,[Re8+d5]     [355] = R30;
 20c0: c7,e8,d4,30         stb   R30,[Re8+d4]     [354] = R30;
 20c4: c7,e6,ae,ba         stb   Rba,[Re6+ae]     [22e] = Rba;
-20c8: ef,5f,8a            call  ab2a             Sub_ab2a ();
+20c8: ef,5f,8a            call  ab2a             KAM_VALIDATION_PROCEDURE ();
 20cb: 11,09               clrb  R9               INT_Pend = 0;
 20cd: 32,0a,06            jnb   B2,Ra,20d6       if (HSI_Ready = 1)  {
 20d0: b0,0d,00            ldb   R0,Rd            R0 = HSI_Data;
@@ -120,9 +120,9 @@
 
 20f5: a1,98,98,30         ldw   R30,9898         R30 = 9898;
 20f9: c3,01,28,09,30      stw   R30,[R0+928]     CART_Status_928 = R30;
-20fe: b1,0f,aa            ldb   Raa,f            XFRAME = f;
+20fe: b1,0f,aa            ldb   Raa,f            XFRAME = f;                       # 0x0Fh = 15, XFRAME Block?
 2101: a1,1f,bc,30         ldw   R30,bc1f         R30 = bc1f;                       # error register is initialized to BC1FH on EEC power-up/initialize
-2105: c3,ec,b2,30         stw   R30,[Rec+b2]     DCL_ErrorFlag_532 = R30; }
+2105: c3,ec,b2,30         stw   R30,[Rec+b2]     DCL_ErrorRegister_532 = R30; }
 2109: ef,e1,41            call  62ed             Sub_62ed ();
 210c: 37,9e,05            jnb   B7,R9e,2114      if (B7_R9e = 1)  {
 210f: b1,b7,0c            ldb   Rc,b7            HSI_Mask = b7;
@@ -194,7 +194,7 @@
 
 # "Task_List_1"
 21ce: d6,a9               vect  a9d6             Check_ConsoleDI
-21d0: 52,3b               vect  3b52             Check_KAM
+21d0: 52,3b               vect  3b52             KAM_Qualification_Test_Logic
 21d2: f1,60               vect  60f1             Sub_60f1
 21d4: 02,3c               vect  3c02             Sub_3c02
 21d6: cf,3c               vect  3ccf             Read_AD
@@ -436,7 +436,7 @@
 2402: c7,ec,89,32         stb   R32,[Rec+89]     XDCL_BAUD = R32;
 2406: b1,0f,aa            ldb   Raa,f            XFRAME = f;
 2409: a1,1f,bc,32         ldw   R32,bc1f         R32 = bc1f;                       # error register is initialized to BC1FH on EEC power-up/initialize
-240d: c3,ec,b2,32         stw   R32,[Rec+b2]     DCL_ErrorFlag_532 = R32;          # XDCL_ERRO = BC1Fh
+240d: c3,ec,b2,32         stw   R32,[Rec+b2]     DCL_ErrorRegister_532 = R32;      # XDCL_ERRO = BC1Fh
                                                                                    # CART_Status = 9393h
 2411: a1,93,93,34         ldw   R34,9393         R34 = 9393; } } }                 
 2415: 01,30               clrw  R30              R30 = 0; }                        # BYTE_NUM = 0
@@ -696,16 +696,16 @@
 2681: f0                  ret                    return;
 
    DCL_DM_ClearDCLErrorFlags:
-2682: a3,ec,b2,42         ldw   R42,[Rec+b2]     R42 = DCL_ErrorFlag_532;
+2682: a3,ec,b2,42         ldw   R42,[Rec+b2]     R42 = DCL_ErrorRegister_532;
 2686: 61,00,10,42         an2w  R42,1000         R42 &= 1000;                      # clear all bits except bit 12
-268a: c3,ec,b2,42         stw   R42,[Rec+b2]     DCL_ErrorFlag_532 = R42;
+268a: c3,ec,b2,42         stw   R42,[Rec+b2]     DCL_ErrorRegister_532 = R42;
 268e: f0                  ret                    return;
 
    Sub_268f:
 268f: ad,01,42            ldzbw R42,1            wR42 = 1;
 2692: 09,35,42            shlw  R42,R35          R42 <<= R35;
-2695: 83,ec,b2,42         orw   R42,[Rec+b2]     R42 |= DCL_ErrorFlag_532;
-2699: c3,ec,b2,42         stw   R42,[Rec+b2]     DCL_ErrorFlag_532 = R42;
+2695: 83,ec,b2,42         orw   R42,[Rec+b2]     R42 |= DCL_ErrorRegister_532;
+2699: c3,ec,b2,42         stw   R42,[Rec+b2]     DCL_ErrorRegister_532 = R42;
 269d: f0                  ret                    return;
 
    DCL_DM_TransmitDMRMap:
@@ -1355,7 +1355,7 @@
 2d88: a6,04,12,04         ???   
 
    PIP_inth:
-2d8c: af,f6,05,58         ldzbw R58,[Rf6+5]      wR58 = ENGCYL;
+2d8c: af,f6,05,58         ldzbw R58,[Rf6+5]      wR58 = ENGCYL?;
 2d90: a3,59,82,2d,58      ldw   R58,[R58+2d82]   R58 = [R58+2d82];
 2d95: 48,7a,6c,54         sb3w  R54,R6c,R7a      R54 = Event_time - Prev_PIP_time;
 2d99: b0,6e,56            ldb   R56,R6e          R56 = Event_timeH;
@@ -1456,7 +1456,7 @@
 2eaa: 3e,a5,32            jb    B6,Ra5,2edf      if (Cttmr_on = 0)  {
 2ead: 3a,51,0c            jb    B2,R51,2ebc      if (B2_R51 = 0)  {
 2eb0: 71,7f,27            an2b  R27,7f           B7_R27 = 0;
-2eb3: b3,f6,05,cf         ldb   Rcf,[Rf6+5]      Rcf = ENGCYL;
+2eb3: b3,f6,05,cf         ldb   Rcf,[Rf6+5]      Rcf = ENGCYL?;
 2eb7: 15,cf               decb  Rcf              Rcf--;
 2eb9: e7,31,00            jump  2eed             goto 2eed; }
 
@@ -1464,7 +1464,7 @@
 2ebf: a3,e6,4e,56         ldw   R56,[Re6+4e]     R56 = [2ce];
 2ec3: c3,e6,50,56         stw   R56,[Re6+50]     [2d0] = R56;
 2ec7: c3,e6,4e,c8         stw   Rc8,[Re6+4e]     [2ce] = PIPH_PW;
-2ecb: a3,e6,4c,54         ldw   R54,[Re6+4c]     R54 = [2cc];
+2ecb: a3,e6,4c,54         ldw   R54,[Re6+4c]     R54 = SIGKAL;
 2ecf: 6c,c8,54            ml2w  R54,Rc8          lR54 = R54 * PIPH_PW;
 2ed2: 8c,ca,54            divw  R54,Rca          R54 = lR54 / Mkay;
 2ed5: dd,05               jv    2edc             if (OVF = 0)  {
@@ -1472,7 +1472,7 @@
 2eda: 20,03               sjmp  2edf             goto 2edf; }
 
 2edc: a0,5c,c8            ldw   Rc8,R5c          PIPH_PW = R5c; }
-2edf: b3,f6,05,cf         ldb   Rcf,[Rf6+5]      Rcf = ENGCYL;
+2edf: b3,f6,05,cf         ldb   Rcf,[Rf6+5]      Rcf = ENGCYL?;
 2ee3: c3,01,00,1f,00      stw   R0,[R0+1f00]     [1f00] = 0;
 2ee8: c3,01,00,1f,00      stw   R0,[R0+1f00]     [1f00] = 0; }
 2eed: 37,9e,03            jnb   B7,R9e,2ef3      if (B7_R9e = 1)  {
@@ -1593,7 +1593,7 @@
 301a: da,03               jle   301f             if (R58 > R56)  {
 301c: a0,56,58            ldw   R58,R56          R58 = R56; }
 301f: c3,e8,0e,58         stw   R58,[Re8+e]      [38e] = R58;
-3023: af,f6,05,5a         ldzbw R5a,[Rf6+5]      wR5a = ENGCYL;
+3023: af,f6,05,5a         ldzbw R5a,[Rf6+5]      wR5a = ENGCYL?;
 3027: a3,5b,74,2f,5a      ldw   R5a,[R5a+2f74]   R5a = [R5a+2f74];
 302c: 45,28,00,5a,56      ad3w  R56,R5a,28       R56 = R5a + 28;
 3031: 68,58,56            sb2w  R56,R58          R56 -= R58;
@@ -1874,7 +1874,7 @@
 3301: a3,f8,30,54         ldw   R54,[Rf8+30]     R54 = [bae0];
 3305: 6c,54,58            ml2w  R58,R54          lR58 = R58 * R54;
 3308: 03,54               negw  R54              R54 = -R54;
-330a: a3,e6,4c,56         ldw   R56,[Re6+4c]     R56 = [2cc];
+330a: a3,e6,4c,56         ldw   R56,[Re6+4c]     R56 = SIGKAL;
 330e: 6c,56,54            ml2w  R54,R56          lR54 = R54 * R56;
 3311: 64,56,5a            ad2w  R5a,R56          R5a += R56;
 3314: 8b,f8,32,5a         cmpw  R5a,[Rf8+32]     
@@ -1883,9 +1883,9 @@
 331e: 8b,f8,34,5a         cmpw  R5a,[Rf8+34]     
 3322: d1,04               jleu  3328             if (R5a > Sigklu)  {
 3324: a3,f8,34,5a         ldw   R5a,[Rf8+34]     R5a = Sigklu; }
-3328: c3,e6,4c,5a         stw   R5a,[Re6+4c]     [2cc] = R5a; } } } }
+3328: c3,e6,4c,5a         stw   R5a,[Re6+4c]     SIGKAL = R5a; } } } }
 332c: 9b,f6,05,c7         cmpb  Rc7,[Rf6+5]      
-3330: d1,0c               jleu  333e             if (Rc7 > ENGCYL)  {
+3330: d1,0c               jleu  333e             if (Rc7 > ENGCYL?)  {
 3332: b1,01,c7            ldb   Rc7,1            Rc7 = 1;
 3335: c3,e6,6e,c4         stw   Rc4,[Re6+6e]     [2ee] = PIPHi_ETime;
 3339: c3,e6,70,c8         stw   Rc8,[Re6+70]     [2f0] = PIPH_PW;
@@ -1893,7 +1893,7 @@
 
 333e: 17,c7               incb  Rc7              Rc7++;
 3340: 9b,f6,05,c7         cmpb  Rc7,[Rf6+5]      
-3344: d1,70               jleu  33b6             if (Rc7 > ENGCYL)  {
+3344: d1,70               jleu  33b6             if (Rc7 > ENGCYL?)  {
 3346: 3a,51,6d            jb    B2,R51,33b6      if (B2_R51 = 0)  {
 3349: 4b,e6,6e,c4,54      sb3w  R54,Rc4,[Re6+6e] R54 = PIPHi_ETime - [2ee];
 334e: db,02               jc    3352             if (R54 < 0)  {
@@ -2072,11 +2072,11 @@
 3517: 18,05,56            shrb  R56,5            R56 >>= 5;                        #[ R56 /= 32] 
 351a: c7,e4,13,56         stb   R56,[Re4+13]     [193] = R56;
 351e: c7,e4,12,54         stb   R54,[Re4+12]     Ibeta1 = R54;
-3522: b3,f6,05,54         ldb   R54,[Rf6+5]      R54 = ENGCYL;
+3522: b3,f6,05,54         ldb   R54,[Rf6+5]      R54 = ENGCYL?;
 3526: 78,56,54            sb2b  R54,R56          R54 -= R56;
 3529: d1,c7               jleu  34f2             if (R54 <= 0) goto 34f2;
 352b: 9b,f6,05,54         cmpb  R54,[Rf6+5]      
-352f: d7,02               jne   3533             if (R54 = ENGCYL)  {
+352f: d7,02               jne   3533             if (R54 = ENGCYL?)  {
 3531: 11,54               clrb  R54              R54 = 0; }
 3533: 37,27,15            jnb   B7,R27,354b      if (B7_R27 = 1)  {
 3536: 98,cf,54            cmpb  R54,Rcf          
@@ -2529,7 +2529,7 @@
 
 39d4: c3,e8,52,58         stw   R58,[Re8+52]     [3d2] = R58;
 39d8: b3,fe,0d,58         ldb   R58,[Rfe+d]      R58 = [cb67];
-39dc: 7f,f6,05,58         ml2b  R58,[Rf6+5]      wR58 = R58 * ENGCYL;
+39dc: 7f,f6,05,58         ml2b  R58,[Rf6+5]      wR58 = R58 * ENGCYL?;
 39e0: 08,01,58            shrw  R58,1            R58 >>= 1;                        #[ R58 /= 2] 
 39e3: 9b,e8,57,58         cmpb  R58,[Re8+57]     
 39e7: d1,30               jleu  3a19             if (R58 <= [3d7]) goto 3a19; } }
@@ -2673,7 +2673,7 @@
 
 3b51: f0                  ret                    return;
 
-   Check_KAM:
+   KAM_Qualification_Test_Logic:
 3b52: 71,7f,28            an2b  R28,7f           KAM_error = 0;
 3b55: b1,aa,42            ldb   R42,aa           R42 = aa;                         # KAMQA = 10101010 BINARY
 3b58: b1,c6,30            ldb   R30,c6           R30 = c6;                         # KAMQB = 11000110 BINARY
@@ -2698,11 +2698,11 @@
 3b7d: d9,18               jgtu  3b97             if (R38 <= BPKYON?)  {
 3b7f: 9b,ee,85,38         cmpb  R38,[Ree+85]     
 3b83: d9,12               jgtu  3b97             if (R38 <= BPKAM?)  {
-3b85: a3,ee,ca,38         ldw   R38,[Ree+ca]     R38 = [74a];
+3b85: a3,ee,ca,38         ldw   R38,[Ree+ca]     R38 = LTMTBLrc;
 3b89: 8b,fd,2e,01,38      cmpw  R38,[Rfc+12e]    
-3b8e: d3,07               jnc   3b97             if (R38 >= [c1d6])  {
+3b8e: d3,07               jnc   3b97             if (R38 >= RTNVMN)  {             # Minimum valid RT_NOVS_KAM.
 3b90: 8b,fd,30,01,38      cmpw  R38,[Rfc+130]    
-3b95: d1,63               jleu  3bfa             if (R38 <= [c1d8]) goto 3bfa; } } } } } } }
+3b95: d1,63               jleu  3bfa             if (R38 <= RTNVMX) goto 3bfa; } } } } } } }   # Maximum valid RT_NOVS_KAM.
 3b97: 91,80,28            orb   R28,80           KAM_error = 1;
 3b9a: c7,ee,80,42         stb   R42,[Ree+80]     KAMQA = R42;
 3b9e: c7,ee,98,30         stb   R30,[Ree+98]     KAMQB = R30;
@@ -2711,7 +2711,7 @@
 3ba9: ef,03,40            call  7baf             Clear_KAM ();
 3bac: b1,80,3a            ldb   R3a,80           R3a = 80;                         # Default 80h value.
 3baf: ad,6a,30            ldzbw R30,6a           wR30 = 6a;                        # 0x6a all 106 KAM locations.
-3bb2: c7,31,4d,07,3a      stb   R3a,[R30+74d]    [R30+74d] = R3a;
+3bb2: c7,31,4d,07,3a      stb   R3a,[R30+74d]    [R30+74d] = R3a;                  # ADAPTIVE FUEL TABLE
 3bb7: e0,30,f8            djnz  R30,3bb2         R30--;
                                                  if (R30 != 0) goto 3bb2;          # Loop, all KAM memory locations (106) set to 80h.
 3bba: a1,00,35,38         ldw   R38,3500         R38 = 3500;                       # KAM checksum, 0x3500 = 0x80 x 0x6a = (128 * (10*10+6))
@@ -2720,10 +2720,10 @@
 3bc5: c7,ee,85,38         stb   R38,[Ree+85]     BPKAM? = R38;
 3bc9: c7,ee,86,38         stb   R38,[Ree+86]     BPKYON? = R38;
 3bcd: c7,ee,89,38         stb   R38,[Ree+89]     BPPTWT? = R38;
-3bd1: c4,bb,38            stb   R38,Rbb          Rbb = R38;                        # ?BP?
+3bd1: c4,bb,38            stb   R38,Rbb          BP? = R38;                        # ?BP?
 3bd4: c7,e8,d6,00         stb   R0,[Re8+d6]      [356] = 0;
 3bd8: a1,00,40,38         ldw   R38,4000         R38 = 4000;
-3bdc: c3,ee,ca,38         stw   R38,[Ree+ca]     [74a] = R38;
+3bdc: c3,ee,ca,38         stw   R38,[Ree+ca]     LTMTBLrc = R38;                   # LTMTBLrc = 0.5
 3be0: 71,7f,e1            an2b  Re1,7f           B7_Re1 = 0;
 3be3: c7,ee,84,00         stb   R0,[Ree+84]      [704] = 0;
    ReInitialize_ISCKAM:
@@ -2736,7 +2736,7 @@
 3bf9: f0                  ret                    return; }
 
 3bfa: b3,ee,85,30         ldb   R30,[Ree+85]     R30 = BPKAM?;
-3bfe: c4,bb,30            stb   R30,Rbb          Rbb = R30;
+3bfe: c4,bb,30            stb   R30,Rbb          BP? = R30;
 3c01: f0                  ret                    return;
 
    Sub_3c02:
@@ -3262,7 +3262,7 @@
 414d: 71,7f,52            an2b  R52,7f           B7_Flags_52 = 0;
 4150: ac,ba,3e            ldzbw R3e,Rba          wR3e = yRba;
 4153: 09,07,3e            shlw  R3e,7            R3e <<= 7;                        #[ R3e *= 128] 
-4156: 9c,bb,3e            divb  R3e,Rbb          R3e = wR3e / Rbb;
+4156: 9c,bb,3e            divb  R3e,Rbb          R3e = wR3e / BP?;
 4159: dd,03               jv    415e             if (OVF = 0)  {
 415b: 37,3e,03            jnb   B7,R3e,4161      if (Lseconds = 0) goto 4161; }
 415e: b1,80,3e            ldb   R3e,80           R3e = 80; }
@@ -3354,7 +3354,7 @@
 4257: 21,04               sjmp  435d             goto 435d; }
 
 4259: 71,f7,4e            an2b  R4e,f7           B3_R4e = 0;
-425c: af,f6,05,34         ldzbw R34,[Rf6+5]      wR34 = ENGCYL;
+425c: af,f6,05,34         ldzbw R34,[Rf6+5]      wR34 = ENGCYL?;
 4260: a3,35,5c,43,32      ldw   R32,[R34+435c]   R32 = [R34+435c];
 4265: a3,35,62,43,30      ldw   R30,[R34+4362]   R30 = [R34+4362];
 426a: 0f,42,30            norm  R30,R42          R42 = normalize(lR30);
@@ -3656,7 +3656,7 @@
 4589: b3,e4,e8,35         ldb   R35,[Re4+e8]     R35 = [168];
 458d: 11,34               clrb  R34              R34 = 0;
 458f: 8c,34,38            divw  R38,R34          R38 = lR38 / R34;
-4592: ac,bb,34            ldzbw R34,Rbb          wR34 = yRbb;
+4592: ac,bb,34            ldzbw R34,Rbb          wR34 = BP?;
 4595: 64,34,38            ad2w  R38,R34          R38 += R34;
 4598: a3,e4,a4,34         ldw   R34,[Re4+a4]     R34 = [124];
 459c: 01,36               clrw  R36              R36 = 0;
@@ -3763,7 +3763,7 @@
 46b0: 9b,f6,24,b6         cmpb  Rb6,[Rf6+24]     
 46b4: da,f1               jle   46a7             if (Rb6 <= [b938]) goto 46a7;
 46b6: a0,9a,14            ldw   R14,R9a          R14 = R9a;
-46b9: 9c,bb,14            divb  R14,Rbb          R14 = wR14 / Rbb;
+46b9: 9c,bb,14            divb  R14,Rbb          R14 = wR14 / BP?;
 46bc: dd,05               jv    46c3             if (OVF = 0)  {
 46be: 99,fe,14            cmpb  R14,fe           
 46c1: d1,03               jleu  46c6             if (R14 <= fe) goto 46c6; }
@@ -3795,7 +3795,7 @@
 46ff: ad,05,34            ldzbw R34,5            wR34 = 5;
 4702: 45,0a,01,f6,38      ad3w  R38,Rf6,10a      R38 = Table_ba1e;
 4707: ef,af,02            call  49b9             UYTabLU_49b9 ();
-470a: 5c,bb,3b,3e         ml3b  R3e,R3b,Rbb      wR3e = R3b * Rbb;
+470a: 5c,bb,3b,3e         ml3b  R3e,R3b,Rbb      wR3e = R3b * BP?;
 470e: 74,ba,3f            ad2b  R3f,Rba          R3f += Rba;
 4711: d3,03               jnc   4716             if (R3f > ff)  {
 4713: b1,ff,3f            ldb   R3f,ff           R3f = ff; }
@@ -3812,7 +3812,7 @@
 
    Sub_4735:
 4735: 31,52,2a            jnb   B1,R52,4762      if (B1_Flags_52 = 1)  {
-4738: b3,ec,b2,43         ldb   R43,[Rec+b2]     R43 = DCL_ErrorFlag_532;
+4738: b3,ec,b2,43         ldb   R43,[Rec+b2]     R43 = DCL_ErrorRegister_532;
 473c: 3c,43,23            jb    B4,R43,4762      if (B4_R43 = 0)  {
 473f: b1,0d,42            ldb   R42,d            R42 = d;
 4742: a1,44,05,30         ldw   R30,544          R30 = 544;
@@ -3837,7 +3837,7 @@
 476e: 91,02,52            orb   R52,2            B1_Flags_52 = 1;
 4771: 3a,42,03            jb    B2,R42,4777      if (B2_R42 = 0)  {
 4774: 91,20,53            orb   R53,20           B5_CART_MODE_53 = 1; }
-4777: a3,ec,b2,30         ldw   R30,[Rec+b2]     R30 = DCL_ErrorFlag_532;
+4777: a3,ec,b2,30         ldw   R30,[Rec+b2]     R30 = DCL_ErrorRegister_532;
 477b: 41,0f,8c,30,00      an3w  R0,R30,8c0f      R0 = R30 & 8c0f;
 4780: d7,17               jne   4799             if ((R30 & 8c0f) = 0)  {
 4782: a3,ec,b4,42         ldw   R42,[Rec+b4]     R42 = [534];
@@ -3859,7 +3859,7 @@
                                                  B2_R31 = 1;
                                                  B3_R31 = 1;
                                                  B7_R31 = 1;
-47a3: c3,ec,b2,30         stw   R30,[Rec+b2]     DCL_ErrorFlag_532 = R30;
+47a3: c3,ec,b2,30         stw   R30,[Rec+b2]     DCL_ErrorRegister_532 = R30;
 47a7: fb                  ei                     enable intps; }
    Sub_47a8:
 47a8: c7,01,1f,09,00      stb   R0,[R0+91f]      [91f] = 0;
@@ -4921,11 +4921,11 @@
 527d: 9b,ff,f0,00,b6      cmpb  Rb6,[Rfe+f0]     
 5282: da,0f               jle   5293             if (Rb6 > [cc4a])  {
 5284: 91,02,25            orb   R25,2            B1_R25 = 1;
-5287: b3,ee,c7,38         ldb   R38,[Ree+c7]     R38 = [747];
+5287: b3,ee,c7,38         ldb   R38,[Ree+c7]     R38 = KWUCTR;
 528b: 17,38               incb  R38              R38++;
 528d: db,04               jc    5293             if (R38 <= ff)  {
-528f: c7,ee,c7,38         stb   R38,[Ree+c7]     [747] = R38; } } } } }
-5293: b3,ee,c7,32         ldb   R32,[Ree+c7]     R32 = [747];
+528f: c7,ee,c7,38         stb   R38,[Ree+c7]     KWUCTR = R38; } } } } }
+5293: b3,ee,c7,32         ldb   R32,[Ree+c7]     R32 = KWUCTR;
 5297: 9b,fe,4a,32         cmpb  R32,[Rfe+4a]     
 529b: d3,06               jnc   52a3             if (R32 >= [cba4])  {
 529d: b3,fe,48,32         ldb   R32,[Rfe+48]     R32 = [cba2];
@@ -5143,7 +5143,7 @@
 54e8: a3,e6,60,34         ldw   R34,[Re6+60]     R34 = [2e0];
 54ec: 6c,b4,34            ml2w  R34,Rb4          lR34 = R34 * Rb4;
 54ef: 0f,42,34            norm  R34,R42          R42 = normalize(lR34);
-54f2: af,f6,05,34         ldzbw R34,[Rf6+5]      wR34 = ENGCYL;
+54f2: af,f6,05,34         ldzbw R34,[Rf6+5]      wR34 = ENGCYL?;
 54f6: 6c,36,34            ml2w  R34,R36          lR34 = R34 * R36;
 54f9: 17,42               incb  R42              R42++;
 54fb: 0c,42,34            shrdw R34,R42          lR34 >>= R42;
@@ -5162,7 +5162,7 @@
 5520: b1,ff,34            ldb   R34,ff           R34 = ff; } }
 5523: a0,00,30            ldw   R30,R0           R30 = 0;
 5526: af,f4,5c,32         ldzbw R32,[Rf4+5c]     wR32 = [b49e];
-552a: 8f,ee,ca,30         divw  R30,[Ree+ca]     R30 = lR30 / [74a];
+552a: 8f,ee,ca,30         divw  R30,[Ree+ca]     R30 = lR30 / LTMTBLrc;
 552e: dd,08               jv    5538             if (OVF = 0)  {
 5530: 08,02,30            shrw  R30,2            R30 >>= 2;                        #[ R30 /= 4] 
 5533: 98,00,31            cmpb  R31,R0           
@@ -5226,7 +5226,7 @@
 55c9: a1,02,00,32         ldw   R32,2            R32 = 2;
 55cd: b3,f4,48,36         ldb   R36,[Rf4+48]     R36 = [b48a];
 55d1: 19,01,36            shlb  R36,1            R36 <<= 1;                        #[ R36 *= 2] 
-55d4: b3,f6,05,3a         ldb   R3a,[Rf6+5]      R3a = ENGCYL;
+55d4: b3,f6,05,3a         ldb   R3a,[Rf6+5]      R3a = ENGCYL?;
 55d8: 9c,3a,36            divb  R36,R3a          R36 = wR36 / R3a;
 55db: 99,02,36            cmpb  R36,2            
 55de: df,04               je    55e4             if (R36 != 2)  {
@@ -6349,7 +6349,7 @@
 61aa: a3,f0,60,36         ldw   R36,[Rf0+60]     R36 = [b060]; }
 61ae: c3,e8,5c,36         stw   R36,[Re8+5c]     [3dc] = R36;
 61b2: 71,df,49            an2b  R49,df           B5_R49 = 0; }
-61b5: af,f6,05,32         ldzbw R32,[Rf6+5]      wR32 = ENGCYL;
+61b5: af,f6,05,32         ldzbw R32,[Rf6+5]      wR32 = ENGCYL?;
 61b9: 01,3a               clrw  R3a              R3a = 0;
 61bb: a3,f0,6e,38         ldw   R38,[Rf0+6e]     R38 = [b06e];
 61bf: 8c,32,38            divw  R38,R32          R38 = lR38 / R32;
@@ -6630,7 +6630,7 @@
 6459: 08,08,38            shrw  R38,8            R38 >>= 8;                        #[ R38 /= 256] 
 645c: 7c,23,38            ml2b  R38,R23          wR38 = R38 * R23;
 645f: 09,01,38            shlw  R38,1            R38 <<= 1;                        #[ R38 *= 2] 
-6462: 5c,bb,39,38         ml3b  R38,R39,Rbb      wR38 = R39 * Rbb;
+6462: 5c,bb,39,38         ml3b  R38,R39,Rbb      wR38 = R39 * BP?;
 6466: 9d,ef,38            divb  R38,ef           R38 = wR38 / ef;
 6469: d5,03               jnv   646e             if (OVF = 1)  {
 646b: b1,ff,38            ldb   R38,ff           R38 = ff; }
@@ -6658,7 +6658,7 @@
 64a4: c7,e6,b1,3b         stb   R3b,[Re6+b1]     [231] = R3b;
 64a8: a3,e4,96,42         ldw   R42,[Re4+96]     R42 = TPS_min;
 64ac: 0c,05,38            shrdw R38,5            lR38 >>= 5;                       #[ R38 /= 32] 
-64af: b0,bb,37            ldb   R37,Rbb          R37 = Rbb;
+64af: b0,bb,37            ldb   R37,Rbb          R37 = BP?;
 64b2: 11,36               clrb  R36              R36 = 0;
 64b4: 8c,36,38            divw  R38,R36          R38 = lR38 / R36;
 64b7: 6d,00,ef,38         ml2w  R38,ef00         lR38 = R38 * ef00;
@@ -7316,7 +7316,7 @@
 6b8b: f0                  ret                    return;
 
    Sub_6b8c:
-6b8c: ac,bb,3e            ldzbw R3e,Rbb          wR3e = yRbb;
+6b8c: ac,bb,3e            ldzbw R3e,Rbb          wR3e = BP?;
 6b8f: 6b,f0,20,20         sb2w  R20,[Rf0+20]     R20 -= ITHBMA;
 6b93: db,02               jc    6b97             if (R20 < 0)  {
 6b95: 01,20               clrw  R20              R20 = 0; }
@@ -7372,7 +7372,7 @@
 
    Sub_6c18:
 6c18: 11,35               clrb  R35              R35 = 0;
-6c1a: 58,ba,bb,34         sb3b  R34,Rbb,Rba      R34 = Rbb - Rba;
+6c1a: 58,ba,bb,34         sb3b  R34,Rbb,Rba      R34 = BP? - Rba;
 6c1e: db,02               jc    6c22             if (R34 < 0)  {
 6c20: 11,34               clrb  R34              R34 = 0; }
 6c22: c7,e6,97,34         stb   R34,[Re6+97]     [217] = R34;
@@ -7843,7 +7843,7 @@
 # Diagnostic Proc Table A
    Sub_70f5:
 70f5: a1,10,55,ac         ldw   Rac,5510         VIP_code = 5510;                  # Diagnostic Proc Table A proc no 2
-70f9: 7b,f6,05,ac         sb2b  Rac,[Rf6+5]      VIP_code -= ENGCYL;
+70f9: 7b,f6,05,ac         sb2b  Rac,[Rf6+5]      VIP_code -= ENGCYL?;
 70fd: 08,ac,ac            shrw  Rac,Rac          VIP_code >>= VIP_code;
 7100: 28,08               scall 710a             Sub_710a ();
 7102: 20,70               sjmp  7174             goto 7174;
@@ -8261,7 +8261,7 @@
 7437: 06,80               #args  
 7439: 77,e2,1c,00         ad2b  R0,[Re2+1c]      R0 += [c1da];
 743d: df,43               je    7482             if ((R0[c1da]) != 0)  {
-743f: ac,bb,42            ldzbw R42,Rbb          wR42 = yRbb;
+743f: ac,bb,42            ldzbw R42,Rbb          wR42 = BP?;
 7442: 09,05,42            shlw  R42,5            R42 <<= 5;                        #[ R42 *= 32] 
 7445: 6b,e4,a6,42         sb2w  R42,[Re4+a6]     R42 -= [126];
 7449: d3,06               jnc   7451             if (R42 >= 0)  {
@@ -8273,7 +8273,7 @@
 745a: 3a,a6,19            jb    B2,Ra6,7476      if (B2_Ra6 = 0)  {
 745d: 77,ea,86,00         ad2b  R0,[Rea+86]      R0 += [406];
 7461: d7,13               jne   7476             if ((R0[406]) = 0)  {
-7463: b0,bb,42            ldb   R42,Rbb          R42 = Rbb;
+7463: b0,bb,42            ldb   R42,Rbb          R42 = BP?;
 7466: 9b,e2,1b,42         cmpb  R42,[Re2+1b]     
 746a: d1,0a               jleu  7476             if (R42 > [c1d9])  {
 746c: a3,e4,c2,30         ldw   R30,[Re4+c2]     R30 = Tslpip;
@@ -8834,7 +8834,7 @@
 79bd: d9,14               jgtu  79d3             if (R3a <= [c235])  {
 79bf: 9b,e2,c7,c1         cmpb  Rc1,[Re2+c7]     
 79c3: d1,d9               jleu  799e             if (Rc1 <= [c185]) goto 799e;
-79c5: b0,bb,42            ldb   R42,Rbb          R42 = Rbb;
+79c5: b0,bb,42            ldb   R42,Rbb          R42 = BP?;
 79c8: 78,ba,42            sb2b  R42,Rba          R42 -= Rba;
 79cb: d3,d1               jnc   799e             if (R42 < 0) goto 799e;
 79cd: 9b,e2,cb,42         cmpb  R42,[Re2+cb]     
@@ -11058,7 +11058,7 @@
 8b97: c3,e4,72,3a         stw   R3a,[Re4+72]     [1f2] = R3a;
 8b9b: a0,b4,14            ldw   R14,Rb4          R14 = Rb4;
 8b9e: 08,02,14            shrw  R14,2            R14 >>= 2;                        #[ R14 /= 4] 
-8ba1: af,f6,05,16         ldzbw R16,[Rf6+5]      wR16 = ENGCYL;
+8ba1: af,f6,05,16         ldzbw R16,[Rf6+5]      wR16 = ENGCYL?;
 8ba5: 6c,16,14            ml2w  R14,R16          lR14 = R14 * R16;
 8ba8: a3,e4,72,1a         ldw   R1a,[Re4+72]     R1a = [1f2];
 8bac: 01,18               clrw  R18              R18 = 0;
@@ -12834,14 +12834,14 @@
 9d8f: 91,08,dc            orb   Rdc,8            B3_Rdc = 1; }
 9d92: b3,e2,24,30         ldb   R30,[Re2+24]     R30 = [c1e2];
 9d96: 98,30,bb            cmpb  Rbb,R30          
-9d99: d9,05               jgtu  9da0             if (Rbb <= R30)  {
+9d99: d9,05               jgtu  9da0             if (BP? <= R30)  {
 9d9b: 91,02,dc            orb   Rdc,2            B1_Rdc = 1;
 9d9e: 20,0e               sjmp  9dae             goto 9dae; }
 
 9da0: 77,e2,23,30         ad2b  R30,[Re2+23]     R30 += [c1e1];
 9da4: db,08               jc    9dae             if (R30 <= ff)  {
 9da6: 98,30,bb            cmpb  Rbb,R30          
-9da9: d1,03               jleu  9dae             if (Rbb > R30)  {
+9da9: d1,03               jleu  9dae             if (BP? > R30)  {
 9dab: 71,fd,dc            an2b  Rdc,fd           B1_Rdc = 0; } }
 9dae: 71,fe,dc            an2b  Rdc,fe           B0_Rdc = 0;
 9db1: 31,de,06            jnb   B1,Rde,9dba      if (B1_Rde = 1)  {
@@ -13214,9 +13214,9 @@ a133: b3,e2,2e,30         ldb   R30,[Re2+2e]     R30 = [c1ec]; } } }
 a137: 3d,de,13            jb    B5,Rde,a14d      if (B5_Rde = 0)  {
 a13a: 36,de,10            jnb   B6,Rde,a14d      if (B6_Rde = 1)  {
 a13d: 9b,e2,24,bb         cmpb  Rbb,[Re2+24]     
-a141: d1,0a               jleu  a14d             if (Rbb > [c1e2])  {
+a141: d1,0a               jleu  a14d             if (BP? > [c1e2])  {
 a143: 9b,e2,25,bb         cmpb  Rbb,[Re2+25]     
-a147: db,04               jc    a14d             if (Rbb < [c1e3])  {
+a147: db,04               jc    a14d             if (BP? < [c1e3])  {
 a149: b3,e2,22,30         ldb   R30,[Re2+22]     R30 = [c1e0]; } } } }
 a14d: c7,e8,f9,30         stb   R30,[Re8+f9]     [379] = R30;
 a151: 98,30,00            cmpb  R0,R30           
@@ -13359,10 +13359,10 @@ a2c5: d1,23               jleu  a2ea             if (R30 > [c1d4])  {
 a2c7: 3f,e1,20            jb    B7,Re1,a2ea      if (B7_Re1 = 0)  {
 a2ca: 28,8a               scall a356             Sub_a356 ();
 a2cc: 8b,e2,18,30         cmpw  R30,[Re2+18]     
-a2d0: d3,18               jnc   a2ea             if (R30 >= [c1d6])  {
+a2d0: d3,18               jnc   a2ea             if (R30 >= RTNVMN)  {
 a2d2: 8b,e2,1a,30         cmpw  R30,[Re2+1a]     
-a2d6: d9,12               jgtu  a2ea             if (R30 <= [c1d8])  {
-a2d8: c3,ee,ca,30         stw   R30,[Ree+ca]     [74a] = R30;
+a2d6: d9,12               jgtu  a2ea             if (R30 <= RTNVMX)  {
+a2d8: c3,ee,ca,30         stw   R30,[Ree+ca]     LTMTBLrc = R30;
 a2dc: 91,80,e1            orb   Re1,80           B7_Re1 = 1;
 a2df: b3,ee,84,32         ldb   R32,[Ree+84]     R32 = [704];
 a2e3: 91,40,32            orb   R32,40           B6_R32 = 1;
@@ -13376,7 +13376,7 @@ a2fa: 31,e0,30            jnb   B1,Re0,a32d      if (B1_Re0 = 1)  {
 a2fd: b3,ee,84,32         ldb   R32,[Ree+84]     R32 = [704];
 a301: 36,32,29            jnb   B6,R32,a32d      if (B6_R32 = 1)  {
 a304: 28,50               scall a356             Sub_a356 ();
-a306: 6b,ee,ca,30         sb2w  R30,[Ree+ca]     R30 -= [74a];
+a306: 6b,ee,ca,30         sb2w  R30,[Ree+ca]     R30 -= LTMTBLrc;
 a30a: db,02               jc    a30e             if (R30 < 0)  {
 a30c: 03,30               negw  R30              R30 = -R30; }
 a30e: 11,32               clrb  R32              R32 = 0;
@@ -13391,7 +13391,7 @@ a328: ef,d3,d7            call  7afe             Sub_7afe (
 a32b: 27                        #arg 1              27
 a32c: 80                        #arg 2              80 );
 a32b: 27,80               #args                  } } } } }
-a32d: a3,ee,ca,30         ldw   R30,[Ree+ca]     R30 = [74a];
+a32d: a3,ee,ca,30         ldw   R30,[Ree+ca]     R30 = LTMTBLrc;
 a331: c3,e8,a0,30         stw   R30,[Re8+a0]     [320] = R30;
 a335: 31,e0,1d            jnb   B1,Re0,a355      if (B1_Re0 = 1)  {
 a338: b3,e4,27,32         ldb   R32,[Re4+27]     R32 = [1a7];
@@ -13426,7 +13426,7 @@ a376: 37,e1,27            jnb   B7,Re1,a3a0      if (B7_Re1 = 1)  {
 a379: 30,49,24            jnb   B0,R49,a3a0      if (B0_R49 = 1)  {
 a37c: 39,e0,1c            jb    B1,Re0,a39b      if (B1_Re0 = 0)  {
 a37f: ef,d4,ff            call  a356             Sub_a356 ();
-a382: 6b,ee,ca,30         sb2w  R30,[Ree+ca]     R30 -= [74a];
+a382: 6b,ee,ca,30         sb2w  R30,[Ree+ca]     R30 -= LTMTBLrc;
 a386: db,02               jc    a38a             if (R30 < 0)  {
 a388: 03,30               negw  R30              R30 = -R30; }
 a38a: 8b,fd,fc,00,30      cmpw  R30,[Rfc+fc]     
@@ -13632,7 +13632,7 @@ a59f: b3,f4,3c,38         ldb   R38,[Rf4+3c]     R38 = [b47e];
 a5a3: 77,f4,3d,38         ad2b  R38,[Rf4+3d]     R38 += [b47f];
 a5a7: db,35               jc    a5de             if (R38 <= ff)  {
 a5a9: 98,38,bb            cmpb  Rbb,R38          
-a5ac: d3,30               jnc   a5de             if (Rbb >= R38)  {
+a5ac: d3,30               jnc   a5de             if (BP? >= R38)  {
 a5ae: b3,f4,31,38         ldb   R38,[Rf4+31]     R38 = [b473];
 a5b2: 7b,f4,32,38         sb2b  R38,[Rf4+32]     R38 -= [b474];
 a5b6: d3,26               jnc   a5de             if (R38 >= 0)  {
@@ -13658,7 +13658,7 @@ a5ec: d3,1c               jnc   a60a             if (Rba >= [b46e])  {
 a5ee: 9b,f4,2a,a9         cmpb  Ra9,[Rf4+2a]     
 a5f2: d9,16               jgtu  a60a             if (Ra9 <= [b46c])  {
 a5f4: 9b,f4,3c,bb         cmpb  Rbb,[Rf4+3c]     
-a5f8: d3,10               jnc   a60a             if (Rbb >= [b47e])  {
+a5f8: d3,10               jnc   a60a             if (BP? >= [b47e])  {
 a5fa: b3,e6,9f,38         ldb   R38,[Re6+9f]     R38 = [21f];
 a5fe: 9b,f4,31,38         cmpb  R38,[Rf4+31]     
 a602: d9,06               jgtu  a60a             if (R38 <= [b473])  {
@@ -14062,136 +14062,217 @@ aa6c: cf                  byte     cf
 aa6d: 01                  byte      1
 aa6e: 9f                  byte     9f
 aa6f: 04                  byte      4
-aa70: a5,40               word   40a5
-aa72: a5,80               word   80a5
-aa74: 4f,01               word    14f
-aa76: a1,40               word   40a1
-aa78: 46,80               word   8046
-aa7a: cb,80               word   80cb
-aa7c: 97,80               word   8097
-aa7e: b6,1e               word   1eb6
-aa80: b7,1e               word   1eb7
-aa82: ba,d8               word   d8ba
-aa84: cc,28               word   28cc
-aa86: a8,ff               word   ffa8
-aa88: 82,01               word    182
-aa8a: 91,c8               word   c891
-aa8c: 8a,80               word   808a
-aa8e: 8b,3e               word   3e8b
-aa90: da,02               word    2da
-aa92: db,0e               word    edb
-aa94: d8,02               word    2d8
-aa96: d9,02               word    2d9
+aa70: a5                  byte     a5
+aa71: 40                  byte     40
+aa72: a5                  byte     a5
+aa73: 80                  byte     80
+aa74: 4f                  byte     4f
+aa75: 01                  byte      1
+aa76: a1                  byte     a1
+aa77: 40                  byte     40
+aa78: 46                  byte     46
+aa79: 80                  byte     80
+aa7a: cb                  byte     cb
+aa7b: 80                  byte     80
+aa7c: 97                  byte     97
+aa7d: 80                  byte     80
+aa7e: b6                  byte     b6
+aa7f: 1e                  byte     1e
+aa80: b7                  byte     b7
+aa81: 1e                  byte     1e
+aa82: ba                  byte     ba
+aa83: d8                  byte     d8
+aa84: cc                  byte     cc
+aa85: 28                  byte     28
+aa86: a8                  byte     a8
+aa87: ff                  byte     ff
+aa88: 82                  byte     82
+aa89: 01                  byte      1
+aa8a: 91                  byte     91
+aa8b: c8                  byte     c8
+aa8c: 8a                  byte     8a
+aa8d: 80                  byte     80
+aa8e: 8b                  byte     8b
+aa8f: 3e                  byte     3e
+aa90: da                  byte     da
+aa91: 02                  byte      2
+aa92: db                  byte     db
+aa93: 0e                  byte      e
+aa94: d8                  byte     d8
+aa95: 02                  byte      2
+aa96: d9                  byte     d9
+aa97: 02                  byte      2
 aa98: 9a,aa               word   aa9a                                              # next data list
 aa9a: 00,01               word    100                                              # Addresses + 0x100 for this list
 aa9c: de,aa               word   aade                                              # next data list
 aa9e: da                  byte     da
 aa9f: 80                  byte     80
-aaa0: db,5c               word   5cdb
-aaa2: 00,80               word   8000
-aaa4: 01,3e               word   3e01
-aaa6: 02,80               word   8002
-aaa8: 03,a2               word   a203
-aaaa: 35,d8               word   d835
-aaac: 98,99               word   9998
-aaae: 99,79               word   7999
-aab0: e8,ff               word   ffe8
-aab2: e9,fe               word   fee9
-aab4: 9c,80               word   809c
-aab6: 9d,3e               word   3e9d
-aab8: 96,ff               word   ff96
-aaba: 97,ff               word   ff97
-aabc: 2e,c0               word   c02e
-aabe: 2f,5b               word   5b2f
-aac0: 04,c0               word   c004
-aac2: 05,4c               word   4c05
-aac4: 14,c0               word   c014
-aac6: 15,4c               word   4c15
-aac8: 16,c0               word   c016
-aaca: 17,4c               word   4c17
-aacc: 67,7a               word   7a67
-aace: 23,96               word   9623
-aad0: 25,1b               word   1b25
-aad2: b4,80               word   80b4
-aad4: b5,a2               word   a2b5
-aad6: b0,80               word   80b0
-aad8: b1,a2               word   a2b1
-aada: cd,7f               word   7fcd
-aadc: fe,01               word    1fe
+aaa0: db                  byte     db
+aaa1: 5c                  byte     5c
+aaa2: 00                  byte      0
+aaa3: 80                  byte     80
+aaa4: 01                  byte      1
+aaa5: 3e                  byte     3e
+aaa6: 02                  byte      2
+aaa7: 80                  byte     80
+aaa8: 03                  byte      3
+aaa9: a2                  byte     a2
+aaaa: 35                  byte     35
+aaab: d8                  byte     d8
+aaac: 98                  byte     98
+aaad: 99                  byte     99
+aaae: 99                  byte     99
+aaaf: 79                  byte     79
+aab0: e8                  byte     e8
+aab1: ff                  byte     ff
+aab2: e9                  byte     e9
+aab3: fe                  byte     fe
+aab4: 9c                  byte     9c
+aab5: 80                  byte     80
+aab6: 9d                  byte     9d
+aab7: 3e                  byte     3e
+aab8: 96                  byte     96
+aab9: ff                  byte     ff
+aaba: 97                  byte     97
+aabb: ff                  byte     ff
+aabc: 2e                  byte     2e
+aabd: c0                  byte     c0
+aabe: 2f                  byte     2f
+aabf: 5b                  byte     5b
+aac0: 04                  byte      4
+aac1: c0                  byte     c0
+aac2: 05                  byte      5
+aac3: 4c                  byte     4c
+aac4: 14                  byte     14
+aac5: c0                  byte     c0
+aac6: 15                  byte     15
+aac7: 4c                  byte     4c
+aac8: 16                  byte     16
+aac9: c0                  byte     c0
+aaca: 17                  byte     17
+aacb: 4c                  byte     4c
+aacc: 67                  byte     67
+aacd: 7a                  byte     7a
+aace: 23                  byte     23
+aacf: 96                  byte     96
+aad0: 25                  byte     25
+aad1: 1b                  byte     1b
+aad2: b4                  byte     b4
+aad3: 80                  byte     80
+aad4: b5                  byte     b5
+aad5: a2                  byte     a2
+aad6: b0                  byte     b0
+aad7: 80                  byte     80
+aad8: b1                  byte     b1
+aad9: a2                  byte     a2
+aada: cd                  byte     cd
+aadb: 7f                  byte     7f
+aadc: fe                  byte     fe
+aadd: 01                  byte      1
 aade: e0,aa               word   aae0                                              # next data list
 aae0: 00,02               word    200                                              # Addresses + 0x200 for this list
 aae2: e8,aa               word   aae8                                              # next data list
-aae4: 39,01               word    139
-aae6: 6f,78               word   786f
+aae4: 39                  byte     39
+aae5: 01                  byte      1
+aae6: 6f                  byte     6f
+aae7: 78                  byte     78
 aae8: ea,aa               word   aaea                                              # next data list
 aaea: 00,03               word    300                                              # Addresses + 0x300 for this list
 aaec: 20,ab               word   ab20                                              # next data list
-aaee: 4a,80               word   804a
-aaf0: 4c,02               word    24c
-aaf2: 4d,02               word    24d
-aaf4: 4e,02               word    24e
-aaf6: 4f,02               word    24f
-aaf8: 58,0e               word    e58
-aafa: 59,08               word    859
-aafc: 21,40               word   4021
-aafe: 2a,c0               word   c02a
-ab00: 2b,5b               word   5b2b
-ab02: 2c,c0               word   c02c
-ab04: 2d,5b               word   5b2d
-ab06: 32,c0               word   c032
-ab08: 33,5b               word   5b33
-ab0a: 5a,01               word    15a
-ab0c: cc,ff               word   ffcc
-ab0e: cd,ff               word   ffcd
-ab10: d0,01               word    1d0
-ab12: 84,fe               word   fe84
-ab14: c9,80               word   80c9
-ab16: 9f,04               word    49f
-ab18: 8c,01               word    18c
-ab1a: 8d,20               word   208d
-ab1c: dc,a4               word   a4dc
-ab1e: dd,06               word    6dd
+aaee: 4a                  byte     4a
+aaef: 80                  byte     80
+aaf0: 4c                  byte     4c
+aaf1: 02                  byte      2
+aaf2: 4d                  byte     4d
+aaf3: 02                  byte      2
+aaf4: 4e                  byte     4e
+aaf5: 02                  byte      2
+aaf6: 4f                  byte     4f
+aaf7: 02                  byte      2
+aaf8: 58                  byte     58
+aaf9: 0e                  byte      e
+aafa: 59                  byte     59
+aafb: 08                  byte      8
+aafc: 21                  byte     21
+aafd: 40                  byte     40
+aafe: 2a                  byte     2a
+aaff: c0                  byte     c0
+ab00: 2b                  byte     2b
+ab01: 5b                  byte     5b
+ab02: 2c                  byte     2c
+ab03: c0                  byte     c0
+ab04: 2d                  byte     2d
+ab05: 5b                  byte     5b
+ab06: 32                  byte     32
+ab07: c0                  byte     c0
+ab08: 33                  byte     33
+ab09: 5b                  byte     5b
+ab0a: 5a                  byte     5a
+ab0b: 01                  byte      1
+ab0c: cc                  byte     cc
+ab0d: ff                  byte     ff
+ab0e: cd                  byte     cd
+ab0f: ff                  byte     ff
+ab10: d0                  byte     d0
+ab11: 01                  byte      1
+ab12: 84                  byte     84
+ab13: fe                  byte     fe
+ab14: c9                  byte     c9
+ab15: 80                  byte     80
+ab16: 9f                  byte     9f
+ab17: 04                  byte      4
+ab18: 8c                  byte     8c
+ab19: 01                  byte      1
+ab1a: 8d                  byte     8d
+ab1b: 20                  byte     20
+ab1c: dc                  byte     dc
+ab1d: a4                  byte     a4
+ab1e: dd                  byte     dd
+ab1f: 06                  byte      6
 ab20: 22,ab               word   ab22                                              # next data list
 ab22: 00,04               word    400                                              # Addresses + 0x400 for this list
 ab24: 28,ab               word   ab28                                              # next data list
-ab26: 39,0c               word    c39
-ab28: ff,ff               word   ffff                                              # End of all lists
+ab26: 39                  byte     39
+ab27: 0c                  byte      c
+ab28: ff                  byte     ff                                              # End of all lists
+ab29: ff                  byte     ff
 
-   Sub_ab2a:
+   KAM_VALIDATION_PROCEDURE:
 ab2a: 01,38               clrw  R38              R38 = 0;
 ab2c: ad,06,32            ldzbw R32,6            wR32 = 6;                         # ISCKAMn = 0.0 (n=0-5)
 ab2f: a1,0a,07,30         ldw   R30,70a          R30 = ISCKAM0;
-ab33: 66,31,38            ad2w  R38,[R30++]      R38 += [R30++];
+ab33: 66,31,38            ad2w  R38,[R30++]      R38 += [R30++];                   # Sum all ISCKAMn
 ab36: e0,32,fa            djnz  R32,ab33         R32--;
-                                                 if (R32 != 0) goto ab33;
+                                                 if (R32 != 0) goto ab33;          # loop for all 6
 ab39: 4b,ee,82,38,30      sb3w  R30,R38,[Ree+82] R30 = R38 - ISKSUM;
 ab3e: db,02               jc    ab42             if (R30 < 0)  {
 ab40: 03,30               negw  R30              R30 = -R30; }
 ab42: c3,ee,82,38         stw   R38,[Ree+82]     ISKSUM = R38;
 ab46: 89,01,00,30         cmpw  R30,1            
-ab4a: d1,03               jleu  ab4f             if (R30 > 1)  {
+ab4a: d1,03               jleu  ab4f             if (R30 > 1)  {                   # if ISCKAMs are invalid
 ab4c: ef,98,90            call  3be7             ReInitialize_ISCKAM (); }
-ab4f: ad,6a,30            ldzbw R30,6a           wR30 = 6a;
+ab4f: ad,6a,30            ldzbw R30,6a           wR30 = 6a;                        # 106 entries
 ab52: 01,38               clrw  R38              R38 = 0;
 ab54: b3,fe,42,3a         ldb   R3a,[Rfe+42]     R3a = [cb9c];
 ab58: 38,3a,1c            jb    B0,R3a,ab77      if (B0_R3a = 0)  {
-ab5b: af,31,4d,07,3a      ldzbw R3a,[R30+74d]    wR3a = [R30+74d];
-ab60: 64,3a,38            ad2w  R38,R3a          R38 += R3a;
+ab5b: af,31,4d,07,3a      ldzbw R3a,[R30+74d]    wR3a = [R30+74d];                 # ADAPTIVE FUEL TABLE
+ab60: 64,3a,38            ad2w  R38,R3a          R38 += R3a;                       # SUM OF ADAPTIVE FUEL CELLS
 ab63: e0,30,f5            djnz  R30,ab5b         R30--;
-                                                 if (R30 != 0) goto ab5b;
+                                                 if (R30 != 0) goto ab5b;          # loop all KAM entries
 ab66: a3,ee,cc,3a         ldw   R3a,[Ree+cc]     R3a = KAM_CHKSUM;
-ab6a: 68,38,3a            sb2w  R3a,R38          R3a -= R38;
+ab6a: 68,38,3a            sb2w  R3a,R38          R3a -= R38;                       # (SUM OF ALL KAM CELLS) - CHKSUM
 ab6d: db,02               jc    ab71             if (R3a < 0)  {
 ab6f: 03,3a               negw  R3a              R3a = -R3a; }
 ab71: 89,01,00,3a         cmpw  R3a,1            
-ab75: d1,16               jleu  ab8d             if (R3a <= 1) goto ab8d; }
-ab77: b1,80,3a            ldb   R3a,80           R3a = 80;
+ab75: d1,16               jleu  ab8d             if (R3a <= 1) goto ab8d; }        # DATA IN KAM IS VALID.
+ab77: b1,80,3a            ldb   R3a,80           R3a = 80;                         # SET LTMTBLrc = 0.5
 ab7a: ad,6a,30            ldzbw R30,6a           wR30 = 6a;
-ab7d: c7,31,4d,07,3a      stb   R3a,[R30+74d]    [R30+74d] = R3a;
+ab7d: c7,31,4d,07,3a      stb   R3a,[R30+74d]    [R30+74d] = R3a;                  # ADAPTIVE FUEL TABLE
 ab82: e0,30,f8            djnz  R30,ab7d         R30--;
                                                  if (R30 != 0) goto ab7d;
 ab85: a1,00,35,38         ldw   R38,3500         R38 = 3500;                       # KAM checksum, 0x3500 = 0x80 x 0x6a = (128 * (10*10+6))
-ab89: c7,ee,c7,00         stb   R0,[Ree+c7]      [747] = 0; }
+                                                                                   # SET CHKSUM = 13568
+ab89: c7,ee,c7,00         stb   R0,[Ree+c7]      KWUCTR = 0; }
 ab8d: c3,ee,cc,38         stw   R38,[Ree+cc]     KAM_CHKSUM = R38;
 ab91: f0                  ret                    return;
 
@@ -14867,10 +14948,10 @@ b432: 00,80,00,00         func  -32768,     0
 b436: 00,80,00,00         func  -32768,     0
 b43a: 00,80,00,00         func  -32768,     0
 
-b43e: 42,b4               word   b442            RF2                               # Register Rf2 
+b43e: 42,b4               word   b442                                              # Register Rf2 
 b440: ff                  byte     ff
 b441: c8                  byte     c8
-b442: 14,b9               word   b914            RF4                               # Register Rf4 
+b442: 14,b9               word   b914                                              # Register Rf4 
 b444: 08                  byte      8
 
 b445: ff                  ???   
@@ -15262,11 +15343,11 @@ b909: 6e,6e,6e,6e,6e,6e,6e,6e,6e,6e  table  110, 110, 110, 110, 110, 110, 110, 1
 
 b913: ff                  ???   
 
-b914: b0,ba               word   bab0            RF6                               # Register Rf6 
+b914: b0,ba               word   bab0                                              # Register Rf6 
 b916: 4b                  byte     4b
 b917: 1e                  byte     1e
 b918: 07                  byte      7
-b919: 08                  byte      8            ENGCYL
+b919: 08                  byte      8            ENGCYL?
 b91a: 16,04               word    416
 b91c: 16,04               word    416
 b91e: 33,33               word   3333
@@ -15442,7 +15523,7 @@ baa4: 80,07,70,00         func   1920,   112
 baa8: 00,00,70,00         func      0,   112
 baac: 00,00,70,00         func      0,   112
 
-bab0: 7a,bb               word   bb7a            RF8                               # Register Rf8 
+bab0: 7a,bb               word   bb7a                                              # Register Rf8 
 bab2: 00,02               word    200
 bab4: 00,02               word    200
 bab6: 11,00               word     11
@@ -15536,7 +15617,7 @@ bb74: 69,fd               func  105,   -3
 bb76: 61,00               func   97,    0
 bb78: 00,00               func    0,    0
 
-bb7a: a8,c0               word   c0a8            RFa                               # Register Rfa
+bb7a: a8,c0               word   c0a8                                              # Register Rfa
 bb7c: 35                  byte     35
 bb7d: 1e                  byte     1e
 bb7e: 37                  byte     37
@@ -15895,7 +15976,7 @@ c0a2: 00,00               func    0,   0
 c0a4: 00,00               func    0,   0
 c0a6: 00,00               func    0,   0
 
-c0a8: 5a,cb               word   cb5a            RFc                               # Register Rfc 
+c0a8: 5a,cb               word   cb5a                                              # Register Rfc 
 c0aa: e0,15               word   15e0
 c0ac: 20,1c               word   1c20
 c0ae: 20,03               word    320
@@ -16123,8 +16204,8 @@ c1d2: 4c                  byte     4c
 c1d3: 07                  byte      7
 c1d4: 04                  byte      4
 c1d5: 01                  byte      1
-c1d6: cd,2c               word   2ccd                                              # 11469
-c1d8: 66,56               word   5666
+c1d6: cd,2c               word   2ccd            RTNVMN                            # 11469
+c1d8: 66,56               word   5666            RTNVMX
 c1da: 29,ac               word   ac29
 c1dc: 20                  byte     20
 c1dd: 08                  byte      8
@@ -16746,7 +16827,7 @@ cb50: 80,00,00,00,80,00   table 128,   0,   0,   0, 128,   0
 
 cb56: 00,00,80,00         ???   
 
-cb5a: 9c,ce               word   ce9c            RFe                               # Register Rfe 
+cb5a: 9c,ce               word   ce9c
 cb5c: 40,01               word    140
 cb5e: c0,00               word     c0
 cb60: 00,20               word   2000

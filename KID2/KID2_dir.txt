@@ -444,41 +444,28 @@ word    a9c4 a9c5
 word    a9c6 a9d5
 
 code    a9d6 aa67
-word    aa68 aa69
-word    aa6a aa6b
-byte    aa6c aa6c
-byte    aa6d aa6d
-byte    aa6e aa6e
-byte    aa6f aa6f
-
-word aa70 aa97
+word    aa68 aa6b
+byte    aa6c aa97
 
 word    aa98 aa99
 word    aa9a aa9b
 word    aa9c aa9d
-byte    aa9e aa9e
-byte    aa9f aa9f
-
-word aaa0 aadd
+byte    aa9e aadd
 
 word aade aadf
 word aae0 aae1
 word aae2 aae3
+byte aae4 aae7
 
-word aae4 aae5
-word aae6 aae7
 word aae8 aae9
-
 word aaea aaeb
 word aaec aaed
-
-word aaee ab1f
+byte aaee ab1f
 
 word ab20 ab21
 word ab22 ab23
 word ab24 ab25
-
-word ab26 ab29
+byte ab26 ab29
 
 
 code    ab2a ac30
@@ -1378,7 +1365,7 @@ sub  83a5b 83a6a  "Sub_3a5b"
 sub  83a6b 83b1f  "Sub_3a6b"  
 sub  83b20 83b4b  "Sub_3b20"  
 sub  83b4c 83bf9  "Sub_3b4c"  
-sub  83b52 "Check_KAM"  
+sub  83b52 "KAM_Qualification_Test_Logic"  
 sub  83be7 "ReInitialize_ISCKAM"  
 sub  83c02 83c6b  "Sub_3c02"  
 sub  83c6c 83cce  "Sub_3c6c"  
@@ -1648,7 +1635,7 @@ sub  8a99b 8a9bc  "Sub_a99b"
 sub  8a9d6 "Check_ConsoleDI"
 sub  8a9d7 "Check_Console"
 sub  8aa02 "Console_Routine"
-sub  8ab2a 8ab91  "Sub_ab2a"  
+sub  8ab2a "KAM_VALIDATION_PROCEDURE"  
 
 sub  8ab92 "DataLoggingPatch" 
 
@@ -1883,6 +1870,8 @@ sym ac "VIP_code"
 
 sym b2 "Throttle_Position"
 
+sym bb "BP?"
+
 sym c4 "PIPHi_ETime"
 sym c8 "PIPH_PW"
 
@@ -1940,6 +1929,8 @@ sym 2bd "Xram1H"
 sym 2be "Xram4L"
 sym 2bf "Xram4H"
 
+sym 2cc "SIGKAL"
+
 sym 344 "Vsc_Raw"
 sym 386 "Cttmr"
 
@@ -1956,7 +1947,7 @@ sym 51f "SBDS_CHKSUM_51f"
 sym 520 "BYTE_NUM"
 sym 521 "EEC_CHKSUM"
 
-sym 532 "DCL_ErrorFlag_532" # XDCL_ERROR
+sym 532 "DCL_ErrorRegister_532" # XDCL_ERROR
 sym 532 "B0_ReadBytes_lowParity" : T 0
 sym 532 "B1_ReadBytes_highBadValue" : T 1
 sym 532 "B2_ReadBytes_DataChecksumParity" : T 2
@@ -2006,7 +1997,11 @@ sym 712 "ISCKAM4"
 sym 714 "ISCKAM5"
 
 sym 718 "KAMQB"
+
+sym 747 "KWUCTR"
 sym 748 "KAMQC"
+
+sym 74a "LTMTBLrc"
 
 sym 74c "KAM_CHKSUM"
 
@@ -2085,18 +2080,18 @@ sym b03c "Stall_RPM"
 sym b050 "ISCLPD"
 
 
-sym b43e "RF2"
-sym b442 "RF4"
-sym b914 "RF6"
+#sym b43e "RF2"
+#sym b442 "RF4"
+#sym b914 "RF6"
 
-sym b919 "ENGCYL"
+sym b919 "ENGCYL?"
 
 sym b92a "BASEMD"
 
-sym bab0 "RF8"
+#sym bab0 "RF8"
 sym bae4 "Sigklu"
 
-sym bb7a "RFa"
+#sym bb7a "RFa"
 sym bbb2 "Retlim"
 sym bbb3 "Tipinret"
 sym bbb4 "TIPINC"
@@ -2104,9 +2099,13 @@ sym bbb4 "TIPINC"
 sym bb85 "Splclp"
 sym bbc7 "KNKCYL"
 
-sym c0a8 "RFc"
+# sym c0a8 "RFc"
 sym c142 "SARCHG"
-sym cb5a "RFe"
+
+sym c1d6 "RTNVMN"
+sym c1d8 "RTNVMX"
+
+# sym cb5a "RFe"
 sym cb83 "EGR_Type"
 
 sym cbd5 "V_fpmflg"

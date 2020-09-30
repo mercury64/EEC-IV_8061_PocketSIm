@@ -594,8 +594,6 @@
  Warning - Extra Parameters Ignored
 ## sub  8a99b 8a9bc  "Sub_a99b"  
  Warning - Extra Parameters Ignored
-## sub  8ab2a 8ab91  "Sub_ab2a"  
- Warning - Extra Parameters Ignored
 # ----- Start Disassembly phase 1 -----
 
 # ----- End   Disassembly phase 1 -----
@@ -1020,32 +1018,24 @@ word    a9be a9bf
 word    a9c0 a9c3
 word    a9c4 a9c5
 word    a9c6 a9d5
-word    aa68 aa69
-word    aa6a aa6b
-byte    aa6c aa6c
-byte    aa6d aa6d
-byte    aa6e aa6e
-byte    aa6f aa6f
-word    aa70 aa97
+word    aa68 aa6b
+byte    aa6c aa97
 word    aa98 aa99
 word    aa9a aa9b
 word    aa9c aa9d
-byte    aa9e aa9e
-byte    aa9f aa9f
-word    aaa0 aadd
+byte    aa9e aadd
 word    aade aadf
 word    aae0 aae1
 word    aae2 aae3
-word    aae4 aae5
-word    aae6 aae7
+byte    aae4 aae7
 word    aae8 aae9
 word    aaea aaeb
 word    aaec aaed
-word    aaee ab1f
+byte    aaee ab1f
 word    ab20 ab21
 word    ab22 ab23
 word    ab24 ab25
-word    ab26 ab29
+byte    ab26 ab29
 word    ac32 acbf
 byte    ae27 ae27
 word    b000 b001
@@ -1154,10 +1144,10 @@ func    b3ea b3fd  "Func_b3ea"   : UW  : UW
 func    b3fe b411  "Func_b3fe"   : UW  : UW 
 func    b412 b425  "Func_b412"   : UW  : UW 
 func    b426 b43d  "Func_b426"   : SW  : UW 
-word    b43e b43f  "RF2"  
+word    b43e b43f
 byte    b440 b440
 byte    b441 b441
-word    b442 b443  "RF4"  
+word    b442 b443
 byte    b444 b444
 word    b446 b447
 word    b448 b449
@@ -1304,11 +1294,11 @@ table   b878 b890  "Table_b878"   : O 5 UY
 table   b891 b8a9  "Table_b891"   : O 5 UY 
 table   b8aa b8c2  "Table_b8aa"   : O 5 UY 
 table   b8c3 b912  "Table_b8c3"   : O 10 UY 
-word    b914 b915  "RF6"  
+word    b914 b915
 byte    b916 b916
 byte    b917 b917
 byte    b918 b918
-byte    b919 b919  "ENGCYL"  
+byte    b919 b919  "ENGCYL?"  
 word    b91a b91b
 word    b91c b91d
 word    b91e b91f
@@ -1378,7 +1368,7 @@ func    ba4b ba56  "Func_ba4b"   : UY  : UY
 func    ba58 ba6f  "Func_ba58"   : UW  : UW 
 func    ba70 ba8b  "Func_ba70"   : UW  : UW 
 func    ba8c baaf  "Func_ba8c"   : UW  : UW 
-word    bab0 bab1  "RF8"  
+word    bab0 bab1
 word    bab2 bab3
 word    bab4 bab5
 word    bab6 bab7
@@ -1413,7 +1403,7 @@ func    bb1e bb3d  "Func_bb1e"   : SW  : SW
 func    bb3e bb47  "Func_bb3e"   : UY  : UY 
 table   bb48 bb6b  "Table_bb48"   : O 6 SY 
 func    bb6c bb79  "Func_bb6c"   : UY  : SY 
-word    bb7a bb7b  "RFa"  
+word    bb7a bb7b
 byte    bb7c bb7c
 byte    bb7d bb7d
 byte    bb7e bb7e
@@ -1493,7 +1483,7 @@ func    c03c c073  "Func_c03c"   : UW  : UW
 func    c074 c087  "Func_c074"   : UW  : UW 
 func    c088 c09f  "Func_c088"   : UW  : UW 
 func    c0a0 c0a7  "Func_c0a0"   : UY  : UY 
-word    c0a8 c0a9  "RFc"  
+word    c0a8 c0a9
 word    c0aa c0ab
 word    c0ac c0ad
 word    c0ae c0af
@@ -1633,8 +1623,8 @@ byte    c1d2 c1d2
 byte    c1d3 c1d3
 byte    c1d4 c1d4
 byte    c1d5 c1d5
-word    c1d6 c1d7
-word    c1d8 c1d9
+word    c1d6 c1d7  "RTNVMN"  
+word    c1d8 c1d9  "RTNVMX"  
 word    c1da c1db
 byte    c1dc c1dc
 byte    c1dd c1dd
@@ -1726,7 +1716,7 @@ table   c8ca c92d  "Table_c8ca"   : O 10 UY
 table   c92e c951  "Table_c92e"   : O 6 UY 
 table   c952 c975  "Table_c952"   : O 6 UY 
 table   c976 cb55  "Table_c976"   : O 6 UY 
-word    cb5a cb5b  "RFe"  
+word    cb5a cb5b
 word    cb5c cb5d
 word    cb5e cb5f
 word    cb60 cb61
@@ -1921,7 +1911,7 @@ sub  83a5b 83a6a  "Sub_3a5b"
 sub  83a6b 83b1f  "Sub_3a6b"  
 sub  83b20 83b4b  "Sub_3b20"  
 sub  83b4c 83bf9  "Sub_3b4c"  
-sub  83b52 83c01  "Check_KAM"   #cmd
+sub  83b52 83c01  "KAM_Qualification_Test_Logic"   #cmd
 sub  83be7 83bf9  "ReInitialize_ISCKAM"   #cmd
 sub  83c02 83c6b  "Sub_3c02"  
 sub  83c6c 83cce  "Sub_3c6c"  
@@ -2192,7 +2182,7 @@ sub  8a99b 8a9bc  "Sub_a99b"
 sub  8a9d6 8aa67  "Check_ConsoleDI"   #cmd
 sub  8a9d7 8aa67  "Check_Console"   #cmd
 sub  8aa02 8aa67  "Console_Routine"   #cmd
-sub  8ab2a 8ab91  "Sub_ab2a"  
+sub  8ab2a 8ab91  "KAM_VALIDATION_PROCEDURE"   #cmd
 sub  8ab92 0  "DataLoggingPatch"   #cmd
 
 
@@ -2383,6 +2373,7 @@ sym a5  "Cranking" :B 7
 sym aa  "XFRAME"
 sym ac  "VIP_code"
 sym b2  "Throttle_Position"
+sym bb  "BP?"
 sym c4  "PIPHi_ETime"
 sym c8  "PIPH_PW"
 sym ca  "Mkay"
@@ -2429,6 +2420,7 @@ sym 2bc  "Xram3L"
 sym 2bd  "Xram1H"
 sym 2be  "Xram4L"
 sym 2bf  "Xram4H"
+sym 2cc  "SIGKAL"
 sym 344  "Vsc_Raw"
 sym 386  "Cttmr"
 sym 413  "C41FIL_TroubleCode"
@@ -2441,7 +2433,7 @@ sym 51e  "BYTE_10"
 sym 51f  "SBDS_CHKSUM_51f"
 sym 520  "BYTE_NUM"
 sym 521  "EEC_CHKSUM"
-sym 532  "DCL_ErrorFlag_532"
+sym 532  "DCL_ErrorRegister_532"
 sym 532  "B0_ReadBytes_lowParity" :B 0
 sym 532  "B1_ReadBytes_highBadValue" :B 1
 sym 532  "B2_ReadBytes_DataChecksumParity" :B 2
@@ -2470,7 +2462,9 @@ sym 710  "ISCKAM3"
 sym 712  "ISCKAM4"
 sym 714  "ISCKAM5"
 sym 718  "KAMQB"
+sym 747  "KWUCTR"
 sym 748  "KAMQC"
+sym 74a  "LTMTBLrc"
 sym 74c  "KAM_CHKSUM"
 sym 901  "UART_tx_buff_901"
 sym 903  "UART_rx_buff_903"

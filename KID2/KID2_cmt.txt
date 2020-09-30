@@ -3,6 +3,12 @@
 
 2034 # stop interrupts
 2036 # save VIP mode
+
+2039 # 0x24h = 36
+203d # set RAM at 0x24 to 0x6ff to zero
+2040 # increment watchdog timer
+2042 # 0x6FFh = 1791
+
 2053 # restore VIP mode
 2058 # Initialize 4 lists, base pointer
 205c # is it done yet?
@@ -10,14 +16,20 @@
 2062 # Base address
 2065 # end of list, next address
 
-207b # if error, reset
+2079 # loop, load bytes from aa68 to aa98
+
+207b # R14 = R16
 207d # next list
 
-2098 # = 1.666 for 6 and 4 cyl
+2098 # = 0xB6DBh / 0x8000h =  1.42857 for 35% duty cycle signature  PIP.
 209c # PIPsC; #= 8 (PIPs per cycle)
+20a3 # = 0xD555h / 0x8000h 1.66666 for  30%  duty cycle signature PIP 
+
 
 20d9 # HSI0, HSI1, HSI2?
 20dc # HSI line select
+
+20fe # 0x0Fh = 15, XFRAME Block?
 
 2101 # error register is initialized to BC1FH on EEC power-up/initialize
 21cd \n# "Task_List_1"
@@ -158,8 +170,13 @@
 3b5b \n#                      KAMQC        HIGHEST ADDRESS OF KAM
 3b5b \n
 
+3b8e # Minimum valid RT_NOVS_KAM.
+3b95 # Maximum valid RT_NOVS_KAM.
+
 3bac # Default 80h value.
 3baf # 0x6a all 106 KAM locations.
+
+3bb2 # ADAPTIVE FUEL TABLE
 
 3bb7 # Loop, all KAM memory locations (106) set to 80h.
 
@@ -168,6 +185,9 @@
 3bc2 # 29.875 * 8 = 239 = 0xEF
 
 3bd1 # ?BP?
+
+3bdc # LTMTBLrc = 0.5
+
 3be7 # ISCKAMn = 0.0 (n=0-5)
 
 3bef # clear Idle Speed KAM IPSIBR cells
@@ -340,9 +360,22 @@ ab24 # next data list
 
 ab28 # End of all lists
 
-ab2c  # ISCKAMn = 0.0 (n=0-5)
+ab2c # ISCKAMn = 0.0 (n=0-5)
+ab33 # Sum all ISCKAMn
+ab36 # loop for all 6
+ab4a # if ISCKAMs are invalid
+ab4f # 106 entries
+ab5b # ADAPTIVE FUEL TABLE
+ab60 # SUM OF ADAPTIVE FUEL CELLS
+ab63 # loop all KAM entries
+ab6a # (SUM OF ALL KAM CELLS) - CHKSUM
+ab75 # DATA IN KAM IS VALID.
+ab77 # SET LTMTBLrc = 0.5
+
+ab7d # ADAPTIVE FUEL TABLE
 
 ab85 # KAM checksum, 0x3500 = 0x80 x 0x6a = (128 * (10*10+6))
+ab85 \w# SET CHKSUM = 13568
 
 ac31 \n## Payloads - Datalogging Lists!
 
@@ -358,4 +391,4 @@ c0a8 # Register Rfc
 c1d6 # 11469
 
 
-cb5a # Register Rfe 
+# cb5a # Register Rfe 
