@@ -125,6 +125,8 @@
 27a5 \w#The EEC will set a flag DCLST_START after receiving diagnostic mode code 25H.
 27a5 \w#This flag is continuously read by VIP to initiate self test.
 
+27d2 # all codes have been transmitted at least once, 
+27d2 \w# by setting bit 14 in the DCL Error/Flag register.
 28b3 \n# DEFINED EEC-IV DIAGNOSTIC MODES
 28b4 # clear DCL error/flag bits
 28b7 # clear Continuous Self Test codes
@@ -216,6 +218,19 @@
 4689 # 29.875 * 8 = 239 = 0xEF
 
 5c86 # 1024 = 1 second
+
+6b26 # ISCKAM(ISFLAG)
+
+6c64 # if(IBGPSI < UPDATM) Exit ISCKAM_UPDATE logic;
+6c66 # IBGPSI = 0
+
+6c83 # Decrement ISCKAMn
+6c85 # Decrement ISKSUM
+6c87 # Increment IPSIBR
+
+6c91 # Increment ISCKAMn
+6c93 # Increment ISKSUM
+6c95 # Decrement IPSIBR
 
 6fb5 # 210
 
@@ -370,8 +385,8 @@ ab60 # SUM OF ADAPTIVE FUEL CELLS
 ab63 # loop all KAM entries
 ab6a # (SUM OF ALL KAM CELLS) - CHKSUM
 ab75 # DATA IN KAM IS VALID.
-ab77 # SET LTMTBLrc = 0.5
-
+ab77 # Default 80h value for initial KAM
+ab7a # 0x6Ah = 106  LTMTBLrc CELLS
 ab7d # ADAPTIVE FUEL TABLE
 
 ab85 # KAM checksum, 0x3500 = 0x80 x 0x6a = (128 * (10*10+6))
