@@ -549,7 +549,7 @@ func    b0cc b0df  "isc_ect_rpm_adder"   : SY  : UY
 func    b0e0 b0ed  "isc_ect_rpm_adder2"   : SY  : UY 
 func    b0ee b0fb  "isc_act_rpm_adder"   : SY  : UY 
 func    b0fc b109  "Func_b0fc"   : UY  : UY 
-func    b10a b111  "Func_b10a"   : UY  : UY 
+func    b10a b111  "FN862"   : UY  : UY 
 func    b112 b129  "isc_idle_air_drive"   : UW  : UW 
 func    b12a b141  "isc_idle_air_neutral"   : UW  : UW 
 func    b142 b15d  "Func_b142"   : UW  : UW 
@@ -563,10 +563,10 @@ func    b212 b23d  "Func_b212"   : UW  : SW
 func    b23e b259  "y_fuel_cold_decay"   : UW  : UW 
 func    b25a b26d  "Func_b25a"   : UW  : UW 
 func    b26e b28d  "x_isc_base_air_ect"   : SW  : UW 
-func    b28e b2bd  "y_ve"   : UW  : UW 
+func    b28e b2bd  "FN021_MAOPE_y_load"   : UW  : UW 
 func    b2be b2e5  "x_fuel_cold"   : SW  : UW 
 func    b2e6 b2fd  "x_base_fuel"   : UW  : UW 
-func    b2fe b319  "x_spark_rpm"   : UW  : UW 
+func    b2fe b319  "FN070_N_x_rpm"   : UW  : UW 
 func    b31a b335  "y_fuel_base_cold"   : UW  : UW 
 func    b336 b351  "y_base_fuel"   : UW  : UW 
 func    b352 b365  "Func_b352"   : UW  : UW 
