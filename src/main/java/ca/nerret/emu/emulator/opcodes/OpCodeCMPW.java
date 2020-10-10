@@ -83,22 +83,23 @@ public class OpCodeCMPW extends OpCode implements IOpCode {
 		
 		// do_sub(reg_r16(OP2), OP1);
 		//state_.doSub((short) state_.setWordRegister(RB), RA);
-		state_.doSub( RB, RA);
+		long cmpResult = state_.doSub( RB, RA);
 		
-		  System.out.println(compare);
+		  System.out.println(compare + " : " + cmpResult);
     	  System.out.println(" Compare: (" + String.format("0x%04X", RB) + ", "+ String.format("0x%04X", RA) + ")");
 
 		  
 		if ( RB < RA)
 		{
-
+ 
+			// True
 			state_.setPswBit(ProgramStatusWord.CARRY, false);
 			
 
 		}
 		else
 		{
-
+			// False
 			//state_.setPswBit(ProgramStatusWord.ZERO, true);
 			//state_.setPswBit(ProgramStatusWord.NEGATIVE, true);
 			//state_.setPswBit(ProgramStatusWord.OVERFLOW, true);
@@ -106,6 +107,8 @@ public class OpCodeCMPW extends OpCode implements IOpCode {
 			state_.setPswBit(ProgramStatusWord.CARRY, true);
 			//state_.setPSW(ProgramStatusWord.STICKY_BIT, null);
 		}
+		
+		System.out.println( state_ );
 
     }
 }

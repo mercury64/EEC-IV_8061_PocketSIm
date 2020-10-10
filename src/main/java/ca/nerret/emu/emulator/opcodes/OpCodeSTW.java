@@ -62,6 +62,7 @@ public class OpCodeSTW extends OpCode implements IOpCode {
         short register = (short) (operands[1] & 0xff);
         short value = (short) (operands[2] & 0xff);
             
+        
         if (this.getAddressModeType() == AddressMode.INDIRECT)
         {
         	if (  register%2 > 0 )

@@ -1843,8 +1843,8 @@ sym 88 "TablePTR"
 
 sym 9d "Tipret" 
 
-sym 9e "Pfehp_flg" : T 1
-sym 9e "Vegrbp" : T4
+# sym 9e "Pfehp_flg" : T 1
+# sym 9e "Vegrbp" : T4
 sym 9f "Flags_9f"
 
 sym 9f "Swtfl" : T 0
@@ -2175,8 +2175,8 @@ sym c1d8 "RTNVMX"
 # sym cb5a "RFe"
 sym cb83 "EGR_Type"
 sym cb85 "emissions_thermactor_sw"
-sym cb86 "TRANS_Type"
-sym cb87 "TRANS_Type_Load"
+sym cb86 "TSTRAT"
+sym cb87 "TRLOAD"
 
 sym cb8f "fuel_adaptive_ect_min"
 sym cb8f "fuel_adaptive_ect_max"

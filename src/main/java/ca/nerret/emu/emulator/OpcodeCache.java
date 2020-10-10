@@ -17,6 +17,7 @@ import ca.nerret.emu.emulator.opcodes.OpCode31;
 import ca.nerret.emu.emulator.opcodes.OpCodeAD3W;
 import ca.nerret.emu.emulator.opcodes.OpCodeAN3B;
 import ca.nerret.emu.emulator.opcodes.OpCodeC3;
+import ca.nerret.emu.emulator.opcodes.OpCodeCALL;
 import ca.nerret.emu.emulator.opcodes.OpCodeCD;
 import ca.nerret.emu.emulator.opcodes.OpCodeDI;
 import ca.nerret.emu.emulator.opcodes.OpCodeFF;
@@ -27,6 +28,7 @@ import ca.nerret.emu.emulator.opcodes.OpCodeJNE;
 import ca.nerret.emu.emulator.opcodes.OpCodeLDB;
 import ca.nerret.emu.emulator.opcodes.OpCodeLDW;
 import ca.nerret.emu.emulator.opcodes.OpCodeNop;
+import ca.nerret.emu.emulator.opcodes.OpCodeORRB;
 
 public final class OpcodeCache {
 
@@ -56,6 +58,8 @@ public final class OpcodeCache {
         _OPCODES.put(0x2d, new OpCodeSCALL(0x2d, "SCALL"));
         _OPCODES.put(0x2e, new OpCodeSCALL(0x2e, "SCALL"));
         _OPCODES.put(0x2f, new OpCodeSCALL(0x2f, "SCALL"));
+
+        _OPCODES.put(0xEF, new OpCodeCALL(0xef, "CALL"));
 
 
         _OPCODES.put(0x17, new OpCodeINCB(0x17, "INCB"));
@@ -105,6 +109,11 @@ public final class OpcodeCache {
         _OPCODES.put(0xD7, new OpCodeJNE(0xd7, "JNE"));
         _OPCODES.put(0xDF, new OpCodeJE(0xdf, "JE"));
         _OPCODES.put(0xDB, new OpCodeJE(0xdb, "JC"));
+        
+        _OPCODES.put(0x90, new OpCodeORRB(0x90, "ORRB"));
+        _OPCODES.put(0x91, new OpCodeORRB(0x91, "ORRB"));
+        _OPCODES.put(0x92, new OpCodeORRB(0x92, "ORRB"));
+        _OPCODES.put(0x93, new OpCodeORRB(0x93, "ORRB"));
 
     }
 
@@ -116,9 +125,10 @@ public final class OpcodeCache {
     /**
      * Get the IOPcode for the current instruction.
      * @param instruction_ Where the state machine pc is at.
+     * @param pc 
      * @return the IOpcode
      */
-    public static IOpCode get(int instruction_) {
+    public static IOpCode get(int instruction_, byte firstByte) {
     	
     	int opCode = instruction_;
     	
@@ -126,7 +136,7 @@ public final class OpcodeCache {
     	
         try 
         {
-            opc.setAddressMode(new AddressMode((byte)instruction_));
+            opc.setAddressMode(new AddressMode((byte)instruction_, firstByte));
     	}
         catch(Exception e)
         {
@@ -134,6 +144,7 @@ public final class OpcodeCache {
 
             return null;
         }
+
         return opc;
     }
 }

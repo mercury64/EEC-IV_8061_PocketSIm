@@ -8,9 +8,9 @@ import ca.nerret.emu.emulator.State;
 /**
  * OpCode 0x45 AD3W
  */
-public class OpCodeAN3B  extends OpCode implements IOpCode {
+public class OpCodeORRB  extends OpCode implements IOpCode {
 
-    public OpCodeAN3B(int opcode, String mnemonic) {
+    public OpCodeORRB(int opcode, String mnemonic) {
 		super(opcode, mnemonic);
 		// TODO Auto-generated constructor stub
 	}
@@ -51,20 +51,20 @@ public class OpCodeAN3B  extends OpCode implements IOpCode {
         switch (this.getAddressModeInt())
         {
 	        case AddressMode.DIRECT:
-	        	numberOfBytes = 4;
-	        	stateTime = 5;
+	        	numberOfBytes = 3;
+	        	stateTime = 4;
 	        	break;
 	        case AddressMode.IMMEDIATE:
-	        	numberOfBytes = 4;
-	        	stateTime = 5; 
+	        	numberOfBytes = 3;
+	        	stateTime = 4; 
 	        	break;
 	        case AddressMode.INDIRECT:
-	        	numberOfBytes = 4;
-	        	stateTime = 7;
+	        	numberOfBytes = 3;
+	        	stateTime = 6;
 	        	break;
 	        case AddressMode.SHORT_INDEXED:
-	        	numberOfBytes = 5;
-	        	stateTime = 7;
+	        	numberOfBytes = 4;
+	        	stateTime = 6;
 	        	break;	
         }
         state_.setPc(pc + numberOfBytes);
@@ -75,14 +75,14 @@ public class OpCodeAN3B  extends OpCode implements IOpCode {
 			operands[i] = (byte)memory[pc + i];
 		}
 
-        byte dest_dwreg = operands[3];
+        byte dest_dwreg = operands[1];
         byte Ra = operands[2];
         byte Rb = operands[1];
-        byte Rd  = (byte) (Ra + Rb) ;
+        byte Rd  = (byte) (Ra | Rb) ;
         
         
         
-        short result = state_.doAdd(Ra, Rb);
+        short result = state_.doORRB(Ra, Rb);
         state_.setByteRegister(dest_dwreg, (byte) result);    
         
         System.out.println( state_ );

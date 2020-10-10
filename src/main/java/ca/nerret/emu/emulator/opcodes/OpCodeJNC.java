@@ -33,7 +33,8 @@ public class OpCodeJNC extends OpCode implements IOpCode {
         int newPC = pc + 2;
         
         boolean carryFlag = state_.getPswBit(ProgramStatusWord.CARRY);
-        
+        // Jump on Not Carry
+        // if C=0
         if ( carryFlag == ProgramStatusWord.CLEAR)
         {
         	// Take jump
@@ -58,8 +59,9 @@ public class OpCodeJNC extends OpCode implements IOpCode {
     
 	public void setAddressMode(AddressMode addressMode) {
 		// TODO Auto-generated method stub
-	    
-	   super.setAddressMode(new AddressMode((byte)AddressMode.DIRECT));
+	    AddressMode am = new AddressMode();
+	    am.setType(AddressMode.DIRECT);
+		super.setAddressMode(am);
 		
 	}
 }
