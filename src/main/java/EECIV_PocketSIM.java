@@ -62,6 +62,11 @@ public class EECIV_PocketSIM {
 			
 			IOpCode opcode = OpcodeCache.get(instruction);
 			
+			if (opcode == null)
+			{
+				System.out.println(String.format("0x%04X: ", state.getPc()));
+				System.exit(1);
+			}
 			
 			
 			logger.info( String.format("0x%04X: ", state.getPc()) );

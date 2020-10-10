@@ -245,7 +245,7 @@ public class State {
 		
 	}
 	
-	void calc_SZP(byte value) {
+	/*void calc_SZP(byte value) {
 	    if (value == 0) set_Z(); else clear_Z();
 	    if (value & 0x80) set_S(); else clear_S();
 	    if (parity[value]) set_P(); else clear_P();
@@ -282,7 +282,7 @@ public class State {
 	        clear_AC();
 	    }
 	}
-    
+    */
 	public byte getByteRegister(byte register) {
 		
 		byte value = (byte)register_memory[register];

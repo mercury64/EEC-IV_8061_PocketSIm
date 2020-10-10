@@ -124,8 +124,16 @@ public final class OpcodeCache {
     	
     	IOpCode opc = _OPCODES.get(opCode);
     	
-    	opc.setAddressMode(new AddressMode((byte)instruction_));
-    	
+        try 
+        {
+            opc.setAddressMode(new AddressMode((byte)instruction_));
+    	}
+        catch(Exception e)
+        {
+            System.err.println("OPCODE Not found: " + String.format("0x%02X: ", opCode));
+
+            return null;
+        }
         return opc;
     }
 }
