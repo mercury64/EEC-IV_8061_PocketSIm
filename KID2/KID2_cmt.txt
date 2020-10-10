@@ -119,7 +119,8 @@
 267b # clear the four (or five) KAM bytes 
 267b \w# which hold the Continuous Self Test Codes
 
-2686 # clear all bits except bit 12
+2686 # clear all bits except bit 13
+2686 \w# 13     EEC Reset            Set if EEC Resets
 
 27a5 # initiate self test
 27a5 \w#The EEC will set a flag DCLST_START after receiving diagnostic mode code 25H.
@@ -216,6 +217,8 @@
 3d1e # end of table
 
 4689 # 29.875 * 8 = 239 = 0xEF
+
+58b3 # 60.000
 
 5c86 # 1024 = 1 second
 

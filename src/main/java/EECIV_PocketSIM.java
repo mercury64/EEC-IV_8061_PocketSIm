@@ -31,7 +31,7 @@ public class EECIV_PocketSIM {
 	    logger.addHandler(logHandler);
 	   
 
-	    Calibration KID2 = new Calibration("KID2.bin");
+	    Calibration KID2 = new Calibration("KID2/KID2.bin");
 		
 		int[] fileBytes = KID2.readFile();
        
@@ -60,10 +60,14 @@ public class EECIV_PocketSIM {
 			
 			int instruction = state.getMemory()[state.getPc()];
 			
-			IOpCode opcode = OpcodeCache.get(instruction);
+			IOpCode opcode = OpcodeCache.get(instruction,(byte)state.getMemory()[state.getPc()]);
 			
 			
-			
+			if (state.getPc() == 0xa9df)
+			{
+				//pause
+				System.out.println("Break Point");
+			}
 			logger.info( String.format("0x%04X: ", state.getPc()) );
 			opcode.exec(state);
 			logger.info( String.format("%s", opcode) );

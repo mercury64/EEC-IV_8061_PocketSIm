@@ -1,5 +1,7 @@
 package ca.nerret.emu.emulator;
 
+import java.util.Arrays;
+
 public class State {
 
     private int _sp; 
@@ -244,7 +246,7 @@ public class State {
         this.setPswBit(ProgramStatusWord.STICKY_BIT, false);
 		
 	}
-	
+	/*
 	void calc_SZP(byte value) {
 	    if (value == 0) set_Z(); else clear_Z();
 	    if (value & 0x80) set_S(); else clear_S();
@@ -282,7 +284,7 @@ public class State {
 	        clear_AC();
 	    }
 	}
-    
+    */
 	public byte getByteRegister(byte register) {
 		
 		byte value = (byte)register_memory[register];
@@ -313,24 +315,116 @@ public class State {
 		return null;
 	}
 
+	public short doAdd(final short v1, final short v2) {
+
+		boolean shortToBoolean = false;
+		
+	     long sum = v1+v2;
+	     
+			this.PSW_FLAGS &= ~( ProgramStatusWord.F_Z
+								|ProgramStatusWord.F_N
+								|ProgramStatusWord.F_C
+								|ProgramStatusWord.F_V
+								);
+	    
+	     if((short)sum == 0)
+	    	 this.PSW_FLAGS |= ProgramStatusWord.F_Z;
+	     else if((short)sum < 0)
+	    	 this.PSW_FLAGS |= ProgramStatusWord.F_N;
+	     
+	    shortToBoolean = ((short) ( ~((v1^v2) & (v1^sum))  & 0x8000)) != 0;
+	     
+	    if(shortToBoolean)
+	    {
+	    	 this.PSW_FLAGS |= ProgramStatusWord.F_V | ProgramStatusWord.F_VT;
+	    }
+	    shortToBoolean =  (short)(sum & 0xffff0000) != 0;
+	    if(shortToBoolean)
+	    {
+	    	this.PSW_FLAGS |= ProgramStatusWord.F_C;
+	    }
+	     return (short) sum;
+	    }
+	
 	/**
 	 * overflow detection
 	 * 
 	 * @param v1
 	 * @param v2
 	 */
-	public long doSub(final short v1, final short v2) {
-		
+	public short doSub(final short v1, final short v2) {
+
 		long diff =  v1 - v2;
 	     
+		this.modifySubPSW(diff, v1, v2);
+	      
+	    return (short) diff;
+		
+	}
+
+	private void modifySubPSW(long diff, final short v1, final short v2) {
+
+		boolean shortToBoolean = false;
+		
 		this.PSW_FLAGS &= ~(ProgramStatusWord.F_N|ProgramStatusWord.F_V|ProgramStatusWord.F_Z|ProgramStatusWord.F_C);
-	     
+	    
+		if((short)diff == 0)
+		{
+			this.PSW_FLAGS |= ProgramStatusWord.F_Z;
+		}
+		else if((short)diff < 0)
+		{
+			this.PSW_FLAGS |= ProgramStatusWord.F_N;
+		}
+		
+		shortToBoolean = ((short) ( ((v1^v2) & (v1^diff))  & 0x8000)) != 0;
+		System.out.println("Short to Boolean: " + shortToBoolean);
+		
+		if( shortToBoolean )
+		{
+			this.PSW_FLAGS |= ProgramStatusWord.F_V;
+		}
+		
+		shortToBoolean =  (short)(diff & 0xffff0000)  != 0;
+		
+		System.out.println("Short to Boolean: " + shortToBoolean);
+		
+	    if( !shortToBoolean )
+	    {
+	    	this.PSW_FLAGS |= ProgramStatusWord.F_C;
+	    }
+		
+		
 	    if ((((~v2 & v1 & ~diff) | (v2 & ~v1 & diff)) & 0x8000) != 0)
 	    {
 	    	System.out.println("short overflow sub(" + v1 + ", " + v2 + ")");
 	    }
-	      
-	    return diff;
 		
 	}
+
+	@Override
+	public String toString() {
+		return "State [_sp=" + _sp + ", _pc=" + _pc + ", _memory="  + ", register_memory="
+				+ ", psw=" + psw + ", PSW_FLAGS=" + PSW_FLAGS + ", _a=" + _a
+				+ ", _b=" + _b + ", _c=" + _c + ", _d=" + _d + ", _e=" + _e + ", _h=" + _h + ", _l=" + _l
+				+ ", _state_time=" + _state_time + "]";
+	}
+
+	public short doORRB(byte ra, byte rb) {
+		 byte orrb  = (byte) (ra | rb) ;
+		 
+		 this.PSW_FLAGS &= ~(ProgramStatusWord.F_N|ProgramStatusWord.F_Z);
+
+			if((short)orrb == 0)
+			{
+				this.PSW_FLAGS |= ProgramStatusWord.F_Z;
+			}
+			else if((short)orrb < 0)
+			{
+				this.PSW_FLAGS |= ProgramStatusWord.F_N;
+			}
+		return orrb;
+	}
+	
+	
 }

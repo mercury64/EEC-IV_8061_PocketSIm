@@ -13,11 +13,16 @@ public class AddressMode {
 	public String name;
 	private boolean autoIncrement;
 	
-	public AddressMode(byte byte1)
+	public AddressMode(byte opcode)
+	{
+		byte firstByte = 0x0;
+		new AddressMode(opcode, firstByte);
+	}
+	public AddressMode(byte opcode, byte firstByte)
 	{
 		this.autoIncrement = false;
 		
-		   switch (byte1 & 0x03)
+		   switch (opcode & 0x03)
 	        {
 	        case 0x0:
 	        	this.setType(DIRECT);
@@ -29,11 +34,20 @@ public class AddressMode {
 	        	this.setType(INDIRECT);
 	        	break;
 	        case 0x3:
+	        	
 	        	this.setType(SHORT_INDEXED);
+	        	if ( (firstByte & 0x1) == 1 )
+	        	{
+	        		this.setType(LONG_INDEXED);
+	        	}
+	        	
 	        	break;	
 	        }
 	}
 
+	public AddressMode() {
+		// TODO Auto-generated constructor stub
+	}
 	@Override
 	public String toString() {
 		return "AddressMode [type=" + type + ", name=" + name + "]";

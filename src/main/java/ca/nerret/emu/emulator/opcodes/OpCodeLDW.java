@@ -43,6 +43,10 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
 	        	numberOfBytes = 4;
 	        	stateTime = 6;
 	        	break;	
+	        case AddressMode.LONG_INDEXED:
+	        	numberOfBytes = 5;
+	        	stateTime = 7;
+	        	break;
         }
 
         operands = new byte[numberOfBytes];
@@ -50,9 +54,13 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
 			operands[i] = (byte)memory[pc + i];
 		}
         System.out.println("LDW bytes:" + numberOfBytes);
+        
+
+
+        //a9d7: a3,01,00,0d,14      ldw   R14,[R0+d00]     R14 = [d00];
         // little endian
         short dest_dwreg = operands[numberOfBytes-1];
-        short value  = (short) ((operands[2] << 8) | operands[1]);;
+        short value  = (short) ((operands[numberOfBytes-2] << 8) | operands[numberOfBytes-3]);;
         
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
