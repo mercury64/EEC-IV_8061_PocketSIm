@@ -63,6 +63,10 @@ public class OpCodeAD3W  extends OpCode implements IOpCode {
 	        	numberOfBytes = 5;
 	        	stateTime = 7;
 	        	break;	
+	        case AddressMode.LONG_INDEXED:
+	        	numberOfBytes = 6;
+	        	stateTime = 8;
+	        	break;	
         }
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
