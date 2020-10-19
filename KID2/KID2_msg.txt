@@ -1111,7 +1111,7 @@ func    b0cc b0df  "isc_ect_rpm_adder"   : SY  : UY
 func    b0e0 b0ed  "isc_ect_rpm_adder2"   : SY  : UY 
 func    b0ee b0fb  "isc_act_rpm_adder"   : SY  : UY 
 func    b0fc b109  "Func_b0fc"   : UY  : UY 
-func    b10a b111  "Func_b10a"   : UY  : UY 
+func    b10a b111  "FN862"   : UY  : UY 
 func    b112 b129  "isc_idle_air_drive"   : UW  : UW 
 func    b12a b141  "isc_idle_air_neutral"   : UW  : UW 
 func    b142 b15d  "Func_b142"   : UW  : UW 
@@ -1125,10 +1125,10 @@ func    b212 b23d  "Func_b212"   : UW  : SW
 func    b23e b259  "y_fuel_cold_decay"   : UW  : UW 
 func    b25a b26d  "Func_b25a"   : UW  : UW 
 func    b26e b28d  "x_isc_base_air_ect"   : SW  : UW 
-func    b28e b2bd  "y_ve"   : UW  : UW 
+func    b28e b2bd  "FN021_MAOPE_y_load"   : UW  : UW 
 func    b2be b2e5  "x_fuel_cold"   : SW  : UW 
 func    b2e6 b2fd  "x_base_fuel"   : UW  : UW 
-func    b2fe b319  "x_spark_rpm"   : UW  : UW 
+func    b2fe b319  "FN070_N_x_rpm"   : UW  : UW 
 func    b31a b335  "y_fuel_base_cold"   : UW  : UW 
 func    b336 b351  "y_base_fuel"   : UW  : UW 
 func    b352 b365  "Func_b352"   : UW  : UW 
@@ -2210,12 +2210,12 @@ sym 7  "IO_Timer_Hi"
 sym 8  "INT_Mask"
 sym 9  "INT_Pend"
 sym a  "IO_Status"
-sym a  "HSO_OVF" :B 0
-sym a  "HSI_OVF" :B 1
-sym a  "HSI_Ready" :B 2
-sym a  "AD_Ready" :B 3
-sym a  "INT_Handling" :B 4
-sym a  "INT_Priority" :B 5
+sym a  "B0_HSO_OVF" :B 0
+sym a  "B1_HSI_OVF" :B 1
+sym a  "B2_HSI_Ready" :B 2
+sym a  "B3_AD_Ready" :B 3
+sym a  "B4_INT_Handling" :B 4
+sym a  "B5_INT_Priority" :B 5
 sym b  "HSI_Sample"
 sym c  "HSI_Mask"
 sym d  "HSI_Data"
@@ -2311,28 +2311,28 @@ sym 48  "Disable_isc" :B 4
 sym 48  "?Sto_trigger?" :B 5
 sym 48  "Egoste2" :B 6
 sym 48  "Egoste1" :B 7
-sym 4c  "Immediate" :B 3
-sym 4c  "No_service" :B 4
-sym 4c  "Late_output" :B 5
-sym 4c  "Queued" :B 6
+sym 4c  "B3_Immediate" :B 3
+sym 4c  "B4_No_service" :B 4
+sym 4c  "B5_Late_output" :B 5
+sym 4c  "B6_Queued" :B 6
 sym 4f  "Flags_4f"
-sym 4f  "?Immediate?" :B 0
-sym 4f  "Bypass_time" :B 1
-sym 4f  "Clkext_ovr" :B 2
-sym 4f  "?Immediate?" :B 3
-sym 4f  "No_service" :B 4
-sym 4f  "Late_output" :B 5
-sym 4f  "Knock_enabled" :B 6
-sym 4f  "Knock_occurred" :B 7
+sym 4f  "B0_?Immediate?" :B 0
+sym 4f  "B1_Bypass_time" :B 1
+sym 4f  "B2_Clkext_ovr" :B 2
+sym 4f  "B3_?Immediate?" :B 3
+sym 4f  "B4_No_service" :B 4
+sym 4f  "B5_Late_output" :B 5
+sym 4f  "B6_Knock_enabled" :B 6
+sym 4f  "B7_Knock_occurred" :B 7
 sym 50  "Flags_50"
-sym 50  "Spout_pending" :B 0
-sym 50  "Undsp_trans" :B 1
-sym 50  "Douple_edge" :B 2
-sym 50  "No_fuel_save" :B 3
-sym 50  "First_pip" :B 4
-sym 50  "Ctflg" :B 5
-sym 50  "Tipflg" :B 6
-sym 50  "Tblsflg" :B 7
+sym 50  "B0_Spout_pending" :B 0
+sym 50  "B1_Undsp_trans" :B 1
+sym 50  "B2_Douple_edge" :B 2
+sym 50  "B3_No_fuel_save" :B 3
+sym 50  "B4_First_pip" :B 4
+sym 50  "B5_Ctflg" :B 5
+sym 50  "B6_Tipflg" :B 6
+sym 50  "B7_Tblsflg" :B 7
 sym 52  "Flags_52"
 sym 52  "B2_DCLST_START_52" :B 2
 sym 53  "B5_CART_MODE_53" :B 5

@@ -32,6 +32,11 @@ public class AddressMode {
 	        	break;
 	        case 0x2:
 	        	this.setType(INDIRECT);
+	        	if ( (firstByte & 0x1) == 1 )
+	        	{
+	        		this.setType(INDIRECT_AUTO_INC);
+	        	}
+	        	
 	        	break;
 	        case 0x3:
 	        	

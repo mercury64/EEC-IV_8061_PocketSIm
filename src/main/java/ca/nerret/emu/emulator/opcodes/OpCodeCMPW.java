@@ -74,9 +74,21 @@ public class OpCodeCMPW extends OpCode implements IOpCode {
         // LSB
         // second byte, shift to high word position
         // first byte, mask to low word position
-    	short RA = (short) (operands[2] << 8 |   operands[1] & 0xff);
-		short RB = state_.getWordRegister(operands[numberOfBytes-1]);
+    	short RA = state_.getWordRegister((byte)operands[numberOfBytes-1]);
+		short RB = state_.getWordRegister(operands[numberOfBytes-2]);
    
+		if (this.getAddressModeType() == AddressMode.IMMEDIATE)
+		{
+			RA = (short) (operands[2] << 8 |   operands[1] & 0xff);
+			RB = state_.getWordRegister(operands[numberOfBytes-1]);
+			
+		}
+		if (this.getAddressModeType() == AddressMode.SHORT_INDEXED)
+		{
+	    	RA = state_.getWordRegister((byte)operands[numberOfBytes-1]);
+			RB = state_.getWordRegister(operands[numberOfBytes-2]);
+			
+		}
     	// TODO:  Need to implement compare, and setting of PSW!!!
     	
 		int compare = Short.compare(RB, RA  );
@@ -107,8 +119,5 @@ public class OpCodeCMPW extends OpCode implements IOpCode {
 			state_.setPswBit(ProgramStatusWord.CARRY, true);
 			//state_.setPSW(ProgramStatusWord.STICKY_BIT, null);
 		}
-		
-		System.out.println( state_ );
-
     }
 }

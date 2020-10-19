@@ -25,6 +25,9 @@ public class OpCodeSTW extends OpCode implements IOpCode {
         short RA = (short) memory[pc + 1];
         short RB;
 
+        short dest_reg;
+        short src_reg;
+        
         int numberOfBytes = 0;
         int stateTime = 0;
 
@@ -47,9 +50,18 @@ public class OpCodeSTW extends OpCode implements IOpCode {
 	        	stateTime = 7;
 	        	
 	        	break;
+	        case AddressMode.INDIRECT_AUTO_INC:
+	        	numberOfBytes = 3;
+	        	stateTime = 8;
+	        	
+	        	break;
 	        case AddressMode.SHORT_INDEXED:
 	        	numberOfBytes = 4;
 	        	stateTime = 7;
+	        	break;	
+	        case AddressMode.LONG_INDEXED:
+	        	numberOfBytes = 5;
+	        	stateTime = 8;
 	        	break;	
         }
 
@@ -62,7 +74,7 @@ public class OpCodeSTW extends OpCode implements IOpCode {
         short register = (short) (operands[1] & 0xff);
         short value = (short) (operands[2] & 0xff);
             
-        
+        dest_reg = value;
         if (this.getAddressModeType() == AddressMode.INDIRECT)
         {
         	if (  register%2 > 0 )
@@ -79,10 +91,23 @@ public class OpCodeSTW extends OpCode implements IOpCode {
         	
         
         }
+        
+        if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
+        {
+        	register = (short) (register-1);
+        	dest_reg = (short) ((operands[numberOfBytes-2] << 8) | operands[numberOfBytes-3]);
+        	System.out.println(String.format(" [0x%04X + 0x%04X]", register, dest_reg));
+        	
+        	src_reg = (short) (register + dest_reg);
+        	dest_reg = (short) (operands[4] & 0xff);
+        	
+        	value = state_.getWordRegister((byte) src_reg);
+        	
+        }
 
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
-        state_.setWordRegister(register, value);
+        state_.setWordRegister(dest_reg, value);
 
     }
 }
