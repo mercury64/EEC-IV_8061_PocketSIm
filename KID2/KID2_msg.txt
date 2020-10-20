@@ -2524,12 +2524,12 @@ sym 7  "IO_Timer_Hi"
 sym 8  "INT_Mask"
 sym 9  "INT_Pend"
 sym a  "IO_Status"
-sym a  "HSO_OVF" :B 0
-sym a  "HSI_OVF" :B 1
-sym a  "HSI_Ready" :B 2
-sym a  "AD_Ready" :B 3
-sym a  "INT_Handling" :B 4
-sym a  "INT_Priority" :B 5
+sym a  "B0_HSO_OVF" :B 0
+sym a  "B1_HSI_OVF" :B 1
+sym a  "B2_HSI_Ready" :B 2
+sym a  "B3_AD_Ready" :B 3
+sym a  "B4_INT_Handling" :B 4
+sym a  "B5_INT_Priority" :B 5
 sym b  "HSI_Sample"
 sym c  "HSI_Mask"
 sym d  "HSI_Data"
@@ -2618,28 +2618,28 @@ sym 48  "Disable_isc" :B 4
 sym 48  "?Sto_trigger?" :B 5
 sym 48  "Egoste2" :B 6
 sym 48  "Egoste1" :B 7
-sym 4c  "Immediate" :B 3
-sym 4c  "No_service" :B 4
-sym 4c  "Late_output" :B 5
-sym 4c  "Queued" :B 6
+sym 4c  "B3_Immediate" :B 3
+sym 4c  "B4_No_service" :B 4
+sym 4c  "B5_Late_output" :B 5
+sym 4c  "B6_Queued" :B 6
 sym 4f  "Flags_4f"
-sym 4f  "?Immediate?" :B 0
-sym 4f  "Bypass_time" :B 1
-sym 4f  "Clkext_ovr" :B 2
-sym 4f  "?Immediate?" :B 3
-sym 4f  "No_service" :B 4
-sym 4f  "Late_output" :B 5
-sym 4f  "Knock_enabled" :B 6
-sym 4f  "Knock_occurred" :B 7
+sym 4f  "B0_?Immediate?" :B 0
+sym 4f  "B1_Bypass_time" :B 1
+sym 4f  "B2_Clkext_ovr" :B 2
+sym 4f  "B3_?Immediate?" :B 3
+sym 4f  "B4_No_service" :B 4
+sym 4f  "B5_Late_output" :B 5
+sym 4f  "B6_Knock_enabled" :B 6
+sym 4f  "B7_Knock_occurred" :B 7
 sym 50  "Flags_50"
-sym 50  "Spout_pending" :B 0
-sym 50  "Undsp_trans" :B 1
-sym 50  "Douple_edge" :B 2
-sym 50  "No_fuel_save" :B 3
-sym 50  "First_pip" :B 4
-sym 50  "Ctflg" :B 5
-sym 50  "Tipflg" :B 6
-sym 50  "Tblsflg" :B 7
+sym 50  "B0_Spout_pending" :B 0
+sym 50  "B1_Undsp_trans" :B 1
+sym 50  "B2_Douple_edge" :B 2
+sym 50  "B3_No_fuel_save" :B 3
+sym 50  "B4_First_pip" :B 4
+sym 50  "B5_Ctflg" :B 5
+sym 50  "B6_Tipflg" :B 6
+sym 50  "B7_Tblsflg" :B 7
 sym 52  "Flags_52"
 sym 52  "B2_DCLST_START_52" :B 2
 sym 53  "B5_CART_MODE_53" :B 5
@@ -2694,6 +2694,7 @@ sym a5  "Cranking" :B 7
 sym aa  "XFRAME"
 sym ac  "VIP_code"
 sym b2  "Throttle_Position"
+sym b4  "N_RPM"
 sym bb  "BP?"
 sym c4  "PIPHi_ETime"
 sym c8  "PIPH_PW"
