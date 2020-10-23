@@ -1500,8 +1500,8 @@ sub  871b6 871c0  "Sub_71b6"
 sub  871c1 871ea  "Sub_71c1"  
 sub  871eb 8720f  "Sub_71eb"  
 sub  87210 87230  "Sub_7210"  
-sub  87231 87256  "Sub_7231"  
-sub  87245 87256  "Sub_7245"  
+sub  87231 "EGR_SELECT_LOGIC"  
+sub  87245 "TRANS_SELECT_LOGIC"  
 sub  8728a 872dc  "Sub_728a"  
 sub  87340 "Check_Sensors"
 sub  87394 87aeb  "Sub_7394"  
@@ -1689,27 +1689,27 @@ sym 12 "Tmr_OVF_cnt"
 sym  14 "ConsoleMode" : B 6
 
 sym 28 "Newsa" : B 2
-sym 28 "KAM_error" :T 7
+sym 28 "KAM_error" :B 7
 
 sym 2a "VIP_flags"
-sym 2a "Vscdt" :T 0
-sym 2a "Vscst" :T 1
-sym 2a "Vip_enable" :T 2
-sym 2a "Disable_running" :T 3
-sym 2a "Disable_nostart" :T 4
-sym 2a "Self_test" :T 5
-sym 2a "No_Start" :T 6
-sym 2a "Disable_vscdt" :T 7
+sym 2a "Vscdt" :B 0
+sym 2a "Vscst" :B 1
+sym 2a "Vip_enable" :B 2
+sym 2a "Disable_running" :B 3
+sym 2a "Disable_nostart" :B 4
+sym 2a "Self_test" :B 5
+sym 2a "No_Start" :B 6
+sym 2a "Disable_vscdt" :B 7
 
 sym 2b "STO_Flags"
-sym 2b "STO_HighSpeed" :T 0
-sym 2b "STO_Lowspeed_r" :T 1
-sym 2b "STO_Lowspeed" :T 2
-sym 2b "STO_working" :T 3
-sym 2b "STO_fast" :T 4
-sym 2b "STO_code" :T 5
-sym 2b "STO_off" :T 6
-sym 2b "STO_on" :T 7
+sym 2b "STO_HighSpeed" :B 0
+sym 2b "STO_Lowspeed_r" :B 1
+sym 2b "STO_Lowspeed" :B 2
+sym 2b "STO_working" :B 3
+sym 2b "STO_fast" :B 4
+sym 2b "STO_code" :B 5
+sym 2b "STO_off" :B 6
+sym 2b "STO_on" :B 7
 
 sym 2c "Vip_flags_2c"
 sym 2c "?Onedigit_out?" : B 0
@@ -1767,6 +1767,7 @@ sym 45 "Rvip_cyl_bal" : B 1
 sym 45 "Sto_trigger" : B 2
 sym 45 "Error_detected" : B 3
 # sym 45 "Console_flag" : B 4
+sym 45 "?B4_ATMR2_FLAG_45?" : B 4
 sym 45 "Stiflg" : B 5
 sym 45 "Egoste2" : B 6
 sym 45 "Egoste1" : B 7
@@ -1843,8 +1844,16 @@ sym 88 "TablePTR"
 
 sym 9d "Tipret" 
 
+sym 9e "Reg_9e"
+sym 9e "Reg_9e" : B 0
+sym 9e "Reg_9e" : B 1
+sym 9e "Reg_9e" : B 2
+sym 9e "Reg_9e" : B 3
+sym 9e "B4_EGREN_9e" : B 4
+
 # sym 9e "Pfehp_flg" : B 1
 # sym 9e "Vegrbp" : T4
+
 sym 9f "Flags_9f"
 
 sym 9f "Swtfl" : B 0
@@ -1887,6 +1896,7 @@ sym aa "XFRAME"
 sym ac "VIP_code"
 
 sym b2 "Throttle_Position"
+sym b4 "N_RPM"
 
 sym b6 "IPSIBR"
 
@@ -2175,7 +2185,7 @@ sym c1d6 "RTNVMN"
 sym c1d8 "RTNVMX"
 
 # sym cb5a "RFe"
-sym cb83 "EGR_Type"
+sym cb83 "PFEHP"
 sym cb85 "emissions_thermactor_sw"
 sym cb86 "TSTRAT"
 sym cb87 "TRLOAD"

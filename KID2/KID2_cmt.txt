@@ -408,5 +408,6 @@ c0a8 # Register Rfc
 
 c1d6 # 11469
 
+cb83 # EGR Type 0 = Sonic
 
 # cb5a # Register Rfe 
