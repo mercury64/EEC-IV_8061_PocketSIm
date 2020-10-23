@@ -1888,6 +1888,8 @@ sym ac "VIP_code"
 
 sym b2 "Throttle_Position"
 
+sym b6 "IPSIBR"
+
 sym bb "BP?"
 
 sym c4 "PIPHi_ETime"

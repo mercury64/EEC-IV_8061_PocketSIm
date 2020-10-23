@@ -62,7 +62,7 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
         // little endian
         short dest_dwreg = operands[numberOfBytes-1];
         short value  = (short) ((operands[numberOfBytes-2] << 8) | operands[numberOfBytes-3]  & 0xff);;
-
+       
        if (this.getAddressModeType() == AddressMode.INDIRECT)
        {
     	   value = (short) operands[numberOfBytes-2];
@@ -95,6 +95,10 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
     	   
     	   state_.setWordRegister(tmp_reg, tmp_value);
            
+       }
+       if (this.getAddressModeType() == AddressMode.IMMEDIATE)
+       {
+    	   //value = state_.getWordRegister((byte) value); // value of R36
        }
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);

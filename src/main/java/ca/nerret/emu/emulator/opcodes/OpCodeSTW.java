@@ -95,11 +95,13 @@ public class OpCodeSTW extends OpCode implements IOpCode {
         if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
         {
         	register = (short) (register-1);
+        	register = state_.getWordRegister((byte) register);
+        	
         	dest_reg = (short) ((operands[numberOfBytes-2] << 8) | operands[numberOfBytes-3]);
         	System.out.println(String.format(" [0x%04X + 0x%04X]", register, dest_reg));
         	
-        	src_reg = (short) (register + dest_reg);
-        	dest_reg = (short) (operands[4] & 0xff);
+        	dest_reg = (short) (register + dest_reg);
+        	src_reg = (short) (operands[4] & 0xff);
         	
         	value = state_.getWordRegister((byte) src_reg);
         	
