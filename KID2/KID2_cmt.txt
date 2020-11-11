@@ -341,7 +341,7 @@ a9fd # R30=4, a9ca+4 = a9ce, [a9ce]=e006
 aa02 # Console Routine, Datalogging patch inserted at 0x
 
 aa0a # R30=4, a9be+4 = a9d2, [a9d2]=c009
-
+aa15 # R30=4, a9c4+4 = a9c8, [a9c8]=1200
 aa1c # [2022] = 0xb000
 
 aa28 # R1a = 8
