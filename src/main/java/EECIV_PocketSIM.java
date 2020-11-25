@@ -53,7 +53,7 @@ public class EECIV_PocketSIM {
 	{
         int count = 1;
         
-        state.setPc(63316);
+       // state.setPc(63316);
         
 		while (true) {
 		        

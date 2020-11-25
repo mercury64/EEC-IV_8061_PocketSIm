@@ -1842,6 +1842,15 @@ sym 86 "ReftimeH"
 
 sym 88 "TablePTR"
 
+sym 8a "RATCH"
+sym 8d "VSBAR"
+
+sym 91 "VBAT"
+sym 92 "ISCDTY"
+sym 96 "LAMBSE"
+
+sym 9a "AM"
+
 sym 9d "Tipret" 
 
 sym 9e "Reg_9e"
@@ -1896,38 +1905,58 @@ sym aa "XFRAME"
 sym ac "VIP_code"
 
 sym b2 "Throttle_Position"
+
 sym b4 "N_RPM"
 
-sym b6 "IPSIBR"
+sym b6 "ECT"
+sym b7 "ACT"
 
-sym bb "BP?"
+sym ba "LOAD"
+# sym bb "BP?"
+
+sym be "EGR"
 
 sym c4 "PIPHi_ETime"
 sym c8 "PIPH_PW"
 
 sym ca "Mkay"
 
-sym d4 "Atmr1"
+sym cc "SAFTOT"
 
+sym d4 "ATMR1"
+
+#sym e1 "CCD"
+sym e1 "CCD_HP" : B 2
 
 sym 108 "TAR_Raw"
 sym 10e "VSS_Raw"
 sym 10a "Key_Pwr"
 sym 10c "OCC_Raw"
+
+
+sym 11a "HEGO"
+
 sym 11c "TPS_Raw"
 sym 106 "Egobar1"
+
 sym 110 "ECT_Raw"
 sym 112 "ACT_Raw"
 sym 118 "NDS_Raw"
 sym 11a "EGO1_Raw"
 sym 114 "EVP_Raw"
 sym 116 "TPS_min"
+sym 124 "MAP"
 sym 138 "Adptmr"
 
 sym 142 "Tslpip"
 sym 144 "Loop_time"
 
+sym 158 "DASPOT"
 sym 15a "IBGPSI"
+
+sym 168 "BP"
+
+sym 176 "KAMRF"
 
 sym 192 "Ibeta1"
 sym 19c "Tbart"
@@ -1935,6 +1964,8 @@ sym 1be "Miltmr"
 
 sym 1c1 "Vip_timer_ex"
 sym 1d0 "SparkAdvance"
+
+sym 1ea "IMAF"
 
 sym 22c "Tsladv"
 sym 230 "Retinc"
@@ -2121,6 +2152,9 @@ sym b048 "idle_rpm_adder_max_time_on_startup"
 sym b04a "idle_rpm_adder_for_a/c"
 sym b050 "ISCLPD_idle_max_rpm"
 
+sym b072 "VBAT_DWELL"
+sym b073 "VBAT_DWL_HYS"
+
 
 #sym b43e "RF2"
 #sym b442 "RF4"
@@ -2157,6 +2191,7 @@ sym bbb3 "Tipinret_spark_initial_retard_tip"
 sym bbb4 "TIPINC_spark_adv_per_pip_tip"
 
 sym bb85 "Splclp"
+
 sym bbc7 "KNKCYL"
 
 # sym c0a8 "RFc"
@@ -2189,6 +2224,8 @@ sym cb83 "PFEHP"
 sym cb85 "emissions_thermactor_sw"
 sym cb86 "TSTRAT"
 sym cb87 "TRLOAD"
+
+sym cb8a "IGN_TYPE"
 
 sym cb8f "fuel_adaptive_ect_min"
 sym cb8f "fuel_adaptive_ect_max"

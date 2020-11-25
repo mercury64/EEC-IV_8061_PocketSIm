@@ -162,6 +162,9 @@
 2da3 |## Initialise the RAM table() from InjTab table()
 2fa6 # Max degrees retard
 
+343a # 0 = Thick Film Ignition (TFI)
+
+
 3b55 # KAMQA = 10101010 BINARY
 3b58 # KAMQB = 11000110 BINARY
 3b5b # KAMQC = 01110101 BINARY
@@ -215,6 +218,8 @@
 3d18 # Exhaust Gas Oxygen sensor 1
 3d1b # EGR Valve position
 3d1e # end of table
+
+4243 # 2 = Low Data Rate Distributorless dual plug (LDR_DIS)
 
 4689 # 29.875 * 8 = 239 = 0xEF
 
@@ -321,6 +326,8 @@
 8801 \n# switch out of self test to run mode ?
 8801 \n## function/maps/scalars
 8801 \n################################################################
+
+88cf # 1 = Thick Film Ignition - Improved Computer Control Dwell (TFI_ICCD)
 
 a777 # IOTimer delta time since last mSec
 a783 # *128/52083 = 1 mSec
