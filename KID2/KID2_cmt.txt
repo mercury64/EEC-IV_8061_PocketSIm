@@ -418,6 +418,7 @@ ac31 \n## Payloads - Datalogging Lists!
 b000 # Register Rf0 
 b098 # FN800(DEBYMA) = Transfer function for the ISC actuator.
 b098 # isc_duty_cycle
+b0c0 # ISC duty cycle multiplier versus VACUUM.
 b142 # A background driven decrement to the dashpot preposition  airflow register  (DASPOT)  as  a function of DASPOT.
 b43e # Register Rf2 
 b442 # Register Rf4 

@@ -544,7 +544,7 @@ byte    b073 b073
 func    b074 b08b  "y_isc_base_air_atmr3"   : UW  : UW 
 func    b08c b097  "Func_b08c"   : SY  : UY 
 func    b098 b0bf  "FN800"   : UW  : UW 
-func    b0c0 b0cb  "Func_b0c0"   : UY  : UY 
+func    b0c0 b0cb  "FN820A"   : UY  : UY 
 func    b0cc b0df  "isc_ect_rpm_adder"   : SY  : UY 
 func    b0e0 b0ed  "isc_ect_rpm_adder2"   : SY  : UY 
 func    b0ee b0fb  "isc_act_rpm_adder"   : SY  : UY 
@@ -555,7 +555,7 @@ func    b12a b141  "isc_idle_air_neutral"   : UW  : UW
 func    b142 b15d  "FN879"   : UW  : UW 
 func    b15e b16b  "Func_b15e"   : UY  : UY 
 func    b16c b187  "Func_b16c"   : UW  : UW 
-func    b1ac b1b3  "Func_b1ac"   : UY  : UY 
+func    b1ac b1b3  "FN890"   : UY  : UY 
 func    b1b4 b1bf  "Func_b1b4"   : UY  : UY 
 table   b1c0 b1e9  "isc_base_air_neutral"   : O 7 UY 
 func    b1ea b211  "act_ect_transfer_function"   : UW  : SW 
@@ -1477,7 +1477,7 @@ sub  868ad "DASPOT_CALC"
 sub  86986 86a39  "Sub_6986"  
 sub  86a3a "ISC_IPSIBR_COM1"  
 sub  86b8c "ISC_ISCDTY_COM1"  
-sub  86c18 86c26  "Sub_6c18"  
+sub  86c18 "Manifold_VACUUM"  
 sub  86ca9 86cd6  "Sub_6ca9"  
 sub  86cd7 86d27  "Sub_6cd7"  
 sub  86d5b 86dac  "Sub_6d5b"  
@@ -1913,22 +1913,23 @@ sym a5 "Cranking" : B 7
 sym a8 "APT"
 sym a8 "APT_WOT" : B 0
 sym a8 "APT_Closed_Throttle" : B 7
+sym a9 "LOAD"
 
 sym aa "XFRAME"
 
 sym ac "VIP_code"
 
-sym b2 "Throttle_Position"
+sym b2 "TP"
 
 sym b4 "N_RPM"
 
 sym b6 "ECT"
 sym b7 "ACT"
 
-sym ba "LOAD"
+sym ba "MAP"
 
 sym bb "BP"
-
+sym bc "TP_REL"
 sym be "EGR"
 
 sym c4 "PIPHi_ETime"
@@ -1939,6 +1940,7 @@ sym ca "Mkay"
 sym cc "SAFTOT"
 
 sym d4 "ATMR1"
+sym d6 "ND_FLAG"
 
 sym e1 "CCD?"
 sym e1 "B2_CCD_HP" : B 2
@@ -1970,7 +1972,7 @@ sym 152 "AWOTMR"
 
 sym 158 "DASPOT"
 sym 15a "IBGPSI"
-
+sym 15c "NLAST"
 sym 163 "DSDRPM"
 
 sym 168 "BPCOR"
@@ -1986,6 +1988,8 @@ sym 1d0 "SparkAdvance"
 
 sym 1ea "IMAF"
 sym 1eb "MAPOPE"
+
+sym 217 "VACUUM"
 
 sym 22c "Tsladv"
 sym 230 "Retinc"
