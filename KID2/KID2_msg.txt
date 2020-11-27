@@ -10,8 +10,8 @@
 
 # Read commands from directive file at 'KID2_dir.txt'
 
-## func    c5f2 C606  "trans_tv_pressure_34"   : UY  : UY 
- Warning - End inconsistent with size, reduced to 8c605
+## args    7a54 7a55 : E 2 F0 N :UW N  
+ Error - End too low for start+data definition
 
 ## word    e002 E003
  Error - Invalid Address
@@ -269,13 +269,7 @@
  Warning - Extra Parameters Ignored
 ## sub  86853 868ac  "Sub_6853"  
  Warning - Extra Parameters Ignored
-## sub  868ad 86985  "Sub_68ad"  
- Warning - Extra Parameters Ignored
 ## sub  86986 86a39  "Sub_6986"  
- Warning - Extra Parameters Ignored
-## sub  86a3a 86b8b  "Sub_6a3a"  
- Warning - Extra Parameters Ignored
-## sub  86b8c 86c17  "Sub_6b8c"  
  Warning - Extra Parameters Ignored
 ## sub  86c18 86c26  "Sub_6c18"  
  Warning - Extra Parameters Ignored
@@ -693,8 +687,8 @@ struct  3cfd 3d1d : UY  : UW N
 args    3d6e 3d71 : E 2 f0 N  : UW N 
 args    3e0e 3e11 : E 2 f0 N  : UW N 
 args    3f73 3f76 : E 2 f0 N  : UW N 
-args    4004 4007 : E 2 f0 N  : O 2 UY 
-args    40a0 40a3 : E 2 f0 N  : O 2 UY 
+args    4004 4007 : E 2 f0 N  : UW N 
+args    40a0 40a3 : E 2 f0 N  : UW N 
 args    40d2 40d5 : E 2 f0 N  : UW N 
 args    40f2 40f5 : E 2 f0 N  : UW N 
 args    4128 412b : E 2 f0 N  : UW N 
@@ -704,12 +698,12 @@ args    4346 4349 : E 2 f0 N  : UW N
 word    4360 4361
 word    4360 4361
 word    4362 4363
-args    436f 4372 : E 2 f0 N  : O 2 UY 
+args    436f 4372 : E 2 f0 N  : UW N 
 byte    43ac 43ac
 byte    43ac 43ac
-args    4544 4547 : E 2 f0 N  : O 2 UY 
+args    4544 4547 : E 2 f0 N  : UW N 
 args    4581 4584 : E 2 f0 N  : UW N 
-args    45ac 45af : E 2 f0 N  : O 2 UY 
+args    45ac 45af : E 2 f0 N  : UW N 
 args    45be 45c1 : E 2 f0 N  : UW N 
 args    46cc 46cf : E 2 f0 N  : UW N 
 args    46eb 46ee : E 2 f0 N  : UW N 
@@ -719,67 +713,67 @@ args    4a53 4a56 : E 2 f0 N  : UW N
 args    4afa 4afd : E 2 f0 N  : UW N 
 args    4b08 4b0b : E 2 f0 N  : UW N 
 args    4b15 4b18 : E 2 f0 N  : UW N 
-args    4bd3 4bd6 : E 2 f0 N  : O 2 UY 
+args    4bd3 4bd6 : E 2 f0 N  : UW N 
 args    4c1a 4c1d : E 2 f0 N  : UW N 
 args    4d8e 4d91 : E 2 f0 N  : UW N 
-args    4df3 4df6 : E 2 f0 N  : O 2 UY 
+args    4df3 4df6 : E 2 f0 N  : UW N 
 args    4f6b 4f6e : E 2 f0 N  : UW N 
 args    4f89 4f8c : E 2 f0 N  : UW N 
-args    4fa1 4fa4 : E 2 f0 N  : O 2 UY 
+args    4fa1 4fa4 : E 2 f0 N  : UW N 
 args    4fee 4ff1 : E 2 f0 N  : UW N 
 args    4ffb 4ffe : E 2 f0 N  : UW N 
 args    5014 5017 : E 2 f0 N  : UW N 
-args    5057 505a : E 2 f0 N  : O 2 UY 
+args    5057 505a : E 2 f0 N  : UW N 
 args    519d 51a0 : E 2 f0 N  : UW N 
 args    51b9 51bc : E 2 f0 N  : UW N 
 args    541b 541e : E 2 f0 N  : UW N 
 args    5429 542c : E 2 f0 N  : UW N 
 args    5445 5448 : E 2 f0 N  : UW N 
 args    544f 5452 : E 2 f0 N  : UW N 
-args    5628 562b : E 2 f0 N  : O 2 UY 
+args    5628 562b : E 2 f0 N  : UW N 
 args    5860 5863 : E 2 f0 N  : UW N 
 args    586a 586d : E 2 f0 N  : UW N 
 args    5909 590c : E 2 f0 N  : UW N 
-args    5925 5928 : E 2 f0 N  : O 2 UY 
+args    5925 5928 : E 2 f0 N  : UW N 
 args    5a77 5a7a : E 2 f0 N  : UW N 
 args    5a88 5a8b : E 2 f0 N  : UW N 
 args    5a94 5a97 : E 2 f0 N  : UW N 
 args    5bb9 5bbc : E 2 f0 N  : UW N 
 args    5bca 5bcd : E 2 f0 N  : UW N 
 args    5be2 5be5 : E 2 f0 N  : UW N 
-args    5bec 5bef : E 2 f0 N  : O 2 UY 
+args    5bec 5bef : E 2 f0 N  : UW N 
 args    5bfc 5bff : E 2 f0 N  : UW N 
-args    5c15 5c18 : E 2 f0 N  : O 2 UY 
-args    5c2c 5c2f : E 2 f0 N  : O 2 UY 
+args    5c15 5c18 : E 2 f0 N  : UW N 
+args    5c2c 5c2f : E 2 f0 N  : UW N 
 args    5d7f 5d82 : E 2 f0 N  : UW N 
 args    5d92 5d95 : E 2 f0 N  : UW N 
-args    5e02 5e05 : E 2 f0 N  : O 2 UY 
-args    5e0c 5e0f : E 2 f0 N  : O 2 UY 
+args    5e02 5e05 : E 2 f0 N  : UW N 
+args    5e0c 5e0f : E 2 f0 N  : UW N 
 args    5e39 5e3c : E 2 f0 N  : UW N 
 args    5e9d 5ea0 : E 2 f0 N  : UW N 
-args    5ea7 5eaa : E 2 f0 N  : O 2 UY 
-args    5ecc 5ecf : E 2 f0 N  : O 2 UY 
-args    60ca 60cd : E 2 f0 N  : O 2 UY 
+args    5ea7 5eaa : E 2 f0 N  : UW N 
+args    5ecc 5ecf : E 2 f0 N  : UW N 
+args    60ca 60cd : E 2 f0 N  : UW N 
 args    61dc 61df : E 2 f0 N  : UW N 
 args    61eb 61ee : E 2 f0 N  : UW N 
 args    6200 6203 : E 2 f0 N  : UW N 
 args    620e 6211 : E 2 f0 N  : UW N 
-args    6226 6229 : E 2 f0 N  : O 2 UY 
-args    63b4 63b7 : E 2 f0 N  : O 2 UY 
-args    63bf 63c2 : E 2 f0 N  : O 2 UY 
-args    63cc 63cf : E 2 f0 N  : O 2 UY 
-args    6404 6407 : E 2 f0 N  : O 2 UY 
-args    643e 6441 : E 2 f0 N  : O 2 UY 
+args    6226 6229 : E 2 f0 N  : UW N 
+args    63b4 63b7 : E 2 f0 N  : UW N 
+args    63bf 63c2 : E 2 f0 N  : UW N 
+args    63cc 63cf : E 2 f0 N  : UW N 
+args    6404 6407 : E 2 f0 N  : UW N 
+args    643e 6441 : E 2 f0 N  : UW N 
 args    6455 6458 : E 2 f0 N  : UW N 
 args    64c6 64c9 : E 2 f0 N  : UW N 
 args    652b 652e : E 2 f0 N  : UW N 
 byte    657e 657e
 byte    657e 657e
-args    65df 65e2 : E 2 f0 N  : O 2 UY 
+args    65df 65e2 : E 2 f0 N  : UW N 
 args    668a 668d : E 2 f0 N  : UW N 
 args    6693 6696 : E 2 f0 N  : UW N 
-args    6712 6715 : UY  : O 2 UY  : UY 
-args    671c 671f : UY  : O 2 UY  : UY 
+args    6712 6715 : E 2 f0 N  : UW N 
+args    671c 671f : E 2 f0 N  : UW N 
 args    67d6 67d9 : E 2 f0 N  : UW N 
 args    67e4 67e7 : E 2 f0 N  : UW N 
 args    68ce 68d1 : E 2 f0 N  : UW N 
@@ -787,16 +781,16 @@ args    6912 6915 : E 2 f0 N  : UW N
 args    691c 691f : E 2 f0 N  : UW N 
 args    693f 6942 : E 2 f0 N  : UW N 
 args    6961 6964 : E 2 f0 N  : UW N 
-args    6a18 6a1b : E 2 f0 N  : O 2 UY 
+args    6a18 6a1b : E 2 f0 N  : UW N 
 args    6b6d 6b70 : E 2 f0 N  : UW N 
 args    6bb5 6bb8 : E 2 f0 N  : UW N 
 args    6bd5 6bd8 : E 2 f0 N  : UW N 
 args    6be9 6bec : E 2 f0 N  : UW N 
 args    6cf4 6cf7 : E 2 f0 N  : UW N 
-args    6d73 6d76 : E 2 f0 N  : O 2 UY 
+args    6d73 6d76 : E 2 f0 N  : UW N 
 args    6dfd 6e00 : E 2 f0 N  : UW N 
 args    6f13 6f16 : E 2 f0 N  : UW N 
-args    6f30 6f33 : E 2 f0 N  : O 2 UY 
+args    6f30 6f33 : E 2 f0 N  : UW N 
 args    6f55 6f58 : E 2 f0 N  : UW N 
 word    6fc6 6fc7
 args    711e 711f : O 2 UY 
@@ -806,12 +800,12 @@ args    7379 737a : O 2 UY
 args    738f 7393 : O 2 UY  : O 2 UY  : UY 
 args    73ac 73ad : O 2 UY 
 args    73b1 73b2 : O 2 UY 
-args    73e1 73e6 : O 2 UY  : O 2 UY  : O 2 UY 
-args    73ea 73ef : O 2 UY  : O 2 UY  : O 2 UY 
-args    73f3 73f8 : O 2 UY  : O 2 UY  : O 2 UY 
-args    73fc 7401 : O 2 UY  : O 2 UY  : O 2 UY 
-args    7405 740a : O 2 UY  : O 2 UY  : O 2 UY 
-args    740e 7413 : O 2 UY  : O 2 UY  : O 2 UY 
+args    73e1 73e6 : E 3 f0 N  : E 3 f0 N  : UW N 
+args    73ea 73ef : E 3 f0 N  : E 3 f0 N  : UW N 
+args    73f3 73f8 : E 3 f0 N  : E 3 f0 N  : UW N 
+args    73fc 7401 : E 3 f0 N  : E 3 f0 N  : UW N 
+args    7405 740a : E 3 f0 N  : E 3 f0 N  : UW N 
+args    740e 7413 : E 3 f0 N  : E 3 f0 N  : UW N 
 args    7426 7429 : E 3 f0 N  : E 3 f0 N 
 args    7430 7433 : E 3 f0 N  : E 3 f0 N 
 args    7437 7438 : O 2 UY 
@@ -831,7 +825,7 @@ byte    773e 773e
 args    77fc 77fd : O 2 UY 
 args    7811 7812 : O 2 UY 
 args    7816 7817 : O 2 UY 
-args    7841 7844 : E 2 f0 N  : O 2 UY 
+args    7841 7844 : E 2 f0 N  : UW N 
 args    788a 788b : O 2 UY 
 args    790a 790b : O 2 UY 
 args    7929 7932 : UW N  : E 3 f0 N  : E 3 f0 N  : O 2 UY  : O 2 UY 
@@ -961,19 +955,19 @@ args    8528 8529 : O 2 UY
 args    8536 8537 : O 2 UY 
 args    85db 85dc : E 3 f0 N 
 args    85e6 85e7 : E 3 f0 N 
-args    893b 893e : E 2 f0 N  : O 2 UY 
+args    893b 893e : E 2 f0 N  : UW N 
 args    8a8e 8a91 : E 2 f0 N  : UW N 
-args    8b7d 8b80 : E 2 f0 N  : O 2 UY 
+args    8b7d 8b80 : E 2 f0 N  : UW N 
 args    8bf3 8bf6 : E 2 f0 N  : UW N 
 args    8bfd 8c00 : E 2 f0 N  : UW N 
-args    8c2e 8c31 : E 2 f0 N  : O 2 UY 
-args    8c5b 8c5e : E 2 f0 N  : O 2 UY 
+args    8c2e 8c31 : E 2 f0 N  : UW N 
+args    8c5b 8c5e : E 2 f0 N  : UW N 
 args    8c68 8c6b : E 2 f0 N  : UW N 
-args    8c7e 8c81 : E 2 f0 N  : O 2 UY 
-args    8c9a 8c9d : E 2 f0 N  : O 2 UY 
+args    8c7e 8c81 : E 2 f0 N  : UW N 
+args    8c9a 8c9d : E 2 f0 N  : UW N 
 args    8caa 8cad : E 2 f0 N  : UW N 
 args    8d62 8d65 : UW N  : UW N 
-args    8e70 8e73 : E 2 f0 N  : O 2 UY 
+args    8e70 8e73 : E 2 f0 N  : UW N 
 args    8e86 8e89 : E 2 f0 N  : UW N 
 args    8f9e 8fa1 : E 2 f0 N  : UW N 
 args    92a7 92a8 : O 2 UY 
@@ -985,11 +979,11 @@ args    93c7 93ca : UW N  : UW N
 args    93ce 93d1 : UW N  : UW N 
 args    95ba 95bd : UW N  : UW N 
 args    964e 9651 : E 2 f0 N  : UW N 
-args    9663 9666 : E 2 f0 N  : O 2 UY 
+args    9663 9666 : E 2 f0 N  : UW N 
 args    966d 9670 : E 2 f0 N  : UW N 
 word    96ee 96ef
-args    96fd 9700 : E 2 f0 N  : O 2 UY 
-args    972f 9732 : E 2 f0 N  : O 2 UY 
+args    96fd 9700 : E 2 f0 N  : UW N 
+args    972f 9732 : E 2 f0 N  : UW N 
 args    98bb 98be : E 2 f0 N  : UW N 
 args    9b13 9b16 : UW N  : UW N 
 word    9c44 9c45
@@ -1068,7 +1062,7 @@ word    b038 b039
 word    b03a b03b
 word    b03c b03d  "Stall_RPM"  
 byte    b03e b03e
-byte    b03f b03f
+byte    b03f b03f  "BPCOR_SW"  
 byte    b041 b041
 word    b042 b043  "idle_rpm_neutral"  
 word    b044 b045  "idle_rpm_drive"  
@@ -1101,7 +1095,7 @@ byte    b072 b072  "VBAT_DWELL"
 byte    b073 b073  "VBAT_DWL_HYS"  
 func    b074 b08b  "y_isc_base_air_atmr3"   : UW  : UW 
 func    b08c b097  "Func_b08c"   : SY  : UY 
-func    b098 b0bf  "isc_duty_cycle"   : UW  : UW 
+func    b098 b0bf  "FN800"   : UW  : UW 
 func    b0c0 b0cb  "Func_b0c0"   : UY  : UY 
 func    b0cc b0df  "isc_ect_rpm_adder"   : SY  : UY 
 func    b0e0 b0ed  "isc_ect_rpm_adder2"   : SY  : UY 
@@ -1110,9 +1104,11 @@ func    b0fc b109  "Func_b0fc"   : UY  : UY
 func    b10a b111  "FN862"   : UY  : UY 
 func    b112 b129  "isc_idle_air_drive"   : UW  : UW 
 func    b12a b141  "isc_idle_air_neutral"   : UW  : UW 
-func    b142 b15d  "Func_b142"   : UW  : UW 
+func    b142 b15d  "FN879"   : UW  : UW 
 func    b15e b16b  "Func_b15e"   : UY  : UY 
 func    b16c b187  "Func_b16c"   : UW  : UW 
+func    b188 b19f  "Func_b188"   : UW  : UW 
+func    b1a0 b1ab  "Func_b1a0"   : SY  : UY 
 func    b1ac b1b3  "Func_b1ac"   : UY  : UY 
 func    b1b4 b1bf  "Func_b1b4"   : UY  : UY 
 table   b1c0 b1e9  "isc_base_air_neutral"   : O 7 UY 
@@ -1446,7 +1442,7 @@ byte    bbc6 bbc6
 byte    bbc7 bbc7  "KNKCYL"  
 byte    bbc8 bbc8
 func    bbc9 bbd2  "Func_bbc9"   : UY  : UY 
-func    bbd3 bbdc  "Func_bbd3"   : UY  : UY 
+func    bbd3 bbdc  "FN004"   : UY  : UY 
 func    bbde bbf5  "Func_bbde"   : SW  : UW 
 func    bbf6 bc19  "x_spark_91"   : SW  : UW 
 func    bc1a bc35  "y_spark_92"   : UW  : UW 
@@ -1460,7 +1456,7 @@ table   bd6a bdb9  "spark_table_base_mpg"   : O 10 UY
 table   bdba be09  "spark_adder_temp_and_tip"   : O 10 UY 
 table   be0a be59  "spark_ect_vs_tp_multiplier"   : O 10 SY 
 table   be5a bea9  "spark_adder_egr_mpg"   : O 10 UY 
-func    beaa bed5  "Func_beaa"   : UW  : UW 
+func    beaa bed5  "FN074A"   : UW  : UW 
 func    bed6 bee3  "egr_multiplier_for_ect"   : SY  : UY 
 func    bee4 beed  "egr_multiplier_part_throttle_bp"   : UY  : UY 
 func    beee bf15  "Func_beee"   : UW  : UW 
@@ -2007,10 +2003,10 @@ sub  86840 86849  "Sub_6840"
 sub  86846 86849  "Sub_6846"  
 sub  8684a 86852  "Sub_684a"  
 sub  86853 868ac  "Sub_6853"  
-sub  868ad 86985  "Sub_68ad"  
+sub  868ad 86985  "DASPOT_CALC"   #cmd
 sub  86986 86a39  "Sub_6986"  
-sub  86a3a 86b8b  "Sub_6a3a"  
-sub  86b8c 86c17  "Sub_6b8c"  
+sub  86a3a 86b8b  "ISC_IPSIBR_COM1"   #cmd
+sub  86b8c 86c17  "ISC_ISCDTY_COM1"   #cmd
 sub  86c18 86c26  "Sub_6c18"  
 sub  86ca9 86cd6  "Sub_6ca9"  
 sub  86cd7 86d27  "Sub_6cd7"  
@@ -2220,6 +2216,15 @@ sym e  "HSI_Time"
 sym 10  "StackPtr"
 sym 12  "Tmr_OVF_cnt"
 sym 14  "ConsoleMode" :B 6
+sym 27  "Flags_27"
+sym 27  "B0_R27" :B 0
+sym 27  "B1_R27" :B 1
+sym 27  "B2_R27" :B 2
+sym 27  "B3_R27" :B 3
+sym 27  "B4_R27" :B 4
+sym 27  "B5_R27" :B 5
+sym 27  "B6_R27_OpenLoop?" :B 6
+sym 27  "B7_R27" :B 7
 sym 28  "Newsa" :B 2
 sym 28  "KAM_error" :B 7
 sym 2a  "VIP_flags"
@@ -2387,6 +2392,9 @@ sym a5  "Egonflg" :B 4
 sym a5  "Purging" :B 5
 sym a5  "Cttmr_on" :B 6
 sym a5  "Cranking" :B 7
+sym a8  "APT"
+sym a8  "APT_WOT" :B 0
+sym a8  "APT_Closed_Throttle" :B 7
 sym aa  "XFRAME"
 sym ac  "VIP_code"
 sym b2  "Throttle_Position"
@@ -2394,13 +2402,15 @@ sym b4  "N_RPM"
 sym b6  "ECT"
 sym b7  "ACT"
 sym ba  "LOAD"
+sym bb  "BP"
 sym be  "EGR"
 sym c4  "PIPHi_ETime"
 sym c8  "PIPH_PW"
 sym ca  "Mkay"
 sym cc  "SAFTOT"
 sym d4  "ATMR1"
-sym e1  "CCD_HP" :B 2
+sym e1  "CCD?"
+sym e1  "B2_CCD_HP" :B 2
 sym 106  "Egobar1"
 sym 108  "TAR_Raw"
 sym 10a  "Key_Pwr"
@@ -2413,13 +2423,15 @@ sym 116  "TPS_min"
 sym 118  "NDS_Raw"
 sym 11a  "HEGO"
 sym 11c  "TPS_Raw"
-sym 124  "MAP"
+sym 124  "MAP_WORD"
 sym 138  "Adptmr"
 sym 142  "Tslpip"
 sym 144  "Loop_time"
+sym 152  "AWOTMR"
 sym 158  "DASPOT"
 sym 15a  "IBGPSI"
-sym 168  "BP"
+sym 163  "DSDRPM"
+sym 168  "BPCOR"
 sym 176  "KAMRF"
 sym 192  "Ibeta1"
 sym 19c  "Tbart"
@@ -2427,6 +2439,7 @@ sym 1be  "Miltmr"
 sym 1c1  "Vip_timer_ex"
 sym 1d0  "SparkAdvance"
 sym 1ea  "IMAF"
+sym 1eb  "MAPOPE"
 sym 22c  "Tsladv"
 sym 230  "Retinc"
 sym 239  "Pip_counter"
@@ -2450,8 +2463,10 @@ sym 2bd  "Xram1H"
 sym 2be  "Xram4L"
 sym 2bf  "Xram4H"
 sym 2cc  "SIGKAL"
+sym 314  "TOT"
 sym 344  "Vsc_Raw"
 sym 386  "Cttmr"
+sym 390  "DEBYMA"
 sym 394  "IPSIBR"
 sym 413  "C41FIL_TroubleCode"
 sym 509  "XDCL_BAUD"

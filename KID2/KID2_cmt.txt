@@ -199,13 +199,13 @@
 3bef # clear Idle Speed KAM IPSIBR cells
 
 
-3cfc ||######
-3cfc \w# A/D Definition. 3 byte entries
-3cfc \w# byte 1   = A/D channel no (0-12)
-3cfc \w# byte 2&3 = destination address
-3cfc \w# NB AD Ch 6 (MAF) is read and saved elsewhere, to 0x124?
-3cfc \w# no Speed control system?
-3cfc \w######
+3cfc \n######
+3cfc \n# A/D Definition. 3 byte entries
+3cfc \n# byte 1   = A/D channel no (0-12)
+3cfc \n# byte 2&3 = destination address
+3cfc \n# NB AD Ch 6 (MAF) is read and saved elsewhere, to 0x124?
+3cfc \n# no Speed control system?
+3cfc \n######
 3cfd # Throttle position sensor rate
 3d00 # Voltage Calibration Level?
 3d03 # Voltage level (->793d)?
@@ -226,6 +226,17 @@
 58b3 # 60.000
 
 5c86 # 1024 = 1 second
+
+6632 \n# 1)  DSDRPM_CALC - calculation of DSDRPM & DESMAF_PRE
+6632 \n# 2)  RPMERR_CALC - calculation of RPMERR_A & RPMERR_S
+6632 \n# 3)  DASPOT_CALC - calculation of DASPOT
+6632 \n# 4)  MODE_SELECT - selection of mode & setting of ISCFLG
+6632 \n# 5)  IPSIBR_CALC - IPSIBR update & calculation of DESMAF
+6632 \n# 6)  ISCDTY_CALC - calculation of DEBYMA & ISCDTY
+6632 \n# 7)  ISCKAM_UPDATE - adaptive update of ISCKAM
+6632 \n#
+
+6986 # APT 0 -> part throttle
 
 6b26 # ISCKAM(ISFLAG)
 
@@ -353,14 +364,14 @@ aa1c # [2022] = 0xb000
 
 aa28 # R1a = 8
 
-aa30 \w# R1a = 8, R1c = b000, R18 = f0
-aa30 \w# R1a = 7, R1c = b43e, R18 = f2
-aa30 \w# R1a = 6, R1c = b442, R18 = f4
-aa30 \w# R1a = 5, R1c = b914, R18 = f6
-aa30 \w# R1a = 4, R1c = bab0, R18 = f8
-aa30 \w# R1a = 3, R1c = bb7a, R18 = fa
-aa30 \w# R1a = 2, R1c = c0a8, R18 = fb
-aa30 \w# R1a = 1, R1c = cb5a, R18 = fc
+aa30 \n# R1a = 8, R1c = b000, R18 = f0
+aa30 \n# R1a = 7, R1c = b43e, R18 = f2
+aa30 \n# R1a = 6, R1c = b442, R18 = f4
+aa30 \n# R1a = 5, R1c = b914, R18 = f6
+aa30 \n# R1a = 4, R1c = bab0, R18 = f8
+aa30 \n# R1a = 3, R1c = bb7a, R18 = fa
+aa30 \n# R1a = 2, R1c = c0a8, R18 = fb
+aa30 \n# R1a = 1, R1c = cb5a, R18 = fc
 
 
 
@@ -400,17 +411,23 @@ ab7a # 0x6Ah = 106  LTMTBLrc CELLS
 ab7d # ADAPTIVE FUEL TABLE
 
 ab85 # KAM checksum, 0x3500 = 0x80 x 0x6a = (128 * (10*10+6))
-ab85 \w# SET CHKSUM = 13568
+ab85 \w # SET CHKSUM = 13568
 
 ac31 \n## Payloads - Datalogging Lists!
 
-
 b000 # Register Rf0 
+b098 # FN800(DEBYMA) = Transfer function for the ISC actuator.
+b098 # isc_duty_cycle
+b142 # A background driven decrement to the dashpot preposition  airflow register  (DASPOT)  as  a function of DASPOT.
 b43e # Register Rf2 
 b442 # Register Rf4 
 b914 # Register Rf6 
 bab0 # Register Rf8 
 bb7a # Register Rfa
+
+bbd3 # EGR Exhaust BP Correction
+beaa # Used as an adder to calculate MAPOPE based on calculated airmass
+
 c0a8 # Register Rfc 
 
 c1d6 # 11469
