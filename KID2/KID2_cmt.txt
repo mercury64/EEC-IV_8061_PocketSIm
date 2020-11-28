@@ -223,9 +223,19 @@
 
 4689 # 29.875 * 8 = 239 = 0xEF
 
+4b3f # 29.875 * 8 = 239 = 0xEF
+
 58b3 # 60.000
 
 5c86 # 1024 = 1 second
+
+6116 # 
+6134 #  [1 / (DWELLM * (VBAT - DWELLA))] * FREQ18 (ticks/sec)
+
+61bf # PPERENG = PACPER / ENGCYL
+61cc # POFFENG = PACOFF / ENGCYL
+
+6466 # 29.875 * 8 = 239 = 0xEF
 
 6632 \n# 1)  DSDRPM_CALC - calculation of DSDRPM & DESMAF_PRE
 6632 \n# 2)  RPMERR_CALC - calculation of RPMERR_A & RPMERR_S
@@ -240,8 +250,11 @@
 
 6b26 # ISCKAM(ISFLAG)
 
+6ba3 # 29.875 * 8 = 239 = 0xEF
+
 6c64 # if(IBGPSI < UPDATM) Exit ISCKAM_UPDATE logic;
 6c66 # IBGPSI = 0
+
 
 6c83 # Decrement ISCKAMn
 6c85 # Decrement ISKSUM
@@ -436,3 +449,5 @@ c1d6 # 11469
 cb83 # EGR Type 0 = Sonic
 
 # cb5a # Register Rfe 
+
+ce5c # FN348(ECT) = Crank fuel pulsewidth as a function of ECT.
