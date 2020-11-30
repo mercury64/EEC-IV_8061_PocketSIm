@@ -674,6 +674,7 @@ word    28f0 28ff
 word    2900 2905
 word    2906 2907
 word    2908 291f
+byte    2920 29cc
 word    2d86 2d87
 word    2f78 2f79
 word    2f78 2f79
@@ -2210,6 +2211,7 @@ sym e  "HSI_Time"
 sym 10  "StackPtr"
 sym 12  "Tmr_OVF_cnt"
 sym 14  "ConsoleMode" :B 6
+sym 22  "MAP_FREQ"
 sym 27  "Flags_27"
 sym 27  "B0_R27" :B 0
 sym 27  "B1_R27" :B 1
@@ -2345,8 +2347,10 @@ sym 86  "ReftimeH"
 sym 88  "TablePTR"
 sym 8a  "RATCH"
 sym 8d  "VSBAR"
+sym 8e  "SAFTOT"
 sym 91  "VBAT"
 sym 92  "ISCDTY"
+sym 94  "FUELPW1"
 sym 96  "LAMBSE"
 sym 9a  "AM"
 sym 9d  "Tipret"
@@ -2386,10 +2390,12 @@ sym a5  "Egonflg" :B 4
 sym a5  "Purging" :B 5
 sym a5  "Cttmr_on" :B 6
 sym a5  "Cranking" :B 7
+sym a6  "FMEM_FLAGS"
+sym a7  "FMEM_FLAGS2"
 sym a8  "APT"
 sym a8  "APT_WOT" :B 0
 sym a8  "APT_Closed_Throttle" :B 7
-sym a9  "LOAD"
+sym a9  "?LOAD?"
 sym aa  "XFRAME"
 sym ac  "VIP_code"
 sym b2  "TP"
@@ -2403,7 +2409,7 @@ sym be  "EGR"
 sym c4  "PIPHi_ETime"
 sym c8  "PIPH_PW"
 sym ca  "Mkay"
-sym cc  "SAFTOT"
+sym cc  "?SAFTOT?"
 sym d4  "ATMR1"
 sym d6  "ND_FLAG"
 sym e1  "CCD?"

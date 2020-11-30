@@ -277,7 +277,7 @@
    Sub_226a:
 226a: 91,80,79            orb   R79,80           B7_R79 = 1;
 226d: 91,01,79            orb   R79,1            B0_R79 = 1;
-2270: 3c,8e,06            jb    B4,R8e,2279      if (B4_R8e = 0)  {
+2270: 3c,8e,06            jb    B4,R8e,2279      if (B4_SAFTOT = 0)  {
 2273: 71,7f,79            an2b  R79,7f           B7_R79 = 0;
 2276: 71,fe,79            an2b  R79,fe           B0_R79 = 0; }
 2279: b3,fe,2e,42         ldb   R42,[Rfe+2e]     R42 = [cb88];
@@ -974,18 +974,179 @@
 291a: 1c,01               word    11c
 291c: 0e,01               word    10e
 291e: 00,00               word      0
-
-2920: 00,00,b4,00,84,ba,00,00,bb,00,00,8e,03,00,12,01  ???  
-2930: 86,10,01,86,14,01,86,1a,01,86,1c,01,86,00,00,00  ???  
-2940: 0e,01,86,94,00,84,96,00,84,a8,00,00,b7,00,00,b6  ???  
-2950: 00,00,91,00,00,22,01,84,c0,00,84,00,00,00,92,00  ???  
-2960: 84,00,00,00,8d,00,00,04,02,84,00,00,00,0e,05,80  ???  
-2970: 10,05,80,00,00,00,00,00,00,38,05,00,3a,05,00,3c  ???  
-2980: 05,00,3e,05,00,40,05,00,42,05,00,a6,00,00,a7,00  ???  
-2990: 00,00,00,00,3e,03,84,76,01,84,00,00,00,63,01,00  ???  
-29a0: 8a,00,84,00,00,00,d4,00,00,0c,01,86,18,01,86,f8  ???  
-29b0: 01,84,00,00,00,d9,00,00,00,00,00,00,00,00,42,03  ???  
-29c0: 84,5b,03,00,08,01,86,db,00,00,00,00,00  ???  
+2920: 00                  byte      0
+2921: 00                  byte      0
+2922: b4                  byte     b4
+2923: 00                  byte      0
+2924: 84                  byte     84
+2925: ba                  byte     ba
+2926: 00                  byte      0
+2927: 00                  byte      0
+2928: bb                  byte     bb
+2929: 00                  byte      0
+292a: 00                  byte      0
+292b: 8e                  byte     8e
+292c: 03                  byte      3
+292d: 00                  byte      0
+292e: 12                  byte     12
+292f: 01                  byte      1
+2930: 86                  byte     86
+2931: 10                  byte     10
+2932: 01                  byte      1
+2933: 86                  byte     86
+2934: 14                  byte     14
+2935: 01                  byte      1
+2936: 86                  byte     86
+2937: 1a                  byte     1a
+2938: 01                  byte      1
+2939: 86                  byte     86
+293a: 1c                  byte     1c
+293b: 01                  byte      1
+293c: 86                  byte     86
+293d: 00                  byte      0
+293e: 00                  byte      0
+293f: 00                  byte      0
+2940: 0e                  byte      e
+2941: 01                  byte      1
+2942: 86                  byte     86
+2943: 94                  byte     94
+2944: 00                  byte      0
+2945: 84                  byte     84
+2946: 96                  byte     96
+2947: 00                  byte      0
+2948: 84                  byte     84
+2949: a8                  byte     a8
+294a: 00                  byte      0
+294b: 00                  byte      0
+294c: b7                  byte     b7
+294d: 00                  byte      0
+294e: 00                  byte      0
+294f: b6                  byte     b6
+2950: 00                  byte      0
+2951: 00                  byte      0
+2952: 91                  byte     91
+2953: 00                  byte      0
+2954: 00                  byte      0
+2955: 22                  byte     22
+2956: 01                  byte      1
+2957: 84                  byte     84
+2958: c0                  byte     c0
+2959: 00                  byte      0
+295a: 84                  byte     84
+295b: 00                  byte      0
+295c: 00                  byte      0
+295d: 00                  byte      0
+295e: 92                  byte     92
+295f: 00                  byte      0
+2960: 84                  byte     84
+2961: 00                  byte      0
+2962: 00                  byte      0
+2963: 00                  byte      0
+2964: 8d                  byte     8d
+2965: 00                  byte      0
+2966: 00                  byte      0
+2967: 04                  byte      4
+2968: 02                  byte      2
+2969: 84                  byte     84
+296a: 00                  byte      0
+296b: 00                  byte      0
+296c: 00                  byte      0
+296d: 0e                  byte      e
+296e: 05                  byte      5
+296f: 80                  byte     80
+2970: 10                  byte     10
+2971: 05                  byte      5
+2972: 80                  byte     80
+2973: 00                  byte      0
+2974: 00                  byte      0
+2975: 00                  byte      0
+2976: 00                  byte      0
+2977: 00                  byte      0
+2978: 00                  byte      0
+2979: 38                  byte     38
+297a: 05                  byte      5
+297b: 00                  byte      0
+297c: 3a                  byte     3a
+297d: 05                  byte      5
+297e: 00                  byte      0
+297f: 3c                  byte     3c
+2980: 05                  byte      5
+2981: 00                  byte      0
+2982: 3e                  byte     3e
+2983: 05                  byte      5
+2984: 00                  byte      0
+2985: 40                  byte     40
+2986: 05                  byte      5
+2987: 00                  byte      0
+2988: 42                  byte     42
+2989: 05                  byte      5
+298a: 00                  byte      0
+298b: a6                  byte     a6
+298c: 00                  byte      0
+298d: 00                  byte      0
+298e: a7                  byte     a7
+298f: 00                  byte      0
+2990: 00                  byte      0
+2991: 00                  byte      0
+2992: 00                  byte      0
+2993: 00                  byte      0
+2994: 3e                  byte     3e
+2995: 03                  byte      3
+2996: 84                  byte     84
+2997: 76                  byte     76
+2998: 01                  byte      1
+2999: 84                  byte     84
+299a: 00                  byte      0
+299b: 00                  byte      0
+299c: 00                  byte      0
+299d: 63                  byte     63
+299e: 01                  byte      1
+299f: 00                  byte      0
+29a0: 8a                  byte     8a
+29a1: 00                  byte      0
+29a2: 84                  byte     84
+29a3: 00                  byte      0
+29a4: 00                  byte      0
+29a5: 00                  byte      0
+29a6: d4                  byte     d4
+29a7: 00                  byte      0
+29a8: 00                  byte      0
+29a9: 0c                  byte      c
+29aa: 01                  byte      1
+29ab: 86                  byte     86
+29ac: 18                  byte     18
+29ad: 01                  byte      1
+29ae: 86                  byte     86
+29af: f8                  byte     f8
+29b0: 01                  byte      1
+29b1: 84                  byte     84
+29b2: 00                  byte      0
+29b3: 00                  byte      0
+29b4: 00                  byte      0
+29b5: d9                  byte     d9
+29b6: 00                  byte      0
+29b7: 00                  byte      0
+29b8: 00                  byte      0
+29b9: 00                  byte      0
+29ba: 00                  byte      0
+29bb: 00                  byte      0
+29bc: 00                  byte      0
+29bd: 00                  byte      0
+29be: 42                  byte     42
+29bf: 03                  byte      3
+29c0: 84                  byte     84
+29c1: 5b                  byte     5b
+29c2: 03                  byte      3
+29c3: 00                  byte      0
+29c4: 08                  byte      8
+29c5: 01                  byte      1
+29c6: 86                  byte     86
+29c7: db                  byte     db
+29c8: 00                  byte      0
+29c9: 00                  byte      0
+29ca: 00                  byte      0
+29cb: 00                  byte      0
+29cc: 00                  byte      0
 
    Send_HSO_Cmd:
 29cd: b3,88,03,6f         ldb   R6f,[R88+3]      R6f = [TablePTR+3];
@@ -1285,10 +1446,10 @@
 2cf1: c3,e6,be,54         stw   R54,[Re6+be]     [23e] = R54;
 2cf5: 84,58,54            xrw   R54,R58          R54 ^= R58;
 2cf8: 02,54               cplw  R54              R54 = ~R54;
-2cfa: a0,8e,56            ldw   R56,R8e          R56 = R8e;
+2cfa: a0,8e,56            ldw   R56,R8e          R56 = SAFTOT;
 2cfd: 84,58,56            xrw   R56,R58          R56 ^= R58;
 2d00: 60,56,54            an2w  R54,R56          R54 &= R56;
-2d03: 84,54,8e            xrw   R8e,R54          R8e ^= R54; }
+2d03: 84,54,8e            xrw   R8e,R54          SAFTOT ^= R54; }
 2d06: c3,01,00,1f,00      stw   R0,[R0+1f00]     [1f00] = 0;
 2d0b: c3,01,00,1f,00      stw   R0,[R0+1f00]     [1f00] = 0;
 2d10: e0,d5,16            djnz  Rd5,2d29         Rd5--;
@@ -1583,7 +1744,7 @@
 2ffa: d5,03               jnv   2fff             if (R56 > ff)  {
 2ffc: b1,80,56            ldb   R56,80           R56 = 80; } }
 2fff: 16,56               sexb  R56              swR56 = R56;
-3001: 44,cc,56,58         ad3w  R58,R56,Rcc      R58 = R56 + SAFTOT;
+3001: 44,cc,56,58         ad3w  R58,R56,Rcc      R58 = R56 + ?SAFTOT?;
 3005: bf,fa,0b,56         ldsbw R56,[Rfa+b]      swR56 = Splclp;
 3009: 88,56,58            cmpw  R58,R56          
 300c: d6,05               jge   3013             if (R58 < R56)  {
@@ -2117,7 +2278,7 @@
 3589: db,04               jc    358f             if (R54 < [b488])  {
 358b: a3,f4,46,54         ldw   R54,[Rf4+46]     R54 = [b488]; } } }
 358f: 6d,73,cb,54         ml2w  R54,cb73         lR54 = R54 * cb73; }
-3593: a0,56,94            ldw   R94,R56          R94 = R56;
+3593: a0,56,94            ldw   R94,R56          FUELPW1 = R56;
 3596: b3,e6,72,54         ldb   R54,[Re6+72]     R54 = [2f2];
 359a: 37,a5,04            jnb   B7,Ra5,35a1      if (Cranking = 1)  {
 359d: b3,f4,49,54         ldb   R54,[Rf4+49]     R54 = [b48b]; }
@@ -2159,7 +2320,7 @@
 35fe: a0,54,72            ldw   R72,R54          HSO_time = R54;
 3601: b0,56,74            ldb   R74,R56          HSO_timeH = R56;
 3604: 88,94,00            cmpw  R0,R94           
-3607: df,15               je    361e             if (R94 != 0)  {
+3607: df,15               je    361e             if (FUELPW1 != 0)  {
 3609: 38,4d,09            jb    B0,R4d,3615      if (B0_R4d = 0)  {
 360c: 71,7f,4d            an2b  R4d,7f           B7_R4d = 0;
 360f: a1,ea,22,88         ldw   R88,22ea         TablePTR = 22ea;
@@ -2639,8 +2800,8 @@
 3af5: c3,e4,a6,5a         stw   R5a,[Re4+a6]     [126] = R5a;
 3af9: 91,40,a0            orb   Ra0,40           B6_Power_up = 1;
 3afc: 91,01,a1            orb   Ra1,1            B0_Flags_a1 = 1;
-3aff: 38,a7,19            jb    B0,Ra7,3b1b      if (B0_Ra7 = 0)  {
-3b02: 71,f7,a6            an2b  Ra6,f7           B3_Ra6 = 0;
+3aff: 38,a7,19            jb    B0,Ra7,3b1b      if (B0_FMEM_FLAGS2 = 0)  {
+3b02: 71,f7,a6            an2b  Ra6,f7           B3_FMEM_FLAGS = 0;
 3b05: c3,e4,a4,5a         stw   R5a,[Re4+a4]     MAP_WORD = R5a;
 3b09: 09,03,5a            shlw  R5a,3            R5a <<= 3;                        #[ R5a *= 8] 
 3b0c: b0,5b,ba            ldb   Rba,R5b          MAP = R5b;
@@ -2649,7 +2810,7 @@
 3b16: c3,e4,a8,00         stw   R0,[Re4+a8]      [128] = 0;
 3b1a: f0                  ret                    return; }
 
-3b1b: 91,08,a6            orb   Ra6,8            B3_Ra6 = 1;
+3b1b: 91,08,a6            orb   Ra6,8            B3_FMEM_FLAGS = 1;
 3b1e: 27,ef               sjmp  3b0f             goto 3b0f;
 
    Sub_3b20:
@@ -2925,7 +3086,7 @@
 3dbd: 8b,ff,d2,00,30      cmpw  R30,[Rfe+d2]     
 3dc2: d3,04               jnc   3dc8             if (R30 >= [cc2c])  {
 3dc4: a3,e4,94,be         ldw   Rbe,[Re4+94]     EGR = EVP_Raw; } }
-3dc8: 34,a6,04            jnb   B4,Ra6,3dcf      if (B4_Ra6 = 1)  {
+3dc8: 34,a6,04            jnb   B4,Ra6,3dcf      if (B4_FMEM_FLAGS = 1)  {
 3dcb: a3,e4,96,be         ldw   Rbe,[Re4+96]     EGR = TPS_min; }
 3dcf: 3f,a5,1f            jb    B7,Ra5,3df1      if (Cranking = 0)  {
 3dd2: a3,e4,84,32         ldw   R32,[Re4+84]     R32 = [104];
@@ -2942,7 +3103,7 @@
    Sub_3df2:
 3df2: 2a,c4               scall 40b8             Sub_40b8 ();
 3df4: b3,f6,3c,39         ldb   R39,[Rf6+3c]     R39 = [b950];
-3df8: 3f,a6,1d            jb    B7,Ra6,3e18      if (B7_Ra6 = 0)  {
+3df8: 3f,a6,1d            jb    B7,Ra6,3e18      if (B7_FMEM_FLAGS = 0)  {
 3dfb: a3,e4,92,34         ldw   R34,[Re4+92]     R34 = ACT_Raw;
 3dff: 8b,fe,72,34         cmpw  R34,[Rfe+72]     
 3e03: d9,13               jgtu  3e18             if (R34 <= act_max_a/d_counts)  {
@@ -2955,14 +3116,14 @@
 3e16: 20,12               sjmp  3e2a             goto 3e2a; } } }
 
 3e18: 3a,a0,0c            jb    B2,Ra0,3e27      if (B2_Power_up = 0)  {
-3e1b: 3d,a6,09            jb    B5,Ra6,3e27      if (B5_Ra6 = 0)  {
+3e1b: 3d,a6,09            jb    B5,Ra6,3e27      if (B5_FMEM_FLAGS = 0)  {
 3e1e: 33,29,06            jnb   B3,R29,3e27      if (B3_R29 = 1)  {
 3e21: a3,e8,5a,38         ldw   R38,[Re8+5a]     R38 = [3da];
 3e25: 20,03               sjmp  3e2a             goto 3e2a; } } }
 
-3e27: 37,a6,03            jnb   B7,Ra6,3e2d      if (B7_Ra6 = 1)  {
+3e27: 37,a6,03            jnb   B7,Ra6,3e2d      if (B7_FMEM_FLAGS = 1)  {
 3e2a: b0,39,b7            ldb   Rb7,R39          ACT = R39; }
-3e2d: 3d,a6,12            jb    B5,Ra6,3e42      if (B5_Ra6 = 0)  {
+3e2d: 3d,a6,12            jb    B5,Ra6,3e42      if (B5_FMEM_FLAGS = 0)  {
 3e30: 33,29,0f            jnb   B3,R29,3e42      if (B3_R29 = 1)  {
 3e33: bf,e8,5b,34         ldsbw R34,[Re8+5b]     swR34 = [3db];
 3e37: 9b,e6,93,00         cmpb  R0,[Re6+93]      
@@ -2979,7 +3140,7 @@
 3e50: bc,b7,34            ldsbw R34,Rb7          swR34 = ACT;
 3e53: 20,2b               sjmp  3e80             goto 3e80; }
 
-3e55: 35,a6,35            jnb   B5,Ra6,3e8d      if (B5_Ra6 = 0) goto 3e8d;
+3e55: 35,a6,35            jnb   B5,Ra6,3e8d      if (B5_FMEM_FLAGS = 0) goto 3e8d;
 3e58: b3,e4,15,30         ldb   R30,[Re4+15]     R30 = [195];
 3e5c: 17,30               incb  R30              R30++;
 3e5e: d3,02               jnc   3e62             if (R30 > ff)  {
@@ -3065,7 +3226,7 @@
 3f44: c3,e8,c2,30         stw   R30,[Re8+c2]     [342] = R30;
 3f48: a3,e4,9c,16         ldw   R16,[Re4+9c]     R16 = TPS_Raw;
 3f4c: a0,8a,1a            ldw   R1a,R8a          R1a = RATCH;
-3f4f: 3a,a6,11            jb    B2,Ra6,3f63      if (B2_Ra6 = 0)  {
+3f4f: 3a,a6,11            jb    B2,Ra6,3f63      if (B2_FMEM_FLAGS = 0)  {
 3f52: 8b,fe,78,16         cmpw  R16,[Rfe+78]     
 3f56: d3,0b               jnc   3f63             if (R16 >= [cbd2])  {
 3f58: 8b,fe,76,16         cmpw  R16,[Rfe+76]     
@@ -3074,7 +3235,7 @@
 3f61: 20,1f               sjmp  3f82             goto 3f82; } } }
 
 3f63: 3f,a5,19            jb    B7,Ra5,3f7f      if (Cranking = 0)  {
-3f66: 32,a6,19            jnb   B2,Ra6,3f82      if (B2_Ra6 = 0) goto 3f82;
+3f66: 32,a6,19            jnb   B2,Ra6,3f82      if (B2_FMEM_FLAGS = 0) goto 3f82;
 3f69: a1,80,3e,8a         ldw   R8a,3e80         RATCH = 3e80;
 3f6d: ac,ba,38            ldzbw R38,Rba          wR38 = MAP;
 3f70: ef,73,09            call  48e6             UUWFuncLU_48e6 (
@@ -3155,7 +3316,7 @@
 403b: 91,01,9f            orb   R9f,1            Swtfl = 1; } }
 403e: 91,08,45            orb   R45,8            Error_detected = 1;
 4041: 3a,52,06            jb    B2,R52,404a      if (B2_DCLST_START_52 = 0)  {
-4044: 3b,8e,03            jb    B3,R8e,404a      if (B3_R8e = 0)  {
+4044: 3b,8e,03            jb    B3,R8e,404a      if (B3_SAFTOT = 0)  {
 4047: 71,f7,45            an2b  R45,f7           Error_detected = 0; } }
 404a: a3,f4,0e,36         ldw   R36,[Rf4+e]      R36 = [b450];
 404e: 01,34               clrw  R34              R34 = 0;
@@ -3226,7 +3387,7 @@
 40f6: f0                  ret                    return;
 
    Sub_40f7:
-40f7: 33,a6,09            jnb   B3,Ra6,4103      if (B3_Ra6 = 1)  {
+40f7: 33,a6,09            jnb   B3,Ra6,4103      if (B3_FMEM_FLAGS = 1)  {
 40fa: 37,a5,1e            jnb   B7,Ra5,411b      if (Cranking = 0) goto 411b;
 40fd: a1,ef,00,38         ldw   R38,ef           R38 = ef;
 4101: 20,29               sjmp  412c             goto 412c; }
@@ -3240,9 +3401,9 @@
 4114: 8b,e4,1e,42         cmpw  R42,[Re4+1e]     
 4118: fb                  ei                     enable intps;
 4119: d7,21               jne   413c             if (R42 != [19e]) goto 413c; } }
-411b: 91,08,a6            orb   Ra6,8            B3_Ra6 = 1;
+411b: 91,08,a6            orb   Ra6,8            B3_FMEM_FLAGS = 1;
 411e: af,f6,3f,38         ldzbw R38,[Rf6+3f]     wR38 = [b953];
-4122: 3a,a6,07            jb    B2,Ra6,412c      if (B2_Ra6 = 0)  {
+4122: 3a,a6,07            jb    B2,Ra6,412c      if (B2_FMEM_FLAGS = 0)  {
 4125: ef,be,07            call  48e6             UUWFuncLU_48e6 (
 4128: 78,61                     #arg 1              Func_ba8c,
 412a: bc,00                     #arg 2              TP_REL );
@@ -3266,7 +3427,7 @@
 4159: dd,03               jv    415e             if (OVF = 0)  {
 415b: 37,3e,03            jnb   B7,R3e,4161      if (Lseconds = 0) goto 4161; }
 415e: b1,80,3e            ldb   R3e,80           R3e = 80; }
-4161: c4,a9,3e            stb   R3e,Ra9          LOAD = R3e;
+4161: c4,a9,3e            stb   R3e,Ra9          ?LOAD? = R3e;
 4164: ac,3e,38            ldzbw R38,R3e          wR38 = yR3e;
 4167: ef,7c,07            call  48e6             UUWFuncLU_48e6 (
 416a: 1a,03                     #arg 1              y_fuel_base_cold,
@@ -3625,7 +3786,7 @@
 
 4537: a3,e4,a4,38         ldw   R38,[Re4+a4]     R38 = MAP_WORD;
 453b: c3,e6,64,38         stw   R38,[Re6+64]     [2e4] = R38;
-453f: 11,22               clrb  R22              R22 = 0;
+453f: 11,22               clrb  R22              MAP_FREQ = 0;
 4541: ef,21,03            call  4865             SUYFuncLU_4865 (
 4544: 61,60                     #arg 1              fuel_ve_multiplier_for_act,
 4546: b7,00                     #arg 2              ACT );
@@ -3694,7 +3855,7 @@
 45fa: 65,e6,00,3c         ad2w  R3c,e6           R3c += e6;
 45fe: 8c,3c,38            divw  R38,R3c          R38 = lR38 / R3c;
 4601: d5,1f               jnv   4622             if (OVF = 1)  {
-4603: 38,22,19            jb    B0,R22,461f      if (B0_R22 = 0)  {
+4603: 38,22,19            jb    B0,R22,461f      if (B0_MAP_FREQ = 0)  {
 4606: ac,7d,40            ldzbw R40,R7d          wR40 = yR7d;
 4609: 09,04,40            shlw  R40,4            R40 <<= 4;                        #[ R40 *= 16] 
 460c: 01,3a               clrw  R3a              R3a = 0;
@@ -3776,7 +3937,7 @@
 46da: d3,58               jnc   4734             if (R30 >= 0)  {
 46dc: 9b,f6,25,30         cmpb  R30,[Rf6+25]     
 46e0: d9,52               jgtu  4734             if (R30 <= [b939])  {
-46e2: 51,ac,a6,32         an3b  R32,Ra6,ac       R32 = Ra6 & ac;
+46e2: 51,ac,a6,32         an3b  R32,Ra6,ac       R32 = FMEM_FLAGS & ac;
 46e6: d7,4c               jne   4734             if (R32 = 0)  {
 46e8: ef,fb,01            call  48e6             UUWFuncLU_48e6 (
 46eb: 66,03                     #arg 1              Func_b366,
@@ -3877,7 +4038,7 @@
 47d6: 91,02,42            orb   R42,2            B1_R42 = 1; }
 47d9: 37,79,03            jnb   B7,R79,47df      if (B7_R79 = 1)  {
 47dc: 91,04,42            orb   R42,4            B2_R42 = 1; }
-47df: 37,8e,03            jnb   B7,R8e,47e5      if (B7_R8e = 1)  {
+47df: 37,8e,03            jnb   B7,R8e,47e5      if (B7_SAFTOT = 1)  {
 47e2: 91,10,42            orb   R42,10           B4_R42 = 1; }
 47e5: 30,46,03            jnb   B0,R46,47eb      if (Scvac = 1)  {
 47e8: 91,20,42            orb   R42,20           B5_R42 = 1; }
@@ -4347,7 +4508,7 @@
 4c65: 39,44,78            jb    B1,R44,4ce0      if (B1_R44 = 0)  {
 4c68: 3b,9f,75            jb    B3,R9f,4ce0      if (Qclol = 0)  {
 4c6b: 39,27,72            jb    B1,R27,4ce0      if (B1_R27 = 0)  {
-4c6e: 38,a6,6f            jb    B0,Ra6,4ce0      if (B0_Ra6 = 0)  {
+4c6e: 38,a6,6f            jb    B0,Ra6,4ce0      if (B0_FMEM_FLAGS = 0)  {
 4c71: 35,24,14            jnb   B5,R24,4c88      if (B5_R24 = 1)  {
 4c74: b3,e4,ff,30         ldb   R30,[Re4+ff]     R30 = [17f];
 4c78: 9b,f4,1e,30         cmpb  R30,[Rf4+1e]     
@@ -4595,7 +4756,7 @@
 4f33: 20,04               sjmp  4f39             goto 4f39; }
 
 4f35: c7,ea,c2,00         stb   R0,[Rea+c2]      [442] = 0; } }
-4f39: b0,a9,34            ldb   R34,Ra9          R34 = LOAD;
+4f39: b0,a9,34            ldb   R34,Ra9          R34 = ?LOAD?;
 4f3c: 91,02,4e            orb   R4e,2            B1_R4e = 1;
 4f3f: 9b,fe,4e,34         cmpb  R34,[Rfe+4e]     
 4f43: d3,03               jnc   4f48             if (R34 >= fuel_max_load_verification_value)  {
@@ -4679,7 +4840,7 @@
 4ff0: b4,00                     #arg 2              N_RPM );
 4fee: e6,02,b4,00         #args  
 4ff2: a0,38,30            ldw   R30,R38          R30 = R38;
-4ff5: ac,a9,38            ldzbw R38,Ra9          wR38 = LOAD;
+4ff5: ac,a9,38            ldzbw R38,Ra9          wR38 = ?LOAD?;
 4ff8: ef,eb,f8            call  48e6             UUWFuncLU_48e6 (
 4ffb: 36,03                     #arg 1              y_base_fuel,
 4ffd: 38,00                     #arg 2              38 );
@@ -4867,7 +5028,7 @@
 51ee: 8b,fe,38,38         cmpw  R38,[Rfe+38]     
 51f2: d3,4b               jnc   523f             if (R38 >= [cb92])  {
 51f4: 3f,9f,48            jb    B7,R9f,523f      if (A3C = 0)  {
-51f7: 51,ac,a6,38         an3b  R38,Ra6,ac       R38 = Ra6 & ac;
+51f7: 51,ac,a6,38         an3b  R38,Ra6,ac       R38 = FMEM_FLAGS & ac;
 51fb: d7,42               jne   523f             if (R38 = 0)  {
 51fd: b3,e6,9b,38         ldb   R38,[Re6+9b]     R38 = [21b];
 5201: 9b,fe,45,38         cmpb  R38,[Rfe+45]     
@@ -5148,7 +5309,7 @@
 550c: d5,03               jnv   5511             if (OVF = 1)  {
 550e: bd,ff,38            ldsbw R38,ff           swR38 = ff; }
 5511: b0,8d,34            ldb   R34,R8d          R34 = VSBAR;
-5514: 36,a6,0c            jnb   B6,Ra6,5523      if (B6_Ra6 = 1)  {
+5514: 36,a6,0c            jnb   B6,Ra6,5523      if (B6_FMEM_FLAGS = 1)  {
 5517: b3,e4,7b,34         ldb   R34,[Re4+7b]     R34 = [1fb];
 551b: 19,01,34            shlb  R34,1            R34 <<= 1;                        #[ R34 *= 2] 
 551e: d3,03               jnc   5523             if (B7_R34 = 1)  {
@@ -5209,7 +5370,7 @@
 55ae: fa                  di                     disable intps;
 55af: 71,fb,4a            an2b  R4a,fb           B2_R4a = 0;
 55b2: 91,02,4a            orb   R4a,2            B1_R4a = 1;
-55b5: 30,a6,09            jnb   B0,Ra6,55c1      if (B0_Ra6 = 1)  {
+55b5: 30,a6,09            jnb   B0,Ra6,55c1      if (B0_FMEM_FLAGS = 1)  {
 55b8: 3d,4a,06            jb    B5,R4a,55c1      if (B5_R4a = 0)  {
 55bb: 30,4a,06            jnb   B0,R4a,55c4      if (B0_R4a = 0) goto 55c4;
 55be: 95,04,4a            xorb  R4a,4            B2_R4a ^= 1; } }
@@ -5276,7 +5437,7 @@
 5670: 7f,f4,4c,34         ml2b  R34,[Rf4+4c]     wR34 = R34 * [b48e];
 5674: 8c,34,30            divw  R30,R34          R30 = lR30 / R34;
 5677: 01,20               clrw  R20              R20 = 0;
-5679: a0,30,22            ldw   R22,R30          R22 = R30;
+5679: a0,30,22            ldw   R22,R30          MAP_FREQ = R30;
 567c: 8c,1e,20            divw  R20,R1e          R20 = lR20 / R1e;
 567f: d5,03               jnv   5684             if (OVF = 1)  {
 5681: bd,ff,20            ldsbw R20,ff           swR20 = ff; }
@@ -5290,7 +5451,7 @@
 569a: c3,e4,f0,3a         stw   R3a,[Re4+f0]     [170] = R3a;
 569e: 9b,f4,5e,00         cmpb  R0,[Rf4+5e]      
 56a2: d7,0b               jne   56af             if ([b4a0] = 0)  {
-56a4: 3b,a6,08            jb    B3,Ra6,56af      if (B3_Ra6 = 0)  {
+56a4: 3b,a6,08            jb    B3,Ra6,56af      if (B3_FMEM_FLAGS = 0)  {
 56a7: 3e,29,05            jb    B6,R29,56af      if (B6_R29 = 0)  {
 56aa: 91,10,a3            orb   Ra3,10           B4_Flags_a3 = 1;
 56ad: 20,03               sjmp  56b2             goto 56b2; } } }
@@ -5634,7 +5795,7 @@
 5a59: c3,ea,b4,b2         stw   Rb2,[Rea+b4]     [434] = TP;
 5a5d: 9b,f5,81,00,b6      cmpb  Rb6,[Rf4+81]     
 5a62: da,38               jle   5a9c             if (ECT > [b4c3])  {
-5a64: 3a,a6,35            jb    B2,Ra6,5a9c      if (B2_Ra6 = 0)  {
+5a64: 3a,a6,35            jb    B2,Ra6,5a9c      if (B2_FMEM_FLAGS = 0)  {
 5a67: 8b,ea,b0,00         cmpw  R0,[Rea+b0]      
 5a6b: d7,12               jne   5a7f             if ([430] = 0)  {
 5a6d: 8b,f5,92,00,14      cmpw  R14,[Rf4+92]     
@@ -5674,7 +5835,7 @@
 5aca: d3,32               jnc   5afe             if (R30 >= 0)  {
 5acc: 98,1a,30            cmpb  R30,R1a          
 5acf: d3,0f               jnc   5ae0             if (R30 >= R1a)  {
-5ad1: 3b,a6,07            jb    B3,Ra6,5adb      if (B3_Ra6 = 0)  {
+5ad1: 3b,a6,07            jb    B3,Ra6,5adb      if (B3_FMEM_FLAGS = 0)  {
 5ad4: 9b,f5,85,00,ba      cmpb  Rba,[Rf4+85]     
 5ad9: d9,05               jgtu  5ae0             if (MAP > [b4c7]) goto 5ae0; }
 5adb: 91,04,27            orb   R27,4            B2_R27 = 1;
@@ -5688,7 +5849,7 @@
 5af4: db,0b               jc    5b01             if (R1a > ff) goto 5b01;
 5af6: 98,1a,ba            cmpb  Rba,R1a          
 5af9: d1,06               jleu  5b01             if (MAP <= R1a) goto 5b01;
-5afb: 3b,a6,03            jb    B3,Ra6,5b01      if (B3_Ra6 = 1) goto 5b01; } }
+5afb: 3b,a6,03            jb    B3,Ra6,5b01      if (B3_FMEM_FLAGS = 1) goto 5b01; } }
 5afe: 71,fb,27            an2b  R27,fb           B2_R27 = 0; } } }
 5b01: 8b,f5,8c,00,d2      cmpw  Rd2,[Rf4+8c]     
 5b06: d1,05               jleu  5b0d             if (Rd2 > [b4ce])  {
@@ -5718,13 +5879,13 @@
 5b44: 9b,f5,80,00,b6      cmpb  Rb6,[Rf4+80]     
 5b49: da,3e               jle   5b89             if (ECT > [b4c2])  {
 5b4b: b3,f5,82,00,30      ldb   R30,[Rf4+82]     R30 = [b4c4];
-5b50: 3a,a6,06            jb    B2,Ra6,5b59      if (B2_Ra6 = 0)  {
+5b50: 3a,a6,06            jb    B2,Ra6,5b59      if (B2_FMEM_FLAGS = 0)  {
 5b53: 30,30,09            jnb   B0,R30,5b5f      if (B0_R30 = 0) goto 5b5f;
-5b56: 33,a6,06            jnb   B3,Ra6,5b5f      if (B3_Ra6 = 0) goto 5b5f; }
-5b59: 3b,a6,2d            jb    B3,Ra6,5b89      if (B3_Ra6 = 1) goto 5b89;
+5b56: 33,a6,06            jnb   B3,Ra6,5b5f      if (B3_FMEM_FLAGS = 0) goto 5b5f; }
+5b59: 3b,a6,2d            jb    B3,Ra6,5b89      if (B3_FMEM_FLAGS = 1) goto 5b89;
 5b5c: 38,30,2a            jb    B0,R30,5b89      if (B0_R30 = 1) goto 5b89; } }
 5b5f: 32,27,27            jnb   B2,R27,5b89      if (B2_R27 = 1)  {
-5b62: 3a,a6,18            jb    B2,Ra6,5b7d      if (B2_Ra6 = 0)  {
+5b62: 3a,a6,18            jb    B2,Ra6,5b7d      if (B2_FMEM_FLAGS = 0)  {
 5b65: b3,ea,b6,30         ldb   R30,[Rea+b6]     R30 = [436];
 5b69: 9b,f5,8a,00,30      cmpb  R30,[Rf4+8a]     
 5b6e: d1,19               jleu  5b89             if (R30 <= [b4cc]) goto 5b89;
@@ -5732,7 +5893,7 @@
 5b75: d9,06               jgtu  5b7d             if (R30 <= [b4c9])  {
 5b77: 36,28,0f            jnb   B6,R28,5b89      if (B6_R28 = 0) goto 5b89;
 5b7a: 32,29,0c            jnb   B2,R29,5b89      if (B2_R29 = 0) goto 5b89; } }
-5b7d: 3e,a6,03            jb    B6,Ra6,5b83      if (B6_Ra6 = 0)  {
+5b7d: 3e,a6,03            jb    B6,Ra6,5b83      if (B6_FMEM_FLAGS = 0)  {
 5b80: 34,27,06            jnb   B4,R27,5b89      if (B4_R27 = 0) goto 5b89; }
 5b83: 91,02,27            orb   R27,2            B1_R27 = 1;
 5b86: 01,30               clrw  R30              R30 = 0;
@@ -5929,7 +6090,7 @@
 5d3f: 91,40,a1            orb   Ra1,40           B6_Flags_a1 = 1;
 5d42: 91,20,a1            orb   Ra1,20           B5_Flags_a1 = 1; }
 5d45: fb                  ei                     enable intps;
-5d46: ad,28,cc            ldzbw Rcc,28           SAFTOT = 28;
+5d46: ad,28,cc            ldzbw Rcc,28           ?SAFTOT? = 28;
 5d49: f0                  ret                    return;
 
 5d4a: 3a,28,01            jb    B2,R28,5d4e      if (Newsa = 0)  {
@@ -6084,7 +6245,7 @@
 5ef9: 67,fa,08,3c         ad2w  R3c,[Rfa+8]      R3c += [bb82];
 5efd: c3,e8,2a,3c         stw   R3c,[Re8+2a]     [3aa] = R3c;
 5f01: 28,1d               scall 5f20             Sub_5f20 ();
-5f03: a0,3c,cc            ldw   Rcc,R3c          SAFTOT = R3c;
+5f03: a0,3c,cc            ldw   Rcc,R3c          ?SAFTOT? = R3c;
 5f06: 71,fb,28            an2b  R28,fb           Newsa = 0;
 5f09: f0                  ret                    return;
 
@@ -6122,9 +6283,9 @@
 5f57: 9b,f0,37,1c         cmpb  R1c,[Rf0+37]     
 5f5b: d9,03               jgtu  5f60             if (R1c <= MINMPH)  {
 5f5d: 71,fd,23            an2b  R23,fd           B1_R23 = 0; } }
-5f60: b3,e8,16,22         ldb   R22,[Re8+16]     R22 = [396];
+5f60: b3,e8,16,22         ldb   R22,[Re8+16]     MAP_FREQ = [396];
 5f64: 98,00,22            cmpb  R22,R0           
-5f67: d7,24               jne   5f8d             if (R22 = 0)  {
+5f67: d7,24               jne   5f8d             if (MAP_FREQ = 0)  {
 5f69: 3c,26,07            jb    B4,R26,5f73      if (B4_R26 = 0)  {
 5f6c: a3,f5,b0,00,3c      ldw   R3c,[Rf4+b0]     R3c = [b4f2];
 5f71: 21,13               sjmp  6086             goto 6086; }
@@ -6133,16 +6294,16 @@
 5f76: 21,0e               sjmp  6086             goto 6086; }
 
 5f78: c7,e8,3c,00         stb   R0,[Re8+3c]      [3bc] = 0;
-5f7c: a0,cc,34            ldw   R34,Rcc          R34 = SAFTOT;
+5f7c: a0,cc,34            ldw   R34,Rcc          R34 = ?SAFTOT?;
 5f7f: 09,06,34            shlw  R34,6            R34 <<= 6;                        #[ R34 *= 64] 
 5f82: c3,e8,28,34         stw   R34,[Re8+28]     [3a8] = R34;
-5f86: b1,01,22            ldb   R22,1            R22 = 1;
+5f86: b1,01,22            ldb   R22,1            MAP_FREQ = 1;
 5f89: 29,00               scall 608b             Sub_608b ();
 5f8b: 20,28               sjmp  5fb5             goto 5fb5; }
 
 5f8d: 28,fc               scall 608b             Sub_608b ();
 5f8f: 99,01,22            cmpb  R22,1            
-5f92: d7,64               jne   5ff8             if (R22 = 1)  {
+5f92: d7,64               jne   5ff8             if (MAP_FREQ = 1)  {
 5f94: 31,23,02            jnb   B1,R23,5f99      if (B1_R23 = 1)  {
 5f97: 20,af               sjmp  6048             goto 6048; }
 
@@ -6177,9 +6338,9 @@
 5ff3: a0,3e,1a            ldw   R1a,R3e          R1a = R3e;
 5ff6: 20,09               sjmp  6001             goto 6001; }
 
-5ff8: 38,22,30            jb    B0,R22,602b      if (B0_R22 = 1) goto 602b;
+5ff8: 38,22,30            jb    B0,R22,602b      if (B0_MAP_FREQ = 1) goto 602b;
 5ffb: 39,23,4a            jb    B1,R23,6048      if (B1_R23 = 1) goto 6048; }
-5ffe: b1,02,22            ldb   R22,2            R22 = 2;
+5ffe: b1,02,22            ldb   R22,2            MAP_FREQ = 2;
 6001: a3,e8,32,3c         ldw   R3c,[Re8+32]     R3c = [3b2];
 6005: fe,6c,18,3c         sml2w R3c,R18          slR3c = R3c * R18;
 6009: 44,1a,3e,3c         ad3w  R3c,R3e,R1a      R3c = R3e + R1a;
@@ -6198,16 +6359,16 @@
 602b: 30,23,02            jnb   B0,R23,6030      if (B0_R23 = 1)  {
 602e: 27,48               sjmp  5f78             goto 5f78; }
 
-6030: 4b,e8,2a,cc,1a      sb3w  R1a,Rcc,[Re8+2a] R1a = SAFTOT - [3aa];
+6030: 4b,e8,2a,cc,1a      sb3w  R1a,Rcc,[Re8+2a] R1a = ?SAFTOT? - [3aa];
 6035: d6,02               jge   6039             if (R1a < 0)  {
 6037: 03,1a               negw  R1a              R1a = -R1a; }
 6039: 8b,f5,98,00,1a      cmpw  R1a,[Rf4+98]     
 603e: d9,08               jgtu  6048             if (R1a <= [b4da])  {
-6040: 11,22               clrb  R22              R22 = 0;
+6040: 11,22               clrb  R22              MAP_FREQ = 0;
 6042: a3,e8,2a,3c         ldw   R3c,[Re8+2a]     R3c = [3aa];
 6046: 20,3e               sjmp  6086             goto 6086; } }
 
-6048: b1,03,22            ldb   R22,3            R22 = 3;
+6048: b1,03,22            ldb   R22,3            MAP_FREQ = 3;
 604b: 01,18               clrw  R18              R18 = 0;
 604d: a0,b0,1a            ldw   R1a,Rb0          R1a = Rb0;
 6050: 0c,01,18            shrdw R18,1            lR18 >>= 1;                       #[ R18 /= 2] 
@@ -6222,10 +6383,10 @@
 6072: c3,e8,1c,18         stw   R18,[Re8+1c]     [39c] = R18;
 6076: a0,18,36            ldw   R36,R18          R36 = R18;
 6079: a3,e8,2a,34         ldw   R34,[Re8+2a]     R34 = [3aa];
-607d: a0,cc,32            ldw   R32,Rcc          R32 = SAFTOT;
+607d: a0,cc,32            ldw   R32,Rcc          R32 = ?SAFTOT?;
 6080: ef,d5,e8            call  4958             Sub_4958 ();
 6083: a0,3e,3c            ldw   R3c,R3e          R3c = R3e; }
-6086: c7,e8,16,22         stb   R22,[Re8+16]     [396] = R22;
+6086: c7,e8,16,22         stb   R22,[Re8+16]     [396] = MAP_FREQ;
 608a: f0                  ret                    return;
 
    Sub_608b:
@@ -6438,7 +6599,7 @@
 62bf: 8b,fa,3e,b4         cmpw  Rb4,[Rfa+3e]     
 62c3: d1,0a               jleu  62cf             if (N_RPM > [bbb8])  {
 62c5: 9b,fa,40,a9         cmpb  Ra9,[Rfa+40]     
-62c9: d1,04               jleu  62cf             if (LOAD > [bbba])  {
+62c9: d1,04               jleu  62cf             if (?LOAD? > [bbba])  {
 62cb: 91,40,4f            orb   R4f,40           B6_Knock_enabled = 1;
 62ce: f0                  ret                    return; } } }
 
@@ -6502,7 +6663,7 @@
 634c: ef,cf,e6            call  4a1e             Sub_4a1e ();
 634f: d3,3b               jnc   638c             if (R42 >= [R30+2])  {
 6351: 3f,a5,38            jb    B7,Ra5,638c      if (Cranking = 0)  {
-6354: 51,bc,a6,30         an3b  R30,Ra6,bc       R30 = Ra6 & bc;
+6354: 51,bc,a6,30         an3b  R30,Ra6,bc       R30 = FMEM_FLAGS & bc;
 6358: d7,32               jne   638c             if (R30 = 0)  {
 635a: 9b,fe,29,00         cmpb  R0,[Rfe+29]      
 635e: d7,11               jne   6371             if (PFEHP = 0)  {
@@ -6581,7 +6742,7 @@
 
    Sub_6422:
 6422: 3f,a5,4c            jb    B7,Ra5,6471      if (Cranking = 0)  {
-6425: 51,bc,a6,30         an3b  R30,Ra6,bc       R30 = Ra6 & bc;
+6425: 51,bc,a6,30         an3b  R30,Ra6,bc       R30 = FMEM_FLAGS & bc;
 6429: d7,0c               jne   6437             if (R30 = 0)  {
 642b: 8b,e4,64,00         cmpw  R0,[Re4+64]      
 642f: d7,0a               jne   643b             if ([1e4] != 0) goto 643b;
@@ -6595,7 +6756,7 @@
 6440: eb,01                     #arg 2              MAPOPE );
 643e: 96,a4,eb,01         #args  
 6442: b0,38,23            ldb   R23,R38          R23 = R38;
-6445: 11,22               clrb  R22              R22 = 0;
+6445: 11,22               clrb  R22              MAP_FREQ = 0;
 6447: a0,be,38            ldw   R38,Rbe          R38 = EGR;
 644a: 6b,e4,96,38         sb2w  R38,[Re4+96]     R38 -= TPS_min;
 644e: db,02               jc    6452             if (R38 < 0)  {
@@ -6639,7 +6800,7 @@
 64b2: 11,36               clrb  R36              R36 = 0;
 64b4: 8c,36,38            divw  R38,R36          R38 = lR38 / R36;
 64b7: 6d,00,ef,38         ml2w  R38,ef00         lR38 = R38 * ef00;
-64bb: 8c,22,38            divw  R38,R22          R38 = lR38 / R22;
+64bb: 8c,22,38            divw  R38,R22          R38 = lR38 / MAP_FREQ;
 64be: d5,03               jnv   64c3             if (OVF = 1)  {
 64c0: bd,ff,38            ldsbw R38,ff           swR38 = ff; }
 64c3: ef,20,e4            call  48e6             UUWFuncLU_48e6 (
@@ -6743,7 +6904,7 @@
 65b5: 20,32               sjmp  65e9             goto 65e9; }
 
 65b7: 3e,45,1d            jb    B6,R45,65d7      if (Egoste2 = 0)  {
-65ba: 51,0c,a6,32         an3b  R32,Ra6,c        R32 = Ra6 & c;
+65ba: 51,0c,a6,32         an3b  R32,Ra6,c        R32 = FMEM_FLAGS & c;
 65be: df,2e               je    65ee             if (R32 = 0) goto 65ee;
 65c0: a3,f6,3a,92         ldw   R92,[Rf6+3a]     ISCDTY = [b94e];
 65c4: b3,f0,5a,30         ldb   R30,[Rf0+5a]     R30 = [b05a];
@@ -6971,7 +7132,7 @@
 6822: 6c,1c,20            ml2w  R20,R1c          lR20 = R20 * R1c;
 6825: 0c,07,20            shrdw R20,7            lR20 >>= 7;                       #[ R20 /= 128] 
 6828: 98,00,22            cmpb  R22,R0           
-682b: df,03               je    6830             if (R22 != 0)  {
+682b: df,03               je    6830             if (MAP_FREQ != 0)  {
 682d: bd,ff,20            ldsbw R20,ff           swR20 = ff; } }
 6830: 3e,79,09            jb    B6,R79,683c      if (B6_R79 = 0)  {
 6833: 9b,fe,2a,00         cmpb  R0,[Rfe+2a]      
@@ -7184,11 +7345,11 @@
 6a4b: db,02               jc    6a4f             if (R30 >= [b444]) goto 6a4f; }
 6a4d: 20,a8               sjmp  6af7             goto 6af7; }
 
-6a4f: a3,f0,14,22         ldw   R22,[Rf0+14]     R22 = [b014];
+6a4f: a3,f0,14,22         ldw   R22,[Rf0+14]     MAP_FREQ = [b014];
 6a53: a3,f0,1a,18         ldw   R18,[Rf0+1a]     R18 = PSIBRM;
 6a57: a3,f0,1e,1a         ldw   R1a,[Rf0+1e]     R1a = PSIBRN;
 6a5b: 34,2f,0e            jnb   B4,R2f,6a6c      if (Vvsfl1 = 1)  {
-6a5e: a3,fe,02,22         ldw   R22,[Rfe+2]      R22 = [cb5c];
+6a5e: a3,fe,02,22         ldw   R22,[Rfe+2]      MAP_FREQ = [cb5c];
 6a62: a3,ff,f6,00,18      ldw   R18,[Rfe+f6]     R18 = [cc50];
 6a67: a3,ff,f8,00,1a      ldw   R1a,[Rfe+f8]     R1a = [cc52]; }
 6a6c: 01,38               clrw  R38              R38 = 0;
@@ -7207,9 +7368,9 @@
 
 6a8e: 89,70,7d,92         cmpw  R92,7d70         
 6a92: db,37               jc    6acb             if (ISCDTY < 7d70)  {
-6a94: a3,f0,16,22         ldw   R22,[Rf0+16]     R22 = [b016];
+6a94: a3,f0,16,22         ldw   R22,[Rf0+16]     MAP_FREQ = [b016];
 6a98: 34,2f,04            jnb   B4,R2f,6a9f      if (Vvsfl1 = 1)  {
-6a9b: a3,fe,04,22         ldw   R22,[Rfe+4]      R22 = [cb5e]; }
+6a9b: a3,fe,04,22         ldw   R22,[Rfe+4]      MAP_FREQ = [cb5e]; }
 6a9f: 01,3c               clrw  R3c              R3c = 0;
 6aa1: 09,02,40            shlw  R40,2            R40 <<= 2;                        #[ R40 *= 4] 
 6aa4: 8c,40,3c            divw  R3c,R40          R3c = lR3c / R40;
@@ -7217,7 +7378,7 @@
 6aa9: bd,ff,3c            ldsbw R3c,ff           swR3c = ff; }
 6aac: a3,e4,ba,32         ldw   R32,[Re4+ba]     R32 = [13a];
 6ab0: 01,30               clrw  R30              R30 = 0;
-6ab2: 8c,22,30            divw  R30,R22          R30 = lR30 / R22;
+6ab2: 8c,22,30            divw  R30,R22          R30 = lR30 / MAP_FREQ;
 6ab5: d5,03               jnv   6aba             if (OVF = 1)  {
 6ab7: bd,ff,30            ldsbw R30,ff           swR30 = ff; }
 6aba: 6c,3c,30            ml2w  R30,R3c          lR30 = R30 * R3c;
@@ -7426,8 +7587,8 @@
    Sub_6cd7:
 6cd7: 9b,fe,2e,00         cmpb  R0,[Rfe+2e]      
 6cdb: df,06               je    6ce3             if ([cb88] != 0)  {
-6cdd: 32,a6,11            jnb   B2,Ra6,6cf1      if (B2_Ra6 = 0) goto 6cf1;
-6ce0: 33,a6,0e            jnb   B3,Ra6,6cf1      if (B3_Ra6 = 0) goto 6cf1; }
+6cdd: 32,a6,11            jnb   B2,Ra6,6cf1      if (B2_FMEM_FLAGS = 0) goto 6cf1;
+6ce0: 33,a6,0e            jnb   B3,Ra6,6cf1      if (B3_FMEM_FLAGS = 0) goto 6cf1; }
 6ce3: c3,e6,08,00         stw   R0,[Re6+8]       [288] = 0;
 6ce7: c3,e6,0a,00         stw   R0,[Re6+a]       [28a] = 0;
 6ceb: c7,01,7b,02,00      stb   R0,[R0+27b]      [27b] = 0;
@@ -7478,8 +7639,8 @@
 6d58: e7,d6,bc            jump  2a31             goto 2a31;
 
    Sub_6d5b:
-6d5b: 33,a6,12            jnb   B3,Ra6,6d70      if (B3_Ra6 = 1)  {
-6d5e: 32,a6,0f            jnb   B2,Ra6,6d70      if (B2_Ra6 = 1)  {
+6d5b: 33,a6,12            jnb   B3,Ra6,6d70      if (B3_FMEM_FLAGS = 1)  {
+6d5e: 32,a6,0f            jnb   B2,Ra6,6d70      if (B2_FMEM_FLAGS = 1)  {
 6d61: c7,e6,05,00         stb   R0,[Re6+5]       [285] = 0;
 6d65: c3,e6,06,00         stw   R0,[Re6+6]       [286] = 0;
 6d69: c7,01,81,02,00      stb   R0,[R0+281]      [281] = 0;
@@ -7487,7 +7648,7 @@
 
 6d70: ef,fd,da            call  4870             UUYFuncLU_4870 (
 6d73: 46,80                     #arg 1              Func_baf6,
-6d75: a9,00                     #arg 2              LOAD );
+6d75: a9,00                     #arg 2              ?LOAD? );
 6d73: 46,80,a9,00         #args  
 6d77: c7,e6,05,38         stb   R38,[Re6+5]      [285] = R38;
 6d7b: 09,08,38            shlw  R38,8            R38 <<= 8;                        #[ R38 *= 256] 
@@ -7563,7 +7724,7 @@
 6e26: 8b,ea,ae,00         cmpw  R0,[Rea+ae]      
 6e2a: d7,6c               jne   6e98             if ([42e] = 0)  {
 6e2c: 3f,a5,69            jb    B7,Ra5,6e98      if (Cranking = 0)  {
-6e2f: 51,af,a6,32         an3b  R32,Ra6,af       R32 = Ra6 & af;
+6e2f: 51,af,a6,32         an3b  R32,Ra6,af       R32 = FMEM_FLAGS & af;
 6e33: d7,63               jne   6e98             if (R32 = 0)  {
 6e35: b3,e4,ce,30         ldb   R30,[Re4+ce]     R30 = [14e];
 6e39: 9b,f6,47,30         cmpb  R30,[Rf6+47]     
@@ -7636,7 +7797,7 @@
 6efb: 3a,a0,06            jb    B2,Ra0,6f04      if (B2_Power_up = 0)  {
 6efe: 9b,f6,35,b6         cmpb  Rb6,[Rf6+35]     
 6f02: da,1b               jle   6f1f             if (ECT <= [b949]) goto 6f1f; }
-6f04: 38,a6,18            jb    B0,Ra6,6f1f      if (B0_Ra6 = 0)  {
+6f04: 38,a6,18            jb    B0,Ra6,6f1f      if (B0_FMEM_FLAGS = 0)  {
 6f07: a3,f4,58,38         ldw   R38,[Rf4+58]     R38 = REV_LIMIT;
 6f0b: 88,38,b4            cmpw  Rb4,R38          
 6f0e: db,0f               jc    6f1f             if (N_RPM < R38)  {
@@ -7678,7 +7839,7 @@
 6f6d: b5,00,37            adcb  R37,0            R37 += CY;
 6f70: 8b,e4,f6,36         cmpw  R36,[Re4+f6]     
 6f74: d3,03               jnc   6f79             if (R36 >= KAMRF)  {
-6f76: 37,a7,0c            jnb   B7,Ra7,6f85      if (B7_Ra7 = 0) goto 6f85; }
+6f76: 37,a7,0c            jnb   B7,Ra7,6f85      if (B7_FMEM_FLAGS2 = 0) goto 6f85; }
 6f79: b0,b6,42            ldb   R42,Rb6          R42 = ECT;
 6f7c: 9b,f6,30,42         cmpb  R42,[Rf6+30]     
 6f80: d1,0d               jleu  6f8f             if (R42 <= [b944]) goto 6f8f;
@@ -7992,9 +8153,9 @@
 7240: df,03               je    7245             if (R42 != 0)  {
 7242: 91,10,9e            orb   R9e,10           B4_EGREN_9e = 1; }
    TRANS_SELECT_LOGIC:
-7245: b1,04,22            ldb   R22,4            R22 = 4;
+7245: b1,04,22            ldb   R22,4            MAP_FREQ = 4;
 7248: 9b,fe,2c,22         cmpb  R22,[Rfe+2c]     
-724c: d7,05               jne   7253             if (R22 = TSTRAT)  {
+724c: d7,05               jne   7253             if (MAP_FREQ = TSTRAT)  {
 724e: 91,02,9e            orb   R9e,2            Reg_9e = 1;
 7251: 20,03               sjmp  7256             return; }
 
@@ -8229,7 +8390,7 @@
 7451: 37,a8,22            jnb   B7,Ra8,7476      if (APT_Closed_Throttle = 1)  {
 7454: 3c,2e,1f            jb    B4,R2e,7476      if (Sto_hyper = 0)  {
 7457: 3e,a5,1c            jb    B6,Ra5,7476      if (Cttmr_on = 0)  {
-745a: 3a,a6,19            jb    B2,Ra6,7476      if (B2_Ra6 = 0)  {
+745a: 3a,a6,19            jb    B2,Ra6,7476      if (B2_FMEM_FLAGS = 0)  {
 745d: 77,ea,86,00         ad2b  R0,[Rea+86]      R0 += [406];
 7461: d7,13               jne   7476             if ((R0[406]) = 0)  {
 7463: b0,bb,42            ldb   R42,Rbb          R42 = BP;
@@ -8238,7 +8399,7 @@
 746c: a3,e4,c2,30         ldw   R30,[Re4+c2]     R30 = Tslpip;
 7470: 8b,e2,17,30         cmpw  R30,[Re2+17]     
 7474: d1,09               jleu  747f             if (R30 <= [c1d5]) goto 747f; } } } } } }
-7476: 38,a7,0e            jb    B0,Ra7,7487      if (B0_Ra7 = 1) goto 7487;
+7476: 38,a7,0e            jb    B0,Ra7,7487      if (B0_FMEM_FLAGS2 = 1) goto 7487;
 7479: c7,ea,87,00         stb   R0,[Rea+87]      [407] = 0;
 747d: 20,08               sjmp  7487             goto 7487; }
 
@@ -8265,8 +8426,8 @@
 749d: 65,80,00,1c         ad2w  R1c,80           R1c += 80;
 74a1: af,fe,44,1e         ldzbw R1e,[Rfe+44]     wR1e = fuel_adaptive_max;
 74a5: 65,80,00,1e         ad2w  R1e,80           R1e += 80;
-74a9: 01,22               clrw  R22              R22 = 0;
-74ab: a0,22,20            ldw   R20,R22          R20 = R22;
+74a9: 01,22               clrw  R22              MAP_FREQ = 0;
+74ab: a0,22,20            ldw   R20,R22          R20 = MAP_FREQ;
 74ae: 08,01,20            shrw  R20,1            R20 >>= 1;                        #[ R20 /= 2] 
 74b1: 01,3c               clrw  R3c              R3c = 0;
 74b3: 9b,e2,be,00         cmpb  R0,[Re2+be]      
@@ -8282,7 +8443,7 @@
 
 74c8: c7,21,cc,01,00      stb   R0,[R20+1cc]     [R20+1cc] = 0;
 74cd: 01,3c               clrw  R3c              R3c = 0;
-74cf: a3,23,96,00,42      ldw   R42,[R22+96]     R42 = [R22+96];
+74cf: a3,23,96,00,42      ldw   R42,[R22+96]     R42 = [MAP_FREQ+96];
 74d4: 8b,f4,44,42         cmpw  R42,[Rf4+44]     
 74d8: d1,0b               jleu  74e5             if (R42 > [b486])  {
 74da: 8b,f4,42,42         cmpw  R42,[Rf4+42]     
@@ -8339,8 +8500,8 @@
 7572: 9b,f4,18,42         cmpb  R42,[Rf4+18]     
 7576: d3,5e               jnc   75d6             if (R42 >= [b45a])  {
 7578: 35,79,5b            jnb   B5,R79,75d6      if (B5_R79 = 1)  {
-757b: 51,ac,a6,00         an3b  R0,Ra6,ac        R0 = Ra6 & ac;
-757f: d7,55               jne   75d6             if ((Ra6 & ac) = 0)  {
+757b: 51,ac,a6,00         an3b  R0,Ra6,ac        R0 = FMEM_FLAGS & ac;
+757f: d7,55               jne   75d6             if ((FMEM_FLAGS & ac) = 0)  {
 7581: 9b,e2,bc,d4         cmpb  Rd4,[Re2+bc]     
 7585: d3,4f               jnc   75d6             if (ATMR1 >= [c17a])  {
 7587: 9b,ea,c9,00         cmpb  R0,[Rea+c9]      
@@ -8367,7 +8528,7 @@
 75be: a0,bc,3e            ldw   R3e,Rbc          R3e = TP_REL;
 75c1: 8b,e2,c3,3e         cmpw  R3e,[Re2+c3]     
 75c5: d3,0f               jnc   75d6             if (R3e >= [c181])  {
-75c7: b0,a9,3e            ldb   R3e,Ra9          R3e = LOAD;
+75c7: b0,a9,3e            ldb   R3e,Ra9          R3e = ?LOAD?;
 75ca: 9b,e2,c1,3e         cmpb  R3e,[Re2+c1]     
 75ce: db,06               jc    75d6             if (R3e < [c17f])  {
 75d0: 9b,e2,c2,3e         cmpb  R3e,[Re2+c2]     
@@ -8412,9 +8573,9 @@
 7637: 28,3a               scall 7673             Sub_7673 ();
 7639: d3,4f               jnc   768a             if (CY = 0) goto 768a; }
 763b: 8b,23,76,01,1c      cmpw  R1c,[R22+176]    
-7640: df,07               je    7649             if (R1c != [R22+176])  {
+7640: df,07               je    7649             if (R1c != [MAP_FREQ+176])  {
 7642: 8b,23,76,01,1e      cmpw  R1e,[R22+176]    
-7647: d7,05               jne   764e             if (R1e != [R22+176]) goto 764e; }
+7647: d7,05               jne   764e             if (R1e != [MAP_FREQ+176]) goto 764e; }
 7649: 91,01,3c            orb   R3c,1            Free_run = 1;
 764c: 20,3c               sjmp  768a             goto 768a; }
 
@@ -8447,7 +8608,7 @@
 7689: f0                  ret                    return; } }
 
 768a: 71,7f,3c            an2b  R3c,7f           Seconds = 0;
-768d: a3,23,98,76,36      ldw   R36,[R22+7698]   R36 = [R22+7698];
+768d: a3,23,98,76,36      ldw   R36,[R22+7698]   R36 = [MAP_FREQ+7698];
 7692: ef,8d,05            call  7c22             Sub_7c22 ();
 7695: 20,15               sjmp  76ac             goto 76ac;
 
@@ -8471,10 +8632,10 @@
 76bc: ef,81,05            call  7c40             Sub_7c40 ();
 76bf: b3,e2,96,42         ldb   R42,[Re2+96]     R42 = trans_min_tv_pressure;
 76c3: 98,a9,42            cmpb  R42,Ra9          
-76c6: db,1d               jc    76e5             if (R42 >= LOAD) goto 76e5;
+76c6: db,1d               jc    76e5             if (R42 >= ?LOAD?) goto 76e5;
 76c8: b3,e2,95,42         ldb   R42,[Re2+95]     R42 = [c153];
 76cc: 98,a9,42            cmpb  R42,Ra9          
-76cf: d1,14               jleu  76e5             if (R42 <= LOAD) goto 76e5;
+76cf: d1,14               jleu  76e5             if (R42 <= ?LOAD?) goto 76e5;
 76d1: 8b,e2,99,b4         cmpw  Rb4,[Re2+99]     
 76d5: d1,0e               jleu  76e5             if (N_RPM <= [c157]) goto 76e5;
 76d7: 8b,e2,97,b4         cmpw  Rb4,[Re2+97]     
@@ -8486,23 +8647,23 @@
 76e5: a1,40,77,30         ldw   R30,7740         R30 = 7740;
 76e9: ef,54,05            call  7c40             Sub_7c40 ();
 76ec: 32,3a,3a            jnb   B2,R3a,7729      if (B2_R3a = 1)  {
-76ef: 01,22               clrw  R22              R22 = 0;
+76ef: 01,22               clrw  R22              MAP_FREQ = 0;
 76f1: 01,3c               clrw  R3c              R3c = 0;
 76f3: 9b,e2,8f,00         cmpb  R0,[Re2+8f]      
 76f7: df,28               je    7721             if ([c14d] != 0)  {
-76f9: a3,23,c8,03,42      ldw   R42,[R22+3c8]    R42 = [R22+3c8];
+76f9: a3,23,c8,03,42      ldw   R42,[R22+3c8]    R42 = [MAP_FREQ+3c8];
 76fe: 8b,23,76,01,1c      cmpw  R1c,[R22+176]    
-7703: d7,09               jne   770e             if (R1c = [R22+176])  {
+7703: d7,09               jne   770e             if (R1c = [MAP_FREQ+176])  {
 7705: 8b,e2,91,42         cmpw  R42,[Re2+91]     
 7709: d3,03               jnc   770e             if (R42 >= [c14f])  {
 770b: b0,3a,3c            ldb   R3c,R3a          R3c = R3a; } }
 770e: 8b,23,76,01,1e      cmpw  R1e,[R22+176]    
-7713: d7,0c               jne   7721             if (R1e = [R22+176])  {
+7713: d7,0c               jne   7721             if (R1e = [MAP_FREQ+176])  {
 7715: 8b,e2,93,42         cmpw  R42,[Re2+93]     
 7719: d9,06               jgtu  7721             if (R42 <= [c151])  {
 771b: b0,3a,3c            ldb   R3c,R3a          R3c = R3a;
 771e: 19,01,3c            shlb  R3c,1            R3c <<= 1; } } }                  #[ R3c *= 2] 
-7721: a3,23,32,77,36      ldw   R36,[R22+7732]   R36 = [R22+7732];
+7721: a3,23,32,77,36      ldw   R36,[R22+7732]   R36 = [MAP_FREQ+7732];
 7726: ef,f9,04            call  7c22             Sub_7c22 (); }
 7729: ef,bf,04            call  7beb             Sub_7beb (
 772c: 0f                        #arg 1              f,
@@ -8621,7 +8782,7 @@
 7841: b6,c1                     #arg 1              Func_c25e,
 7843: bc,00                     #arg 2              TP_REL );
 7841: b6,c1,bc,00         #args  
-7845: 3a,a6,29            jb    B2,Ra6,7871      if (B2_Ra6 = 0)  {
+7845: 3a,a6,29            jb    B2,Ra6,7871      if (B2_FMEM_FLAGS = 0)  {
 7848: 36,9f,26            jnb   B6,R9f,7871      if (Indflg = 1)  {
 784b: 32,90,12            jnb   B2,R90,7860      if (B2_R90 = 1)  {
 784e: af,e2,60,36         ldzbw R36,[Re2+60]     wR36 = [c21e];
@@ -8652,9 +8813,9 @@
 788c: b3,ea,98,42         ldb   R42,[Rea+98]     R42 = [418];
 7890: 9b,e2,7c,42         cmpb  R42,[Re2+7c]     
 7894: d1,03               jleu  7899             if (R42 > [c23a])  {
-7896: 91,40,a6            orb   Ra6,40           B6_Ra6 = 1; }
+7896: 91,40,a6            orb   Ra6,40           B6_FMEM_FLAGS = 1; }
 7899: 30,a4,03            jnb   B0,Ra4,789f      if (B0_Ra4 = 1)  {
-789c: 71,bf,a6            an2b  Ra6,bf           B6_Ra6 = 0; }
+789c: 71,bf,a6            an2b  Ra6,bf           B6_FMEM_FLAGS = 0; }
 789f: 9b,fe,26,00         cmpb  R0,[Rfe+26]      
 78a3: df,67               je    790c             if ([cb80] != 0)  {
 78a5: 9b,e2,b2,00         cmpb  R0,[Re2+b2]      
@@ -9337,7 +9498,7 @@
 7ded: 34                        #arg 7              34
 7dee: 03                        #arg 8              3 );
 7de5: 14,01,d6,f0,d2,f0,28,03,34,03  #args       }
-7def: 34,8e,04            jnb   B4,R8e,7df6      if (B4_R8e = 1)  {
+7def: 34,8e,04            jnb   B4,R8e,7df6      if (B4_SAFTOT = 1)  {
 7df2: 2a,d5               scall 80c9             SaveTCode1 (
 7df4: 39                        #arg 1              39
 7df5: 05                        #arg 2              5 );
@@ -9771,14 +9932,14 @@
 8105: 01,30               clrw  R30              R30 = 0;
 8107: 71,fc,a3            an2b  Ra3,fc           Error_detected = 0;
                                                  B1_Flags_a3 = 0;
-810a: 51,ac,a6,22         an3b  R22,Ra6,ac       R22 = Ra6 & ac;
-810e: df,46               je    8156             if (R22 != 0)  {
+810a: 51,ac,a6,22         an3b  R22,Ra6,ac       MAP_FREQ = FMEM_FLAGS & ac;
+810e: df,46               je    8156             if (MAP_FREQ != 0)  {
 8110: 2f,b7               scall 80c9             SaveTCode1 (
 8112: 98                        #arg 1              98
 8113: 09                        #arg 2              9 );
 8112: 98,09               #args  
-8114: 33,a6,0d            jnb   B3,Ra6,8124      if (B3_Ra6 = 1)  {
-8117: 30,a7,06            jnb   B0,Ra7,8120      if (B0_Ra7 = 1)  {
+8114: 33,a6,0d            jnb   B3,Ra6,8124      if (B3_FMEM_FLAGS = 1)  {
+8117: 30,a7,06            jnb   B0,Ra7,8120      if (B0_FMEM_FLAGS2 = 1)  {
 811a: 2f,ad               scall 80c9             SaveTCode1 (
 811c: 28                        #arg 1              28
 811d: 01                        #arg 2              1 );
@@ -9789,33 +9950,33 @@
 8122: 26                        #arg 1              26
 8123: 01                        #arg 2              1 );
 8122: 26,01               #args                  }
-8124: a3,e4,26,22         ldw   R22,[Re4+26]     R22 = [1a6];
-8128: 37,22,04            jnb   B7,R22,812f      if (B7_R22 = 1)  {
+8124: a3,e4,26,22         ldw   R22,[Re4+26]     MAP_FREQ = [1a6];
+8128: 37,22,04            jnb   B7,R22,812f      if (B7_MAP_FREQ = 1)  {
 812b: 2f,9c               scall 80c9             SaveTCode1 (
 812d: 12                        #arg 1              12
 812e: 01                        #arg 2              1 );
 812d: 12,01               #args                  }
-812f: 36,22,04            jnb   B6,R22,8136      if (B6_R22 = 1)  {
+812f: 36,22,04            jnb   B6,R22,8136      if (B6_MAP_FREQ = 1)  {
 8132: 2f,95               scall 80c9             SaveTCode1 (
 8134: 13                        #arg 1              13
 8135: 01                        #arg 2              1 );
 8134: 13,01               #args                  }
-8136: 35,22,04            jnb   B5,R22,813d      if (B5_R22 = 1)  {
+8136: 35,22,04            jnb   B5,R22,813d      if (B5_MAP_FREQ = 1)  {
 8139: 2f,8e               scall 80c9             SaveTCode1 (
 813b: 17                        #arg 1              17
 813c: 01                        #arg 2              1 );
 813b: 17,01               #args                  }
-813d: 34,22,04            jnb   B4,R22,8144      if (B4_R22 = 1)  {
+813d: 34,22,04            jnb   B4,R22,8144      if (B4_MAP_FREQ = 1)  {
 8140: 2f,87               scall 80c9             SaveTCode1 (
 8142: 18                        #arg 1              18
 8143: 01                        #arg 2              1 );
 8142: 18,01               #args                  }
-8144: 31,22,04            jnb   B1,R22,814b      if (B1_R22 = 1)  {
+8144: 31,22,04            jnb   B1,R22,814b      if (B1_MAP_FREQ = 1)  {
 8147: 2f,80               scall 80c9             SaveTCode1 (
 8149: 22                        #arg 1              22
 814a: 01                        #arg 2              1 );
 8149: 22,01               #args                  }
-814b: 30,22,04            jnb   B0,R22,8152      if (B0_R22 = 1)  {
+814b: 30,22,04            jnb   B0,R22,8152      if (B0_MAP_FREQ = 1)  {
 814e: 2f,79               scall 80c9             SaveTCode1 (
 8150: 23                        #arg 1              23
 8151: 01                        #arg 2              1 );
@@ -9832,7 +9993,7 @@
 816b: c0,98,00            stw   R0,R98           R98 = 0;
 816e: a1,00,01,42         ldw   R42,100          R42 = 100;
 8172: c3,e4,f6,42         stw   R42,[Re4+f6]     KAMRF = R42;
-8176: a3,fe,52,cc         ldw   Rcc,[Rfe+52]     SAFTOT = [cbac];
+8176: a3,fe,52,cc         ldw   Rcc,[Rfe+52]     ?SAFTOT? = [cbac];
 817a: 01,c0               clrw  Rc0              Rc0 = 0;
 817c: 91,40,46            orb   R46,40           WOT_AC = 1;
 817f: 71,fe,46            an2b  R46,fe           Scvac = 0;
@@ -10079,7 +10240,7 @@
    Sub_830c:
 830c: 9b,e2,37,00         cmpb  R0,[Re2+37]      
 8310: df,51               je    8363             if ([c1f5] != 0)  {
-8312: a3,e2,35,cc         ldw   Rcc,[Re2+35]     SAFTOT = [c1f3];
+8312: a3,e2,35,cc         ldw   Rcc,[Re2+35]     ?SAFTOT? = [c1f3];
 8316: 20,ec               sjmp  8404             goto 8404;
 
    Sub_8318:
@@ -10094,22 +10255,22 @@
 8326: 5f,e2,38,18,1c      ml3b  R1c,R18,[Re2+38] wR1c = R18 * [c1f6];
 832b: 08,03,1c            shrw  R1c,3            R1c >>= 3;                        #[ R1c /= 8] 
 832e: a3,e2,35,42         ldw   R42,[Re2+35]     R42 = [c1f3];
-8332: 48,1c,42,cc         sb3w  Rcc,R42,R1c      SAFTOT = R42 - R1c;
-8336: a3,e4,9e,22         ldw   R22,[Re4+9e]     R22 = [11e];
-833a: 6b,e4,44,22         sb2w  R22,[Re4+44]     R22 -= [1c4];
-833e: db,02               jc    8342             if (R22 < 0)  {
-8340: 03,22               negw  R22              R22 = -R22; }
+8332: 48,1c,42,cc         sb3w  Rcc,R42,R1c      ?SAFTOT? = R42 - R1c;
+8336: a3,e4,9e,22         ldw   R22,[Re4+9e]     MAP_FREQ = [11e];
+833a: 6b,e4,44,22         sb2w  R22,[Re4+44]     MAP_FREQ -= [1c4];
+833e: db,02               jc    8342             if (MAP_FREQ < 0)  {
+8340: 03,22               negw  R22              MAP_FREQ = -MAP_FREQ; }
 8342: 8b,e2,31,22         cmpw  R22,[Re2+31]     
-8346: db,0c               jc    8354             if (R22 < [c1ef])  {
+8346: db,0c               jc    8354             if (MAP_FREQ < [c1ef])  {
 8348: 8b,e2,33,cc         cmpw  Rcc,[Re2+33]     
-834c: da,02               jle   8350             if (SAFTOT > [c1f1])  {
+834c: da,02               jle   8350             if (?SAFTOT? > [c1f1])  {
 834e: 20,ba               sjmp  840a             return; }
 
 8350: 2d,77               scall 80c9             SaveTCode1 (
 8352: 13                        #arg 1              13
 8353: 02                        #arg 2              2 );
 8352: 13,02               #args                  }
-8354: a3,fe,52,cc         ldw   Rcc,[Rfe+52]     SAFTOT = [cbac];
+8354: a3,fe,52,cc         ldw   Rcc,[Rfe+52]     ?SAFTOT? = [cbac];
 8358: 20,aa               sjmp  8404             goto 8404;
 
    Sub_835a:
@@ -10192,7 +10353,7 @@
 
 83e8: 8a,1c,42            cmpw  R42,[R1c]        
 83eb: d1,16               jleu  8403             if (R42 <= [R1c]) return;
-83ed: a0,22,1a            ldw   R1a,R22          R1a = R22;
+83ed: a0,22,1a            ldw   R1a,R22          R1a = MAP_FREQ;
 83f0: 8b,1e,02,42         cmpw  R42,[R1e+2]      
 83f4: d3,04               jnc   83fa             if (R42 >= [R1e+2])  {
 83f6: a1,37,03,1a         ldw   R1a,337          R1a = 337; } }
@@ -10233,7 +10394,7 @@
 8434: 9b,fe,28,00         cmpb  R0,[Rfe+28]      
 8438: df,17               je    8451             if ([cb82] != 0)  {
 843a: 91,40,2f            orb   R2f,40           B6_VIP_flags4 = 1;
-843d: a3,e2,01,cc         ldw   Rcc,[Re2+1]      SAFTOT = [c1bf];
+843d: a3,e2,01,cc         ldw   Rcc,[Re2+1]      ?SAFTOT? = [c1bf];
 8441: a3,e2,03,96         ldw   R96,[Re2+3]      LAMBSE = [c1c1];
 8445: af,e2,09,1a         ldzbw R1a,[Re2+9]      wR1a = [c1c7];
 8449: c3,e4,1a,1a         stw   R1a,[Re4+1a]     [19a] = R1a;
@@ -10309,7 +10470,7 @@
 84f2: 25                        #arg 1              25
 84f3: 02                        #arg 2              2 );
 84f2: 25,02               #args                  } }
-84f4: a3,fe,52,cc         ldw   Rcc,[Rfe+52]     SAFTOT = [cbac];
+84f4: a3,fe,52,cc         ldw   Rcc,[Rfe+52]     ?SAFTOT? = [cbac];
 84f8: b3,e2,af,42         ldb   R42,[Re2+af]     R42 = [c16d];
 84fc: e0,42,12            djnz  R42,8511         R42--;
                                                  if (R42 != 0) goto 8511;
@@ -10443,9 +10604,9 @@
 8608: 8b,fe,6a,20         cmpw  R20,[Rfe+6a]     
 860c: d9,1c               jgtu  862a             if (R20 <= [cbc4])  {
 860e: a3,e2,5b,20         ldw   R20,[Re2+5b]     R20 = [c219];
-8612: 4b,e2,59,20,22      sb3w  R22,R20,[Re2+59] R22 = R20 - [c217];
+8612: 4b,e2,59,20,22      sb3w  R22,R20,[Re2+59] MAP_FREQ = R20 - [c217];
 8617: 8b,e4,9e,22         cmpw  R22,[Re4+9e]     
-861b: db,17               jc    8634             if (R22 >= [11e]) goto 8634;
+861b: db,17               jc    8634             if (MAP_FREQ >= [11e]) goto 8634;
 861d: 67,e2,57,20         ad2w  R20,[Re2+57]     R20 += [c215];
 8621: 8b,e4,9e,20         cmpw  R20,[Re4+9e]     
 8625: d1,08               jleu  862f             if (R20 <= [11e]) goto 862f;
@@ -10639,7 +10800,7 @@
 87a8: b3,ea,93,42         ldb   R42,[Rea+93]     R42 = C41FIL_TroubleCode;
 87ac: 9b,e2,77,42         cmpb  R42,[Re2+77]     
 87b0: d9,1c               jgtu  87ce             if (R42 <= [c235])  {
-87b2: 41,be,80,a6,34      an3w  R34,Ra6,80be     R34 = Ra6 & 80be;
+87b2: 41,be,80,a6,34      an3w  R34,Ra6,80be     R34 = FMEM_FLAGS & 80be;
 87b7: d7,15               jne   87ce             if (R34 = 0)  {
 87b9: b3,e2,25,42         ldb   R42,[Re2+25]     R42 = [c1e3];
 87bd: 99,02,42            cmpb  R42,2            
@@ -10840,17 +11001,17 @@
 899e: c7,e8,e0,30         stb   R30,[Re8+e0]     [360] = R30;
 89a2: 20,42               sjmp  89e6             goto 89e6; }
 
-89a4: 11,22               clrb  R22              R22 = 0;
+89a4: 11,22               clrb  R22              MAP_FREQ = 0;
 89a6: 4b,e6,7a,3e,34      sb3w  R34,R3e,[Re6+7a] R34 = R3e - [2fa];
 89ab: 37,35,04            jnb   B7,R35,89b2      if (B7_R35 = 1)  {
 89ae: 03,34               negw  R34              R34 = -R34;
-89b0: 17,22               incb  R22              R22++; }
+89b0: 17,22               incb  R22              MAP_FREQ++; }
 89b2: 01,36               clrw  R36              R36 = 0;
 89b4: 0d,0a,34            shldw R34,a            lR34 <<= a;                       #[ R34 *= 1024] 
 89b7: 8f,e6,7c,34         divw  R34,[Re6+7c]     R34 = lR34 / [2fc];
 89bb: d5,04               jnv   89c1             if (OVF = 1)  {
 89bd: a1,ff,7f,34         ldw   R34,7fff         R34 = 7fff; }
-89c1: 30,22,02            jnb   B0,R22,89c6      if (B0_R22 = 1)  {
+89c1: 30,22,02            jnb   B0,R22,89c6      if (B0_MAP_FREQ = 1)  {
 89c4: 03,34               negw  R34              R34 = -R34; }
 89c6: a3,e6,78,32         ldw   R32,[Re6+78]     R32 = [2f8];
 89ca: a3,fd,d6,00,36      ldw   R36,[Rfc+d6]     R36 = [c17e];
@@ -10895,7 +11056,7 @@
 8a3f: 88,30,14            cmpw  R14,R30          
 8a42: db,03               jc    8a47             if (R14 < R30)  {
 8a44: 71,fe,53            an2b  R53,fe           B0_R53 = 0; } }
-8a47: 3a,a6,08            jb    B2,Ra6,8a52      if (B2_Ra6 = 0)  {
+8a47: 3a,a6,08            jb    B2,Ra6,8a52      if (B2_FMEM_FLAGS = 0)  {
 8a4a: 31,53,08            jnb   B1,R53,8a55      if (B1_R53 = 0) goto 8a55;
 8a4d: 71,bf,df            an2b  Rdf,bf           B6_Rdf = 0;
 8a50: 20,06               sjmp  8a58             goto 8a58; }
@@ -10914,7 +11075,7 @@
 8a78: c3,e8,aa,3e         stw   R3e,[Re8+aa]     [32a] = R3e;
 8a7c: a3,e8,94,30         ldw   R30,[Re8+94]     R30 = TOT;
 8a80: b3,fd,d1,00,16      ldb   R16,[Rfc+d1]     R16 = [c179];
-8a85: 38,a6,1f            jb    B0,Ra6,8aa7      if (B0_Ra6 = 0)  {
+8a85: 38,a6,1f            jb    B0,Ra6,8aa7      if (B0_FMEM_FLAGS = 0)  {
 8a88: b1,80,16            ldb   R16,80           R16 = 80;
 8a8b: ef,52,be            call  48e0             SSWFuncLU_48e0 (
 8a8e: de,c1                     #arg 1              Func_c286,
@@ -11001,7 +11162,7 @@
    Sub_8b71:
 8b71: 30,a1,03            jnb   B0,Ra1,8b77      if (B0_Flags_a1 = 1)  {
 8b74: ef,e7,be            call  4a5e             Sub_4a5e (); }
-8b77: b1,01,22            ldb   R22,1            R22 = 1;
+8b77: b1,01,22            ldb   R22,1            MAP_FREQ = 1;
 8b7a: ef,e8,bc            call  4865             SUYFuncLU_4865 (
 8b7d: 9e,c7                     #arg 1              Func_c846,
 8b7f: b7,00                     #arg 2              ACT );
@@ -11195,7 +11356,7 @@
 8d62: da,00,30,00         #args  
 8d66: 71,f7,df            an2b  Rdf,f7           B3_Rdf = 0;
 8d69: 71,fd,df            an2b  Rdf,fd           B1_Rdf = 0;
-8d6c: 3e,a6,06            jb    B6,Ra6,8d75      if (B6_Ra6 = 0)  {
+8d6c: 3e,a6,06            jb    B6,Ra6,8d75      if (B6_FMEM_FLAGS = 0)  {
 8d6f: 9b,e6,bb,00         cmpb  R0,[Re6+bb]      
 8d73: df,02               je    8d77             if ([23b] = 0) goto 8d77; }
 8d75: 20,f3               sjmp  8e6a             goto 8e6a; }
@@ -11455,7 +11616,7 @@
 8fe7: b3,e8,d7,1e         ldb   R1e,[Re8+d7]     R1e = [357];
 8feb: 9b,fd,26,01,1e      cmpb  R1e,[Rfc+126]    
 8ff0: d9,03               jgtu  8ff5             if (R1e <= [c1ce])  {
-8ff2: 36,a6,05            jnb   B6,Ra6,8ffa      if (B6_Ra6 = 0) goto 8ffa; }
+8ff2: 36,a6,05            jnb   B6,Ra6,8ffa      if (B6_FMEM_FLAGS = 0) goto 8ffa; }
 8ff5: b3,fd,27,01,d9      ldb   Rd9,[Rfc+127]    Rd9 = [c1cf]; } } }
 8ffa: 71,fd,de            an2b  Rde,fd           B1_Rde = 0;
 8ffd: 9b,e8,cd,d9         cmpb  Rd9,[Re8+cd]     
@@ -11475,7 +11636,7 @@
 9025: f0                  ret                    return; }
 
 9026: 11,34               clrb  R34              R34 = 0;
-9028: 3e,a6,0a            jb    B6,Ra6,9035      if (B6_Ra6 = 0)  {
+9028: 3e,a6,0a            jb    B6,Ra6,9035      if (B6_FMEM_FLAGS = 0)  {
 902b: b3,e8,d7,32         ldb   R32,[Re8+d7]     R32 = [357];
 902f: 9b,e2,14,32         cmpb  R32,[Re2+14]     
 9033: d1,02               jleu  9037             if (R32 <= [c1d2]) goto 9037; }
@@ -11655,8 +11816,8 @@
 91f0: 64,30,42            ad2w  R42,R30          R42 += R30;
 91f3: 9a,42,32            cmpb  R32,[R42]        
 91f6: d1,33               jleu  922b             if (R32 > [R42])  {
-91f8: 3a,a6,30            jb    B2,Ra6,922b      if (B2_Ra6 = 0)  {
-91fb: 3e,a6,2d            jb    B6,Ra6,922b      if (B6_Ra6 = 0)  {
+91f8: 3a,a6,30            jb    B2,Ra6,922b      if (B2_FMEM_FLAGS = 0)  {
+91fb: 3e,a6,2d            jb    B6,Ra6,922b      if (B6_FMEM_FLAGS = 0)  {
 91fe: 9b,e6,bb,00         cmpb  R0,[Re6+bb]      
 9202: d7,27               jne   922b             if ([23b] = 0)  {
 9204: b3,ee,84,32         ldb   R32,[Ree+84]     R32 = [704];
@@ -11789,7 +11950,7 @@
 9367: d7,08               jne   9371             if ([c190] = 0)  {
 9369: 99,06,db            cmpb  Rdb,6            
 936c: d1,03               jleu  9371             if (Rdb > 6)  {
-936e: 36,a6,15            jnb   B6,Ra6,9386      if (B6_Ra6 = 0) goto 9386; } }
+936e: 36,a6,15            jnb   B6,Ra6,9386      if (B6_FMEM_FLAGS = 0) goto 9386; } }
 9371: 9b,e8,fa,00         cmpb  R0,[Re8+fa]      
 9375: d7,0a               jne   9381             if ([37a] = 0)  {
 9377: 98,d9,33            cmpb  R33,Rd9          
@@ -11830,13 +11991,13 @@
 93c0: c3,e6,74,20         stw   R20,[Re6+74]     [2f4] = R20;
 93c4: ef,8f,08            call  9c56             Sub_9c56 (
 93c7: da,00                     #arg 1              da,
-93c9: 22,00                     #arg 2              22 );
+93c9: 22,00                     #arg 2              MAP_FREQ );
 93c7: da,00,22,00         #args  
 93cb: ef,88,08            call  9c56             Sub_9c56 (
 93ce: 4c,03                     #arg 1              34c,
 93d0: 23,00                     #arg 2              23 );
 93ce: 4c,03,23,00         #args  
-93d2: c3,e6,76,22         stw   R22,[Re6+76]     [2f6] = R22;
+93d2: c3,e6,76,22         stw   R22,[Re6+76]     [2f6] = MAP_FREQ;
 93d6: 8b,fe,1e,b4         cmpw  Rb4,[Rfe+1e]     
 93da: d1,09               jleu  93e5             if (N_RPM > [cb78])  {
 93dc: 3d,20,06            jb    B5,R20,93e5      if (B5_R20 = 0)  {
@@ -11968,7 +12129,7 @@
 951f: db,d9               jc    94fa             if ([36e] <= 0) goto 94fa; }
 9521: b3,e3,1f,ff,38      ldb   R38,[Re2+ff1f]   R38 = [c0dd];
 9526: a3,e6,74,20         ldw   R20,[Re6+74]     R20 = [2f4];
-952a: a3,e6,76,22         ldw   R22,[Re6+76]     R22 = [2f6];
+952a: a3,e6,76,22         ldw   R22,[Re6+76]     MAP_FREQ = [2f6];
 952e: a3,e8,8c,30         ldw   R30,[Re8+8c]     R30 = [30c];
 9532: 8b,fc,12,30         cmpw  R30,[Rfc+12]     
 9536: d1,05               jleu  953d             if (R30 > [c0ba])  {
@@ -11986,12 +12147,12 @@
 9556: b1,ff,30            ldb   R30,ff           R30 = ff; }
 9559: c7,e8,db,30         stb   R30,[Re8+db]     [35b] = R30; } }
 955d: 3c,4a,06            jb    B4,R4a,9566      if (B4_R4a = 0)  {
-9560: 3a,a6,03            jb    B2,Ra6,9566      if (B2_Ra6 = 0)  {
-9563: 33,a6,05            jnb   B3,Ra6,956b      if (B3_Ra6 = 0) goto 956b; } }
+9560: 3a,a6,03            jb    B2,Ra6,9566      if (B2_FMEM_FLAGS = 0)  {
+9563: 33,a6,05            jnb   B3,Ra6,956b      if (B3_FMEM_FLAGS = 0) goto 956b; } }
 9566: b1,ff,38            ldb   R38,ff           R38 = ff;
 9569: 20,c7               sjmp  9632             goto 9632; }
 
-956b: 3e,a6,0f            jb    B6,Ra6,957d      if (B6_Ra6 = 0)  {
+956b: 3e,a6,0f            jb    B6,Ra6,957d      if (B6_FMEM_FLAGS = 0)  {
 956e: 9b,e6,bb,00         cmpb  R0,[Re6+bb]      
 9572: d7,09               jne   957d             if ([23b] = 0)  {
 9574: 3a,4b,06            jb    B2,R4b,957d      if (B2_R4b = 0)  {
@@ -12004,12 +12165,12 @@
 
 958b: 45,36,00,fc,14      ad3w  R14,Rfc,36       R14 = c0de;
 9590: 31,20,24            jnb   B1,R20,95b7      if (B1_R20 = 1)  {
-9593: 39,22,10            jb    B1,R22,95a6      if (B1_R22 = 0)  {
-9596: 32,22,06            jnb   B2,R22,959f      if (B2_R22 = 1)  {
+9593: 39,22,10            jb    B1,R22,95a6      if (B1_MAP_FREQ = 0)  {
+9596: 32,22,06            jnb   B2,R22,959f      if (B2_MAP_FREQ = 1)  {
 9599: 65,02,00,14         ad2w  R14,2            R14 += 2;
 959d: 20,07               sjmp  95a6             goto 95a6; }
 
-959f: 33,22,15            jnb   B3,R22,95b7      if (B3_R22 = 0) goto 95b7;
+959f: 33,22,15            jnb   B3,R22,95b7      if (B3_MAP_FREQ = 0) goto 95b7;
 95a2: 65,04,00,14         ad2w  R14,4            R14 += 4; }
 95a6: 9a,14,38            cmpb  R38,[R14]        
 95a9: d9,07               jgtu  95b2             if (R38 <= [R14])  {
@@ -12112,17 +12273,17 @@
 96ae: d3,30               jnc   96e0             if (R30 >= [c15c])  {
 96b0: ef,af,e5            call  7c62             Sub_7c62 ();
 96b3: 71,bf,4b            an2b  R4b,bf           B6_R4b = 0;
-96b6: 71,fe,a6            an2b  Ra6,fe           B0_Ra6 = 0;
+96b6: 71,fe,a6            an2b  Ra6,fe           B0_FMEM_FLAGS = 0;
 96b9: 71,fd,4b            an2b  R4b,fd           B1_R4b = 0;
 96bc: 3c,4a,08            jb    B4,R4a,96c7      if (B4_R4a = 0)  {
 96bf: 8b,e8,c2,1e         cmpw  R1e,[Re8+c2]     
 96c3: d1,1b               jleu  96e0             if (R1e <= [342]) return;
 96c5: 20,0f               sjmp  96d6             goto 96d6; }
 
-96c7: 91,01,a6            orb   Ra6,1            B0_Ra6 = 1;
+96c7: 91,01,a6            orb   Ra6,1            B0_FMEM_FLAGS = 1;
 96ca: 8b,e8,c2,1e         cmpw  R1e,[Re8+c2]     
 96ce: d9,0d               jgtu  96dd             if (R1e <= [342])  {
-96d0: 71,fe,a6            an2b  Ra6,fe           B0_Ra6 = 0;
+96d0: 71,fe,a6            an2b  Ra6,fe           B0_FMEM_FLAGS = 0;
 96d3: 91,40,4b            orb   R4b,40           B6_R4b = 1;
 96d6: c3,e8,e4,00         stw   R0,[Re8+e4]      [364] = 0;
 96da: 95,10,4a            xorb  R4a,10           B4_R4a ^= 1; }
@@ -12153,7 +12314,7 @@
 970c: 26,18               sjmp  9526             goto 9526;
 
 970e: ad,04,14            ldzbw R14,4            wR14 = 4;
-9711: 3c,22,04            jb    B4,R22,9718      if (B4_R22 = 0)  {
+9711: 3c,22,04            jb    B4,R22,9718      if (B4_MAP_FREQ = 0)  {
 9714: 59,02,da,14         sb3b  R14,Rda,2        R14 = Rda - 2; }
 9718: 7d,06,14            ml2b  R14,6            wR14 = R14 * 6;
 971b: 45,d2,06,fc,32      ad3w  R32,Rfc,6d2      R32 = Func_c77a;
@@ -12491,13 +12652,13 @@
 
    Sub_9aa1:
 9aa1: 01,18               clrw  R18              R18 = 0;
-9aa3: 39,22,1e            jb    B1,R22,9ac4      if (B1_R22 = 0)  {
+9aa3: 39,22,1e            jb    B1,R22,9ac4      if (B1_MAP_FREQ = 0)  {
 9aa6: ac,da,18            ldzbw R18,Rda          wR18 = yRda;
-9aa9: 32,22,06            jnb   B2,R22,9ab2      if (B2_R22 = 1)  {
+9aa9: 32,22,06            jnb   B2,R22,9ab2      if (B2_MAP_FREQ = 1)  {
 9aac: 69,02,00,18         sb2w  R18,2            R18 -= 2;
 9ab0: 20,08               sjmp  9aba             goto 9aba; }
 
-9ab2: 3b,22,05            jb    B3,R22,9aba      if (B3_R22 = 0)  {
+9ab2: 3b,22,05            jb    B3,R22,9aba      if (B3_MAP_FREQ = 0)  {
 9ab5: b1,0a,18            ldb   R18,a            R18 = a;
 9ab8: 20,0a               sjmp  9ac4             goto 9ac4; }
 
@@ -12705,11 +12866,11 @@
 9cc7: a3,e8,a2,30         ldw   R30,[Re8+a2]     R30 = [322];
 9ccb: 8b,fc,14,30         cmpw  R30,[Rfc+14]     
 9ccf: d1,06               jleu  9cd7             if (R30 > [c0bc])  {
-9cd1: 3a,a6,20            jb    B2,Ra6,9cf4      if (B2_Ra6 = 1) goto 9cf4;
+9cd1: 3a,a6,20            jb    B2,Ra6,9cf4      if (B2_FMEM_FLAGS = 1) goto 9cf4;
 9cd4: 3f,d6,1d            jb    B7,Rd6,9cf4      if (B7_ND_FLAG = 1) goto 9cf4; }
-9cd7: 36,a6,20            jnb   B6,Ra6,9cfa      if (B6_Ra6 = 0) return;
+9cd7: 36,a6,20            jnb   B6,Ra6,9cfa      if (B6_FMEM_FLAGS = 0) return;
 9cda: a3,e8,8c,16         ldw   R16,[Re8+8c]     R16 = [30c];
-9cde: 3a,a6,0d            jb    B2,Ra6,9cee      if (B2_Ra6 = 0)  {
+9cde: 3a,a6,0d            jb    B2,Ra6,9cee      if (B2_FMEM_FLAGS = 0)  {
 9ce1: ef,02,ac            call  48e6             UUWFuncLU_48e6 (
 9ce4: f6,c4                     #arg 1              Func_c59e,
 9ce6: bc,00                     #arg 2              TP_REL );
@@ -12817,12 +12978,12 @@
 9def: 34,dc,02            jnb   B4,Rdc,9df4      if (B4_Rdc = 1)  {
 9df2: 28,a1               scall 9e95             Sub_9e95 (); }
 9df4: 07,32               incw  R32              R32++;
-9df6: 38,a6,0f            jb    B0,Ra6,9e08      if (B0_Ra6 = 0)  {
+9df6: 38,a6,0f            jb    B0,Ra6,9e08      if (B0_FMEM_FLAGS = 0)  {
 9df9: 3b,e1,0c            jb    B3,Re1,9e08      if (B3_CCD? = 0)  {
 9dfc: 3b,dc,09            jb    B3,Rdc,9e08      if (B3_Rdc = 0)  {
 9dff: 3a,dc,06            jb    B2,Rdc,9e08      if (B2_Rdc = 0)  {
 9e02: 39,dc,03            jb    B1,Rdc,9e08      if (B1_Rdc = 0)  {
-9e05: 32,a6,02            jnb   B2,Ra6,9e0a      if (B2_Ra6 = 0) goto 9e0a; } } } } }
+9e05: 32,a6,02            jnb   B2,Ra6,9e0a      if (B2_FMEM_FLAGS = 0) goto 9e0a; } } } } }
 9e08: 28,8b               scall 9e95             Sub_9e95 (); }
 9e0a: 30,dc,45            jnb   B0,Rdc,9e52      if (B0_Rdc = 1)  {
 9e0d: b3,e8,cc,34         ldb   R34,[Re8+cc]     R34 = [34c];
@@ -12870,8 +13031,8 @@
 9e78: 98,00,dc            cmpb  Rdc,R0           
 9e7b: d7,14               jne   9e91             if (Rdc = 0)  {
 9e7d: 3b,e1,11            jb    B3,Re1,9e91      if (B3_CCD? = 0)  {
-9e80: 3a,a6,0e            jb    B2,Ra6,9e91      if (B2_Ra6 = 0)  {
-9e83: 38,a6,0b            jb    B0,Ra6,9e91      if (B0_Ra6 = 0)  {
+9e80: 3a,a6,0e            jb    B2,Ra6,9e91      if (B2_FMEM_FLAGS = 0)  {
+9e83: 38,a6,0b            jb    B0,Ra6,9e91      if (B0_FMEM_FLAGS = 0)  {
 9e86: 9b,e8,fc,00         cmpb  R0,[Re8+fc]      
 9e8a: d7,08               jne   9e94             if ([37c] != 0) return;
 9e8c: 71,fb,de            an2b  Rde,fb           B2_Rde = 0;
@@ -13008,9 +13169,9 @@
 9f9b: c2,33,42            stw   R42,[R32++]      [R32++] = R42;
 9f9e: e0,34,ee            djnz  R34,9f8f         R34--;
                                                  if (R34 != 0) goto 9f8f;
-9fa1: ac,da,22            ldzbw R22,Rda          wR22 = yRda;
-9fa4: 64,fc,22            ad2w  R22,Rfc          R22 += Rfc;
-9fa7: a3,23,4e,01,20      ldw   R20,[R22+14e]    R20 = [R22+14e];
+9fa1: ac,da,22            ldzbw R22,Rda          MAP_FREQ = yRda;
+9fa4: 64,fc,22            ad2w  R22,Rfc          MAP_FREQ += Rfc;
+9fa7: a3,23,4e,01,20      ldw   R20,[R22+14e]    R20 = [MAP_FREQ+14e];
 9fac: c3,e8,a4,20         stw   R20,[Re8+a4]     [324] = R20; }
 9fb0: a3,e8,88,38         ldw   R38,[Re8+88]     R38 = [308];
 9fb4: 28,0d               scall 9fc3             Sub_9fc3 ();
@@ -13258,7 +13419,7 @@ a22c: b3,e8,fd,30         ldb   R30,[Re8+fd]     R30 = [37d];
 a230: 9b,e2,1f,30         cmpb  R30,[Re2+1f]     
 a234: d3,2a               jnc   a260             if (R30 >= [c1dd])  {
 a236: 3a,4b,27            jb    B2,R4b,a260      if (B2_R4b = 0)  {
-a239: 3e,a6,24            jb    B6,Ra6,a260      if (B6_Ra6 = 0)  {
+a239: 3e,a6,24            jb    B6,Ra6,a260      if (B6_FMEM_FLAGS = 0)  {
 a23c: 3f,df,21            jb    B7,Rdf,a260      if (B7_Rdf = 0)  {
 a23f: 9b,e6,bb,00         cmpb  R0,[Re6+bb]      
 a243: d7,1b               jne   a260             if ([23b] = 0)  {
@@ -13438,7 +13599,7 @@ a425: 20,03               sjmp  a42a             goto a42a; }
 a427: 91,04,44            orb   R44,4            B2_R44 = 1; }
 a42a: 3b,45,37            jb    B3,R45,a464      if (Error_detected = 0)  {
 a42d: 3f,a5,34            jb    B7,Ra5,a464      if (Cranking = 0)  {
-a430: 38,a6,35            jb    B0,Ra6,a468      if (B0_Ra6 = 1) return;
+a430: 38,a6,35            jb    B0,Ra6,a468      if (B0_FMEM_FLAGS = 1) return;
 a433: ad,09,30            ldzbw R30,9            wR30 = 9;
 a436: 44,fc,30,16         ad3w  R16,R30,Rfc      R16 = R30 + c0a8;
 a43a: 05,16               decw  R16              R16--;
@@ -13455,7 +13616,7 @@ a456: 50,18,4b,32         an3b  R32,R4b,R18      R32 = R4b & R18;
 a45a: df,de               je    a43a             if (R32 = 0) goto a43a;
 a45c: f0                  ret                    return; }
 
-a45d: 50,18,a6,32         an3b  R32,Ra6,R18      R32 = Ra6 & R18;
+a45d: 50,18,a6,32         an3b  R32,Ra6,R18      R32 = FMEM_FLAGS & R18;
 a461: df,d7               je    a43a             if (R32 = 0) goto a43a;
 a463: f0                  ret                    return; } } }
 
@@ -13464,7 +13625,7 @@ a468: f0                  ret                    return;
 
    Sub_a469:
 a469: 71,ef,79            an2b  R79,ef           B4_R79 = 0;
-a46c: b3,ee,84,22         ldb   R22,[Ree+84]     R22 = [704];
+a46c: b3,ee,84,22         ldb   R22,[Ree+84]     MAP_FREQ = [704];
 a470: 37,a5,05            jnb   B7,Ra5,a478      if (Cranking = 1)  {
 a473: b0,00,30            ldb   R30,R0           R30 = 0;
 a476: 20,0d               sjmp  a485             goto a485; }
@@ -13493,9 +13654,9 @@ a4a9: 20,04               sjmp  a4af             goto a4af; }
 
 a4ab: c7,ea,b6,00         stb   R0,[Rea+b6]      [436] = 0;
 a4af: 9b,f6,51,a9         cmpb  Ra9,[Rf6+51]     
-a4b3: d1,25               jleu  a4da             if (LOAD > [b965])  {
+a4b3: d1,25               jleu  a4da             if (?LOAD? > [b965])  {
 a4b5: 9b,f6,4d,a9         cmpb  Ra9,[Rf6+4d]     
-a4b9: db,1f               jc    a4da             if (LOAD < [b961])  {
+a4b9: db,1f               jc    a4da             if (?LOAD? < [b961])  {
 a4bb: 3f,a8,1c            jb    B7,Ra8,a4da      if (APT_Closed_Throttle = 0)  {
 a4be: 32,a0,19            jnb   B2,Ra0,a4da      if (B2_Power_up = 1)  {
 a4c1: 71,fd,a1            an2b  Ra1,fd           B1_Flags_a1 = 0;
@@ -13541,20 +13702,20 @@ a532: 91,40,24            orb   R24,40           B6_R24 = 1;
 a535: c7,e8,05,00         stb   R0,[Re8+5]       [385] = 0; } }
 a539: 91,40,27            orb   R27,40           B6_R27_OpenLoop? = 1;
 a53c: 32,9f,0c            jnb   B2,R9f,a54b      if (Olflg = 1)  {
-a53f: 3d,22,09            jb    B5,R22,a54b      if (B5_R22 = 0)  {
+a53f: 3d,22,09            jb    B5,R22,a54b      if (B5_MAP_FREQ = 0)  {
 a542: 71,bf,27            an2b  R27,bf           B6_R27_OpenLoop? = 0;
 a545: c3,e4,c0,00         stw   R0,[Re4+c0]      [140] = 0;
 a549: 20,15               sjmp  a560             goto a560; } }
 
 a54b: 30,9f,05            jnb   B0,R9f,a553      if (Swtfl = 1)  {
-a54e: 71,df,22            an2b  R22,df           B5_R22 = 0;
+a54e: 71,df,22            an2b  R22,df           B5_MAP_FREQ = 0;
 a551: 20,0d               sjmp  a560             goto a560; }
 
 a553: a3,e4,c0,38         ldw   R38,[Re4+c0]     R38 = [140];
 a557: 8b,f4,68,38         cmpw  R38,[Rf4+68]     
 a55b: d1,03               jleu  a560             if (R38 > [b4aa])  {
-a55d: 91,20,22            orb   R22,20           B5_R22 = 1; }
-a560: c7,ee,84,22         stb   R22,[Ree+84]     [704] = R22;
+a55d: 91,20,22            orb   R22,20           B5_MAP_FREQ = 1; }
+a560: c7,ee,84,22         stb   R22,[Ree+84]     [704] = MAP_FREQ;
 a564: ac,8d,38            ldzbw R38,R8d          wR38 = VSBAR;
 a567: ef,7c,a3            call  48e6             UUWFuncLU_48e6 (
 a56a: 08,41                     #arg 1              Func_b54a,
@@ -13575,7 +13736,7 @@ a590: b3,f4,2a,38         ldb   R38,[Rf4+2a]     R38 = [b46c];
 a594: 7b,f4,2b,38         sb2b  R38,[Rf4+2b]     R38 -= [b46d];
 a598: d3,44               jnc   a5de             if (R38 >= 0)  {
 a59a: 98,38,a9            cmpb  Ra9,R38          
-a59d: d9,3f               jgtu  a5de             if (LOAD <= R38)  {
+a59d: d9,3f               jgtu  a5de             if (?LOAD? <= R38)  {
 a59f: b3,f4,3c,38         ldb   R38,[Rf4+3c]     R38 = [b47e];
 a5a3: 77,f4,3d,38         ad2b  R38,[Rf4+3d]     R38 += [b47f];
 a5a7: db,35               jc    a5de             if (R38 <= ff)  {
@@ -13604,7 +13765,7 @@ a5e6: d3,22               jnc   a60a             if (R38 >= [b475])  {
 a5e8: 9b,f4,2c,ba         cmpb  Rba,[Rf4+2c]     
 a5ec: d3,1c               jnc   a60a             if (MAP >= [b46e])  {
 a5ee: 9b,f4,2a,a9         cmpb  Ra9,[Rf4+2a]     
-a5f2: d9,16               jgtu  a60a             if (LOAD <= [b46c])  {
+a5f2: d9,16               jgtu  a60a             if (?LOAD? <= [b46c])  {
 a5f4: 9b,f4,3c,bb         cmpb  Rbb,[Rf4+3c]     
 a5f8: d3,10               jnc   a60a             if (BP >= [b47e])  {
 a5fa: b3,e6,9f,38         ldb   R38,[Re6+9f]     R38 = [21f];
@@ -13614,8 +13775,8 @@ a604: 9b,f4,3e,8d         cmpb  R8d,[Rf4+3e]
 a608: db,03               jc    a60d             if (VSBAR >= [b480]) goto a60d; } } } } }
 a60a: 71,fe,45            an2b  R45,fe           Rvip_cyl_quit = 0; }
 a60d: 30,45,3e            jnb   B0,R45,a64e      if (Rvip_cyl_quit = 1)  {
-a610: 3d,a6,3b            jb    B5,Ra6,a64e      if (B5_Ra6 = 0)  {
-a613: 3b,a6,38            jb    B3,Ra6,a64e      if (B3_Ra6 = 0)  {
+a610: 3d,a6,3b            jb    B5,Ra6,a64e      if (B5_FMEM_FLAGS = 0)  {
+a613: 3b,a6,38            jb    B3,Ra6,a64e      if (B3_FMEM_FLAGS = 0)  {
 a616: 3e,a4,35            jb    B6,Ra4,a64e      if (B6_Ra4 = 0)  {
 a619: 32,9f,03            jnb   B2,R9f,a61f      if (Olflg = 1)  {
 a61c: 36,25,2f            jnb   B6,R25,a64e      if (B6_R25 = 0) goto a64e; }
@@ -13695,12 +13856,12 @@ a6e2: b3,f6,4e,42         ldb   R42,[Rf6+4e]     R42 = [b962];
 a6e6: 57,f6,4f,42,30      ad3b  R30,R42,[Rf6+4f] R30 = R42 + [b963];
 a6eb: db,0a               jc    a6f7             if (R30 <= ff)  {
 a6ed: 98,30,a9            cmpb  Ra9,R30          
-a6f0: d3,05               jnc   a6f7             if (LOAD >= R30)  {
+a6f0: d3,05               jnc   a6f7             if (?LOAD? >= R30)  {
 a6f2: 91,80,24            orb   R24,80           B7_R24 = 1;
 a6f5: 20,0c               sjmp  a703             goto a703; } }
 
 a6f7: 98,42,a9            cmpb  Ra9,R42          
-a6fa: db,07               jc    a703             if (LOAD < R42)  {
+a6fa: db,07               jc    a703             if (?LOAD? < R42)  {
 a6fc: c7,e4,cc,00         stb   R0,[Re4+cc]      [14c] = 0;
 a700: 71,7f,24            an2b  R24,7f           B7_R24 = 0; }
 a703: 71,fd,24            an2b  R24,fd           B1_R24 = 0;
