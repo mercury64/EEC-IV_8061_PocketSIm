@@ -2123,7 +2123,7 @@ sym 928 "B5_CART_Status" : B 5
 sym 2004 "FIXSUM"
 
 sym 22c8 "HSO_Table"
-
+sym 29a6 "ATMR1"
 sym 29cd "Send_HSO_Cmd"
 sym 2a4c "Do_CmdN"
 sym 2a5e "Do_CmdP"
