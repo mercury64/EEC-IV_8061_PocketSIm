@@ -23,6 +23,15 @@ R30 = (1*3) + 2922 = 2925
 R30 = (2*3) + 2922 = 2928
 
 2922: b4                  byte     b4  N                 01    word      bin -2      4 RPM          
+2923: 00                  byte      0
+2924: 84                  byte     84
+
+Byte R42 = 2922
+Byte R43 = 2923
+Byte R32 = 2924
+
+
+
 2925: ba                  byte     ba  MAP               02    byte      bin 3       0.125 "Hg        
 2928: bb                  byte     bb  BP                03    byte      bin 3       0.125 "Hg       
 292b: 8e                  byte     8e  SAFTOT            04    byte      bin 2       0.25 degrees S.A.    
