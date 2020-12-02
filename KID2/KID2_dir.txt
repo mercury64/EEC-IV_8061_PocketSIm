@@ -73,7 +73,8 @@ word 2900 2905
 
 # 13 words
 word 2908 291f
-byte 2920 29cc
+word 2920 2921
+byte 2922 29cc
 
 
 
@@ -559,8 +560,8 @@ func    b16c b187  "Func_b16c"   : UW  : UW
 func    b1ac b1b3  "FN890"   : UY  : UY 
 func    b1b4 b1bf  "Func_b1b4"   : UY  : UY 
 table   b1c0 b1e9  "isc_base_air_neutral"   : O 7 UY 
-func    b1ea b211  "act_ect_transfer_function"   : UW  : SW 
-func    b212 b23d  "Func_b212"   : UW  : SW 
+func    b1ea b211  "FN703"   : UW  : SW 
+func    b212 b23d  "FN703D"   : UW  : SW 
 func    b23e b259  "y_fuel_cold_decay"   : UW  : UW 
 func    b25a b26d  "Func_b25a"   : UW  : UW 
 func    b26e b28d  "x_isc_base_air_ect"   : SW  : UW 
@@ -704,7 +705,7 @@ byte    b4f4 b4f4
 word    b4f6 b4f7
 word    b4f8 b4f9
 func    b4fa b511  "Func_b4fa"   : UW  : UW 
-func    b512 b529  "Func_b512"   : SW  : SW 
+func    b512 b529  "FN852"   : SW  : SW 
 func    b52a b535  "Func_b52a"   : SY  : UY 
 func    b536 b549  "Func_b536"   : UW  : UW 
 func    b54a b565  "Func_b54a"   : UW  : UW 
@@ -1378,10 +1379,10 @@ sub  8368a 837f8  "Sub_368a"
 sub  837f9 83828  "Sub_37f9"  
 sub  83829 8386f  "Sub_3829"  
 sub  838f4 83989  "Sub_38f4"  
-sub  8398a 83b1a  "Sub_398a"  
+sub  8398a "SYSEQ_MAP_COM1"  
 sub  83a3f 83b1f  "Sub_3a3f"  
 sub  83a5b 83a6a  "Sub_3a5b"  
-sub  83a6b 83b1f  "Sub_3a6b"  
+sub  83a6b "MAP_CALC"  
 sub  83b20 83b4b  "Sub_3b20"  
 sub  83b4c 83bf9  "Sub_3b4c"  
 sub  83b52 "KAM_Qualification_Test_Logic"  
@@ -1391,9 +1392,9 @@ sub  83c6c 83cce  "Sub_3c6c"
 sub  83ccf  "Read_AD"
 sub  83cd3  "Enable_Int"
 sub  83d1f "Update_EGR?" 
-sub  83df2 840b7  "Sub_3df2"  
-sub  840b8 840da  "Sub_40b8"  
-sub  840db 840f6  "Sub_40db"  
+sub  83df2 "INPUT_ACT_COM2"  
+sub  840b8 "Compute_TCSTRT"  
+sub  840db "Compute_INIT_TOT"  
 sub  840f7 8435f  "Sub_40f7"  
 sub  8436c 843ab  "Sub_436c"  
 sub  843b2 8443a  "Sub_43b2"  
@@ -1415,8 +1416,8 @@ sub  848e0 8494e  "SSWFuncLU_48e0"  $ F sswflu 32
 sub  848e3 8494e  "USWFuncLU_48e3"  $ F uswflu 32
 sub  848e6 8494e  "UUWFuncLU_48e6"  $ F uuwflu 32
 sub  84907 8494e  "UUWFuncLU_4907"  $ F uuwflu 32
-sub  8494f "?Urolav?" 
-sub  84956 84986  "Sub_4956"  
+sub  8494f "UROLAV" 
+sub  84956 "ROLAV"  
 sub  84958 84986  "Sub_4958"  
 sub  84987 "?Calc_FFact?" 
 sub  849a7 849ed  "SYTabLU_49a7"  $ F sytlu 38 34
@@ -1473,7 +1474,7 @@ sub  86635 8683f  "Sub_6635"
 sub  86840 86849  "Sub_6840"  
 sub  86846 86849  "Sub_6846"  
 sub  8684a 86852  "Sub_684a"  
-sub  86853 868ac  "Sub_6853"  
+sub  86853 "RPMERR_CALC"  
 sub  868ad "DASPOT_CALC"  
 sub  86986 86a39  "Sub_6986"  
 sub  86a3a "ISC_IPSIBR_COM1"  
@@ -1689,7 +1690,7 @@ sym 12 "Tmr_OVF_cnt"
 
 sym  14 "ConsoleMode" : B 6
 
-sym 22 "MAP_FREQ"
+sym 26 "RUNUP_FLG" : B 4
 
 sym 27 "Flags_27"
 sym 27 "B0_R27" : B 0
@@ -1786,15 +1787,15 @@ sym 45 "Stiflg" : B 5
 sym 45 "Egoste2" : B 6
 sym 45 "Egoste1" : B 7
 
-sym 46 "IO_Port_State"
-sym 46 "Scvac" : B 0
-sym 46 "Dol" : B 1
-sym 46 "Evr" : B 2
-sym 46 "Isc" : B 3
-sym 46 "Scvnt" : B 4
-sym 46 "Sto_state" : B 5
+#sym 46 "IO_Port_State"
+#sym 46 "Scvac" : B 0
+#sym 46 "Dol" : B 1
+#sym 46 "Evr" : B 2
+#sym 46 "Isc" : B 3
+#sym 46 "Scvnt" : B 4
+#sym 46 "Sto_state" : B 5
 sym 46 "WOT_AC" : B 6
-sym 46 "Pump" : B 7
+#sym 46 "Pump" : B 7
 
 sym 47 "Flags_47"
 sym 47 "B0_Flags47" : B 0
@@ -1858,12 +1859,12 @@ sym 88 "TablePTR"
 
 sym 8a "RATCH"
 sym 8d "VSBAR"
-sym 8e "SAFTOT"
+
 
 sym 91 "VBAT"
 sym 92 "ISCDTY"
 sym 94 "FUELPW1"
-sym 96 "LAMBSE"
+sym 96 "LAMBSE1"
 
 sym 9a "AM"
 
@@ -1880,14 +1881,14 @@ sym 9e "B4_EGREN_9e" : B 4
 # sym 9e "Vegrbp" : T4
 
 sym 9f "Flags_9f"
-sym 9f "Swtfl" : B 0
-sym 9f "Egofl" : B 1
-sym 9f "Olflg" : B 2
-sym 9f "Qclol" : B 3
-sym 9f "Signdy" : B 4
-sym 9f "Signdslp" : B 5
-sym 9f "Indflg" : B 6
-sym 9f "A3C" : B 7
+#sym 9f "Swtfl" : B 0
+#sym 9f "Egofl" : B 1
+#sym 9f "Olflg" : B 2
+#sym 9f "Qclol" : B 3
+#sym 9f "Signdy" : B 4
+#sym 9f "Signdslp" : B 5
+#sym 9f "Indflg" : B 6
+#sym 9f "A3C" : B 7
 
 sym a0 "Power_up"
 sym a0 "Tblsflg"  : B 7
@@ -1913,10 +1914,12 @@ sym a5 "Dmflg" : B 3
 sym a5 "Egonflg" : B 4
 sym a5 "Purging" : B 5
 sym a5 "Cttmr_on" : B 6
-sym a5 "Cranking" : B 7
+sym a5 "CRKFLG" : B 7
 
 sym a6 "FMEM_FLAGS"
-sym a7 "FMEM_FLAGS2"
+sym a6 "EFMFLG" : B 4
+sym a6 "AFMFLG" : B 7
+sym a7 "FMEM_FLAG2"
 
 sym a8 "APT"
 sym a8 "APT_WOT" : B 0
@@ -1936,11 +1939,11 @@ sym b6 "ECT"
 sym b7 "ACT"
 
 sym ba "MAP"
-
 sym bb "BP"
 sym bc "TP_REL"
-sym be "EGR"
+sym be "EVP"
 
+sym c0 "EGRDC"
 sym c4 "PIPHi_ETime"
 sym c8 "PIPH_PW"
 
@@ -1950,23 +1953,27 @@ sym cc "?SAFTOT?"
 
 sym d4 "ATMR1"
 sym d6 "ND_FLAG"
+sym d9 "GR_CM"
+sym db "PDL"
 
 sym e1 "CCD?"
 sym e1 "B2_CCD_HP" : B 2
 
 sym 106 "Egobar1"
-sym 108 "TAR_Raw"
+sym 108 "ITOT"
 sym 10e "VSS_Raw"
 sym 10a "Key_Pwr"
-sym 10c "OCC_Raw"
-sym 110 "ECT_Raw"
-sym 112 "ACT_Raw"
-sym 114 "EVP_Raw"
+sym 10c "IOCC"
+Sam 10e "IVCAL"
+sym 110 "IECT"
+sym 112 "IACT"
+sym 114 "IEGR"
 sym 116 "TPS_min"
-sym 118 "NDS_Raw"
-sym 11a "HEGO_Raw"
+sym 118 "INDS"
+sym 11a "IEGO1"
 
-sym 11c "TPS_Raw"
+sym 11c "ITP"
+sym 122 "MAP_FREQ"
 sym 124 "MAP_WORD"
 sym 138 "Adptmr"
 
@@ -1978,11 +1985,12 @@ sym 152 "AWOTMR"
 sym 158 "DASPOT"
 sym 15a "IBGPSI"
 sym 15c "NLAST"
+sym 162 "ISCFLG"
 sym 163 "DSDRPM"
 
 sym 168 "BPCOR"
 
-sym 176 "KAMRF"
+sym 176 "KAMRF1"
 
 sym 181 "CRKPIP_CTR"
 
@@ -1993,8 +2001,12 @@ sym 1be "Miltmr"
 sym 1c1 "Vip_timer_ex"
 sym 1d0 "SparkAdvance"
 
-sym 1ea "IMAF"
+
 sym 1eb "MAPOPE"
+sym 1f8 "BCSDC"
+
+sym 204 "VS"
+sym 213 "ECTCNT"
 
 sym 217 "VACUUM"
 
@@ -2026,21 +2038,33 @@ sym 2bf "Xram4H"
 sym 2cc "SIGKAL"
 
 sym 314 "TOT"
-
+sym 33e "LOAD"
+sym 342 "ETVOCM"
 sym 344 "Vsc_Raw"
+sym 35b "TV_PRES"
 sym 386 "CTTMR"
+sym 38e "SAFTOT"
 
 sym 390 "DEBYMA"
 sym 394 "IPSIBR"
 
-sym 3e0 "DWLBSE"
+sym 3ae "RPMERR"
 
+sym 3b0 "RPMERR_A"
+sym 3b2 "RPMERR_S"
+
+sym 3da "TCSTRT"
+
+sym 3e0 "DWLBSE"
 sym 3ea "POFFENG"
 sym 3ec "PPERENG"
 
 sym 413 "C41FIL_TroubleCode"
 
 sym 509 "XDCL_BAUD"
+
+sym 50e "BITMAP_0"
+sym 510 "BITMAP_1"
 
 sym 51a "UART_MSG_51a"
 sym 51b "CMD_CODE_51b"
@@ -2085,6 +2109,14 @@ sym 532 "Background_SetDisableProgramExecution" : B 15
 #13     EEC Reset            Set if EEC Resets
 #14     Self Test            Self Test Complete
 #15     Background           Set to Disable Program* Execution
+
+
+sym 538 "SBDS01"
+sym 53a "SBDS02"
+sym 53c "SBDS03"
+sym 53e "SBDS04"
+sym 540 "SBDS05"
+sym 542 "SBDS06"
 
 sym 700 "KAMQA"
 
@@ -2194,6 +2226,9 @@ sym b048 "idle_rpm_adder_max_time_on_startup"
 sym b04a "idle_rpm_adder_for_a/c"
 sym b050 "ISCLPD_idle_max_rpm"
 
+sym b052 "ACHPTM"
+sym b053 "ECT_HP"
+
 sym b05b "DWELLA"
 sym b05c "DWELLM"
 
@@ -2221,11 +2256,20 @@ sym b49f "speed_limiter1_hysteresis"
 
 sym b919 "ENGCYL"
 
+sym b926 "TOTMIN"
+sym b928 "TOTMAX"
+
 sym b92a "BASEMD_ci"
 sym b92c "fuel_ve_multiplier"
 
 sym b934 "fuel_tp_pt"
 sym b936 "fuel_tp_wot"
+
+sym b950 "ACTFMM"
+
+sym bab2 "TCBPA"
+sym bab4 "TCFBS"
+sym bad6 "TCTOT"
 
 #sym bab0 "RF8"
 sym bae4 "Sigklu"
@@ -2268,6 +2312,13 @@ sym c1d6 "RTNVMN"
 sym c1d8 "RTNVMX"
 
 # sym cb5a "RFe"
+
+sym cb67 "MAP_CYCLE"
+sym cb72 "NCNT"
+
+sym cb78 "1200_RPM"
+sym cb7a "400_RPM"
+
 sym cb83 "PFEHP"
 sym cb85 "emissions_thermactor_sw"
 sym cb86 "TSTRAT"
@@ -2284,12 +2335,16 @@ sym cb9e "fuel_adaptive_max"
 
 sym cba8 "fuel_max_load_verification_value"
 
-sym cbca "act_min_a/d_counts"
-sym cbcc "act_max_a/d_counts"
+sym cbca "ACTMIN"
+sym cbcc "ACTMAX"
 
 sym cbd5 "V_fpmflg"
+sym cbd8 "ECTMIN"
+sym cbda "ECTMAX"
 
-sym cc59 "EctMax"
+sym cc2c "EVPMIN"
+sym cc2e "EVPMAX"
+
 
 # ----- END of disassembly run -----
 

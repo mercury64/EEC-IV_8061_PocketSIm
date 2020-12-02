@@ -148,6 +148,69 @@
 28e1 # go permanently offline, disable DCL function
 28e4 # Set DCL baud rate
 
+2921 \n\n# 9.0 Parameter Identification (PID) Code Tables:
+2921 #Parameter        PID    Data    Output    Output
+2921 \w#Name             Code   Type    Scaling   Resolution
+2921 \w#----------------------------------------------------
+2922 #N                 01    word      bin -2      4 RPM
+2925 #MAP               02    byte      bin 3       0.125 "Hg
+2928 #BP                03    byte      bin 3       0.125 "Hg   
+292b #SAFTOT            04    byte      bin 2       0.25 degrees S.A.
+292e #IACT              05    word      bin 0       1 A/D count             
+2931 #IECT              06    word      bin 0       1 A/D count             
+2934 #IEGR              07    word      bin 0       1 A/D count             
+2937 #IEGO1             08    word      bin 0       1 A/D count             
+293a #ITP               09    word      bin 0       1 A/D count               
+293d #***NOT USED***    0A    
+2940 #IVCAL             0B    word      bin 0       1 A/D count             
+2943 #FUELPW1           0C    word      bin -5      32 clock ticks          
+2946 #LAMBSE1           0D    word      bin 11      1/2048 unitless         
+2949 #APT               0E    byte      bin 0       -1,0,1 unitless         
+294c #ACT               0F    byte      bin -1      2 degrees F             
+294f #ECT               10    byte      bin -1      2 degrees F             
+2952 #VBAT              11    byte      bin 4       0.0625 volts            
+2955 #MAP_FREQ          12    word      bin 4       0.0625 Hz               
+2958 #EGRDC             13    word      bin 11      1 EEC-IV count            
+295b #***NOT USED***    14    
+295e #ISCDTY            15    word      bin 11      1 EEC-IV count            
+2961 #***NOT USED***    16    
+2964 #VSBAR             17    byte      bin 1       0.5 MPH                 
+2967 #VS                18    word      bin 5       0.03125 MPH               
+296a #***NOT USED***    19    
+296d #BITMAP_0          1A    word      N/A         N/A (see def. below)    
+2970 #BITMAP_1          1B    word      N/A         N/A (see def. below)      
+2973 #***NOT USED***    1C    
+2976 #***NOT USED***    1D    
+2979 #SBDS01            1E    byte      bin 0       N/A                     
+297c #SBDS02            1F    byte      bin 0       N/A                     
+297f #SBDS03            20    byte      bin 0       N/A                     
+2982 #SBDS04            21    byte      bin 0       N/A                     
+2985 #SBDS05            22    byte      bin 0       N/A                     
+2988 #SBDS06            23    byte      bin 0       N/A        
+298b #FMEM_FLAGS        24    byte      bin 0       N/A   
+298e #FMEM_FLAG2        25    byte      bin 0       N/A
+2991 #***NOT USED***    26    
+2994 #LOAD              27    word      bin 11      0.0488% of standard air charge
+2997 #KAMRF1            28    word      bin 4       0.0625 A/F
+299a #***NOT USED***    29    
+299d #DSDRPM            2A    byte      bin -4      16 r.p.m.
+29a0 #RATCH             2B    word      bin 2       0.25 count
+29a3 #***NOT USED***    2C    
+29a6 #ATMR1             2D    word      bin 0       1 second
+29a9 #IOCC              2E    word      bin 0       1 A/D count
+29ac #INDS              2F    word      bin 0       1 A/D count
+29af #BCSDC             30    word      bin 11      0.0488% duty cycle on time
+29b2 #***NOT USED***    31    
+29b5 #GR_CM             32    byte      bin 1       N/A
+29b8 #***NOT USED***    33    
+29bb #***NOT USED***    34    
+29be #ETVOCM            35    word      bin 2       0.25 volts
+29c1 #TV_PRES           36    byte      bin 1       0.5 p.s.i
+29c4 #ITOT              37    word      bin 0       1 A/D count
+29c7 #PDL               38    byte      bin 1       N/A
+29ca #***NOT USED***    39    
+
+
 
 2d5c # reset int mask
 2d5c \w# a1 = 1010 0001
@@ -219,6 +282,8 @@
 3d1b # EGR Valve position
 3d1e # end of table
 
+40b8 # Calculates (engine coolant temperature)
+40db # Calculates  (transmission oil temperature)
 4243 # 2 = Low Data Rate Distributorless dual plug (LDR_DIS)
 
 4689 # 29.875 * 8 = 239 = 0xEF
@@ -245,6 +310,9 @@
 6632 \n# 6)  ISCDTY_CALC - calculation of DEBYMA & ISCDTY
 6632 \n# 7)  ISCKAM_UPDATE - adaptive update of ISCKAM
 6632 \n#
+
+685f # (RPM control or lockout)
+6890 # (TCSTRT OK to use)  
 
 6986 # APT 0 -> part throttle
 
