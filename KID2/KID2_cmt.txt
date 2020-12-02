@@ -261,6 +261,7 @@
 
 3bef # clear Idle Speed KAM IPSIBR cells
 
+3c05 # Crank Mode
 
 3cfc \n######
 3cfc \n# A/D Definition. 3 byte entries

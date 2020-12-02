@@ -1387,7 +1387,7 @@ sub  83b20 83b4b  "Sub_3b20"
 sub  83b4c 83bf9  "Sub_3b4c"  
 sub  83b52 "KAM_Qualification_Test_Logic"  
 sub  83be7 "ReInitialize_ISCKAM"  
-sub  83c02 83c6b  "Sub_3c02"  
+sub  83c02 "RUN_MODE_SELECTION"  
 sub  83c6c 83cce  "Sub_3c6c"  
 sub  83ccf  "Read_AD"
 sub  83cd3  "Enable_Int"
@@ -1909,11 +1909,11 @@ sym a3 "B7_Flags_a3" : B 7
 sym a5 "Flags_a5"
 sym a5 "Adptmr_on" : B 0
 sym a5 "Idleq" : B 1
-sym a5 "Undsp" : B 2
+sym a5 "?Undsp?" : B 2
 sym a5 "Dmflg" : B 3
-sym a5 "Egonflg" : B 4
+sym a5 "FLG_STALL" : B 4
 sym a5 "Purging" : B 5
-sym a5 "Cttmr_on" : B 6
+sym a5 "UNDSP" : B 6
 sym a5 "CRKFLG" : B 7
 
 sym a6 "FMEM_FLAGS"
@@ -1949,7 +1949,7 @@ sym c8 "PIPH_PW"
 
 sym ca "Mkay"
 
-sym cc "?SAFTOT?"
+# sym cc "?SAFTOT?"
 
 sym d4 "ATMR1"
 sym d6 "ND_FLAG"
