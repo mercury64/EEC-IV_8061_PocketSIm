@@ -557,6 +557,8 @@ func    b12a b141  "isc_idle_air_neutral"   : UW  : UW
 func    b142 b15d  "FN879"   : UW  : UW 
 func    b15e b16b  "Func_b15e"   : UY  : UY 
 func    b16c b187  "Func_b16c"   : UW  : UW 
+func    b188 b19f  "FN885"   : UW  : UW 
+func    b1a0 b1ab  "FN887A"   : SY  : UY 
 func    b1ac b1b3  "FN890"   : UY  : UY 
 func    b1b4 b1bf  "Func_b1b4"   : UY  : UY 
 table   b1c0 b1e9  "isc_base_air_neutral"   : O 7 UY 
@@ -717,7 +719,7 @@ func    b602 b60f  "fuel_enrichment_vs_wot_time"   : UY  : UY
 func    b610 b62b  "fuel_tp_ol"   : UW  : UW 
 func    b62c b639  "fuel_open_loop_multiplier"   : SY  : UY 
 func    b63a b655  "Func_b63a"   : UW  : SW 
-func    b656 b679  "Func_b656"   : UW  : UW 
+func    b656 b679  "FNTP_AIR_OFF"   : UW  : UW 
 table   b67a b6c9  "fuel_base_table_cold"   : O 10 UY 
 table   b6ca b719  "fuel_base_table_cold_decay"   : O 10 UY 
 func    b71a b727  "fuel_equil_constant_multiplier"   : UY  : UY 
@@ -1470,20 +1472,20 @@ sub  86422 864f6  "Sub_6422"
 sub  864f7 86551  "Sub_64f7"  
 sub  86552 "Update_EGR2?" 
 sub  86584 86ca8  "Sub_6584"  
-sub  86635 8683f  "Sub_6635"  
+sub  86635 "DSDRPM_CALC"  
 sub  86840 86849  "Sub_6840"  
 sub  86846 86849  "Sub_6846"  
 sub  8684a 86852  "Sub_684a"  
 sub  86853 "RPMERR_CALC"  
 sub  868ad "DASPOT_CALC"  
-sub  86986 86a39  "Sub_6986"  
+sub  86986 "MODE_SELECT"  
 sub  86a3a "ISC_IPSIBR_COM1"  
 sub  86b8c "ISC_ISCDTY_COM1"  
 sub  86c18 "Manifold_VACUUM"  
 sub  86ca9 86cd6  "Sub_6ca9"  
 sub  86cd7 86d27  "Sub_6cd7"  
 sub  86d5b 86dac  "Sub_6d5b"  
-sub  86de0 86ee5  "Sub_6de0"  
+sub  86de0 "THERMACTOR_AIR_STRATEGY"  
 sub  86ee6 86fc4  "Sub_6ee6"  
 sub  86fb2 "Update_Can_Purge"  
 sub  87016 "Do_SelfTest"  
@@ -1511,7 +1513,7 @@ sub  8766a 87689  "Sub_766a"
 sub  87673 87689  "Sub_7673"  
 sub  879a3 87aeb  "Sub_79a3"  
 sub  87aec 87bae  "Sub_7aec"  
-sub  87afe 87bae  "Sub_7afe"  
+sub  87afe "?Fault_Filter_Routine?"  
 sub  87b00 87bae  "Sub_7b00"  
 sub  87b08 87bae  "Sub_7b08"  
 sub  87baf 87bbf  "Sub_7baf"  
@@ -1690,7 +1692,11 @@ sym 12 "Tmr_OVF_cnt"
 
 sym  14 "ConsoleMode" : B 6
 
+sym 25 "CHKAIR" : B 2
+
 sym 26 "RUNUP_FLG" : B 4
+sym 26 "PTSCR" : B 5
+sym 26 "DNDSUP" : B 6
 
 sym 27 "Flags_27"
 sym 27 "B0_R27" : B 0
@@ -1776,6 +1782,8 @@ sym 3e "Lseconds" : B 7
 
 #sym 42 "HSI_Mask"
 
+sym 44 "V_SPDTOZ_FLG" : B 4
+
 sym 45 "Flags_2B"
 sym 45 "Rvip_cyl_quit" : B 0
 sym 45 "Rvip_cyl_bal" : B 1
@@ -1788,7 +1796,9 @@ sym 45 "Egoste2" : B 6
 sym 45 "Egoste1" : B 7
 
 #sym 46 "IO_Port_State"
-#sym 46 "Scvac" : B 0
+
+sym 46 "AM1" : B 0
+
 #sym 46 "Dol" : B 1
 #sym 46 "Evr" : B 2
 #sym 46 "Isc" : B 3
@@ -1799,6 +1809,8 @@ sym 46 "WOT_AC" : B 6
 
 sym 47 "Flags_47"
 sym 47 "B0_Flags47" : B 0
+sym 47 "AM2" : B 6
+
 
 sym 48 "Flags_48"
 sym 48 "Rvip_cyl_quit" : B 0
@@ -1847,6 +1859,10 @@ sym 6e "Event_timeH"
 sym 70 "Rtab"
 sym 72 "HSO_time"
 sym 74 "HSO_timeH"
+
+
+sym 79 "ACIFLG" : B 0
+sym 79 "ACCFLG" : B 7
 
 sym 7a "Prev_PIP_time"
 sym 7c "Prev_PIP_timeH"
@@ -1906,6 +1922,8 @@ sym a3 "B5_Flags_a3" : B 5
 sym a3 "B6_Flags_a3" : B 6
 sym a3 "B7_Flags_a3" : B 7
 
+sym a4 "TAQ1" : B 5
+
 sym a5 "Flags_a5"
 sym a5 "Adptmr_on" : B 0
 sym a5 "Idleq" : B 1
@@ -1952,7 +1970,11 @@ sym ca "Mkay"
 # sym cc "?SAFTOT?"
 
 sym d4 "ATMR1"
+
 sym d6 "ND_FLAG"
+sym d6 "TP_AIR_OFF_F" : B 2
+
+
 sym d9 "GR_CM"
 sym db "PDL"
 
@@ -1988,6 +2010,7 @@ sym 15c "NLAST"
 sym 162 "ISCFLG"
 sym 163 "DSDRPM"
 
+sym 167 "LOACT"
 sym 168 "BPCOR"
 
 sym 176 "KAMRF1"
@@ -2060,6 +2083,8 @@ sym 3ea "POFFENG"
 sym 3ec "PPERENG"
 
 sym 413 "C41FIL_TroubleCode"
+
+sym 428 "V_BOOSPD_TMR"
 
 sym 509 "XDCL_BAUD"
 
@@ -2196,13 +2221,15 @@ sym b003 "bit5HSI_Line_Select" : B 5
 sym b003 "bit6HSI_Line_Select" : B 6
 sym b003 "bit7HSI_Line_Select" : B 7
 
+sym b008 "CHGRPM"
+
 sym b00c "ISCMOD_TPREL"
 sym b00e "ISCMOD_MAX"
 sym b010 "ISCMOD_MIN"
 sym b018 "ISCMOD_RPM"
 
 sym b01a "PSIBRM"
-
+sym b01c "RPMINC"
 sym b01e "PSIBRN"
 
 sym b020 "ITHBMA" 
@@ -2219,15 +2246,20 @@ sym b03c "Stall_RPM"
 
 sym b03f "BPCOR_SW"
 
-sym b042 "idle_rpm_neutral"
-sym b044 "idle_rpm_drive"
+sym b042 "pre_nubase"
+sym b044 "pre_drbase"
 sym b046 "idle_rpm_adder_startup"
 sym b048 "idle_rpm_adder_max_time_on_startup"
-sym b04a "idle_rpm_adder_for_a/c"
+sym b04a "DNAC"
+sym b04c "DACTM"
 sym b050 "ISCLPD_idle_max_rpm"
 
 sym b052 "ACHPTM"
 sym b053 "ECT_HP"
+
+sym b056 "TKDTM"
+sym b057 "pre_bzztm"
+sym b059 "MINACT"
 
 sym b05b "DWELLA"
 sym b05c "DWELLM"
@@ -2252,6 +2284,8 @@ sym b49c "rev_limit_hysteresis"
 sym b49e "speed_limiter1"
 sym b49f "speed_limiter1_hysteresis"
 
+sym b4d2 "TP_AIR_OFF_H"
+
 #sym b914 "RF6"
 
 sym b919 "ENGCYL"
@@ -2266,6 +2300,8 @@ sym b934 "fuel_tp_pt"
 sym b936 "fuel_tp_wot"
 
 sym b950 "ACTFMM"
+sym b95e "CTBYS"
+sym b95f "CTBYSH"
 
 sym bab2 "TCBPA"
 sym bab4 "TCFBS"
@@ -2304,6 +2340,9 @@ sym c142 "SARCHG"
 
 sym c154 "trans_min_tv_pressure"
 
+sym c16e "V_BOO_SPD"
+sym c16f "V_BOOSPD_TM"
+
 sym c184 "trans_wot_shift_12"
 sym c188 "trans_wot_shift_23"
 sym c18c "trans_wot_shift_34"
@@ -2315,7 +2354,8 @@ sym c1d8 "RTNVMX"
 
 sym cb67 "MAP_CYCLE"
 sym cb72 "NCNT"
-
+sym cb74 "UNRPM"
+sym cb76 "UNRPMH"
 sym cb78 "1200_RPM"
 sym cb7a "400_RPM"
 
