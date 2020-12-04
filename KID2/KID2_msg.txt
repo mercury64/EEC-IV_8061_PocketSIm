@@ -13,6 +13,12 @@
 ## args    7a54 7a55 : E 2 F0 N :UW N  
  Error - End too low for start+data definition
 
+## timer a8ab  A8ad  : UW N
+ Error - Commands Overlap
+
+## timer a96c  A96e  : UW N
+ Error - Commands Overlap
+
 ## word    e002 E003
  Error - Invalid Address
 
@@ -974,7 +980,94 @@ args    a32b a32c : O 2 UY
 args    a39e a39f : O 2 UY 
 byte    a3e0 a3e0
 args    a56a a56d : E 2 f0 N  : UW N 
-# timer   a841 a99a : UW 
+# timer   a841 a843 : UW N 
+# timer   a844 a846 : UW N 
+# timer   a847 a849 : UW N 
+# timer   a84a a84e : UW N 
+# timer   a84f a853 : UW N 
+# timer   a854 a858 : UW N 
+# timer   a859 a85d : UW N 
+# timer   a85e a862 : UW N 
+# timer   a863 a867 : UW N 
+# timer   a868 a86c : UW N 
+# timer   a86d a871 : UW N 
+# timer   a872 a876 : UW N 
+# timer   a877 a87b : UW N 
+# timer   a87c a87e : UW N 
+# timer   a87f a883 : UW N 
+# timer   a884 a888 : UW N 
+# timer   a889 a88d : UW N 
+# timer   a88e a892 : UW N 
+# timer   a893 a897 : UW N 
+# timer   a898 a89c : UW N 
+# timer   a89d a8a1 : UW N 
+# timer   a8a2 a8a4 : UW N 
+# timer   a8a5 a8a7 : UW N 
+# timer   a8a8 a8ac : UW N 
+# timer   a8ae a8b2 : UW N 
+# timer   a8b3 a8b7 : UW N 
+# timer   a8b8 a8ba : UW N 
+# timer   a8bb a8bd : UW N 
+# timer   a8be a8c0 : UW N 
+# timer   a8c1 a8c3 : UW N 
+# timer   a8c4 a8c6 : UW N 
+# timer   a8c7 a8c9 : UW N 
+# timer   a8ca a8cc : UW N 
+# timer   a8cd a8cf : UW N 
+# timer   a8d0 a8d2 : UW N 
+# timer   a8d3 a8d7 : UW N 
+# timer   a8d8 a8da : UW N 
+# timer   a8db a8dd : UW N 
+# timer   a8de a8e0 : UW N 
+# timer   a8e1 a8e3 : UW N 
+# timer   a8e4 a8e8 : UW N 
+# timer   a8e9 a8ed : UW N 
+# timer   a8ee a8f2 : UW N 
+# timer   a8f3 a8f7 : UW N 
+# timer   a8f8 a8fa : UW N 
+# timer   a8fb a8ff : UW N 
+# timer   a900 a904 : UW N 
+# timer   a905 a909 : UW N 
+# timer   a90a a90e : UW N 
+# timer   a90f a911 : UW N 
+# timer   a912 a916 : UW N 
+# timer   a917 a919 : UW N 
+# timer   a91a a91e : UW N 
+# timer   a91f a921 : UW N 
+# timer   a922 a924 : UW N 
+# timer   a925 a927 : UW N 
+# timer   a928 a92a : UW N 
+# timer   a92b a92d : UW N 
+# timer   a92e a930 : UW N 
+# timer   a931 a933 : UW N 
+# timer   a934 a938 : UW N 
+# timer   a939 a93d : UW N 
+# timer   a93e a942 : UW N 
+# timer   a943 a947 : UW N 
+# timer   a948 a94a : UW N 
+# timer   a94b a94d : UW N 
+# timer   a94e a950 : UW N 
+# timer   a951 a953 : UW N 
+# timer   a954 a956 : UW N 
+# timer   a957 a959 : UW N 
+# timer   a95a a95c : UW N 
+# timer   a95d a95f : UW N 
+# timer   a960 a962 : UW N 
+# timer   a963 a965 : UW N 
+# timer   a966 a968 : UW N 
+# timer   a969 a96d : UW N 
+# timer   a96f a973 : UW N 
+# timer   a974 a978 : UW N 
+# timer   a979 a97d : UW N 
+# timer   a97e a980 : UW N 
+# timer   a981 a983 : UW N 
+# timer   a984 a986 : UW N 
+# timer   a987 a989 : UW N 
+# timer   a98a a98c : UW N 
+# timer   a98d a991 : UW N 
+# timer   a992 a996 : UW N 
+# timer   a997 a999 : UW N 
+byte    a99a a99a
 word    a9be a9bf
 word    a9c0 a9c3
 word    a9c4 a9c5
@@ -1712,7 +1805,7 @@ word    cb74 cb75  "UNRPM"
 word    cb76 cb77  "UNRPMH"  
 word    cb78 cb79  "1200_RPM"  
 word    cb7a cb7b  "400_RPM"  
-byte    cb7c cb7c
+byte    cb7c cb7c  "CRKTM1"  
 byte    cb7d cb7d
 byte    cb7e cb7e
 byte    cb7f cb7f
@@ -2191,6 +2284,8 @@ sym 10  "StackPtr"
 sym 12  "Tmr_OVF_cnt"
 sym 14  "ConsoleMode" :B 6
 sym 25  "CHKAIR" :B 2
+sym 25  "BIFLG" :B 4
+sym 26  "PSFLAG" :B 3
 sym 26  "RUNUP_FLG" :B 4
 sym 26  "PTSCR" :B 5
 sym 26  "DNDSUP" :B 6
@@ -2351,6 +2446,8 @@ sym a3  "B4_Flags_a3" :B 4
 sym a3  "B5_Flags_a3" :B 5
 sym a3  "B6_Flags_a3" :B 6
 sym a3  "B7_Flags_a3" :B 7
+sym a4  "BRK_NEVER_OFF" :B 1
+sym a4  "BRK_NEVER_ON" :B 3
 sym a4  "TAQ1" :B 5
 sym a5  "Flags_a5"
 sym a5  "Adptmr_on" :B 0
@@ -2418,6 +2515,7 @@ sym 168  "BPCOR"
 sym 176  "KAMRF1"
 sym 181  "CRKPIP_CTR"
 sym 192  "Ibeta1"
+sym 196  "A3CTMR"
 sym 19c  "Tbart"
 sym 1be  "Miltmr"
 sym 1c1  "Vip_timer_ex"
@@ -2430,6 +2528,7 @@ sym 217  "VACUUM"
 sym 22c  "Tsladv"
 sym 230  "Retinc"
 sym 239  "Pip_counter"
+sym 23a  "ATMR1_LST"
 sym 240  "HSOQ"
 sym 242  "SvStack"
 sym 244  "Q0"
@@ -2468,6 +2567,7 @@ sym 3ea  "POFFENG"
 sym 3ec  "PPERENG"
 sym 413  "C41FIL_TroubleCode"
 sym 428  "V_BOOSPD_TMR"
+sym 43e  "AC_PPM"
 sym 509  "XDCL_BAUD"
 sym 50e  "BITMAP_0"
 sym 510  "BITMAP_1"
@@ -2527,6 +2627,7 @@ sym 928  "B5_CART_Status" :B 5
 sym 2004  "FIXSUM"
 sym 29a6  "ATMR1"
 sym 2d69  "Pop_PSW"
+sym 6955  "UPSWOT"
 sym 873d  "Disable_No_Start"
 sym 8755  "VO_KAMRAM_COM1"
 sym 8794  "RAM_ERROR"

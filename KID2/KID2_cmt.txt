@@ -479,68 +479,98 @@ a7dd # All zero - return (exit)
 a836 # Save word timer
 a83b # Save byte timer
 
-a841 # A3CTMR         Time between A3C state changes.
+a840 \n###################################### 
+a840 \n# TIMERS Table 
+a840 \n# 3 or 5 byte entries
+a840 \n# byte  0    = flags word
+a840 \n# byte  2&3 WORD = timer address
+a840 \n# if 5 byte entry - timer controlled by flag(s)
+a840 \n# byte  4    = flag mask - selects control bit(s) in address
+a840 \n# byte  5    = flags address (start/stop) timer|#
+a840 \n# 2X = timer in 1/1024 seconds (~msec)
 
-a844 # ADPTMR         Adaptive fuel timer (seconds)
 
-a847 # ATMR1          Time since start (time since exiting CRANK mode) (seconds)
+a840 \n# 4X = timer in 1/8 seconds
+a840 \n# 8X = timer in seconds
+a840 \n# So
+a840 \n# bit 0 = 0 if short entry (3 or 5 bytes)
+a840 \n# bit 1 = 1 if 16 bit timer else 0 = 8 bit timer
+a840 \n# bit 2 = 0 timer count up vs down
+a840 \n# bit 3 = 0 if flag bit must be set to update timer loc
+a840 \n# bit 4 not used
+a840 \n# bit 5 = 1 update in 1/1024 seconds (~msec)
+a840 \n# bit 6 = update in 1/8 seconds
+a840 \n# bit 7 = update in seconds
+a840 \n# else entry size = 5
+a840 \n# entry size = 2 if bit 0 of first byte = 0
+a840 \n# in follow Table the 15 bit address field is byte flipped for correct word order
+a840 \n######################################
 
-a84a # ATMR2          Time since engine coolant temperature became greater than 
+#a841 # A3CTMR         Time between A3C state changes.
+
+#a844 # ADPTMR         Adaptive fuel timer (seconds)
+
+a84f #ATMR1          Time since start (time since exiting CRANK mode) (seconds)
+a859 #CTTMR          Time at closed throttle timer (0.125 seconds)
+
+a8ee #AWOTMR         Time in wide open throttle (seconds)
+a8f3 #AWOTMR         Time in wide open throttle (seconds)
+
+
+#a84a # ATMR2          Time since engine coolant temperature became greater than 
                      TEMPFB (seconds)
 
-      ATMR3          Time since entering run mode (seconds)
+# ATMR3          Time since entering run mode (seconds)
 
-      AWOTMR         Time in wide open throttle (seconds)
 
-      BYPTMR         Thermactor air bypass-enable timer (seconds)
+#BYPTMR         Thermactor air bypass-enable timer (seconds)
 
-      CRKPIP_CTR     PIP Counter for Cranking fuel
+#CRKPIP_CTR     PIP Counter for Cranking fuel
 
-      CTTMR          Time at closed throttle timer (0.125 seconds)
 
-      EGRTMR         EGR enabled timer (seconds)
+#EGRTMR         EGR enabled timer (seconds)
 
-      HLTMR          High load timer (0.125 seconds)
+#HLTMR          High load timer (0.125 seconds)
 
-      HMUTMR         High MAPPA upstream air timer.
+#HMUTMR         High MAPPA upstream air timer.
 
-      HTPTMR         Heat protection timer (seconds)
+#HTPTMR         Heat protection timer (seconds)
 
-      IDLTMR         Idle time (seconds)
+#IDLTMR         Idle time (seconds)
 
-      ISCTMR         RPM Sample/KAM Update Delay Timer (seconds)
+#ISCTMR         RPM Sample/KAM Update Delay Timer (seconds)
 
-      LMBTMR         Low MAP bypass timer (seconds)
+#LMBTMR         Low MAP bypass timer (seconds)
 
-      LUTIMR         Transmission lock-up control timer (0.125 seconds)
+#LUTIMR         Transmission lock-up control timer (0.125 seconds)
 
-      MPGTMR         MPG mode control timer (seconds)
+#MPGTMR         MPG mode control timer (seconds)
 
-      MULTMR         Time since incrementing LAMMUL (0.001 seconds)
+#MULTMR         Time since incrementing LAMMUL (0.001 seconds)
 
-      NACTMR         Time not at closed throttle (seconds)
+#NACTMR         Time not at closed throttle (seconds)
 
-      NDDTIM         Time since neutral/drive switch state change (0.125 seconds)
+#NDDTIM         Time since neutral/drive switch state change (0.125 seconds)
 
-      OSCTMR         OSCMOD delay timer (0.125 seconds)
+#OSCTMR         OSCMOD delay timer (0.125 seconds)
 
-      PUTMR          Time since CPU power-up (0.001 seconds)
+#PUTMR          Time since CPU power-up (0.001 seconds)
 
-      SETTMR         RPM Control Entry Delay Timer (0.125 seconds)
+#SETTMR         RPM Control Entry Delay Timer (0.125 seconds)
 
-      SHFTMR         Shift in progress timer (0.125 seconds)
+#SHFTMR         Shift in progress timer (0.125 seconds)
 
-      TARTMR         Time since OLDTP was updated (0.001 seconds)
+#TARTMR         Time since OLDTP was updated (0.001 seconds)
 
-      TSLEGO         Time since last EGO switch (0.001 seconds)
+#TSLEGO         Time since last EGO switch (0.001 seconds)
 
-      TSLPIP         Time since last PIP (0.001 seconds)
+#TSLPIP         Time since last PIP (0.001 seconds)
 
-      V_NACTMR_CUM   Accumulative time at part WOT
+#V_NACTMR_CUM   Accumulative time at part WOT
 
-      VOLTMR         Time of low battery voltage
+#VOLTMR         Time of low battery voltage
 
-      WOTTMR         Time at wide open throttle
+#WOTTMR         Time at wide open throttle
 
 
 
