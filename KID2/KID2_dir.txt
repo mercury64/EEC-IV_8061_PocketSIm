@@ -1917,6 +1917,8 @@ sym 48 "?Sto_trigger?" : B 5
 sym 48 "Egoste2" : B 6
 sym 48 "Egoste1" : B 7
 
+sym 49 "DWLELD" : B 3
+
 sym 4c "B3_Immediate" : B 3
 sym 4c "B4_No_service" : B 4
 sym 4c "B5_Late_output" : B 5
@@ -2060,7 +2062,7 @@ sym be "EVP"
 
 sym c0 "EGRDC"
 sym c4 "PIPHi_ETime"
-sym c8 "PIPH_PW"
+sym c8 "HFDLTA"
 
 sym ca "Mkay"
 
@@ -2125,6 +2127,7 @@ sym 1d0 "SparkAdvance"
 
 
 sym 1eb "MAPOPE"
+sym 1f6 "PURGDC"
 sym 1f8 "BCSDC"
 
 sym 204 "VS"
@@ -2170,7 +2173,8 @@ sym 38e "SAFTOT"
 
 sym 390 "DEBYMA"
 sym 394 "IPSIBR"
-
+sym 398 "DNDT_ISC"
+sym 39e "ISCMOD"
 sym 3ae "RPMERR"
 
 sym 3b0 "RPMERR_A"
@@ -2410,6 +2414,7 @@ sym bab4 "TCFBS"
 sym bad6 "TCTOT"
 
 #sym bab0 "RF8"
+sym bace "TCNDT_ISC"
 sym bae4 "Sigklu"
 
 #sym bb7a "RFa"
