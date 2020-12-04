@@ -302,11 +302,11 @@
 22ac: ef,73,41            call  6422             Sub_6422 ();
 22af: ef,45,42            call  64f7             Sub_64f7 ();
    Sub_22b2:
-22b2: 71,ef,25            an2b  R25,ef           B4_R25 = 0;
+22b2: 71,ef,25            an2b  R25,ef           BIFLG = 0;
 22b5: 9b,fe,26,00         cmpb  R0,[Rfe+26]      
 22b9: df,06               je    22c1             if ([cb80] != 0)  {
 22bb: 34,90,03            jnb   B4,R90,22c1      if (B4_R90 = 1)  {
-22be: 91,10,25            orb   R25,10           B4_R25 = 1; } }
+22be: 91,10,25            orb   R25,10           BIFLG = 1; } }
 22c1: 31,9e,03            jnb   B1,R9e,22c7      if (Reg_9e = 1)  {
 22c4: ef,17,66            call  88de             Sub_88de (); }
 22c7: f0                  ret                    return;
@@ -1261,7 +1261,7 @@
 2ad4: 32,75,03            jnb   B2,R75,2ada      if (B2_R75 = 1)  {
 2ad7: ef,1a,0e            call  38f4             Sub_38f4 (); }
 2ada: 34,75,04            jnb   B4,R75,2ae1      if (B4_R75 = 1)  {
-2add: c3,e4,16,00         stw   R0,[Re4+16]      [196] = 0; }
+2add: c3,e4,16,00         stw   R0,[Re4+16]      A3CTMR = 0; }
 2ae1: 3a,0a,a1            jb    B2,Ra,2a85       if (B2_HSI_Ready = 1) goto Read_HSI;
 2ae4: f0                  ret                    return;
 
@@ -4351,9 +4351,9 @@
 4aae: 9b,f4,4a,00         cmpb  R0,[Rf4+4a]      
 4ab2: df,17               je    4acb             if ([b48c] != 0)  {
 4ab4: 34,a5,14            jnb   B4,Ra5,4acb      if (FLG_STALL = 1)  {
-4ab7: b3,e6,ba,32         ldb   R32,[Re6+ba]     R32 = [23a];
+4ab7: b3,e6,ba,32         ldb   R32,[Re6+ba]     R32 = ATMR1_LST;
 4abb: 9b,fe,22,32         cmpb  R32,[Rfe+22]     
-4abf: d9,0a               jgtu  4acb             if (R32 <= [cb7c])  {
+4abf: d9,0a               jgtu  4acb             if (R32 <= CRKTM1)  {
 4ac1: c7,e4,01,14         stb   R14,[Re4+1]      CRKPIP_CTR = R14;
 4ac5: c7,e4,00,14         stb   R14,[Re4+0]      [180] = R14;
 4ac9: 20,1b               sjmp  4ae6             goto 4ae6; } } }
@@ -7033,8 +7033,8 @@
 66f3: 67,f0,44,40         ad2w  R40,[Rf0+44]     R40 += pre_drbase;                # Use pre_drbase in DSDRPM calculation
 66f7: 3f,79,13            jb    B7,R79,670d      if (ACCFLG = 0)  {
 66fa: 38,79,10            jb    B0,R79,670d      if (ACIFLG = 0)  {
-66fd: c3,ea,be,00         stw   R0,[Rea+be]      [43e] = 0;
-6701: a3,e4,16,34         ldw   R34,[Re4+16]     R34 = [196];
+66fd: c3,ea,be,00         stw   R0,[Rea+be]      AC_PPM = 0;
+6701: a3,e4,16,34         ldw   R34,[Re4+16]     R34 = A3CTMR;
 6705: 8b,f0,4c,34         cmpw  R34,[Rf0+4c]     
 6709: d3,35               jnc   6740             if (R34 < DACTM) goto 6740;
 670b: 20,37               sjmp  6744             goto 6744; } }
@@ -7057,7 +7057,7 @@
 6730: 89,f7,07,18         cmpw  R18,7f7          
 6734: d1,04               jleu  673a             if (R18 > 7f7)  {
 6736: a1,f7,07,18         ldw   R18,7f7          R18 = 7f7; }
-673a: c3,ea,be,18         stw   R18,[Rea+be]     [43e] = R18;
+673a: c3,ea,be,18         stw   R18,[Rea+be]     AC_PPM = R18;
 673e: 29,0a               scall 684a             Sub_684a (); }
 6740: 67,f0,4a,40         ad2w  R40,[Rf0+4a]     R40 += DNAC;                      # Add DNAC to DSDRPM
 6744: 9b,fe,2a,00         cmpb  R0,[Rfe+2a]      
@@ -7066,12 +7066,12 @@
 674d: 67,f0,4e,40         ad2w  R40,[Rf0+4e]     R40 += [b04e];
 6751: a3,f0,54,18         ldw   R18,[Rf0+54]     R18 = [b054];
 6755: 28,f3               scall 684a             Sub_684a ();
-6757: 3b,26,0f            jb    B3,R26,6769      if (B3_R26 = 1) goto 6769;
-675a: 91,08,26            orb   R26,8            B3_R26 = 1;
+6757: 3b,26,0f            jb    B3,R26,6769      if (PSFLAG = 1) goto 6769;
+675a: 91,08,26            orb   R26,8            PSFLAG = 1;
 675d: 20,06               sjmp  6765             goto 6765; }
 
-675f: 33,26,07            jnb   B3,R26,6769      if (B3_R26 = 1)  {
-6762: 71,f7,26            an2b  R26,f7           B3_R26 = 0;
+675f: 33,26,07            jnb   B3,R26,6769      if (PSFLAG = 1)  {
+6762: 71,f7,26            an2b  R26,f7           PSFLAG = 0;
 6765: c3,e4,da,00         stw   R0,[Re4+da]      IBGPSI = 0; } } }
 6769: c7,e4,e5,3e         stb   R3e,[Re4+e5]     [165] = R3e;
 676d: 08,01,40            shrw  R40,1            R40 >>= 1;                        #[ R40 /= 2] 
@@ -8798,7 +8798,7 @@
 7864: d9,0b               jgtu  7871             if (R38 <= [30c])  {
 7866: 9b,fe,26,00         cmpb  R0,[Rfe+26]      
 786a: df,03               je    786f             if ([cb80] != 0)  {
-786c: 3c,25,02            jb    B4,R25,7871      if (B4_R25 = 1) goto 7871; }
+786c: 3c,25,02            jb    B4,R25,7871      if (BIFLG = 1) goto 7871; }
 786f: 20,06               sjmp  7877             goto 7877; } } } }
 
 7871: c7,e4,42,00         stb   R0,[Re4+42]      [1c2] = 0;
@@ -8827,7 +8827,7 @@
 78ae: 9b,e2,b0,42         cmpb  R42,[Re2+b0]     
 78b2: db,04               jc    78b8             if (R42 < V_BOO_SPD)  {
 78b4: c7,ea,a8,00         stb   R0,[Rea+a8]      V_BOOSPD_TMR = 0; }
-78b8: 3c,25,08            jb    B4,R25,78c3      if (B4_R25 = 0)  {
+78b8: 3c,25,08            jb    B4,R25,78c3      if (BIFLG = 0)  {
 78bb: 35,44,0a            jnb   B5,R44,78c8      if (B5_R44 = 0) goto 78c8;
 78be: 95,20,44            xorb  R44,20           B5_R44 ^= 1;
 78c1: 20,40               sjmp  7903             goto 7903; }
@@ -10002,8 +10002,8 @@
 817f: 71,fe,46            an2b  R46,fe           AM1 = 0;
 8182: 71,bf,47            an2b  R47,bf           AM2 = 0;
 8185: c3,e4,76,00         stw   R0,[Re4+76]      [1f6] = 0;
-8189: 91,0a,a4            orb   Ra4,a            B1_Ra4 = 1;
-                                                 B3_Ra4 = 1;
+8189: 91,0a,a4            orb   Ra4,a            BRK_NEVER_OFF = 1;
+                                                 BRK_NEVER_ON = 1;
 818c: 71,fc,29            an2b  R29,fc           B0_R29 = 0;
                                                  B1_R29 = 0;
 818f: 71,f9,49            an2b  R49,f9           B1_R49 = 0;
@@ -10480,8 +10480,8 @@
 84ff: b3,fe,26,42         ldb   R42,[Rfe+26]     R42 = [cb80];
 8503: e0,42,0b            djnz  R42,8511         R42--;
                                                  if (R42 != 0) goto 8511;
-8506: 3b,a4,03            jb    B3,Ra4,850c      if (B3_Ra4 = 0)  {
-8509: 31,a4,05            jnb   B1,Ra4,8511      if (B1_Ra4 = 0) goto 8511; }
+8506: 3b,a4,03            jb    B3,Ra4,850c      if (BRK_NEVER_ON = 0)  {
+8509: 31,a4,05            jnb   B1,Ra4,8511      if (BRK_NEVER_OFF = 0) goto 8511; }
 850c: ef,ba,fb            call  80c9             SaveTCode1 (
 850f: 36                        #arg 1              36
 8510: 05                        #arg 2              5 );
@@ -10512,11 +10512,11 @@
 853b: 26,c7               sjmp  8404             goto 8404;
 
    Check_PS_PB:
-853d: 34,25,05            jnb   B4,R25,8545      if (B4_R25 = 1)  {
-8540: 71,f7,a4            an2b  Ra4,f7           B3_Ra4 = 0;
+853d: 34,25,05            jnb   B4,R25,8545      if (BIFLG = 1)  {
+8540: 71,f7,a4            an2b  Ra4,f7           BRK_NEVER_ON = 0;
 8543: 20,03               sjmp  8548             goto 8548; }
 
-8545: 71,fd,a4            an2b  Ra4,fd           B1_Ra4 = 0;
+8545: 71,fd,a4            an2b  Ra4,fd           BRK_NEVER_OFF = 0;
 8548: 30,8f,05            jnb   B0,R8f,8550      if (B0_R8f = 1)  {
 854b: 91,02,29            orb   R29,2            B1_R29 = 1;
 854e: 20,03               sjmp  8553             goto 8553; }
@@ -12923,7 +12923,7 @@
 9d4e: da,03               jle   9d53             if (R30 > [c220])  {
 9d50: 71,bf,dc            an2b  Rdc,bf           B6_Rdc = 0; } }
 9d53: 91,20,dc            orb   Rdc,20           B5_Rdc = 1;
-9d56: 34,25,07            jnb   B4,R25,9d60      if (B4_R25 = 1)  {
+9d56: 34,25,07            jnb   B4,R25,9d60      if (BIFLG = 1)  {
 9d59: 8b,fd,6c,01,bc      cmpw  Rbc,[Rfc+16c]    
 9d5e: d1,03               jleu  9d63             if (TP_REL <= [c214]) goto 9d63; }
 9d60: 71,df,dc            an2b  Rdc,df           B5_Rdc = 0; }
@@ -13641,7 +13641,7 @@ a485: c7,e6,94,30         stb   R30,[Re6+94]     [214] = R30;
 a489: 20,03               sjmp  a48e             goto a48e; }
 
 a48b: 91,10,79            orb   R79,10           B4_R79 = 1; }
-a48e: c7,e6,ba,d4         stb   Rd4,[Re6+ba]     [23a] = ATMR1;
+a48e: c7,e6,ba,d4         stb   Rd4,[Re6+ba]     ATMR1_LST = ATMR1;
 a492: 3f,a5,02            jb    B7,Ra5,a497      if (CRKFLG = 0)  {
 a495: 20,0d               sjmp  a4a4             goto a4a4; }
 
@@ -13988,60 +13988,80 @@ a83e: 27,97               sjmp  a7d7             goto a7d7; }
 
 a840: f0                  ret                    return;
 
-a841: 26,2e,04            timer 26,   42e,                                         # A3CTMR         Time between A3C state changes.
-a844: 26,30,04            timer 26,   430,                                         # ADPTMR         Adaptive fuel timer (seconds)
-a847: 20,16,02            timer 20,   216,                                         # ATMR1          Time since start (time since exiting CRANK mode) (seconds)
-a84a: 81,53,01,02,4e      timer 81,   153,  B1_4e                                  # ATMR2          Time since engine coolant temperature became greater than    TMR3          Time 
-                                                                                   since entering run mode (seconds)   WOTMR         Time in wide open throttle (seconds)   YPTMR   
-                                                                                         Thermactor air bypass-enable timer (seconds)   RKPIP_CTR     PIP Counter for Cranking fuel   
-                                                                                   TTMR          Time at closed throttle timer (0.125 seconds)   GRTMR         EGR enabled timer (se
-                                                                                   conds)
-a84f: 89,d4,00,80,a5      timer 89,    d4,  B7_a5
+###################################### 
+# TIMERS Table 
+# 3 or 5 byte entries
+# byte  0    = flags word
+# byte  2&3 WORD = timer address
+# if 5 byte entry - timer controlled by flag(s)
+# byte  4    = flag mask - selects control bit(s) in address
+# byte  5    = flags address (start/stop) timer|#
+# 2X = timer in 1/1024 seconds (~msec)
+# 4X = timer in 1/8 seconds
+# 8X = timer in seconds
+# So
+# bit 0 = 0 if short entry (3 or 5 bytes)
+# bit 1 = 1 if 16 bit timer else 0 = 8 bit timer
+# bit 2 = 0 timer count up vs down
+# bit 3 = 0 if flag bit must be set to update timer loc
+# bit 4 not used
+# bit 5 = 1 update in 1/1024 seconds (~msec)
+# bit 6 = update in 1/8 seconds
+# bit 7 = update in seconds
+# else entry size = 5
+# entry size = 2 if bit 0 of first byte = 0
+# in follow Table the 15 bit address field is byte flipped for correct word order
+######################################
+a841: 26,2e,04            timer 26,   42e, 
+a844: 26,30,04            timer 26,   430, 
+a847: 20,16,02            timer 20,   216, 
+a84a: 81,53,01,02,4e      timer 81,   153,  B1_4e
+a84f: 89,d4,00,80,a5      timer 89, ATMR1, CRKFLG,                                 #ATMR1          Time since start (time since exiting CRANK mode) (seconds)
 a854: 81,85,03,40,24      timer 81,   385,  B6_24
-a859: 89,86,03,40,a5      timer 89,   386,  B6_a5
+a859: 89,86,03,40,a5      timer 89, CTTMR, UNDSP,                                  #CTTMR          Time at closed throttle timer (0.125 seconds)
 a85e: 83,74,03,04,e0      timer 83,   374,  B2_e0
 a863: 81,d1,00,40,a4      timer 81,    d1,  B6_a4
-a868: 41,bb,03,10,26      timer 41,   3bb,  B4_26
-a86d: 41,4f,01,08,a0      timer 41,   14f,  B3_a0
-a872: 23,40,01,40,27      timer 23,   140,  B6_27
-a877: 23,2c,02,40,4f      timer 23,   22c,  B6_4f
+a868: 41,bb,03,10,26      timer 41,   3bb, RUNUP_FLG, 
+a86d: 41,4f,01,08,a0      timer 41,   14f, Power_up, 
+a872: 23,40,01,40,27      timer 23,   140, B6_R27_OpenLoop?, 
+a877: 23,2c,02,40,4f      timer 23, Tsladv, B6_Knock_enabled, 
 a87c: 22,fc,02            timer 22,   2fc, 
 a87f: 83,2c,04,10,24      timer 83,   42c,  B4_24
 a884: 41,7f,01,20,24      timer 41,   17f,  B5_24
 a889: 87,2c,04,08,24      timer 87,   42c,  B3_24
-a88e: 41,36,04,80,a8      timer 41,   436,  B7_a8
+a88e: 41,36,04,80,a8      timer 41,   436, APT_Closed_Throttle, 
 a893: 81,14,02,10,79      timer 81,   214,  B4_79
-a898: 4b,d2,00,80,a8      timer 4b,    d2,  B7_a8
-a89d: 83,38,01,01,a5      timer 83,   138,  B0_a5
+a898: 4b,d2,00,80,a8      timer 4b,    d2, APT_Closed_Throttle, 
+a89d: 83,38,01,01,a5      timer 83, Adptmr, Adptmr_on, 
 a8a2: 20,51,01            timer 20,   151, 
-a8a5: 40,c1,01            timer 40,   1c1, 
+a8a5: 40,c1,01            timer 40, Vip_timer_ex, 
 a8a8: 22,36,01            timer 22,   136, 
 a8ab: 80,cc,01            timer 80,   1cc, 
-a8ae: 81,d0,01,04,48      timer 81,   1d0,  B2_48
-a8b3: 89,37,04,80,a8      timer 89,   437,  B7_a8
-a8b8: 42,be,01            timer 42,   1be, 
+a8ae: 81,d0,01,04,48      timer 81, SparkAdvance, ?Stiflg?, 
+a8b3: 89,37,04,80,a8      timer 89,   437, APT_Closed_Throttle, 
+a8b8: 42,be,01            timer 42, Miltmr, 
 a8bb: 40,c0,01            timer 40,   1c0, 
 a8be: 82,82,01            timer 82,   182, 
-a8c1: 22,42,01            timer 22,   142, 
+a8c1: 22,42,01            timer 22, Tslpip, 
 a8c4: 20,33,02            timer 20,   233, 
 a8c7: 22,36,02            timer 22,   236, 
 a8ca: 80,64,01            timer 80,   164, 
 a8cd: 20,e8,01            timer 20,   1e8, 
-a8d0: 22,96,01            timer 22,   196, 
-a8d3: 81,49,01,04,a5      timer 81,   149,  B2_a5
+a8d0: 22,96,01            timer 22, A3CTMR, 
+a8d3: 81,49,01,04,a5      timer 81,   149, ?Undsp?, 
 a8d8: 40,bc,03            timer 40,   3bc, 
 a8db: 40,bd,03            timer 40,   3bd, 
 a8de: 22,3c,02            timer 22,   23c, 
 a8e1: 40,50,01            timer 40,   150, 
-a8e4: 81,4e,01,10,a1      timer 81,   14e,  B4_a1
-a8e9: 85,4e,01,08,a1      timer 85,   14e,  B3_a1
-a8ee: 81,52,01,04,a5      timer 81,   152,  B2_a5
-a8f3: 8d,52,01,04,a5      timer 8d,   152,  B2_a5
+a8e4: 81,4e,01,10,a1      timer 81,   14e, Flags_a1, 
+a8e9: 85,4e,01,08,a1      timer 85,   14e, Flags_a1, 
+a8ee: 81,52,01,04,a5      timer 81, AWOTMR, ?Undsp?,                               #AWOTMR         Time in wide open throttle (seconds)
+a8f3: 8d,52,01,04,a5      timer 8d, AWOTMR, ?Undsp?,                               #AWOTMR         Time in wide open throttle (seconds)
 a8f8: 20,84,03            timer 20,   384, 
 a8fb: 81,4b,01,01,28      timer 81,   14b,  B0_28
-a900: 81,4a,01,04,a1      timer 81,   14a,  B2_a1
-a905: 85,4a,01,02,a1      timer 85,   14a,  B1_a1
-a90a: 23,bc,01,08,45      timer 23,   1bc,  B3_45
+a900: 81,4a,01,04,a1      timer 81,   14a, Flags_a1, 
+a905: 85,4a,01,02,a1      timer 85,   14a, Flags_a1, 
+a90a: 23,bc,01,08,45      timer 23,   1bc, Error_detected, 
 a90f: 40,c2,01            timer 40,   1c2, 
 a912: 81,4c,01,80,24      timer 81,   14c,  B7_24
 a917: 22,3c,01            timer 22,   13c, 
@@ -14072,16 +14092,17 @@ a969: 22,64,03            timer 22,   364,
 a96c: 26,38,04            timer 26,   438, 
 a96f: 81,f3,02,02,24      timer 81,   2f3,  B1_24
 a974: 85,f3,02,01,24      timer 85,   2f3,  B0_24
-a979: 81,18,05,01,52      timer 81,   518,  B0_52
+a979: 81,18,05,01,52      timer 81,   518, Flags_52, 
 a97e: 40,b6,03            timer 40,   3b6, 
 a981: 40,46,04            timer 40,   446, 
 a984: 84,47,04            timer 84,   447, 
 a987: 84,49,04            timer 84,   449, 
 a98a: 40,48,04            timer 40,   448, 
-a98d: 81,15,02,20,a0      timer 81,   215,  B5_a0
+a98d: 81,15,02,20,a0      timer 81,   215, Power_up, 
 a992: 85,15,02,02,a2      timer 85,   215,  B1_a2
-a997: 80,28,04            timer 80,   428, 
-a99a: 00                  byte  
+a997: 80,28,04            timer 80, V_BOOSPD_TMR, 
+
+a99a: 00                  byte      0
 
    Sub_a99b:
 a99b: 37,4e,07            jnb   B7,R4e,a9a5      if (B7_R4e = 1)  {
@@ -17087,7 +17108,7 @@ cb74: 40,06               word    640            UNRPM
 cb76: c8,00               word     c8            UNRPMH
 cb78: b0,04               word    4b0            1200_RPM
 cb7a: 90,01               word    190            400_RPM
-cb7c: 05                  byte      5
+cb7c: 05                  byte      5            CRKTM1
 cb7d: 00                  byte      0
 cb7e: 00                  byte      0
 cb7f: 00                  byte      0

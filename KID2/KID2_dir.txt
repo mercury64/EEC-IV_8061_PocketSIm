@@ -93,6 +93,7 @@ struct 3cfd 3d1d :Y P 3: W N P 4
 
 code    3d1e 435f
 args    3d6e 3d71 : E 2 f0 N  : UW N 
+#3d6e: bc,a0,38,00         #args  
 args    3e0e 3e11 : E 2 f0 N  : UW N 
 args    3f73 3f76 : E 2 f0 N  : UW N 
 args    4004 4007 : E 2 f0 N  : UW N 
@@ -436,8 +437,100 @@ byte    a3e0 a3e0
 
 code    a3e1 a840
 args    a56a a56d : E 2 f0 N  : UW N 
-# timer   a841 a99a : UW 
 
+timer   a841 a843 : UW N
+timer   a844 a846 : UW N
+timer   a847 a849 : UW N
+timer   a84a a84e : UW N
+timer   a84f a853 : UW N
+timer    a854 a858  : UW N
+timer    a859 a85d  : UW N
+timer    a85e a862  : UW N
+timer    a863 a867 : UW N
+timer    a868 a86c : UW N
+timer    a86d a871 : UW N
+timer    a872 a876: UW N
+
+timer    a877 a87b: UW N
+timer    a87c a87e: UW N 
+timer    a87f a883: UW N
+timer    a884 a888: UW N
+timer    a889 a88d: UW N
+timer    a88e a892: UW N
+timer    a893 a897: UW N
+timer a898 a89c  : UW N
+timer a89d a8a1  : UW N
+timer a8a2  a8a4  : UW N
+timer a8a5  a8a7  : UW N
+timer a8a8  a8ac  : UW N
+timer a8ab  a8ad  : UW N
+timer a8ae a8b2  : UW N
+timer a8b3 a8b7  : UW N
+timer a8b8  a8ba  : UW N
+timer a8bb  a8bd  : UW N
+timer a8be  a8c0  : UW N
+timer a8c1  a8c3  : UW N
+timer a8c4  a8c6  : UW N
+timer a8c7  a8c9  : UW N
+timer a8ca  a8cc  : UW N
+timer a8cd  a8cf  : UW N
+timer a8d0  a8d2  : UW N
+timer a8d3 a8d7  : UW N
+timer a8d8  a8da  : UW N
+timer a8db  a8dd  : UW N
+timer a8de  a8e0  : UW N
+timer a8e1  a8e3  : UW N
+timer a8e4 a8e8  : UW N
+timer a8e9 a8ed  : UW N
+timer a8ee a8f2  : UW N
+timer a8f3 a8f7  : UW N
+timer a8f8  a8fa  : UW N
+timer a8fb a8ff  : UW N
+timer a900 a904  : UW N
+timer a905 a909  : UW N
+timer a90a a90e  : UW N
+timer a90f  a911  : UW N
+timer a912 a916  : UW N
+timer a917  a919  : UW N
+timer a91a a91e  : UW N
+timer a91f  a921  : UW N
+timer a922  a924  : UW N
+timer a925  a927  : UW N
+timer a928  a92a  : UW N
+timer a92b  a92d  : UW N
+timer a92e  a930  : UW N
+timer a931  a933  : UW N
+timer a934 a938  : UW N
+timer a939 a93d  : UW N
+timer a93e a942  : UW N
+timer a943 a947  : UW N
+timer a948  a94a  : UW N
+timer a94b  a94d  : UW N
+timer a94e  a950  : UW N
+timer a951  a953  : UW N
+timer a954  a956  : UW N
+timer a957  a959  : UW N
+timer a95a  a95c  : UW N
+timer a95d  a95f  : UW N
+timer a960  a962  : UW N
+timer a963  a965  : UW N
+timer a966  a968  : UW N
+timer a969  a96d  : UW N
+timer a96c  a96e  : UW N
+timer a96f a973  : UW N
+timer a974 a978  : UW N
+timer a979 a97d  : UW N
+timer a97e  a980  : UW N
+timer a981  a983  : UW N
+timer a984  a986  : UW N
+timer a987  a989  : UW N
+timer a98a  a98c  : UW N
+timer a98d a991  : UW N
+timer a992 a996  : UW N
+timer a997  a999: UW N
+
+
+byte a99a a99a
 code    a99b a9bc
 
 word    a9be a9bf
@@ -1693,7 +1786,9 @@ sym 12 "Tmr_OVF_cnt"
 sym  14 "ConsoleMode" : B 6
 
 sym 25 "CHKAIR" : B 2
+sym 25 "BIFLG" : B 4
 
+sym 26 "PSFLAG" : B 3
 sym 26 "RUNUP_FLG" : B 4
 sym 26 "PTSCR" : B 5
 sym 26 "DNDSUP" : B 6
@@ -1922,6 +2017,8 @@ sym a3 "B5_Flags_a3" : B 5
 sym a3 "B6_Flags_a3" : B 6
 sym a3 "B7_Flags_a3" : B 7
 
+sym a4 "BRK_NEVER_OFF" : B 1
+sym a4 "BRK_NEVER_ON" : B 3
 sym a4 "TAQ1" : B 5
 
 sym a5 "Flags_a5"
@@ -2018,6 +2115,8 @@ sym 176 "KAMRF1"
 sym 181 "CRKPIP_CTR"
 
 sym 192 "Ibeta1"
+sym 196 "A3CTMR"
+
 sym 19c "Tbart"
 sym 1be "Miltmr"
 
@@ -2036,6 +2135,7 @@ sym 217 "VACUUM"
 sym 22c "Tsladv"
 sym 230 "Retinc"
 sym 239 "Pip_counter"
+sym 23a "ATMR1_LST"
 
 sym 240 "HSOQ"   # HSO queue entries 
 sym 242 "SvStack"
@@ -2085,6 +2185,7 @@ sym 3ec "PPERENG"
 sym 413 "C41FIL_TroubleCode"
 
 sym 428 "V_BOOSPD_TMR"
+sym 43e "AC_PPM"
 
 sym 509 "XDCL_BAUD"
 
@@ -2195,6 +2296,7 @@ sym 3ccf "Read_AD"
 sym 3cd3 "Enable_Ints"
 
 sym 60F1 "Update_Dwell"
+sym 6955 "UPSWOT"
 
 sym 7016 "Do_Self_Test"
 sym 71eb "Get_DiagCodes"
@@ -2358,6 +2460,8 @@ sym cb74 "UNRPM"
 sym cb76 "UNRPMH"
 sym cb78 "1200_RPM"
 sym cb7a "400_RPM"
+
+sym cb7c "CRKTM1"
 
 sym cb83 "PFEHP"
 sym cb85 "emissions_thermactor_sw"
