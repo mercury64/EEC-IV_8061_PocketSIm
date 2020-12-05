@@ -283,6 +283,11 @@
 3d1b # EGR Valve position
 3d1e # end of table
 
+3df8 # (sensor OK)
+
+3ecf # ECTCNT = ECTCNT + 1
+3ede # ACSTRT + ACT/8
+
 40b8 # Calculates (engine coolant temperature)
 40db # Calculates  (transmission oil temperature)
 4243 # 2 = Low Data Rate Distributorless dual plug (LDR_DIS)
@@ -453,6 +458,24 @@
 7d34 # Start address (0x2000)
 7d36 # End address  (0xdffe)
 
+7e85 \n#######################################################
+7e85 \n# Decode complex addresses into their TRUE addresses (plain ones OK too)
+7e85 \n# address decoded back to input register (via R16, R42 )
+7e85 \n# Address is encoded as 1 bit=flag, 3 bits=base reg/2, 12 bits offset from reg
+7e85 \n# NOTE encoding is HALF reg value (because of divide by 8)
+7e85 \n# return value is then a POINTER (as a plain address) 
+7e85 \n#######################################################
+
+7e86 # get data from address
+7e89 # 7_R43 = 1 address encoded, else return unchanged
+7e8c # Hi byte of value
+7e8f # Clear bottom nibble and flag
+7e92 #[ R3a /= 8]  ? # Rbase register (0-14 times 2 effectively)?
+7e95 # Clear top nibble.  R42 = Offset address
+7e98 # R42 += Rbase register (as pointer)
+7e9d # update input pointer to new address
+
+
 7fd3 # loop until 5161 IO times have passed(12.4ms)
 
 8754 \n#############################################################
@@ -513,6 +536,8 @@ a840 \n######################################
 a84f #ATMR1          Time since start (time since exiting CRANK mode) (seconds)
 a859 #CTTMR          Time at closed throttle timer (0.125 seconds)
 
+a8a8 #PUTMR          Time since CPU power-up (0.001 seconds)
+
 a8ee #AWOTMR         Time in wide open throttle (seconds)
 a8f3 #AWOTMR         Time in wide open throttle (seconds)
 
@@ -554,7 +579,7 @@ a8f3 #AWOTMR         Time in wide open throttle (seconds)
 
 #OSCTMR         OSCMOD delay timer (0.125 seconds)
 
-#PUTMR          Time since CPU power-up (0.001 seconds)
+
 
 #SETTMR         RPM Control Entry Delay Timer (0.125 seconds)
 

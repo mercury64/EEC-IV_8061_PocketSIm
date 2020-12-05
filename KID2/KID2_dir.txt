@@ -804,7 +804,7 @@ func    b512 b529  "FN852"   : SW  : SW
 func    b52a b535  "Func_b52a"   : SY  : UY 
 func    b536 b549  "Func_b536"   : UW  : UW 
 func    b54a b565  "Func_b54a"   : UW  : UW 
-table   b566 b595  "Table_b566"   : O 6 UY 
+table   b566 b595  "FN1354"   : O 6 UY 
 table   b596 b5c5  "emissions_lambda_bias"   : O 6 SY 
 func    b5c6 b5dd  "fuel_closed_throttle_ol_multiplier"   : UW  : UW 
 func    b5de b601  "fuel_wot_multiplier"   : UW  : UW 
@@ -819,7 +819,7 @@ func    b71a b727  "fuel_equil_constant_multiplier"   : UY  : UY
 table   b728 b777  "fuel_equil_surface"   : O 10 UY 
 table   b778 b7c7  "fuel_equil_constant"   : O 10 UY 
 table   b7c8 b817  "fuel_open_loop_alt_adjust"   : O 10 SY 
-table   b818 b847  "Table_b818"   : O 6 UY 
+table   b818 b847  "FN1343"   : O 6 UY 
 func    b848 b85f  "Func_b848"   : UW  : UW 
 func    b860 b877  "Func_b860"   : UW  : UW 
 table   b878 b890  "Table_b878"   : O 5 UY 
@@ -1083,6 +1083,7 @@ word    c156 c157
 byte    c158 c158
 byte    c159 c159
 byte    c15a c15a
+byte    c15b c15b
 word    c15c c15d
 byte    c15e c15e
 byte    c15f c15f
@@ -1366,7 +1367,7 @@ func    cd4a cd61  "Func_cd4a"   : UW  : UW
 func    cd62 cd6d  "Func_cd62"   : UY  : UY 
 table   cd6e cda5  "Table_cd6e"   : O 8 UY 
 func    cda6 cdc5  "Func_cda6"   : UW  : UW 
-func    cdc6 cde1  "Func_cdc6"   : UW  : UW 
+func    cdc6 cde1  "FN070L"   : UW  : UW 
 func    cde2 cded  "Func_cde2"   : SY  : UY 
 byte    cdee cdee
 byte    ce52 ce52
@@ -1513,8 +1514,8 @@ sub  848e6 8494e  "UUWFuncLU_48e6"  $ F uuwflu 32
 sub  84907 8494e  "UUWFuncLU_4907"  $ F uuwflu 32
 sub  8494f "UROLAV" 
 sub  84956 "ROLAV"  
-sub  84958 84986  "Sub_4958"  
-sub  84987 "?Calc_FFact?" 
+sub  84958 "ROLLING_AVERAGE_ROUTINE"  
+sub  84987 "ROLLING_AVERAGE_FILTER_ROUTINE" 
 sub  849a7 849ed  "SYTabLU_49a7"  $ F sytlu 38 34
 sub  849b6 849ed  "SYTabLU_49b6"  $ F sytlu 38 34
 sub  849b9 849ed  "UYTabLU_49b9"  $ F uytlu 38 34
@@ -1631,7 +1632,7 @@ sub  87e35 880dc  "Sub_7e35"
 sub  87e3d 880dc  "Sub_7e3d"  
 sub  87e40 880dc  "Sub_7e40"  
 sub  87e7c 87ea0  "Sub_7e7c"  
-sub  87e86 87ea0  "Sub_7e86"  
+sub  87e86 "GET_ADDRESS"  
 sub  87ea1 "ThermactorAirTest" 
 sub  87ec3 87ed0  "Sub_7ec3"  
 sub  87ed7 87edb  "Sub_7ed7"  
@@ -1805,7 +1806,10 @@ sym 27 "B7_R27" : B 7
 
 
 sym 28 "Newsa" : B 2
+sym 28 "EGOSTE" : B 5
 sym 28 "KAM_error" :B 7
+
+sym 29 "ECT_IN_RANGE" : B 3
 
 sym 2a "VIP_flags"
 sym 2a "Vscdt" :B 0
@@ -1843,8 +1847,8 @@ sym 2e "Flags_2e"
 sym 2e "Idm_bypass" : B 0
 sym 2e "Kflg_local" : B 1
 sym 2e "Flags_bit2" : B 2
-sym 2e "Wigflg" : B 3
-sym 2e "Sto_hyper" : B 4
+sym 2e "???_Re_" : B 3
+sym 2e "WIGFLG" : B 4
 sym 2e "Disable_eolt" : B 5
 sym 2e "Egrfg2" : B 6
 sym 2e "Egrfg1" : B 7
@@ -1996,7 +2000,7 @@ sym 9e "B4_EGREN_9e" : B 4
 sym 9f "Flags_9f"
 #sym 9f "Swtfl" : B 0
 #sym 9f "Egofl" : B 1
-#sym 9f "Olflg" : B 2
+sym 9f "OLFLG" : B 2
 #sym 9f "Qclol" : B 3
 #sym 9f "Signdy" : B 4
 #sym 9f "Signdslp" : B 5
@@ -2004,7 +2008,8 @@ sym 9f "Flags_9f"
 #sym 9f "A3C" : B 7
 
 sym a0 "Power_up"
-sym a0 "Tblsflg"  : B 7
+sym a0 "SIGNED_TBL_FLG" : B 4
+#sym a0 "Tblsflg"  : B 7
 
 sym a1 "Flags_a1" 
 # sym a1 "Console_flag"  : B 0
@@ -2025,7 +2030,7 @@ sym a4 "TAQ1" : B 5
 
 sym a5 "Flags_a5"
 sym a5 "Adptmr_on" : B 0
-sym a5 "Idleq" : B 1
+sym a5 "BG_TMR_DISABLE" : B 1
 sym a5 "?Undsp?" : B 2
 sym a5 "Dmflg" : B 3
 sym a5 "FLG_STALL" : B 4
@@ -2080,7 +2085,7 @@ sym db "PDL"
 sym e1 "CCD?"
 sym e1 "B2_CCD_HP" : B 2
 
-sym 106 "Egobar1"
+sym 106 "EGOBAR"
 sym 108 "ITOT"
 sym 10e "VSS_Raw"
 sym 10a "Key_Pwr"
@@ -2096,7 +2101,10 @@ sym 11a "IEGO1"
 sym 11c "ITP"
 sym 122 "MAP_FREQ"
 sym 124 "MAP_WORD"
+sym 136 "PUTMR"
 sym 138 "Adptmr"
+
+sym 13a "BG_TMR"
 
 sym 142 "Tslpip"
 sym 144 "Loop_time"
@@ -2162,6 +2170,8 @@ sym 2be "Xram4L"
 sym 2bf "Xram4H"
 
 sym 2cc "SIGKAL"
+
+sym 2e2 "ACSTRT"
 
 sym 314 "TOT"
 sym 33e "LOAD"
@@ -2385,6 +2395,8 @@ sym b44e "fuel_injector_slope"
 sym b463 "fuel_open_loop_multiplier_drive"
 sym b466 "fuel_open_loop_multiplier_neutral"
 
+sym b47c "MPGDEC"
+
 sym b49a "REV_LIMIT"
 sym b49c "rev_limit_hysteresis"
 sym b49e "speed_limiter1"
@@ -2404,6 +2416,8 @@ sym b92c "fuel_ve_multiplier"
 
 sym b934 "fuel_tp_pt"
 sym b936 "fuel_tp_wot"
+
+sym b940 "TKYON2"
 
 sym b950 "ACTFMM"
 sym b95e "CTBYS"
@@ -2447,6 +2461,8 @@ sym c142 "SARCHG"
 
 sym c154 "trans_min_tv_pressure"
 
+sym c15b "VTCEGO"
+
 sym c16e "V_BOO_SPD"
 sym c16f "V_BOOSPD_TM"
 
@@ -2475,10 +2491,10 @@ sym cb87 "TRLOAD"
 
 sym cb8a "IGN_TYPE"
 
-sym cb8f "fuel_adaptive_ect_min"
-sym cb8f "fuel_adaptive_ect_max"
-sym cb90 "fuel_adaptive_act_min"
-sym cb91 "fuel_adaptive_act_max"
+sym cb8e "AFECT1"
+sym cb8f "AFECT2"
+sym cb90 "AFACT1"
+sym cb91 "AFACT2"
 sym cb9d "fuel_adaptive_min"
 sym cb9e "fuel_adaptive_max"
 
