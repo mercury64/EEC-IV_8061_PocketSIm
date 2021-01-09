@@ -91,7 +91,7 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
     	   short RA = (short) (value2 << 8 |  value & 0xff);
     	   
     	   value = RA;
-    	   tmp_value = (short) (tmp_value +2);// R32++
+    	   tmp_value = (short) (tmp_value + 2 );// R32++
     	   
     	   state_.setWordRegister(tmp_reg, tmp_value);
            

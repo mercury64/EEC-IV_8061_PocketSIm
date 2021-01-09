@@ -62,29 +62,46 @@ public class OpCodeORRB  extends OpCode implements IOpCode {
 	        	numberOfBytes = 3;
 	        	stateTime = 6;
 	        	break;
+	        case AddressMode.INDIRECT_AUTO_INC:
+	        	numberOfBytes = 3;
+	        	stateTime = 7;
+	        	break;
 	        case AddressMode.SHORT_INDEXED:
 	        	numberOfBytes = 4;
 	        	stateTime = 6;
 	        	break;	
         }
-        state_.setPc(pc + numberOfBytes);
-        state_.updateStateTime(stateTime);
         
         operands = new byte[numberOfBytes];
         for (int i = 0; i < numberOfBytes; i++) {
 			operands[i] = (byte)memory[pc + i];
 		}
 
-        byte dest_dwreg = operands[1];
-        byte Ra = operands[2];
-        byte Rb = operands[1];
-        byte Rd  = (byte) (Ra | Rb) ;
+        //byte dest_dwreg = operands[1];
+        byte Ra = operands[1];
+        byte Rb = operands[2];
         
+		if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
+		{
+		
+			//2073: 92,15,1c            orb   R1c,[R14++]      R1c |= [R14++]; R1c | [R14++]
+			// register [R14++]
+			short register_value = state_.getWordRegister((byte) (Ra - 1));// [R32]
+			state_.setWordRegister((byte) (Ra - 1), (short) (register_value + 1));	
+		 
+			// register [value]
+			int mem_index = register_value & 0xffff;
+			short tmp_register_value =  (short) memory[(int)mem_index];
+			Ra = (byte) tmp_register_value;	
+		
+		}
+
+        short result = state_.doORRB(state_.getByteRegister(Rb), Ra);
+
+        state_.setPc(pc + numberOfBytes);
+        state_.updateStateTime(stateTime);
         
+        state_.setByteRegister(Rb, (byte) result);    
         
-        short result = state_.doORRB(Ra, Rb);
-        state_.setByteRegister(dest_dwreg, (byte) result);    
-        
-        System.out.println( state_ );
     }
 }

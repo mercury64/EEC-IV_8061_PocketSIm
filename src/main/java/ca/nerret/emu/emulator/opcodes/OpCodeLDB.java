@@ -37,6 +37,10 @@ public class OpCodeLDB extends OpCode implements IOpCode {
 	        	numberOfBytes = 3;
 	        	stateTime = 6;
 	        	break;
+	        case AddressMode.INDIRECT_AUTO_INC:
+	        	numberOfBytes = 3;
+	        	stateTime = 7;
+	        	break;
 	        case AddressMode.SHORT_INDEXED:
 	        	numberOfBytes = 4;
 	        	stateTime = 6;
@@ -53,6 +57,27 @@ public class OpCodeLDB extends OpCode implements IOpCode {
         byte register = operands[2] ;
         byte value = operands[1] ;
         
+        if (this.getAddressModeType() == AddressMode.INDIRECT)
+        {
+        	// register [R14++]
+        	short register_value = state_.getByteRegister((byte) (value));// [R32]
+			
+			value = (byte) register_value;	
+        }
+		if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
+		{
+		
+			// register [R14++]
+			short register_value = state_.getWordRegister((byte) (value - 1));// [R32]
+			state_.setWordRegister((byte) (value - 1), (short) (register_value + 1));	
+		 
+			// register [value]
+			int mem_index = register_value & 0xffff;
+			short tmp_register_value =  (short) memory[(int)mem_index];
+			value = (byte) tmp_register_value;	
+		
+		}
+		
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
         state_.setByteRegister(register, value);

@@ -352,6 +352,8 @@
 6890 # (TCSTRT OK to use)  
 6892 # (first time this start) 
 
+68bb #  if (TP <= RATCH)
+
 6986 # APT 0 -> part throttle
 
 6b26 # ISCKAM(ISFLAG)

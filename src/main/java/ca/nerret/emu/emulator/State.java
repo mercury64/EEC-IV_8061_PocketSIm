@@ -189,11 +189,12 @@ public class State {
 
 		System.out.println(
 				" Set Register:" + 
-				String.format("R%02X", reg) + " = " + 
+				String.format("R%02X", reg) + 
+				" = " + 
 				String.format("0x%02X", value)
 				);
 				
-		register_memory[reg] = value;
+		register_memory[reg & 0xf] = value;
 		
 	}
 	
@@ -411,8 +412,8 @@ public class State {
 				+ ", _state_time=" + _state_time + "]";
 	}
 
-	public short doORRB(byte ra, byte rb) {
-		 byte orrb  = (byte) (ra | rb) ;
+	public short doORRB(byte rb, byte ra) {
+		 byte orrb  = (byte) (rb | ra) ;
 		 
 		 this.PSW_FLAGS &= ~(ProgramStatusWord.F_N|ProgramStatusWord.F_Z);
 

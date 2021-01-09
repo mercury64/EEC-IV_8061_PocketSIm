@@ -7194,7 +7194,7 @@
 68b1: a0,b2,34            ldw   R34,Rb2          R34 = TP;
 68b4: a3,f8,0e,36         ldw   R36,[Rf8+e]      R36 = [babe];
 68b8: 88,32,34            cmpw  R34,R32          
-68bb: d9,04               jgtu  68c1             if (R34 <= R32)  {
+68bb: d9,04               jgtu  68c1             if (R34 <= R32)  {                #  if (TP <= RATCH)
 68bd: a3,f8,0c,36         ldw   R36,[Rf8+c]      R36 = [babc]; }
 68c1: ef,8b,e0            call  494f             UROLAV ();
 68c4: c3,e4,d6,3e         stw   R3e,[Re4+d6]     [156] = R3e;
@@ -7277,7 +7277,7 @@
 6986: 3f,a8,12            jb    B7,Ra8,699b      if (APT_Closed_Throttle = 0)  {   # APT 0 -> part throttle
 6989: c3,e4,dc,b4         stw   Rb4,[Re4+dc]     NLAST = N_RPM;
 698d: c7,e4,e2,00         stb   R0,[Re4+e2]      ISCFLG = 0;
-6991: c7,e4,e4,00         stb   R0,[Re4+e4]      [164] = 0;
+6991: c7,e4,e4,00         stb   R0,[Re4+e4]      ISCTMR = 0;
 6995: c7,e8,3d,00         stb   R0,[Re8+3d]      [3bd] = 0;
 6999: 20,9e               sjmp  6a39             return; }
 
@@ -7306,7 +7306,7 @@
 69dc: b3,e8,3d,38         ldb   R38,[Re8+3d]     R38 = [3bd];
 69e0: 9b,ff,f4,00,38      cmpb  R38,[Rfe+f4]     
 69e5: d9,4b               jgtu  6a32             if (R38 > [cc4e]) goto 6a32; }
-69e7: b3,e4,e4,38         ldb   R38,[Re4+e4]     R38 = [164];
+69e7: b3,e4,e4,38         ldb   R38,[Re4+e4]     R38 = ISCTMR;
 69eb: 9b,f0,32,38         cmpb  R38,[Rf0+32]     
 69ef: d3,17               jnc   6a08             if (R38 >= [b032])  {
 69f1: 4b,e4,dc,b4,38      sb3w  R38,Rb4,[Re4+dc] R38 = N_RPM - NLAST;
@@ -7315,7 +7315,7 @@
 69fa: 8b,f0,2c,38         cmpw  R38,[Rf0+2c]     
 69fe: d1,0d               jleu  6a0d             if (R38 <= [b02c]) goto 6a0d;
 6a00: c3,e4,dc,b4         stw   Rb4,[Re4+dc]     NLAST = N_RPM;
-6a04: c7,e4,e4,00         stb   R0,[Re4+e4]      [164] = 0; } } } }
+6a04: c7,e4,e4,00         stb   R0,[Re4+e4]      ISCTMR = 0; } } } }
 6a08: b1,ff,3a            ldb   R3a,ff           R3a = ff;
 6a0b: 20,28               sjmp  6a35             goto 6a35; }
 
@@ -7529,8 +7529,8 @@
 6c34: d7,23               jne   6c59             if (R1e = 1)  {
 6c36: 8b,f0,2e,14         cmpw  R14,[Rf0+2e]     
 6c3a: d1,04               jleu  6c40             if (R14 > [b02e])  {
-6c3c: c7,e4,e4,00         stb   R0,[Re4+e4]      [164] = 0; }
-6c40: b3,e4,e4,38         ldb   R38,[Re4+e4]     R38 = [164];
+6c3c: c7,e4,e4,00         stb   R0,[Re4+e4]      ISCTMR = 0; }
+6c40: b3,e4,e4,38         ldb   R38,[Re4+e4]     R38 = ISCTMR;
 6c44: 9b,f0,35,38         cmpb  R38,[Rf0+35]     
 6c48: d3,0f               jnc   6c59             if (R38 >= [b035])  {
 6c4a: 3f,26,0c            jb    B7,R26,6c59      if (B7_R26 = 0)  {
@@ -14052,7 +14052,7 @@ a8be: 82,82,01            timer 82,   182,
 a8c1: 22,42,01            timer 22, Tslpip, 
 a8c4: 20,33,02            timer 20,   233, 
 a8c7: 22,36,02            timer 22,   236, 
-a8ca: 80,64,01            timer 80,   164, 
+a8ca: 80,64,01            timer 80, ISCTMR, 
 a8cd: 20,e8,01            timer 20,   1e8, 
 a8d0: 22,96,01            timer 22, A3CTMR, 
 a8d3: 81,49,01,04,a5      timer 81,   149, ?Undsp?, 
