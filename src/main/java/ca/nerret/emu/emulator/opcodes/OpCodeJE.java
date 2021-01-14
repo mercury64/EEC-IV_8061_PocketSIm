@@ -29,6 +29,8 @@ public class OpCodeJE  extends OpCode implements IOpCode {
 	        
 	        boolean zeroFlag = state_.getPswBit(ProgramStatusWord.ZERO);
 	        
+	        System.out.println(state_.PSW_FLAGS & ProgramStatusWord.F_N);
+	        System.out.println(state_.pswFlagsToString());
 	        // Jump on =
 	        // If Z=1
 	        

@@ -4,6 +4,8 @@ public class ProgramStatusWord {
 	
 	Bit psw[];
 	
+	private int processorStatusWord = 0x00;
+	
 	private short memory;
 			
 	public final static byte STICKY_BIT = 0x0;
@@ -21,18 +23,29 @@ public class ProgramStatusWord {
 	public final static byte FIXED_LOGIC_ONE5 = 0xc;
 	public final static byte FIXED_LOGIC_ONE6 = 0xd;
 	public final static byte FIXED_LOGIC_ONE7 = 0xe;
-	public final static byte INTERRUPT_ENABLE = 0xf;
+	public final static byte INTERRUPT_SERVICE = 0xf;
 	
 	public final static boolean SET = true; 
 	public final static boolean CLEAR = false;
-	
-    static final int F_ST = 0x0100;
-    static final int F_I  = 0x0200;
-    static final int F_C  = 0x0800;
-    static final int F_VT = 0x1000;
-    static final int F_V  = 0x2000;
-    static final int F_N  = 0x4000;
-    static final int F_Z  = 0x8000;
+	// 0000 0000 0000 0000
+    public static final int F_ST 	  = 0x0001;
+    public static final int F_CZ	  = 0x0002;
+    public static final int F_NZ      = 0x0004;
+    public static final int F_C       = 0x0008;
+    public static final int F_VT	  = 0x0010;
+    public static final int F_V 	  = 0x0020;
+    public static final int F_N 	  = 0x0040;
+    public static final int F_Z 	  = 0x0080;
+    static final int F_BIT8   = 0x0100;
+    static final int F_BIT9   = 0x0200;
+    static final int F_BIT10  = 0x0400;
+    static final int F_BIT11  = 0x0800;
+    static final int F_BIT12  = 0x1000;
+    static final int F_BIT13  = 0x2000;
+    static final int F_BIT14  = 0x4000;
+    public static final int F_I  	  = 0x8000;
+
+
 	
 	public ProgramStatusWord()
 	{
@@ -60,7 +73,7 @@ public class ProgramStatusWord {
 		psw[FIXED_LOGIC_ONE5] = new Bit(FIXED_LOGIC_ONE5,"\"1\"", "Fixed Logic One", true);
 		psw[FIXED_LOGIC_ONE6] = new Bit(FIXED_LOGIC_ONE6,"\"1\"", "Fixed Logic One", true);
 		psw[FIXED_LOGIC_ONE7] = new Bit(FIXED_LOGIC_ONE7,"\"1\"", "Fixed Logic One", true);
-		psw[INTERRUPT_ENABLE] = new Bit(INTERRUPT_ENABLE,"I", "Interrupt Enable", false);
+		psw[INTERRUPT_SERVICE] = new Bit(INTERRUPT_SERVICE,"I", "Interrupt Enable", false);
 	}
 	
 	public void setBit(byte bit, boolean value)

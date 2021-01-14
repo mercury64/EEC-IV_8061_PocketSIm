@@ -28,6 +28,9 @@ public class State {
      * @param memory_ int[]
      */
     public State(int[] memory_) {
+    	
+    	this.PSW_FLAGS = 0x7f00; // Reset PSW.
+    	
         _memory = memory_.clone();
         this.register_memory = new long[0x1fff];
         
@@ -289,7 +292,7 @@ public class State {
     */
 	public byte getByteRegister(byte register) {
 		
-		byte value = (byte)register_memory[register];
+		byte value = (byte)register_memory[register  & 0xf];
 		
 		System.out.println(" Get Register:" + String.format("R%02X",register) + " = " + String.format("0x%02X",value));
 		
@@ -407,7 +410,7 @@ public class State {
 	@Override
 	public String toString() {
 		return "State [_sp=" + _sp + ", _pc=" + _pc + ", _memory="  + ", register_memory="
-				+ ", psw=" + psw + ", PSW_FLAGS=" + PSW_FLAGS + ", _a=" + _a
+				+ ", PSW_FLAGS=" + this.pswFlagsToString() + ", _a=" + _a
 				+ ", _b=" + _b + ", _c=" + _c + ", _d=" + _d + ", _e=" + _e + ", _h=" + _h + ", _l=" + _l
 				+ ", _state_time=" + _state_time + "]";
 	}
@@ -428,5 +431,25 @@ public class State {
 		return orrb;
 	}
 	
-	
+	public String pswFlagsToString()
+	{
+		String pswTableHeader 			= "________________________\n";
+		pswTableHeader = pswTableHeader + "| Z | N | V | VT| C | ST|\n";
+		pswTableHeader = pswTableHeader + "------------------------\n";
+		
+		String zeroFlag = Integer.toBinaryString( (this.PSW_FLAGS & ProgramStatusWord.F_Z)  >>> ProgramStatusWord.ZERO) ;
+		String negativeFlag = Integer.toBinaryString( (this.PSW_FLAGS & ProgramStatusWord.F_N) >>> ProgramStatusWord.NEGATIVE ) ;
+		String overflowFlag = Integer.toBinaryString( this.PSW_FLAGS & ProgramStatusWord.F_V) ;
+		String overflowTrapFlag = Integer.toBinaryString( this.PSW_FLAGS & ProgramStatusWord.F_VT) ;
+		String carryFlag = Integer.toBinaryString( (this.PSW_FLAGS & ProgramStatusWord.F_C)  >>> ProgramStatusWord.CARRY) ;
+		String stickyBitFlag = Integer.toBinaryString( this.PSW_FLAGS & ProgramStatusWord.F_ST) ;
+		
+		String flagValues = "| " + zeroFlag + " | " + negativeFlag + " | " + overflowFlag + " | " + overflowTrapFlag
+				+ " | " + carryFlag + " | " + stickyBitFlag + " |\n";
+		
+		String pswFlagsString = Integer.toBinaryString(this.PSW_FLAGS);//;String.format("%04X",this.PSW_FLAGS) ;
+		pswFlagsString = "PSW FLAGS : " + String.format("%16s", pswFlagsString).replace(' ', '0'); 
+		
+		return pswTableHeader + flagValues + pswFlagsString;
+	}	
 }

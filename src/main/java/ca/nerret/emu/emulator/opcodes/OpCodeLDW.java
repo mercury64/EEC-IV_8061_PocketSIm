@@ -65,11 +65,22 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
        
        if (this.getAddressModeType() == AddressMode.INDIRECT)
        {
-    	   value = (short) operands[numberOfBytes-2];
-    	   value = state_.getWordRegister((byte) value); // value of R36
     	   
-    	   int index = (int)value & 0xffff;
-    	   value = (short) memory[(int)index];// need [R36], actual program word code
+    	   // aa98: 9a,aa word aa91
+    	   
+    	   value = (short) operands[numberOfBytes-2]; // operand
+    	   value = state_.getWordRegister((byte) value); // value of [Register]
+    	   
+    	   int index = (int)value & 0xffff; // byte index, LSB
+    	   int index2 = (int)value+1 & 0xffff;// byte index2, MSB
+    	   
+    	   value = (short) memory[(int)index]; // LSB
+    	   short value2 = (short) memory[(int)index2]; // MSB
+     	  
+    	   short RA = (short) (value2 << 8 |  value & 0xff); // put MSB | LSB
+    	   
+    	   value = RA;
+    	   
        }
        
        if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
@@ -100,6 +111,18 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
        {
     	   //value = state_.getWordRegister((byte) value); // value of R36
        }
+       
+       if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
+       {
+    	   // a3,
+    	   short tmp_reg = (short) (operands[numberOfBytes-4] - 1);
+    	   int index = (int)value & 0xffff;
+    	   short tmp_value = (short) memory[(int)tmp_reg];
+    	   
+    	   value = (short) (tmp_value + index);
+    	   
+       }
+       
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
         state_.setWordRegister(dest_dwreg, value);
