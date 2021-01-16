@@ -8,7 +8,7 @@ public class State {
     private int _pc = 0x2000; // Program start.
     private int[] _memory; 
     
-    private long[] register_memory ;
+    private byte[] register_memory ;
     
 	public ProgramStatusWord psw = new ProgramStatusWord();
     public int PSW_FLAGS;
@@ -32,7 +32,7 @@ public class State {
     	this.PSW_FLAGS = 0x7f00; // Reset PSW.
     	
         _memory = memory_.clone();
-        this.register_memory = new long[0x1fff];
+        this.register_memory = new byte[0x1fff];
         
         updateStateTime(_state_time + 1);
     }
@@ -186,9 +186,8 @@ public class State {
 		this._state_time += _state_time;
 	}
 
-	// Could be byte, word or double word register
-	// Value could be byte, word, dword, etc.
-	public void setByteRegister(byte reg, byte value) {
+
+	public void setByteRegister(short reg, byte value) {
 
 		System.out.println(
 				" Set Register:" + 
@@ -197,7 +196,7 @@ public class State {
 				String.format("0x%02X", value)
 				);
 				
-		register_memory[reg & 0xf] = value;
+		register_memory[reg] = value;
 		
 	}
 	
@@ -290,29 +289,55 @@ public class State {
 	    }
 	}
     */
-	public byte getByteRegister(byte register) {
+	public byte getByteRegister(short register) {
 		
-		byte value = (byte)register_memory[register  & 0xf];
+		byte value = register_memory[register];
 		
 		System.out.println(" Get Register:" + String.format("R%02X",register) + " = " + String.format("0x%02X",value));
 		
 		return value;
 	}
 	
-	public short getWordRegister(byte register) {
-		// TODO Auto-generated method stub
-		byte reg1 = register;
-		byte reg2 = (byte) (reg1 + 1);
-		short temp = (short) (this.register_memory[reg1] & 0xffff |  ((this.register_memory[reg2] & 0xffff) << 8));
+	public short getWordRegister(short register) {
+        
+		byte lo = this.register_memory[register];
+        byte hi = this.register_memory[register + 1];
+        
+		short temp = (short) (lo & 0xffff |  ((hi & 0xffff) << 8));
 		
-		System.out.println(" Get Word Register:" + String.format("R%02X",register) + " = " + String.format("0x%04X",temp));
+		System.out.println(" Get Word Register:" + 
+				String.format("R%02X",register) + 
+				" = " + 
+				String.format("0x%04X",temp)
+			);
 		
 		return temp;
 	}
 
+	public void setWordRegister(short dest_dwreg, byte value) {
+	
+		register_memory[dest_dwreg] = value;
+		System.out.println(" Set Word Register with a Byte:" + 
+				String.format("0x%02X",dest_dwreg) + 
+				" = " + 
+				String.format("0x%04X",value));
+	}
+	
 	public void setWordRegister(short dest_dwreg, short value) {
-		register_memory[dest_dwreg] = value  & 0xffff ;
-		System.out.println(" Set Word Register:" + String.format("0x%02X",dest_dwreg) + " = " + String.format("0x%04X",value));
+        
+        byte hi = (byte) ((value >> 8) & 0xff ) ;
+        byte lo = (byte) (value  & 0xff) ;
+      
+		register_memory[dest_dwreg] = lo;
+		register_memory[dest_dwreg + 1] = hi;
+		System.out.println(
+				" Set Word Register:" + 
+						String.format("0x%02X",dest_dwreg) + 
+						" = " + 
+						String.format("0x%04X",value) +
+						String.format("[hi: 0x%02X ",hi) + String.format("lo: 0x%02X]",lo) +
+						String.format("= 0x%02X%02X",lo,hi)
+				);
 	}
 
 	public Object setWordRegister(short rB) {
@@ -350,6 +375,17 @@ public class State {
 	    }
 	     return (short) sum;
 	    }
+	
+	
+	public short doByteSub(final byte Rb, final byte Ra) {
+
+		long diff =  Rb - Ra;
+	     
+		this.modifySubPSW(diff, Rb, Ra);
+	      
+	    return (short) diff;
+		
+	}
 	
 	/**
 	 * overflow detection

@@ -90,7 +90,7 @@ public class OpCodeCMPW extends OpCode implements IOpCode {
         // LSB
         // second byte, shift to high word position
         // first byte, mask to low word position
-    	short RA = state_.getWordRegister((byte)operands[numberOfBytes-1]);
+    	short RA = 0;
 		short RB = 0;
    
 		if (this.getAddressModeType() == AddressMode.DIRECT)

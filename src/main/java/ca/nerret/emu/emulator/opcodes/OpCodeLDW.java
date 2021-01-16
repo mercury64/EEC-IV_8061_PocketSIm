@@ -5,7 +5,14 @@ import ca.nerret.emu.emulator.OpCode;
 import ca.nerret.emu.emulator.State;
 
 /**
- * @author h
+ * LDW - Load Word
+ * 
+ * Description:
+ * 	LDW transfers a 16-bit "A" operand to a 16-bit "B" operand location.
+ * 
+ * 
+ * @author wwhite
+ *
  */
 public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
 
@@ -63,6 +70,9 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
         short dest_dwreg = operands[numberOfBytes-1];
         short value  = (short) ((operands[numberOfBytes-2] << 8) | operands[numberOfBytes-3]  & 0xff);;
        
+        byte lo;
+        byte hi;
+        
        if (this.getAddressModeType() == AddressMode.INDIRECT)
        {
     	   
@@ -85,31 +95,27 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
        
        if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
        {
-    	   short tmp_reg = (short) (operands[numberOfBytes-2] - 1);// R32// R36
-    	   short tmp_value = value;
+    	   // LDW (indirreg)+, breg
+    	   // (RB) <- ([RA]); (RA) <- (RA) + 2
     	   
-    	   //a2,33,36            ldw   R36,[R32++]      R36 = [R32++];
-    	   // # bytes, 1-opcode, 2-[reg++], 3-dest
-
-    	   tmp_value = state_.getWordRegister((byte) tmp_reg);// [R32]
-    	   int index = (int)tmp_value & 0xffff;
-    	   int index2 = (int)tmp_value+1 & 0xffff;
+    	   short indirectRegRA = (short) (operands[numberOfBytes-2] - 1);
+    	   short destRegRB = operands[numberOfBytes-1];
     	   
-    	   value = (short) memory[(int)index];// need [R36], actual program word code
+    	   // [RA]
+    	   short RA = state_.getWordRegister(indirectRegRA);
     	   
-    	   short value2 = (short) memory[(int)index2];// need [R36], actual program word code
-    	  
-    	   short RA = (short) (value2 << 8 |  value & 0xff);
+    	   // (RB) <- ([RA])
+    	   state_.setWordRegister(destRegRB, RA);
     	   
-    	   value = RA;
-    	   tmp_value = (short) (tmp_value + 2 );// R32++
-    	   
-    	   state_.setWordRegister(tmp_reg, tmp_value);
-           
+    	   // (RA) <- (RA) + 2
+    	   state_.setWordRegister(indirectRegRA, (short)(RA + 2));
        }
        if (this.getAddressModeType() == AddressMode.IMMEDIATE)
        {
-    	   //value = state_.getWordRegister((byte) value); // value of R36
+           dest_dwreg = operands[numberOfBytes-1];
+           value  = (short) ((operands[numberOfBytes-2] << 8) | operands[numberOfBytes-3]  & 0xff);;
+
+          
        }
        
        if (this.getAddressModeType() == AddressMode.LONG_INDEXED)

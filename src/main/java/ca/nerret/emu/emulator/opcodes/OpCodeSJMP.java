@@ -99,7 +99,7 @@ public class OpCodeSJMP extends OpCode implements IOpCode {
     public String toString()
     {
     	String out = super.toString();
-    	out = out + System.lineSeparator() + " Jump to: " + String.format("0x%02X",this.getOffset());
+    	out = out + " Jump to: " + String.format("0x%02X",this.getOffset()) + System.lineSeparator();
     	
     	return out;
     }

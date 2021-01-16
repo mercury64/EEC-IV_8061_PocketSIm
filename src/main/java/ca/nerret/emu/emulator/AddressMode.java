@@ -13,6 +13,11 @@ public class AddressMode {
 	public String name;
 	private boolean autoIncrement;
 	
+	private String assemblerFormat;
+	private String instructionOperation;
+	private int executionStates;
+	// private MachineFormat: TODO
+	
 	public AddressMode(byte opcode)
 	{
 		byte firstByte = 0x0;
@@ -55,7 +60,10 @@ public class AddressMode {
 	}
 	@Override
 	public String toString() {
-		return "AddressMode [type=" + type + ", name=" + name + "]";
+		return "AddressMode [" + name + "]";
+		
+		//+" {  Assembler Format: "+ this.assemblerFormat
+		//		+ System.lineSeparator() + "    Instruction Operation: " +this.instructionOperation + System.lineSeparator() + " }]";
 	}
 
 	public int getType() {
@@ -105,5 +113,23 @@ public class AddressMode {
 
 	public void setAutoIncrement(boolean autoIncrement) {
 		this.autoIncrement = autoIncrement;
+	}
+	public String getAssemblerFormat() {
+		return assemblerFormat;
+	}
+	public void setAssemblerFormat(String assemblerFormat) {
+		this.assemblerFormat = assemblerFormat;
+	}
+	public String getInstructionOperation() {
+		return instructionOperation;
+	}
+	public void setInstructionOperation(String instructionOperation) {
+		this.instructionOperation = instructionOperation;
+	}
+	public int getExecutionStates() {
+		return executionStates;
+	}
+	public void setExecutionStates(int executionStates) {
+		this.executionStates = executionStates;
 	}
 }

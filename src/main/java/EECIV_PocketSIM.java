@@ -77,8 +77,10 @@ public class EECIV_PocketSIM {
 				System.out.println("Break Point");
 			}
 			logger.info( String.format("0x%04X: ", state.getPc()) );
+			
 			System.out.print(String.format("0x%04X: %s", state.getPc(), opcode));
 			opcode.exec(state);
+			
 			logger.info( String.format("%s", opcode) );
 			    
 			//System.out.println(state);
