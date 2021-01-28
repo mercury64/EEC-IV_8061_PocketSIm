@@ -95,7 +95,7 @@ public class OpCodeCMPW extends OpCode implements IOpCode {
    
 		if (this.getAddressModeType() == AddressMode.DIRECT)
 		{
-			RA = state_.getWordRegister((byte)operands[numberOfBytes-1]);
+			RA = state_.getWordRegister(operands[numberOfBytes-1]);
 			RB = state_.getWordRegister(operands[numberOfBytes-2]);
 		}
 		if (this.getAddressModeType() == AddressMode.IMMEDIATE)

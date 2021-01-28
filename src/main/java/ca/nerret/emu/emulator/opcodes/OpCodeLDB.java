@@ -99,15 +99,15 @@ public class OpCodeLDB extends OpCode implements IOpCode {
 		    	   short destRegRB = operands[numberOfBytes-1];
 		    	   
 		    	   // [RA]
-		    	   byte RA = state_.getByteRegister(indirectRegRA);
+		    	   short RA = state_.getWordRegister(indirectRegRA);
 		    	   
 		    	   // (RB) <- ([RA])
-		    	   state_.setByteRegister(destRegRB, RA);
-		    	   areg = RA;
+		    	  // state_.setByteRegister(destRegRB, RA);
+		    	   areg = getByteValue(memory, RA);
 		    	   breg = destRegRB;
 		    	   
 		    	   // (RA) <- (RA) + 1
-		    	   state_.setByteRegister(indirectRegRA, (byte) (RA + 1));
+		    	   state_.setWordRegister(indirectRegRA, (short) (RA + 1));
 
 
 	        	break;
@@ -139,4 +139,17 @@ public class OpCodeLDB extends OpCode implements IOpCode {
         state_.setByteRegister(breg, areg);
 
     }
+	
+	private byte getByteValue(int[] memory, short location) {
+	 	   int index = (int)location & 0xffff; // byte index, LSB
+	 	   //int index2 = (int)location+1 & 0xffff;// byte index2, MSB
+	 	   
+	 	   byte value = (byte) memory[(int)index]; // LSB
+	 	  // short value2 = (short) memory[(int)index2]; // MSB
+	  	  
+	 	   //short RA = (short) (value2 << 8 |  value & 0xff); // put MSB | LSB
+	 	   
+	 	   //value = RA;
+			return value;
+		}
 }

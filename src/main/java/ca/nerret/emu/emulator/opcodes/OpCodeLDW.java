@@ -81,15 +81,9 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
     	   value = (short) operands[numberOfBytes-2]; // operand
     	   value = state_.getWordRegister((byte) value); // value of [Register]
     	   
-    	   int index = (int)value & 0xffff; // byte index, LSB
-    	   int index2 = (int)value+1 & 0xffff;// byte index2, MSB
+    	   value = this.getWordValue(memory, value);
     	   
-    	   value = (short) memory[(int)index]; // LSB
-    	   short value2 = (short) memory[(int)index2]; // MSB
-     	  
-    	   short RA = (short) (value2 << 8 |  value & 0xff); // put MSB | LSB
-    	   
-    	   value = RA;
+    	   state_.setWordRegister(dest_dwreg, value);
     	   
        }
        
@@ -104,8 +98,10 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
     	   // [RA]
     	   short RA = state_.getWordRegister(indirectRegRA);
     	   
+    	   value = this.getWordValue(memory, RA);
+    	   
     	   // (RB) <- ([RA])
-    	   state_.setWordRegister(destRegRB, RA);
+    	   state_.setWordRegister(destRegRB, (short)value);
     	   
     	   // (RA) <- (RA) + 2
     	   state_.setWordRegister(indirectRegRA, (short)(RA + 2));
@@ -115,7 +111,7 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
            dest_dwreg = operands[numberOfBytes-1];
            value  = (short) ((operands[numberOfBytes-2] << 8) | operands[numberOfBytes-3]  & 0xff);;
 
-          
+           state_.setWordRegister(dest_dwreg, value);
        }
        
        if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
@@ -126,14 +122,27 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
     	   short tmp_value = (short) memory[(int)tmp_reg];
     	   
     	   value = (short) (tmp_value + index);
-    	   
+    	   state_.setWordRegister(dest_dwreg, value);
        }
        
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
-        state_.setWordRegister(dest_dwreg, value);
+       
 
     }
+
+	private short getWordValue(int[] memory, short location) {
+ 	   int index = (int)location & 0xffff; // byte index, LSB
+ 	   int index2 = (int)location+1 & 0xffff;// byte index2, MSB
+ 	   
+ 	   short value = (short) memory[(int)index]; // LSB
+ 	   short value2 = (short) memory[(int)index2]; // MSB
+  	  
+ 	   short RA = (short) (value2 << 8 |  value & 0xff); // put MSB | LSB
+ 	   
+ 	   value = RA;
+		return value;
+	}
 
 	@Override
 	public void setAddressMode(AddressMode direct) {

@@ -80,23 +80,25 @@ public class OpCodeORRB  extends OpCode implements IOpCode {
         //byte dest_dwreg = operands[1];
         byte Ra = operands[1];
         byte Rb = operands[2];
+        byte result = 0;
         
 		if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
 		{
 		
 			//2073: 92,15,1c            orb   R1c,[R14++]      R1c |= [R14++]; R1c | [R14++]
 			// register [R14++]
-			short register_value = state_.getWordRegister((byte) (Ra - 1));// [R32]
-			state_.setWordRegister((byte) (Ra - 1), (short) (register_value + 1));	
+			short register_value = state_.getWordRegister((short) (Ra - 1));// [R32]
+			state_.setWordRegister((short) (Ra - 1), (short) (register_value + 1));	
 		 
 			// register [value]
-			int mem_index = register_value & 0xffff;
-			short tmp_register_value =  (short) memory[(int)mem_index];
-			Ra = (byte) tmp_register_value;	
-		
+			//int mem_index = register_value & 0xff;
+			//byte tmp_register_value =  (byte) memory[(int)mem_index];
+			//Ra = (byte) tmp_register_value;	
+		    Ra = getByteValue(memory, register_value);
+		    
+			result = (byte) state_.doORRB(state_.getByteRegister(Rb), Ra);
 		}
 
-        short result = state_.doORRB(state_.getByteRegister(Rb), Ra);
 
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
@@ -104,4 +106,17 @@ public class OpCodeORRB  extends OpCode implements IOpCode {
         state_.setByteRegister(Rb, (byte) result);    
         
     }
+    
+	private byte getByteValue(int[] memory, short location) {
+	 	   int index = (int)location & 0xffff; // byte index, LSB
+	 	   //int index2 = (int)location+1 & 0xffff;// byte index2, MSB
+	 	   
+	 	   byte value = (byte) memory[(int)index]; // LSB
+	 	  // short value2 = (short) memory[(int)index2]; // MSB
+	  	  
+	 	   //short RA = (short) (value2 << 8 |  value & 0xff); // put MSB | LSB
+	 	   
+	 	   //value = RA;
+			return value;
+		}
 }

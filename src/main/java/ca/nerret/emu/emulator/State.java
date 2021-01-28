@@ -196,7 +196,7 @@ public class State {
 				String.format("0x%02X", value)
 				);
 				
-		register_memory[reg] = value;
+		register_memory[(int)reg] = value;
 		
 	}
 	
@@ -302,8 +302,10 @@ public class State {
         
 		byte lo = this.register_memory[register];
         byte hi = this.register_memory[register + 1];
-        
-		short temp = (short) (lo & 0xffff |  ((hi & 0xffff) << 8));
+        short sHiByte =  (short) ((hi & 0xff) << 8);
+        short sLoByte = (short) (lo & 0xff);
+		
+        short temp = (short) (sHiByte | sLoByte);
 		
 		System.out.println(" Get Word Register:" + 
 				String.format("R%02X",register) + 

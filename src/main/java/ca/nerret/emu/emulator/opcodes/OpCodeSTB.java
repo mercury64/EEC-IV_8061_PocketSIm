@@ -68,15 +68,17 @@ public class OpCodeSTB extends OpCode implements IOpCode {
         	{
         		register =  (byte) (register - 1);
         		this.getAddressMode().setType(AddressMode.INDIRECT_AUTO_INC);
-        		byte next_reg = (byte) state_.getWordRegister((byte) (register));
+        		byte next_reg = (byte) state_.getByteRegister((byte) (register));
         		
-        		state_.setWordRegister((short) (register), (short) (next_reg + 2));
+        		state_.setByteRegister((byte) (register), (byte) (next_reg + 2));
         		register = next_reg;
         	}
         	else 
         	{
             	register = state_.getByteRegister((byte) (register));
             	value = state_.getByteRegister((byte)value);
+            	
+            	register = (byte) (register << 2);
         		
         	}   	
         }
