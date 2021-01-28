@@ -5,7 +5,14 @@ import ca.nerret.emu.emulator.OpCode;
 import ca.nerret.emu.emulator.State;
 
 /**
- * @author h
+ * LDW - Load Word
+ * 
+ * Description:
+ * 	LDW transfers a 16-bit "A" operand to a 16-bit "B" operand location.
+ * 
+ * 
+ * @author wwhite
+ *
  */
 public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
 
@@ -63,48 +70,79 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
         short dest_dwreg = operands[numberOfBytes-1];
         short value  = (short) ((operands[numberOfBytes-2] << 8) | operands[numberOfBytes-3]  & 0xff);;
        
+        byte lo;
+        byte hi;
+        
        if (this.getAddressModeType() == AddressMode.INDIRECT)
        {
-    	   value = (short) operands[numberOfBytes-2];
-    	   value = state_.getWordRegister((byte) value); // value of R36
     	   
-    	   int index = (int)value & 0xffff;
-    	   value = (short) memory[(int)index];// need [R36], actual program word code
+    	   // aa98: 9a,aa word aa91
+    	   
+    	   value = (short) operands[numberOfBytes-2]; // operand
+    	   value = state_.getWordRegister((byte) value); // value of [Register]
+    	   
+    	   value = this.getWordValue(memory, value);
+    	   
+    	   state_.setWordRegister(dest_dwreg, value);
+    	   
        }
        
        if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
        {
-    	   short tmp_reg = (short) (operands[numberOfBytes-2] - 1);// R32// R36
-    	   short tmp_value = value;
+    	   // LDW (indirreg)+, breg
+    	   // (RB) <- ([RA]); (RA) <- (RA) + 2
     	   
-    	   //a2,33,36            ldw   R36,[R32++]      R36 = [R32++];
-    	   // # bytes, 1-opcode, 2-[reg++], 3-dest
-
-    	   tmp_value = state_.getWordRegister((byte) tmp_reg);// [R32]
-    	   int index = (int)tmp_value & 0xffff;
-    	   int index2 = (int)tmp_value+1 & 0xffff;
+    	   short indirectRegRA = (short) (operands[numberOfBytes-2] - 1);
+    	   short destRegRB = operands[numberOfBytes-1];
     	   
-    	   value = (short) memory[(int)index];// need [R36], actual program word code
+    	   // [RA]
+    	   short RA = state_.getWordRegister(indirectRegRA);
     	   
-    	   short value2 = (short) memory[(int)index2];// need [R36], actual program word code
-    	  
-    	   short RA = (short) (value2 << 8 |  value & 0xff);
+    	   value = this.getWordValue(memory, RA);
     	   
-    	   value = RA;
-    	   tmp_value = (short) (tmp_value +2);// R32++
+    	   // (RB) <- ([RA])
+    	   state_.setWordRegister(destRegRB, (short)value);
     	   
-    	   state_.setWordRegister(tmp_reg, tmp_value);
-           
+    	   // (RA) <- (RA) + 2
+    	   state_.setWordRegister(indirectRegRA, (short)(RA + 2));
        }
        if (this.getAddressModeType() == AddressMode.IMMEDIATE)
        {
-    	   //value = state_.getWordRegister((byte) value); // value of R36
+           dest_dwreg = operands[numberOfBytes-1];
+           value  = (short) ((operands[numberOfBytes-2] << 8) | operands[numberOfBytes-3]  & 0xff);;
+
+           state_.setWordRegister(dest_dwreg, value);
        }
+       
+       if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
+       {
+    	   // a3,
+    	   short tmp_reg = (short) (operands[numberOfBytes-4] - 1);
+    	   int index = (int)value & 0xffff;
+    	   short tmp_value = (short) memory[(int)tmp_reg];
+    	   
+    	   value = (short) (tmp_value + index);
+    	   state_.setWordRegister(dest_dwreg, value);
+       }
+       
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
-        state_.setWordRegister(dest_dwreg, value);
+       
 
     }
+
+	private short getWordValue(int[] memory, short location) {
+ 	   int index = (int)location & 0xffff; // byte index, LSB
+ 	   int index2 = (int)location+1 & 0xffff;// byte index2, MSB
+ 	   
+ 	   short value = (short) memory[(int)index]; // LSB
+ 	   short value2 = (short) memory[(int)index2]; // MSB
+  	  
+ 	   short RA = (short) (value2 << 8 |  value & 0xff); // put MSB | LSB
+ 	   
+ 	   value = RA;
+		return value;
+	}
 
 	@Override
 	public void setAddressMode(AddressMode direct) {

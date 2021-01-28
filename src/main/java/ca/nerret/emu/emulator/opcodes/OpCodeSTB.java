@@ -59,29 +59,33 @@ public class OpCodeSTB extends OpCode implements IOpCode {
 		}
         
         // little endian
-        short register = (short) (operands[1] & 0xff);
-        short value = (short) (operands[2] & 0xff);
+        byte register =(byte) (operands[1] & 0xff);
+        byte value = (byte) (operands[2] & 0xff);
             
         if (this.getAddressModeType() == AddressMode.INDIRECT)
         {
         	if (  register%2 > 0 )
         	{
-        		register = (short) (register-1);
+        		register =  (byte) (register - 1);
         		this.getAddressMode().setType(AddressMode.INDIRECT_AUTO_INC);
-        		short next_reg = (short) state_.getWordRegister((byte) (register));
+        		byte next_reg = (byte) state_.getByteRegister((byte) (register));
         		
-        		state_.setWordRegister((short) (register), (short) (next_reg + 2));
+        		state_.setByteRegister((byte) (register), (byte) (next_reg + 2));
         		register = next_reg;
-        		
-        		
         	}
-        	
-        
+        	else 
+        	{
+            	register = state_.getByteRegister((byte) (register));
+            	value = state_.getByteRegister((byte)value);
+            	
+            	register = (byte) (register << 2);
+        		
+        	}   	
         }
 
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
-        state_.setWordRegister(register, value);
+        state_.setByteRegister((byte)register, (byte)value);
 
     }
 }

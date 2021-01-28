@@ -6,12 +6,12 @@ import ca.nerret.emu.emulator.ProgramStatusWord;
 import ca.nerret.emu.emulator.State;
 
 /**
- * JB - Jump if bit equals one
+ * JNB - Jump if bit equals zero
  * 
  * Description: 
- * 		JB performs a test on a specified bit(0 thru 7) in an 8-bit "B" operand register.
- * 		If the tested bit is "1", a program counter(PC) relative jump using an 8-bit signed displacement value contained in the 3rd instruction byte occurs.
- *      If the tested bit is "0", a jump is not performed and the next sequential program instruction is executed.
+ * 		JNB performs a test on a specified bit(0 thru 7) in an 8-bit "B" operand register.
+ * 		If the tested bit is "0", a program counter(PC) relative jump using an 8-bit signed displacement value contained in the 3rd instruction byte occurs.
+ *      If the tested bit is "1", a jump is not performed and the next sequential program instruction is executed.
  *      The target label for the jump must be within the following displacement range:-128 to +127 bytes from the end of the instruction.
  * 
  * PSW Flags Affected:
@@ -21,12 +21,12 @@ import ca.nerret.emu.emulator.State;
  * @author wwhite
  *
  */
-public class OpCodeJB  extends OpCode implements IOpCode {
+public class OpCodeJNB  extends OpCode implements IOpCode {
 
-	 public OpCodeJB(int opcode, String mnemonic) {
+	 public OpCodeJNB(int opcode, String mnemonic) {
 			super(opcode, mnemonic);
 			byte opcodeByte = (byte) (opcode & 0B00000111);
-			this.setMnemonic("JB" + opcodeByte);
+			this.setMnemonic("JNB" + opcodeByte);
 		}
 
 		/* (non-Javadoc)
@@ -58,7 +58,7 @@ public class OpCodeJB  extends OpCode implements IOpCode {
 			int setBit = (value >>> bitToTest) & 0x1;
 			
 			System.out.println(setBit);
-	        if ( setBit == 1 )
+	        if ( setBit == 0 )
 	        {
 	        	// Take jump
 	            // If jump taken, state_.updateStateTime(4);

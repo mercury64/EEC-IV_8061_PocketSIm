@@ -5,9 +5,9 @@ import ca.nerret.emu.emulator.OpCode;
 import ca.nerret.emu.emulator.ProgramStatusWord;
 import ca.nerret.emu.emulator.State;
 
-public class OpCodeJE  extends OpCode implements IOpCode {
+public class OpCodeJGTU  extends OpCode implements IOpCode {
 
-	 public OpCodeJE(int opcode, String mnemonic) {
+	 public OpCodeJGTU(int opcode, String mnemonic) {
 			super(opcode, mnemonic);
 			// TODO Auto-generated constructor stub
 		}
@@ -28,13 +28,14 @@ public class OpCodeJE  extends OpCode implements IOpCode {
 	        int newPC = pc + 2;
 	        
 	        boolean zeroFlag = state_.getPswBit(ProgramStatusWord.ZERO);
+	        boolean carryFlag = state_.getPswBit(ProgramStatusWord.CARRY);
 	        
 	        System.out.println(state_.PSW_FLAGS & ProgramStatusWord.F_N);
 	        System.out.println(state_.pswFlagsToString());
 	        // Jump on =
 	        // If Z=1
 	        
-	        if ( zeroFlag == ProgramStatusWord.SET)
+	        if ( zeroFlag == ProgramStatusWord.CLEAR && carryFlag == ProgramStatusWord.SET)
 	        {
 	        	// Take jump
 	            // If jump taken, state_.updateStateTime(4);

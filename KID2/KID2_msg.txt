@@ -2317,7 +2317,7 @@ sub  58d5 "Sub_58d5"   #cmd
 sub  58ec "Sub_58ec"   #cmd
 sub  5a31 "Sub_5a31"   #cmd
 sub  5b96 "Sub_5b96"   #cmd
-sub  5c7b "Update_fpump"   #cmd
+sub  5c7b "FUEL_PUMP_COM1"   #cmd
 sub  5c90 "Sub_5c90"   #cmd
 sub  5ca7 "Sub_5ca7"   #cmd
 sub  5ca9 "Sub_5ca9"   #cmd
@@ -2578,8 +2578,8 @@ sym 2a  "VIP_flags"
 sym 2a  "Vscdt" :B 0
 sym 2a  "Vscst" :B 1
 sym 2a  "Vip_enable" :B 2
-sym 2a  "Disable_running" :B 3
-sym 2a  "Disable_nostart" :B 4
+sym 2a  "DISABLE_RUNNING" :B 3
+sym 2a  "DISABLE_NOSTART" :B 4
 sym 2a  "Self_test" :B 5
 sym 2a  "No_Start" :B 6
 sym 2a  "Disable_vscdt" :B 7
@@ -2587,7 +2587,7 @@ sym 2b  "STO_Flags"
 sym 2b  "STO_HighSpeed" :B 0
 sym 2b  "STO_Lowspeed_r" :B 1
 sym 2b  "STO_Lowspeed" :B 2
-sym 2b  "STO_working" :B 3
+sym 2b  "STO_WORKING" :B 3
 sym 2b  "STO_fast" :B 4
 sym 2b  "STO_code" :B 5
 sym 2b  "STO_off" :B 6
@@ -2635,6 +2635,7 @@ sym 45  "Egoste2" :B 6
 sym 45  "Egoste1" :B 7
 sym 46  "AM1" :B 0
 sym 46  "WOT_AC" :B 6
+sym 46  "PUMP" :B 7
 sym 47  "Flags_47"
 sym 47  "B0_Flags47" :B 0
 sym 47  "AM2" :B 6
@@ -2716,6 +2717,7 @@ sym a3  "B6_Flags_a3" :B 6
 sym a3  "B7_Flags_a3" :B 7
 sym a4  "BRK_NEVER_OFF" :B 1
 sym a4  "BRK_NEVER_ON" :B 3
+sym a4  "MAPOFL" :B 4
 sym a4  "TAQ1" :B 5
 sym a5  "Flags_a5"
 sym a5  "Adptmr_on" :B 0
@@ -2763,7 +2765,7 @@ sym 10e  "VSS_Raw"
 sym 110  "IECT"
 sym 112  "IACT"
 sym 114  "IEGR"
-sym 116  "TPS_min"
+sym 116  "EOFF"
 sym 118  "INDS"
 sym 11a  "IEGO1"
 sym 11c  "ITP"
@@ -2772,7 +2774,7 @@ sym 124  "MAP_WORD"
 sym 136  "PUTMR"
 sym 138  "Adptmr"
 sym 13a  "BG_TMR"
-sym 142  "Tslpip"
+sym 142  "TSLPIP"
 sym 144  "Loop_time"
 sym 152  "AWOTMR"
 sym 158  "DASPOT"
@@ -2780,6 +2782,7 @@ sym 15a  "IBGPSI"
 sym 15c  "NLAST"
 sym 162  "ISCFLG"
 sym 163  "DSDRPM"
+sym 164  "ISCTMR"
 sym 167  "LOACT"
 sym 168  "BPCOR"
 sym 176  "KAMRF1"
@@ -2940,6 +2943,7 @@ sym b022  "DEBYCP"
 sym b024  "DASCTL"
 sym b026  "DASPTK"
 sym b030  "DELRAT"
+sym b033  "ACMAP"
 sym b036  "UPDATM"
 sym b037  "MINMPH"
 sym b03c  "Stall_RPM"
@@ -3003,8 +3007,8 @@ sym b3fe  "Func_b3fe"
 sym b412  "FN023"
 sym b426  "FN024"
 sym b44e  "fuel_injector_slope"
-sym b463  "fuel_open_loop_multiplier_drive"
-sym b466  "fuel_open_loop_multiplier_neutral"
+sym b463  "OLIDRV"
+sym b466  "OLINEUT"
 sym b47c  "MPGDEC"
 sym b49a  "REV_LIMIT"
 sym b49c  "rev_limit_hysteresis"
@@ -3062,6 +3066,7 @@ sym ba70  "Func_ba70"
 sym ba8c  "Func_ba8c"
 sym bab2  "TCBPA"
 sym bab4  "TCFBS"
+sym bac8  "TCEGR"
 sym bace  "TCNDT_ISC"
 sym bad6  "TCTOT"
 sym bae4  "Sigklu"
@@ -3191,7 +3196,7 @@ sym cb78  "1200_RPM"
 sym cb7a  "400_RPM"
 sym cb7c  "CRKTM1"
 sym cb83  "PFEHP"
-sym cb85  "emissions_thermactor_sw"
+sym cb85  "THRMHP"
 sym cb86  "TSTRAT"
 sym cb87  "TRLOAD"
 sym cb8a  "IGN_TYPE"

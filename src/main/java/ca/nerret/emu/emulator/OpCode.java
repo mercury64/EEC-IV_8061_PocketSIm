@@ -73,7 +73,7 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 	public String toString()
 	{
 		return " " + this.mnemonic + " " + String.format("0x%02X",this.opcode) + System.lineSeparator() 
-			+ " " + this.addressMode.toString();
+			+ " " + this.addressMode.toString() + System.lineSeparator() ;
 	}
 
 	

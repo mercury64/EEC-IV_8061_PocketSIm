@@ -1547,7 +1547,7 @@ sub  858d5 858eb  "Sub_58d5"
 sub  858ec 85a30  "Sub_58ec"  
 sub  85a31 85b95  "Sub_5a31"  
 sub  85b96 85c7a  "Sub_5b96"  
-sub  85c7b "Update_fpump"
+sub  85c7b "FUEL_PUMP_COM1"
 sub  85c90 85c98  "Sub_5c90"  
 sub  85ca7 85ccb  "Sub_5ca7"  
 sub  85ca9 85ccb  "Sub_5ca9"  
@@ -1819,8 +1819,8 @@ sym 2a "VIP_flags"
 sym 2a "Vscdt" :B 0
 sym 2a "Vscst" :B 1
 sym 2a "Vip_enable" :B 2
-sym 2a "Disable_running" :B 3
-sym 2a "Disable_nostart" :B 4
+sym 2a "DISABLE_RUNNING" :B 3
+sym 2a "DISABLE_NOSTART" :B 4
 sym 2a "Self_test" :B 5
 sym 2a "No_Start" :B 6
 sym 2a "Disable_vscdt" :B 7
@@ -1829,7 +1829,7 @@ sym 2b "STO_Flags"
 sym 2b "STO_HighSpeed" :B 0
 sym 2b "STO_Lowspeed_r" :B 1
 sym 2b "STO_Lowspeed" :B 2
-sym 2b "STO_working" :B 3
+sym 2b "STO_WORKING" :B 3
 sym 2b "STO_fast" :B 4
 sym 2b "STO_code" :B 5
 sym 2b "STO_off" :B 6
@@ -1908,7 +1908,7 @@ sym 46 "AM1" : B 0
 #sym 46 "Scvnt" : B 4
 #sym 46 "Sto_state" : B 5
 sym 46 "WOT_AC" : B 6
-#sym 46 "Pump" : B 7
+sym 46 "PUMP" : B 7
 
 sym 47 "Flags_47"
 sym 47 "B0_Flags47" : B 0
@@ -2030,6 +2030,7 @@ sym a3 "B7_Flags_a3" : B 7
 
 sym a4 "BRK_NEVER_OFF" : B 1
 sym a4 "BRK_NEVER_ON" : B 3
+sym a4 "MAPOFL" : B 4
 sym a4 "TAQ1" : B 5
 
 sym a5 "Flags_a5"
@@ -2098,7 +2099,7 @@ Sam 10e "IVCAL"
 sym 110 "IECT"
 sym 112 "IACT"
 sym 114 "IEGR"
-sym 116 "TPS_min"
+sym 116 "EOFF"
 sym 118 "INDS"
 sym 11a "IEGO1"
 
@@ -2110,7 +2111,7 @@ sym 138 "Adptmr"
 
 sym 13a "BG_TMR"
 
-sym 142 "Tslpip"
+sym 142 "TSLPIP"
 sym 144 "Loop_time"
 
 sym 152 "AWOTMR"
@@ -2120,7 +2121,7 @@ sym 15a "IBGPSI"
 sym 15c "NLAST"
 sym 162 "ISCFLG"
 sym 163 "DSDRPM"
-
+sym 164 "ISCTMR"
 sym 167 "LOACT"
 sym 168 "BPCOR"
 
@@ -2358,6 +2359,7 @@ sym b024 "DASCTL"
 sym b026 "DASPTK"
 
 sym b030 "DELRAT"
+sym b033 "ACMAP"
 
 sym b036 "UPDATM"
 sym b037 "MINMPH"
@@ -2396,8 +2398,8 @@ sym b073 "VBAT_DWL_HYS"
 
 sym b44e "fuel_injector_slope"
 
-sym b463 "fuel_open_loop_multiplier_drive"
-sym b466 "fuel_open_loop_multiplier_neutral"
+sym b463 "OLIDRV"
+sym b466 "OLINEUT"
 
 sym b47c "MPGDEC"
 
@@ -2432,6 +2434,8 @@ sym bab4 "TCFBS"
 sym bad6 "TCTOT"
 
 #sym bab0 "RF8"
+sym bac8 "TCEGR"
+
 sym bace "TCNDT_ISC"
 sym bae4 "Sigklu"
 
@@ -2489,7 +2493,7 @@ sym cb7a "400_RPM"
 sym cb7c "CRKTM1"
 
 sym cb83 "PFEHP"
-sym cb85 "emissions_thermactor_sw"
+sym cb85 "THRMHP"
 sym cb86 "TSTRAT"
 sym cb87 "TRLOAD"
 

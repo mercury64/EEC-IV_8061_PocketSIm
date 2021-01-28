@@ -11,7 +11,7 @@ public class OpCodeCALL extends OpCode implements IOpCode {
 	private int offset;
 	
     public int getOffset() {
-		return offset;
+		return this.offset;
 	}
 
 	public void setOffset(int offset) {
@@ -76,13 +76,8 @@ public class OpCodeCALL extends OpCode implements IOpCode {
         
         state_.updateStateTime(stateTime);
         
+        System.out.println(" Call to: " + String.format("0x%02X",this.getOffset()));
+        
     }
-    
-    public String toString()
-    {
-    	String out = super.toString();
-    	out = out + System.lineSeparator() + " Call to: " + String.format("0x%02X",this.getOffset());
-    	
-    	return out;
-    }
+
 }

@@ -296,9 +296,14 @@
 
 4b3f # 29.875 * 8 = 239 = 0xEF
 
+5174 # ISCFLG = 1 CLOSED LOOP RPM CONTROL
+523a # ISCFLG = 1 CLOSED LOOP RPM CONTROL
+5252 \n# CLOSED LOOP RPM CONTROL
 58b3 # 60.000
 
 5c86 # 1024 = 1 second
+
+5ec0 # ISCFLG = -1 DASHPOT CONTROL
 
 6116 # 
 6134 #  [1 / (DWELLM * (VBAT - DWELLA))] * FREQ18 (ticks/sec)
@@ -307,6 +312,8 @@
 61cc # POFFENG = PACOFF / ENGCYL
 
 6466 # 29.875 * 8 = 239 = 0xEF
+
+65d2 # ISCFLG = 0 DASHPOT PRE-POSITION
 
 6632 \n# 1)  DSDRPM_CALC - calculation of DSDRPM & DESMAF_PRE
 6632 \n# 2)  RPMERR_CALC - calculation of RPMERR_A & RPMERR_S
@@ -352,8 +359,15 @@
 6890 # (TCSTRT OK to use)  
 6892 # (first time this start) 
 
-6986 # APT 0 -> part throttle
+68bb #  if (TP <= RATCH)
 
+6986 # APT 0 -> part throttle
+698d # ISCFLG = 0 DASHPOT PRE-POSITION
+
+699b # ISCFLG = 1 CLOSED LOOP RPM CONTROL
+6a08 # ISCFLG = -1 DASHPOT CONTROL
+6a2d # ISCFLG = -1 DASHPOT CONTROL
+6a32 # ISCFLG = 2 CLOSED LOOP RPM CONTROL (Lock-out entry to RPM control)
 6b26 # ISCKAM(ISFLAG)
 
 6ba3 # 29.875 * 8 = 239 = 0xEF
@@ -677,6 +691,8 @@ ab85 \w # SET CHKSUM = 13568
 ac31 \n## Payloads - Datalogging Lists!
 
 b000 # Register Rf0 
+b033 # 2 " Hg (engine specific parameter).
+
 b098 # FN800(DEBYMA) = Transfer function for the ISC actuator.
 b098 # isc_duty_cycle
 b0c0 # ISC duty cycle multiplier versus VACUUM.

@@ -62,29 +62,61 @@ public class OpCodeORRB  extends OpCode implements IOpCode {
 	        	numberOfBytes = 3;
 	        	stateTime = 6;
 	        	break;
+	        case AddressMode.INDIRECT_AUTO_INC:
+	        	numberOfBytes = 3;
+	        	stateTime = 7;
+	        	break;
 	        case AddressMode.SHORT_INDEXED:
 	        	numberOfBytes = 4;
 	        	stateTime = 6;
 	        	break;	
         }
-        state_.setPc(pc + numberOfBytes);
-        state_.updateStateTime(stateTime);
         
         operands = new byte[numberOfBytes];
         for (int i = 0; i < numberOfBytes; i++) {
 			operands[i] = (byte)memory[pc + i];
 		}
 
-        byte dest_dwreg = operands[1];
-        byte Ra = operands[2];
-        byte Rb = operands[1];
-        byte Rd  = (byte) (Ra | Rb) ;
+        //byte dest_dwreg = operands[1];
+        byte Ra = operands[1];
+        byte Rb = operands[2];
+        byte result = 0;
         
+		if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
+		{
+		
+			//2073: 92,15,1c            orb   R1c,[R14++]      R1c |= [R14++]; R1c | [R14++]
+			// register [R14++]
+			short register_value = state_.getWordRegister((short) (Ra - 1));// [R32]
+			state_.setWordRegister((short) (Ra - 1), (short) (register_value + 1));	
+		 
+			// register [value]
+			//int mem_index = register_value & 0xff;
+			//byte tmp_register_value =  (byte) memory[(int)mem_index];
+			//Ra = (byte) tmp_register_value;	
+		    Ra = getByteValue(memory, register_value);
+		    
+			result = (byte) state_.doORRB(state_.getByteRegister(Rb), Ra);
+		}
+
+
+        state_.setPc(pc + numberOfBytes);
+        state_.updateStateTime(stateTime);
         
+        state_.setByteRegister(Rb, (byte) result);    
         
-        short result = state_.doORRB(Ra, Rb);
-        state_.setByteRegister(dest_dwreg, (byte) result);    
-        
-        System.out.println( state_ );
     }
+    
+	private byte getByteValue(int[] memory, short location) {
+	 	   int index = (int)location & 0xffff; // byte index, LSB
+	 	   //int index2 = (int)location+1 & 0xffff;// byte index2, MSB
+	 	   
+	 	   byte value = (byte) memory[(int)index]; // LSB
+	 	  // short value2 = (short) memory[(int)index2]; // MSB
+	  	  
+	 	   //short RA = (short) (value2 << 8 |  value & 0xff); // put MSB | LSB
+	 	   
+	 	   //value = RA;
+			return value;
+		}
 }

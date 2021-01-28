@@ -6,7 +6,23 @@ import ca.nerret.emu.emulator.ProgramStatusWord;
 import ca.nerret.emu.emulator.State;
 
 /**
- * @author h
+ * 
+ * DESCRIPTION: CMPW subtracts a 16-bit "A" operand from a 16-bit "B"operand,
+ *   and then sets and clears the PSW flags based upon the result of the operation.
+ * The result from the subtraction is not returned.
+ * 
+ * PSW FLAGS AFFECTED:
+ *  Z  N  V  VT C  ST 
+ *  √  √  √  √  √  -
+ *  
+ *  FLAG	SET CONDITION
+ *    Z		One if result is zero; else zero.
+ *    N		One if result is negative (i.e., reflects the algebraically correct result even if an overflow caused the sign bK to be incorrect);else zero.
+ *    V		One if algebraically correct result istoo largeto be represented in fifteen bits and sign bit; else zero.
+ *   VT		One if V-fiag is set anytime during the instruction execution; else state of previous VT-fiag.
+ *    C		Oneiftheunsignedvalueofthe"B"operandisgreaterthanorequaltotheunsigned value ofthe"A"operand;elsezero.
+ *  
+ * @author Warren White
  */
 public class OpCodeCMPW extends OpCode implements IOpCode {
 
@@ -74,9 +90,14 @@ public class OpCodeCMPW extends OpCode implements IOpCode {
         // LSB
         // second byte, shift to high word position
         // first byte, mask to low word position
-    	short RA = state_.getWordRegister((byte)operands[numberOfBytes-1]);
-		short RB = state_.getWordRegister(operands[numberOfBytes-2]);
+    	short RA = 0;
+		short RB = 0;
    
+		if (this.getAddressModeType() == AddressMode.DIRECT)
+		{
+			RA = state_.getWordRegister(operands[numberOfBytes-1]);
+			RB = state_.getWordRegister(operands[numberOfBytes-2]);
+		}
 		if (this.getAddressModeType() == AddressMode.IMMEDIATE)
 		{
 			RA = (short) (operands[2] << 8 |   operands[1] & 0xff);
@@ -90,7 +111,6 @@ public class OpCodeCMPW extends OpCode implements IOpCode {
 			
 		}
     	// TODO:  Need to implement compare, and setting of PSW!!!
-    	
 		int compare = Short.compare(RB, RA  );
 		
 		// do_sub(reg_r16(OP2), OP1);
@@ -101,19 +121,19 @@ public class OpCodeCMPW extends OpCode implements IOpCode {
     	  System.out.println(" Compare: (" + String.format("0x%04X", RB) + ", "+ String.format("0x%04X", RA) + ")");
 
 		  
-		if ( RB < RA)
+		if ( compare == 0) // Z Flag
 		{
- 
-			// True
-			state_.setPswBit(ProgramStatusWord.CARRY, false);
-			
-
+			//state_.setPswBit(ProgramStatusWord.CARRY, false);
+			state_.setPswBit(ProgramStatusWord.ZERO, true);
+		}
+		else if( compare < 0 ) // N Flag
+		{
+			state_.setPswBit(ProgramStatusWord.NEGATIVE, true);
 		}
 		else
 		{
-			// False
-			//state_.setPswBit(ProgramStatusWord.ZERO, true);
-			//state_.setPswBit(ProgramStatusWord.NEGATIVE, true);
+			state_.setPswBit(ProgramStatusWord.ZERO, false);
+			state_.setPswBit(ProgramStatusWord.NEGATIVE, false);
 			//state_.setPswBit(ProgramStatusWord.OVERFLOW, true);
 			//state_.setPswBit(ProgramStatusWord.OVERFLOW_TRAP, true);
 			state_.setPswBit(ProgramStatusWord.CARRY, true);
