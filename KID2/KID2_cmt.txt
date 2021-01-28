@@ -455,8 +455,14 @@
 7d0b \n# ROM Checksum
 7d0b \n############################################################
 
+7d2d #511   | ROM test failed                    |    X    |      |       |
 7d34 # Start address (0x2000)
 7d36 # End address  (0xdffe)
+
+7d86 #126   | MAP/BP out of S-T range.           |    X    |  XX  |   X   |
+7df2 #539   | A/C Swith error                    |    X    |      |       |
+7e1c #519   | PSPS ckt. open.                    |    X    |      |       |
+7e2f #633   | 4X4 Switch closed                  |    X    |      |       |
 
 7e85 \n#######################################################
 7e85 \n# Decode complex addresses into their TRUE addresses (plain ones OK too)
@@ -475,6 +481,8 @@
 7e98 # R42 += Rbase register (as pointer)
 7e9d # update input pointer to new address
 
+
+7ebd #543   | FP Ckt Open Bat. to Relay          |    X    |      |   X   |
 
 7fd3 # loop until 5161 IO times have passed(12.4ms)
 

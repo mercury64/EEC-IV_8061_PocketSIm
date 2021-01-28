@@ -26,15 +26,32 @@ R30 = (2*3) + 2922 = 2928
 2923: 00                  byte      0
 2924: 84                  byte     84
 
-Byte R42 = 2922
-Byte R43 = 2923
-Byte R32 = 2924
-
-
+Byte R42 = 2922 byte     b4
+Byte R43 = 2923 Byte     00
+Byte R32 = 2924 Byte     0x84 = 1000 0100
+Output scaling = bin -2
+Output resolution = 4 RPM
 
 2925: ba                  byte     ba  MAP               02    byte      bin 3       0.125 "Hg        
+2926 00
+2927 00
+Output scaling = bin 3
+Output resolution = 0.125 "Hg
+
+
 2928: bb                  byte     bb  BP                03    byte      bin 3       0.125 "Hg       
-292b: 8e                  byte     8e  SAFTOT            04    byte      bin 2       0.25 degrees S.A.    
+2929 00
+2930 00
+Output scaling = bin 3
+Output resolution = 0.125 "Hg
+
+292b: 8e                  byte     38e  SAFTOT            04    byte      bin 2       0.25 degrees S.A.    
+292c 3
+292d 0 
+Output scaling = bin 2
+Output resolution 0.25 degrees
+
+
 292e: 12                  byte     12 IACT              05    word      bin 0       1 A/D count    
 2931: 10                  byte     10 IECT              06    word      bin 0       1 A/D count     
 2934: 14                  byte     14 IEGR              07    word      bin 0       1 A/D count        
