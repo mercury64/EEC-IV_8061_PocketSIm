@@ -77,19 +77,35 @@ public class OpCodeSTW extends OpCode implements IOpCode {
         dest_reg = value;
         if (this.getAddressModeType() == AddressMode.INDIRECT)
         {
-        	if (  register%2 > 0 )
-        	{
-        		register = (short) (register-1);
-        		this.getAddressMode().setType(AddressMode.INDIRECT_AUTO_INC);
-        		short next_reg = (short) state_.getWordRegister((byte) (register));
-        		
-        		state_.setWordRegister((short) (register), (short) (next_reg + 2));
-        		register = next_reg;
-        		
-        		
-        	}
-        	
+
         
+        }
+        
+        if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
+        {
+    		register = (short) (register & 0xfe);
+    		this.getAddressMode().setType(AddressMode.INDIRECT_AUTO_INC);
+    		short next_reg = (short) state_.getWordRegister((byte) (register));
+    		
+    		state_.setWordRegister((short) (register), (short) (next_reg + 2));
+    		register = next_reg;
+    		
+		 	/*   byte indirectRegRA = operands[numberOfBytes-2];
+		 	   indirectRegRA = (byte) (indirectRegRA &  0xfe);
+		 	   short destRegRB = operands[numberOfBytes-1];
+		 	   
+		 	   // [RA]
+		 	   short RA = state_.getWordRegister(indirectRegRA);
+		 	   
+		 	   // (RB) <- ([RA])
+		 	  // state_.setByteRegister(destRegRB, RA);
+		 	   areg = getByteValue(memory, RA);
+		 	   breg = destRegRB;
+		 	   
+		 	   // (RA) <- (RA) + 1
+		 	   state_.setWordRegister(indirectRegRA, (short) (RA + 1));
+*/
+
         }
         
         if (this.getAddressModeType() == AddressMode.LONG_INDEXED)

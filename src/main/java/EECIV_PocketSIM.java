@@ -53,13 +53,11 @@ public class EECIV_PocketSIM {
 	{
         int count = 1;
         
-       state.setPc(8280);
+      // state.setPc(8280);
         
 		while (true) {
 		        
 			//System.out.println(String.format("0x%04X",state.getPc()));
-			
-			
 			int instruction = state.getMemory()[state.getPc()];
 			
 			IOpCode opcode = OpcodeCache.get(instruction,(byte)state.getMemory()[state.getPc()+1]);
@@ -76,6 +74,7 @@ public class EECIV_PocketSIM {
 				//pause
 				System.out.println("Break Point");
 			}
+			
 			logger.info( String.format("0x%04X: ", state.getPc()) );
 			
 			System.out.print(String.format("0x%04X: %s", state.getPc(), opcode));
@@ -86,7 +85,10 @@ public class EECIV_PocketSIM {
 			//System.out.println(state);
 			    
 			//System.out.println("PSW: " + state.psw.getMemory());
-			if (count == 5000) break;
+			if (count == 500000) {
+				System.err.println("Count reached, ending");
+				break;
+			}
 			count++;
 		}
 	}

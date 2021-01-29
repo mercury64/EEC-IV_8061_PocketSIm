@@ -67,7 +67,7 @@ public class OpCodeLDB extends OpCode implements IOpCode {
         byte areg = 0;
         short breg = operands[numberOfBytes-1];
         byte data;
-        byte indirreg;
+        byte indirreg = 0;
         byte indirreg_inc;
         
         byte basereg;
@@ -87,7 +87,10 @@ public class OpCodeLDB extends OpCode implements IOpCode {
 	        	break;
 	        case AddressMode.INDIRECT:
 	        	
-	        	indirreg = state_.getByteRegister( operands[numberOfBytes-2]);// [R32]
+	        	indirreg = operands[numberOfBytes-2];
+	        	indirreg = (byte) (indirreg &  0xfe);
+
+	        	indirreg = state_.getByteRegister( indirreg );// [R32]
 				
 				areg = indirreg;	
 				
@@ -95,7 +98,8 @@ public class OpCodeLDB extends OpCode implements IOpCode {
 	        case AddressMode.INDIRECT_AUTO_INC:
 				
 		    	   
-		    	   short indirectRegRA = (short) (operands[numberOfBytes-2] - 1);
+		    	   byte indirectRegRA = operands[numberOfBytes-2];
+		    	   indirectRegRA = (byte) (indirectRegRA &  0xfe);
 		    	   short destRegRB = operands[numberOfBytes-1];
 		    	   
 		    	   // [RA]

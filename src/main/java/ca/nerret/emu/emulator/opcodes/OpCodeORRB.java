@@ -87,7 +87,8 @@ public class OpCodeORRB  extends OpCode implements IOpCode {
 		
 			//2073: 92,15,1c            orb   R1c,[R14++]      R1c |= [R14++]; R1c | [R14++]
 			// register [R14++]
-			short register_value = state_.getWordRegister((short) (Ra - 1));// [R32]
+			Ra = (byte) (Ra & 0xfe);
+			short register_value = state_.getWordRegister((short) (Ra));// [R32]
 			state_.setWordRegister((short) (Ra - 1), (short) (register_value + 1));	
 		 
 			// register [value]

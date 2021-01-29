@@ -45,11 +45,18 @@ public class OpCodeSTB extends OpCode implements IOpCode {
 	        case AddressMode.INDIRECT:
 	        	numberOfBytes = 3;
 	        	stateTime = 7;
-	        	
+	        	break;
+	        case AddressMode.INDIRECT_AUTO_INC:
+	        	numberOfBytes = 3;
+	        	stateTime = 8;
 	        	break;
 	        case AddressMode.SHORT_INDEXED:
 	        	numberOfBytes = 4;
 	        	stateTime = 7;
+	        	break;	
+	        case AddressMode.LONG_INDEXED:
+	        	numberOfBytes = 5;
+	        	stateTime = 8;
 	        	break;	
         }
 
@@ -64,24 +71,21 @@ public class OpCodeSTB extends OpCode implements IOpCode {
             
         if (this.getAddressModeType() == AddressMode.INDIRECT)
         {
-        	if (  register%2 > 0 )
-        	{
-        		register =  (byte) (register - 1);
-        		this.getAddressMode().setType(AddressMode.INDIRECT_AUTO_INC);
-        		byte next_reg = (byte) state_.getByteRegister((byte) (register));
-        		
-        		state_.setByteRegister((byte) (register), (byte) (next_reg + 2));
-        		register = next_reg;
-        	}
-        	else 
-        	{
-            	register = state_.getByteRegister((byte) (register));
-            	value = state_.getByteRegister((byte)value);
-            	
-            	register = (byte) (register << 2);
-        		
-        	}   	
+        	register = (byte) (register & 0xfe);
+
+			register = state_.getByteRegister((byte) (register));
+			value = state_.getByteRegister((byte)value);
+			
+			//register = (byte) (register << 2);
+			//value = (byte) (value << 2);
+
         }
+    	if ( this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC )
+    	{
+    		System.err.println("Not implemented");
+    		System.exit(1);
+    	}
+
 
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);

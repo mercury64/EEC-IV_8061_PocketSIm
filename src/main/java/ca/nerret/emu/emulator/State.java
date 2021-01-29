@@ -189,14 +189,21 @@ public class State {
 
 	public void setByteRegister(short reg, byte value) {
 
+		
 		System.out.println(
-				" Set Register:" + 
-				String.format("R%02X", reg) + 
+				" Set Byte Register:" + 
+				String.format("R%02X", (byte)reg) + 
 				" = " + 
 				String.format("0x%02X", value)
 				);
 				
-		register_memory[(int)reg] = value;
+		int index = (byte)reg & 0xff;
+		if ( index > 0x1fff )
+		{
+			System.err.println("RAM buffer out of range :" + String.format("R0x%04X", (short)reg));
+			System.exit(1);
+		}
+		register_memory[index] = value;
 		
 	}
 	
@@ -291,9 +298,10 @@ public class State {
     */
 	public byte getByteRegister(short register) {
 		
-		byte value = register_memory[register];
+		int regIndex = register &0xffff;
+		byte value = register_memory[regIndex];
 		
-		System.out.println(" Get Register:" + String.format("R%02X",register) + " = " + String.format("0x%02X",value));
+		System.out.println(" Get Register:" + String.format("R%02X",regIndex) + " = " + String.format("0x%02X",value));
 		
 		return value;
 	}
