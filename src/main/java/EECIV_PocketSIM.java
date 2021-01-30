@@ -30,8 +30,9 @@ public class EECIV_PocketSIM {
 	    logHandler.setFormatter(new LogFormatter8061());
 	    logger.addHandler(logHandler);
 	   
-	    Calibration KID2 = new Calibration("KID2/KID2patchedNew.bin");
-		
+	   // Calibration KID2 = new Calibration("KID2/KID2patchedNew.bin");
+	    Calibration KID2 = new Calibration("KID2/KID2.bin");
+	    
 		int[] fileBytes = KID2.readFile();
        
 		state = new State(fileBytes);

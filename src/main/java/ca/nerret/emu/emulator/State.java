@@ -335,9 +335,45 @@ public class State {
 	
 	public void setWordRegister(short dest_dwreg, short value) {
         
+
+        if ( dest_dwreg <= 0x10)
+        {
+        	this.setSFR(dest_dwreg, value);
+        }
+        else if( dest_dwreg >= 0x12 && dest_dwreg <= 0xff)
+        {
+        	this.setGeneralRegister(dest_dwreg, value);
+        }
+        else
+        {
+        	this.setRAM(dest_dwreg, value);
+        }
+	}
+	
+	private void setRAM(short dest_dwreg, short value)
+	{
         byte hi = (byte) ((value >> 8) & 0xff ) ;
         byte lo = (byte) (value  & 0xff) ;
-      
+        
+        
+		register_memory[dest_dwreg] = lo;
+		register_memory[dest_dwreg + 1] = hi;
+		System.out.println(
+				" Set word in RAM:" + 
+						String.format("0x%02X",dest_dwreg) + 
+						" = " + 
+						String.format("0x%04X",value) +
+						String.format("[hi: 0x%02X ",hi) + String.format("lo: 0x%02X]",lo) +
+						String.format("= 0x%02X%02X",lo,hi)
+				);
+	}
+	
+	private void setGeneralRegister(short dest_dwreg, short value)
+	{
+        byte hi = (byte) ((value >> 8) & 0xff ) ;
+        byte lo = (byte) (value  & 0xff) ;
+        
+        
 		register_memory[dest_dwreg] = lo;
 		register_memory[dest_dwreg + 1] = hi;
 		System.out.println(
@@ -348,6 +384,26 @@ public class State {
 						String.format("[hi: 0x%02X ",hi) + String.format("lo: 0x%02X]",lo) +
 						String.format("= 0x%02X%02X",lo,hi)
 				);
+	}
+
+	private void setSFR(short dest_dwreg, short value) {
+    	System.out.println("Set SFR");
+    	
+    	switch (dest_dwreg)
+    	{
+    	case 0x06:
+    		System.out.println("Setting IO_Timer:");
+    		break;
+    	case 0x0e:
+    		System.out.println("Setting HSI_Time:");
+    		break;
+    	case 0x10: // Stack Pointer
+    		this._sp = value;
+    		System.out.println("Setting Stack Pointer:");
+    		break;
+    	}
+    	
+    	this.setGeneralRegister(dest_dwreg, value);
 	}
 
 	public Object setWordRegister(short rB) {
@@ -497,5 +553,16 @@ public class State {
 		pswFlagsString = "PSW FLAGS : " + String.format("%16s", pswFlagsString).replace(' ', '0'); 
 		
 		return pswTableHeader + flagValues + pswFlagsString;
+	}
+
+	public void decrementSP() {
+		this._sp = this._sp - 2;
+		this.setWordRegister((short)0x10, (short)this._sp);
+		
+	}
+
+	public void incrementSP() {
+		this._sp = this._sp + 2;
+		this.setWordRegister((short)0x10, (short)this._sp);
 	}	
 }

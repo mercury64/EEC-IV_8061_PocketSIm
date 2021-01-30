@@ -25,7 +25,7 @@ public class OpCodeSTW extends OpCode implements IOpCode {
         short RA = (short) memory[pc + 1];
         short RB;
 
-        short dest_reg;
+        short dest_reg, value = 0;
         short src_reg;
         
         int numberOfBytes = 0;
@@ -71,25 +71,41 @@ public class OpCodeSTW extends OpCode implements IOpCode {
 		}
         
         // little endian
-        short register = (short) (operands[1] & 0xff);
-        short value = (short) (operands[2] & 0xff);
+        short registerRA = (short) (operands[1] & 0xff);
+        short registerRB = (short) (operands[2] & 0xff);
             
-        dest_reg = value;
+        dest_reg = registerRA;
         if (this.getAddressModeType() == AddressMode.INDIRECT)
         {
+        	// AssemblerFormat: STW breg, @indirreg
+        	// Instruction operation: ([RA])<-(RB)
+        	// Execution states: 7/12
+        	// Machine Format: [ ^C2 ],[ DestRA |0_MB],[ SourceRB ]
 
         
         }
         
         if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
         {
-    		register = (short) (register & 0xfe);
-    		this.getAddressMode().setType(AddressMode.INDIRECT_AUTO_INC);
-    		short next_reg = (short) state_.getWordRegister((byte) (register));
+        	// AssemblerFormat: STW breg, (indirreg)+
+        	// Instruction operation: ([RA])<-(RB); (RA)<-(RA) + 1
+        	// Execution states: 8/13
+        	// Machine Format: [ ^C2 ],[ DestRA |1_MB],[ SourceRB ]
+        	registerRA = (short) (registerRA & 0xfe);
     		
-    		state_.setWordRegister((short) (register), (short) (next_reg + 2));
-    		register = next_reg;
+        	// [RA]
+    		short valueRA = (short) state_.getWordRegister((byte) (registerRA));
     		
+    		// RB
+    		short valueRB = (short) state_.getWordRegister((byte) (registerRB));
+    		 
+    		// ([RA])<-(RB);
+    		state_.setWordRegister((short) (valueRA), (short) (valueRB));
+
+		 	// (RA) <- (RA) + 1
+		 	//state_.setWordRegister(registerRA, (short) (registerRA + 2));
+		 	   value = (short) (valueRA + 1);
+		 	  dest_reg = registerRA;
 		 	/*   byte indirectRegRA = operands[numberOfBytes-2];
 		 	   indirectRegRA = (byte) (indirectRegRA &  0xfe);
 		 	   short destRegRB = operands[numberOfBytes-1];
@@ -110,13 +126,13 @@ public class OpCodeSTW extends OpCode implements IOpCode {
         
         if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
         {
-        	register = (short) (register-1);
-        	register = state_.getWordRegister((byte) register);
+        	registerRA = (short) (registerRA & 0xfe);
+        	registerRA = state_.getWordRegister((byte) registerRA);
         	
         	dest_reg = (short) ((operands[numberOfBytes-2] << 8) | operands[numberOfBytes-3]);
-        	System.out.println(String.format(" [0x%04X + 0x%04X]", register, dest_reg));
+        	System.out.println(String.format(" [0x%04X + 0x%04X]", registerRA, dest_reg));
         	
-        	dest_reg = (short) (register + dest_reg);
+        	dest_reg = (short) (registerRA + dest_reg);
         	src_reg = (short) (operands[4] & 0xff);
         	
         	value = state_.getWordRegister((byte) src_reg);
