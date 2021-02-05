@@ -2,7 +2,6 @@ package ca.nerret.emu.emulator.opcodes;
 
 import ca.nerret.emu.emulator.AddressMode;
 import ca.nerret.emu.emulator.OpCode;
-import ca.nerret.emu.emulator.ProgramStatusWord;
 import ca.nerret.emu.emulator.State;
 
 /**
@@ -21,7 +20,7 @@ import ca.nerret.emu.emulator.State;
  *  
  * @author Warren White
  */
-public class OpCodePUSHW extends OpCode implements IOpCode {
+public class OpCodePUSHW extends OpCode<OpCodePUSHW> implements IOpCode {
 
     public OpCodePUSHW(int opcode, String mnemonic) {
 		super(opcode, mnemonic);
@@ -64,18 +63,100 @@ public class OpCodePUSHW extends OpCode implements IOpCode {
 	        	stateTime = 12;
 	        	break;
         }
-        state_.setPc(pc + numberOfBytes);
-        state_.updateStateTime(stateTime);
-        
+
         operands = new byte[numberOfBytes];
         for (int i = 0; i < numberOfBytes; i++) {
 			operands[i] = (byte)memory[pc + i];
 		}
         
+    	short RA = 0;
+		short RB = 0;
+   
+		state_.decrementSP();
+		if (this.getAddressModeType() == AddressMode.DIRECT)
+		{
+			RA = state_.getWordRegister(operands[numberOfBytes-1]);
+			RB = 0x10;//stack
+			
+			state_.setWordRegister(RB, RA);
+		}
+		if (this.getAddressModeType() == AddressMode.IMMEDIATE)
+		{
+			RA = (short) (operands[2] << 8 |   operands[1] & 0xff);
+			RB = 0x10;//stack
+			
+			state_.setWordRegister(RB, RA);
+			
+		}
+		if (this.getAddressModeType() == AddressMode.INDIRECT)
+		{
+			RA = (short) (operands[numberOfBytes-1]  & 0xfe);
+			RB = 0x10;//stack
+			
+			// [RA]
+        	RA = state_.getWordRegister(RA);
+			
+        	// ([SP]) <- ([RA])
+			state_.setWordRegister(RB, RA);
+			
+		}
+		if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
+		{
+			short indirectRA = (short) (operands[numberOfBytes-1]  & 0xfe);
+			RB = 0x10;//stack
+			
+			// RA
+			RA = state_.getWordRegister(indirectRA);
+	    	   
+			// [RA]
+	    	short RAvalue = this.getWordValue(memory, RA);
+	    	   
+			// ([SP]) <- ([RA])
+			state_.setWordRegister(RB, RAvalue);
+
+	    	// (RA) <- (RA) + 2
+	    	state_.setWordRegister(indirectRA, (short)(RA + 2));
+			
+		}
+		if (this.getAddressModeType() == AddressMode.SHORT_INDEXED)
+		{
+	    	//RA = state_.getWordRegister((byte)operands[numberOfBytes-1]);
+			//RB = state_.getWordRegister(operands[numberOfBytes-2]);
+			
+		}
+		if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
+		{
+			// PUSHW offset (indexreg)
+			// (SP)<-(SP)-2;// done above for all PUSHW
+			// ([SP])<-([Ra]+Offset)
+			
+			// [ ^CB ], [ IndexRa| 0x1 MB ], [ Offset Lo Byte ], [ +- | Offset Hi Byte ]
+			
+	    	//RA = state_.getWordRegister((byte)operands[numberOfBytes-1]);
+			//RB = state_.getWordRegister(operands[numberOfBytes-2]);
+        	byte indexRa  = (byte) (operands[numberOfBytes-3] & 0xfe);
+        	RB = 0x10;//stack
+        	byte offset_lo = operands[numberOfBytes-2];
+        	byte offset_hi = operands[numberOfBytes-1];
+        	
+        	short Ravalue = state_.getByteRegister((byte) indexRa);
+        	
+        	short offset = (short) ((offset_hi << 8) | (offset_lo & 0xff));
+        	
+        	System.out.println(String.format(" [0x%04X + 0x%04X]", Ravalue, offset));
+        	System.out.println(String.format("Offset hi & lo : [0x%04X + 0x%04X]", (short) (offset_hi << 8), offset_lo));
+        	
+        	Ravalue = (short) (Ravalue + offset);
+        	
+        	state_.setWordRegister(RB, Ravalue);
+		}
+		
         //int sp = (state.getSP() - 2) & 0xffff;
         //state.setSP(sp);
         //mem.setWord((state.getSS() << 4) + sp, (short) value);
         
-        System.err.println("Not Implemented");
+        state_.setPc(pc + numberOfBytes);
+        state_.updateStateTime(stateTime);
+
     }
 }

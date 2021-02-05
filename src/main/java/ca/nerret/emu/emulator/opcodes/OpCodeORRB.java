@@ -2,13 +2,12 @@ package ca.nerret.emu.emulator.opcodes;
 
 import ca.nerret.emu.emulator.AddressMode;
 import ca.nerret.emu.emulator.OpCode;
-import ca.nerret.emu.emulator.ProgramStatusWord;
 import ca.nerret.emu.emulator.State;
 
 /**
  * OpCode 0x45 AD3W
  */
-public class OpCodeORRB  extends OpCode implements IOpCode {
+public class OpCodeORRB  extends OpCode<OpCodeORRB> implements IOpCode {
 
     public OpCodeORRB(int opcode, String mnemonic) {
 		super(opcode, mnemonic);
@@ -107,17 +106,4 @@ public class OpCodeORRB  extends OpCode implements IOpCode {
         state_.setByteRegister(Rb, (byte) result);    
         
     }
-    
-	private byte getByteValue(int[] memory, short location) {
-	 	   int index = (int)location & 0xffff; // byte index, LSB
-	 	   //int index2 = (int)location+1 & 0xffff;// byte index2, MSB
-	 	   
-	 	   byte value = (byte) memory[(int)index]; // LSB
-	 	  // short value2 = (short) memory[(int)index2]; // MSB
-	  	  
-	 	   //short RA = (short) (value2 << 8 |  value & 0xff); // put MSB | LSB
-	 	   
-	 	   //value = RA;
-			return value;
-		}
 }

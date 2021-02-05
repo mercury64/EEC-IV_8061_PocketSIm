@@ -80,9 +80,31 @@ public class OpCodeAN3B  extends OpCode implements IOpCode {
         byte Rb = operands[1];
         byte Rd  = (byte) (Ra + Rb) ;
         
-        
+		state_.setPswBit(ProgramStatusWord.OVERFLOW, false);
+		state_.setPswBit(ProgramStatusWord.CARRY, false);
         
         short result = state_.doAdd(Ra, Rb);
+        if ( result == 0) // Z Flag
+ 		{
+ 			state_.setPswBit(ProgramStatusWord.ZERO, true);
+ 			
+ 		}
+ 		else 
+ 		{
+ 			state_.setPswBit(ProgramStatusWord.ZERO, false);
+ 		
+ 		}
+     		
+           
+ 		if( (result & 0x80) == 1 ) // N Flag
+ 		{
+ 			state_.setPswBit(ProgramStatusWord.NEGATIVE, true);
+ 		}
+ 		else {
+ 			state_.setPswBit(ProgramStatusWord.NEGATIVE, false);
+ 		}
+
+ 		
         state_.setByteRegister(dest_dwreg, (byte) result);    
         
         System.out.println( state_ );

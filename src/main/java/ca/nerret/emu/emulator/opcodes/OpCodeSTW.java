@@ -82,7 +82,8 @@ public class OpCodeSTW extends OpCode implements IOpCode {
         	// Execution states: 7/12
         	// Machine Format: [ ^C2 ],[ DestRA |0_MB],[ SourceRB ]
 
-        
+        	System.err.println("Not Implemented");
+     	   System.exit(1);
         }
         
         if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)

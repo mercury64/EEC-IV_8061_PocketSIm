@@ -123,21 +123,36 @@ public class OpCodeCMPW extends OpCode implements IOpCode {
 		  
 		if ( compare == 0) // Z Flag
 		{
-			//state_.setPswBit(ProgramStatusWord.CARRY, false);
 			state_.setPswBit(ProgramStatusWord.ZERO, true);
 		}
-		else if( compare < 0 ) // N Flag
+		else {
+			state_.setPswBit(ProgramStatusWord.ZERO, false);
+		}
+		
+		if( compare < 0 ) // N Flag
 		{
 			state_.setPswBit(ProgramStatusWord.NEGATIVE, true);
 		}
-		else
-		{
-			state_.setPswBit(ProgramStatusWord.ZERO, false);
+		else {
 			state_.setPswBit(ProgramStatusWord.NEGATIVE, false);
-			//state_.setPswBit(ProgramStatusWord.OVERFLOW, true);
-			//state_.setPswBit(ProgramStatusWord.OVERFLOW_TRAP, true);
-			state_.setPswBit(ProgramStatusWord.CARRY, true);
-			//state_.setPSW(ProgramStatusWord.STICKY_BIT, null);
 		}
+		
+		if ( compare > 0xff )
+		{
+			state_.setPswBit(ProgramStatusWord.OVERFLOW, true);
+			state_.setPswBit(ProgramStatusWord.OVERFLOW_TRAP, true);
+		}
+		else {
+			state_.setPswBit(ProgramStatusWord.OVERFLOW, false);
+		}
+		
+		if ((int) RB >= (int) RA)
+		{
+			state_.setPswBit(ProgramStatusWord.CARRY, true);
+		}
+		else {
+			state_.setPswBit(ProgramStatusWord.CARRY, false);
+		}
+		
     }
 }

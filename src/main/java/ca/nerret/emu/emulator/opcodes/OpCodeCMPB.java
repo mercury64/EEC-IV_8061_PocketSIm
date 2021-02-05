@@ -2,6 +2,7 @@ package ca.nerret.emu.emulator.opcodes;
 
 import ca.nerret.emu.emulator.AddressMode;
 import ca.nerret.emu.emulator.OpCode;
+import ca.nerret.emu.emulator.ProgramStatusWord;
 import ca.nerret.emu.emulator.State;
 
 /**
@@ -44,6 +45,7 @@ public class OpCodeCMPB extends OpCode implements IOpCode {
         String assemblerFormat =  this.getMnemonic() ;
         String instructionOperation = "";
         
+    	System.out.println(state_.pswFlagsToString());
         switch (this.getAddressModeInt())
         {
 	        case AddressMode.DIRECT:
@@ -145,21 +147,45 @@ public class OpCodeCMPB extends OpCode implements IOpCode {
 	        	breg = state_.getByteRegister(operands[numberOfBytes-1]);
 	        	break;
 	        case AddressMode.INDIRECT:
-
+	        	System.err.println("Not Implemented");
+	     	   System.exit(1);
 	        	break;
 	        case AddressMode.INDIRECT_AUTO_INC:
-
+	        	System.err.println("Not Implemented");
+	     	   System.exit(1);
 	        	break;
 	        case AddressMode.SHORT_INDEXED:
-
+	        	System.err.println("Not Implemented");
+	     	   System.exit(1);
 	        	break;	
 	        case AddressMode.LONG_INDEXED:
-	        	
+	        	System.err.println("Not Implemented");
+	     	   System.exit(1);
 	        	break;
         }
         
+    	// TODO:  Need to implement compare, and setting of PSW!!!
+		int compare = Short.compare( breg, areg);
+
         cmpResult = state_.doByteSub( breg, areg);
         
+		if ( compare == 0) // Z Flag
+		{
+			state_.setPswBit(ProgramStatusWord.ZERO, true);
+		}
+		else if( compare < 0 ) // N Flag
+		{
+			state_.setPswBit(ProgramStatusWord.NEGATIVE, true);
+		}
+		else
+		{
+			state_.setPswBit(ProgramStatusWord.ZERO, false);
+			state_.setPswBit(ProgramStatusWord.NEGATIVE, false);
+			//state_.setPswBit(ProgramStatusWord.OVERFLOW, true);
+			//state_.setPswBit(ProgramStatusWord.OVERFLOW_TRAP, true);
+			state_.setPswBit(ProgramStatusWord.CARRY, true);
+			//state_.setPSW(ProgramStatusWord.STICKY_BIT, null);
+		}
         
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);

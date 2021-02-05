@@ -92,7 +92,7 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
     	   // LDW (indirreg)+, breg
     	   // (RB) <- ([RA]); (RA) <- (RA) + 2
     	   
-    	   short indirectRegRA = (short) (operands[numberOfBytes-2] - 1);
+    	   short indirectRegRA = (short) (operands[numberOfBytes-2] & 0xfe);
     	   short destRegRB = operands[numberOfBytes-1];
     	   
     	   // [RA]
@@ -109,20 +109,42 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
        if (this.getAddressModeType() == AddressMode.IMMEDIATE)
        {
            dest_dwreg = operands[numberOfBytes-1];
-           value  = (short) ((operands[numberOfBytes-2] << 8) | operands[numberOfBytes-3]  & 0xff);;
+           value  = (short) ((operands[numberOfBytes-2] << 8) | operands[numberOfBytes-3]  & 0xff);
 
            state_.setWordRegister(dest_dwreg, value);
        }
-       
+       if (this.getAddressModeType() == AddressMode.SHORT_INDEXED)
+       {
+    	   System.err.println("Not Implemented");
+    	   System.exit(1);
+       }
        if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
        {
-    	   // a3,
-    	   short tmp_reg = (short) (operands[numberOfBytes-4] - 1);
-    	   int index = (int)value & 0xffff;
-    	   short tmp_value = (short) memory[(int)tmp_reg];
     	   
-    	   value = (short) (tmp_value + index);
-    	   state_.setWordRegister(dest_dwreg, value);
+    	   // LDW offset(indexReg), breg
+    	   // (RB)<-([RA] + Offset)
+    	   //[ ^A3 ], [ Index RA | 0x1 MB ], [ Offset Lo Byte], [ +- | Offset Hi Byte ], [ Dest RB ]
+    	   
+    	   byte indexRA  = (byte) (operands[numberOfBytes-4] & 0xfe);
+           
+    	   byte offset_lo = operands[numberOfBytes-3];
+           byte offset_hi = operands[numberOfBytes-2];
+           	
+           byte destRB = (byte) (operands[numberOfBytes-1]);
+           
+           short offset = (short) ((offset_hi << 8) | (offset_lo & 0xff));
+        	
+
+    	   short RA = (short) (indexRA + offset);
+    	   short RAvalue = state_.getWordRegister(RA);
+       	
+       	System.out.println(String.format(" [0x%04X + 0x%04X]", RAvalue, offset));
+       	System.out.println(String.format(" Offset hi & lo : [0x%04X + 0x%04X]", (short) (offset_hi << 8), offset_lo));
+       	
+
+       	state_.setWordRegister(destRB, RAvalue);
+       	
+       	
        }
        
         state_.setPc(pc + numberOfBytes);
@@ -130,19 +152,6 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
        
 
     }
-
-	private short getWordValue(int[] memory, short location) {
- 	   int index = (int)location & 0xffff; // byte index, LSB
- 	   int index2 = (int)location+1 & 0xffff;// byte index2, MSB
- 	   
- 	   short value = (short) memory[(int)index]; // LSB
- 	   short value2 = (short) memory[(int)index2]; // MSB
-  	  
- 	   short RA = (short) (value2 << 8 |  value & 0xff); // put MSB | LSB
- 	   
- 	   value = RA;
-		return value;
-	}
 
 	@Override
 	public void setAddressMode(AddressMode direct) {

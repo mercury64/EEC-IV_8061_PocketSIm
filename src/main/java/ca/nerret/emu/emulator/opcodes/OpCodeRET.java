@@ -8,16 +8,6 @@ import ca.nerret.emu.emulator.State;
  */
 public class OpCodeRET extends OpCode implements IOpCode {
 
-	private int offset;
-	
-    public int getOffset() {
-		return this.offset;
-	}
-
-	public void setOffset(int offset) {
-		this.offset = offset;
-	}
-
 	public OpCodeRET(int opcode, String mnemonic) {
 		super(opcode, mnemonic);
 		// TODO Auto-generated constructor stub
@@ -35,7 +25,8 @@ public class OpCodeRET extends OpCode implements IOpCode {
         int stateTime = 12;
         
         short stack = state_.getWordRegister((short)0x10);
-        final int programCounter = state_.getWordRegister((short)stack);
+        short stackValue = this.getWordValue(memory, (short)stack);
+        final int programCounter = stackValue;
         
         // SP <- SP+2; 
         state_.incrementSP();
@@ -44,9 +35,8 @@ public class OpCodeRET extends OpCode implements IOpCode {
         
         state_.updateStateTime(stateTime);
         
-        System.out.println(" Return to: " + String.format("0x%02X",this.getOffset()));
-        
-        System.exit(1);
+        System.out.println(" Return to: " + String.format("0x%02X",(short)programCounter));
+
     }
 
 }

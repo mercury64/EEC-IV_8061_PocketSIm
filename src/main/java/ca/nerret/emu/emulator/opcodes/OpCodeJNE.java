@@ -28,8 +28,9 @@ public class OpCodeJNE  extends OpCode implements IOpCode {
 	        
 	        boolean zeroFlag = state_.getPswBit(ProgramStatusWord.ZERO);
 	        
-	        // Jump on !=
-	        // If Z=0
+	        // Instruction Operation: 
+	        // (PC)<-(PC + Displacement if Z=0,
+	        // or (PC)unchanged if Z=1.
 	        
 	        if ( zeroFlag == ProgramStatusWord.CLEAR)
 	        {

@@ -1,11 +1,5 @@
 package ca.nerret.emu.emulator;
 
-import java.io.IOException;
-import java.util.logging.FileHandler;
-import java.util.logging.Handler;
-import java.util.logging.Logger;
-
-import ca.nerret.emu.LogFormatter8061;
 import ca.nerret.emu.emulator.opcodes.IOpCode;
 
 public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
@@ -63,6 +57,20 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 	public int getAddressModeType() {
 		return addressMode.getType();
 	}
+	
+	protected short getWordValue(int[] memory, short location) {
+		int index = (int)location & 0xffff; // byte index, LSB
+		int index2 = (int)location+1 & 0xffff;// byte index2, MSB
+	   
+		short value = (short) memory[(int)index]; // LSB
+		short value2 = (short) memory[(int)index2]; // MSB
+	  
+		short RA = (short) (value2 << 8 |  value & 0xff); // put MSB | LSB
+	   
+		value = RA;
+		
+		return value;
+	}
 
 	@Override
 	public int getAddressModeInt() {
@@ -75,6 +83,17 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 		return " " + this.mnemonic + " " + String.format("0x%02X",this.opcode) + System.lineSeparator() 
 			+ " " + this.addressMode.toString() + System.lineSeparator() ;
 	}
-
 	
+	protected byte getByteValue(int[] memory, short location) {
+	 	   int index = (int)location & 0xffff; // byte index, LSB
+	 	   //int index2 = (int)location+1 & 0xffff;// byte index2, MSB
+	 	   
+	 	   byte value = (byte) memory[(int)index]; // LSB
+	 	  // short value2 = (short) memory[(int)index2]; // MSB
+	  	  
+	 	   //short RA = (short) (value2 << 8 |  value & 0xff); // put MSB | LSB
+	 	   
+	 	   //value = RA;
+			return value;
+		}
 }

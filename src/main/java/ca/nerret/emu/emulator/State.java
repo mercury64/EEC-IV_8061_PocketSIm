@@ -1,7 +1,5 @@
 package ca.nerret.emu.emulator;
 
-import java.util.Arrays;
-
 public class State {
 
     private int _sp; 
@@ -30,6 +28,8 @@ public class State {
     public State(int[] memory_) {
     	
     	this.PSW_FLAGS = 0x7f00; // Reset PSW.
+    	// 0 1 1 1  1 1 1 1 0 0 0 0 0 0 0 0 
+    	this.psw.reset();
     	
         _memory = memory_.clone();
         this.register_memory = new byte[0x1fff];
@@ -298,7 +298,7 @@ public class State {
     */
 	public byte getByteRegister(short register) {
 		
-		int regIndex = register &0xffff;
+		int regIndex = register & 0xffff;
 		byte value = register_memory[regIndex];
 		
 		System.out.println(" Get Register:" + String.format("R%02X",regIndex) + " = " + String.format("0x%02X",value));
@@ -485,16 +485,13 @@ public class State {
 		}
 		
 		shortToBoolean = ((short) ( ((v1^v2) & (v1^diff))  & 0x8000)) != 0;
-		System.out.println("Short to Boolean: " + shortToBoolean);
-		
+
 		if( shortToBoolean )
 		{
 			this.PSW_FLAGS |= ProgramStatusWord.F_V;
 		}
 		
 		shortToBoolean =  (short)(diff & 0xffff0000)  != 0;
-		
-		System.out.println("Short to Boolean: " + shortToBoolean);
 		
 	    if( !shortToBoolean )
 	    {
@@ -555,6 +552,7 @@ public class State {
 		return pswTableHeader + flagValues + pswFlagsString;
 	}
 
+	// Decrement Stack by 2.
 	public void decrementSP() {
 		this._sp = this._sp - 2;
 		this.setWordRegister((short)0x10, (short)this._sp);

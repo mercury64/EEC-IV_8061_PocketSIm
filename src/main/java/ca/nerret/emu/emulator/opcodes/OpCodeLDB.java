@@ -117,7 +117,8 @@ public class OpCodeLDB extends OpCode implements IOpCode {
 	        	break;
 	        case AddressMode.SHORT_INDEXED:
 	        	byte offset  = operands[numberOfBytes-4];
-	        	
+	        	System.err.println("Not Implemented");
+	     	   	System.exit(1);
 	        	break;	
 	        case AddressMode.LONG_INDEXED:
 	        	
@@ -143,17 +144,5 @@ public class OpCodeLDB extends OpCode implements IOpCode {
         state_.setByteRegister(breg, areg);
 
     }
-	
-	private byte getByteValue(int[] memory, short location) {
-	 	   int index = (int)location & 0xffff; // byte index, LSB
-	 	   //int index2 = (int)location+1 & 0xffff;// byte index2, MSB
-	 	   
-	 	   byte value = (byte) memory[(int)index]; // LSB
-	 	  // short value2 = (short) memory[(int)index2]; // MSB
-	  	  
-	 	   //short RA = (short) (value2 << 8 |  value & 0xff); // put MSB | LSB
-	 	   
-	 	   //value = RA;
-			return value;
-		}
+
 }

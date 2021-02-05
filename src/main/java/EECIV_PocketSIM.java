@@ -83,7 +83,7 @@ public class EECIV_PocketSIM {
 			
 			logger.info( String.format("%s", opcode) );
 			    
-			//System.out.println(state);
+			//System.out.println("CONSOLE STATUS " + String.format("0x%04X",state.getWordRegister((short) 0xd00)));
 			    
 			//System.out.println("PSW: " + state.psw.getMemory());
 			if (count == 500000) {

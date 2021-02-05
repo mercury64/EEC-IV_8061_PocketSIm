@@ -623,7 +623,11 @@ a8f3 #AWOTMR         Time in wide open throttle (seconds)
 
 
 
-a9d7  # Console status
+a9d7 # Console status
+a9dc # [RD00]=0x2A=Engineering Console Present
+a9df # Console Not Present goto aa1c
+a9e1 # Bit4 of R54 Set 1 at ????. ???? Calls a9d7
+a9e4 # HSO PORT CAM or OUTPUT HOLD BUFFER FULL goto aa02
 
 a9e7 # add 5D to current IOTime
 

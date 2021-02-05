@@ -27,15 +27,13 @@ public class OpCodeJGTU  extends OpCode implements IOpCode {
 	      
 	        int newPC = pc + 2;
 	        
-	        boolean zeroFlag = state_.getPswBit(ProgramStatusWord.ZERO);
+	        boolean notZeroFlag = !(state_.getPswBit(ProgramStatusWord.ZERO));
 	        boolean carryFlag = state_.getPswBit(ProgramStatusWord.CARRY);
 	        
-	        System.out.println(state_.PSW_FLAGS & ProgramStatusWord.F_N);
-	        System.out.println(state_.pswFlagsToString());
-	        // Jump on =
-	        // If Z=1
+	        // Jump on (PC)<-(PC)+ Displacement if (C*!Z)=1,or
+	        // (PC)unchanged if(C*!Z)=0.
 	        
-	        if ( zeroFlag == ProgramStatusWord.CLEAR && carryFlag == ProgramStatusWord.SET)
+	        if ( (carryFlag || notZeroFlag) == ProgramStatusWord.SET)
 	        {
 	        	// Take jump
 	            // If jump taken, state_.updateStateTime(4);

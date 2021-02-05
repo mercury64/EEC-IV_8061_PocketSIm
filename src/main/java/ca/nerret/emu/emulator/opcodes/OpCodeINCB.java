@@ -33,13 +33,34 @@ public class OpCodeINCB extends OpCode implements IOpCode {
         // Now increment the pc by 3
         state_.setPc(pc + _PC_INCR_2);
         
-        // set program status word (PSW)
-        state_.setPswBit(ProgramStatusWord.ZERO, true);
-        state_.setPswBit(ProgramStatusWord.NEGATIVE, false);
-        state_.setPswBit(ProgramStatusWord.OVERFLOW, false);
-        state_.setPswBit(ProgramStatusWord.OVERFLOW_TRAP, false);
-        state_.setPswBit(ProgramStatusWord.CARRY, false);    
-        state_.setPswBit(ProgramStatusWord.STICKY_BIT, false);
+        if ( value == 0) // Z,C Flag
+		{
+			state_.setPswBit(ProgramStatusWord.ZERO, true);
+			state_.setPswBit(ProgramStatusWord.CARRY, true);
+		}
+		else 
+		{
+			state_.setPswBit(ProgramStatusWord.ZERO, false);
+			state_.setPswBit(ProgramStatusWord.CARRY, false);
+		}
+		
+        //One if result is in the range of'*80to'*FF;else zero.
+		if( value >= 0x80 && value <= 0xff ) // N Flag
+		{
+			state_.setPswBit(ProgramStatusWord.NEGATIVE, true);
+		}
+		else {
+			state_.setPswBit(ProgramStatusWord.NEGATIVE, false);
+		}
+		
+		if ( value > 0x7f )
+		{
+			state_.setPswBit(ProgramStatusWord.OVERFLOW, true);
+			state_.setPswBit(ProgramStatusWord.OVERFLOW_TRAP, true);
+		}
+		else {
+			state_.setPswBit(ProgramStatusWord.OVERFLOW, false);
+		}
     }
     
 	public void setAddressMode(AddressMode addressMode) {
