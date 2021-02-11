@@ -68,7 +68,8 @@ public class OpCodeSTB extends OpCode implements IOpCode {
         // little endian
         byte register =(byte) (operands[1] & 0xff);
         byte value = (byte) (operands[2] & 0xff);
-            
+        byte registerRb = value;
+        
         if (this.getAddressModeType() == AddressMode.INDIRECT)
         {
         	register = (byte) (register & 0xfe);
@@ -78,18 +79,37 @@ public class OpCodeSTB extends OpCode implements IOpCode {
 			
 			//register = (byte) (register << 2);
 			//value = (byte) (value << 2);
+			
+			 state_.setByteRegister((byte)register, (byte)value);
 
         }
     	if ( this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC )
     	{
-    		System.err.println("Not implemented");
-    		System.exit(1);
+           	// AssemblerFormat: STB breg, (indirreg)+
+        	// Instruction operation: ([Ra])<-(Rb); (Ra)<-(Ra) + 1
+        	// Execution states: 8/13
+        	// Machine Format: [ ^C6 ],[ DestRa |1_MB],[ SourceRb ]
+        	register = (byte) (register & 0xfe);
+    		
+        	// [RA]
+    		short valueRa = (short) state_.getWordRegister((byte) (register));
+    		
+    		// RB
+    		byte valueRb = (byte) state_.getByteRegister((byte) (registerRb));
+    		 
+    		// ([RA])<-(RB);
+    		state_.setWordRegister((short) (valueRa), (short) (valueRb));
+
+		 	// (RA) <- (RA) + 1
+		 	valueRa = (short) (valueRa + 1);
+		 	
+		 	state_.setWordRegister((short)register, valueRa);
     	}
 
 
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
-        state_.setByteRegister((byte)register, (byte)value);
+       
 
     }
 }

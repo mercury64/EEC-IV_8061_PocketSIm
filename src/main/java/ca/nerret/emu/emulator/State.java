@@ -326,7 +326,9 @@ public class State {
 
 	public void setWordRegister(short dest_dwreg, byte value) {
 	
-		register_memory[dest_dwreg] = value;
+		int index = (dest_dwreg);
+		System.out.println("Index" + index);
+		register_memory[index] = value;
 		System.out.println(" Set Word Register with a Byte:" + 
 				String.format("0x%02X",dest_dwreg) + 
 				" = " + 

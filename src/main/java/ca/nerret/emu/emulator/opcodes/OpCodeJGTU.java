@@ -33,7 +33,7 @@ public class OpCodeJGTU  extends OpCode implements IOpCode {
 	        // Jump on (PC)<-(PC)+ Displacement if (C*!Z)=1,or
 	        // (PC)unchanged if(C*!Z)=0.
 	        
-	        if ( (carryFlag || notZeroFlag) == ProgramStatusWord.SET)
+	        if ( (carryFlag && notZeroFlag) == ProgramStatusWord.SET)
 	        {
 	        	// Take jump
 	            // If jump taken, state_.updateStateTime(4);
