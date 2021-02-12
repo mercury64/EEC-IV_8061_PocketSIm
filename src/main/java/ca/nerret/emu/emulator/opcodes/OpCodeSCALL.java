@@ -82,9 +82,17 @@ public class OpCodeSCALL extends OpCode implements IOpCode {
         	offset = offset | ~0x03ff;
         }
 
-        offset = ret + offset;
 
-        this.setOffset(offset);
+
+        offset = ret + offset;
+        
+        // SP <- SP-2; 
+        state_.decrementSP();
+
+        short stack = state_.getWordRegister((short)0x10);
+        // Stack <- PC;
+        state_.setWordRegister(stack, (short)ret);
+        this.setOffset((short)offset & 0x0000ffff);
         
         state_.setPc(offset);
         
@@ -97,6 +105,6 @@ public class OpCodeSCALL extends OpCode implements IOpCode {
     	String out = super.toString();
     	out = out + System.lineSeparator() + " Call to: " + String.format("0x%02X",this.getOffset());
     	
-    	return out;
+    	return out+ System.lineSeparator();
     }
 }

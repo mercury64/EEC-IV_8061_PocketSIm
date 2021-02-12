@@ -84,6 +84,13 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 			+ " " + this.addressMode.toString() + System.lineSeparator() ;
 	}
 	
+	/**
+	 * Be sure to cast byte to short using: (short) (indirreg & 0xff) 
+	 * 
+	 * @param memory
+	 * @param location
+	 * @return
+	 */
 	protected byte getByteValue(int[] memory, short location) {
 	 	   int index = (int)location & 0xffff; // byte index, LSB
 	 	   //int index2 = (int)location+1 & 0xffff;// byte index2, MSB

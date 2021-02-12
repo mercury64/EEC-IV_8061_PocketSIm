@@ -1,5 +1,6 @@
 package ca.nerret.emu.emulator.opcodes;
 
+import ca.nerret.emu.emulator.AddressMode;
 import ca.nerret.emu.emulator.OpCode;
 import ca.nerret.emu.emulator.State;
 
@@ -86,5 +87,12 @@ public class OpCodeCALL extends OpCode implements IOpCode {
         System.out.println(" Call to: " + String.format("0x%02X",this.getOffset()));
         
     }
+    
+	public void setAddressMode(AddressMode addressMode) {
+		// TODO Auto-generated method stub
+	    
+	   super.setAddressMode(new AddressMode((byte)AddressMode.DIRECT));
+		
+	}
 
 }

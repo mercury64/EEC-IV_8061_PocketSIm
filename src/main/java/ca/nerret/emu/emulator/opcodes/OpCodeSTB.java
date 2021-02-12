@@ -72,15 +72,22 @@ public class OpCodeSTB extends OpCode implements IOpCode {
         
         if (this.getAddressModeType() == AddressMode.INDIRECT)
         {
-        	register = (byte) (register & 0xfe);
+        	// Assembler Format: STB breg, @indirreg
+        	// Instruction Operation: ([Ra])<- (Rb)
+        	// Execution States: 7/12 
+        	// MachineFormat: [ ^C6 ], [ Dest Ra | 1 MB ], [ Source Rb ]
+        	
+        	// 2076: c6,1a,1c            stb   R1c,[R1a]        [R1a] = R1c;
+        	byte destRa = (byte) (operands[1] & 0xfe);
 
-			register = state_.getByteRegister((byte) (register));
-			value = state_.getByteRegister((byte)value);
+        	
+        	destRa = state_.getByteRegister((short) (destRa & 0xff));
+        	value = state_.getByteRegister((short) (destRa & 0xff));
 			
 			//register = (byte) (register << 2);
 			//value = (byte) (value << 2);
 			
-			 state_.setByteRegister((byte)register, (byte)value);
+			 state_.setByteRegister((byte)destRa, (byte)value);
 
         }
     	if ( this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC )

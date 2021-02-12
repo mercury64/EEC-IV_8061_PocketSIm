@@ -142,6 +142,11 @@ public class OpCodeCMPB extends OpCode implements IOpCode {
 
 	        	break;
 	        case AddressMode.IMMEDIATE:
+	        	
+	        	// Assembler Format: CMPB =data, breg
+	        	// Instruction Operation: (Rb) - Data; PSW Flags <- Compare Results
+	        	// Execution States: 4
+	        	// Machine Format: [ ^99 ], [ Data Byte ], [ Source Rb ]
 	        	data = (byte)operands[numberOfBytes-2];
 	        	areg = data;
 	        	breg = state_.getByteRegister(operands[numberOfBytes-1]);
@@ -173,18 +178,34 @@ public class OpCodeCMPB extends OpCode implements IOpCode {
 		{
 			state_.setPswBit(ProgramStatusWord.ZERO, true);
 		}
-		else if( compare < 0 ) // N Flag
+		else 
+		{
+			state_.setPswBit(ProgramStatusWord.ZERO, false);
+		}
+		if( compare < 0 ) // N Flag
 		{
 			state_.setPswBit(ProgramStatusWord.NEGATIVE, true);
 		}
 		else
 		{
-			state_.setPswBit(ProgramStatusWord.ZERO, false);
 			state_.setPswBit(ProgramStatusWord.NEGATIVE, false);
-			//state_.setPswBit(ProgramStatusWord.OVERFLOW, true);
-			//state_.setPswBit(ProgramStatusWord.OVERFLOW_TRAP, true);
+		}
+		
+		if ( compare > 0xfe )
+		{
+			state_.setPswBit(ProgramStatusWord.OVERFLOW, true);
+			state_.setPswBit(ProgramStatusWord.OVERFLOW_TRAP, true);
+		}
+		else {
+			state_.setPswBit(ProgramStatusWord.OVERFLOW, false);
+		}
+		
+		if ( (int) breg >= (int) areg)
+		{
 			state_.setPswBit(ProgramStatusWord.CARRY, true);
-			//state_.setPSW(ProgramStatusWord.STICKY_BIT, null);
+		}
+		else {
+			state_.setPswBit(ProgramStatusWord.CARRY, false);
 		}
         
         state_.setPc(pc + numberOfBytes);

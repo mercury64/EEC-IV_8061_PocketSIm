@@ -21,6 +21,7 @@ import ca.nerret.emu.emulator.opcodes.OpCodeC3;
 import ca.nerret.emu.emulator.opcodes.OpCodeCALL;
 import ca.nerret.emu.emulator.opcodes.OpCodeCD;
 import ca.nerret.emu.emulator.opcodes.OpCodeDI;
+import ca.nerret.emu.emulator.opcodes.OpCodeDJNZ;
 import ca.nerret.emu.emulator.opcodes.OpCodeFF;
 import ca.nerret.emu.emulator.opcodes.OpCodeINCB;
 import ca.nerret.emu.emulator.opcodes.OpCodeINCW;
@@ -138,6 +139,8 @@ public final class OpcodeCache {
         _OPCODES.put(0xD9, new OpCodeJGTU(0xd9, "JGTU"));
         _OPCODES.put(0xDF, new OpCodeJE(0xdf, "JE"));
         _OPCODES.put(0xDB, new OpCodeJC(0xdb, "JC"));
+        
+        _OPCODES.put(0xE0, new OpCodeDJNZ(0xe0, "DJNZ"));
         
         _OPCODES.put(0x30, new OpCodeJNB(0x30, "JNB"));
         _OPCODES.put(0x31, new OpCodeJNB(0x31, "JNB"));

@@ -25,7 +25,7 @@ public class OpCodeRET extends OpCode implements IOpCode {
         int stateTime = 12;
         
         short stack = state_.getWordRegister((short)0x10);
-        short stackValue = this.getWordValue(memory, (short)stack);
+        short stackValue = state_.getWordRegister(stack);
         final int programCounter = stackValue;
         
         // SP <- SP+2; 

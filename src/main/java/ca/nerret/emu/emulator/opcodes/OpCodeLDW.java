@@ -108,10 +108,15 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
        }
        if (this.getAddressModeType() == AddressMode.IMMEDIATE)
        {
-           dest_dwreg = operands[numberOfBytes-1];
+    	   // Assembler Format: LDW =data, breg
+    	   // Instruction Operation: (RB) <- Data
+    	   // Execution States: 5
+    	   // Machine Format: [ ^A1 ], [ Data Lo Byte ], [ Data Hi Byte ], [ Dest RB]
+    	   
+           byte destRB = operands[numberOfBytes-1];
            value  = (short) ((operands[numberOfBytes-2] << 8) | operands[numberOfBytes-3]  & 0xff);
 
-           state_.setWordRegister(dest_dwreg, value);
+           state_.setWordRegister((short) (destRB & 0xff), value);
        }
        if (this.getAddressModeType() == AddressMode.SHORT_INDEXED)
        {
@@ -134,9 +139,10 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
            
            short offset = (short) ((offset_hi << 8) | (offset_lo & 0xff));
         	
+           short indexRAValue = state_.getWordRegister(indexRA);
 
-    	   short RA = (short) (indexRA + offset);
-    	   short RAvalue = state_.getWordRegister(RA);
+    	   short RA = (short) (indexRAValue + offset);
+    	   short RAvalue = this.getWordValue(memory, RA);
        	
        	System.out.println(String.format(" [0x%04X + 0x%04X]", RAvalue, offset));
        	System.out.println(String.format(" Offset hi & lo : [0x%04X + 0x%04X]", (short) (offset_hi << 8), offset_lo));

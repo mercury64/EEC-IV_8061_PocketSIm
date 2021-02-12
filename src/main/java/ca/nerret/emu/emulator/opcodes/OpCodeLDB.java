@@ -65,7 +65,7 @@ public class OpCodeLDB extends OpCode implements IOpCode {
 		}
         
         byte areg = 0;
-        short breg = operands[numberOfBytes-1];
+        byte breg = operands[numberOfBytes-1];
         byte data;
         byte indirreg = 0;
         byte indirreg_inc;
@@ -92,12 +92,21 @@ public class OpCodeLDB extends OpCode implements IOpCode {
 	        	break;
 	        case AddressMode.INDIRECT:
 	        	
+	        	// LDB @indlrreg, breg
+	        	// (Rb) <- ([Ra])
+	        	// [ ^B2 ], [ Indirect Ra | 0 MB ], [ Dest Rb ]
+	        	// 2070: b2,1a,1c            ldb   R1c,[R1a]        R1c = [R1a];
+	        	
+	        	// (Ra)
 	        	indirreg = operands[numberOfBytes-2];
 	        	indirreg = (byte) (indirreg &  0xfe);
 
 	        	indirreg = state_.getByteRegister( indirreg );// [R32]
 				
-				areg = indirreg;	
+	        	// ([Ra])
+	        	byte indirRegValue = getByteValue(memory, (short) (indirreg & 0xff));
+	        	
+				areg = indirRegValue;//getByteValue(memory, indirreg);
 				
 	        	break;
 	        case AddressMode.INDIRECT_AUTO_INC:
@@ -105,7 +114,7 @@ public class OpCodeLDB extends OpCode implements IOpCode {
 		    	   
 		    	   byte indirectRegRA = operands[numberOfBytes-2];
 		    	   indirectRegRA = (byte) (indirectRegRA &  0xfe);
-		    	   short destRegRB = operands[numberOfBytes-1];
+		    	   byte destRegRB = operands[numberOfBytes-1];
 		    	   
 		    	   // [RA]
 		    	   short RA = state_.getWordRegister(indirectRegRA);
@@ -126,21 +135,27 @@ public class OpCodeLDB extends OpCode implements IOpCode {
 	     	   	System.exit(1);
 	        	break;	
 	        case AddressMode.LONG_INDEXED:
-	        	
-	        	byte indexreg  = operands[numberOfBytes-4];
+	        	// Assembler Format: LDB offset(indexreg),breg 
+	        	// Instruction Operation:(Rb) <- ([Ra]+Offset)
+	        	// Execution States: 7/12
+	        	// MachineFormat: [ ^B3 ] [ Index Ra | 1 MB ], [ Offset Lo Byte ], [+-| Offset Hi Byte ], [ Dest Rb ]
+	        			
+	        	byte indexRa  = (byte) (operands[numberOfBytes-4] & 0xfe); // mode bit mask
 	        	byte offset_lo = operands[numberOfBytes-3];
 	        	byte offset_hi = operands[numberOfBytes-2];
+	        	byte dest_reg = operands[numberOfBytes-1];
 	        	
-	        	short value = state_.getByteRegister((byte) indexreg);
+	        	short valueRa = state_.getByteRegister((byte) (indexRa & 0xff)); 
 	        	
-	        	short dest_reg = (short) ((offset_lo << 8) | offset_hi);
-	        	System.out.println(String.format(" [0x%04X + 0x%04X]", value, dest_reg));
+	        	short offsetWord = (short) ((offset_hi << 8) | offset_lo);
+
+	        	offsetWord = (short) (valueRa + offsetWord);
+	        	System.out.println(String.format(" [0x%04X + 0x%04X]", valueRa, offsetWord));
 	        	
-	        	dest_reg = (short) (value + dest_reg);
 	        	//src_reg = (short) (operands[4] & 0xff);
 	        	
-	        	//value = state_.getWordRegister((byte) src_reg);
-	        	
+	        	areg = this.getByteValue(memory, offsetWord);
+	        	breg = dest_reg;
 	        	break;
         }
 

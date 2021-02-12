@@ -296,6 +296,13 @@ public class State {
 	    }
 	}
     */
+	
+	
+	/**
+	 * If passing in byte, make sure to cast: (byte) (destRa & 0xff)
+	 * @param register
+	 * @return
+	 */
 	public byte getByteRegister(short register) {
 		
 		int regIndex = register & 0xffff;
@@ -304,20 +311,22 @@ public class State {
 		
 		System.out.println(" Get Register:" + String.format("R%02X",regIndex) + " = " + String.format("0x%02X",value));
 		
-		return value;
+		return value; 
 	}
 	
 	public short getWordRegister(short register) {
         
-		byte lo = this.register_memory[register];
-        byte hi = this.register_memory[register + 1];
+		int regIndex = register & 0xffff;
+		
+		byte lo = this.register_memory[regIndex];
+        byte hi = this.register_memory[regIndex + 1];
         short sHiByte =  (short) ((hi & 0xff) << 8);
         short sLoByte = (short) (lo & 0xff);
 		
         short temp = (short) (sHiByte | sLoByte);
 		
 		System.out.println(" Get Word Register:" + 
-				String.format("R%02X",register) + 
+				String.format("R%02X",regIndex) + 
 				" = " + 
 				String.format("0x%04X",temp)
 			);
@@ -328,22 +337,27 @@ public class State {
 	public void setWordRegister(short dest_dwreg, byte value) {
 	
 		int index = (dest_dwreg);
-		System.out.println("Index" + index);
+		
+		if (index == 0)
+		{
+			System.out.println("Zero Reg R0, return 0");
+		}
 		register_memory[index] = value;
 		System.out.println(" Set Word Register with a Byte:" + 
-				String.format("0x%02X",dest_dwreg) + 
+				String.format("R%02X",dest_dwreg) + 
 				" = " + 
-				String.format("0x%04X",value));
+				String.format("0x%02X",value));
 	}
 	
 	public void setWordRegister(short dest_dwreg, short value) {
         
+		int index = dest_dwreg & 0xffff;
 
-        if ( dest_dwreg <= 0x10)
+        if ( index <= 0x10)
         {
         	this.setSFR(dest_dwreg, value);
         }
-        else if( dest_dwreg >= 0x12 && dest_dwreg <= 0xff)
+        else if( index >= 0x12 && dest_dwreg <= 0xff)
         {
         	this.setGeneralRegister(dest_dwreg, value);
         }
@@ -373,12 +387,14 @@ public class State {
 	
 	private void setGeneralRegister(short dest_dwreg, short value)
 	{
+		int index = dest_dwreg & 0xffff;
+		
         byte hi = (byte) ((value >> 8) & 0xff ) ;
         byte lo = (byte) (value  & 0xff) ;
         
         
-		register_memory[dest_dwreg] = lo;
-		register_memory[dest_dwreg + 1] = hi;
+		register_memory[index] = lo;
+		register_memory[index + 1] = hi;
 		System.out.println(
 				" Set Word Register:" + 
 						String.format("0x%02X",dest_dwreg) + 

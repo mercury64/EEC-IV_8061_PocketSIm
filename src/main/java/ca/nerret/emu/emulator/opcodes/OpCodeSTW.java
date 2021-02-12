@@ -88,6 +88,8 @@ public class OpCodeSTW extends OpCode implements IOpCode {
         
         if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
         {
+        	// aa30: c2,19,1c            stw   R1c,[R18++]      [R18++] = R1c;
+        	
         	// AssemblerFormat: STW breg, (indirreg)+
         	// Instruction operation: ([RA])<-(RB); (RA)<-(RA) + 1
         	// Execution states: 8/13
@@ -105,7 +107,7 @@ public class OpCodeSTW extends OpCode implements IOpCode {
 
 		 	// (RA) <- (RA) + 1
 		 	//state_.setWordRegister(registerRA, (short) (registerRA + 2));
-		 	   value = (short) (valueRA + 1);
+		 	   value = (short) (valueRA + 2);
 		 	  dest_reg = registerRA;
 		 	/*   byte indirectRegRA = operands[numberOfBytes-2];
 		 	   indirectRegRA = (byte) (indirectRegRA &  0xfe);

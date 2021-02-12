@@ -70,7 +70,7 @@ public class EECIV_PocketSIM {
 			}
 			
 			
-			if (state.getPc() == 0xf7bf)
+			if (state.getPc() == 0xaa64)
 			{
 				//pause
 				System.out.println("Break Point");
