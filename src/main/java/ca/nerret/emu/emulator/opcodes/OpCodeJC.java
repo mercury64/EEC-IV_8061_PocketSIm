@@ -31,6 +31,7 @@ public class OpCodeJC  extends OpCode implements IOpCode {
 	        
 	        // Jump on Carry
 	        // If C=1
+	        System.out.println(state_.pswFlagsToString());
 	        
 	        if ( carryFlag == ProgramStatusWord.SET)
 	        {

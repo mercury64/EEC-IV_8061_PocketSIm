@@ -95,8 +95,16 @@ public class OpCodeCMPW extends OpCode implements IOpCode {
    
 		if (this.getAddressModeType() == AddressMode.DIRECT)
 		{
-			RA = state_.getWordRegister(operands[numberOfBytes-1]);
-			RB = state_.getWordRegister(operands[numberOfBytes-2]);
+			// Assembler Format: CMPW areg,breg
+			// InstructionOperation: (RB)-(RA); PSWFiags <- Compare Results
+			// MachineFormat: "[ ^88 ], [ Source RA ], [ Source RB ]
+			// ADDRESS MODES:
+			// DIRECT AssemblerFormat:
+			// InstructionOperation:
+			// ExecutionStates: 4
+				
+			RA = state_.getWordRegister(operands[numberOfBytes-2]);
+			RB = state_.getWordRegister(operands[numberOfBytes-1]);
 		}
 		if (this.getAddressModeType() == AddressMode.IMMEDIATE)
 		{
@@ -117,10 +125,9 @@ public class OpCodeCMPW extends OpCode implements IOpCode {
 		//state_.doSub((short) state_.setWordRegister(RB), RA);
 		long cmpResult = state_.doSub( RB, RA);
 		
-		  System.out.println(compare + " : " + cmpResult);
-    	  System.out.println(" Compare: (" + String.format("0x%04X", RB) + ", "+ String.format("0x%04X", RA) + ")");
-
-		  
+		System.out.println(" Compare: (" + String.format("0x%04X", RB) + ", "+ String.format("0x%04X", RA) + ")");
+		System.out.println(state_.pswFlagsToString());
+		
 		if ( compare == 0) // Z Flag
 		{
 			state_.setPswBit(ProgramStatusWord.ZERO, true);
@@ -137,7 +144,7 @@ public class OpCodeCMPW extends OpCode implements IOpCode {
 			state_.setPswBit(ProgramStatusWord.NEGATIVE, false);
 		}
 		
-		if ( compare > 0xff )
+		if ( compare > 0xfffe )
 		{
 			state_.setPswBit(ProgramStatusWord.OVERFLOW, true);
 			state_.setPswBit(ProgramStatusWord.OVERFLOW_TRAP, true);
@@ -146,13 +153,14 @@ public class OpCodeCMPW extends OpCode implements IOpCode {
 			state_.setPswBit(ProgramStatusWord.OVERFLOW, false);
 		}
 		
-		if ((int) RB >= (int) RA)
+		if ( (int) RB >= (int) RA)
 		{
 			state_.setPswBit(ProgramStatusWord.CARRY, true);
 		}
 		else {
 			state_.setPswBit(ProgramStatusWord.CARRY, false);
 		}
+		System.out.println(state_.pswFlagsToString());
 		
     }
 }

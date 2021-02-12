@@ -299,6 +299,7 @@ public class State {
 	public byte getByteRegister(short register) {
 		
 		int regIndex = register & 0xffff;
+		
 		byte value = register_memory[regIndex];
 		
 		System.out.println(" Get Register:" + String.format("R%02X",regIndex) + " = " + String.format("0x%02X",value));
@@ -461,17 +462,17 @@ public class State {
 	 * @param v1
 	 * @param v2
 	 */
-	public short doSub(final short v1, final short v2) {
+	public short doSub(final short RB, final short RA) {
 
-		long diff =  v1 - v2;
+		long diff =  RB - RA;
 	     
-		this.modifySubPSW(diff, v1, v2);
+		this.modifySubPSW(diff, RB, RA);
 	      
 	    return (short) diff;
 		
 	}
 
-	private void modifySubPSW(long diff, final short v1, final short v2) {
+	private void modifySubPSW(long diff, final short RB, final short RA) {
 
 		boolean shortToBoolean = false;
 		
@@ -486,7 +487,7 @@ public class State {
 			this.PSW_FLAGS |= ProgramStatusWord.F_N;
 		}
 		
-		shortToBoolean = ((short) ( ((v1^v2) & (v1^diff))  & 0x8000)) != 0;
+		shortToBoolean = ((short) ( ((RB^RA) & (RB^diff))  & 0x8000)) != 0;
 
 		if( shortToBoolean )
 		{
@@ -501,9 +502,9 @@ public class State {
 	    }
 		
 		
-	    if ((((~v2 & v1 & ~diff) | (v2 & ~v1 & diff)) & 0x8000) != 0)
+	    if ((((~RA & RB & ~diff) | (RA & ~RB & diff)) & 0x8000) != 0)
 	    {
-	    	System.out.println("short overflow sub(" + v1 + ", " + v2 + ")");
+	    	System.out.println("short overflow sub(" + RB + ", " + RA + ")");
 	    }
 		
 	}
@@ -516,6 +517,22 @@ public class State {
 				+ ", _state_time=" + _state_time + "]";
 	}
 
+	public short doANB(byte rb, byte ra) {
+		 byte anb  = (byte) (rb & ra) ;
+		 
+		 this.PSW_FLAGS &= ~(ProgramStatusWord.F_N|ProgramStatusWord.F_Z); // set to zero
+
+			if((short)anb == 0)
+			{
+				this.PSW_FLAGS |= ProgramStatusWord.F_Z; // set to one
+			}
+			else if((short)anb < 0)
+			{
+				this.PSW_FLAGS |= ProgramStatusWord.F_N; // set to one
+			}
+		return anb;
+	}
+	
 	public short doORRB(byte rb, byte ra) {
 		 byte orrb  = (byte) (rb | ra) ;
 		 
@@ -538,12 +555,12 @@ public class State {
 		pswTableHeader = pswTableHeader + "| Z | N | V | VT| C | ST|\n";
 		pswTableHeader = pswTableHeader + "------------------------\n";
 		
-		String zeroFlag = Integer.toBinaryString( (this.PSW_FLAGS & ProgramStatusWord.F_Z)  >>> ProgramStatusWord.ZERO) ;
-		String negativeFlag = Integer.toBinaryString( (this.PSW_FLAGS & ProgramStatusWord.F_N) >>> ProgramStatusWord.NEGATIVE ) ;
-		String overflowFlag = Integer.toBinaryString( this.PSW_FLAGS & ProgramStatusWord.F_V) ;
-		String overflowTrapFlag = Integer.toBinaryString( this.PSW_FLAGS & ProgramStatusWord.F_VT) ;
+		String zeroFlag = Integer.toBinaryString( (this.PSW_FLAGS & ProgramStatusWord.F_Z)  >>> ProgramStatusWord.ZERO);
+		String negativeFlag = Integer.toBinaryString( (this.PSW_FLAGS & ProgramStatusWord.F_N) >>> ProgramStatusWord.NEGATIVE );
+		String overflowFlag = Integer.toBinaryString( (this.PSW_FLAGS & ProgramStatusWord.F_V) >>> ProgramStatusWord.OVERFLOW);
+		String overflowTrapFlag = Integer.toBinaryString( (this.PSW_FLAGS & ProgramStatusWord.F_VT) >>> ProgramStatusWord.OVERFLOW_TRAP);
 		String carryFlag = Integer.toBinaryString( (this.PSW_FLAGS & ProgramStatusWord.F_C)  >>> ProgramStatusWord.CARRY) ;
-		String stickyBitFlag = Integer.toBinaryString( this.PSW_FLAGS & ProgramStatusWord.F_ST) ;
+		String stickyBitFlag = Integer.toBinaryString( (this.PSW_FLAGS & ProgramStatusWord.F_ST) >>> ProgramStatusWord.STICKY_BIT);
 		
 		String flagValues = "| " + zeroFlag + " | " + negativeFlag + " | " + overflowFlag + " | " + overflowTrapFlag
 				+ " | " + carryFlag + " | " + stickyBitFlag + " |\n";
@@ -564,5 +581,10 @@ public class State {
 	public void incrementSP() {
 		this._sp = this._sp + 2;
 		this.setWordRegister((short)0x10, (short)this._sp);
+	}
+
+	public ProgramStatusWord getPsw() {
+		// TODO Auto-generated method stub
+		return this.psw;
 	}	
 }

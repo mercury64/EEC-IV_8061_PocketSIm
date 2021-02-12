@@ -6,7 +6,16 @@ import ca.nerret.emu.emulator.ProgramStatusWord;
 import ca.nerret.emu.emulator.State;
 
 /**
- * OpCode 0x45 AD3W
+ * AN3B - LOGICAL-AND BYTES,THREE OPERANDS
+ * 
+ * Description:
+ *     AN3B logically-ANDs an 8-bit "A" operand and an 8-bit "B" operand, 
+ *     and returns the result to an 8-bit "D" operand location
+ *     
+ * Flags:
+ *  Z One if result is zero; else zero.
+ *	N One if result MSB is one; else zero.
+ *	V,C Set to zero upon instruction execution.
  */
 public class OpCodeAN3B  extends OpCode implements IOpCode {
 
@@ -78,12 +87,53 @@ public class OpCodeAN3B  extends OpCode implements IOpCode {
         byte dest_dwreg = operands[3];
         byte Ra = operands[2];
         byte Rb = operands[1];
-        byte Rd  = (byte) (Ra + Rb) ;
+        byte result = 0;
         
+        if (this.getAddressModeType() == AddressMode.DIRECT)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.IMMEDIATE)
+		{
+        	// AN3B =data, breg, dreg
+        	//(Rd) <- DATA && (Rb)
+        	
+        	byte data = operands[1];
+        	byte breg = state_.getByteRegister(operands[2]);
+        	byte dreg = operands[3];
+        	
+        	
+        	result = (byte) state_.doANB(breg, data);
+        	dest_dwreg = dreg;
+		}
+        if (this.getAddressModeType() == AddressMode.INDIRECT)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.SHORT_INDEXED)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
+        
+        // V,C Settozero upon instruction execution.
 		state_.setPswBit(ProgramStatusWord.OVERFLOW, false);
 		state_.setPswBit(ProgramStatusWord.CARRY, false);
         
-        short result = state_.doAdd(Ra, Rb);
+        //short resultTEST = state_.doAdd(Ra, Rb);
+
         if ( result == 0) // Z Flag
  		{
  			state_.setPswBit(ProgramStatusWord.ZERO, true);

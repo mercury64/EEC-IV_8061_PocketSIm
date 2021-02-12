@@ -37,10 +37,10 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 		this.opcode = opcode;
 	}
 
-	public void setAddressMode(AddressMode direct) {
+	public void setAddressMode(AddressMode mode) {
 		// TODO Auto-generated method stub
 	    
-	    this.addressMode = direct;
+	    this.addressMode = mode;
 	}
 	
 	public AddressMode getAddressMode()

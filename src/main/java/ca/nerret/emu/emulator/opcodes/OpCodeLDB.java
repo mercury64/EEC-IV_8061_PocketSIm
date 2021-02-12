@@ -78,7 +78,12 @@ public class OpCodeLDB extends OpCode implements IOpCode {
         switch (this.getAddressModeInt())
         {
 	        case AddressMode.DIRECT:
+	        	// LDB areg,breg
+	        	// InstructionOperation: (Rb)<-(Ra)
+	        	// Machine Format: [ ^B0 ], [ Source Ra ] [ Dest Rb ]
 	        	areg = operands[numberOfBytes-2];
+	        	breg = operands[numberOfBytes-1];
+	        	areg = state_.getByteRegister( areg );
 	        	break;
 	        case AddressMode.IMMEDIATE:
 	        	data = (byte)operands[numberOfBytes-2];

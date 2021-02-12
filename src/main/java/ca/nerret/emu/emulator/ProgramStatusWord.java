@@ -3,10 +3,8 @@ package ca.nerret.emu.emulator;
 public class ProgramStatusWord {
 	
 	Bit psw[];
-	
-	private int processorStatusWord = 0x00;
-	
-	private short memory;
+
+	private short register;
 			
 	public final static byte STICKY_BIT = 0x0;
 	public final static byte UNSIGNED = 0x1;
@@ -56,7 +54,7 @@ public class ProgramStatusWord {
 	
 	public void reset()
 	{
-		this.memory = 0x7f00;
+		this.register = 0x7f00;
 		
 		psw[STICKY_BIT] = new Bit(STICKY_BIT,"ST", "Sticky Bit Flag", false);
 		psw[UNSIGNED] = new Bit(UNSIGNED,"C.!Z", "Unsigned, > Flag", false);
@@ -76,35 +74,38 @@ public class ProgramStatusWord {
 		psw[INTERRUPT_SERVICE] = new Bit(INTERRUPT_SERVICE,"I", "Interrupt Enable", false);
 	}
 	
-	public void setBit(byte bit, boolean value)
+	public void setBit(byte index, boolean value)
 	{
-		this.psw[bit].value = value;
+		this.psw[index].value = value;
 		
-		this.memory = this.getMemory();
+		this.setRegister();
 	}
 	
-	public boolean getBit(byte bit) {
-		// TODO Auto-generated method stub
-		return this.psw[bit].value;
-	}
-	
-	public short getMemory()
+	public void setRegister()
 	{
 		for (int i = psw.length-1; i >= 0; i--)
 		{
-			this.memory <<= 1;
+			this.register <<= 1;
 			
 			if ( psw[i].value )
 			{
-				this.memory |= 1;
+				this.register |= 1;
 			}
 			else
 			{
-				this.memory |= 0;
+				this.register |= 0;
 			}
 		}
+	}
+	
+	public boolean getBit(byte index) {
 		
-		return this.memory;
+		return this.psw[index].value;
+	}
+	
+	public short getRegister()
+	{
+		return this.register;
 	}
 	
 	
@@ -126,11 +127,20 @@ public class ProgramStatusWord {
 		ProgramStatusWord psw = new ProgramStatusWord();
 		
 		psw.setBit(CARRY, SET);
-		
-		System.out.println(psw.memory);
+		System.out.println(psw.register);
 		System.out.println(psw);
+		System.out.println(psw.getRegister());
+		
+		psw.setBit(ZERO, SET);
+		System.out.println(psw.register);
+		System.out.println(psw);
+		System.out.println(psw.getRegister());
+		
 		psw.reset();
-		System.out.println(psw.getMemory());
+		System.out.println(psw.register);
+		System.out.println(psw);
+		System.out.println(psw.getRegister());
+		
 		
 		
 	}

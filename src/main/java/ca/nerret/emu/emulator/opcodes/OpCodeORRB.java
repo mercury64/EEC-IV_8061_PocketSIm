@@ -2,6 +2,7 @@ package ca.nerret.emu.emulator.opcodes;
 
 import ca.nerret.emu.emulator.AddressMode;
 import ca.nerret.emu.emulator.OpCode;
+import ca.nerret.emu.emulator.ProgramStatusWord;
 import ca.nerret.emu.emulator.State;
 
 /**
@@ -81,29 +82,77 @@ public class OpCodeORRB  extends OpCode<OpCodeORRB> implements IOpCode {
         byte Rb = operands[2];
         byte result = 0;
         
+        if (this.getAddressModeType() == AddressMode.DIRECT)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.IMMEDIATE)
+		{
+        	// Assembler Format: ORRB =data,breg
+        	// Instruction Operation: (Rb) <- Data + (Rb)
+        	// Execution States: 4
+        	// Machine Format: [ ^91 ], [ Data Byte ], [ Dest Rb ]
+        	
+        	byte data = operands[1];
+        	byte RbValue = state_.getByteRegister((short) (Rb & 0xff));
+        	
+        	result = (byte) (data | RbValue);
+        	
+        	
+        	
+        	System.out.print(" ORRB: " + result +":");
+        	result =  (byte) state_.doORRB(RbValue, data);
+        	System.out.println(result);
+		}
+        if (this.getAddressModeType() == AddressMode.INDIRECT)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.SHORT_INDEXED)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
+        
 		if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
 		{
-		
+			// AssemblerFormat: ORRB (lndirreg)+,brag
+			// instruction Operation: (Rb)<-([Ra])+(Rb); (Ra)<-(Ra) + 1
+			// ([Ra]) the value stored in Ra
+			// )+( logical OR operation.
+			
+			// Execution Sfafes; 7/12
+			// MachineFormat: [ ^92 ], [ Indeirect Ra | 1 MB ], [ Dest Rb ]
+
 			//2073: 92,15,1c            orb   R1c,[R14++]      R1c |= [R14++]; R1c | [R14++]
 			// register [R14++]
+			
+			// (Ra)<-(Ra) + 1
 			Ra = (byte) (Ra & 0xfe);
-			short register_value = state_.getWordRegister((short) (Ra));// [R32]
-			state_.setWordRegister((short) (Ra - 1), (short) (register_value + 1));	
+			short RaAddress = state_.getWordRegister( Ra );// [R32]
+			 
+			byte value = getByteValue(memory, RaAddress);
+			
+			state_.setWordRegister((short) Ra, (short) (RaAddress + 1));	
 		 
-			// register [value]
-			//int mem_index = register_value & 0xff;
-			//byte tmp_register_value =  (byte) memory[(int)mem_index];
-			//Ra = (byte) tmp_register_value;	
-		    Ra = getByteValue(memory, register_value);
-		    
-			result = (byte) state_.doORRB(state_.getByteRegister(Rb), Ra);
+			result = (byte) state_.doORRB(state_.getByteRegister(Rb), value);
 		}
 
 
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
         
-        state_.setByteRegister(Rb, (byte) result);    
+        state_.setByteRegister(Rb, (byte) result);  
+        
+		state_.setPswBit(ProgramStatusWord.OVERFLOW, false);
+		state_.setPswBit(ProgramStatusWord.CARRY, false);
         
     }
 }
