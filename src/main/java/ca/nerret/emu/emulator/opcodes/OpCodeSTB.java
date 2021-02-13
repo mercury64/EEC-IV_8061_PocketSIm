@@ -70,6 +70,23 @@ public class OpCodeSTB extends OpCode implements IOpCode {
         byte value = (byte) (operands[2] & 0xff);
         byte registerRb = value;
         
+    	if ( this.getAddressModeType() == AddressMode.DIRECT )
+    	{
+        	System.err.println("Not Implemented");
+     	   System.exit(1);
+        	
+    	}
+    	if ( this.getAddressModeType() == AddressMode.SHORT_INDEXED )
+    	{
+        	System.err.println("Not Implemented");
+     	   System.exit(1);
+        	
+    	}
+    	if ( this.getAddressModeType() == AddressMode.LONG_INDEXED )
+    	{	        	System.err.println("Not Implemented");
+  	   System.exit(1);
+     	}
+    	
         if (this.getAddressModeType() == AddressMode.INDIRECT)
         {
         	// Assembler Format: STB breg, @indirreg
