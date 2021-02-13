@@ -130,9 +130,19 @@ public class OpCodeLDB extends OpCode implements IOpCode {
 
 	        	break;
 	        case AddressMode.SHORT_INDEXED:
-	        	byte offset  = operands[numberOfBytes-4];
-	        	System.err.println("Not Implemented");
-	     	   	System.exit(1);
+	        	// Assembler Format: LDB offset(basereg),breg
+	        	// Instruction Operation: (Rb) <- ([Ra] + Offset)
+	        	// Execution States: 6/11
+	        	// Machine Format: [ ^B3 ], [ Base Ra | 0 MB ], [ +-| Offset Byte ], [ Dest Rb ]
+	        	byte baseRa  = (byte) (operands[numberOfBytes-3] & 0xfe); // mode bit mask
+	        	byte offset   = operands[numberOfBytes-2];
+	        	byte destRb   = operands[numberOfBytes-1];
+	       
+	        	short valueBaseRa = state_.getWordRegister((short) (baseRa & 0xff)); 
+	        	byte value = this.getByteValue(memory, (short) (valueBaseRa + offset));
+	        	
+	        	breg = destRb;
+	        	areg = value;
 	        	break;	
 	        case AddressMode.LONG_INDEXED:
 	        	// Assembler Format: LDB offset(indexreg),breg 
