@@ -160,8 +160,22 @@ public class OpCodeCMPB extends OpCode implements IOpCode {
 	     	   System.exit(1);
 	        	break;
 	        case AddressMode.SHORT_INDEXED:
-	        	System.err.println("Not Implemented");
-	     	   System.exit(1);
+	        	// Assembler Format: CMPB offset(basereg),breg
+	        	// Instruction Operation: (Rb) - ([Ra] + Offset); PSW Flags <- Compare Results
+	        	// Execution States: 6/11
+	        	// Machine Format: [ ^9B ], [ Base Ra | 0 MB ], [ +-| Offset Byte ], [ Source Rb ]
+	        	
+	        	breg   = (byte)operands[numberOfBytes-1];
+	        	offset = (byte)operands[numberOfBytes-2];
+	        	areg   = (byte) (operands[numberOfBytes-3] & 0xfe);
+	        	
+	        	short offsetLocation = state_.getWordRegister((short) (areg & 0xff));
+	        	byte value = this.getByteValue(memory, (short) (offsetLocation + offset));
+	        	
+	        	byte valueRb =  state_.getByteRegister(breg);
+	        	
+	        	breg = valueRb;
+	        	areg = value;
 	        	break;	
 	        case AddressMode.LONG_INDEXED:
 	        	System.err.println("Not Implemented");
