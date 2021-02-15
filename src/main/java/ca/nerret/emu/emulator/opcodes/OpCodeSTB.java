@@ -78,9 +78,19 @@ public class OpCodeSTB extends OpCode implements IOpCode {
     	}
     	if ( this.getAddressModeType() == AddressMode.SHORT_INDEXED )
     	{
-        	System.err.println("Not Implemented");
-     	   System.exit(1);
-        	
+			// Assembler Format: STB breg, offset (basereg)
+			// Instruction Operation: ([Ra] + Offset) <- (Rb)
+			// Execution States: 7/12
+			// Machine Format:[ ^C7 ], [ Base Ra | 0 MB ], [ +- | Offset ], [ Source Rb ]
+			byte baseRa = (byte) (register & 0xfe);
+			byte offset = (byte) (operands[2] & 0xff);
+			byte sourceRb = (byte) (operands[3] & 0xff); 
+			
+			short basereg = state_.getWordRegister((short) (baseRa & 0xff));
+			
+			byte breg = state_.getByteRegister((byte) sourceRb);
+			
+			state_.setWordRegister((short)(basereg + offset), breg);
     	}
     	if ( this.getAddressModeType() == AddressMode.LONG_INDEXED )
     	{	        	System.err.println("Not Implemented");
