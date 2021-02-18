@@ -93,8 +93,9 @@ public class OpCodeSTB extends OpCode implements IOpCode {
 			state_.setWordRegister((short)(basereg + offset), breg);
     	}
     	if ( this.getAddressModeType() == AddressMode.LONG_INDEXED )
-    	{	        	System.err.println("Not Implemented");
-  	   System.exit(1);
+    	{
+    		System.err.println("Not Implemented");
+  	   		System.exit(1);
      	}
     	
         if (this.getAddressModeType() == AddressMode.INDIRECT)

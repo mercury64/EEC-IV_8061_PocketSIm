@@ -75,6 +75,12 @@ public class OpCodeSTW extends OpCode implements IOpCode {
         short registerRB = (short) (operands[2] & 0xff);
             
         dest_reg = registerRA;
+    	if ( this.getAddressModeType() == AddressMode.DIRECT )
+    	{
+        	System.err.println("Not Implemented");
+     	   System.exit(1);
+        	
+    	}
         if (this.getAddressModeType() == AddressMode.INDIRECT)
         {
         	// AssemblerFormat: STW breg, @indirreg
@@ -124,9 +130,25 @@ public class OpCodeSTW extends OpCode implements IOpCode {
 		 	   // (RA) <- (RA) + 1
 		 	   state_.setWordRegister(indirectRegRA, (short) (RA + 1));
 */
+		 	 state_.setWordRegister(dest_reg, value);
 
         }
-        
+    	if ( this.getAddressModeType() == AddressMode.SHORT_INDEXED )
+    	{
+			// Assembler Format: STW breg, offset (basereg)
+			// Instruction Operation: ([RA] + Offset) <- (RB)
+			// Execution States: 7/12
+			// Machine Format:[ ^C3 ], [ Base RA | 0 MB ], [ +- | Offset ], [ Source RB ]
+			byte baseRA = (byte) ((operands[1] & 0xff) & 0xfe);
+			byte offset = (byte) (operands[2] & 0xff);
+			byte sourceRB = (byte) (operands[3] & 0xff); 
+			
+			short basereg = state_.getWordRegister((short) (baseRA & 0xff));
+			
+			short breg = state_.getWordRegister((byte) sourceRB);
+			
+			state_.setWordRegister((short)(basereg + offset), breg);
+    	}
         if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
         {
         	registerRA = (short) (registerRA & 0xfe);
@@ -139,12 +161,12 @@ public class OpCodeSTW extends OpCode implements IOpCode {
         	src_reg = (short) (operands[4] & 0xff);
         	
         	value = state_.getWordRegister((byte) src_reg);
-        	
+        	 state_.setWordRegister(dest_reg, value);
         }
 
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
-        state_.setWordRegister(dest_reg, value);
+       
 
     }
 }
