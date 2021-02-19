@@ -33,4 +33,11 @@ public interface IOpCode {
     void exec(final State state_);
 	void setAddressMode(AddressMode addressMode);
 	int getAddressModeInt();
+	
+	void execDirect();
+	void execImmediate();
+	void execIndirect();
+	void execIndirectAutoInc();
+	void execShortIndexed();
+	void execLongIndexed();
 }

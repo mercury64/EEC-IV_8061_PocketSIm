@@ -9,6 +9,15 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 	private int stateTimes;
 	private AddressMode addressMode;
 
+    protected int numberOfBytes = 0;
+    protected int executionStates = 0;
+	private int pc;
+	private int[] memory;
+	private State state;
+	
+	private short result;
+	private short operandLocation;
+
 	public OpCode(int opcode, String mnemonic)
 	{
 		this.setOpcode(opcode);
@@ -16,41 +25,89 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 	}
 	
 	@Override
-	public void exec(State state_) {
-		// TODO Auto-generated method stub
-		
+	public void exec(State state) {
+
+		this.state = state;
+		this.memory = state.getMemory();
+        this.pc = state.getPc();
+
+
         if (this.getAddressModeType() == AddressMode.DIRECT)
 		{
-        	System.err.println("Sub Class Not Implemented yet.");
-        	System.exit(1);
+        	this.execDirect();
 		}
         if (this.getAddressModeType() == AddressMode.IMMEDIATE)
 		{
-        	System.err.println("Sub Class Not Implemented yet.");
-        	System.exit(1);
+        	this.execImmediate();
 		}
         if (this.getAddressModeType() == AddressMode.INDIRECT)
 		{
-        	System.err.println("Sub Class Not Implemented yet.");
-        	System.exit(1);
+        	this.execIndirect();
 		}
         if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
 		{
-        	System.err.println("Sub Class Not Implemented yet.");
-        	System.exit(1);
+        	this.execIndirectAutoInc();
 		}
         if (this.getAddressModeType() == AddressMode.SHORT_INDEXED)
 		{
-        	System.err.println("Sub Class Not Implemented yet.");
-        	System.exit(1);
+        	this.execShortIndexed();
+
 		}
         if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
 		{
-        	System.err.println("Sub Class Not Implemented yet.");
-        	System.exit(1);
+        	this.execLongIndexed();
 		}
+	}
+
+	public byte[] getOperands(int count, int executionStates2) {
+        byte[] operands;	
+
+        operands = new byte[count];
+        for (int i = 0; i < count; i++) {
+			operands[i] = (byte)memory[pc + i];
+		}
+        
+        this.state.setPc(pc + numberOfBytes);
+        this.state.updateStateTime(executionStates);
+        
+        return operands;
 		
 	}
+
+	public void execDirect()
+	{
+    	System.err.println("Direct Not Implemented yet."+ this.getClass().getSimpleName());
+    	System.exit(1);
+	}
+	public void execImmediate()
+	{
+    	System.err.println("Immediate Not Implemented yet."+ this.getClass().getSimpleName());
+    	System.exit(1);
+	}
+	public void execIndirect()
+	{
+    	System.err.println("Indirect Not Implemented yet."+ this.getClass().getSimpleName());
+    	System.exit(1);
+	}
+	public void execIndirectAutoInc()
+	{
+    	System.err.println("Indirect Auto Increment Not Implemented yet."+ this.getClass().getSimpleName());
+    	System.exit(1);
+	}
+
+	public void execShortIndexed()
+	{
+    	System.err.println("Short Indexed Not Implemented yet in: " + this.getClass().getSimpleName());
+
+    	System.exit(1);
+	}
+
+	public void execLongIndexed()
+	{
+    	System.err.println("Long Indexed Not Implemented yet."+ this.getClass().getSimpleName());
+    	System.exit(1);
+	}
+	
 
 	public String getMnemonic() {
 		return mnemonic;
@@ -87,6 +144,20 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 
 	public int getAddressModeType() {
 		return addressMode.getType();
+	}
+	
+	protected short getWordValue(short location) {
+		int index = (int)location & 0xffff; // byte index, LSB
+		int index2 = (int)location+1 & 0xffff;// byte index2, MSB
+	   
+		short value = (short) memory[(int)index]; // LSB
+		short value2 = (short) memory[(int)index2]; // MSB
+	  
+		short RA = (short) (value2 << 8 |  value & 0xff); // put MSB | LSB
+	   
+		value = RA;
+		
+		return value;
 	}
 	
 	protected short getWordValue(int[] memory, short location) {
@@ -135,4 +206,27 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 	 	   //value = RA;
 			return value;
 		}
+
+	public short setResult(short RB, short RA) {
+		 short result = state.doSub(RB, RA);
+		 this.setResult(result);
+		return result;
+	}
+
+	public void setResult(short result) {
+		this.result = result;
+	}
+	
+	
+
+	protected short getOperandLocation() {
+		
+		return this.operandLocation;
+	}
+
+	protected short getResult() {
+		
+		return result;
+	}
+
 }

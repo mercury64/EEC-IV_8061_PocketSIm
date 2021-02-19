@@ -36,10 +36,12 @@ import ca.nerret.emu.emulator.opcodes.OpCodeJNE;
 import ca.nerret.emu.emulator.opcodes.OpCodeLDB;
 import ca.nerret.emu.emulator.opcodes.OpCodeLDW;
 import ca.nerret.emu.emulator.opcodes.OpCodeLDZBW;
+import ca.nerret.emu.emulator.opcodes.OpCodeNEGW;
 import ca.nerret.emu.emulator.opcodes.OpCodeNop;
 import ca.nerret.emu.emulator.opcodes.OpCodeORRB;
 import ca.nerret.emu.emulator.opcodes.OpCodePUSHW;
 import ca.nerret.emu.emulator.opcodes.OpCodeRET;
+import ca.nerret.emu.emulator.opcodes.OpCodeSB3W;
 
 public final class OpcodeCache {
 
@@ -49,6 +51,9 @@ public final class OpcodeCache {
         
         _OPCODES.put(0x00, new OpCodeNop(0x00, "SKP"));
 
+        _OPCODES.put(0x03, new OpCodeNEGW(0x03, "NEGW"));
+
+        
         _OPCODES.put(0x11, new OpCodeCLRB(0x11, "CLRB"));
         _OPCODES.put(0x01, new OpCodeCLRW(0x01, "CLRW"));
         
@@ -98,6 +103,11 @@ public final class OpcodeCache {
         _OPCODES.put(0x45, new OpCodeAD3W(0x45, "AD3W"));
         _OPCODES.put(0x46, new OpCodeAD3W(0x46, "AD3W"));
         _OPCODES.put(0x47, new OpCodeAD3W(0x47, "AD3W"));
+        
+        _OPCODES.put(0x48, new OpCodeSB3W(0x48, "SB3W"));
+        _OPCODES.put(0x49, new OpCodeSB3W(0x49, "SB3W"));
+        _OPCODES.put(0x4a, new OpCodeSB3W(0x4a, "SB3W"));
+        _OPCODES.put(0x4b, new OpCodeSB3W(0x4b, "SB3W"));
         
         _OPCODES.put(0x70, new OpCodeAN2B(0x70, "AN2B"));
         _OPCODES.put(0x71, new OpCodeAN2B(0x71, "AN2B"));

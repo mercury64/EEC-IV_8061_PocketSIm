@@ -117,14 +117,7 @@ public class OpCodeAD3W  extends OpCode implements IOpCode {
         	System.err.println("Not Implemented yet.");
         	System.exit(1);
 		}
-        // DEST, SRC1, SRC2 ADD Dwreg, Swreg, waop
-        // (010001aa) (waop) (Swreg) (Dwreg)
-        //System.out.println("     DEST, SRC1, SRC2");
-        //System.out.println("ADD Dwreg, Swreg, waop");
-        
-        //System.out.printf("0x%x(AD3W) Dwreg: 0x%x,Swreg: 0x%x,waop: 0x%x  \n", operands[0], dest_dwreg, src1_Swreg, src2_waop);
-        //System.out.printf(" 0x%x =  [0x%x] +  0x%x\n", dest_dwreg, src1_value, src2_waop);
-       
+
         state_.setWordRegister(dest_dwreg, sum);
         
     }
