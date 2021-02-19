@@ -88,7 +88,7 @@ public class OpCodeSTB extends OpCode implements IOpCode {
 			
 			short basereg = state_.getWordRegister((short) (baseRa & 0xff));
 			
-			byte breg = state_.getByteRegister((byte) sourceRb);
+			byte breg = state_.getByteRegister((short) (sourceRb  & 0xff));
 			
 			state_.setWordRegister((short)(basereg + offset), breg);
     	}

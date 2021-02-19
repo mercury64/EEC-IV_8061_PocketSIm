@@ -76,14 +76,47 @@ public class OpCodeAD3W  extends OpCode implements IOpCode {
 			operands[i] = (byte)memory[pc + i];
 		}
 
-        short dest_dwreg = operands[4];
-        short src1_Swreg = operands[3];
-        short src2_waop  = (short) ((operands[2] << 8) | operands[1]);;
+        short dest_dwreg = 0;
+
+        short sum = 0;
         
-        short src1_value =  state_.getWordRegister((byte)src1_Swreg);
-     
-        short sum =  (short) (src1_value + src2_waop) ;
-        
+
+        if (this.getAddressModeType() == AddressMode.DIRECT)
+		{
+        	System.err.println("Sub class Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.IMMEDIATE)
+		{
+            dest_dwreg = operands[4];
+            short src1_Swreg = operands[3];
+            short src2_waop  = (short) ((operands[2] << 8) | operands[1]);;
+            
+            short src1_value =  state_.getWordRegister((byte)src1_Swreg);
+         
+            sum =  (short) (src1_value + src2_waop) ;
+            
+		}
+        if (this.getAddressModeType() == AddressMode.INDIRECT)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.SHORT_INDEXED)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
         // DEST, SRC1, SRC2 ADD Dwreg, Swreg, waop
         // (010001aa) (waop) (Swreg) (Dwreg)
         //System.out.println("     DEST, SRC1, SRC2");

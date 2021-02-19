@@ -982,7 +982,7 @@
 2922: b4                  byte     b4                                              #N                 01    word      bin -2      4 RPM
 2923: 00                  byte      0
 2924: 84                  byte     84
-2925: ba                  byte     ba                                              #MAP               02    byte      bin 3       0.125 "Hg
+2925: ba                  byte     ba            MAP                               #MAP               02    byte      bin 3       0.125 "Hg
 2926: 00                  byte      0
 2927: 00                  byte      0
 2928: bb                  byte     bb                                              #BP                03    byte      bin 3       0.125 "Hg   
@@ -14199,7 +14199,7 @@ aa02: a3,01,80,0c,14      ldw   R14,[R0+c80]     R14 = [c80];                   
 aa07: ad,04,30            ldzbw R30,4            wR30 = 4;
 aa0a: a3,31,be,a9,42      ldw   R42,[R30+a9be]   R42 = [R30+a9be];                 # R30=4, a9be+4 = a9d2, [a9d2]=c009
 aa0f: c6,42,00            stb   R0,[R42]         [R42] = 0;
-aa12: 36,14,07            jnb   B6,R14,aa1c      if (ConsoleMode = 1)  {
+aa12: 36,14,07            jnb   B6,R14,aa1c      if (B6_R14 = 1)  {                # Bit 6 of register c80, "ConsoleMode" : B 6
 aa15: a3,31,c4,a9,14      ldw   R14,[R30+a9c4]   R14 = [R30+a9c4];                 # R30=4, a9c4+4 = a9c8, [a9c8]=1200
 aa1a: 20,04               sjmp  aa20             goto aa20; } }
 

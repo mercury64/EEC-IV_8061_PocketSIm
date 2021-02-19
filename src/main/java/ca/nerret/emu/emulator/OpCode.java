@@ -19,6 +19,37 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 	public void exec(State state_) {
 		// TODO Auto-generated method stub
 		
+        if (this.getAddressModeType() == AddressMode.DIRECT)
+		{
+        	System.err.println("Sub Class Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.IMMEDIATE)
+		{
+        	System.err.println("Sub Class Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.INDIRECT)
+		{
+        	System.err.println("Sub Class Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
+		{
+        	System.err.println("Sub Class Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.SHORT_INDEXED)
+		{
+        	System.err.println("Sub Class Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
+		{
+        	System.err.println("Sub Class Not Implemented yet.");
+        	System.exit(1);
+		}
+		
 	}
 
 	public String getMnemonic() {

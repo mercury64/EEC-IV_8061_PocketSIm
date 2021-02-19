@@ -2257,7 +2257,6 @@ sym d  "HSO_Cmd" : W
 sym e  "HSI_Time"
 sym 10  "StackPtr"
 sym 12  "Tmr_OVF_cnt"
-sym 14  "ConsoleMode" :B 6
 sym 25  "CHKAIR" :B 2
 sym 25  "BIFLG" :B 4
 sym 26  "PSFLAG" :B 3
@@ -2612,7 +2611,9 @@ sym 903  "UART_rx_buff_903"
 sym 928  "CART_Status_928"
 sym 928  "B0_CART_Status" :B 0
 sym 928  "B5_CART_Status" :B 5
+sym c80  "ConsoleMode" :B 6
 sym 2004  "FIXSUM"
+sym 2925  "MAP"
 sym 29a6  "ATMR1"
 sym 2d69  "Pop_PSW"
 sym 6955  "UPSWOT"
