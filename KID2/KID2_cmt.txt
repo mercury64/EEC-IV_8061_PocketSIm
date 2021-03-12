@@ -294,6 +294,19 @@
 
 4689 # 29.875 * 8 = 239 = 0xEF
 
+49ed \n#############################################################
+49ed \n# 1 dimension interpolate - signed or unsigned
+49ed \n# Inputs:
+49ed \n#  R30 (byte) - Fraction
+49ed \n#  R31 (byte) - Lower table value
+49ed \n#  R33 (byte) - Upper table value
+49ed \n# Outputs:
+49ed \n#  R3B - Interpolated result (byte?)
+49ed \n#############################################################
+
+49ee \n# SIGNED interpolate calc
+4a0a \n# UNSIGNED interpolate calc
+
 4b3f # 29.875 * 8 = 239 = 0xEF
 
 5174 # ISCFLG = 1 CLOSED LOOP RPM CONTROL
@@ -497,6 +510,17 @@
 
 
 7ebd #543   | FP Ckt Open Bat. to Relay          |    X    |      |   X   |
+
+7f50 \n#################################################################
+7f50 \n# Four data bytes follow calls to this function (R1A,1B,1C,1D)
+7f50 \n# R1A - is Trouble Code if there is an error
+7f50 \n# R1B - ROM loc for limit 8F86 + this offset (word)
+7f50 \n# R1C - parameter flag - mask to select the device (Fan, CANP, FuelPump etc)
+7f50 \n# R1D - pointer to SFR flag byte usually R46 or 47 for output lines
+7f50 \n# The OCC AD channel must be a supply voltage to the actuators
+7f50 \n# This performs 'circuit' tests
+7f50 \n# Measure any variation in voltage when the selected output line is switched
+7f50 \n#################################################################
 
 7fd3 # loop until 5161 IO times have passed(12.4ms)
 

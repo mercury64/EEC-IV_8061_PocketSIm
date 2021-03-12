@@ -138,8 +138,6 @@
  Warning - Extra Parameters Ignored
 ## sub  849b9 849ed  "UYTabLU_49b9"  $ F uytlu 38 34
  Warning - Extra Parameters Ignored
-## sub  849ee 84a1d  "Sub_49ee"  
- Warning - Extra Parameters Ignored
 ## sub  84a1e 84a3e  "Sub_4a1e"  
  Warning - Extra Parameters Ignored
 ## sub  84a3f 84aa9  "Sub_4a3f"  
@@ -315,8 +313,6 @@
 ## sub  87ec3 87ed0  "Sub_7ec3"  
  Warning - Extra Parameters Ignored
 ## sub  87ed7 87edb  "Sub_7ed7"  
- Warning - Extra Parameters Ignored
-## sub  87f51 87f96  "Sub_7f51"  
  Warning - Extra Parameters Ignored
 ## sub  87f69 87f96  "Sub_7f69"  
  Warning - Extra Parameters Ignored
@@ -1994,7 +1990,7 @@ sub  84987 849a6  "ROLLING_AVERAGE_FILTER_ROUTINE"   #cmd
 sub  849a7 849ed  "SYTabLU_49a7"  $ F sytlu 38 34
 sub  849b6 849ed  "SYTabLU_49b6"  $ F sytlu 38 34
 sub  849b9 849ed  "UYTabLU_49b9"  $ F uytlu 38 34
-sub  849ee 84a1d  "Sub_49ee"  
+sub  849ee 84a1d  "TableInterpolation"   #cmd
 sub  84a1e 84a3e  "Sub_4a1e"  
 sub  84a3f 84aa9  "Sub_4a3f"  
 sub  84a5e 84aa9  "Sub_4a5e"  
@@ -2114,7 +2110,7 @@ sub  87e86 87ea0  "GET_ADDRESS"   #cmd
 sub  87ea1 87ec2  "ThermactorAirTest"   #cmd
 sub  87ec3 87ed0  "Sub_7ec3"  
 sub  87ed7 87edb  "Sub_7ed7"  
-sub  87f51 87f96  "Sub_7f51"  
+sub  87f51 87f96  "Test_IO"   #cmd
 sub  87f97 87fb2  "Sub_7f97"  
 sub  87fb3 88403  "Sub_7fb3"  
 sub  87fcc 87fe4  "Sub_7fcc"  
@@ -2276,7 +2272,6 @@ sym 28  "Newsa" :B 2
 sym 28  "EGOSTE" :B 5
 sym 28  "KAM_error" :B 7
 sym 29  "ECT_IN_RANGE" :B 3
-sym 2a  "VIP_flags"
 sym 2a  "Vscdt" :B 0
 sym 2a  "Vscst" :B 1
 sym 2a  "Vip_enable" :B 2
@@ -2310,12 +2305,12 @@ sym 2e  "Kflg_local" :B 1
 sym 2e  "Flags_bit2" :B 2
 sym 2e  "???_Re_" :B 3
 sym 2e  "WIGFLG" :B 4
-sym 2e  "Disable_eolt" :B 5
+sym 2e  "RMSPRU?" :B 5
 sym 2e  "Egrfg2" :B 6
 sym 2e  "Egrfg1" :B 7
 sym 2f  "VIP_flags4"
-sym 2f  "B0_VIP_flags4" :B 0
-sym 2f  "B1_VIP_flags4" :B 1
+sym 2f  "B0_GOOSE" :B 0
+sym 2f  "B1_OneDigit_output?" :B 1
 sym 2f  "B2_VIP_flags4" :B 2
 sym 2f  "B3_VIP_flags4" :B 3
 sym 2f  "Vvsfl1" :B 4
@@ -2363,6 +2358,9 @@ sym 4c  "B3_Immediate" :B 3
 sym 4c  "B4_No_service" :B 4
 sym 4c  "B5_Late_output" :B 5
 sym 4c  "B6_Queued" :B 6
+sym 4e  "B4_NEW_IDM" :B 4
+sym 4e  "B6_NEW_BAP" :B 6
+sym 4e  "B7_NEW_PIP" :B 7
 sym 4f  "Flags_4f"
 sym 4f  "B0_?Immediate?" :B 0
 sym 4f  "B1_Bypass_time" :B 1
@@ -2384,16 +2382,18 @@ sym 50  "B7_Tblsflg" :B 7
 sym 52  "Flags_52"
 sym 52  "B2_DCLST_START_52" :B 2
 sym 53  "B5_CART_MODE_53" :B 5
+sym 53  "B6_IDM_BYPASS_53" :B 6
 sym 6c  "Event_time"
 sym 6e  "Event_timeH"
 sym 70  "Rtab"
 sym 72  "HSO_time"
 sym 74  "HSO_timeH"
+sym 75  "NEW_IRQs"
 sym 79  "ACIFLG" :B 0
 sym 79  "ACCFLG" :B 7
 sym 7a  "Prev_PIP_time"
 sym 7c  "Prev_PIP_timeH"
-sym 83  "Last_HSI"
+sym 83  "HSI_State"
 sym 84  "Reftime"
 sym 86  "ReftimeH"
 sym 88  "TablePTR"
@@ -2412,7 +2412,9 @@ sym 9e  "Reg_9e" :B 2
 sym 9e  "Reg_9e" :B 3
 sym 9e  "B4_EGREN_9e" :B 4
 sym 9f  "Flags_9f"
-sym 9f  "OLFLG" :B 2
+sym 9f  "B2_OLFLG" :B 2
+sym 9f  "B4_SignedOutput" :B 4
+sym 9f  "B5_SignedInput" :B 5
 sym a0  "Power_up"
 sym a0  "SIGNED_TBL_FLG" :B 4
 sym a1  "Flags_a1"
@@ -2508,11 +2510,13 @@ sym 1f6  "PURGDC"
 sym 1f8  "BCSDC"
 sym 204  "VS"
 sym 213  "ECTCNT"
+sym 216  "BAPTMR"
 sym 217  "VACUUM"
 sym 22c  "Tsladv"
 sym 230  "Retinc"
 sym 239  "Pip_counter"
 sym 23a  "ATMR1_LST"
+sym 23c  "TSLIDM"
 sym 240  "HSOQ"
 sym 242  "SvStack"
 sym 244  "Q0"
@@ -2550,6 +2554,7 @@ sym 3b0  "RPMERR_A"
 sym 3b2  "RPMERR_S"
 sym 3da  "TCSTRT"
 sym 3e0  "DWLBSE"
+sym 3e4  "DWLIDM"
 sym 3ea  "POFFENG"
 sym 3ec  "PPERENG"
 sym 413  "C41FIL_TroubleCode"

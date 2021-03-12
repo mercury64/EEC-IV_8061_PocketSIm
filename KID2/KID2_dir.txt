@@ -1523,7 +1523,7 @@ sub  84987 "ROLLING_AVERAGE_FILTER_ROUTINE"
 sub  849a7 849ed  "SYTabLU_49a7"  $ F sytlu 38 34
 sub  849b6 849ed  "SYTabLU_49b6"  $ F sytlu 38 34
 sub  849b9 849ed  "UYTabLU_49b9"  $ F uytlu 38 34
-sub  849ee 84a1d  "Sub_49ee"  
+sub  849ee "TableInterpolation"  
 sub  84a1e 84a3e  "Sub_4a1e"  
 sub  84a3f 84aa9  "Sub_4a3f"  
 sub  84a5e 84aa9  "Sub_4a5e"  
@@ -1640,7 +1640,7 @@ sub  87e86 "GET_ADDRESS"
 sub  87ea1 "ThermactorAirTest" 
 sub  87ec3 87ed0  "Sub_7ec3"  
 sub  87ed7 87edb  "Sub_7ed7"  
-sub  87f51 87f96  "Sub_7f51"  
+sub  87f51 "Test_IO"  
 sub  87f69 87f96  "Sub_7f69"  
 sub  87f78 87f96  "Sub_7f78"  
 sub  87f97 87fb2  "Sub_7f97"  
@@ -1815,7 +1815,7 @@ sym 28 "KAM_error" :B 7
 
 sym 29 "ECT_IN_RANGE" : B 3
 
-sym 2a "VIP_flags"
+#sym 2a "VIP_flags"
 sym 2a "Vscdt" :B 0
 sym 2a "Vscst" :B 1
 sym 2a "Vip_enable" :B 2
@@ -1853,16 +1853,16 @@ sym 2e "Kflg_local" : B 1
 sym 2e "Flags_bit2" : B 2
 sym 2e "???_Re_" : B 3
 sym 2e "WIGFLG" : B 4
-sym 2e "Disable_eolt" : B 5
+sym 2e "RMSPRU?" : B 5
 sym 2e "Egrfg2" : B 6
 sym 2e "Egrfg1" : B 7
 
 sym 2f "VIP_flags4"
-sym 2f "B0_VIP_flags4" :T 0
-sym 2f "B1_VIP_flags4" :T 1
+sym 2f "B0_GOOSE" :T 0
+sym 2f "B1_OneDigit_output?" :T 1
 sym 2f "B2_VIP_flags4" :T 2
 sym 2f "B3_VIP_flags4" :T 3
-sym 2f "Vvsfl1" :T 4
+sym 2f "Vvsfl1" : T 4
 sym 2f "Disable_isc" :T 5
 sym 2f "B6_VIP_flags4" :T 6
 sym 2f "B7_VIP_flags4" :T 7
@@ -1932,6 +1932,11 @@ sym 4c "B4_No_service" : B 4
 sym 4c "B5_Late_output" : B 5
 sym 4c "B6_Queued" : B 6
 
+sym 4e "B4_NEW_IDM" : T 4
+sym 4e "B6_NEW_BAP" : T 6
+sym 4e "B7_NEW_PIP" : T 7
+
+ 
 sym 4f "Flags_4f"
 sym 4f "B0_?Immediate?" : B 0
 sym 4f "B1_Bypass_time" : B 1
@@ -1955,8 +1960,10 @@ sym 50 "B7_Tblsflg" : B 7
 sym 52 "Flags_52"
 sym 52 "B2_DCLST_START_52" : B 2
 
-# sym 53 "Next_spout_beta" : B 7
+
 sym 53 "B5_CART_MODE_53" : B 5
+sym 53 "B6_IDM_BYPASS_53" : B 6
+# sym 53 "Next_spout_beta" : B 7
 
 sym 6c "Event_time"
 sym 6e "Event_timeH"
@@ -1964,7 +1971,7 @@ sym 6e "Event_timeH"
 sym 70 "Rtab"
 sym 72 "HSO_time"
 sym 74 "HSO_timeH"
-
+sym 75 "NEW_IRQs"
 
 sym 79 "ACIFLG" : B 0
 sym 79 "ACCFLG" : B 7
@@ -1972,7 +1979,7 @@ sym 79 "ACCFLG" : B 7
 sym 7a "Prev_PIP_time"
 sym 7c "Prev_PIP_timeH"
 
-sym 83 "Last_HSI"
+sym 83 "HSI_State"
 sym 84 "Reftime"
 sym 86 "ReftimeH"
 
@@ -2004,10 +2011,10 @@ sym 9e "B4_EGREN_9e" : B 4
 sym 9f "Flags_9f"
 #sym 9f "Swtfl" : B 0
 #sym 9f "Egofl" : B 1
-sym 9f "OLFLG" : B 2
+sym 9f "B2_OLFLG" : B 2
 #sym 9f "Qclol" : B 3
-#sym 9f "Signdy" : B 4
-#sym 9f "Signdslp" : B 5
+sym 9f "B4_SignedOutput" : B 4
+sym 9f "B5_SignedInput" : B 5
 #sym 9f "Indflg" : B 6
 #sym 9f "A3C" : B 7
 
@@ -2146,12 +2153,16 @@ sym 1f8 "BCSDC"
 sym 204 "VS"
 sym 213 "ECTCNT"
 
+sym 216 "BAPTMR"
+
 sym 217 "VACUUM"
 
 sym 22c "Tsladv"
 sym 230 "Retinc"
 sym 239 "Pip_counter"
 sym 23a "ATMR1_LST"
+
+sym 23c "TSLIDM"
 
 sym 240 "HSOQ"   # HSO queue entries 
 sym 242 "SvStack"
@@ -2198,6 +2209,8 @@ sym 3b2 "RPMERR_S"
 sym 3da "TCSTRT"
 
 sym 3e0 "DWLBSE"
+sym 3e4 "DWLIDM"
+
 sym 3ea "POFFENG"
 sym 3ec "PPERENG"
 
