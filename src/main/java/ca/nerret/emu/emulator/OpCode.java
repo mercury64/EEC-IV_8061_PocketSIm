@@ -207,7 +207,7 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 			return value;
 		}
 
-	public short setResult(short RB, short RA) {
+	public short setSubResult(short RB, short RA) {
 		 short result = state.doSub(RB, RA);
 		 this.setResult(result);
 		return result;

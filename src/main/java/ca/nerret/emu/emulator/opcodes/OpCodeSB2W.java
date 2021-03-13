@@ -13,7 +13,7 @@ import ca.nerret.emu.emulator.State;
  *   and returns the result to a 16-bit "D" operand location. 
  *   The operands are sign-extended prior to the subtraction.
  */
-public class OpCodeSB3W  extends OpCode implements IOpCode {
+public class OpCodeSB2W  extends OpCode implements IOpCode {
 
 	private short Aoperand;
 	private short Boperand;
@@ -21,7 +21,7 @@ public class OpCodeSB3W  extends OpCode implements IOpCode {
 	private short DoperandLocation;
 
 	
-    public OpCodeSB3W(int opcode, String mnemonic) {
+    public OpCodeSB2W(int opcode, String mnemonic) {
 		super(opcode, mnemonic);
 		// TODO Auto-generated constructor stub
 	}
@@ -37,35 +37,53 @@ public class OpCodeSB3W  extends OpCode implements IOpCode {
         state_.setWordRegister(this.getOperandLocation(),this.getResult());
 
     }
+    
+	public void execDirect()
+	{
+    	numberOfBytes = 3;
+    	executionStates = 4;
+
+    	byte[] operands = this.getOperands(numberOfBytes, executionStates);
+    	
+    	byte sourceRA = (byte) (operands[1]);
+    	byte destRB = (byte) (operands[2]);
+
+    	short valueRA = this.getWordValue(sourceRA);
+    	short valueRB = this.getWordValue(destRB);
+    	
+    	this.setSubResult(valueRB, valueRA);
+    	
+    	this.setOperandLocation(destRB);
+	
+	}
 
 	public  void execShortIndexed()
     {
-    	// AssemblerFormat: SB3W offset(basereg),breg,dreg
-    	// InstructionOperation:(RD) <- (RB)-([RA]+Offset) 
-    	// ExecutionStates: 7/12
-    	// MachineFormat: [ ^4B ],[ Base RA | 0 MB ],[+-| Offset ],[ Source RB ], [ Dest RD ]
-    	numberOfBytes = 5;
-    	executionStates = 7;//12
+    	// AssemblerFormat: SB2W offset(basereg),breg
+    	// InstructionOperation:(RB) <- (RB)-([RA]+Offset) 
+    	// ExecutionStates: 6/11
+    	// MachineFormat: [ ^6B ],[ Base RA | 0 MB ],[+-| Offset ], [ Dest RB ]
+    	numberOfBytes = 4;
+    	executionStates = 6;//11
 
     	byte[] operands = this.getOperands(numberOfBytes, executionStates);
     	
     	byte baseRA = (byte) (operands[1] & 0xfe); // mask out mode bit
     	byte offset = operands[2];
-    	byte sourceRB = operands[3];
-    	byte destRD = operands[4];
+    	byte destRB = operands[3];
     	
     	short valueBaseRA = this.getWordValue(baseRA);
     	short locationRA = (short) (valueBaseRA + offset);
     	
     	short valueRA = this.getWordValue(locationRA);
-    	short valueRB = this.getWordValue(sourceRB);
+    	short valueRB = this.getWordValue(destRB);
     	
     	this.setSubResult(valueRB, valueRA);
-    	this.setOperandLocation(destRD);
+    	this.setOperandLocation(destRB);
     }
 
 	public short setSubResult(short valueRB, short valueRA) {
-		 this.result =super.setSubResult(valueRB, valueRA);
+		 this.result = super.setSubResult(valueRB, valueRA);
 		
 		 return this.result;
 	}

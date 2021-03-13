@@ -150,6 +150,8 @@ public class OpCodeCMPB extends OpCode implements IOpCode {
 	        	data = (byte)operands[numberOfBytes-2];
 	        	areg = data;
 	        	breg = state_.getByteRegister(operands[numberOfBytes-1]);
+	        	
+	        	System.out.println("Unsigned " + ((areg & 0xf)));
 	        	break;
 	        case AddressMode.INDIRECT:
 	        	System.err.println("Not Implemented");
@@ -184,9 +186,9 @@ public class OpCodeCMPB extends OpCode implements IOpCode {
         }
         
     	// TODO:  Need to implement compare, and setting of PSW!!!
-		int compare = Short.compare( breg, areg);
+		int compare = Short.compare( breg, (byte) (areg & 0xf));
 
-        cmpResult = state_.doByteSub( breg, areg);
+        cmpResult = state_.doByteSub( breg, (byte) (areg & 0xf));
         
 		if ( compare == 0) // Z Flag
 		{
@@ -214,7 +216,7 @@ public class OpCodeCMPB extends OpCode implements IOpCode {
 			state_.setPswBit(ProgramStatusWord.OVERFLOW, false);
 		}
 		
-		if ( (int) breg >= (int) areg)
+		if ( (breg & 0xf) >= (areg & 0xf))
 		{
 			state_.setPswBit(ProgramStatusWord.CARRY, true);
 		}
@@ -224,6 +226,6 @@ public class OpCodeCMPB extends OpCode implements IOpCode {
         
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
-        
+ 
     }
 }

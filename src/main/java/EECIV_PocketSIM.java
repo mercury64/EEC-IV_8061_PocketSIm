@@ -59,6 +59,7 @@ public class EECIV_PocketSIM {
 		while (true) {
 		        
 			//System.out.println(String.format("0x%04X",state.getPc()));
+			
 			int instruction = state.getMemory()[state.getPc()];
 			
 			IOpCode opcode = OpcodeCache.get(instruction,(byte)state.getMemory()[state.getPc()+1]);
@@ -86,7 +87,7 @@ public class EECIV_PocketSIM {
 			//System.out.println("CONSOLE STATUS " + String.format("0x%04X",state.getWordRegister((short) 0xd00)));
 			    
 			//System.out.println("PSW: " + state.psw.getMemory());
-			if (count == 500000) {
+			if (count == 4850) {
 				System.err.println("Count reached, ending");
 				break;
 			}

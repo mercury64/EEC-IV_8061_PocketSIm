@@ -161,7 +161,7 @@ public class State {
      * @param pc_ int
      */
     public final void setPc(int pc_) {
-        _pc = pc_;
+        _pc = pc_ & 0xffff;
     }
     /**
      * Getter.
@@ -305,7 +305,7 @@ public class State {
 	 */
 	public byte getByteRegister(short register) {
 		
-		int regIndex = register & 0xffff;
+		int regIndex = (short)(register & 0xff);
 		
 		byte value = register_memory[regIndex];
 		
@@ -336,7 +336,7 @@ public class State {
 
 	public void setWordRegister(short dest_dwreg, byte value) {
 	
-		int index = (dest_dwreg);
+		int index = (dest_dwreg & 0xff);
 		
 		if (index == 0)
 		{
@@ -491,7 +491,7 @@ public class State {
 	private void modifySubPSW(long diff, final short RB, final short RA) {
 
 		boolean shortToBoolean = false;
-		
+
 		this.PSW_FLAGS &= ~(ProgramStatusWord.F_N|ProgramStatusWord.F_V|ProgramStatusWord.F_Z|ProgramStatusWord.F_C);
 	    
 		if((short)diff == 0)

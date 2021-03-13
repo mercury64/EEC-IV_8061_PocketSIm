@@ -63,22 +63,31 @@ public class OpCodeAD2W extends OpCode<OpCodeAD2W> implements IOpCode {
 			operands[i] = (byte) memory[pc + i];
 		}
 
-		// DEST, SRC1, SRC2 ADD Dwreg, Swreg, waop
-		// (010001aa) (waop) (Swreg) (Dwreg)
-		// System.out.println(" DEST, SRC1, SRC2");
-		// System.out.println("ADD Dwreg, Swreg, waop");
-
-		// System.out.printf("0x%x(AD3W) Dwreg: 0x%x,Swreg: 0x%x,waop: 0x%x \n",
-		// operands[0], dest_dwreg, src1_Swreg, src2_waop);
-		// System.out.printf(" 0x%x = [0x%x] + 0x%x\n", dest_dwreg, src1_value,
-		// src2_waop);
+		short sum = 0;
+		
 		if (this.getAddressModeType() == AddressMode.DIRECT) {
-			System.err.println("Not Implemented yet.");
-			System.exit(1);
+			// Assembler Format: AD2W areg, breg
+			// Instruction Operation: (RB)<-(RA)+(RB)
+			// Execution Sates: 4
+			// Machine Format: [ ^66 ],[ Indirect RA| 1 MB ],[ Dest RB ]
+			
+			byte areg = (byte)(operands[1]);
+			byte breg = (byte)(operands[2]);
+			
+			sum = state_.doAdd(areg,  breg);
+			
+			// (RA)<-(RA)+2
+
+			state_.setWordRegister(breg, sum);
 		}
 		if (this.getAddressModeType() == AddressMode.IMMEDIATE) {
-			System.err.println("Not Implemented yet.");
-			System.exit(1);
+            short data  = (short) ((operands[2] << 8) | operands[1]);;
+			byte breg = (byte)(operands[3]);
+	        short bregValue = state_.getWordRegister((byte)breg);
+	         
+	            sum =  (short) (data + bregValue) ;
+	            
+	        state_.setWordRegister(breg, (short) (sum));
 		}
 		if (this.getAddressModeType() == AddressMode.INDIRECT) {
 			System.err.println("Not Implemented yet.");
