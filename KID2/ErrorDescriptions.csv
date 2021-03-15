@@ -1,0 +1,76 @@
+ # 111,"PASS  	"
+sym 6fc6 # 112,254 deg. ind. ACT-ckt. grounded.
+sym 6fc8 # 113,-40 deg. ind. ACT-sensor ckt. open.
+sym  # 114,ACT out of S-T range.
+sym  # 116,ECT out of S-T range.
+sym 6fca # 117,254 deg. ind. ECT-ckt. grounded.
+sym 6fcc # 118,-40 deg. ind. ECT-sensor ckt. open.
+sym  # 121,TP out of S-T range.
+sym 6fce # 122,TPS ckt. below minimum voltage.
+sym 6fd0 # 123,TPS ckt. above max. voltage.
+sym 6fd2 # 126,MAP/BP out of S-T range.
+sym 6fd4 # 128,MAP vacuum circuit failure
+sym  # 129,Insuff. MAP change-dyn resp. test.
+sym  # 167,Insuff. TP change-dyn resp. test.
+sym 6fd6 # ,
+sym 6fd8 # 172,EGO sensor ckt. ind. system lean.
+sym 6fda # 173,EGO sensor ckt. ind. system rich.
+sym 6fdc # 179,Adaptive Fuel Limit Lean
+sym 6fde # 181,Adaptive Fuel Limit Rich
+sym 6fe0 # 182,Adaptive Fuel Limit Lean @idle
+sym 6fe2 # 183,Adaptive Fuel Limit Rich @idle
+sym  # 194,Hego switch rate too fast
+sym 6fe4 # 211,PIP ckt. fault.
+sym 6fe6 # 212,Loss of tach input to processor.
+sym  # 213,Spark control fault present
+sym  # 225,Knock not sensed-dyn response test.
+sym  # 311,Themactor air system inop.
+sym  # 312,Thermactor air upstream during S-T.
+sym  # 313,Therm. air not bypassed during S-T.
+sym 6fe8 # 327,EPT/EVP below min. voltage.
+sym 6fea # 328,EVP volt below closed lim (SONIC)
+sym 6fec # 332,EGR valve not opening (SONIC).
+sym 6fee # 334,EVP volt. above closed limit.
+sym 6ff0 # 337,EVP ckt. above max volt.
+sym 6ff2 # 338,Cooling System not Heating
+sym 6ff4 # 339,Cooling System not Cooling
+sym  # 411,RPM not within S-T lower band limit
+sym  # 412,RPM not within S-T upper band limit
+sym 6ff6 # 452,Insufficient input from VSS.
+sym  # 511,ROM test failed
+sym  # 512,KAM Test Failed
+sym  # 513,Failure in EEC ref. voltage.
+sym  # 519,PSPS ckt. open.
+sym  # 521,PSPS did not change states.
+sym 6ff8 # 536,BOO Sw. Ckt failed open/closed -ECA input open or brake not actuated during test
+sym  # 538,Operator error-dyn response test.
+sym  # 539,A/C Swith error
+sym 6ffa # 542,FP Ckt Open -ECA to Motor Ground
+sym 6ffc # 543,FP Ckt Open Bat. to Relay
+sym  # 552,Air Management 1 (AM1) ckt. failure
+sym  # 553,Air Management 2 (AM2) ckt. failure
+sym 6ffe # 556,Fuel pump ckt. failure.
+sym  # 558,Elect. vac. reg. (EVR) ckt. failure
+sym  # 565,Canister Purge (CANP) ckt. failure.
+sym 7000 # 617,1-2 Shift Error
+sym 7002 # 618,2-3 Shift Error
+sym 7004 # 619,3-4 Shift Error
+sym  # 621,SS1 Sol Ckt Failure
+sym  # 622,SS2 Sol. Ckt. Failure
+sym 7006 # 624,EPC Solenoid Circuit Failure/Shor-Output Driver
+sym  # 626,CCS Sol Ckt Failure
+sym 7008 # 628,Converter Clutch Failure
+sym  # 629,CCC Sol. Ckt. Failure
+sym  # 631,OCIL Ckt. Failure
+sym  # 632,OCS Not Changing State
+sym  # 633,4X4 Switch closed
+sym 700a # 634,MLPS Out of Range
+sym  # 636,TOT Out of S-T range
+sym 700c # 637,-40 deg. ind. TOT sensor ckt open
+sym 700e # 638,315 Deg ind. TOT sensor ckt grounded    X
+sym  # 654,MLPS not in park
+sym  # 655,MLPS not in neutral
+sym 7010 # ,
+sym 7012 # ,
+sym 7014 # ,
+sym  # 998,FMEM failure/Failed (open)EPC Output Driver

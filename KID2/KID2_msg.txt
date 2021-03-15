@@ -740,8 +740,8 @@ args    6f13 6f16 : E 2 f0 N  : UW N
 args    6f30 6f33 : E 2 f0 N  : UW N 
 args    6f55 6f58 : E 2 f0 N  : UW N 
 word    6fc6 7015
-args    711e 711f : O 2 UY 
-args    7123 7124 : O 2 UY 
+args    711e 711f : UW 
+args    7123 7124 : UW 
 vect    72de 733f
 args    7379 737a : O 2 UY 
 args    738f 7393 : O 2 UY  : O 2 UY  : UY 
@@ -757,8 +757,8 @@ args    7426 7429 : E 3 f0 N  : E 3 f0 N
 args    7430 7433 : E 3 f0 N  : E 3 f0 N 
 args    7437 7438 : O 2 UY 
 args    7485 7486 : O 2 UY 
-args    748a 748f : O 2 UY  : O 2 UY  : O 2 UY 
-args    7493 7498 : O 2 UY  : O 2 UY  : O 2 UY 
+args    748a 748f : UW  : UW  : UW 
+args    7493 7498 : UW  : UW  : UW 
 byte    75ee 75ee
 word    7698 7699
 byte    769a 769a
@@ -800,36 +800,36 @@ args    7a6f 7a72 : O 2 UY  : O 2 UY
 args    7a75 7a78 : O 2 UY  : O 2 UY 
 args    7a7b 7a7e : O 2 UY  : O 2 UY 
 args    7a81 7a84 : O 2 UY  : O 2 UY 
-args    7d30 7d31 : O 2 UY 
+args    7d30 7d31 : UW 
 word    7d34 7d35  "CheckSumBase"  
 word    7d36 7d37  "CheckSumEnd"  
 word    7d38 7d39
-args    7d3c 7d41 : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    7d47 7d4c : E 3 f0 N  : O 2 UY  : O 2 UY 
+args    7d3c 7d41 : E 3 f0 N  : E 3 f0 N  : UW 
+args    7d47 7d4c : E 3 f0 N  : E 3 f0 N  : UW 
 args    7d53 7d5a : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    7d5d 7d62 : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    7d68 7d6d : E 3 f0 N  : E 3 f0 N  : O 2 UY 
+args    7d5d 7d62 : E 3 f0 N  : E 3 f0 N  : UW 
+args    7d68 7d6d : E 3 f0 N  : E 3 f0 N  : UW 
 args    7d74 7d7b : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    7d88 7d89 : O 2 UY 
+args    7d88 7d89 : UW 
 args    7d8f 7d96 : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    7da0 7da5 : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    7dab 7db0 : E 3 f0 N  : O 2 UY  : O 2 UY 
+args    7da0 7da5 : E 3 f0 N  : E 3 f0 N  : UW 
+args    7dab 7db0 : E 3 f0 N  : E 3 f0 N  : UW 
 args    7db7 7dbe : O 2 UY  : O 2 UY  : O 2 UY  : O 2 UY 
-args    7dc1 7dc6 : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    7dcc 7dd1 : E 3 f0 N  : E 3 f0 N  : O 2 UY 
+args    7dc1 7dc6 : E 3 f0 N  : E 3 f0 N  : UW 
+args    7dcc 7dd1 : E 3 f0 N  : E 3 f0 N  : UW 
 args    7dd7 7dde : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    7de5 7dee : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY  : O 2 UY 
-args    7df4 7df5 : O 2 UY 
+args    7df4 7df5 : UW 
 args    7dfe 7e05 : O 2 UY  : O 2 UY  : O 2 UY  : O 2 UY 
 args    7e0a 7e11 : O 2 UY  : O 2 UY  : O 2 UY  : O 2 UY 
-args    7e1f 7e20 : O 2 UY 
-args    7e23 7e28 : E 3 f0 N  : O 2 UY  : O 2 UY 
-args    7e31 7e32 : O 2 UY 
+args    7e1f 7e20 : UW 
+args    7e23 7e28 : E 3 f0 N  : E 3 f0 N  : UW 
+args    7e31 7e32 : UW 
 args    7e37 7e37 : UY 
 args    7eb8 7eb9 : E 3 f0 N 
-args    7ebf 7ec0 : O 2 UY 
+args    7ebf 7ec0 : UW 
 args    7ec6 7ec7 : E 3 f0 N 
-args    7ecd 7ece : O 2 UY 
+args    7ecd 7ece : UW 
 args    7ee5 7ee9 : UY  : UW N  : UW N 
 args    7eec 7ef0 : O 2 UY  : O 2 UY  : UY 
 args    7f00 7f04 : O 2 UY  : O 2 UY  : UY 
@@ -842,53 +842,53 @@ args    7f43 7f47 : O 2 UY  : O 2 UY  : UY
 args    7f4a 7f4e : O 2 UY  : O 2 UY  : UY 
 args    7f9e 7f9e : UY 
 args    8012 8013 : E 3 f0 N 
-args    802e 802f : O 2 UY 
-args    804c 804d : O 2 UY 
+args    802e 802f : UW 
+args    804c 804d : UW 
 args    80cc 80cc : UY 
 args    80e0 80e0 : UY 
-args    80e3 80e4 : O 2 UY 
-args    80e7 80e8 : O 2 UY 
-args    8112 8113 : O 2 UY 
-args    811c 811d : O 2 UY 
-args    8122 8123 : O 2 UY 
-args    812d 812e : O 2 UY 
-args    8134 8135 : O 2 UY 
-args    813b 813c : O 2 UY 
-args    8142 8143 : O 2 UY 
-args    8149 814a : O 2 UY 
-args    8150 8151 : O 2 UY 
+args    80e3 80e4 : UW 
+args    80e7 80e8 : UW 
+args    8112 8113 : UW 
+args    811c 811d : UW 
+args    8122 8123 : UW 
+args    812d 812e : UW 
+args    8134 8135 : UW 
+args    813b 813c : UW 
+args    8142 8143 : UW 
+args    8149 814a : UW 
+args    8150 8151 : UW 
 args    8197 8198 : E 3 f0 N 
 args    819b 81a0 : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    81ba 81c1 : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    81c4 81cb : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    81d8 81d9 : O 2 UY 
+args    81d8 81d9 : UW 
 args    81df 81e6 : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    81e9 81f0 : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    81f3 81fa : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    8223 8224 : E 3 f0 N 
 args    8227 8228 : E 3 f0 N 
-args    822b 822c : O 2 UY 
+args    822b 822c : UW 
 args    8236 8237 : E 3 f0 N 
 args    8247 8248 : E 3 f0 N 
-args    824b 824c : O 2 UY 
+args    824b 824c : UW 
 args    825e 825f : E 3 f0 N 
 args    8262 8263 : E 3 f0 N 
 args    826f 8270 : E 3 f0 N 
-args    8273 8274 : O 2 UY 
+args    8273 8274 : UW 
 args    8281 8282 : E 3 f0 N 
-args    8285 8286 : O 2 UY 
+args    8285 8286 : UW 
 args    8297 8298 : E 3 f0 N 
-args    829e 829f : O 2 UY 
+args    829e 829f : UW 
 args    82c0 82c0 : UY 
 args    82c4 82c5 : E 3 f0 N 
 args    82fe 82fe : UY 
 args    8302 8303 : E 3 f0 N 
 args    831a 831b : E 3 f0 N 
-args    8352 8353 : O 2 UY 
+args    8352 8353 : UW 
 args    835c 835d : E 3 f0 N 
 args    8365 8366 : E 3 f0 N 
 args    8372 837b : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY  : O 2 UY 
-args    83b8 83b9 : O 2 UY 
+args    83b8 83b9 : UW 
 args    83c5 83c5 : UY 
 args    83c9 83ca : O 2 UY 
 args    83ce 83cf : O 2 UY 
@@ -896,13 +896,13 @@ args    841a 841b : E 3 f0 N
 args    841e 8423 : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    844f 8450 : E 3 f0 N 
 args    84c6 84c7 : E 3 f0 N 
-args    84d5 84d6 : O 2 UY 
-args    84df 84e0 : O 2 UY 
-args    84e7 84e8 : O 2 UY 
-args    84f2 84f3 : O 2 UY 
-args    850f 8510 : O 2 UY 
-args    8528 8529 : O 2 UY 
-args    8536 8537 : O 2 UY 
+args    84d5 84d6 : UW 
+args    84df 84e0 : UW 
+args    84e7 84e8 : UW 
+args    84f2 84f3 : UW 
+args    850f 8510 : UW 
+args    8528 8529 : UW 
+args    8536 8537 : UW 
 args    85db 85dc : E 3 f0 N 
 args    85e6 85e7 : E 3 f0 N 
 args    893b 893e : E 2 f0 N  : UW N 
@@ -1587,7 +1587,7 @@ word    c164 c165
 word    c166 c167
 word    c168 c169
 word    c16a c16b
-word    c16c c16d
+byte    c16c c16d
 word    c16e c16f  "V_BOO_SPD"  
 byte    c170 c170
 byte    c171 c171
@@ -1780,7 +1780,7 @@ byte    cb7c cb7c  "CRKTM1"
 byte    cb7d cb7d
 byte    cb7e cb7e
 byte    cb7f cb7f
-byte    cb80 cb80
+byte    cb80 cb80  "BIHP"  
 byte    cb81 cb81
 byte    cb82 cb82
 byte    cb83 cb83  "PFEHP"  
@@ -1812,6 +1812,7 @@ byte    cba5 cba5
 byte    cba6 cba6
 byte    cba7 cba7
 byte    cba8 cba8  "fuel_max_load_verification_value"  
+word    cbaa cbab
 word    cbac cbad
 word    cbae cbaf
 word    cbb0 cbb1
@@ -2399,6 +2400,8 @@ sym 86  "ReftimeH"
 sym 88  "TablePTR"
 sym 8a  "RATCH"
 sym 8d  "VSBAR"
+sym 90  "Flags_90"
+sym 90  "B4_BRAKE_INPUT_90" :B 4
 sym 91  "VBAT"
 sym 92  "ISCDTY"
 sym 94  "FUELPW1"
@@ -2471,7 +2474,7 @@ sym e1  "CCD?"
 sym e1  "B2_CCD_HP" :B 2
 sym 106  "EGOBAR"
 sym 108  "ITOT"
-sym 10a  "Key_Pwr"
+sym 10a  "VKYPWR"
 sym 10c  "IOCC"
 sym 10e  "VSS_Raw"
 sym 110  "IECT"
@@ -2510,7 +2513,7 @@ sym 1f6  "PURGDC"
 sym 1f8  "BCSDC"
 sym 204  "VS"
 sym 213  "ECTCNT"
-sym 216  "BAPTMR"
+sym 216  "MAPTMR"
 sym 217  "VACUUM"
 sym 22c  "Tsladv"
 sym 230  "Retinc"

@@ -304,8 +304,8 @@
    Sub_22b2:
 22b2: 71,ef,25            an2b  R25,ef           BIFLG = 0;
 22b5: 9b,fe,26,00         cmpb  R0,[Rfe+26]      
-22b9: df,06               je    22c1             if ([cb80] != 0)  {
-22bb: 34,90,03            jnb   B4,R90,22c1      if (B4_R90 = 1)  {
+22b9: df,06               je    22c1             if (BIHP != 0)  {
+22bb: 34,90,03            jnb   B4,R90,22c1      if (B4_BRAKE_INPUT_90 = 1)  {
 22be: 91,10,25            orb   R25,10           BIFLG = 1; } }
 22c1: 31,9e,03            jnb   B1,R9e,22c7      if (Reg_9e = 1)  {
 22c4: ef,17,66            call  88de             Sub_88de (); }
@@ -1441,10 +1441,10 @@
 2cd5: 71,03,56            an2b  R56,3            R56 &= 3;
 2cd8: 90,56,55            orb   R55,R56          R55 |= R56;
 2cdb: b3,01,30,09,56      ldb   R56,[R0+930]     R56 = [930];
-2ce0: c4,90,56            stb   R56,R90          R90 = R56;
+2ce0: c4,90,56            stb   R56,R90          Flags_90 = R56;
 2ce3: b0,0b,54            ldb   R54,Rb           R54 = HSI_Sample;
 2ce6: 85,08,00,54         xrw   R54,8            B3_R54 ^= 1;
-2cea: 95,04,90            xorb  R90,4            B2_R90 ^= 1;
+2cea: 95,04,90            xorb  R90,4            B2_Flags_90 ^= 1;
 2ced: a3,e6,be,58         ldw   R58,[Re6+be]     R58 = [23e];
 2cf1: c3,e6,be,54         stw   R54,[Re6+be]     [23e] = R54;
 2cf5: 84,58,54            xrw   R54,R58          R54 ^= R58;
@@ -3021,7 +3021,7 @@
 ######
 3cfd: 00,08,01            struct    0, ITOT                                        # Throttle position sensor rate
 3d00: 01,0e,01            struct    1, VSS_Raw                                     # Voltage Calibration Level?
-3d03: 02,0a,01            struct    2, Key_Pwr                                     # Voltage level (->793d)?
+3d03: 02,0a,01            struct    2, VKYPWR                                      # Voltage level (->793d)?
 3d06: 03,0c,01            struct    3, IOCC                                        # Open Circuit Check?
 3d09: 05,44,03            struct    5, Vsc_Raw                                     # Exhaust Gas Oxygen sensor 2? or Speed control system?
 3d0c: 07,1c,01            struct    7, ITP                                         # Throttle position sensor (->794d)?
@@ -3337,7 +3337,7 @@
 406e: d9,04               jgtu  4074             if (R34 <= 4189)  {
 4070: a1,89,41,34         ldw   R34,4189         R34 = 4189; }
 4074: 6f,f6,1a,34         ml2w  R34,[Rf6+1a]     lR34 = R34 * [b92e];
-4078: a3,e4,8a,34         ldw   R34,[Re4+8a]     R34 = Key_Pwr;
+4078: a3,e4,8a,34         ldw   R34,[Re4+8a]     R34 = VKYPWR;
 407c: 6c,36,34            ml2w  R34,R36          lR34 = R34 * R36;
 407f: 89,e1,1f,36         cmpw  R36,1fe1         
 4083: d9,05               jgtu  408a             if (R36 <= 1fe1)  {
@@ -3395,7 +3395,7 @@
 40fd: a1,ef,00,38         ldw   R38,ef           R38 = ef;
 4101: 20,29               sjmp  412c             goto 412c; }
 
-4103: b3,e6,96,38         ldb   R38,[Re6+96]     R38 = BAPTMR;
+4103: b3,e6,96,38         ldb   R38,[Re6+96]     R38 = MAPTMR;
 4107: 9b,ff,1c,01,38      cmpb  R38,[Rfe+11c]    
 410c: db,0d               jc    411b             if (R38 < [cc76])  {
 410e: fa                  di                     disable intps;
@@ -7886,46 +7886,47 @@
 
 6fc5: ff                  ???   
 
-6fc6: 12,01               word    112
-6fc8: 13,01               word    113
-6fca: 17,01               word    117
-6fcc: 18,01               word    118
-6fce: 22,01               word    122
-6fd0: 23,01               word    123
-6fd2: 26,01               word    126
-6fd4: 28,01               word    128
-6fd6: 71,01               word    171
-6fd8: 72,01               word    172
-6fda: 73,01               word    173
-6fdc: 79,01               word    179
-6fde: 81,01               word    181
-6fe0: 82,01               word    182
-6fe2: 83,01               word    183
-6fe4: 11,02               word    211
-6fe6: 12,02               word    212
-6fe8: 27,03               word    327
-6fea: 28,03               word    328
-6fec: 32,03               word    332
-6fee: 34,03               word    334
-6ff0: 37,03               word    337
-6ff2: 38,03               word    338
-6ff4: 39,03               word    339
-6ff6: 52,04               word    452
-6ff8: 36,05               word    536
-6ffa: 42,05               word    542
-6ffc: 43,05               word    543
-6ffe: 56,05               word    556
-7000: 17,06               word    617
-7002: 18,06               word    618
-7004: 19,06               word    619
-7006: 24,06               word    624
-7008: 28,06               word    628
-700a: 34,06               word    634
-700c: 37,06               word    637
-700e: 38,06               word    638
-7010: 57,06               word    657
-7012: 59,06               word    659
-7014: 91,06               word    691
+ERROR CODE DESCRIPTION
+6fc6: 12,01               word    112                                              # 112,254 deg. ind. ACT-ckt. grounded.
+6fc8: 13,01               word    113                                              # 113,-40 deg. ind. ACT-sensor ckt. open.
+6fca: 17,01               word    117                                              # 117,254 deg. ind. ECT-ckt. grounded.
+6fcc: 18,01               word    118                                              # 118,-40 deg. ind. ECT-sensor ckt. open.
+6fce: 22,01               word    122                                              # 122,TPS ckt. below minimum voltage.
+6fd0: 23,01               word    123                                              # 123,TPS ckt. above max. voltage.
+6fd2: 26,01               word    126                                              # 126,MAP/BP out of S-T range.
+6fd4: 28,01               word    128                                              # 128,MAP vacuum circuit failure
+6fd6: 71,01               word    171                                              # ,
+6fd8: 72,01               word    172                                              # 172,EGO sensor ckt. ind. system lean.
+6fda: 73,01               word    173                                              # 173,EGO sensor ckt. ind. system rich.
+6fdc: 79,01               word    179                                              # 179,Adaptive Fuel Limit Lean
+6fde: 81,01               word    181                                              # 181,Adaptive Fuel Limit Rich
+6fe0: 82,01               word    182                                              # 182,Adaptive Fuel Limit Lean @idle
+6fe2: 83,01               word    183                                              # 183,Adaptive Fuel Limit Rich @idle
+6fe4: 11,02               word    211                                              # 211,PIP ckt. fault.
+6fe6: 12,02               word    212                                              # 212,Loss of tach input to processor.
+6fe8: 27,03               word    327                                              # 327,EPT/EVP below min. voltage.
+6fea: 28,03               word    328                                              # 328,EVP volt below closed lim (SONIC)
+6fec: 32,03               word    332                                              # 332,EGR valve not opening (SONIC).
+6fee: 34,03               word    334                                              # 334,EVP volt. above closed limit.
+6ff0: 37,03               word    337                                              # 337,EVP ckt. above max volt.
+6ff2: 38,03               word    338                                              # 338,Cooling System not Heating
+6ff4: 39,03               word    339                                              # 339,Cooling System not Cooling
+6ff6: 52,04               word    452                                              # 452,Insufficient input from VSS.
+6ff8: 36,05               word    536                                              # 536,BOO Sw. Ckt failed open/closed -ECA input open or brake not actuated during test
+6ffa: 42,05               word    542                                              # 542,FP Ckt Open -ECA to Motor Ground
+6ffc: 43,05               word    543                                              # 543,FP Ckt Open Bat. to Relay
+6ffe: 56,05               word    556                                              # 556,Fuel pump ckt. failure.
+7000: 17,06               word    617                                              # 617,1-2 Shift Error
+7002: 18,06               word    618                                              # 618,2-3 Shift Error
+7004: 19,06               word    619                                              # 619,3-4 Shift Error
+7006: 24,06               word    624                                              # 624,EPC Solenoid Circuit Failure/Shor-Output Driver
+7008: 28,06               word    628                                              # 628,Converter Clutch Failure
+700a: 34,06               word    634                                              # 634,MLPS Out of Range
+700c: 37,06               word    637                                              # 637,-40 deg. ind. TOT sensor ckt open
+700e: 38,06               word    638                                              # 638,315 Deg ind. TOT sensor ckt grounded    X
+7010: 57,06               word    657                                              # ,
+7012: 59,06               word    659                                              # ,
+7014: 91,06               word    691                                              # ,
 
    Do_SelfTest:
 7016: 71,fb,2c            an2b  R2c,fb           VIP_FP_OVERRIDE = 0;
@@ -8052,12 +8053,10 @@
 7116: 88,30,00            cmpw  R0,R30           
 7119: d7,05               jne   7120             if (R30 = 0)  {
 711b: ef,ab,0f            call  80c9             SaveTCode1 (
-711e: 11                        #arg 1              11
-711f: 01                        #arg 2              1 );
+711e: 11,01                     #arg 1              111 );
 711e: 11,01               #args                  }                                 # E11 - System PASS
 7120: ef,a6,0f            call  80c9             SaveTCode1 (
-7123: 00                        #arg 1              0
-7124: 00                        #arg 2              0 );
+7123: 00,00                     #arg 1              0 );
 7123: 00,00               #args                                                    # E 00 (end of errors? )
 7125: d3,f9               jnc   7120             if (R30 <= ffff) goto 7120;
 7127: 91,08,52            orb   R52,8            B3_Flags_52 = 1;
@@ -8239,9 +8238,9 @@
 7290: db,4a               jc    72dc             if (R42 < 28)  {
 7292: 88,42,00            cmpw  R0,R42           
 7295: d7,0b               jne   72a2             if (R42 = 0)  {
-7297: a1,12,05,3a         ldw   R3a,512          R3a = 512;
+7297: a1,12,05,3a         ldw   R3a,512          R3a = 512;                        # 512, KAM Test Failed
 729b: 3e,2d,3a            jb    B6,R2d,72d8      if (Vip_kam = 1) goto 72d8;
-729e: a1,11,01,3a         ldw   R3a,111          R3a = 111; }
+729e: a1,11,01,3a         ldw   R3a,111          R3a = 111; }                      # 111, PASS 
 72a2: a0,42,30            ldw   R30,R42          R30 = R42;
 72a5: 08,03,30            shrw  R30,3            R30 >>= 3;                        #[ R30 /= 8] 
 72a8: b3,31,19,07,32      ldb   R32,[R30+719]    R32 = [R30+719];
@@ -8334,7 +8333,7 @@
 735d: 37,46,1d            jnb   B7,R46,737d      if (PUMP = 0) goto 737d;
 7360: 3e,a5,03            jb    B6,Ra5,7366      if (UNDSP = 0)  {
 7363: 91,20,2e            orb   R2e,20           RMSPRU? = 1; }
-7366: 3b,90,0d            jb    B3,R90,7376      if (B3_R90 = 0)  {
+7366: 3b,90,0d            jb    B3,R90,7376      if (B3_Flags_90 = 0)  {
 7369: b3,e4,40,42         ldb   R42,[Re4+40]     R42 = [1c0];
 736d: 9b,fe,7d,42         cmpb  R42,[Rfe+7d]     
 7371: d3,03               jnc   7376             if (R42 >= [cbd7])  {
@@ -8363,7 +8362,7 @@
 7399: b3,e4,40,42         ldb   R42,[Re4+40]     R42 = [1c0];
 739d: 9b,fe,7d,42         cmpb  R42,[Rfe+7d]     
 73a1: d3,06               jnc   73a9             if (R42 >= [cbd7])  {
-73a3: 33,90,03            jnb   B3,R90,73a9      if (B3_R90 = 1)  {
+73a3: 33,90,03            jnb   B3,R90,73a9      if (B3_Flags_90 = 1)  {
 73a6: 91,04,2f            orb   R2f,4            B2_VIP_flags4 = 1; } }
 73a9: ef,52,07            call  7afe             ?Fault_Filter_Routine? (
 73ac: 1a                        #arg 1              1a
@@ -8410,7 +8409,7 @@
 740e: 12,01                     #arg 1              IACT,
 7410: 72,f0                     #arg 2              ACTMAX,
 7412: 01,06                     #arg 3              601 );
-7414: b3,e6,96,1a         ldb   R1a,[Re6+96]     R1a = BAPTMR;
+7414: b3,e6,96,1a         ldb   R1a,[Re6+96]     R1a = MAPTMR;
 7418: 9b,e2,1d,1a         cmpb  R1a,[Re2+1d]     
 741c: d1,05               jleu  7423             if (R1a > [c1db])  {
 741e: 91,04,2f            orb   R2f,4            B2_VIP_flags4 = 1;
@@ -8457,19 +8456,13 @@
 7486: 0f                        #arg 2              f );
 7485: 07,0f               #args                  }
 7487: ef,b6,09            call  7e40             Sub_7e40 (
-748a: 78                        #arg 1              78,
-748b: f0                        #arg 2              f0,
-748c: 1c                        #arg 3              1c,
-748d: 01                        #arg 4              1,
-748e: 04                        #arg 5              4
-748f: 01                        #arg 6              1 );
+748a: 78,f0                     #arg 1              f078,
+748c: 1c,01                     #arg 2              11c,
+748e: 04,01                     #arg 3              104 );
 7490: ef,ad,09            call  7e40             Sub_7e40 (
-7493: 1c                        #arg 1              1c,
-7494: 01                        #arg 2              1,
-7495: 76                        #arg 3              76,
-7496: f0                        #arg 4              f0,
-7497: 05                        #arg 5              5
-7498: 00                        #arg 6              0 );
+7493: 1c,01                     #arg 1              11c,
+7495: 76,f0                     #arg 2              f076,
+7497: 05,00                     #arg 3              5 );
 7499: af,fe,43,1c         ldzbw R1c,[Rfe+43]     wR1c = fuel_adaptive_min;
 749d: 65,80,00,1c         ad2w  R1c,80           R1c += 80;
 74a1: af,fe,44,1e         ldzbw R1e,[Rfe+44]     wR1e = fuel_adaptive_max;
@@ -8835,7 +8828,7 @@
 7841: b6,c1,bc,00         #args  
 7845: 3a,a6,29            jb    B2,Ra6,7871      if (B2_FMEM_FLAGS = 0)  {
 7848: 36,9f,26            jnb   B6,R9f,7871      if (B6_Flags_9f = 1)  {
-784b: 32,90,12            jnb   B2,R90,7860      if (B2_R90 = 1)  {
+784b: 32,90,12            jnb   B2,R90,7860      if (B2_Flags_90 = 1)  {
 784e: af,e2,60,36         ldzbw R36,[Re2+60]     wR36 = [c21e];
 7852: 6c,36,38            ml2w  R38,R36          lR38 = R38 * R36;
 7855: 0c,06,38            shrdw R38,6            lR38 >>= 6;                       #[ R38 /= 64] 
@@ -8845,7 +8838,7 @@
 7860: 8b,e8,8c,38         cmpw  R38,[Re8+8c]     
 7864: d9,0b               jgtu  7871             if (R38 <= [30c])  {
 7866: 9b,fe,26,00         cmpb  R0,[Rfe+26]      
-786a: df,03               je    786f             if ([cb80] != 0)  {
+786a: df,03               je    786f             if (BIHP != 0)  {
 786c: 3c,25,02            jb    B4,R25,7871      if (BIFLG = 1) goto 7871; }
 786f: 20,06               sjmp  7877             goto 7877; } } } }
 
@@ -8868,7 +8861,7 @@
 7899: 30,a4,03            jnb   B0,Ra4,789f      if (B0_Ra4 = 1)  {
 789c: 71,bf,a6            an2b  Ra6,bf           B6_FMEM_FLAGS = 0; }
 789f: 9b,fe,26,00         cmpb  R0,[Rfe+26]      
-78a3: df,67               je    790c             if ([cb80] != 0)  {
+78a3: df,67               je    790c             if (BIHP != 0)  {
 78a5: 9b,e2,b2,00         cmpb  R0,[Re2+b2]      
 78a9: df,61               je    790c             if ([c170] != 0)  {
 78ab: b0,8d,42            ldb   R42,R8d          R42 = VSBAR;                      # BOO_SPD_TMR
@@ -9414,8 +9407,7 @@
 7d28: 88,3c,00            cmpw  R0,R3c           
 7d2b: df,05               je    7d32             if (R3c != 0)  {
 7d2d: ef,99,03            call  80c9             SaveTCode1 (                      #511   | ROM test failed                    |    X    |      |       |
-7d30: 11                        #arg 1              11
-7d31: 05                        #arg 2              5 );
+7d30: 11,05                     #arg 1              511 );
 7d30: 11,05               #args                  }
 7d32: 20,63               sjmp  7d97             goto 7d97;
 
@@ -9427,16 +9419,13 @@
 7d3a: 28,f9               scall 7e35             Sub_7e35 (
 7d3c: 7e,f0                     #arg 1              ECTMIN,
 7d3e: 10,01                     #arg 2              IECT,
-7d40: 17                        #arg 3              17
-7d41: 01                        #arg 4              1 );
+7d40: 17,01                     #arg 3              117 );
 7d3c: 7e,f0,10,01,17,01   #args  
 7d42: 3a,2f,16            jb    B2,R2f,7d5b      if (B2_VIP_flags4 = 0)  {
 7d45: 28,ee               scall 7e35             Sub_7e35 (
 7d47: 10,01                     #arg 1              IECT,
-7d49: 80                        #arg 2              80,
-7d4a: f0                        #arg 3              f0,
-7d4b: 18                        #arg 4              18
-7d4c: 01                        #arg 5              1 );
+7d49: 80,f0                     #arg 2              ECTMAX,
+7d4b: 18,01                     #arg 3              118 );
 7d47: 10,01,80,f0,18,01   #args  
 7d4d: 3a,2f,0b            jb    B2,R2f,7d5b      if (B2_VIP_flags4 = 0)  {
 7d50: ef,8a,03            call  80dd             Sub_80dd (
@@ -9450,15 +9439,13 @@
 7d5b: 28,d8               scall 7e35             Sub_7e35 (
 7d5d: 12,b0                     #arg 1              TOTMIN,
 7d5f: 08,01                     #arg 2              ITOT,
-7d61: 38                        #arg 3              38
-7d62: 06                        #arg 4              6 );
+7d61: 38,06                     #arg 3              638 );
 7d5d: 12,b0,08,01,38,06   #args  
 7d63: 3a,2f,16            jb    B2,R2f,7d7c      if (B2_VIP_flags4 = 0)  {
 7d66: 28,cd               scall 7e35             Sub_7e35 (
 7d68: 08,01                     #arg 1              ITOT,
 7d6a: 14,b0                     #arg 2              TOTMAX,
-7d6c: 37                        #arg 3              37
-7d6d: 06                        #arg 4              6 );
+7d6c: 37,06                     #arg 3              637 );
 7d68: 08,01,14,b0,37,06   #args  
 7d6e: 3a,2f,0b            jb    B2,R2f,7d7c      if (B2_VIP_flags4 = 0)  {
 7d71: ef,69,03            call  80dd             Sub_80dd (
@@ -9469,12 +9456,11 @@
 7d7a: 36                        #arg 5              36
 7d7b: 06                        #arg 6              6 );
 7d74: 08,01,48,f1,46,f1,36,06  #args             } }
-7d7c: b3,e6,96,42         ldb   R42,[Re6+96]     R42 = BAPTMR;
+7d7c: b3,e6,96,42         ldb   R42,[Re6+96]     R42 = MAPTMR;
 7d80: 9b,e2,1d,42         cmpb  R42,[Re2+1d]     
 7d84: d1,06               jleu  7d8c             if (R42 > [c1db])  {
 7d86: 2b,41               scall 80c9             SaveTCode1 (                      #126   | MAP/BP out of S-T range.           |    X    |  XX  |   X   |
-7d88: 26                        #arg 1              26
-7d89: 01                        #arg 2              1 );
+7d88: 26,01                     #arg 1              126 );
 7d88: 26,01               #args  
 7d8a: 20,0b               sjmp  7d97             goto 7d97; }
 
@@ -9494,16 +9480,13 @@
 7d9e: 28,95               scall 7e35             Sub_7e35 (
 7da0: 78,f0                     #arg 1              cbd2,
 7da2: 1c,01                     #arg 2              ITP,
-7da4: 22                        #arg 3              22
-7da5: 01                        #arg 4              1 );
+7da4: 22,01                     #arg 3              122 );
 7da0: 78,f0,1c,01,22,01   #args  
 7da6: 3a,2f,16            jb    B2,R2f,7dbf      if (B2_VIP_flags4 = 0)  {
 7da9: 28,8a               scall 7e35             Sub_7e35 (
 7dab: 1c,01                     #arg 1              ITP,
-7dad: 76                        #arg 2              76,
-7dae: f0                        #arg 3              f0,
-7daf: 23                        #arg 4              23
-7db0: 01                        #arg 5              1 );
+7dad: 76,f0                     #arg 2              cbd0,
+7daf: 23,01                     #arg 3              123 );
 7dab: 1c,01,76,f0,23,01   #args  
 7db1: 3a,2f,0b            jb    B2,R2f,7dbf      if (B2_VIP_flags4 = 0)  {
 7db4: ef,26,03            call  80dd             Sub_80dd (
@@ -9519,15 +9502,13 @@
 7dbf: 28,74               scall 7e35             Sub_7e35 (
 7dc1: 70,f0                     #arg 1              ACTMIN,
 7dc3: 12,01                     #arg 2              IACT,
-7dc5: 12                        #arg 3              12
-7dc6: 01                        #arg 4              1 );
+7dc5: 12,01                     #arg 3              112 );
 7dc1: 70,f0,12,01,12,01   #args  
 7dc7: 3a,2f,15            jb    B2,R2f,7ddf      if (B2_VIP_flags4 = 0)  {
 7dca: 28,69               scall 7e35             Sub_7e35 (
 7dcc: 12,01                     #arg 1              IACT,
 7dce: 72,f0                     #arg 2              ACTMAX,
-7dd0: 13                        #arg 3              13
-7dd1: 01                        #arg 4              1 );
+7dd0: 13,01                     #arg 3              113 );
 7dcc: 12,01,72,f0,13,01   #args  
 7dd2: 3a,2f,0a            jb    B2,R2f,7ddf      if (B2_VIP_flags4 = 0)  {
 7dd5: 2b,06               scall 80dd             Sub_80dd (
@@ -9551,8 +9532,7 @@
 7de5: 14,01,d6,f0,d2,f0,28,03,34,03  #args       }
 7def: 34,8e,04            jnb   B4,R8e,7df6      if (B4_R8e = 1)  {
 7df2: 2a,d5               scall 80c9             SaveTCode1 (                      #539   | A/C Swith error                    |    X    |      |       |
-7df4: 39                        #arg 1              39
-7df5: 05                        #arg 2              5 );
+7df4: 39,05                     #arg 1              539 );
 7df4: 39,05               #args                  }
 7df6: 9b,e2,2f,00         cmpb  R0,[Re2+2f]      
 7dfa: df,0c               je    7e08             if ([c1ed] != 0)  {
@@ -9583,21 +9563,17 @@
                                                  if (R42 != 0) goto 7e21;
 7e19: 30,8f,05            jnb   B0,R8f,7e21      if (B0_R8f = 1)  {
 7e1c: ef,aa,02            call  80c9             SaveTCode1 (                      #519   | PSPS ckt. open.                    |    X    |      |       |
-7e1f: 19                        #arg 1              19
-7e20: 05                        #arg 2              5 );
+7e1f: 19,05                     #arg 1              519 );
 7e1f: 19,05               #args                  } }
 7e21: 28,12               scall 7e35             Sub_7e35 (
 7e23: 50,f0                     #arg 1              cbaa,
-7e25: 0a                        #arg 2              a,
-7e26: 01                        #arg 3              1,
-7e27: 13                        #arg 4              13
-7e28: 05                        #arg 5              5 );
+7e25: 0a,01                     #arg 2              VKYPWR,
+7e27: 13,05                     #arg 3              513 );
 7e23: 50,f0,0a,01,13,05   #args  
 7e29: 31,9e,07            jnb   B1,R9e,7e33      if (Reg_9e = 1)  {
-7e2c: 32,90,04            jnb   B2,R90,7e33      if (B2_R90 = 1)  {
+7e2c: 32,90,04            jnb   B2,R90,7e33      if (B2_Flags_90 = 1)  {
 7e2f: 2a,98               scall 80c9             SaveTCode1 (                      #633   | 4X4 Switch closed                  |    X    |      |       |
-7e31: 33                        #arg 1              33
-7e32: 06                        #arg 2              6 );
+7e31: 33,06                     #arg 1              633 );
 7e31: 33,06               #args                  } }
 7e33: 20,9c               sjmp  7ed1             goto 7ed1;
 
@@ -9675,10 +9651,9 @@
 7eb5: ef,43,04            call  82fb             Sub_82fb (
 7eb8: 7c,f0                     #arg 1              cbd6 );
 7eb8: 7c,f0               #args  
-7eba: 3b,90,04            jb    B3,R90,7ec1      if (B3_R90 = 0)  {
+7eba: 3b,90,04            jb    B3,R90,7ec1      if (B3_Flags_90 = 0)  {
 7ebd: 2a,0a               scall 80c9             SaveTCode1 (                      #543   | FP Ckt Open Bat. to Relay          |    X    |      |   X   |
-7ebf: 43                        #arg 1              43
-7ec0: 05                        #arg 2              5 );
+7ebf: 43,05                     #arg 1              543 );
 7ebf: 43,05               #args                  }
 7ec1: 26,d4               sjmp  7d97             goto 7d97;
 
@@ -9686,10 +9661,9 @@
 7ec3: ef,35,04            call  82fb             Sub_82fb (
 7ec6: 7c,f0                     #arg 1              cbd6 );
 7ec6: 7c,f0               #args  
-7ec8: 33,90,04            jnb   B3,R90,7ecf      if (B3_R90 = 1)  {
+7ec8: 33,90,04            jnb   B3,R90,7ecf      if (B3_Flags_90 = 1)  {
 7ecb: 29,fc               scall 80c9             SaveTCode1 (
-7ecd: 42                        #arg 1              42
-7ece: 05                        #arg 2              5 );
+7ecd: 42,05                     #arg 1              542 );
 7ecd: 42,05               #args                  }
 7ecf: 26,c6               sjmp  7d97             goto 7d97;
 
@@ -9886,8 +9860,7 @@
 8027: 88,42,1e            cmpw  R1e,R42          
 802a: d1,29               jleu  8055             if (R1e <= R42) goto 8055;
 802c: 28,9b               scall 80c9             SaveTCode1 (
-802e: 24                        #arg 1              24
-802f: 06                        #arg 2              6 );
+802e: 24,06                     #arg 1              624 );
 802e: 24,06               #args  
 8030: 20,1c               sjmp  804e             goto 804e;
 
@@ -9903,8 +9876,7 @@
 8044: 8b,e2,d1,3a         cmpw  R3a,[Re2+d1]     
 8048: db,04               jc    804e             if (R3a < [c18f])  {
 804a: 28,7d               scall 80c9             SaveTCode1 (
-804c: 25                        #arg 1              25
-804d: 06                        #arg 2              6 );
+804c: 25,06                     #arg 1              625 );
 804c: 25,06               #args                  }
 804e: c7,e8,d1,00         stb   R0,[Re8+d1]      [351] = 0; } }
 8052: b1,0a,38            ldb   R38,a            R38 = a; }
@@ -9975,12 +9947,10 @@
 80dd: ef,f2,fa            call  7bd2             GetBytes_R1a (
 80e0: 08                        #arg 1              8 );
 80e1: 2d,99               scall 7e7c             Sub_7e7c (
-80e3: 1c                        #arg 1              1c
-80e4: 00                        #arg 2              0 );
+80e3: 1c,00                     #arg 1              1c );
 80e3: 1c,00               #args  
 80e5: 2d,95               scall 7e7c             Sub_7e7c (
-80e7: 1e                        #arg 1              1e
-80e8: 00                        #arg 2              0 );
+80e7: 1e,00                     #arg 1              1e );
 80e7: 1e,00               #args  
 80e9: a2,1a,42            ldw   R42,[R1a]        R42 = [R1a];
 80ec: 8a,1c,42            cmpw  R42,[R1c]        
@@ -10003,52 +9973,43 @@
 810a: 51,ac,a6,22         an3b  R22,Ra6,ac       R22 = FMEM_FLAGS & ac;
 810e: df,46               je    8156             if (R22 != 0)  {
 8110: 2f,b7               scall 80c9             SaveTCode1 (
-8112: 98                        #arg 1              98
-8113: 09                        #arg 2              9 );
-8112: 98,09               #args  
+8112: 98,09                     #arg 1              998 );
+8112: 98,09               #args                                                    # 998,FMEM failure/Failed (open)EPC Output Driver
 8114: 33,a6,0d            jnb   B3,Ra6,8124      if (B3_FMEM_FLAGS = 1)  {
 8117: 30,a7,06            jnb   B0,Ra7,8120      if (B0_FMEM_FLAG2 = 1)  {
 811a: 2f,ad               scall 80c9             SaveTCode1 (
-811c: 28                        #arg 1              28
-811d: 01                        #arg 2              1 );
-811c: 28,01               #args  
+811c: 28,01                     #arg 1              128 );
+811c: 28,01               #args                                                    # 128,MAP vacuum circuit failure
 811e: 20,04               sjmp  8124             goto 8124; }
 
 8120: 2f,a7               scall 80c9             SaveTCode1 (
-8122: 26                        #arg 1              26
-8123: 01                        #arg 2              1 );
-8122: 26,01               #args                  }
+8122: 26,01                     #arg 1              126 );
+8122: 26,01               #args                  }                                 # 126,MAP/BP out of S-T range.
 8124: a3,e4,26,22         ldw   R22,[Re4+26]     R22 = [1a6];
 8128: 37,22,04            jnb   B7,R22,812f      if (B7_R22 = 1)  {
 812b: 2f,9c               scall 80c9             SaveTCode1 (
-812d: 12                        #arg 1              12
-812e: 01                        #arg 2              1 );
-812d: 12,01               #args                  }
+812d: 12,01                     #arg 1              112 );
+812d: 12,01               #args                  }                                 # 112,254 deg. ind. ACT-ckt. grounded.
 812f: 36,22,04            jnb   B6,R22,8136      if (B6_R22 = 1)  {
 8132: 2f,95               scall 80c9             SaveTCode1 (
-8134: 13                        #arg 1              13
-8135: 01                        #arg 2              1 );
-8134: 13,01               #args                  }
+8134: 13,01                     #arg 1              113 );
+8134: 13,01               #args                  }                                 # 113,-40 deg. ind. ACT-sensor ckt. open.
 8136: 35,22,04            jnb   B5,R22,813d      if (B5_R22 = 1)  {
 8139: 2f,8e               scall 80c9             SaveTCode1 (
-813b: 17                        #arg 1              17
-813c: 01                        #arg 2              1 );
-813b: 17,01               #args                  }
+813b: 17,01                     #arg 1              117 );
+813b: 17,01               #args                  }                                 # 117,254 deg. ind. ECT-ckt. grounded.
 813d: 34,22,04            jnb   B4,R22,8144      if (B4_R22 = 1)  {
 8140: 2f,87               scall 80c9             SaveTCode1 (
-8142: 18                        #arg 1              18
-8143: 01                        #arg 2              1 );
-8142: 18,01               #args                  }
+8142: 18,01                     #arg 1              118 );
+8142: 18,01               #args                  }                                 # 118,-40 deg. ind. ECT-sensor ckt. open.
 8144: 31,22,04            jnb   B1,R22,814b      if (B1_R22 = 1)  {
 8147: 2f,80               scall 80c9             SaveTCode1 (
-8149: 22                        #arg 1              22
-814a: 01                        #arg 2              1 );
-8149: 22,01               #args                  }
+8149: 22,01                     #arg 1              122 );
+8149: 22,01               #args                  }                                 # 122,TPS ckt. below minimum voltage.
 814b: 30,22,04            jnb   B0,R22,8152      if (B0_R22 = 1)  {
 814e: 2f,79               scall 80c9             SaveTCode1 (
-8150: 23                        #arg 1              23
-8151: 01                        #arg 2              1 );
-8150: 23,01               #args                  }
+8150: 23,01                     #arg 1              123 );
+8150: 23,01               #args                  }                                 # 123,TPS ckt. above max. voltage.
 8152: b1,1f,38            ldb   R38,1f           R38 = 1f;
 8155: f0                  ret                    return; }
 
@@ -10113,13 +10074,12 @@
 81ca: 36                        #arg 5              36
 81cb: 06                        #arg 6              6 );
 81c4: 08,01,4c,f1,4a,f1,36,06  #args   
-81cc: b3,e6,96,42         ldb   R42,[Re6+96]     R42 = BAPTMR;
+81cc: b3,e6,96,42         ldb   R42,[Re6+96]     R42 = MAPTMR;
 81d0: 9b,e2,1d,42         cmpb  R42,[Re2+1d]     
 81d4: d1,06               jleu  81dc             if (R42 > [c1db])  {
 81d6: 2e,f1               scall 80c9             SaveTCode1 (
-81d8: 26                        #arg 1              26
-81d9: 01                        #arg 2              1 );
-81d8: 26,01               #args  
+81d8: 26,01                     #arg 1              126 );
+81d8: 26,01               #args                                                    # 126,MAP/BP out of S-T range.
 81da: 20,0b               sjmp  81e7             goto 81e7; }
 
 81dc: ef,fe,fe            call  80dd             Sub_80dd (
@@ -10174,8 +10134,7 @@
 8227: 62,f0                     #arg 1              cbbc );
 8227: 62,f0               #args  
 8229: 2e,9e               scall 80c9             SaveTCode1 (
-822b: 73                        #arg 1              73
-822c: 01                        #arg 2              1 );
+822b: 73,01                     #arg 1              173 );
 822b: 73,01               #args  
 822d: 20,7a               sjmp  82a9             goto 82a9;
 
@@ -10195,9 +10154,8 @@
 8247: 63,f0                     #arg 1              cbbd );
 8247: 63,f0               #args  
 8249: 2e,7e               scall 80c9             SaveTCode1 (
-824b: 72                        #arg 1              72
-824c: 01                        #arg 2              1 );
-824b: 72,01               #args  
+824b: 72,01                     #arg 1              172 );
+824b: 72,01               #args                                                    # 172,EGO sensor ckt. ind. system lean.
 824d: 20,5a               sjmp  82a9             goto 82a9;
 
    Sub_824f:
@@ -10221,8 +10179,7 @@
 826f: 3b,f1                     #arg 1              cc95 );
 826f: 3b,f1               #args  
 8271: 2e,56               scall 80c9             SaveTCode1 (
-8273: 11                        #arg 1              11
-8274: 03                        #arg 2              3 );
+8273: 11,03                     #arg 1              311 );
 8273: 11,03               #args  
 8275: 20,29               sjmp  82a0             goto 82a0; }
 
@@ -10235,8 +10192,7 @@
 8281: 3c,f1                     #arg 1              cc96 );
 8281: 3c,f1               #args  
 8283: 2e,44               scall 80c9             SaveTCode1 (
-8285: 12                        #arg 1              12
-8286: 03                        #arg 2              3 );
+8285: 12,03                     #arg 1              312 );
 8285: 12,03               #args                  }
 8287: 71,fe,46            an2b  R46,fe           AM1 = 0;
 828a: 91,40,47            orb   R47,40           AM2 = 1;
@@ -10250,8 +10206,7 @@
 8297: 3a,f1               #args  
 8299: 35,28,04            jnb   B5,R28,82a0      if (EGOSTE = 1)  {
 829c: 2e,2b               scall 80c9             SaveTCode1 (
-829e: 13                        #arg 1              13
-829f: 03                        #arg 2              3 );
+829e: 13,03                     #arg 1              313 );
 829e: 13,03               #args                  } }
 82a0: 61,fe,bf,46         an2w  R46,bffe         AM1 = 0;
                                                  AM2 = 0; } }
@@ -10335,8 +10290,7 @@
 834e: 20,ba               sjmp  840a             return; }
 
 8350: 2d,77               scall 80c9             SaveTCode1 (
-8352: 13                        #arg 1              13
-8353: 02                        #arg 2              2 );
+8352: 13,02                     #arg 1              213 );
 8352: 13,02               #args                  }
 8354: a3,fe,52,cc         ldw   Rcc,[Rfe+52]     Rcc = [cbac];
 8358: 20,aa               sjmp  8404             goto 8404;
@@ -10391,8 +10345,7 @@
 83b4: f0                  ret                    return; }
 
 83b5: ef,11,fd            call  80c9             SaveTCode1 (
-83b8: 32                        #arg 1              32
-83b9: 03                        #arg 2              3 );
+83b8: 32,03                     #arg 1              332 );
 83b8: 32,03               #args                  }
 83ba: c0,c0,00            stw   R0,Rc0           EGRDC = 0;
 83bd: b1,10,38            ldb   R38,10           R38 = 10;
@@ -10517,39 +10470,34 @@
 84cb: a3,fe,60,96         ldw   R96,[Rfe+60]     LAMBSE1 = [cbba]; }
 84cf: 34,2c,07            jnb   B4,R2c,84d9      if (Kam_codes = 1)  {
 84d2: ef,f4,fb            call  80c9             SaveTCode1 (
-84d5: 38                        #arg 1              38
-84d6: 05                        #arg 2              5 );
-84d5: 38,05               #args  
+84d5: 38,05                     #arg 1              538 );
+84d5: 38,05               #args                                                    # 538,Operator error-dyn response test.
 84d7: 20,1b               sjmp  84f4             goto 84f4; }
 
 84d9: 36,2c,05            jnb   B6,R2c,84e1      if (Vegrbp = 1)  {
 84dc: ef,ea,fb            call  80c9             SaveTCode1 (
-84df: 29                        #arg 1              29
-84e0: 01                        #arg 2              1 );
-84df: 29,01               #args                  }
+84df: 29,01                     #arg 1              129 );
+84df: 29,01               #args                  }                                 # 129,Insuff. MAP change-dyn resp. test.
 84e1: 35,2c,05            jnb   B5,R2c,84e9      if (Vvsfl1 = 1)  {
 84e4: ef,e2,fb            call  80c9             SaveTCode1 (
-84e7: 67                        #arg 1              67
-84e8: 01                        #arg 2              1 );
+84e7: 67,01                     #arg 1              167 );
 84e7: 67,01               #args                  }
 84e9: 36,2f,08            jnb   B6,R2f,84f4      if (B6_VIP_flags4 = 1)  {
 84ec: 37,2c,05            jnb   B7,R2c,84f4      if (Rmspru = 1)  {
 84ef: ef,d7,fb            call  80c9             SaveTCode1 (
-84f2: 25                        #arg 1              25
-84f3: 02                        #arg 2              2 );
+84f2: 25,02                     #arg 1              225 );
 84f2: 25,02               #args                  } }
 84f4: a3,fe,52,cc         ldw   Rcc,[Rfe+52]     Rcc = [cbac];
 84f8: b3,e2,af,42         ldb   R42,[Re2+af]     R42 = [c16d];
 84fc: e0,42,12            djnz  R42,8511         R42--;
                                                  if (R42 != 0) goto 8511;
-84ff: b3,fe,26,42         ldb   R42,[Rfe+26]     R42 = [cb80];
+84ff: b3,fe,26,42         ldb   R42,[Rfe+26]     R42 = BIHP;
 8503: e0,42,0b            djnz  R42,8511         R42--;
                                                  if (R42 != 0) goto 8511;
 8506: 3b,a4,03            jb    B3,Ra4,850c      if (BRK_NEVER_ON = 0)  {
 8509: 31,a4,05            jnb   B1,Ra4,8511      if (BRK_NEVER_OFF = 0) goto 8511; }
 850c: ef,ba,fb            call  80c9             SaveTCode1 (
-850f: 36                        #arg 1              36
-8510: 05                        #arg 2              5 );
+850f: 36,05                     #arg 1              536 );
 850f: 36,05               #args                  } } }
 8511: b3,e2,30,42         ldb   R42,[Re2+30]     R42 = [c1ee];
 8515: e0,42,12            djnz  R42,852a         R42--;
@@ -10560,15 +10508,13 @@
 851f: 30,29,03            jnb   B0,R29,8525      if (B0_R29 = 1)  {
 8522: 39,29,05            jb    B1,R29,852a      if (B1_R29 = 1) goto 852a; }
 8525: ef,a1,fb            call  80c9             SaveTCode1 (
-8528: 21                        #arg 1              21
-8529: 05                        #arg 2              5 );
+8528: 21,05                     #arg 1              521 );
 8528: 21,05               #args                  } } }
 852a: 31,9e,0b            jnb   B1,R9e,8538      if (Reg_9e = 1)  {
 852d: 32,49,03            jnb   B2,R49,8533      if (B2_R49 = 1)  {
 8530: 39,49,05            jb    B1,R49,8538      if (B1_R49 = 1) goto Sub_8538; }
 8533: ef,93,fb            call  80c9             SaveTCode1 (
-8536: 32                        #arg 1              32
-8537: 06                        #arg 2              6 );
+8536: 32,06                     #arg 1              632 );
 8536: 32,06               #args                  } }
    Sub_8538:
 8538: 91,07,2b            orb   R2b,7            STO_HighSpeed = 1;
@@ -10587,7 +10533,7 @@
 854e: 20,03               sjmp  8553             goto 8553; }
 
 8550: 91,01,29            orb   R29,1            B0_R29 = 1;
-8553: 30,90,05            jnb   B0,R90,855b      if (B0_R90 = 1)  {
+8553: 30,90,05            jnb   B0,R90,855b      if (B0_Flags_90 = 1)  {
 8556: 91,02,49            orb   R49,2            B1_R49 = 1;
 8559: 20,03               sjmp  855e             return; }
 
@@ -11019,17 +10965,17 @@
 
    Sub_890c:
 890c: 38,e0,05            jb    B0,Re0,8914      if (B0_Re0 = 0)  {
-890f: 3a,90,05            jb    B2,R90,8917      if (B2_R90 = 1) goto 8917;
+890f: 3a,90,05            jb    B2,R90,8917      if (B2_Flags_90 = 1) goto 8917;
 8912: 20,0f               sjmp  8923             goto 8923; }
 
-8914: 3a,90,0c            jb    B2,R90,8923      if (B2_R90 = 1) goto 8923; }
+8914: 3a,90,0c            jb    B2,R90,8923      if (B2_Flags_90 = 1) goto 8923; }
 8917: 95,01,e0            xorb  Re0,1            B0_Re0 ^= 1;
 891a: a3,fd,c4,00,42      ldw   R42,[Rfc+c4]     R42 = [c16c];
 891f: c3,e8,f2,42         stw   R42,[Re8+f2]     [372] = R42; }
 8923: 8b,e8,f2,00         cmpw  R0,[Re8+f2]      
 8927: d7,09               jne   8932             if ([372] = 0)  {
 8929: 91,02,e0            orb   Re0,2            B1_Re0 = 1;
-892c: 3a,90,03            jb    B2,R90,8932      if (B2_R90 = 0)  {
+892c: 3a,90,03            jb    B2,R90,8932      if (B2_Flags_90 = 0)  {
 892f: 71,fd,e0            an2b  Re0,fd           B1_Re0 = 0; } }
 8932: f0                  ret                    return;
 
@@ -13626,7 +13572,7 @@ a3b7: f0                  ret                    return;
 
    Sub_a3b8:
 a3b8: a3,e8,f0,30         ldw   R30,[Re8+f0]     R30 = [370];
-a3bc: 38,90,05            jb    B0,R90,a3c4      if (B0_R90 = 0)  {
+a3bc: 38,90,05            jb    B0,R90,a3c4      if (B0_Flags_90 = 0)  {
 a3bf: 01,30               clrw  R30              R30 = 0;
 a3c1: 71,bf,e0            an2b  Re0,bf           B6_Re0 = 0; }
 a3c4: 8b,fd,66,01,30      cmpw  R30,[Rfc+166]    
@@ -14079,7 +14025,7 @@ a840: f0                  ret                    return;
 ######################################
 a841: 26,2e,04            timer 26,   42e, 
 a844: 26,30,04            timer 26,   430, 
-a847: 20,16,02            timer 20, BAPTMR, 
+a847: 20,16,02            timer 20, MAPTMR, 
 a84a: 81,53,01,02,4e      timer 81,   153,  B1_4e
 a84f: 89,d4,00,80,a5      timer 89, ATMR1, CRKFLG,                                 #ATMR1          Time since start (time since exiting CRANK mode) (seconds)
 a854: 81,85,03,40,24      timer 81,   385,  B6_24
@@ -14179,7 +14125,7 @@ a9ab: 71,ef,4e            an2b  R4e,ef           B4_NEW_IDM = 0;
 a9ae: c3,e6,bc,00         stw   R0,[Re6+bc]      TSLIDM = 0; } }
 a9b2: 36,4e,07            jnb   B6,R4e,a9bc      if (B6_NEW_BAP = 1)  {
 a9b5: 71,bf,4e            an2b  R4e,bf           B6_NEW_BAP = 0;
-a9b8: c7,e6,96,00         stb   R0,[Re6+96]      BAPTMR = 0; }
+a9b8: c7,e6,96,00         stb   R0,[Re6+96]      MAPTMR = 0; }
 a9bc: f0                  ret                    return;
 
 a9bd: ff                  ???   
@@ -16323,7 +16269,8 @@ c164: 1f,00               word     1f
 c166: 1f,00               word     1f
 c168: 12,00               word     12
 c16a: 33,01               word    133
-c16c: 00,03               word    300
+c16c: 00                  byte      0
+c16d: 03                  byte      3
 c16e: 00,05               word    500            V_BOO_SPD
 c170: 40                  byte     40
 c171: 01                  byte      1
@@ -17175,7 +17122,7 @@ cb7c: 05                  byte      5            CRKTM1
 cb7d: 00                  byte      0
 cb7e: 00                  byte      0
 cb7f: 00                  byte      0
-cb80: 01                  byte      1
+cb80: 01                  byte      1            BIHP
 cb81: 01                  byte      1
 cb82: 00                  byte      0
 cb83: 00                  byte      0            PFEHP                             # EGR Type 0 = Sonic
@@ -17214,8 +17161,9 @@ cba6: 66                  byte     66
 cba7: 00                  byte      0
 cba8: 8d                  byte     8d            fuel_max_load_verification_value
 
-cba9: ff,00,32            ???   
+cba9: ff                  ???   
 
+cbaa: 00,32               word   3200
 cbac: 78,00               word     78
 cbae: 00,60               word   6000
 cbb0: 00,a0               word   a000
