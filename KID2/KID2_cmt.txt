@@ -283,16 +283,69 @@
 3d1b # EGR Valve position
 3d1e # end of table
 
+3d67 \n
+3d67 \n# THROTTLE POSITION FILTER (TAPBAR)
+3d67 \n#   The TAPBAR calculation is a time and MAP dependent rolling average filter  of
+3d67 \n#    instantaneous  throttle  position  (TP).   It is updated each background pass
+3d67 \n#    while in RUN or UNDERSPEED mode.  The TAPBAR time constant is FN093(MAP).
+
+3d72 # TCxxxx = FN093
+3d75 # old average
+3d79 # new value
+3d7f # TAPBAR = UROLAV(TP,FN093(MAP))
+
+3dd1 \n
+3dd1 \n# EGR POSITION FILTER (EGRBAR)
+3dd1 \n#   The EGRBAR  calculation  is  a  time  dependent  rolling  average  filter  of
+3dd1 \n#    instantaneous  EGR  valve  position  EVP.  It is updated each background pass
+3dd1 \n#    while in  RUN  or  UNDERSPEED  mode.   The  EGRBAR  time  constant  TCEGR  is
+3dd1 \n#    calibratable, but should be set to 2.0 seconds.
+
+3dd2 # old average
+3dd6 # new value
+3dd9 # TCxxxx
+3de0 # EGRBAR = UROLAV(EVP,TCEGR)
+
 3df8 # (sensor OK)
 
 3ecf # ECTCNT = ECTCNT + 1
 3ede # ACSTRT + ACT/8
+
+3f77 # RATCH + FN090(MAP)
+3f7f # TP = RATCH (TP sensor out of limits)
+
+4089 \n# BATTERY VOLTAGE (VBAT)
+
+4089 \n# 
+4089 \n#       The  VBAT  calculation  is  a  time  dependent  rolling  average  filter   of
+4089 \n#       instantaneous  battery  voltage.  It is updated each background pass while in
+4089 \n#       RUN or UNDERSPEED mode.  The VBAT  time  constant  TCVBAT  is  a  calibration
+4089 \n#       parameter and should be set to 0.1 seconds.
+
+4089 \n# 
+
+4089 \n# Instantaneous battery voltage is calculated from;
+4089 \n# VBAT' = IIVPWR * (VCAL/IVCAL) * KSF/IVCAL
+4089 \n# 
+408d # old average
+4090 # new value
+4093 # TCxxxx
+409a # VBAT = UROLAV(VBAT',TCVBAT)
 
 40b8 # Calculates (engine coolant temperature)
 40db # Calculates  (transmission oil temperature)
 4243 # 2 = Low Data Rate Distributorless dual plug (LDR_DIS)
 
 4689 # 29.875 * 8 = 239 = 0xEF
+495a # new value - old average 
+495e # if unsigned
+
+4967 # new value < old average
+496f # new value - old average <= 1 BIT
+4971 # new average = new value
+4975 # FK * (new value - old average)
+497c # old average - 1 BIT
+
 
 49ed \n#############################################################
 49ed \n# 1 dimension interpolate - signed or unsigned
@@ -491,6 +544,12 @@
 7014 # ,
  # 998,FMEM failure/Failed (open)EPC Output Driver
 
+7016 # (make sure base strategy can control pump)
+
+703a # PUTMR >= 4 SEC
+70bb # (Vehicle moving)  
+70c7 # EXIT CONDITIONS TRUE
+
 70dd \n######################################
 70dd \n# gets jump function index into R3A
 70dd \n#######################################
@@ -634,6 +693,8 @@
 8801 \n################################################################
 
 88cf # 1 = Thick Film Ignition - Improved Computer Control Dwell (TFI_ICCD)
+
+8ba5 # (ENGCYL * N)
 
 a777 # IOTimer delta time since last mSec
 a783 # *128/52083 = 1 mSec

@@ -99,7 +99,7 @@
 20b7: b3,fd,ec,00,30      ldb   R30,[Rfc+ec]     R30 = [c194];
 20bc: c7,e8,d5,30         stb   R30,[Re8+d5]     [355] = R30;
 20c0: c7,e8,d4,30         stb   R30,[Re8+d4]     [354] = R30;
-20c4: c7,e6,ae,ba         stb   Rba,[Re6+ae]     [22e] = MAP;
+20c4: c7,e6,ae,ba         stb   Rba,[Re6+ae]     MAPBAR = MAP;
 20c8: ef,5f,8a            call  ab2a             KAM_VALIDATION_PROCEDURE ();
 20cb: 11,09               clrb  R9               INT_Pend = 0;
 20cd: 32,0a,06            jnb   B2,Ra,20d6       if (B2_HSI_Ready = 1)  {
@@ -246,7 +246,7 @@
 2230: 64,21               vect  2164             Set_TaskList
 # "Task_List_3"
 2232: d6,a9               vect  a9d6             Check_ConsoleDI
-2234: 4c,3b               vect  3b4c             Sub_3b4c
+2234: 4c,3b               vect  3b4c             VIP_THROTTLE_MODE_SET
 2236: cf,3c               vect  3ccf             Read_AD
 2238: 35,47               vect  4735             Sub_4735
 223a: f2,3d               vect  3df2             INPUT_ACT_COM2
@@ -1426,8 +1426,8 @@
 2caa: 2d,d9               scall 2a85             Read_HSI (); }
 2cac: 34,48,03            jnb   B4,R48,2cb2      if (Disable_isc = 1)  {
 2caf: ef,77,0b            call  3829             Sub_3829 (); }
-2cb2: 33,48,0c            jnb   B3,R48,2cc1      if (Error_detected = 1)  {
-2cb5: 71,f7,48            an2b  R48,f7           Error_detected = 0;
+2cb2: 33,48,0c            jnb   B3,R48,2cc1      if (B3_Flags_48 = 1)  {
+2cb5: 71,f7,48            an2b  R48,f7           B3_Flags_48 = 0;
 2cb8: 91,02,28            orb   R28,2            B1_R28 = 1;
 2cbb: 17,ce               incb  Rce              Rce++;
 2cbd: d7,02               jne   2cc1             if (Rce = 0)  {
@@ -1567,7 +1567,7 @@
 2e11: 3a,50,03            jb    B2,R50,2e17      if (B2_Douple_edge = 0)  {
 2e14: 71,fe,4f            an2b  R4f,fe           B0_?Immediate? = 0; }
 2e17: 91,80,4e            orb   R4e,80           B7_NEW_PIP = 1;
-2e1a: 91,08,48            orb   R48,8            Error_detected = 1;
+2e1a: 91,08,48            orb   R48,8            B3_Flags_48 = 1;
 2e1d: c3,e6,0c,c4         stw   Rc4,[Re6+c]      [28c] = PIPHi_ETime;
 2e21: a0,54,c4            ldw   Rc4,R54          PIPHi_ETime = R54;
 2e24: b0,56,c6            ldb   Rc6,R56          Rc6 = R56;
@@ -1712,7 +1712,7 @@
 2f90: 36,4f,22            jnb   B6,R4f,2fb5      if (B6_Knock_enabled = 1)  {
 2f93: 37,4f,1f            jnb   B7,R4f,2fb5      if (B7_Knock_occurred = 1)  {
 2f96: 98,9d,00            cmpb  R0,R9d           
-2f99: d7,1a               jne   2fb5             if (Tipret = 0)  {
+2f99: d7,1a               jne   2fb5             if (TIPRET = 0)  {
 2f9b: b3,55,d0,01,56      ldb   R56,[R54+1d0]    R56 = [R54+1d0];
 2fa0: 7b,e6,b0,56         sb2b  R56,[Re6+b0]     R56 -= Retinc;
 2fa4: dd,06               jv    2fac             if (R56 < 0)  {
@@ -1723,7 +1723,7 @@
 2fb5: 2f,c7               scall 2f7e             Knock_Check4 ();
 2fb7: c7,e6,b9,54         stb   R54,[Re6+b9]     Pip_counter = R54;
 2fbb: 98,00,9d            cmpb  R9d,R0           
-2fbe: d7,1f               jne   2fdf             if (Tipret = 0)  {
+2fbe: d7,1f               jne   2fdf             if (TIPRET = 0)  {
 2fc0: 34,51,1c            jnb   B4,R51,2fdf      if (B4_R51 = 1)  {
 2fc3: 3b,51,0f            jb    B3,R51,2fd5      if (B3_R51 = 0)  {
 2fc6: 36,4f,16            jnb   B6,R4f,2fdf      if (B6_Knock_enabled = 0) goto 2fdf;
@@ -1731,16 +1731,16 @@
 2fcc: b3,fa,4d,58         ldb   R58,[Rfa+4d]     R58 = KNKCYL;
 2fd0: 99,01,58            cmpb  R58,1            
 2fd3: df,0a               je    2fdf             if (R58 = 1) goto 2fdf; }
-2fd5: b3,fa,39,9d         ldb   R9d,[Rfa+39]     Tipret = Tipinret_spark_initial_retard_tip;
-2fd9: c3,e4,1c,b2         stw   Rb2,[Re4+1c]     Tbart = TP;
+2fd5: b3,fa,39,9d         ldb   R9d,[Rfa+39]     TIPRET = TIPMAX;
+2fd9: c3,e4,1c,b2         stw   Rb2,[Re4+1c]     TBART = TP;
 2fdd: 20,0e               sjmp  2fed             goto 2fed; } } } } }
 
-2fdf: b0,9d,58            ldb   R58,R9d          R58 = Tipret;
-2fe2: 77,fa,3a,58         ad2b  R58,[Rfa+3a]     R58 += TIPINC_spark_adv_per_pip_tip;
+2fdf: b0,9d,58            ldb   R58,R9d          R58 = TIPRET;
+2fe2: 77,fa,3a,58         ad2b  R58,[Rfa+3a]     R58 += TIPINC;
 2fe6: da,02               jle   2fea             if (R58 > 0)  {
 2fe8: 11,58               clrb  R58              R58 = 0; }
-2fea: c4,9d,58            stb   R58,R9d          Tipret = R58;
-2fed: b0,9d,56            ldb   R56,R9d          R56 = Tipret;
+2fea: c4,9d,58            stb   R58,R9d          TIPRET = R58;
+2fed: b0,9d,56            ldb   R56,R9d          R56 = TIPRET;
 2ff0: 36,4f,0c            jnb   B6,R4f,2fff      if (B6_Knock_enabled = 1)  {
 2ff3: 2f,89               scall 2f7e             Knock_Check4 ();
 2ff5: 77,55,d0,01,56      ad2b  R56,[R54+1d0]    R56 += [R54+1d0];
@@ -2205,8 +2205,8 @@
 34c7: f0                  ret                    return;
 
    Sub_34c8:
-34c8: 35,a5,11            jnb   B5,Ra5,34dc      if (Purging = 1)  {
-34cb: 71,df,a5            an2b  Ra5,df           Purging = 0;
+34c8: 35,a5,11            jnb   B5,Ra5,34dc      if (B5_FLAGS_a5 = 1)  {
+34cb: 71,df,a5            an2b  Ra5,df           B5_FLAGS_a5 = 0;
 34ce: 71,7f,27            an2b  R27,7f           B7_R27 = 0;
 34d1: 11,cf               clrb  Rcf              Rcf = 0;
 34d3: 71,7f,51            an2b  R51,7f           B7_R51 = 0;
@@ -2833,8 +2833,8 @@
 3b47: c7,e8,03,54         stb   R54,[Re8+3]      [383] = R54;
 3b4b: f0                  ret                    return;
 
-   Sub_3b4c:
-3b4c: 30,a3,02            jnb   B0,Ra3,3b51      if (Error_detected = 1)  {
+   VIP_THROTTLE_MODE_SET:
+3b4c: 30,a3,02            jnb   B0,Ra3,3b51      if (B0_V_MODE_SETUP_a3 = 1)  {
 3b4f: 20,96               sjmp  3be7             goto ReInitialize_ISCKAM; }
 
 3b51: f0                  ret                    return;
@@ -2923,7 +2923,7 @@
 3c28: 91,10,a5            orb   Ra5,10           FLG_STALL = 1;
 3c2b: 71,ef,26            an2b  R26,ef           RUNUP_FLG = 0;
 3c2e: c7,e8,3b,00         stb   R0,[Re8+3b]      [3bb] = 0;
-3c32: 91,20,a5            orb   Ra5,20           Purging = 1;
+3c32: 91,20,a5            orb   Ra5,20           B5_FLAGS_a5 = 1;
 3c35: 91,80,a5            orb   Ra5,80           CRKFLG = 1;
 3c38: c7,e6,93,00         stb   R0,[Re6+93]      ECTCNT = 0;
 3c3c: c3,e6,62,00         stw   R0,[Re6+62]      ACSTRT = 0;
@@ -3021,7 +3021,7 @@
 ######
 3cfd: 00,08,01            struct    0, ITOT                                        # Throttle position sensor rate
 3d00: 01,0e,01            struct    1, VSS_Raw                                     # Voltage Calibration Level?
-3d03: 02,0a,01            struct    2, VKYPWR                                      # Voltage level (->793d)?
+3d03: 02,0a,01            struct    2, IIVPWR                                      # Voltage level (->793d)?
 3d06: 03,0c,01            struct    3, IOCC                                        # Open Circuit Check?
 3d09: 05,44,03            struct    5, Vsc_Raw                                     # Exhaust Gas Oxygen sensor 2? or Speed control system?
 3d0c: 07,1c,01            struct    7, ITP                                         # Throttle position sensor (->794d)?
@@ -3044,7 +3044,7 @@
 3d36: 89,08,07,b4         cmpw  Rb4,708          
 3d3a: d1,1a               jleu  3d56             if (N_RPM > 708)  {
 3d3c: 35,2a,0f            jnb   B5,R2a,3d4e      if (Self_test = 1)  {
-3d3f: 30,a3,14            jnb   B0,Ra3,3d56      if (Error_detected = 0) goto 3d56;
+3d3f: 30,a3,14            jnb   B0,Ra3,3d56      if (B0_V_MODE_SETUP_a3 = 0) goto 3d56;
 3d42: 89,80,3e,3e         cmpw  R3e,3e80         
 3d46: d3,0b               jnc   3d53             if (R3e < 3e80) goto 3d53;
 3d48: a1,80,3e,8a         ldw   R8a,3e80         RATCH = 3e80;
@@ -3058,25 +3058,30 @@
 3d5d: a3,f8,08,36         ldw   R36,[Rf8+8]      R36 = [bab8];
 3d61: ef,eb,0b            call  494f             UROLAV ();
 3d64: c3,e4,ae,3e         stw   R3e,[Re4+ae]     [12e] = R3e;
+
+# THROTTLE POSITION FILTER (TAPBAR)
+#   The TAPBAR calculation is a time and MAP dependent rolling average filter  of
+#    instantaneous  throttle  position  (TP).   It is updated each background pass
+#    while in RUN or UNDERSPEED mode.  The TAPBAR time constant is FN093(MAP).
 3d68: ac,ba,38            ldzbw R38,Rba          wR38 = MAP;
 3d6b: ef,78,0b            call  48e6             UUWFuncLU_48e6 (
-3d6e: bc,a0                     #arg 1              Func_bc36,
+3d6e: bc,a0                     #arg 1              FN093,
 3d70: 38,00                     #arg 2              38 );
 3d6e: bc,a0,38,00         #args  
-3d72: a0,38,36            ldw   R36,R38          R36 = R38;
-3d75: a3,e6,88,32         ldw   R32,[Re6+88]     R32 = [208];
-3d79: a0,b2,34            ldw   R34,Rb2          R34 = TP;
+3d72: a0,38,36            ldw   R36,R38          R36 = R38;                        # TCxxxx = FN093
+3d75: a3,e6,88,32         ldw   R32,[Re6+88]     R32 = TAPBAR;                     # old average
+3d79: a0,b2,34            ldw   R34,Rb2          R34 = TP;                         # new value
 3d7c: ef,d0,0b            call  494f             UROLAV ();
-3d7f: c3,e6,88,3e         stw   R3e,[Re6+88]     [208] = R3e;
+3d7f: c3,e6,88,3e         stw   R3e,[Re6+88]     TAPBAR = R3e;                     # TAPBAR = UROLAV(TP,FN093(MAP))
 3d83: 36,a0,25            jnb   B6,Ra0,3dab      if (B6_Power_up = 1)  {
-3d86: c7,e6,af,ba         stb   Rba,[Re6+af]     [22f] = MAP;
-3d8a: af,e6,ae,32         ldzbw R32,[Re6+ae]     wR32 = [22e];
-3d8e: af,e6,af,34         ldzbw R34,[Re6+af]     wR34 = [22f];
-3d92: a3,f8,06,36         ldw   R36,[Rf8+6]      R36 = [bab6];
+3d86: c7,e6,af,ba         stb   Rba,[Re6+af]     MAP = MAP;
+3d8a: af,e6,ae,32         ldzbw R32,[Re6+ae]     wR32 = MAPBAR;
+3d8e: af,e6,af,34         ldzbw R34,[Re6+af]     wR34 = MAP;
+3d92: a3,f8,06,36         ldw   R36,[Rf8+6]      R36 = TCMBAR;
 3d96: af,e6,b3,3e         ldzbw R3e,[Re6+b3]     wR3e = [233];
 3d9a: 91,02,a5            orb   Ra5,2            BG_TMR_DISABLE = 1;
 3d9d: ef,af,0b            call  494f             UROLAV ();
-3da0: c7,e6,ae,3e         stb   R3e,[Re6+ae]     [22e] = R3e;
+3da0: c7,e6,ae,3e         stb   R3e,[Re6+ae]     MAPBAR = R3e;
 3da4: 71,bf,a0            an2b  Ra0,bf           B6_Power_up = 0;
 3da7: c7,e6,b3,00         stb   R0,[Re6+b3]      [233] = 0; }
 3dab: 9b,fe,29,00         cmpb  R0,[Rfe+29]      
@@ -3089,14 +3094,20 @@
 3dbd: 8b,ff,d2,00,30      cmpw  R30,[Rfe+d2]     
 3dc2: d3,04               jnc   3dc8             if (R30 >= EVPMIN)  {
 3dc4: a3,e4,94,be         ldw   Rbe,[Re4+94]     EVP = IEGR; } }
-3dc8: 34,a6,04            jnb   B4,Ra6,3dcf      if (EFMFLG = 1)  {
+3dc8: 34,a6,04            jnb   B4,Ra6,3dcf      if (B4_EFMFLG = 1)  {
 3dcb: a3,e4,96,be         ldw   Rbe,[Re4+96]     EVP = EOFF; }
 3dcf: 3f,a5,1f            jb    B7,Ra5,3df1      if (CRKFLG = 0)  {
-3dd2: a3,e4,84,32         ldw   R32,[Re4+84]     R32 = [104];
-3dd6: a0,be,34            ldw   R34,Rbe          R34 = EVP;
-3dd9: a3,f8,18,36         ldw   R36,[Rf8+18]     R36 = TCEGR;
+
+# EGR POSITION FILTER (EGRBAR)
+#   The EGRBAR  calculation  is  a  time  dependent  rolling  average  filter  of
+#    instantaneous  EGR  valve  position  EVP.  It is updated each background pass
+#    while in  RUN  or  UNDERSPEED  mode.   The  EGRBAR  time  constant  TCEGR  is
+#    calibratable, but should be set to 2.0 seconds.
+3dd2: a3,e4,84,32         ldw   R32,[Re4+84]     R32 = EGRBAR;                     # old average
+3dd6: a0,be,34            ldw   R34,Rbe          R34 = EVP;                        # new value
+3dd9: a3,f8,18,36         ldw   R36,[Rf8+18]     R36 = TCEGR;                      # TCxxxx
 3ddd: ef,6f,0b            call  494f             UROLAV ();
-3de0: c3,e4,84,3e         stw   R3e,[Re4+84]     [104] = R3e;
+3de0: c3,e4,84,3e         stw   R3e,[Re4+84]     EGRBAR = R3e;                     # EGRBAR = UROLAV(EVP,TCEGR)
 3de4: 37,a8,0a            jnb   B7,Ra8,3df1      if (APT_Closed_Throttle = 1)  {
 3de7: 8b,e4,96,3e         cmpw  R3e,[Re4+96]     
 3deb: db,04               jc    3df1             if (R3e < EOFF)  {
@@ -3106,7 +3117,7 @@
    INPUT_ACT_COM2:
 3df2: 2a,c4               scall 40b8             Compute_TCSTRT ();
 3df4: b3,f6,3c,39         ldb   R39,[Rf6+3c]     R39 = ACTFMM;
-3df8: 3f,a6,1d            jb    B7,Ra6,3e18      if (AFMFLG = 0)  {                # (sensor OK)
+3df8: 3f,a6,1d            jb    B7,Ra6,3e18      if (B7_AFMFLG = 0)  {             # (sensor OK)
 3dfb: a3,e4,92,34         ldw   R34,[Re4+92]     R34 = IACT;
 3dff: 8b,fe,72,34         cmpw  R34,[Rfe+72]     
 3e03: d9,13               jgtu  3e18             if (R34 <= ACTMAX)  {
@@ -3124,7 +3135,7 @@
 3e21: a3,e8,5a,38         ldw   R38,[Re8+5a]     R38 = TCSTRT;
 3e25: 20,03               sjmp  3e2a             goto 3e2a; } } }
 
-3e27: 37,a6,03            jnb   B7,Ra6,3e2d      if (AFMFLG = 1)  {
+3e27: 37,a6,03            jnb   B7,Ra6,3e2d      if (B7_AFMFLG = 1)  {
 3e2a: b0,39,b7            ldb   Rb7,R39          ACT = R39; }
 3e2d: 3d,a6,12            jb    B5,Ra6,3e42      if (B5_FMEM_FLAGS = 0)  {
 3e30: 33,29,0f            jnb   B3,R29,3e42      if (ECT_IN_RANGE = 1)  {
@@ -3161,7 +3172,7 @@
 3e7e: 20,0d               sjmp  3e8d             goto 3e8d; }
 
 3e80: bc,b6,32            ldsbw R32,Rb6          swR32 = ECT;
-3e83: a3,f8,14,36         ldw   R36,[Rf8+14]     R36 = [bac4];
+3e83: a3,f8,14,36         ldw   R36,[Rf8+14]     R36 = TCECT;
 3e87: ef,cc,0a            call  4956             ROLAV ();
 3e8a: b0,3e,b6            ldb   Rb6,R3e          ECT = R3e; }
 3e8d: 2a,4c               scall 40db             Compute_INIT_TOT ();
@@ -3229,26 +3240,26 @@
 3f44: c3,e8,c2,30         stw   R30,[Re8+c2]     ETVOCM = R30;
 3f48: a3,e4,9c,16         ldw   R16,[Re4+9c]     R16 = ITP;
 3f4c: a0,8a,1a            ldw   R1a,R8a          R1a = RATCH;
-3f4f: 3a,a6,11            jb    B2,Ra6,3f63      if (B2_FMEM_FLAGS = 0)  {
+3f4f: 3a,a6,11            jb    B2,Ra6,3f63      if (B2_TFMFLG_a6 = 0)  {
 3f52: 8b,fe,78,16         cmpw  R16,[Rfe+78]     
-3f56: d3,0b               jnc   3f63             if (R16 >= [cbd2])  {
+3f56: d3,0b               jnc   3f63             if (R16 >= TAPMIN)  {
 3f58: 8b,fe,76,16         cmpw  R16,[Rfe+76]     
-3f5c: d9,05               jgtu  3f63             if (R16 <= [cbd0])  {
+3f5c: d9,05               jgtu  3f63             if (R16 <= TAPMAX)  {
 3f5e: a0,16,b2            ldw   Rb2,R16          TP = R16;
 3f61: 20,1f               sjmp  3f82             goto 3f82; } } }
 
 3f63: 3f,a5,19            jb    B7,Ra5,3f7f      if (CRKFLG = 0)  {
-3f66: 32,a6,19            jnb   B2,Ra6,3f82      if (B2_FMEM_FLAGS = 0) goto 3f82;
+3f66: 32,a6,19            jnb   B2,Ra6,3f82      if (B2_TFMFLG_a6 = 0) goto 3f82;
 3f69: a1,80,3e,8a         ldw   R8a,3e80         RATCH = 3e80;
 3f6d: ac,ba,38            ldzbw R38,Rba          wR38 = MAP;
 3f70: ef,73,09            call  48e6             UUWFuncLU_48e6 (
-3f73: 5c,61                     #arg 1              Func_ba70,
+3f73: 5c,61                     #arg 1              FN090,
 3f75: 38,00                     #arg 2              38 );
 3f73: 5c,61,38,00         #args  
-3f77: 64,38,1a            ad2w  R1a,R38          R1a += R38;
+3f77: 64,38,1a            ad2w  R1a,R38          R1a += R38;                       # RATCH + FN090(MAP)
 3f7a: d3,03               jnc   3f7f             if (R1a > ffff)  {
 3f7c: bd,ff,1a            ldsbw R1a,ff           swR1a = ff; } }
-3f7f: a0,1a,b2            ldw   Rb2,R1a          TP = R1a; }
+3f7f: a0,1a,b2            ldw   Rb2,R1a          TP = R1a; }                       # TP = RATCH (TP sensor out of limits)
 3f82: ef,b6,04            call  443b             Sub_443b ();
 3f85: ef,0e,1c            call  5b96             Sub_5b96 ();
 3f88: 48,8a,b2,34         sb3w  R34,Rb2,R8a      R34 = TP - RATCH;
@@ -3260,10 +3271,10 @@
 3f9b: 08,01,34            shrw  R34,1            R34 >>= 1;                        #[ R34 /= 2] 
 3f9e: 08,01,36            shrw  R36,1            R36 >>= 1;                        #[ R36 /= 2] 
 3fa1: 68,36,34            sb2w  R34,R36          R34 -= R36;
-3fa4: a3,e8,40,32         ldw   R32,[Re8+40]     R32 = [3c0];
-3fa8: a3,fa,16,36         ldw   R36,[Rfa+16]     R36 = [bb90];
+3fa4: a3,e8,40,32         ldw   R32,[Re8+40]     R32 = TPDLBR;
+3fa8: a3,fa,16,36         ldw   R36,[Rfa+16]     R36 = TCTPDL;
 3fac: ef,a7,09            call  4956             ROLAV ();
-3faf: c3,e8,40,3e         stw   R3e,[Re8+40]     [3c0] = R3e;
+3faf: c3,e8,40,3e         stw   R3e,[Re8+40]     TPDLBR = R3e;
 3fb3: b3,fe,2d,42         ldb   R42,[Rfe+2d]     R42 = TRLOAD;
 3fb7: 99,00,42            cmpb  R42,0            
 3fba: df,23               je    3fdf             if (R42 != 0)  {
@@ -3317,10 +3328,10 @@
 4035: 31,9f,06            jnb   B1,R9f,403e      if (B1_Flags_9f = 1)  {
 4038: 71,fd,9f            an2b  R9f,fd           B1_Flags_9f = 0;
 403b: 91,01,9f            orb   R9f,1            B0_Flags_9f = 1; } }
-403e: 91,08,45            orb   R45,8            Error_detected = 1;
+403e: 91,08,45            orb   R45,8            B3_Flags_2B = 1;
 4041: 3a,52,06            jb    B2,R52,404a      if (B2_DCLST_START_52 = 0)  {
 4044: 3b,8e,03            jb    B3,R8e,404a      if (B3_R8e = 0)  {
-4047: 71,f7,45            an2b  R45,f7           Error_detected = 0; } }
+4047: 71,f7,45            an2b  R45,f7           B3_Flags_2B = 0; } }
 404a: a3,f4,0e,36         ldw   R36,[Rf4+e]      R36 = [b450];
 404e: 01,34               clrw  R34              R34 = 0;
 4050: a3,e4,8e,32         ldw   R32,[Re4+8e]     R32 = VSS_Raw;
@@ -3337,19 +3348,29 @@
 406e: d9,04               jgtu  4074             if (R34 <= 4189)  {
 4070: a1,89,41,34         ldw   R34,4189         R34 = 4189; }
 4074: 6f,f6,1a,34         ml2w  R34,[Rf6+1a]     lR34 = R34 * [b92e];
-4078: a3,e4,8a,34         ldw   R34,[Re4+8a]     R34 = VKYPWR;
+4078: a3,e4,8a,34         ldw   R34,[Re4+8a]     R34 = IIVPWR;
 407c: 6c,36,34            ml2w  R34,R36          lR34 = R34 * R36;
 407f: 89,e1,1f,36         cmpw  R36,1fe1         
 4083: d9,05               jgtu  408a             if (R36 <= 1fe1)  {
 4085: 0d,03,34            shldw R34,3            lR34 <<= 3;                       #[ R34 *= 8] 
 4088: 20,03               sjmp  408d             goto 408d; }
 
+# BATTERY VOLTAGE (VBAT)
+# 
+#       The  VBAT  calculation  is  a  time  dependent  rolling  average  filter   of
+#       instantaneous  battery  voltage.  It is updated each background pass while in
+#       RUN or UNDERSPEED mode.  The VBAT  time  constant  TCVBAT  is  a  calibration
+#       parameter and should be set to 0.1 seconds.
+# 
+# Instantaneous battery voltage is calculated from;
+# VBAT' = IIVPWR * (VCAL/IVCAL) * KSF/IVCAL
+# 
 408a: b1,ff,37            ldb   R37,ff           R37 = ff;
-408d: ac,91,32            ldzbw R32,R91          wR32 = VBAT;
-4090: ac,37,34            ldzbw R34,R37          wR34 = yR37;
-4093: a3,f8,28,36         ldw   R36,[Rf8+28]     R36 = [bad8];
+408d: ac,91,32            ldzbw R32,R91          wR32 = VBAT;                      # old average
+4090: ac,37,34            ldzbw R34,R37          wR34 = yR37;                      # new value
+4093: a3,f8,28,36         ldw   R36,[Rf8+28]     R36 = TCVBAT;                     # TCxxxx
 4097: ef,b5,08            call  494f             UROLAV ();
-409a: c4,91,3e            stb   R3e,R91          VBAT = R3e;
+409a: c4,91,3e            stb   R3e,R91          VBAT = R3e;                       # VBAT = UROLAV(VBAT',TCVBAT)
 409d: ef,d0,07            call  4870             UUYFuncLU_4870 (
 40a0: 75,60                     #arg 1              fuel_injector_offset_vs_volts,
 40a2: 91,00                     #arg 2              VBAT );
@@ -3406,7 +3427,7 @@
 4119: d7,21               jne   413c             if (R42 != [19e]) goto 413c; } }
 411b: 91,08,a6            orb   Ra6,8            B3_FMEM_FLAGS = 1;
 411e: af,f6,3f,38         ldzbw R38,[Rf6+3f]     wR38 = [b953];
-4122: 3a,a6,07            jb    B2,Ra6,412c      if (B2_FMEM_FLAGS = 0)  {
+4122: 3a,a6,07            jb    B2,Ra6,412c      if (B2_TFMFLG_a6 = 0)  {
 4125: ef,be,07            call  48e6             UUWFuncLU_48e6 (
 4128: 78,61                     #arg 1              Func_ba8c,
 412a: bc,00                     #arg 2              TP_REL );
@@ -3703,8 +3724,8 @@
 4449: 03,38               negw  R38              R38 = -R38;
 444b: a0,38,3a            ldw   R3a,R38          R3a = R38;
 444e: 01,38               clrw  R38              R38 = 0; }
-4450: b3,e6,af,36         ldb   R36,[Re6+af]     R36 = [22f];
-4454: 7b,e6,ae,36         sb2b  R36,[Re6+ae]     R36 -= [22e];
+4450: b3,e6,af,36         ldb   R36,[Re6+af]     R36 = MAP;
+4454: 7b,e6,ae,36         sb2b  R36,[Re6+ae]     R36 -= MAPBAR;
 4458: d3,0b               jnc   4465             if (R36 >= 0)  {
 445a: 9b,f6,5c,36         cmpb  R36,[Rf6+5c]     
 445e: d3,07               jnc   4467             if (R36 < [b970]) goto 4467;
@@ -4203,23 +4224,23 @@
 4956: 28,2f               scall 4987             ROLLING_AVERAGE_FILTER_ROUTINE ();
    ROLLING_AVERAGE_ROUTINE:
 4958: 11,42               clrb  R42              R42 = 0;
-495a: 48,32,34,3c         sb3w  R3c,R34,R32      R3c = R34 - R32;
-495e: 31,42,04            jnb   B1,R42,4965      if (B1_R42 = 1)  {
+495a: 48,32,34,3c         sb3w  R3c,R34,R32      R3c = R34 - R32;                  # new value - old average 
+495e: 31,42,04            jnb   B1,R42,4965      if (B1_R42 = 1)  {                # if unsigned
 4961: db,08               jc    496b             if (R3c >= 0) goto 496b;
 4963: 20,02               sjmp  4967             goto 4967; }
 
 4965: d6,04               jge   496b             if (R3c < 0)  {
-4967: 17,42               incb  R42              R42++;
+4967: 17,42               incb  R42              R42++;                            # new value < old average
 4969: 03,3c               negw  R3c              R3c = -R3c; } }
 496b: 89,01,00,3c         cmpw  R3c,1            
-496f: d9,04               jgtu  4975             if (R3c <= 1)  {
-4971: a0,34,3e            ldw   R3e,R34          R3e = R34;
+496f: d9,04               jgtu  4975             if (R3c <= 1)  {                  # new value - old average <= 1 BIT
+4971: a0,34,3e            ldw   R3e,R34          R3e = R34;                        # new average = new value
 4974: f0                  ret                    return; }
 
-4975: 6c,36,3c            ml2w  R3c,R36          lR3c = R3c * R36;
+4975: 6c,36,3c            ml2w  R3c,R36          lR3c = R3c * R36;                 # FK * (new value - old average)
 4978: 03,3e               negw  R3e              R3e = -R3e;
 497a: d7,02               jne   497e             if (R3e = 0)  {
-497c: 05,3e               decw  R3e              R3e--; }
+497c: 05,3e               decw  R3e              R3e--; }                          # old average - 1 BIT
 497e: 38,42,02            jb    B0,R42,4983      if (B0_R42 = 0)  {
 4981: 03,3e               negw  R3e              R3e = -R3e; }
 4983: 64,32,3e            ad2w  R3e,R32          R3e += R32;
@@ -4686,7 +4707,7 @@
 
    Sub_4e45:
 4e45: 35,2a,04            jnb   B5,R2a,4e4c      if (Self_test = 1)  {
-4e48: 38,a3,01            jb    B0,Ra3,4e4c      if (Error_detected = 0)  {
+4e48: 38,a3,01            jb    B0,Ra3,4e4c      if (B0_V_MODE_SETUP_a3 = 0)  {
 4e4b: f0                  ret                    return; } }
 
 4e4c: b1,01,34            ldb   R34,1            R34 = 1;
@@ -5082,14 +5103,14 @@
 5265: d3,03               jnc   526a             if (R42 > ffff)  {
 5267: bd,ff,42            ldsbw R42,ff           swR42 = ff; }
 526a: c3,e8,7a,42         stw   R42,[Re8+7a]     [3fa] = R42;
-526e: 39,25,22            jb    B1,R25,5293      if (B1_R25 = 0)  {
+526e: 39,25,22            jb    B1,R25,5293      if (B1_WARM_UP_25 = 0)  {
 5271: 3e,a5,1f            jb    B6,Ra5,5293      if (UNDSP = 0)  {
 5274: b0,b9,38            ldb   R38,Rb9          R38 = Rb9;
 5277: 9b,fe,75,38         cmpb  R38,[Rfe+75]     
 527b: d6,16               jge   5293             if (R38 < [cbcf])  {
 527d: 9b,ff,f0,00,b6      cmpb  Rb6,[Rfe+f0]     
 5282: da,0f               jle   5293             if (ECT > [cc4a])  {
-5284: 91,02,25            orb   R25,2            B1_R25 = 1;
+5284: 91,02,25            orb   R25,2            B1_WARM_UP_25 = 1;
 5287: b3,ee,c7,38         ldb   R38,[Ree+c7]     R38 = KWUCTR;
 528b: 17,38               incb  R38              R38++;
 528d: db,04               jc    5293             if (R38 <= ff)  {
@@ -5348,16 +5369,16 @@
 554e: 98,32,34            cmpb  R34,R32          
 5551: d9,03               jgtu  5556             if (R34 <= R32)  {
 5553: 71,fb,a3            an2b  Ra3,fb           B2_Flags_a3 = 0; }
-5556: a3,f4,58,3a         ldw   R3a,[Rf4+58]     R3a = REV_LIMIT;
+5556: a3,f4,58,3a         ldw   R3a,[Rf4+58]     R3a = NLMT;
 555a: 88,3a,b4            cmpw  Rb4,R3a          
 555d: d1,03               jleu  5562             if (N_RPM > R3a)  {
-555f: 91,04,a4            orb   Ra4,4            B2_Ra4 = 1; }
-5562: 6b,f4,5a,3a         sb2w  R3a,[Rf4+5a]     R3a -= rev_limit_hysteresis;
+555f: 91,04,a4            orb   Ra4,4            B2_TLS_NV_FLG_a4 = 1; }
+5562: 6b,f4,5a,3a         sb2w  R3a,[Rf4+5a]     R3a -= NLMTH;
 5566: 88,3a,b4            cmpw  Rb4,R3a          
 5569: db,03               jc    556e             if (N_RPM < R3a)  {
-556b: 71,fb,a4            an2b  Ra4,fb           B2_Ra4 = 0; }
+556b: 71,fb,a4            an2b  Ra4,fb           B2_TLS_NV_FLG_a4 = 0; }
 556e: 3a,a3,08            jb    B2,Ra3,5579      if (B2_Flags_a3 = 0)  {
-5571: 3a,a4,05            jb    B2,Ra4,5579      if (B2_Ra4 = 0)  {
+5571: 3a,a4,05            jb    B2,Ra4,5579      if (B2_TLS_NV_FLG_a4 = 0)  {
 5574: 71,f7,4a            an2b  R4a,f7           B3_R4a = 0;
 5577: 20,03               sjmp  557c             goto 557c; } }
 
@@ -5810,7 +5831,7 @@
 5a59: c3,ea,b4,b2         stw   Rb2,[Rea+b4]     [434] = TP;
 5a5d: 9b,f5,81,00,b6      cmpb  Rb6,[Rf4+81]     
 5a62: da,38               jle   5a9c             if (ECT > [b4c3])  {
-5a64: 3a,a6,35            jb    B2,Ra6,5a9c      if (B2_FMEM_FLAGS = 0)  {
+5a64: 3a,a6,35            jb    B2,Ra6,5a9c      if (B2_TFMFLG_a6 = 0)  {
 5a67: 8b,ea,b0,00         cmpw  R0,[Rea+b0]      
 5a6b: d7,12               jne   5a7f             if ([430] = 0)  {
 5a6d: 8b,f5,92,00,14      cmpw  R14,[Rf4+92]     
@@ -5894,13 +5915,13 @@
 5b44: 9b,f5,80,00,b6      cmpb  Rb6,[Rf4+80]     
 5b49: da,3e               jle   5b89             if (ECT > [b4c2])  {
 5b4b: b3,f5,82,00,30      ldb   R30,[Rf4+82]     R30 = [b4c4];
-5b50: 3a,a6,06            jb    B2,Ra6,5b59      if (B2_FMEM_FLAGS = 0)  {
+5b50: 3a,a6,06            jb    B2,Ra6,5b59      if (B2_TFMFLG_a6 = 0)  {
 5b53: 30,30,09            jnb   B0,R30,5b5f      if (B0_R30 = 0) goto 5b5f;
 5b56: 33,a6,06            jnb   B3,Ra6,5b5f      if (B3_FMEM_FLAGS = 0) goto 5b5f; }
 5b59: 3b,a6,2d            jb    B3,Ra6,5b89      if (B3_FMEM_FLAGS = 1) goto 5b89;
 5b5c: 38,30,2a            jb    B0,R30,5b89      if (B0_R30 = 1) goto 5b89; } }
 5b5f: 32,27,27            jnb   B2,R27,5b89      if (B2_R27 = 1)  {
-5b62: 3a,a6,18            jb    B2,Ra6,5b7d      if (B2_FMEM_FLAGS = 0)  {
+5b62: 3a,a6,18            jb    B2,Ra6,5b7d      if (B2_TFMFLG_a6 = 0)  {
 5b65: b3,ea,b6,30         ldb   R30,[Rea+b6]     R30 = [436];
 5b69: 9b,f5,8a,00,30      cmpb  R30,[Rf4+8a]     
 5b6e: d1,19               jleu  5b89             if (R30 <= [b4cc]) goto 5b89;
@@ -6074,7 +6095,7 @@
 5cfe: f0                  ret                    return;
 
    Sub_5cff:
-5cff: 38,a3,01            jb    B0,Ra3,5d03      if (Error_detected = 0)  {
+5cff: 38,a3,01            jb    B0,Ra3,5d03      if (B0_V_MODE_SETUP_a3 = 0)  {
 5d02: f0                  ret                    return; }
 
    Sub_5d03:
@@ -6129,7 +6150,7 @@
 5d7f: 7c,a0                     #arg 1              x_spark_91,
 5d81: 38,00                     #arg 2              38 );
 5d83: a0,38,30            ldw   R30,R38          R30 = R38;
-5d86: 4b,e6,88,b2,38      sb3w  R38,Rb2,[Re6+88] R38 = TP - [208];
+5d86: 4b,e6,88,b2,38      sb3w  R38,Rb2,[Re6+88] R38 = TP - TAPBAR;
 5d8b: db,02               jc    5d8f             if (R38 < 0)  {
 5d8d: 01,38               clrw  R38              R38 = 0; }
 5d8f: ef,54,eb            call  48e6             UUWFuncLU_48e6 (
@@ -6214,7 +6235,7 @@
 5e77: 71,f7,44            an2b  R44,f7           B3_R44 = 0; } }
 5e7a: 33,a3,38            jnb   B3,Ra3,5eb5      if (B3_Flags_a3 = 1)  {
 5e7d: 33,44,35            jnb   B3,R44,5eb5      if (B3_R44 = 1)  {
-5e80: a3,e8,40,18         ldw   R18,[Re8+40]     R18 = [3c0];
+5e80: a3,e8,40,18         ldw   R18,[Re8+40]     R18 = TPDLBR;
 5e84: 8b,fa,12,18         cmpw  R18,[Rfa+12]     
 5e88: d2,2b               jgt   5eb5             if (R18 <= [bb8c])  {
 5e8a: b3,e8,36,16         ldb   R16,[Re8+36]     R16 = [3b6];
@@ -6431,7 +6452,7 @@
 60d1: a3,f5,a6,00,18      ldw   R18,[Rf4+a6]     R18 = [b4e8];
 60d6: 3f,3f,05            jb    B7,R3f,60de      if (B7_R3f = 0)  {
 60d9: a3,f5,a8,00,18      ldw   R18,[Rf4+a8]     R18 = [b4ea]; } }
-60de: 30,a3,07            jnb   B0,Ra3,60e8      if (Error_detected = 1)  {
+60de: 30,a3,07            jnb   B0,Ra3,60e8      if (B0_V_MODE_SETUP_a3 = 1)  {
 60e1: 01,18               clrw  R18              R18 = 0;
 60e3: a3,f5,ae,00,1a      ldw   R1a,[Rf4+ae]     R1a = [b4f0]; }
 60e8: c3,e8,26,1a         stw   R1a,[Re8+26]     [3a6] = R1a;
@@ -6569,11 +6590,11 @@
 6247: e0,42,e8            djnz  R42,6232         R42--;
                                                  if (R42 != 0) goto 6232;
 624a: fb                  ei                     enable intps; } }
-624b: a3,e4,1c,32         ldw   R32,[Re4+1c]     R32 = Tbart;
+624b: a3,e4,1c,32         ldw   R32,[Re4+1c]     R32 = TBART;
 624f: a0,b2,34            ldw   R34,Rb2          R34 = TP;
-6252: a3,f8,24,36         ldw   R36,[Rf8+24]     R36 = [bad4];
+6252: a3,f8,24,36         ldw   R36,[Rf8+24]     R36 = TCTPT;
 6256: ef,f6,e6            call  494f             UROLAV ();
-6259: c3,e4,1c,3e         stw   R3e,[Re4+1c]     Tbart = R3e;
+6259: c3,e4,1c,3e         stw   R3e,[Re4+1c]     TBART = R3e;
 625d: 08,01,3e            shrw  R3e,1            R3e >>= 1;                        #[ R3e /= 2] 
 6260: 08,01,34            shrw  R34,1            R34 >>= 1;                        #[ R34 /= 2] 
 6263: 68,3e,34            sb2w  R34,R3e          R34 -= R3e;
@@ -7447,7 +7468,7 @@
 6b45: 89,eb,3f,20         cmpw  R20,3feb         
 6b49: d1,04               jleu  6b4f             if (R20 > 3feb)  {
 6b4b: a1,eb,3f,20         ldw   R20,3feb         R20 = 3feb; }
-6b4f: 38,a3,32            jb    B0,Ra3,6b84      if (Error_detected = 0)  {
+6b4f: 38,a3,32            jb    B0,Ra3,6b84      if (B0_V_MODE_SETUP_a3 = 0)  {
 6b52: 37,79,22            jnb   B7,R79,6b77      if (ACCFLG = 1)  {
 6b55: 9b,e4,e2,00         cmpb  R0,[Re4+e2]      
 6b59: d6,1c               jge   6b77             if (ISCFLG > 0)  {
@@ -7602,7 +7623,7 @@
    Sub_6cd7:
 6cd7: 9b,fe,2e,00         cmpb  R0,[Rfe+2e]      
 6cdb: df,06               je    6ce3             if ([cb88] != 0)  {
-6cdd: 32,a6,11            jnb   B2,Ra6,6cf1      if (B2_FMEM_FLAGS = 0) goto 6cf1;
+6cdd: 32,a6,11            jnb   B2,Ra6,6cf1      if (B2_TFMFLG_a6 = 0) goto 6cf1;
 6ce0: 33,a6,0e            jnb   B3,Ra6,6cf1      if (B3_FMEM_FLAGS = 0) goto 6cf1; }
 6ce3: c3,e6,08,00         stw   R0,[Re6+8]       [288] = 0;
 6ce7: c3,e6,0a,00         stw   R0,[Re6+a]       [28a] = 0;
@@ -7655,7 +7676,7 @@
 
    Sub_6d5b:
 6d5b: 33,a6,12            jnb   B3,Ra6,6d70      if (B3_FMEM_FLAGS = 1)  {
-6d5e: 32,a6,0f            jnb   B2,Ra6,6d70      if (B2_FMEM_FLAGS = 1)  {
+6d5e: 32,a6,0f            jnb   B2,Ra6,6d70      if (B2_TFMFLG_a6 = 1)  {
 6d61: c7,e6,05,00         stb   R0,[Re6+5]       [285] = 0;
 6d65: c3,e6,06,00         stw   R0,[Re6+6]       [286] = 0;
 6d69: c7,01,81,02,00      stb   R0,[R0+281]      [281] = 0;
@@ -7813,25 +7834,25 @@
 6efe: 9b,f6,35,b6         cmpb  Rb6,[Rf6+35]     
 6f02: da,1b               jle   6f1f             if (ECT <= [b949]) goto 6f1f; }
 6f04: 38,a6,18            jb    B0,Ra6,6f1f      if (B0_FMEM_FLAGS = 0)  {
-6f07: a3,f4,58,38         ldw   R38,[Rf4+58]     R38 = REV_LIMIT;
+6f07: a3,f4,58,38         ldw   R38,[Rf4+58]     R38 = NLMT;
 6f0b: 88,38,b4            cmpw  Rb4,R38          
 6f0e: db,0f               jc    6f1f             if (N_RPM < R38)  {
 6f10: ef,d3,d9            call  48e6             UUWFuncLU_48e6 (
-6f13: 44,61                     #arg 1              Func_ba58,
+6f13: 44,61                     #arg 1              FN605A,
 6f15: 9a,00                     #arg 2              AM );
 6f13: 44,61,9a,00         #args  
 6f17: a0,38,16            ldw   R16,R38          R16 = R38;
 6f1a: 98,00,16            cmpb  R16,R0           
 6f1d: d9,0b               jgtu  6f2a             if (R16 > 0) goto 6f2a; } } } } } }
-6f1f: 71,7f,29            an2b  R29,7f           B7_R29 = 0;
+6f1f: 71,7f,29            an2b  R29,7f           B7_PURGING_29 = 0;
 6f22: 01,38               clrw  R38              R38 = 0;
 6f24: c3,e4,76,00         stw   R0,[Re4+76]      PURGDC = 0;
 6f28: 20,10               sjmp  6f3a             goto 6f3a; }
 
-6f2a: 91,80,29            orb   R29,80           B7_R29 = 1;
+6f2a: 91,80,29            orb   R29,80           B7_PURGING_29 = 1;
 6f2d: ef,40,d9            call  4870             UUYFuncLU_4870 (
-6f30: 37,61                     #arg 1              Func_ba4b,
-6f32: 14,02                     #arg 2              214 );
+6f30: 37,61                     #arg 1              FN600,
+6f32: 14,02                     #arg 2              PRGTMR );
 6f30: 37,61,14,02         #args  
 6f34: 7c,16,38            ml2b  R38,R16          wR38 = R38 * R16;
 6f37: 09,01,38            shlw  R38,1            R38 <<= 1;                        #[ R38 *= 2] 
@@ -7929,7 +7950,7 @@ ERROR CODE DESCRIPTION
 7014: 91,06               word    691                                              # ,
 
    Do_SelfTest:
-7016: 71,fb,2c            an2b  R2c,fb           VIP_FP_OVERRIDE = 0;
+7016: 71,fb,2c            an2b  R2c,fb           VIP_FP_OVERRIDE = 0;              # (make sure base strategy can control pump)
 7019: 2a,16               scall 7231             EGR_SELECT_LOGIC ();
 701b: 71,ef,2e            an2b  R2e,ef           WIGFLG = 0;
 701e: 37,46,05            jnb   B7,R46,7026      if (PUMP = 1)  {
@@ -7939,13 +7960,13 @@ ERROR CODE DESCRIPTION
 7026: 34,2d,07            jnb   B4,R2d,7030      if (B4_R2d = 1)  {
 7029: 95,10,2d            xorb  R2d,10           B4_R2d ^= 1;
 702c: c7,e4,40,00         stb   R0,[Re4+40]      [1c0] = 0; } }
-7030: 3a,2a,0c            jb    B2,R2a,703f      if (Vip_enable = 0)  {
+7030: 3a,2a,0c            jb    B2,R2a,703f      if (VIP_ENABLE = 0)  {
 7033: a3,e4,b6,42         ldw   R42,[Re4+b6]     R42 = PUTMR;
 7037: 99,10,43            cmpb  R43,10           
-703a: d3,03               jnc   703f             if (R43 >= 10)  {
-703c: 91,04,2a            orb   R2a,4            Vip_enable = 1; } }
+703a: d3,03               jnc   703f             if (R43 >= 10)  {                 # PUTMR >= 4 SEC
+703c: 91,04,2a            orb   R2a,4            VIP_ENABLE = 1; } }
 703f: 36,2a,17            jnb   B6,R2a,7059      if (No_Start = 1)  {
-7042: 33,45,08            jnb   B3,R45,704d      if (Error_detected = 1)  {
+7042: 33,45,08            jnb   B3,R45,704d      if (B3_Flags_2B = 1)  {
 7045: 37,a5,0e            jnb   B7,Ra5,7056      if (CRKFLG = 0) goto 7056;
 7048: 91,20,e0            orb   Re0,20           B5_Re0 = 1;
 704b: 20,84               sjmp  70d1             goto 70d1; }
@@ -7957,7 +7978,7 @@ ERROR CODE DESCRIPTION
 
 7059: 35,2a,23            jnb   B5,R2a,707f      if (Self_test = 1)  {
 705c: 39,a3,03            jb    B1,Ra3,7062      if (B1_Flags_a3 = 0)  {
-705f: 33,45,f4            jnb   B3,R45,7056      if (Error_detected = 0) goto 7056; }
+705f: 33,45,f4            jnb   B3,R45,7056      if (B3_Flags_2B = 0) goto 7056; }
 7062: b3,fe,2d,42         ldb   R42,[Rfe+2d]     R42 = TRLOAD;
 7066: 99,03,42            cmpb  R42,3            
 7069: d3,03               jnc   706e             if (R42 >= 3)  {
@@ -7971,13 +7992,13 @@ ERROR CODE DESCRIPTION
 
 707f: 3f,a5,49            jb    B7,Ra5,70cb      if (CRKFLG = 0)  {
 7082: 3e,a5,03            jb    B6,Ra5,7088      if (UNDSP = 0)  {
-7085: 3b,45,02            jb    B3,R45,708a      if (Error_detected = 1) goto 708a; }
+7085: 3b,45,02            jb    B3,R45,708a      if (B3_Flags_2B = 1) goto 708a; }
 7088: 20,53               sjmp  70dd             return; }
 
 708a: a3,e4,3c,42         ldw   R42,[Re4+3c]     R42 = [1bc];
 708e: 99,04,43            cmpb  R43,4            
 7091: d3,4a               jnc   70dd             if (R43 < 4) return;
-7093: 32,2a,47            jnb   B2,R2a,70dd      if (Vip_enable = 0) return;
+7093: 32,2a,47            jnb   B2,R2a,70dd      if (VIP_ENABLE = 0) return;
 7096: a3,e4,b6,42         ldw   R42,[Re4+b6]     R42 = PUTMR;
 709a: 99,18,43            cmpb  R43,18           
 709d: d3,3e               jnc   70dd             if (R43 < 18) return;
@@ -7990,16 +8011,16 @@ ERROR CODE DESCRIPTION
 70b2: df,09               je    70bd             if ([cb89] != 0)  {
 70b4: b0,8d,42            ldb   R42,R8d          R42 = VSBAR;
 70b7: 9b,f0,37,42         cmpb  R42,[Rf0+37]     
-70bb: d9,0a               jgtu  70c7             if (R42 > MINMPH) goto 70c7; }
+70bb: d9,0a               jgtu  70c7             if (R42 > MINMPH) goto 70c7; }    # (Vehicle moving)  
 70bd: 91,20,2a            orb   R2a,20           Self_test = 1;
 70c0: 28,1c               scall 70de             Sub_70de ();
 70c2: cb,3b,fc,72         push  [R3a+72fc]       push([R3a+72fc]);
 70c6: f0                  ret                    return; } }
 
-70c7: 91,08,2a            orb   R2a,8            DISABLE_RUNNING = 1;
+70c7: 91,08,2a            orb   R2a,8            DISABLE_RUNNING = 1;              # EXIT CONDITIONS TRUE
 70ca: f0                  ret                    return; }
 
-70cb: 33,45,0f            jnb   B3,R45,70dd      if (Error_detected = 0) return;
+70cb: 33,45,0f            jnb   B3,R45,70dd      if (B3_Flags_2B = 0) return;
 70ce: 3c,2a,09            jb    B4,R2a,70da      if (DISABLE_NOSTART = 0)  {
 70d1: 28,0b               scall 70de             Sub_70de ();
 70d3: cb,3b,de,72         push  [R3a+72de]       push([R3a+72de]);
@@ -8282,7 +8303,7 @@ ERROR CODE DESCRIPTION
 72f6: 13,71               vect  7113             StackErrorCodes
 72f8: 57,80               vect  8057             Sub_8057
 72fa: 75,80               vect  8075             Sub_8075
-72fc: 02,81               vect  8102             Sub_8102
+72fc: 02,81               vect  8102             VR_RUN_INIT_COM8
 72fe: f5,70               vect  70f5             Sub_70f5
 7300: 95,81               vect  8195             Sub_8195
 7302: b8,81               vect  81b8             Sub_81b8
@@ -8322,8 +8343,8 @@ ERROR CODE DESCRIPTION
 7342: ef,52,14            call  8797             Sub_8797 ();
 7345: 71,df,2f            an2b  R2f,df           Disable_isc = 0;
 7348: 71,ef,2f            an2b  R2f,ef           Vvsfl1 = 0;
-734b: 71,fe,a3            an2b  Ra3,fe           Error_detected = 0;
-734e: 3a,2a,02            jb    B2,R2a,7353      if (Vip_enable = 0)  {
+734b: 71,fe,a3            an2b  Ra3,fe           B0_V_MODE_SETUP_a3 = 0;
+734e: 3a,2a,02            jb    B2,R2a,7353      if (VIP_ENABLE = 0)  {
 7351: 20,63               sjmp  73b6             goto 73b6; }
 
 7353: 71,fb,2f            an2b  R2f,fb           B2_VIP_flags4 = 0;
@@ -8381,7 +8402,7 @@ ERROR CODE DESCRIPTION
 73cc: c7,ea,c7,42         stb   R42,[Rea+c7]     [447] = R42;
 73d0: c7,e4,42,00         stb   R0,[Re4+42]      [1c2] = 0;
 73d4: 34,2e,03            jnb   B4,R2e,73da      if (WIGFLG = 1)  {
-73d7: 3a,2a,01            jb    B2,R2a,73db      if (Vip_enable = 1) goto 73db; }
+73d7: 3a,2a,01            jb    B2,R2a,73db      if (VIP_ENABLE = 1) goto 73db; }
 73da: f0                  ret                    return; } }
 
 73db: 71,7f,2d            an2b  R2d,7f           B7_R2d = 0;
@@ -8437,7 +8458,7 @@ ERROR CODE DESCRIPTION
 7451: 37,a8,22            jnb   B7,Ra8,7476      if (APT_Closed_Throttle = 1)  {
 7454: 3c,2e,1f            jb    B4,R2e,7476      if (WIGFLG = 0)  {
 7457: 3e,a5,1c            jb    B6,Ra5,7476      if (UNDSP = 0)  {
-745a: 3a,a6,19            jb    B2,Ra6,7476      if (B2_FMEM_FLAGS = 0)  {
+745a: 3a,a6,19            jb    B2,Ra6,7476      if (B2_TFMFLG_a6 = 0)  {
 745d: 77,ea,86,00         ad2b  R0,[Rea+86]      R0 += [406];
 7461: d7,13               jne   7476             if ((R0[406]) = 0)  {
 7463: b0,bb,42            ldb   R42,Rbb          R42 = BP;
@@ -8558,7 +8579,7 @@ ERROR CODE DESCRIPTION
 75a4: 20,07               sjmp  75ad             goto 75ad; }
 
 75a6: 35,25,0a            jnb   B5,R25,75b3      if (B5_R25 = 1)  {
-75a9: b3,e6,94,30         ldb   R30,[Re6+94]     R30 = [214];
+75a9: b3,e6,94,30         ldb   R30,[Re6+94]     R30 = PRGTMR;
 75ad: 9b,e2,b7,30         cmpb  R30,[Re2+b7]     
 75b1: d3,23               jnc   75d6             if (R30 < [c175]) goto 75d6; } }
 75b3: 36,29,08            jnb   B6,R29,75be      if (B6_R29 = 1)  {
@@ -8826,7 +8847,7 @@ ERROR CODE DESCRIPTION
 7841: b6,c1                     #arg 1              Func_c25e,
 7843: bc,00                     #arg 2              TP_REL );
 7841: b6,c1,bc,00         #args  
-7845: 3a,a6,29            jb    B2,Ra6,7871      if (B2_FMEM_FLAGS = 0)  {
+7845: 3a,a6,29            jb    B2,Ra6,7871      if (B2_TFMFLG_a6 = 0)  {
 7848: 36,9f,26            jnb   B6,R9f,7871      if (B6_Flags_9f = 1)  {
 784b: 32,90,12            jnb   B2,R90,7860      if (B2_Flags_90 = 1)  {
 784e: af,e2,60,36         ldzbw R36,[Re2+60]     wR36 = [c21e];
@@ -8927,16 +8948,12 @@ ERROR CODE DESCRIPTION
 7936: 37,2f,11            jnb   B7,R2f,794a      if (B7_VIP_flags4 = 0) goto 794a; }
 7939: a0,1a,40            ldw   R40,R1a          R40 = R1a;
 793c: ef,ad,01            call  7aec             Sub_7aec (
-793f: 27                        #arg 1              27,
-7940: 03                        #arg 2              3,
-7941: 11                        #arg 3              11
-7942: 03                        #arg 4              3 );
+793f: 27,03                     #arg 1              327,
+7941: 11,03                     #arg 2              311 );
 793f: 27,03,11,03         #args  
 7943: ef,a6,01            call  7aec             Sub_7aec (
-7946: 37                        #arg 1              37,
-7947: 03                        #arg 2              3,
-7948: 15                        #arg 3              15
-7949: 02                        #arg 4              2 );
+7946: 37,03                     #arg 1              337,
+7948: 15,02                     #arg 2              215 );
 7946: 37,03,15,02         #args                  } }
 794a: 34,2e,08            jnb   B4,R2e,7955      if (WIGFLG = 1)  {
 794d: 71,fb,2e            an2b  R2e,fb           Flags_bit2 = 0;
@@ -8944,10 +8961,8 @@ ERROR CODE DESCRIPTION
 7953: 20,a3               sjmp  79f8             goto 79f8; }
 
 7955: ef,94,01            call  7aec             Sub_7aec (
-7958: 28                        #arg 1              28,
-7959: 03                        #arg 2              3,
-795a: 12                        #arg 3              12
-795b: 80                        #arg 4              80 );
+7958: 28,03                     #arg 1              328,
+795a: 12,80                     #arg 2              8012 );
 7958: 28,03,12,80         #args  
 795c: 38,40,ee            jb    B0,R40,794d      if (B0_R40 = 1) goto 794d;
 795f: 88,c0,00            cmpw  R0,Rc0           
@@ -9121,14 +9136,14 @@ ERROR CODE DESCRIPTION
 7a8d: 20,02               sjmp  7a91             goto 7a91; }
 
 7a8f: 29,37               scall 7bc8             Reset_STO (); }
-7a91: 39,25,57            jb    B1,R25,7aeb      if (B1_R25 = 0)  {
+7a91: 39,25,57            jb    B1,R25,7aeb      if (B1_WARM_UP_25 = 0)  {
 7a94: 3e,a5,54            jb    B6,Ra5,7aeb      if (UNDSP = 0)  {
 7a97: b0,b9,14            ldb   R14,Rb9          R14 = Rb9;
 7a9a: 9b,fe,75,14         cmpb  R14,[Rfe+75]     
 7a9e: d2,4b               jgt   7aeb             if (R14 <= [cbcf])  {
 7aa0: 9b,e2,f1,b6         cmpb  Rb6,[Re2+f1]     
 7aa4: de,45               jlt   7aeb             if (ECT >= [c1af])  {
-7aa6: 91,02,25            orb   R25,2            B1_R25 = 1;
+7aa6: 91,02,25            orb   R25,2            B1_WARM_UP_25 = 1;
 7aa9: 30,a0,3f            jnb   B0,Ra0,7aeb      if (B0_Power_up = 1)  {
 7aac: ad,28,38            ldzbw R38,28           wR38 = 28;
 7aaf: b3,39,1f,07,3a      ldb   R3a,[R38+71f]    R3a = [R38+71f];
@@ -9371,7 +9386,7 @@ ERROR CODE DESCRIPTION
 
    Sub_7ced:
 7ced: 3f,46,08            jb    B7,R46,7cf8      if (PUMP = 0)  {
-7cf0: 32,2a,05            jnb   B2,R2a,7cf8      if (Vip_enable = 1)  {
+7cf0: 32,2a,05            jnb   B2,R2a,7cf8      if (VIP_ENABLE = 1)  {
 7cf3: ef,ef,02            call  7fe5             Sub_7fe5 ();
 7cf6: 20,9f               sjmp  7d97             goto 7d97; } } } }
 
@@ -9478,14 +9493,14 @@ ERROR CODE DESCRIPTION
 
    Sub_7d9e:
 7d9e: 28,95               scall 7e35             Sub_7e35 (
-7da0: 78,f0                     #arg 1              cbd2,
+7da0: 78,f0                     #arg 1              TAPMIN,
 7da2: 1c,01                     #arg 2              ITP,
 7da4: 22,01                     #arg 3              122 );
 7da0: 78,f0,1c,01,22,01   #args  
 7da6: 3a,2f,16            jb    B2,R2f,7dbf      if (B2_VIP_flags4 = 0)  {
 7da9: 28,8a               scall 7e35             Sub_7e35 (
 7dab: 1c,01                     #arg 1              ITP,
-7dad: 76,f0                     #arg 2              cbd0,
+7dad: 76,f0                     #arg 2              TAPMAX,
 7daf: 23,01                     #arg 3              123 );
 7dab: 1c,01,76,f0,23,01   #args  
 7db1: 3a,2f,0b            jb    B2,R2f,7dbf      if (B2_VIP_flags4 = 0)  {
@@ -9566,8 +9581,8 @@ ERROR CODE DESCRIPTION
 7e1f: 19,05                     #arg 1              519 );
 7e1f: 19,05               #args                  } }
 7e21: 28,12               scall 7e35             Sub_7e35 (
-7e23: 50,f0                     #arg 1              cbaa,
-7e25: 0a,01                     #arg 2              VKYPWR,
+7e23: 50,f0                     #arg 1              VKYPWR,
+7e25: 0a,01                     #arg 2              IIVPWR,
 7e27: 13,05                     #arg 3              513 );
 7e23: 50,f0,0a,01,13,05   #args  
 7e29: 31,9e,07            jnb   B1,R9e,7e33      if (Reg_9e = 1)  {
@@ -9965,10 +9980,10 @@ ERROR CODE DESCRIPTION
 80fc: 91,02,2e            orb   R2e,2            Kflg_local = 1;
 80ff: e7,36,04            jump  8538             goto Sub_8538;
 
-   Sub_8102:
+   VR_RUN_INIT_COM8:
 8102: ef,c3,fa            call  7bc8             Reset_STO ();
 8105: 01,30               clrw  R30              R30 = 0;
-8107: 71,fc,a3            an2b  Ra3,fc           Error_detected = 0;
+8107: 71,fc,a3            an2b  Ra3,fc           B0_V_MODE_SETUP_a3 = 0;
                                                  B1_Flags_a3 = 0;
 810a: 51,ac,a6,22         an3b  R22,Ra6,ac       R22 = FMEM_FLAGS & ac;
 810e: df,46               je    8156             if (R22 != 0)  {
@@ -10015,7 +10030,7 @@ ERROR CODE DESCRIPTION
 
 8156: 91,10,2f            orb   R2f,10           Vvsfl1 = 1;
 8159: 91,04,9f            orb   R9f,4            B2_OLFLG = 1;
-815c: a3,fe,60,96         ldw   R96,[Rfe+60]     LAMBSE1 = [cbba];
+815c: a3,fe,60,96         ldw   R96,[Rfe+60]     LAMBSE1 = VRLAM;
 8160: a3,e2,a9,3e         ldw   R3e,[Re2+a9]     R3e = [c167];
 8164: c3,e4,36,3e         stw   R3e,[Re4+36]     [1b6] = R3e;
 8168: 71,bf,4f            an2b  R4f,bf           B6_Knock_enabled = 0;
@@ -10214,7 +10229,7 @@ ERROR CODE DESCRIPTION
 82a7: 20,03               sjmp  82ac             goto 82ac;
 
 82a9: b1,0a,38            ldb   R38,a            R38 = a;
-82ac: a3,fe,60,1c         ldw   R1c,[Rfe+60]     R1c = [cbba];
+82ac: a3,fe,60,1c         ldw   R1c,[Rfe+60]     R1c = VRLAM;
 82b0: c0,96,1c            stw   R1c,R96          LAMBSE1 = R1c;
 82b3: 21,4f               sjmp  8404             goto 8404;
 
@@ -10467,7 +10482,7 @@ ERROR CODE DESCRIPTION
 84c6: 05,f1                     #arg 1              cc5f );
 84c6: 05,f1               #args  
 84c8: 36,2f,04            jnb   B6,R2f,84cf      if (B6_VIP_flags4 = 1)  {
-84cb: a3,fe,60,96         ldw   R96,[Rfe+60]     LAMBSE1 = [cbba]; }
+84cb: a3,fe,60,96         ldw   R96,[Rfe+60]     LAMBSE1 = VRLAM; }
 84cf: 34,2c,07            jnb   B4,R2c,84d9      if (Kam_codes = 1)  {
 84d2: ef,f4,fb            call  80c9             SaveTCode1 (
 84d5: 38,05                     #arg 1              538 );
@@ -10569,7 +10584,7 @@ ERROR CODE DESCRIPTION
 859c: b1,1d,38            ldb   R38,1d           R38 = 1d;
 859f: 26,67               sjmp  8408             goto 8408; }
 
-85a1: 3b,45,ea            jb    B3,R45,858e      if (Error_detected = 1) goto 858e;
+85a1: 3b,45,ea            jb    B3,R45,858e      if (B3_Flags_2B = 1) goto 858e;
 85a4: b1,1a,38            ldb   R38,1a           R38 = 1a;
 85a7: 26,5b               sjmp  8404             goto 8404;
 
@@ -10578,13 +10593,13 @@ ERROR CODE DESCRIPTION
 85ac: d3,08               jnc   85b6             if (R18 >= 2)  {
 85ae: 99,20,18            cmpb  R18,20           
 85b1: db,05               jc    85b8             if (R18 >= 20) goto 85b8;
-85b3: 3b,45,07            jb    B3,R45,85bd      if (Error_detected = 1) goto 85bd; }
+85b3: 3b,45,07            jb    B3,R45,85bd      if (B3_Flags_2B = 1) goto 85bd; }
 85b6: 26,52               sjmp  840a             return; }
 
 85b8: 71,fd,a3            an2b  Ra3,fd           B1_Flags_a3 = 0;
 85bb: 22,4b               sjmp  8808             goto 8808; }
 
-85bd: 91,01,a3            orb   Ra3,1            Error_detected = 1;
+85bd: 91,01,a3            orb   Ra3,1            B0_V_MODE_SETUP_a3 = 1;
 85c0: 91,04,9f            orb   R9f,4            B2_OLFLG = 1;
 85c3: a3,e2,5b,42         ldw   R42,[Re2+5b]     R42 = [c219];
 85c7: 08,05,42            shrw  R42,5            R42 >>= 5;                        #[ R42 /= 32] 
@@ -10593,7 +10608,7 @@ ERROR CODE DESCRIPTION
 
    Sub_85d1:
 85d1: c3,e4,02,00         stw   R0,[Re4+2]       [182] = 0;
-85d5: 33,45,10            jnb   B3,R45,85e8      if (Error_detected = 1)  {
+85d5: 33,45,10            jnb   B3,R45,85e8      if (B3_Flags_2B = 1)  {
 85d8: ef,20,fd            call  82fb             Sub_82fb (
 85db: 5c,f1                     #arg 1              ccb6 );
 85db: 5c,f1               #args  
@@ -10607,7 +10622,7 @@ ERROR CODE DESCRIPTION
 85e8: a3,e4,02,1a         ldw   R1a,[Re4+2]      R1a = [182];
 85ec: 8b,e2,55,1a         cmpw  R1a,[Re2+55]     
 85f0: db,48               jc    863a             if (R1a < [c213])  {
-85f2: 3b,45,05            jb    B3,R45,85fa      if (Error_detected = 0)  {
+85f2: 3b,45,05            jb    B3,R45,85fa      if (B3_Flags_2B = 0)  {
 85f5: b1,1a,38            ldb   R38,1a           R38 = 1a;
 85f8: 20,40               sjmp  863a             goto 863a; }
 
@@ -10803,7 +10818,7 @@ ERROR CODE DESCRIPTION
 8794: e7,a6,ff            jump  873d             goto Disable_No_Start;
 
    Sub_8797:
-8797: 33,45,05            jnb   B3,R45,879f      if (Error_detected = 1)  {
+8797: 33,45,05            jnb   B3,R45,879f      if (B3_Flags_2B = 1)  {
    Sub_879a:
 879a: c3,e4,3e,00         stw   R0,[Re4+3e]      Miltmr = 0;
 879e: f0                  ret                    return; }
@@ -10862,12 +10877,12 @@ ERROR CODE DESCRIPTION
 880e: ef,d4,f7            call  7fe5             Sub_7fe5 ();
 8811: ef,1e,98            call  2032             Reset_All ();
 8814: 35,2a,06            jnb   B5,R2a,881d      if (Self_test = 1)  {
-8817: 71,db,2a            an2b  R2a,db           Vip_enable = 0;
+8817: 71,db,2a            an2b  R2a,db           VIP_ENABLE = 0;
                                                  Self_test = 0;
 881a: 91,18,2a            orb   R2a,18           DISABLE_RUNNING = 1;
                                                  DISABLE_NOSTART = 1; }
 881d: 36,2a,06            jnb   B6,R2a,8826      if (No_Start = 1)  {
-8820: 71,bb,2a            an2b  R2a,bb           Vip_enable = 0;
+8820: 71,bb,2a            an2b  R2a,bb           VIP_ENABLE = 0;
                                                  No_Start = 0;
 8823: 91,10,2a            orb   R2a,10           DISABLE_NOSTART = 1; }
 8826: ef,9f,f3            call  7bc8             Reset_STO ();
@@ -11070,7 +11085,7 @@ ERROR CODE DESCRIPTION
 8a3f: 88,30,14            cmpw  R14,R30          
 8a42: db,03               jc    8a47             if (R14 < R30)  {
 8a44: 71,fe,53            an2b  R53,fe           B0_R53 = 0; } }
-8a47: 3a,a6,08            jb    B2,Ra6,8a52      if (B2_FMEM_FLAGS = 0)  {
+8a47: 3a,a6,08            jb    B2,Ra6,8a52      if (B2_TFMFLG_a6 = 0)  {
 8a4a: 31,53,08            jnb   B1,R53,8a55      if (B1_R53 = 0) goto 8a55;
 8a4d: 71,bf,df            an2b  Rdf,bf           B6_Rdf = 0;
 8a50: 20,06               sjmp  8a58             goto 8a58; }
@@ -11190,24 +11205,24 @@ ERROR CODE DESCRIPTION
 8b9b: a0,b4,14            ldw   R14,Rb4          R14 = N_RPM;
 8b9e: 08,02,14            shrw  R14,2            R14 >>= 2;                        #[ R14 /= 4] 
 8ba1: af,f6,05,16         ldzbw R16,[Rf6+5]      wR16 = ENGCYL;
-8ba5: 6c,16,14            ml2w  R14,R16          lR14 = R14 * R16;
+8ba5: 6c,16,14            ml2w  R14,R16          lR14 = R14 * R16;                 # (ENGCYL * N)
 8ba8: a3,e4,72,1a         ldw   R1a,[Re4+72]     R1a = [1f2];
 8bac: 01,18               clrw  R18              R18 = 0;
 8bae: 0c,02,18            shrdw R18,2            lR18 >>= 2;                       #[ R18 /= 4] 
 8bb1: 8c,14,18            divw  R18,R14          R18 = lR18 / R14;
 8bb4: d5,03               jnv   8bb9             if (OVF = 1)  {
 8bb6: bd,ff,18            ldsbw R18,ff           swR18 = ff; }
-8bb9: a3,e8,bc,32         ldw   R32,[Re8+bc]     R32 = [33c];
+8bb9: a3,e8,bc,32         ldw   R32,[Re8+bc]     R32 = ARCHG;
 8bbd: c0,34,18            stw   R18,R34          R34 = R18;
 8bc0: 3b,4a,08            jb    B3,R4a,8bcb      if (B3_R4a = 0)  {
 8bc3: 3a,4a,05            jb    B2,R4a,8bcb      if (B2_R4a = 0)  {
 8bc6: 39,4a,02            jb    B1,R4a,8bcb      if (B1_R4a = 0)  {
 8bc9: 20,0b               sjmp  8bd6             goto 8bd6; } } }
 
-8bcb: a3,fd,c2,00,36      ldw   R36,[Rfc+c2]     R36 = [c16a];
+8bcb: a3,fd,c2,00,36      ldw   R36,[Rfc+c2]     R36 = TCTTA;
 8bd0: ef,7c,bd            call  494f             UROLAV ();
 8bd3: c0,18,3e            stw   R3e,R18          R18 = R3e;
-8bd6: c3,e8,bc,18         stw   R18,[Re8+bc]     [33c] = R18;
+8bd6: c3,e8,bc,18         stw   R18,[Re8+bc]     ARCHG = R18;
 8bda: a0,18,1a            ldw   R1a,R18          R1a = R18;
 8bdd: 01,18               clrw  R18              R18 = 0;
 8bdf: 0c,01,18            shrdw R18,1            lR18 >>= 1;                       #[ R18 /= 2] 
@@ -11830,7 +11845,7 @@ ERROR CODE DESCRIPTION
 91f0: 64,30,42            ad2w  R42,R30          R42 += R30;
 91f3: 9a,42,32            cmpb  R32,[R42]        
 91f6: d1,33               jleu  922b             if (R32 > [R42])  {
-91f8: 3a,a6,30            jb    B2,Ra6,922b      if (B2_FMEM_FLAGS = 0)  {
+91f8: 3a,a6,30            jb    B2,Ra6,922b      if (B2_TFMFLG_a6 = 0)  {
 91fb: 3e,a6,2d            jb    B6,Ra6,922b      if (B6_FMEM_FLAGS = 0)  {
 91fe: 9b,e6,bb,00         cmpb  R0,[Re6+bb]      
 9202: d7,27               jne   922b             if ([23b] = 0)  {
@@ -12161,7 +12176,7 @@ ERROR CODE DESCRIPTION
 9556: b1,ff,30            ldb   R30,ff           R30 = ff; }
 9559: c7,e8,db,30         stb   R30,[Re8+db]     TV_PRES = R30; } }
 955d: 3c,4a,06            jb    B4,R4a,9566      if (B4_R4a = 0)  {
-9560: 3a,a6,03            jb    B2,Ra6,9566      if (B2_FMEM_FLAGS = 0)  {
+9560: 3a,a6,03            jb    B2,Ra6,9566      if (B2_TFMFLG_a6 = 0)  {
 9563: 33,a6,05            jnb   B3,Ra6,956b      if (B3_FMEM_FLAGS = 0) goto 956b; } }
 9566: b1,ff,38            ldb   R38,ff           R38 = ff;
 9569: 20,c7               sjmp  9632             goto 9632; }
@@ -12880,11 +12895,11 @@ ERROR CODE DESCRIPTION
 9cc7: a3,e8,a2,30         ldw   R30,[Re8+a2]     R30 = [322];
 9ccb: 8b,fc,14,30         cmpw  R30,[Rfc+14]     
 9ccf: d1,06               jleu  9cd7             if (R30 > [c0bc])  {
-9cd1: 3a,a6,20            jb    B2,Ra6,9cf4      if (B2_FMEM_FLAGS = 1) goto 9cf4;
+9cd1: 3a,a6,20            jb    B2,Ra6,9cf4      if (B2_TFMFLG_a6 = 1) goto 9cf4;
 9cd4: 3f,d6,1d            jb    B7,Rd6,9cf4      if (B7_ND_FLAG = 1) goto 9cf4; }
 9cd7: 36,a6,20            jnb   B6,Ra6,9cfa      if (B6_FMEM_FLAGS = 0) return;
 9cda: a3,e8,8c,16         ldw   R16,[Re8+8c]     R16 = [30c];
-9cde: 3a,a6,0d            jb    B2,Ra6,9cee      if (B2_FMEM_FLAGS = 0)  {
+9cde: 3a,a6,0d            jb    B2,Ra6,9cee      if (B2_TFMFLG_a6 = 0)  {
 9ce1: ef,02,ac            call  48e6             UUWFuncLU_48e6 (
 9ce4: f6,c4                     #arg 1              Func_c59e,
 9ce6: bc,00                     #arg 2              TP_REL );
@@ -12997,7 +13012,7 @@ ERROR CODE DESCRIPTION
 9dfc: 3b,dc,09            jb    B3,Rdc,9e08      if (B3_Rdc = 0)  {
 9dff: 3a,dc,06            jb    B2,Rdc,9e08      if (B2_Rdc = 0)  {
 9e02: 39,dc,03            jb    B1,Rdc,9e08      if (B1_Rdc = 0)  {
-9e05: 32,a6,02            jnb   B2,Ra6,9e0a      if (B2_FMEM_FLAGS = 0) goto 9e0a; } } } } }
+9e05: 32,a6,02            jnb   B2,Ra6,9e0a      if (B2_TFMFLG_a6 = 0) goto 9e0a; } } } } }
 9e08: 28,8b               scall 9e95             Sub_9e95 (); }
 9e0a: 30,dc,45            jnb   B0,Rdc,9e52      if (B0_Rdc = 1)  {
 9e0d: b3,e8,cc,34         ldb   R34,[Re8+cc]     R34 = [34c];
@@ -13045,7 +13060,7 @@ ERROR CODE DESCRIPTION
 9e78: 98,00,dc            cmpb  Rdc,R0           
 9e7b: d7,14               jne   9e91             if (Rdc = 0)  {
 9e7d: 3b,e1,11            jb    B3,Re1,9e91      if (B3_CCD? = 0)  {
-9e80: 3a,a6,0e            jb    B2,Ra6,9e91      if (B2_FMEM_FLAGS = 0)  {
+9e80: 3a,a6,0e            jb    B2,Ra6,9e91      if (B2_TFMFLG_a6 = 0)  {
 9e83: 38,a6,0b            jb    B0,Ra6,9e91      if (B0_FMEM_FLAGS = 0)  {
 9e86: 9b,e8,fc,00         cmpb  R0,[Re8+fc]      
 9e8a: d7,08               jne   9e94             if ([37c] != 0) return;
@@ -13594,7 +13609,7 @@ a3ee: 6b,fc,0c,16         sb2w  R16,[Rfc+c]      R16 -= [c0b4];
 a3f2: 8b,e8,94,16         cmpw  R16,[Re8+94]     
 a3f6: de,03               jlt   a3fb             if (R16 >= TOT)  {
 a3f8: 71,df,4b            an2b  R4b,df           B5_R4b = 0; }
-a3fb: 3b,45,1d            jb    B3,R45,a41b      if (Error_detected = 0)  {
+a3fb: 3b,45,1d            jb    B3,R45,a41b      if (B3_Flags_2B = 0)  {
 a3fe: b3,e8,f8,42         ldb   R42,[Re8+f8]     R42 = [378];
 a402: 9b,fc,18,42         cmpb  R42,[Rfc+18]     
 a406: d1,13               jleu  a41b             if (R42 > [c0c0])  {
@@ -13611,7 +13626,7 @@ a422: 71,fb,44            an2b  R44,fb           B2_R44 = 0;
 a425: 20,03               sjmp  a42a             goto a42a; }
 
 a427: 91,04,44            orb   R44,4            B2_R44 = 1; }
-a42a: 3b,45,37            jb    B3,R45,a464      if (Error_detected = 0)  {
+a42a: 3b,45,37            jb    B3,R45,a464      if (B3_Flags_2B = 0)  {
 a42d: 3f,a5,34            jb    B7,Ra5,a464      if (CRKFLG = 0)  {
 a430: 38,a6,35            jb    B0,Ra6,a468      if (B0_FMEM_FLAGS = 1) return;
 a433: ad,09,30            ldzbw R30,9            wR30 = 9;
@@ -13644,11 +13659,11 @@ a470: 37,a5,05            jnb   B7,Ra5,a478      if (CRKFLG = 1)  {
 a473: b0,00,30            ldb   R30,R0           R30 = 0;
 a476: 20,0d               sjmp  a485             goto a485; }
 
-a478: 37,29,13            jnb   B7,R29,a48e      if (B7_R29 = 1)  {
+a478: 37,29,13            jnb   B7,R29,a48e      if (B7_PURGING_29 = 1)  {
 a47b: b3,f6,39,30         ldb   R30,[Rf6+39]     R30 = [b94d];
 a47f: 9b,e6,94,30         cmpb  R30,[Re6+94]     
-a483: d9,06               jgtu  a48b             if (R30 <= [214])  {
-a485: c7,e6,94,30         stb   R30,[Re6+94]     [214] = R30;
+a483: d9,06               jgtu  a48b             if (R30 <= PRGTMR)  {
+a485: c7,e6,94,30         stb   R30,[Re6+94]     PRGTMR = R30;
 a489: 20,03               sjmp  a48e             goto a48e; }
 
 a48b: 91,10,79            orb   R79,10           B4_R79 = 1; }
@@ -13864,7 +13879,7 @@ a6d3: 71,f7,a0            an2b  Ra0,f7           B3_Power_up = 0;
 a6d6: 20,03               sjmp  a6db             goto a6db; }
 
 a6d8: 91,08,a0            orb   Ra0,8            B3_Power_up = 1;
-a6db: 3b,45,04            jb    B3,R45,a6e2      if (Error_detected = 0)  {
+a6db: 3b,45,04            jb    B3,R45,a6e2      if (B3_Flags_2B = 0)  {
 a6de: c3,e4,3c,00         stw   R0,[Re4+3c]      [1bc] = 0; }
 a6e2: b3,f6,4e,42         ldb   R42,[Rf6+4e]     R42 = [b962];
 a6e6: 57,f6,4f,42,30      ad3b  R30,R42,[Rf6+4f] R30 = R42 + [b963];
@@ -13904,7 +13919,7 @@ a73c: b3,f0,07,30         ldb   R30,[Rf0+7]      R30 = [b007];
 a740: 9b,e6,73,30         cmpb  R30,[Re6+73]     
 a744: db,04               jc    a74a             if (R30 < [2f3])  {
 a746: c7,e6,73,30         stb   R30,[Re6+73]     [2f3] = R30; } } } } } }
-a74a: a3,e8,40,30         ldw   R30,[Re8+40]     R30 = [3c0];
+a74a: a3,e8,40,30         ldw   R30,[Re8+40]     R30 = TPDLBR;
 a74e: 8b,fa,1c,30         cmpw  R30,[Rfa+1c]     
 a752: d6,04               jge   a758             if (R30 < [bb96])  {
 a754: c7,e8,36,00         stb   R0,[Re8+36]      [3b6] = 0; }
@@ -14041,7 +14056,7 @@ a87f: 83,2c,04,10,24      timer 83,   42c,  B4_24
 a884: 41,7f,01,20,24      timer 41,   17f,  B5_24
 a889: 87,2c,04,08,24      timer 87,   42c,  B3_24
 a88e: 41,36,04,80,a8      timer 41,   436, APT_Closed_Throttle, 
-a893: 81,14,02,10,79      timer 81,   214,  B4_79
+a893: 81,14,02,10,79      timer 81, PRGTMR,  B4_79
 a898: 4b,d2,00,80,a8      timer 4b,    d2, APT_Closed_Throttle, 
 a89d: 83,38,01,01,a5      timer 83, Adptmr, Adptmr_on, 
 a8a2: 20,51,01            timer 20,   151, 
@@ -14072,7 +14087,7 @@ a8f8: 20,84,03            timer 20,   384,
 a8fb: 81,4b,01,01,28      timer 81,   14b,  B0_28
 a900: 81,4a,01,04,a1      timer 81,   14a, Flags_a1, 
 a905: 85,4a,01,02,a1      timer 85,   14a, Flags_a1, 
-a90a: 23,bc,01,08,45      timer 23,   1bc, Error_detected, 
+a90a: 23,bc,01,08,45      timer 23,   1bc, Flags_2B, 
 a90f: 40,c2,01            timer 40,   1c2, 
 a912: 81,4c,01,80,24      timer 81,   14c,  B7_24
 a917: 22,3c,01            timer 22,   13c, 
@@ -15185,8 +15200,8 @@ b48e: 02                  byte      2
 
 b48f: ff,55,55,0f,0f,ff,5a,55,55,5f,5f  ???  
 
-b49a: f0,55               word   55f0            REV_LIMIT
-b49c: 90,01               word    190            rev_limit_hysteresis
+b49a: f0,55               word   55f0            NLMT
+b49c: 90,01               word    190            NLMTH
 b49e: c0                  byte     c0            speed_limiter1
 b49f: 06                  byte      6            speed_limiter1_hysteresis
 b4a0: 00                  byte      0
@@ -15648,7 +15663,7 @@ ba3c: 43,1a,11,0b,08      table  67,  26,  17,  11,   8
 ba41: 43,1a,11,0b,0a      table  67,  26,  17,  11,  10
 ba46: 43,1a,11,0b,0b      table  67,  26,  17,  11,  11
 
-   Func_ba4b:
+   FN600:
 ba4b: ff,80               func  255, 128
 ba4d: 3c,80               func   60, 128
 ba4f: 2d,3a               func   45,  58
@@ -15658,7 +15673,7 @@ ba55: 00,00               func    0,   0
 
 ba57: ff                  ???   
 
-   Func_ba58:
+   FN605A:
 ba58: ff,ff,80,00         func  65535,   128
 ba5c: 00,18,80,00         func   6144,   128
 ba60: 00,14,60,00         func   5120,    96
@@ -15666,7 +15681,7 @@ ba64: 66,0e,40,00         func   3686,    64
 ba68: 00,00,00,00         func      0,     0
 ba6c: 00,00,00,00         func      0,     0
 
-   Func_ba70:
+   FN090:
 ba70: ff,ff,c0,ff         func  65535, 65472
 ba74: ff,00,c0,ff         func    255, 65472
 ba78: f8,00,00,b9         func    248, 47360
@@ -15689,14 +15704,14 @@ baac: 00,00,70,00         func      0,   112
 bab0: 7a,bb               word   bb7a                                              # Register Rf8 
 bab2: 00,02               word    200            TCBPA
 bab4: 00,02               word    200            TCFBS
-bab6: 11,00               word     11
+bab6: 11,00               word     11            TCMBAR
 bab8: 71,01               word    171
 baba: 48,02               word    248
 babc: ae,04               word    4ae
 babe: d7,07               word    7d7
 bac0: 00,08               word    800
 bac2: cd,00               word     cd
-bac4: cd,04               word    4cd
+bac4: cd,04               word    4cd            TCECT
 bac6: cd,00               word     cd
 bac8: 00,08               word    800            TCEGR
 baca: 71,01               word    171
@@ -15704,9 +15719,9 @@ bacc: b8,06               word    6b8
 bace: 9a,00               word     9a            TCNDT_ISC
 bad0: 71,01               word    171
 bad2: 00,08               word    800
-bad4: 48,02               word    248
+bad4: 48,02               word    248            TCTPT
 bad6: cd,04               word    4cd            TCTOT
-bad8: 85,00               word     85
+bad8: 85,00               word     85            TCVBAT
 bada: 29,00               word     29
 badc: 48,01               word    148
 bade: 8f,02               word    28f
@@ -15798,7 +15813,7 @@ bb88: 80,0c               word    c80
 bb8a: 80,02               word    280
 bb8c: 40,06               word    640
 bb8e: 00,02               word    200
-bb90: 00,02               word    200
+bb90: 00,02               word    200            TCTPDL
 bb92: 00                  byte      0            spark_addr_global
 bb93: 04                  byte      4
 bb94: 80                  byte     80
@@ -15826,8 +15841,8 @@ bbad: 01                  byte      1
 bbae: 00,04               word    400
 bbb0: 80,02               word    280            spark_max_retard_control
 bbb2: 00                  byte      0            Retlim_spark_tip_in_sw
-bbb3: ec                  byte     ec            Tipinret_spark_initial_retard_tip
-bbb4: 01                  byte      1            TIPINC_spark_adv_per_pip_tip
+bbb3: ec                  byte     ec            TIPMAX
+bbb4: 01                  byte      1            TIPINC
 bbb5: 60                  byte     60
 bbb6: 18                  byte     18
 
@@ -15889,7 +15904,7 @@ bc2a: 00,00,00,00         func      0,     0
 bc2e: 00,00,00,00         func      0,     0
 bc32: 00,00,00,00         func      0,     0
 
-   Func_bc36:
+   FN093:
 bc36: ff,ff,04,00         func  65535,     4
 bc3a: ff,00,04,00         func    255,     4
 bc3e: c8,00,66,00         func    200,   102
@@ -16268,7 +16283,7 @@ c162: 1f,00               word     1f
 c164: 1f,00               word     1f
 c166: 1f,00               word     1f
 c168: 12,00               word     12
-c16a: 33,01               word    133
+c16a: 33,01               word    133            TCTTA
 c16c: 00                  byte      0
 c16d: 03                  byte      3
 c16e: 00,05               word    500            V_BOO_SPD
@@ -17163,7 +17178,7 @@ cba8: 8d                  byte     8d            fuel_max_load_verification_valu
 
 cba9: ff                  ???   
 
-cbaa: 00,32               word   3200
+cbaa: 00,32               word   3200            VKYPWR
 cbac: 78,00               word     78
 cbae: 00,60               word   6000
 cbb0: 00,a0               word   a000
@@ -17174,7 +17189,7 @@ cbb6: a0,0f               word    fa0
 
 cbb8: 18,ff               ???   
 
-cbba: 33,73               word   7333
+cbba: 33,73               word   7333            VRLAM
 
 cbbc: a0,28,c0,21,c0,3f   ???   
 
@@ -17186,8 +17201,8 @@ cbca: 00,0a               word    a00            ACTMIN
 cbcc: c0,e9               word   e9c0            ACTMAX
 cbce: 01                  byte      1
 cbcf: 3c                  byte     3c
-cbd0: 80,f7               word   f780
-cbd2: 80,11               word   1180
+cbd0: 80,f7               word   f780            TAPMAX
+cbd2: 80,11               word   1180            TAPMIN
 cbd4: e1                  byte     e1
 cbd5: 01                  byte      1            V_fpmflg
 
@@ -17254,15 +17269,64 @@ cc9b: 14,f0,1e,b0,04,40,b3,00,0a,40,b3,00,0a  ???
 cca8: 66,04               word    466
 ccaa: 9a,03               word    39a
 ccac: 0a,00               word      a
-
-ccae: 58,02,90,01,60,04,ac,0d,28,01,20,46,08,01,10,c8  ???  
-ccbe: c8,c8,c8,c8,c8,c8,c8,c8,c8,c8,c8,c8,c8,c8,c8,c8  ???  
-ccce: c8,c8,c8,c8,c8,c8,c8,c8,c8,c8,c8,c8,08,08,08,c8  ???  
-ccde: 3c,fe,c8,c8,28,fe,a0,32,32,32,32,32,32,64,04,32  ???  
-ccee: 32,32,32,32,00,00,64,32,0a,00,0a,0a,0a,32,32,0a  ???  
-ccfe: fe,05,05,ff,02,02,02,0a,02,03,0a,0a,02,03,28,ff  ???  
-cd0e: 00,09,00,09,00,05,00,09,00,09,00,09,00,09,00,09  ???  
-cd1e: 00,09,00,09         ???   
+ccae: 58,02               word    258
+ccb0: 90,01               word    190
+ccb2: 60,04               word    460
+ccb4: ac,0d               word    dac
+ccb6: 28,01               word    128
+ccb8: 20,46               word   4620
+ccba: 08,01               word    108
+ccbc: 10,c8               word   c810
+ccbe: c8,c8               word   c8c8
+ccc0: c8,c8               word   c8c8
+ccc2: c8,c8               word   c8c8
+ccc4: c8,c8               word   c8c8
+ccc6: c8,c8               word   c8c8
+ccc8: c8,c8               word   c8c8
+ccca: c8,c8               word   c8c8
+cccc: c8,c8               word   c8c8
+ccce: c8,c8               word   c8c8
+ccd0: c8,c8               word   c8c8
+ccd2: c8,c8               word   c8c8
+ccd4: c8,c8               word   c8c8
+ccd6: c8,c8               word   c8c8
+ccd8: c8,c8               word   c8c8
+ccda: 08,08               word    808
+ccdc: 08,c8               word   c808
+ccde: 3c,fe               word   fe3c
+cce0: c8,c8               word   c8c8
+cce2: 28,fe               word   fe28
+cce4: a0,32               word   32a0
+cce6: 32,32               word   3232
+cce8: 32,32               word   3232
+ccea: 32,64               word   6432
+ccec: 04,32               word   3204
+ccee: 32,32               word   3232
+ccf0: 32,32               word   3232
+ccf2: 00,00               word      0
+ccf4: 64,32               word   3264
+ccf6: 0a,00               word      a
+ccf8: 0a,0a               word    a0a
+ccfa: 0a,32               word   320a
+ccfc: 32,0a               word    a32
+ccfe: fe,05               word    5fe
+cd00: 05,ff               word   ff05
+cd02: 02,02               word    202
+cd04: 02,0a               word    a02
+cd06: 02,03               word    302
+cd08: 0a,0a               word    a0a
+cd0a: 02,03               word    302
+cd0c: 28,ff               word   ff28
+cd0e: 00,09               word    900
+cd10: 00,09               word    900
+cd12: 00,05               word    500
+cd14: 00,09               word    900
+cd16: 00,09               word    900
+cd18: 00,09               word    900
+cd1a: 00,09               word    900
+cd1c: 00,09               word    900
+cd1e: 00,09               word    900
+cd20: 00,09               word    900
 
    Func_cd22:
 cd22: ff,ff,80,00         func  65535,   128

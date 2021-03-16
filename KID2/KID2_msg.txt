@@ -86,8 +86,6 @@
  Warning - Extra Parameters Ignored
 ## sub  83b20 83b4b  "Sub_3b20"  
  Warning - Extra Parameters Ignored
-## sub  83b4c 83bf9  "Sub_3b4c"  
- Warning - Extra Parameters Ignored
 ## sub  83c6c 83cce  "Sub_3c6c"  
  Warning - Extra Parameters Ignored
 ## sub  840f7 8435f  "Sub_40f7"  
@@ -343,8 +341,6 @@
 ## sub  880dd 880fb  "Sub_80dd"  
  Warning - Extra Parameters Ignored
 ## sub  880fc 8853c  "Sub_80fc"  
- Warning - Extra Parameters Ignored
-## sub  88102 8840a  "Sub_8102"  
  Warning - Extra Parameters Ignored
 ## sub  88195 8840a  "Sub_8195"  
  Warning - Extra Parameters Ignored
@@ -779,9 +775,9 @@ args    7841 7844 : E 2 f0 N  : UW N
 args    788a 788b : O 2 UY 
 args    790a 790b : O 2 UY 
 args    7929 7932 : UW N  : E 3 f0 N  : E 3 f0 N  : O 2 UY  : O 2 UY 
-args    793f 7942 : O 2 UY  : O 2 UY 
-args    7946 7949 : O 2 UY  : O 2 UY 
-args    7958 795b : O 2 UY  : O 2 UY 
+args    793f 7942 : O 2 UW 
+args    7946 7949 : O 2 UW 
+args    7958 795b : O 2 UW 
 args    7984 7987 : O 2 UY  : O 2 UY 
 args    799a 799b : O 2 UY 
 args    79ea 79ed : O 2 UY  : O 2 UY 
@@ -1229,8 +1225,8 @@ byte    b48b b48b
 byte    b48c b48c
 byte    b48d b48d
 byte    b48e b48e
-word    b49a b49b  "REV_LIMIT"  
-word    b49c b49d  "rev_limit_hysteresis"  
+word    b49a b49b  "NLMT"  
+word    b49c b49d  "NLMTH"  
 byte    b49e b49e  "speed_limiter1"  
 byte    b49f b49f  "speed_limiter1_hysteresis"  
 byte    b4a0 b4a0
@@ -1390,21 +1386,21 @@ func    b99b b9a0  "Func_b99b"   : UY  : UY
 table   b9a1 ba04  "fuel_ve_table"   : O 10 UY 
 func    ba06 ba1d  "Func_ba06"   : UW  : UW 
 table   ba1e ba4a  "Table_ba1e"   : O 5 UY 
-func    ba4b ba56  "Func_ba4b"   : UY  : UY 
-func    ba58 ba6f  "Func_ba58"   : UW  : UW 
-func    ba70 ba8b  "Func_ba70"   : UW  : UW 
+func    ba4b ba56  "FN600"   : UY  : UY 
+func    ba58 ba6f  "FN605A"   : UW  : UW 
+func    ba70 ba8b  "FN090"   : UW  : UW 
 func    ba8c baaf  "Func_ba8c"   : UW  : UW 
 word    bab0 bab1
 word    bab2 bab3  "TCBPA"  
 word    bab4 bab5  "TCFBS"  
-word    bab6 bab7
+word    bab6 bab7  "TCMBAR"  
 word    bab8 bab9
 word    baba babb
 word    babc babd
 word    babe babf
 word    bac0 bac1
 word    bac2 bac3
-word    bac4 bac5
+word    bac4 bac5  "TCECT"  
 word    bac6 bac7
 word    bac8 bac9  "TCEGR"  
 word    baca bacb
@@ -1412,9 +1408,9 @@ word    bacc bacd
 word    bace bacf  "TCNDT_ISC"  
 word    bad0 bad1
 word    bad2 bad3
-word    bad4 bad5
+word    bad4 bad5  "TCTPT"  
 word    bad6 bad7  "TCTOT"  
-word    bad8 bad9
+word    bad8 bad9  "TCVBAT"  
 word    bada badb
 word    badc badd
 word    bade badf
@@ -1444,7 +1440,7 @@ word    bb88 bb89
 word    bb8a bb8b
 word    bb8c bb8d
 word    bb8e bb8f
-word    bb90 bb91
+word    bb90 bb91  "TCTPDL"  
 byte    bb92 bb92  "spark_addr_global"  
 byte    bb93 bb93
 byte    bb94 bb94
@@ -1463,8 +1459,8 @@ byte    bbad bbad
 word    bbae bbaf
 word    bbb0 bbb1  "spark_max_retard_control"  
 byte    bbb2 bbb2  "Retlim_spark_tip_in_sw"  
-byte    bbb3 bbb3  "Tipinret_spark_initial_retard_tip"  
-byte    bbb4 bbb4  "TIPINC_spark_adv_per_pip_tip"  
+byte    bbb3 bbb3  "TIPMAX"  
+byte    bbb4 bbb4  "TIPINC"  
 byte    bbb5 bbb5
 byte    bbb6 bbb6
 word    bbb8 bbb9
@@ -1483,7 +1479,7 @@ func    bbd3 bbdc  "FN004"   : UY  : UY
 func    bbde bbf5  "Func_bbde"   : SW  : UW 
 func    bbf6 bc19  "x_spark_91"   : SW  : UW 
 func    bc1a bc35  "y_spark_92"   : UW  : UW 
-func    bc36 bc51  "Func_bc36"   : UW  : UW 
+func    bc36 bc51  "FN093"   : UW  : UW 
 func    bc52 bc6d  "spark_adder_for_wot_fuel"   : UW  : SW 
 func    bc6e bc79  "Func_bc6e"   : UY  : UY 
 table   bc7a bcc9  "spark_table_base"   : O 10 UY 
@@ -1586,7 +1582,7 @@ word    c162 c163
 word    c164 c165
 word    c166 c167
 word    c168 c169
-word    c16a c16b
+word    c16a c16b  "TCTTA"  
 byte    c16c c16d
 word    c16e c16f  "V_BOO_SPD"  
 byte    c170 c170
@@ -1812,12 +1808,12 @@ byte    cba5 cba5
 byte    cba6 cba6
 byte    cba7 cba7
 byte    cba8 cba8  "fuel_max_load_verification_value"  
-word    cbaa cbab
+word    cbaa cbab  "VKYPWR"  
 word    cbac cbad
 word    cbae cbaf
 word    cbb0 cbb1
 word    cbb6 cbb7
-word    cbba cbbb
+word    cbba cbbb  "VRLAM"  
 word    cbc2 cbc3
 word    cbc4 cbc5
 word    cbc6 cbc7
@@ -1826,8 +1822,8 @@ word    cbca cbcb  "ACTMIN"
 word    cbcc cbcd  "ACTMAX"  
 byte    cbce cbce
 byte    cbcf cbcf
-word    cbd0 cbd1
-word    cbd2 cbd3
+word    cbd0 cbd1  "TAPMAX"  
+word    cbd2 cbd3  "TAPMIN"  
 byte    cbd4 cbd4
 byte    cbd5 cbd5  "V_fpmflg"  
 byte    cbd7 cbd7
@@ -1850,7 +1846,7 @@ byte    cc76 cc76
 byte    cc9a cc9a
 word    cca8 cca9
 word    ccaa ccab
-word    ccac ccad
+word    ccac cd21
 func    cd22 cd35  "Func_cd22"   : UW  : UW 
 func    cd36 cd3d  "Func_cd36"   : UY  : UY 
 func    cd40 cd49  "Func_cd40"   : UY  : UY 
@@ -1952,7 +1948,7 @@ sub  83a3f 83b1f  "Sub_3a3f"
 sub  83a5b 83a6a  "Sub_3a5b"  
 sub  83a6b 83b1f  "MAP_CALC"   #cmd
 sub  83b20 83b4b  "Sub_3b20"  
-sub  83b4c 83bf9  "Sub_3b4c"  
+sub  83b4c 83bf9  "VIP_THROTTLE_MODE_SET"   #cmd
 sub  83b52 83c01  "KAM_Qualification_Test_Logic"   #cmd
 sub  83be7 83bf9  "ReInitialize_ISCKAM"   #cmd
 sub  83c02 83c6b  "RUN_MODE_SELECTION"   #cmd
@@ -2126,7 +2122,7 @@ sub  880c9 880dc  "SaveTCode1"   #cmd
 sub  880cd 880dc  "Sub_80cd"  
 sub  880dd 880fb  "Sub_80dd"  
 sub  880fc 8853c  "Sub_80fc"  
-sub  88102 8840a  "Sub_8102"  
+sub  88102 8840a  "VR_RUN_INIT_COM8"   #cmd
 sub  88195 8840a  "Sub_8195"  
 sub  881a6 881b7  "Sub_81a6"  
 sub  881b8 8840a  "Sub_81b8"  
@@ -2254,6 +2250,7 @@ sym d  "HSO_Cmd" : W
 sym e  "HSI_Time"
 sym 10  "StackPtr"
 sym 12  "Tmr_OVF_cnt"
+sym 25  "B1_WARM_UP_25" :B 1
 sym 25  "CHKAIR" :B 2
 sym 25  "BIFLG" :B 4
 sym 26  "PSFLAG" :B 3
@@ -2273,9 +2270,10 @@ sym 28  "Newsa" :B 2
 sym 28  "EGOSTE" :B 5
 sym 28  "KAM_error" :B 7
 sym 29  "ECT_IN_RANGE" :B 3
+sym 29  "B7_PURGING_29" :B 7
 sym 2a  "Vscdt" :B 0
 sym 2a  "Vscst" :B 1
-sym 2a  "Vip_enable" :B 2
+sym 2a  "VIP_ENABLE" :B 2
 sym 2a  "DISABLE_RUNNING" :B 3
 sym 2a  "DISABLE_NOSTART" :B 4
 sym 2a  "Self_test" :B 5
@@ -2334,7 +2332,6 @@ sym 45  "Flags_2B"
 sym 45  "Rvip_cyl_quit" :B 0
 sym 45  "Rvip_cyl_bal" :B 1
 sym 45  "Sto_trigger" :B 2
-sym 45  "Error_detected" :B 3
 sym 45  "?B4_ATMR2_FLAG_45?" :B 4
 sym 45  "Stiflg" :B 5
 sym 45  "Egoste2" :B 6
@@ -2349,7 +2346,6 @@ sym 48  "Flags_48"
 sym 48  "Rvip_cyl_quit" :B 0
 sym 48  "Rvip_cyl_bal" :B 1
 sym 48  "?Stiflg?" :B 2
-sym 48  "Error_detected" :B 3
 sym 48  "Disable_isc" :B 4
 sym 48  "?Sto_trigger?" :B 5
 sym 48  "Egoste2" :B 6
@@ -2407,7 +2403,7 @@ sym 92  "ISCDTY"
 sym 94  "FUELPW1"
 sym 96  "LAMBSE1"
 sym 9a  "AM"
-sym 9d  "Tipret"
+sym 9d  "TIPRET"
 sym 9e  "Reg_9e"
 sym 9e  "Reg_9e" :B 0
 sym 9e  "Reg_9e" :B 1
@@ -2422,7 +2418,7 @@ sym a0  "Power_up"
 sym a0  "SIGNED_TBL_FLG" :B 4
 sym a1  "Flags_a1"
 sym a3  "Flags_a3"
-sym a3  "Error_detected" :B 0
+sym a3  "B0_V_MODE_SETUP_a3" :B 0
 sym a3  "B1_Flags_a3" :B 1
 sym a3  "B2_Flags_a3" :B 2
 sym a3  "B3_Flags_a3" :B 3
@@ -2431,6 +2427,7 @@ sym a3  "B5_Flags_a3" :B 5
 sym a3  "B6_Flags_a3" :B 6
 sym a3  "B7_Flags_a3" :B 7
 sym a4  "BRK_NEVER_OFF" :B 1
+sym a4  "B2_TLS_NV_FLG_a4" :B 2
 sym a4  "BRK_NEVER_ON" :B 3
 sym a4  "MAPOFL" :B 4
 sym a4  "TAQ1" :B 5
@@ -2440,12 +2437,18 @@ sym a5  "BG_TMR_DISABLE" :B 1
 sym a5  "?Undsp?" :B 2
 sym a5  "Dmflg" :B 3
 sym a5  "FLG_STALL" :B 4
-sym a5  "Purging" :B 5
+sym a5  "B5_FLAGS_a5" :B 5
 sym a5  "UNDSP" :B 6
 sym a5  "CRKFLG" :B 7
 sym a6  "FMEM_FLAGS"
-sym a6  "EFMFLG" :B 4
-sym a6  "AFMFLG" :B 7
+sym a6  "B0_FMEM_FLAGS" :B 0
+sym a6  "B1_FMEM_FLAGS" :B 1
+sym a6  "B2_TFMFLG_a6" :B 2
+sym a6  "B3_FMEM_FLAGS" :B 3
+sym a6  "B4_EFMFLG" :B 4
+sym a6  "B5_FMEM_FLAGS" :B 5
+sym a6  "B6_FMEM_FLAGS" :B 6
+sym a6  "B7_AFMFLG" :B 7
 sym a7  "FMEM_FLAG2"
 sym a8  "APT"
 sym a8  "APT_WOT" :B 0
@@ -2472,9 +2475,10 @@ sym d9  "GR_CM"
 sym db  "PDL"
 sym e1  "CCD?"
 sym e1  "B2_CCD_HP" :B 2
+sym 104  "EGRBAR"
 sym 106  "EGOBAR"
 sym 108  "ITOT"
-sym 10a  "VKYPWR"
+sym 10a  "IIVPWR"
 sym 10c  "IOCC"
 sym 10e  "VSS_Raw"
 sym 110  "IECT"
@@ -2504,7 +2508,7 @@ sym 176  "KAMRF1"
 sym 181  "CRKPIP_CTR"
 sym 192  "Ibeta1"
 sym 196  "A3CTMR"
-sym 19c  "Tbart"
+sym 19c  "TBART"
 sym 1be  "Miltmr"
 sym 1c1  "Vip_timer_ex"
 sym 1d0  "SparkAdvance"
@@ -2512,10 +2516,14 @@ sym 1eb  "MAPOPE"
 sym 1f6  "PURGDC"
 sym 1f8  "BCSDC"
 sym 204  "VS"
+sym 208  "TAPBAR"
 sym 213  "ECTCNT"
+sym 214  "PRGTMR"
 sym 216  "MAPTMR"
 sym 217  "VACUUM"
 sym 22c  "Tsladv"
+sym 22e  "MAPBAR"
+sym 22f  "MAP"
 sym 230  "Retinc"
 sym 239  "Pip_counter"
 sym 23a  "ATMR1_LST"
@@ -2542,6 +2550,7 @@ sym 2bf  "Xram4H"
 sym 2cc  "SIGKAL"
 sym 2e2  "ACSTRT"
 sym 314  "TOT"
+sym 33c  "ARCHG"
 sym 33e  "LOAD"
 sym 342  "ETVOCM"
 sym 344  "Vsc_Raw"
@@ -2555,6 +2564,7 @@ sym 39e  "ISCMOD"
 sym 3ae  "RPMERR"
 sym 3b0  "RPMERR_A"
 sym 3b2  "RPMERR_S"
+sym 3c0  "TPDLBR"
 sym 3da  "TCSTRT"
 sym 3e0  "DWLBSE"
 sym 3e4  "DWLIDM"
