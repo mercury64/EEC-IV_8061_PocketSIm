@@ -126,7 +126,11 @@ public class OpCodeSTW extends OpCode implements IOpCode {
 */
 
         }
-        
+		if (this.getAddressModeType() == AddressMode.SHORT_INDEXED)
+		{
+			System.err.println("Not Implemented");
+			System.exit(1);
+		}
         if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
         {
         	registerRA = (short) (registerRA & 0xfe);
