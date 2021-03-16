@@ -294,6 +294,19 @@
 
 4689 # 29.875 * 8 = 239 = 0xEF
 
+49ed \n#############################################################
+49ed \n# 1 dimension interpolate - signed or unsigned
+49ed \n# Inputs:
+49ed \n#  R30 (byte) - Fraction
+49ed \n#  R31 (byte) - Lower table value
+49ed \n#  R33 (byte) - Upper table value
+49ed \n# Outputs:
+49ed \n#  R3B - Interpolated result (byte?)
+49ed \n#############################################################
+
+49ee \n# SIGNED interpolate calc
+4a0a \n# UNSIGNED interpolate calc
+
 4b3f # 29.875 * 8 = 239 = 0xEF
 
 5174 # ISCFLG = 1 CLOSED LOOP RPM CONTROL
@@ -400,6 +413,84 @@
 
 6fb5 # 210
 
+6fc5 \nERROR CODE DESCRIPTION
+ # 111,"PASS  	"
+6fc6 # 112,254 deg. ind. ACT-ckt. grounded.
+6fc8 # 113,-40 deg. ind. ACT-sensor ckt. open.
+ # 114,ACT out of S-T range.
+ # 116,ECT out of S-T range.
+6fca # 117,254 deg. ind. ECT-ckt. grounded.
+6fcc # 118,-40 deg. ind. ECT-sensor ckt. open.
+ # 121,TP out of S-T range.
+6fce # 122,TPS ckt. below minimum voltage.
+6fd0 # 123,TPS ckt. above max. voltage.
+6fd2 # 126,MAP/BP out of S-T range.
+6fd4 # 128,MAP vacuum circuit failure
+ # 129,Insuff. MAP change-dyn resp. test.
+ # 167,Insuff. TP change-dyn resp. test.
+6fd6 # ,
+6fd8 # 172,EGO sensor ckt. ind. system lean.
+6fda # 173,EGO sensor ckt. ind. system rich.
+6fdc # 179,Adaptive Fuel Limit Lean
+6fde # 181,Adaptive Fuel Limit Rich
+6fe0 # 182,Adaptive Fuel Limit Lean @idle
+6fe2 # 183,Adaptive Fuel Limit Rich @idle
+ # 194,Hego switch rate too fast
+6fe4 # 211,PIP ckt. fault.
+6fe6 # 212,Loss of tach input to processor.
+ # 213,Spark control fault present
+ # 225,Knock not sensed-dyn response test.
+ # 311,Themactor air system inop.
+ # 312,Thermactor air upstream during S-T.
+ # 313,Therm. air not bypassed during S-T.
+6fe8 # 327,EPT/EVP below min. voltage.
+6fea # 328,EVP volt below closed lim (SONIC)
+6fec # 332,EGR valve not opening (SONIC).
+6fee # 334,EVP volt. above closed limit.
+6ff0 # 337,EVP ckt. above max volt.
+6ff2 # 338,Cooling System not Heating
+6ff4 # 339,Cooling System not Cooling
+ # 411,RPM not within S-T lower band limit
+ # 412,RPM not within S-T upper band limit
+6ff6 # 452,Insufficient input from VSS.
+ # 511,ROM test failed
+ # 512,KAM Test Failed
+ # 513,Failure in EEC ref. voltage.
+ # 519,PSPS ckt. open.
+ # 521,PSPS did not change states.
+6ff8 # 536,BOO Sw. Ckt failed open/closed -ECA input open or brake not actuated during test
+ # 538,Operator error-dyn response test.
+ # 539,A/C Swith error
+6ffa # 542,FP Ckt Open -ECA to Motor Ground
+6ffc # 543,FP Ckt Open Bat. to Relay
+ # 552,Air Management 1 (AM1) ckt. failure
+ # 553,Air Management 2 (AM2) ckt. failure
+6ffe # 556,Fuel pump ckt. failure.
+ # 558,Elect. vac. reg. (EVR) ckt. failure
+ # 565,Canister Purge (CANP) ckt. failure.
+7000 # 617,1-2 Shift Error
+7002 # 618,2-3 Shift Error
+7004 # 619,3-4 Shift Error
+ # 621,SS1 Sol Ckt Failure
+ # 622,SS2 Sol. Ckt. Failure
+7006 # 624,EPC Solenoid Circuit Failure/Shor-Output Driver
+ # 626,CCS Sol Ckt Failure
+7008 # 628,Converter Clutch Failure
+ # 629,CCC Sol. Ckt. Failure
+ # 631,OCIL Ckt. Failure
+ # 632,OCS Not Changing State
+ # 633,4X4 Switch closed
+700a # 634,MLPS Out of Range
+ # 636,TOT Out of S-T range
+700c # 637,-40 deg. ind. TOT sensor ckt open
+700e # 638,315 Deg ind. TOT sensor ckt grounded    X
+ # 654,MLPS not in park
+ # 655,MLPS not in neutral
+7010 # ,
+7012 # ,
+7014 # ,
+ # 998,FMEM failure/Failed (open)EPC Output Driver
+
 70dd \n######################################
 70dd \n# gets jump function index into R3A
 70dd \n#######################################
@@ -443,6 +534,8 @@
 71c0 \n# this proc can shortcut returns from stack - to grandcaller
 71c0 \n#######################################################
 
+7297 # 512, KAM Test Failed
+729e # 111, PASS 
 
 78ab # BOO_SPD_TMR
 
@@ -498,7 +591,33 @@
 
 7ebd #543   | FP Ckt Open Bat. to Relay          |    X    |      |   X   |
 
+7f50 \n#################################################################
+7f50 \n# Four data bytes follow calls to this function (R1A,1B,1C,1D)
+7f50 \n# R1A - is Trouble Code if there is an error
+7f50 \n# R1B - ROM loc for limit 8F86 + this offset (word)
+7f50 \n# R1C - parameter flag - mask to select the device (Fan, CANP, FuelPump etc)
+7f50 \n# R1D - pointer to SFR flag byte usually R46 or 47 for output lines
+7f50 \n# The OCC AD channel must be a supply voltage to the actuators
+7f50 \n# This performs 'circuit' tests
+7f50 \n# Measure any variation in voltage when the selected output line is switched
+7f50 \n#################################################################
+
 7fd3 # loop until 5161 IO times have passed(12.4ms)
+
+8112 # 998,FMEM failure/Failed (open)EPC Output Driver
+811c # 128,MAP vacuum circuit failure
+8122 # 126,MAP/BP out of S-T range.
+812d # 112,254 deg. ind. ACT-ckt. grounded.
+8134 # 113,-40 deg. ind. ACT-sensor ckt. open.
+813b # 117,254 deg. ind. ECT-ckt. grounded.
+8142 # 118,-40 deg. ind. ECT-sensor ckt. open.
+8149 # 122,TPS ckt. below minimum voltage.
+8150 # 123,TPS ckt. above max. voltage.
+81d8 # 126,MAP/BP out of S-T range.
+824b # 172,EGO sensor ckt. ind. system lean.
+
+84d5 # 538,Operator error-dyn response test.
+84df # 129,Insuff. MAP change-dyn resp. test.
 
 8754 \n#############################################################
 8754 \n# memory RAM test from 100 to 8FF
@@ -638,7 +757,10 @@ a9fd # R30=4, a9ca+4 = a9ce, [a9ce]=e006
 aa02 # Console Routine, Datalogging patch inserted at 0x
 
 aa0a # R30=4, a9be+4 = a9d2, [a9d2]=c009
+aa12 # Bit 6 of register c80, "ConsoleMode" : B 6
 aa15 # R30=4, a9c4+4 = a9c8, [a9c8]=1200
+
+
 aa1c # [2022] = 0xb000
 
 aa28 # R1a = 8

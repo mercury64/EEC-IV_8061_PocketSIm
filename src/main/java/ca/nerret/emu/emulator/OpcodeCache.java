@@ -14,6 +14,7 @@ import ca.nerret.emu.emulator.opcodes.OpCodeSJMP;
 import ca.nerret.emu.emulator.opcodes.OpCodeSTB;
 import ca.nerret.emu.emulator.opcodes.OpCodeSTW;
 import ca.nerret.emu.emulator.opcodes.OpCode31;
+import ca.nerret.emu.emulator.opcodes.OpCodeAD2W;
 import ca.nerret.emu.emulator.opcodes.OpCodeAD3W;
 import ca.nerret.emu.emulator.opcodes.OpCodeAN2B;
 import ca.nerret.emu.emulator.opcodes.OpCodeAN3B;
@@ -22,6 +23,7 @@ import ca.nerret.emu.emulator.opcodes.OpCodeCALL;
 import ca.nerret.emu.emulator.opcodes.OpCodeCD;
 import ca.nerret.emu.emulator.opcodes.OpCodeDI;
 import ca.nerret.emu.emulator.opcodes.OpCodeDJNZ;
+import ca.nerret.emu.emulator.opcodes.OpCodeEI;
 import ca.nerret.emu.emulator.opcodes.OpCodeFF;
 import ca.nerret.emu.emulator.opcodes.OpCodeINCB;
 import ca.nerret.emu.emulator.opcodes.OpCodeINCW;
@@ -29,16 +31,20 @@ import ca.nerret.emu.emulator.opcodes.OpCodeJB;
 import ca.nerret.emu.emulator.opcodes.OpCodeJC;
 import ca.nerret.emu.emulator.opcodes.OpCodeJE;
 import ca.nerret.emu.emulator.opcodes.OpCodeJGTU;
+import ca.nerret.emu.emulator.opcodes.OpCodeJLEU;
 import ca.nerret.emu.emulator.opcodes.OpCodeJNB;
 import ca.nerret.emu.emulator.opcodes.OpCodeJNC;
 import ca.nerret.emu.emulator.opcodes.OpCodeJNE;
 import ca.nerret.emu.emulator.opcodes.OpCodeLDB;
 import ca.nerret.emu.emulator.opcodes.OpCodeLDW;
 import ca.nerret.emu.emulator.opcodes.OpCodeLDZBW;
+import ca.nerret.emu.emulator.opcodes.OpCodeNEGW;
 import ca.nerret.emu.emulator.opcodes.OpCodeNop;
 import ca.nerret.emu.emulator.opcodes.OpCodeORRB;
 import ca.nerret.emu.emulator.opcodes.OpCodePUSHW;
 import ca.nerret.emu.emulator.opcodes.OpCodeRET;
+import ca.nerret.emu.emulator.opcodes.OpCodeSB2W;
+import ca.nerret.emu.emulator.opcodes.OpCodeSB3W;
 
 public final class OpcodeCache {
 
@@ -48,6 +54,9 @@ public final class OpcodeCache {
         
         _OPCODES.put(0x00, new OpCodeNop(0x00, "SKP"));
 
+        _OPCODES.put(0x03, new OpCodeNEGW(0x03, "NEGW"));
+
+        
         _OPCODES.put(0x11, new OpCodeCLRB(0x11, "CLRB"));
         _OPCODES.put(0x01, new OpCodeCLRW(0x01, "CLRW"));
         
@@ -76,6 +85,7 @@ public final class OpcodeCache {
         _OPCODES.put(0x17, new OpCodeINCB(0x17, "INCB"));
         
         _OPCODES.put(0xFA, new OpCodeDI(0xfa, "DI"));
+        _OPCODES.put(0xFB, new OpCodeEI(0xfb, "EI"));
         _OPCODES.put(0xFF, new OpCodeFF(0xff, "NOP"));
  
         _OPCODES.put(0x98, new OpCodeCMPB(0x98, "CMPB"));
@@ -88,10 +98,25 @@ public final class OpcodeCache {
         _OPCODES.put(0x8a, new OpCodeCMPW(0x8a, "CMPW"));
         _OPCODES.put(0x8b, new OpCodeCMPW(0x8b, "CMPW"));
         
+        _OPCODES.put(0x64, new OpCodeAD2W(0x64, "AD2W"));
+        _OPCODES.put(0x65, new OpCodeAD2W(0x65, "AD2W"));
+        _OPCODES.put(0x66, new OpCodeAD2W(0x66, "AD2W"));
+        _OPCODES.put(0x67, new OpCodeAD2W(0x67, "AD2W"));
+ 
         _OPCODES.put(0x44, new OpCodeAD3W(0x44, "AD3W"));
         _OPCODES.put(0x45, new OpCodeAD3W(0x45, "AD3W"));
         _OPCODES.put(0x46, new OpCodeAD3W(0x46, "AD3W"));
         _OPCODES.put(0x47, new OpCodeAD3W(0x47, "AD3W"));
+        
+        _OPCODES.put(0x68, new OpCodeSB2W(0x68, "SB2W"));
+        _OPCODES.put(0x69, new OpCodeSB2W(0x69, "SB2W"));
+        _OPCODES.put(0x6a, new OpCodeSB2W(0x6a, "SB2W"));
+        _OPCODES.put(0x6b, new OpCodeSB2W(0x6b, "SB2W"));
+
+        _OPCODES.put(0x48, new OpCodeSB3W(0x48, "SB3W"));
+        _OPCODES.put(0x49, new OpCodeSB3W(0x49, "SB3W"));
+        _OPCODES.put(0x4a, new OpCodeSB3W(0x4a, "SB3W"));
+        _OPCODES.put(0x4b, new OpCodeSB3W(0x4b, "SB3W"));
         
         _OPCODES.put(0x70, new OpCodeAN2B(0x70, "AN2B"));
         _OPCODES.put(0x71, new OpCodeAN2B(0x71, "AN2B"));
@@ -133,7 +158,7 @@ public final class OpcodeCache {
         _OPCODES.put(0xCB, new OpCodePUSHW(0xcb, "PUSHW"));
 
      
-        
+        _OPCODES.put(0xD1, new OpCodeJLEU(0xd1, "JLEU"));
         _OPCODES.put(0xD3, new OpCodeJNC(0xd3, "JNC"));
         _OPCODES.put(0xD7, new OpCodeJNE(0xd7, "JNE"));
         _OPCODES.put(0xD9, new OpCodeJGTU(0xd9, "JGTU"));

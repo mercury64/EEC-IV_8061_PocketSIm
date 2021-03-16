@@ -73,6 +73,11 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
         byte lo;
         byte hi;
         
+        if (this.getAddressModeType() == AddressMode.DIRECT)
+        {
+     	   System.err.println("Not Implemented");
+     	   System.exit(1);
+        }
        if (this.getAddressModeType() == AddressMode.INDIRECT)
        {
     	   
@@ -120,8 +125,18 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
        }
        if (this.getAddressModeType() == AddressMode.SHORT_INDEXED)
        {
-    	   System.err.println("Not Implemented");
-    	   System.exit(1);
+			// Assembler Format: LDW offset (basereg), breg
+			// Instruction Operation: (RB) <- ([RA] + Offset)
+			// Execution States: 6/11
+			// Machine Format:[ ^A3 ], [ Base RA | 0 MB ], [ +- | Offset ], [ Dest RB ]
+			byte baseRA = (byte) ((operands[1] & 0xff) & 0xfe);
+			byte offset = (byte) (operands[2] & 0xff);
+			byte destRB = (byte) (operands[3] & 0xff); 
+			
+			short basereg = state_.getWordRegister((short) (baseRA & 0xff));
+			short valueRA =  this.getWordValue(memory, (short)(basereg + offset));
+			
+			state_.setWordRegister(destRB, valueRA );
        }
        if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
        {

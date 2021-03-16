@@ -155,12 +155,12 @@ public class OpCodeLDB extends OpCode implements IOpCode {
 	        	byte offset_hi = operands[numberOfBytes-2];
 	        	byte dest_reg = operands[numberOfBytes-1];
 	        	
-	        	short valueRa = state_.getByteRegister((byte) (indexRa & 0xff)); 
+	        	short valueRa = state_.getWordRegister((short) (indexRa & 0xff)); 
 	        	
-	        	short offsetWord = (short) ((offset_hi << 8) | offset_lo);
+	        	short sOffset = (short) ((offset_hi << 8) | (offset_lo & 0xff));
 
-	        	offsetWord = (short) (valueRa + offsetWord);
-	        	System.out.println(String.format(" [0x%04X + 0x%04X]", valueRa, offsetWord));
+	        	short offsetWord = (short) (valueRa + sOffset);
+	        	System.out.println(String.format(" [0x%04X + 0x%04X]", valueRa, sOffset) + String.format("= 0x%04X ", offsetWord));
 	        	
 	        	//src_reg = (short) (operands[4] & 0xff);
 	        	

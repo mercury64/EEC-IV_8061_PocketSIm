@@ -80,6 +80,36 @@ public class OpCodeAN2B  extends OpCode implements IOpCode {
         byte Rb = operands[numberOfBytes-3];
         byte Rd  = (byte) (Ra + Rb) ;
         
+        if (this.getAddressModeType() == AddressMode.DIRECT)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.IMMEDIATE)
+		{
+        	System.err.println("Not Implemented yet.");
+        	//System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.INDIRECT)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.SHORT_INDEXED)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
+        if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
+		{
+        	System.err.println("Not Implemented yet.");
+        	System.exit(1);
+		}
         
         
         short result = state_.doAdd(Ra, Rb);

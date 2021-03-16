@@ -209,8 +209,8 @@ args    6f55 6f58 : E 2 f0 N  : UW N
 word    6fc6 7015
 
 code    7016 72dc
-args    711e 711f : O 2 UY 
-args    7123 7124 : O 2 UY 
+args    711e 711f : W
+args    7123 7124 : W
 vect    72de 733f
 
 code    7340 7426
@@ -230,8 +230,8 @@ byte    7427 7427
 code    7434 75ec
 args    7437 7438 : O 2 UY 
 args    7485 7486 : O 2 UY 
-args    748a 748f : O 2 UY  : O 2 UY  : O 2 UY 
-args    7493 7498 : O 2 UY  : O 2 UY  : O 2 UY 
+args    748a 748f : W:W:W
+args    7493 7498 : W:W:W
 byte    75ee 75ee
 
 
@@ -280,7 +280,7 @@ args    7a6f 7a72 : O 2 UY  : O 2 UY
 args    7a75 7a78 : O 2 UY  : O 2 UY 
 args    7a7b 7a7e : O 2 UY  : O 2 UY 
 args    7a81 7a84 : O 2 UY  : O 2 UY 
-args    7d30 7d31 : O 2 UY 
+args    7d30 7d31 : W 
 
 word    7d34 7d35
 word    7d36 7d37
@@ -288,32 +288,32 @@ word    7d38 7d39
 
 
 code    7d3a 96ec
-args    7d3c 7d41 : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    7d47 7d4c : E 3 f0 N  : O 2 UY  : O 2 UY 
+args    7d3c 7d41 : E 3 f0 N  : E 3 f0 N  : W
+args    7d47 7d4c : E 3 f0 N  : E 3 f0 N  : W
 args    7d53 7d5a : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    7d5d 7d62 : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    7d68 7d6d : E 3 f0 N  : E 3 f0 N  : O 2 UY 
+args    7d5d 7d62 : E 3 f0 N  : E 3 f0 N  : W
+args    7d68 7d6d : E 3 f0 N  : E 3 f0 N  : W
 args    7d74 7d7b : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    7d88 7d89 : O 2 UY 
+args    7d88 7d89 : W 
 args    7d8f 7d96 : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    7da0 7da5 : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    7dab 7db0 : E 3 f0 N  : O 2 UY  : O 2 UY 
+args    7da0 7da5 : E 3 f0 N  : E 3 f0 N  : W
+args    7dab 7db0 : E 3 f0 N  : E 3 f0 N  : W 
 args    7db7 7dbe : O 2 UY  : O 2 UY  : O 2 UY  : O 2 UY 
-args    7dc1 7dc6 : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    7dcc 7dd1 : E 3 f0 N  : E 3 f0 N  : O 2 UY 
+args    7dc1 7dc6 : E 3 f0 N  : E 3 f0 N  : W
+args    7dcc 7dd1 : E 3 f0 N  : E 3 f0 N  : W
 args    7dd7 7dde : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    7de5 7dee : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY  : O 2 UY 
-args    7df4 7df5 : O 2 UY 
+args    7df4 7df5 : W 
 args    7dfe 7e05 : O 2 UY  : O 2 UY  : O 2 UY  : O 2 UY 
 args    7e0a 7e11 : O 2 UY  : O 2 UY  : O 2 UY  : O 2 UY 
-args    7e1f 7e20 : O 2 UY 
-args    7e23 7e28 : E 3 f0 N  : O 2 UY  : O 2 UY 
-args    7e31 7e32 : O 2 UY 
+args    7e1f 7e20 : W 
+args    7e23 7e28 : E 3 f0 N  : E 3 f0 N  : W
+args    7e31 7e32 : W 
 args    7e37 7e37 : UY 
 args    7eb8 7eb9 : E 3 f0 N 
-args    7ebf 7ec0 : O 2 UY 
+args    7ebf 7ec0 : W 
 args    7ec6 7ec7 : E 3 f0 N 
-args    7ecd 7ece : O 2 UY 
+args    7ecd 7ece : W 
 args    7ee5 7ee9 : UY  : UW N  : UW N 
 args    7eec 7ef0 : O 2 UY  : O 2 UY  : UY 
 args    7f00 7f04 : O 2 UY  : O 2 UY  : UY 
@@ -326,53 +326,53 @@ args    7f43 7f47 : O 2 UY  : O 2 UY  : UY
 args    7f4a 7f4e : O 2 UY  : O 2 UY  : UY 
 args    7f9e 7f9e : UY 
 args    8012 8013 : E 3 f0 N 
-args    802e 802f : O 2 UY 
-args    804c 804d : O 2 UY 
+args    802e 802f : W 
+args    804c 804d : W 
 args    80cc 80cc : UY 
 args    80e0 80e0 : UY 
-args    80e3 80e4 : O 2 UY 
-args    80e7 80e8 : O 2 UY 
-args    8112 8113 : O 2 UY 
-args    811c 811d : O 2 UY 
-args    8122 8123 : O 2 UY 
-args    812d 812e : O 2 UY 
-args    8134 8135 : O 2 UY 
-args    813b 813c : O 2 UY 
-args    8142 8143 : O 2 UY 
-args    8149 814a : O 2 UY 
-args    8150 8151 : O 2 UY 
+args    80e3 80e4 : W 
+args    80e7 80e8 : W 
+args    8112 8113 : W 
+args    811c 811d : W 
+args    8122 8123 : W 
+args    812d 812e : W 
+args    8134 8135 : W 
+args    813b 813c : W 
+args    8142 8143 : W 
+args    8149 814a : W 
+args    8150 8151 : W 
 args    8197 8198 : E 3 f0 N 
 args    819b 81a0 : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    81ba 81c1 : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    81c4 81cb : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    81d8 81d9 : O 2 UY 
+args    81d8 81d9 : W 
 args    81df 81e6 : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    81e9 81f0 : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    81f3 81fa : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    8223 8224 : E 3 f0 N 
 args    8227 8228 : E 3 f0 N 
-args    822b 822c : O 2 UY 
+args    822b 822c : W 
 args    8236 8237 : E 3 f0 N 
 args    8247 8248 : E 3 f0 N 
-args    824b 824c : O 2 UY 
+args    824b 824c : W 
 args    825e 825f : E 3 f0 N 
 args    8262 8263 : E 3 f0 N 
 args    826f 8270 : E 3 f0 N 
-args    8273 8274 : O 2 UY 
+args    8273 8274 : W
 args    8281 8282 : E 3 f0 N 
-args    8285 8286 : O 2 UY 
+args    8285 8286 : W 
 args    8297 8298 : E 3 f0 N 
-args    829e 829f : O 2 UY 
+args    829e 829f : W
 args    82c0 82c0 : UY 
 args    82c4 82c5 : E 3 f0 N 
 args    82fe 82fe : UY 
 args    8302 8303 : E 3 f0 N 
 args    831a 831b : E 3 f0 N 
-args    8352 8353 : O 2 UY 
+args    8352 8353 : W
 args    835c 835d : E 3 f0 N 
 args    8365 8366 : E 3 f0 N 
 args    8372 837b : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY  : O 2 UY 
-args    83b8 83b9 : O 2 UY 
+args    83b8 83b9 : W 
 args    83c5 83c5 : UY 
 args    83c9 83ca : O 2 UY 
 args    83ce 83cf : O 2 UY 
@@ -380,13 +380,13 @@ args    841a 841b : E 3 f0 N
 args    841e 8423 : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    844f 8450 : E 3 f0 N 
 args    84c6 84c7 : E 3 f0 N 
-args    84d5 84d6 : O 2 UY 
-args    84df 84e0 : O 2 UY 
-args    84e7 84e8 : O 2 UY 
-args    84f2 84f3 : O 2 UY 
-args    850f 8510 : O 2 UY 
-args    8528 8529 : O 2 UY 
-args    8536 8537 : O 2 UY 
+args    84d5 84d6 : W 
+args    84df 84e0 : W 
+args    84e7 84e8 : W 
+args    84f2 84f3 : W 
+args    850f 8510 : W 
+args    8528 8529 : W 
+args    8536 8537 : W 
 args    85db 85dc : E 3 f0 N 
 args    85e6 85e7 : E 3 f0 N 
 args    893b 893e : E 2 f0 N  : UW N 
@@ -1097,7 +1097,7 @@ word    c164 c165
 word    c166 c167
 word    c168 c169
 word    c16a c16b
-word    c16c c16d
+byte    c16c c16d
 word    c16e c16f
 byte    c170 c170
 byte    c171 c171
@@ -1326,6 +1326,7 @@ byte    cba5 cba5
 byte    cba6 cba6
 byte    cba7 cba7
 byte    cba8 cba8
+word	cbaa cbab
 word    cbac cbad
 word    cbae cbaf
 word    cbb0 cbb1
@@ -1523,7 +1524,7 @@ sub  84987 "ROLLING_AVERAGE_FILTER_ROUTINE"
 sub  849a7 849ed  "SYTabLU_49a7"  $ F sytlu 38 34
 sub  849b6 849ed  "SYTabLU_49b6"  $ F sytlu 38 34
 sub  849b9 849ed  "UYTabLU_49b9"  $ F uytlu 38 34
-sub  849ee 84a1d  "Sub_49ee"  
+sub  849ee "TableInterpolation"  
 sub  84a1e 84a3e  "Sub_4a1e"  
 sub  84a3f 84aa9  "Sub_4a3f"  
 sub  84a5e 84aa9  "Sub_4a5e"  
@@ -1640,7 +1641,7 @@ sub  87e86 "GET_ADDRESS"
 sub  87ea1 "ThermactorAirTest" 
 sub  87ec3 87ed0  "Sub_7ec3"  
 sub  87ed7 87edb  "Sub_7ed7"  
-sub  87f51 87f96  "Sub_7f51"  
+sub  87f51 "Test_IO"  
 sub  87f69 87f96  "Sub_7f69"  
 sub  87f78 87f96  "Sub_7f78"  
 sub  87f97 87fb2  "Sub_7f97"  
@@ -1788,7 +1789,7 @@ sym 10  "StackPtr"                                    # autogenerated by SAD
 
 sym 12 "Tmr_OVF_cnt"
 
-sym  14 "ConsoleMode" : B 6
+# sym  14 "ConsoleMode" : B 6
 
 sym 25 "CHKAIR" : B 2
 sym 25 "BIFLG" : B 4
@@ -1815,7 +1816,7 @@ sym 28 "KAM_error" :B 7
 
 sym 29 "ECT_IN_RANGE" : B 3
 
-sym 2a "VIP_flags"
+#sym 2a "VIP_flags"
 sym 2a "Vscdt" :B 0
 sym 2a "Vscst" :B 1
 sym 2a "Vip_enable" :B 2
@@ -1853,16 +1854,16 @@ sym 2e "Kflg_local" : B 1
 sym 2e "Flags_bit2" : B 2
 sym 2e "???_Re_" : B 3
 sym 2e "WIGFLG" : B 4
-sym 2e "Disable_eolt" : B 5
+sym 2e "RMSPRU?" : B 5
 sym 2e "Egrfg2" : B 6
 sym 2e "Egrfg1" : B 7
 
 sym 2f "VIP_flags4"
-sym 2f "B0_VIP_flags4" :T 0
-sym 2f "B1_VIP_flags4" :T 1
+sym 2f "B0_GOOSE" :T 0
+sym 2f "B1_OneDigit_output?" :T 1
 sym 2f "B2_VIP_flags4" :T 2
 sym 2f "B3_VIP_flags4" :T 3
-sym 2f "Vvsfl1" :T 4
+sym 2f "Vvsfl1" : T 4
 sym 2f "Disable_isc" :T 5
 sym 2f "B6_VIP_flags4" :T 6
 sym 2f "B7_VIP_flags4" :T 7
@@ -1932,6 +1933,11 @@ sym 4c "B4_No_service" : B 4
 sym 4c "B5_Late_output" : B 5
 sym 4c "B6_Queued" : B 6
 
+sym 4e "B4_NEW_IDM" : T 4
+sym 4e "B6_NEW_BAP" : T 6
+sym 4e "B7_NEW_PIP" : T 7
+
+ 
 sym 4f "Flags_4f"
 sym 4f "B0_?Immediate?" : B 0
 sym 4f "B1_Bypass_time" : B 1
@@ -1955,8 +1961,10 @@ sym 50 "B7_Tblsflg" : B 7
 sym 52 "Flags_52"
 sym 52 "B2_DCLST_START_52" : B 2
 
-# sym 53 "Next_spout_beta" : B 7
+
 sym 53 "B5_CART_MODE_53" : B 5
+sym 53 "B6_IDM_BYPASS_53" : B 6
+# sym 53 "Next_spout_beta" : B 7
 
 sym 6c "Event_time"
 sym 6e "Event_timeH"
@@ -1964,7 +1972,7 @@ sym 6e "Event_timeH"
 sym 70 "Rtab"
 sym 72 "HSO_time"
 sym 74 "HSO_timeH"
-
+sym 75 "NEW_IRQs"
 
 sym 79 "ACIFLG" : B 0
 sym 79 "ACCFLG" : B 7
@@ -1972,7 +1980,7 @@ sym 79 "ACCFLG" : B 7
 sym 7a "Prev_PIP_time"
 sym 7c "Prev_PIP_timeH"
 
-sym 83 "Last_HSI"
+sym 83 "HSI_State"
 sym 84 "Reftime"
 sym 86 "ReftimeH"
 
@@ -1981,6 +1989,8 @@ sym 88 "TablePTR"
 sym 8a "RATCH"
 sym 8d "VSBAR"
 
+sym 90 "Flags_90"
+sym 90 "B4_BRAKE_INPUT_90" : T 4
 
 sym 91 "VBAT"
 sym 92 "ISCDTY"
@@ -2004,10 +2014,10 @@ sym 9e "B4_EGREN_9e" : B 4
 sym 9f "Flags_9f"
 #sym 9f "Swtfl" : B 0
 #sym 9f "Egofl" : B 1
-sym 9f "OLFLG" : B 2
+sym 9f "B2_OLFLG" : B 2
 #sym 9f "Qclol" : B 3
-#sym 9f "Signdy" : B 4
-#sym 9f "Signdslp" : B 5
+sym 9f "B4_SignedOutput" : B 4
+sym 9f "B5_SignedInput" : B 5
 #sym 9f "Indflg" : B 6
 #sym 9f "A3C" : B 7
 
@@ -2093,7 +2103,7 @@ sym e1 "B2_CCD_HP" : B 2
 sym 106 "EGOBAR"
 sym 108 "ITOT"
 sym 10e "VSS_Raw"
-sym 10a "Key_Pwr"
+sym 10a "VKYPWR"
 sym 10c "IOCC"
 Sam 10e "IVCAL"
 sym 110 "IECT"
@@ -2146,12 +2156,16 @@ sym 1f8 "BCSDC"
 sym 204 "VS"
 sym 213 "ECTCNT"
 
+sym 216 "MAPTMR"
+
 sym 217 "VACUUM"
 
 sym 22c "Tsladv"
 sym 230 "Retinc"
 sym 239 "Pip_counter"
 sym 23a "ATMR1_LST"
+
+sym 23c "TSLIDM"
 
 sym 240 "HSOQ"   # HSO queue entries 
 sym 242 "SvStack"
@@ -2198,6 +2212,8 @@ sym 3b2 "RPMERR_S"
 sym 3da "TCSTRT"
 
 sym 3e0 "DWLBSE"
+sym 3e4 "DWLIDM"
+
 sym 3ea "POFFENG"
 sym 3ec "PPERENG"
 
@@ -2295,11 +2311,13 @@ sym 928 "CART_Status_928"
 sym 928 "B0_CART_Status" : B 0
 sym 928 "B5_CART_Status" : B 5
 
+sym c80 "ConsoleMode" : B 6
 # sym d00 "LastSWtime"
 
 sym 2004 "FIXSUM"
 
 sym 22c8 "HSO_Table"
+sym 2925 "MAP"
 sym 29a6 "ATMR1"
 sym 29cd "Send_HSO_Cmd"
 sym 2a4c "Do_CmdN"
@@ -2492,6 +2510,7 @@ sym cb7a "400_RPM"
 
 sym cb7c "CRKTM1"
 
+sym cb80 "BIHP"
 sym cb83 "PFEHP"
 sym cb85 "THRMHP"
 sym cb86 "TSTRAT"
