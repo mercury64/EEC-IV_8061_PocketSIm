@@ -337,6 +337,22 @@
 4243 # 2 = Low Data Rate Distributorless dual plug (LDR_DIS)
 
 4689 # 29.875 * 8 = 239 = 0xEF
+
+# BITMAP_0
+47b2 # Bit 6: 1 if not in neutral or park.
+47b8 # Bit 7: 1 if fuel pump is on.
+47be # Bit 2: 1 if canister purge has non-zero duty cycle.
+47c4 # Bit 3: 1 if A/C clutch is disengaged.
+
+# BITMAP_1
+47d0 # Bit 0: 1 if in closed loop fuel control.
+47d6 # Bit 1: 1 if power steering pressure switch is closed.
+47dc # Bit 2: 1 if driver has selected A/C.
+47e2 # Bit 4: 1 if Ignition Diagnostic Monitor EEC module input is high.
+47e8 # Bit 5: 1 if output AM1 is on.
+47ee # Bit 6: 1 if output AM2 is on.
+47f4 # Bit 0: 1 if alternate shift mode/overdrive cancel is selected.
+
 495a # new value - old average 
 495e # if unsigned
 
@@ -481,7 +497,7 @@
 6fd4 # 128,MAP vacuum circuit failure
  # 129,Insuff. MAP change-dyn resp. test.
  # 167,Insuff. TP change-dyn resp. test.
-6fd6 # ,
+6fd6 # 171,Heated oxygen sensor fault/not switching bank #1 or fuel system at adaptive limits
 6fd8 # 172,EGO sensor ckt. ind. system lean.
 6fda # 173,EGO sensor ckt. ind. system rich.
 6fdc # 179,Adaptive Fuel Limit Lean
@@ -628,6 +644,8 @@
 7d86 #126   | MAP/BP out of S-T range.           |    X    |  XX  |   X   |
 7df2 #539   | A/C Swith error                    |    X    |      |       |
 7e1c #519   | PSPS ckt. open.                    |    X    |      |       |
+7e21 #VO_IVPWR_COM1
+7e27 #513   | Failure in EEC ref. voltage.       |    X    |      |       |
 7e2f #633   | 4X4 Switch closed                  |    X    |      |       |
 
 7e85 \n#######################################################
@@ -651,11 +669,11 @@
 7ebd #543   | FP Ckt Open Bat. to Relay          |    X    |      |   X   |
 
 7f50 \n#################################################################
-7f50 \n# Four data bytes follow calls to this function (R1A,1B,1C,1D)
-7f50 \n# R1A - is Trouble Code if there is an error
-7f50 \n# R1B - ROM loc for limit 8F86 + this offset (word)
-7f50 \n# R1C - parameter flag - mask to select the device (Fan, CANP, FuelPump etc)
-7f50 \n# R1D - pointer to SFR flag byte usually R46 or 47 for output lines
+7f50 \n# Five data bytes follow calls to this function (R1A,1B,1C,1D,1E)
+7f50 \n# R1A, R1B - is Trouble Code if there is an error
+7f50 \n# R1C - MASK
+7f50 \n# R1D - parameter flag to select device?
+7f50 \n# R1E - TIME???????
 7f50 \n# The OCC AD channel must be a supply voltage to the actuators
 7f50 \n# This performs 'circuit' tests
 7f50 \n# Measure any variation in voltage when the selected output line is switched

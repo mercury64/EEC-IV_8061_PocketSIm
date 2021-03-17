@@ -108,8 +108,6 @@
  Warning - Extra Parameters Ignored
 ## sub  84763 847fb  "Sub_4763"  
  Warning - Extra Parameters Ignored
-## sub  847a8 847fb  "Sub_47a8"  
- Warning - Extra Parameters Ignored
 ## sub  847fc 84864  "Sub_47fc"  
  Warning - Extra Parameters Ignored
 ## sub  84865 848da  "SUYFuncLU_4865"  $ F suyflu 32
@@ -296,10 +294,6 @@
  Warning - Extra Parameters Ignored
 ## sub  87d08 87d0b  "Sub_7d08"  
  Warning - Extra Parameters Ignored
-## sub  87d3a 87d9d  "Sub_7d3a"  
- Warning - Extra Parameters Ignored
-## sub  87d9e 87ed6  "Sub_7d9e"  
- Warning - Extra Parameters Ignored
 ## sub  87e35 880dc  "Sub_7e35"  
  Warning - Extra Parameters Ignored
 ## sub  87e3d 880dc  "Sub_7e3d"  
@@ -311,10 +305,6 @@
 ## sub  87ec3 87ed0  "Sub_7ec3"  
  Warning - Extra Parameters Ignored
 ## sub  87ed7 87edb  "Sub_7ed7"  
- Warning - Extra Parameters Ignored
-## sub  87f69 87f96  "Sub_7f69"  
- Warning - Extra Parameters Ignored
-## sub  87f78 87f96  "Sub_7f78"  
  Warning - Extra Parameters Ignored
 ## sub  87f97 87fb2  "Sub_7f97"  
  Warning - Extra Parameters Ignored
@@ -356,19 +346,11 @@
  Warning - Extra Parameters Ignored
 ## sub  8824f 8840a  "Sub_824f"  
  Warning - Extra Parameters Ignored
-## sub  8826a 8840a  "Sub_826a"  
- Warning - Extra Parameters Ignored
-## sub  8827c 8840a  "Sub_827c"  
- Warning - Extra Parameters Ignored
-## sub  8828f 8840a  "Sub_828f"  
- Warning - Extra Parameters Ignored
 ## sub  882b5 882fa  "Sub_82b5"  
  Warning - Extra Parameters Ignored
 ## sub  882ba 882fa  "Sub_82ba"  
  Warning - Extra Parameters Ignored
 ## sub  882f6 882fa  "Sub_82f6"  
- Warning - Extra Parameters Ignored
-## sub  882fb 8830b  "Sub_82fb"  
  Warning - Extra Parameters Ignored
 ## sub  8830c 8840a  "Sub_830c"  
  Warning - Extra Parameters Ignored
@@ -740,7 +722,7 @@ args    711e 711f : UW
 args    7123 7124 : UW 
 vect    72de 733f
 args    7379 737a : O 2 UY 
-args    738f 7393 : O 2 UY  : O 2 UY  : UY 
+args    738f 7393 : UW  : UW  : UY 
 args    73ac 73ad : O 2 UY 
 args    73b1 73b2 : O 2 UY 
 args    73e1 73e6 : E 3 f0 N  : E 3 f0 N  : UW N 
@@ -753,8 +735,8 @@ args    7426 7429 : E 3 f0 N  : E 3 f0 N
 args    7430 7433 : E 3 f0 N  : E 3 f0 N 
 args    7437 7438 : O 2 UY 
 args    7485 7486 : O 2 UY 
-args    748a 748f : UW  : UW  : UW 
-args    7493 7498 : UW  : UW  : UW 
+args    748a 748f : E 3 f0 N  : E 3 f0 N  : UW N 
+args    7493 7498 : E 3 f0 N  : E 3 f0 N  : UW N 
 byte    75ee 75ee
 word    7698 7699
 byte    769a 769a
@@ -774,7 +756,7 @@ args    7816 7817 : O 2 UY
 args    7841 7844 : E 2 f0 N  : UW N 
 args    788a 788b : O 2 UY 
 args    790a 790b : O 2 UY 
-args    7929 7932 : UW N  : E 3 f0 N  : E 3 f0 N  : O 2 UY  : O 2 UY 
+args    7929 7932 : UW  : E 3 f0 N  : E 3 f0 N  : UW  : UW 
 args    793f 7942 : O 2 UW 
 args    7946 7949 : O 2 UW 
 args    7958 795b : O 2 UW 
@@ -785,7 +767,7 @@ args    79f6 79f7 : O 2 UY
 args    7a04 7a05 : O 2 UY 
 args    7a11 7a14 : O 2 UY  : O 2 UY 
 args    7a25 7a26 : O 2 UY 
-args    7a2d 7a32 : O 2 UY  : O 2 UY  : O 2 UY 
+args    7a2d 7a32 : E 3 f0 N  : E 3 f0 N  : UW N 
 args    7a4e 7a50 : O 2 UY  : UY 
 args    7a54 7a55 : O 2 UY 
 args    7a5b 7a5c : O 2 UY 
@@ -802,22 +784,22 @@ word    7d36 7d37  "CheckSumEnd"
 word    7d38 7d39
 args    7d3c 7d41 : E 3 f0 N  : E 3 f0 N  : UW 
 args    7d47 7d4c : E 3 f0 N  : E 3 f0 N  : UW 
-args    7d53 7d5a : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
+args    7d53 7d5a : UW  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    7d5d 7d62 : E 3 f0 N  : E 3 f0 N  : UW 
 args    7d68 7d6d : E 3 f0 N  : E 3 f0 N  : UW 
-args    7d74 7d7b : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
+args    7d74 7d7b : UW  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    7d88 7d89 : UW 
-args    7d8f 7d96 : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
+args    7d8f 7d96 : UW  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    7da0 7da5 : E 3 f0 N  : E 3 f0 N  : UW 
 args    7dab 7db0 : E 3 f0 N  : E 3 f0 N  : UW 
-args    7db7 7dbe : O 2 UY  : O 2 UY  : O 2 UY  : O 2 UY 
+args    7db7 7dbe : UW  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    7dc1 7dc6 : E 3 f0 N  : E 3 f0 N  : UW 
 args    7dcc 7dd1 : E 3 f0 N  : E 3 f0 N  : UW 
-args    7dd7 7dde : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    7de5 7dee : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY  : O 2 UY 
+args    7dd7 7dde : UW  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
+args    7de5 7dee : UW  : E 3 f0 N  : E 3 f0 N  : UW  : UW 
 args    7df4 7df5 : UW 
-args    7dfe 7e05 : O 2 UY  : O 2 UY  : O 2 UY  : O 2 UY 
-args    7e0a 7e11 : O 2 UY  : O 2 UY  : O 2 UY  : O 2 UY 
+args    7dfe 7e05 : UW  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
+args    7e0a 7e11 : UW  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    7e1f 7e20 : UW 
 args    7e23 7e28 : E 3 f0 N  : E 3 f0 N  : UW 
 args    7e31 7e32 : UW 
@@ -826,16 +808,16 @@ args    7eb8 7eb9 : E 3 f0 N
 args    7ebf 7ec0 : UW 
 args    7ec6 7ec7 : E 3 f0 N 
 args    7ecd 7ece : UW 
-args    7ee5 7ee9 : UY  : UW N  : UW N 
-args    7eec 7ef0 : O 2 UY  : O 2 UY  : UY 
-args    7f00 7f04 : O 2 UY  : O 2 UY  : UY 
-args    7f07 7f0b : UY  : UW N  : UW N 
-args    7f24 7f28 : O 2 UY  : O 2 UY  : UY 
-args    7f2e 7f32 : O 2 UY  : UW N  : UY 
-args    7f35 7f39 : O 2 UY  : O 2 UY  : UY 
-args    7f3c 7f40 : O 2 UY  : O 2 UY  : UY 
-args    7f43 7f47 : O 2 UY  : O 2 UY  : UY 
-args    7f4a 7f4e : O 2 UY  : O 2 UY  : UY 
+args    7ee5 7ee9 : UW  : UW  : UY 
+args    7eec 7ef0 : UW  : UW  : UY 
+args    7f00 7f04 : UW  : O 2 UY  : UY 
+args    7f07 7f0b : UW  : UW  : UY 
+args    7f24 7f28 : UW  : UW  : UY 
+args    7f2e 7f32 : UW  : UW  : UY 
+args    7f35 7f39 : UW  : UW  : UY 
+args    7f3c 7f40 : UW  : UW  : UY 
+args    7f43 7f47 : UW  : UW  : UY 
+args    7f4a 7f4e : UW  : UW  : UY 
 args    7f9e 7f9e : UY 
 args    8012 8013 : E 3 f0 N 
 args    802e 802f : UW 
@@ -855,8 +837,8 @@ args    8149 814a : UW
 args    8150 8151 : UW 
 args    8197 8198 : E 3 f0 N 
 args    819b 81a0 : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    81ba 81c1 : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
-args    81c4 81cb : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
+args    81ba 81c1 : UW  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
+args    81c4 81cb : UW  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    81d8 81d9 : UW 
 args    81df 81e6 : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
 args    81e9 81f0 : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY 
@@ -883,7 +865,7 @@ args    831a 831b : E 3 f0 N
 args    8352 8353 : UW 
 args    835c 835d : E 3 f0 N 
 args    8365 8366 : E 3 f0 N 
-args    8372 837b : O 2 UY  : E 3 f0 N  : E 3 f0 N  : O 2 UY  : O 2 UY 
+args    8372 837b : UW  : E 3 f0 N  : E 3 f0 N  : UW  : UW 
 args    83b8 83b9 : UW 
 args    83c5 83c5 : UY 
 args    83c9 83ca : O 2 UY 
@@ -1572,7 +1554,7 @@ byte    c154 c154  "trans_min_tv_pressure"
 word    c156 c157
 byte    c158 c158
 byte    c159 c159
-byte    c15a c15a
+byte    c15a c15a  "VTABFL"  
 byte    c15b c15b  "VTCEGO"  
 word    c15c c15d
 byte    c15e c15e
@@ -1843,6 +1825,7 @@ word    cc50 cc51
 word    cc52 cc53
 byte    cc54 cc54
 byte    cc76 cc76
+word    cc94 cc95  "VDLY2"  
 byte    cc9a cc9a
 word    cca8 cca9
 word    ccaa ccab
@@ -1969,7 +1952,7 @@ sub  84623 84631  "Sub_4623"
 sub  84632 84734  "Sub_4632"  
 sub  84735 84762  "Sub_4735"  
 sub  84763 847fb  "Sub_4763"  
-sub  847a8 847fb  "Sub_47a8"  
+sub  847a8 847fb  "BIMAP_DEFINITIONS"   #cmd
 sub  847fc 84864  "Sub_47fc"  
 sub  84865 848da  "SUYFuncLU_4865"  $ F suyflu 32
 sub  8486d 848da  "USYFuncLU_486d"  $ F usyflu 32
@@ -2091,14 +2074,16 @@ sub  87c10 87c21  "Sub_7c10"
 sub  87c22 87c3f  "Sub_7c22"  
 sub  87c40 87c61  "Sub_7c40"  
 sub  87c62 87ca0  "Sub_7c62"  
-sub  87ca1 87d9d  "Do_KOEO"   #cmd
+sub  87ca1 87d9d  "VO_EOTS_COM1"   #cmd
+sub  87cb0 87cb7  "FAIL_Loop"   #cmd
 sub  87ced 87d9d  "Sub_7ced"  
 sub  87cf9 87d03  "Sub_7cf9"  
 sub  87d04 87d0b  "Sub_7d04"  
 sub  87d08 87d0b  "Sub_7d08"  
-sub  87d0c 87d9d  "ROM_Checksum"   #cmd
-sub  87d3a 87d9d  "Sub_7d3a"  
-sub  87d9e 87ed6  "Sub_7d9e"  
+sub  87d0c 87d9d  "VO_ROM_COM1"   #cmd
+sub  87d3a 87d9d  "TEST_AD_SWITCHES_1"   #cmd
+sub  87d97 87d9d  "EXIT_THIS_TEST"   #cmd
+sub  87d9e 87ed6  "TEST_AD_SWITCHES_2"   #cmd
 sub  87e35 880dc  "Sub_7e35"  
 sub  87e3d 880dc  "Sub_7e3d"  
 sub  87e40 880dc  "Sub_7e40"  
@@ -2107,7 +2092,9 @@ sub  87e86 87ea0  "GET_ADDRESS"   #cmd
 sub  87ea1 87ec2  "ThermactorAirTest"   #cmd
 sub  87ec3 87ed0  "Sub_7ec3"  
 sub  87ed7 87edb  "Sub_7ed7"  
-sub  87f51 87f96  "Test_IO"   #cmd
+sub  87f51 87f96  "VO_OCC_COM12_Func1"   #cmd
+sub  87f69 87f96  "VO_OCC_COM12_Func2"   #cmd
+sub  87f78 87f96  "VO_OCC_COM12_Func4"   #cmd
 sub  87f97 87fb2  "Sub_7f97"  
 sub  87fb3 88403  "Sub_7fb3"  
 sub  87fcc 87fe4  "Sub_7fcc"  
@@ -2118,7 +2105,7 @@ sub  88032 88037  "Sub_8032"
 sub  88038 88056  "Sub_8038"  
 sub  88057 88074  "Sub_8057"  
 sub  88075 880c8  "Sub_8075"  
-sub  880c9 880dc  "SaveTCode1"   #cmd
+sub  880c9 880dc  "SET_SERVICE_CODE"   #cmd
 sub  880cd 880dc  "Sub_80cd"  
 sub  880dd 880fb  "Sub_80dd"  
 sub  880fc 8853c  "Sub_80fc"  
@@ -2130,13 +2117,15 @@ sub  881fd 8840a  "Sub_81fd"
 sub  8821a 8840a  "Sub_821a"  
 sub  8822f 8840a  "Sub_822f"  
 sub  8824f 8840a  "Sub_824f"  
-sub  8826a 8840a  "Sub_826a"  
-sub  8827c 8840a  "Sub_827c"  
-sub  8828f 8840a  "Sub_828f"  
+sub  8826a 8840a  "AIR_UPSTREAM"   #cmd
+sub  8827c 8840a  "AIR_DOWNSTREAM"   #cmd
+sub  8828f 8840a  "BLOCK_F2_VR_THERMAIR_COM2"   #cmd
+sub  882a0 8840a  "AM1_AM2_OFF"   #cmd
+sub  882a9 8840a  "BLOCK_AA"   #cmd
 sub  882b5 882fa  "Sub_82b5"  
 sub  882ba 882fa  "Sub_82ba"  
 sub  882f6 882fa  "Sub_82f6"  
-sub  882fb 8830b  "Sub_82fb"  
+sub  882fb 8830b  "DELAY_SEC"   #cmd
 sub  8830c 8840a  "Sub_830c"  
 sub  88318 8840a  "Sub_8318"  
 sub  88326 8840a  "Sub_8326"  
@@ -2144,6 +2133,7 @@ sub  8835a 8840a  "Sub_835a"
 sub  88369 8840a  "Sub_8369"  
 sub  88393 8840a  "Sub_8393"  
 sub  883c2 88403  "Sub_83c2"  
+sub  88404 8840a  "EXIT"   #cmd
 sub  8840b 88417  "Sub_840b"  
 sub  88418 88425  "Sub_8418"  
 sub  88426 8853c  "Sub_8426"  
@@ -2297,7 +2287,7 @@ sym 2c  "Kam_codes" :B 4
 sym 2c  "Vvsfl1" :B 5
 sym 2c  "Vegrbp" :B 6
 sym 2c  "Rmspru" :B 7
-sym 2d  "Vip_kam" :B 6
+sym 2d  "VIP_KAM" :B 6
 sym 2e  "Flags_2e"
 sym 2e  "Idm_bypass" :B 0
 sym 2e  "Kflg_local" :B 1
@@ -2397,6 +2387,7 @@ sym 88  "TablePTR"
 sym 8a  "RATCH"
 sym 8d  "VSBAR"
 sym 90  "Flags_90"
+sym 90  "B3_V_FPMFLG_90" :B 3
 sym 90  "B4_BRAKE_INPUT_90" :B 4
 sym 91  "VBAT"
 sym 92  "ISCDTY"
@@ -2506,9 +2497,11 @@ sym 167  "LOACT"
 sym 168  "BPCOR"
 sym 176  "KAMRF1"
 sym 181  "CRKPIP_CTR"
+sym 184  "OCCSAV"
 sym 192  "Ibeta1"
 sym 196  "A3CTMR"
 sym 19c  "TBART"
+sym 1bc  "TSSTIL_TMR"
 sym 1be  "Miltmr"
 sym 1c1  "Vip_timer_ex"
 sym 1d0  "SparkAdvance"
@@ -2575,7 +2568,23 @@ sym 428  "V_BOOSPD_TMR"
 sym 43e  "AC_PPM"
 sym 509  "XDCL_BAUD"
 sym 50e  "BITMAP_0"
+sym 50e  "B0_BITMAP_0" :B 0
+sym 50e  "B1_BITMAP_0" :B 1
+sym 50e  "B2_BITMAP_0" :B 2
+sym 50e  "B3_BITMAP_0" :B 3
+sym 50e  "B4_BITMAP_0" :B 4
+sym 50e  "B5_BITMAP_0" :B 5
+sym 50e  "B6_BITMAP_0" :B 6
+sym 50e  "B7_BITMAP_0" :B 7
 sym 510  "BITMAP_1"
+sym 510  "B0_BITMAP_1" :B 0
+sym 510  "B1_BITMAP_1" :B 1
+sym 510  "B2_BITMAP_1" :B 2
+sym 510  "B3_BITMAP_1" :B 3
+sym 510  "B4_BITMAP_1" :B 4
+sym 510  "B5_BITMAP_1" :B 5
+sym 510  "B6_BITMAP_1" :B 6
+sym 510  "B7_BITMAP_1" :B 7
 sym 51a  "UART_MSG_51a"
 sym 51b  "CMD_CODE_51b"
 sym 51c  "BYTE_8"
@@ -2647,7 +2656,11 @@ sym b003  "bit5HSI_Line_Select" :B 5
 sym b003  "bit6HSI_Line_Select" :B 6
 sym b003  "bit7HSI_Line_Select" :B 7
 sym b046  "idle_rpm_adder_startup"
+sym c141  "V_HICKOKTM"
+sym c143  "V_LANSDTM"
 sym c16f  "V_BOOSPD_TM"
+sym cc95  "VIPTM2"
+sym cc96  "VATMR2"
 
 
 

@@ -2873,7 +2873,7 @@
 3b9a: c7,ee,80,42         stb   R42,[Ree+80]     KAMQA = R42;
 3b9e: c7,ee,98,30         stb   R30,[Ree+98]     KAMQB = R30;
 3ba2: c7,ee,c8,32         stb   R32,[Ree+c8]     KAMQC = R32;
-3ba6: 91,40,2d            orb   R2d,40           Vip_kam = 1;
+3ba6: 91,40,2d            orb   R2d,40           VIP_KAM = 1;
 3ba9: ef,03,40            call  7baf             Clear_KAM ();
 3bac: b1,80,3a            ldb   R3a,80           R3a = 80;                         # Default 80h value.
 3baf: ad,6a,30            ldzbw R30,6a           wR30 = 6a;                        # 0x6a all 106 KAM locations.
@@ -4024,10 +4024,10 @@
 4780: d7,17               jne   4799             if ((R30 & 8c0f) = 0)  {
 4782: a3,ec,b4,42         ldw   R42,[Rec+b4]     R42 = [534];
 4786: 88,00,42            cmpw  R42,R0           
-4789: df,1d               je    47a8             if (R42 = 0) goto Sub_47a8;
+4789: df,1d               je    47a8             if (R42 = 0) goto BIMAP_DEFINITIONS;
 478b: b1,aa,32            ldb   R32,aa           R32 = aa;
 478e: c7,01,1f,09,32      stb   R32,[R0+91f]     [91f] = R32;
-4793: c9,a8,47            push  47a8             push(Sub_47a8);
+4793: c9,a8,47            push  47a8             push(BIMAP_DEFINITIONS);
 4796: c8,42               push  R42              push(R42);
 4798: f0                  ret                    return; }
 
@@ -4043,33 +4043,33 @@
                                                  B7_R31 = 1;
 47a3: c3,ec,b2,30         stw   R30,[Rec+b2]     DCL_XDCL_ERROR_532 = R30;
 47a7: fb                  ei                     enable intps; }
-   Sub_47a8:
+   BIMAP_DEFINITIONS:
 47a8: c7,01,1f,09,00      stb   R0,[R0+91f]      [91f] = 0;
 47ad: 01,42               clrw  R42              R42 = 0;
 47af: 36,9f,03            jnb   B6,R9f,47b5      if (B6_Flags_9f = 1)  {
-47b2: 91,40,42            orb   R42,40           B6_R42 = 1; }
+47b2: 91,40,42            orb   R42,40           B6_R42 = 1; }                     # Bit 6: 1 if not in neutral or park.
 47b5: 37,46,03            jnb   B7,R46,47bb      if (PUMP = 1)  {
-47b8: 91,80,42            orb   R42,80           B7_R42 = 1; }
+47b8: 91,80,42            orb   R42,80           B7_R42 = 1; }                     # Bit 7: 1 if fuel pump is on.
 47bb: 31,47,03            jnb   B1,R47,47c1      if (B1_Flags_47 = 1)  {
-47be: 91,04,43            orb   R43,4            B2_R43 = 1; }
+47be: 91,04,43            orb   R43,4            B2_R43 = 1; }                     # Bit 2: 1 if canister purge has non-zero duty cycle.
 47c1: 36,46,03            jnb   B6,R46,47c7      if (WOT_AC = 1)  {
-47c4: 91,08,43            orb   R43,8            B3_R43 = 1; }
+47c4: 91,08,43            orb   R43,8            B3_R43 = 1; }                     # Bit 3: 1 if A/C clutch is disengaged.
 47c7: c3,ec,8e,42         stw   R42,[Rec+8e]     BITMAP_0 = R42;
 47cb: 01,42               clrw  R42              R42 = 0;
 47cd: 3a,9f,03            jb    B2,R9f,47d3      if (B2_OLFLG = 0)  {
-47d0: 91,01,42            orb   R42,1            B0_R42 = 1; }
+47d0: 91,01,42            orb   R42,1            B0_R42 = 1; }                     # Bit 0: 1 if in closed loop fuel control.
 47d3: 30,8f,03            jnb   B0,R8f,47d9      if (B0_R8f = 1)  {
-47d6: 91,02,42            orb   R42,2            B1_R42 = 1; }
+47d6: 91,02,42            orb   R42,2            B1_R42 = 1; }                     # Bit 1: 1 if power steering pressure switch is closed.
 47d9: 37,79,03            jnb   B7,R79,47df      if (ACCFLG = 1)  {
-47dc: 91,04,42            orb   R42,4            B2_R42 = 1; }
+47dc: 91,04,42            orb   R42,4            B2_R42 = 1; }                     # Bit 2: 1 if driver has selected A/C.
 47df: 37,8e,03            jnb   B7,R8e,47e5      if (B7_R8e = 1)  {
-47e2: 91,10,42            orb   R42,10           B4_R42 = 1; }
+47e2: 91,10,42            orb   R42,10           B4_R42 = 1; }                     # Bit 4: 1 if Ignition Diagnostic Monitor EEC module input is high.
 47e5: 30,46,03            jnb   B0,R46,47eb      if (AM1 = 1)  {
-47e8: 91,20,42            orb   R42,20           B5_R42 = 1; }
+47e8: 91,20,42            orb   R42,20           B5_R42 = 1; }                     # Bit 5: 1 if output AM1 is on.
 47eb: 36,47,03            jnb   B6,R47,47f1      if (AM2 = 1)  {
-47ee: 91,40,42            orb   R42,40           B6_R42 = 1; }
+47ee: 91,40,42            orb   R42,40           B6_R42 = 1; }                     # Bit 6: 1 if output AM2 is on.
 47f1: 37,e0,03            jnb   B7,Re0,47f7      if (B7_Re0 = 1)  {
-47f4: 91,01,43            orb   R43,1            B0_R43 = 1; }
+47f4: 91,01,43            orb   R43,1            B0_R43 = 1; }                     # Bit 0: 1 if alternate shift mode/overdrive cancel is selected.
 47f7: c3,ec,90,42         stw   R42,[Rec+90]     BITMAP_1 = R42;
 47fb: f0                  ret                    return;
 
@@ -7916,7 +7916,7 @@ ERROR CODE DESCRIPTION
 6fd0: 23,01               word    123                                              # 123,TPS ckt. above max. voltage.
 6fd2: 26,01               word    126                                              # 126,MAP/BP out of S-T range.
 6fd4: 28,01               word    128                                              # 128,MAP vacuum circuit failure
-6fd6: 71,01               word    171                                              # ,
+6fd6: 71,01               word    171                                              # 171,Heated oxygen sensor fault/not switching bank #1 or fuel system at adaptive limits
 6fd8: 72,01               word    172                                              # 172,EGO sensor ckt. ind. system lean.
 6fda: 73,01               word    173                                              # 173,EGO sensor ckt. ind. system rich.
 6fdc: 79,01               word    179                                              # 179,Adaptive Fuel Limit Lean
@@ -7995,7 +7995,7 @@ ERROR CODE DESCRIPTION
 7085: 3b,45,02            jb    B3,R45,708a      if (B3_Flags_2B = 1) goto 708a; }
 7088: 20,53               sjmp  70dd             return; }
 
-708a: a3,e4,3c,42         ldw   R42,[Re4+3c]     R42 = [1bc];
+708a: a3,e4,3c,42         ldw   R42,[Re4+3c]     R42 = TSSTIL_TMR;
 708e: 99,04,43            cmpb  R43,4            
 7091: d3,4a               jnc   70dd             if (R43 < 4) return;
 7093: 32,2a,47            jnb   B2,R2a,70dd      if (VIP_ENABLE = 0) return;
@@ -8073,10 +8073,10 @@ ERROR CODE DESCRIPTION
 7113: b1,10,19            ldb   R19,10           R19 = 10;
 7116: 88,30,00            cmpw  R0,R30           
 7119: d7,05               jne   7120             if (R30 = 0)  {
-711b: ef,ab,0f            call  80c9             SaveTCode1 (
+711b: ef,ab,0f            call  80c9             SET_SERVICE_CODE (
 711e: 11,01                     #arg 1              111 );
 711e: 11,01               #args                  }                                 # E11 - System PASS
-7120: ef,a6,0f            call  80c9             SaveTCode1 (
+7120: ef,a6,0f            call  80c9             SET_SERVICE_CODE (
 7123: 00,00                     #arg 1              0 );
 7123: 00,00               #args                                                    # E 00 (end of errors? )
 7125: d3,f9               jnc   7120             if (R30 <= ffff) goto 7120;
@@ -8112,7 +8112,7 @@ ERROR CODE DESCRIPTION
 
 716f: 71,fd,2b            an2b  R2b,fd           STO_Lowspeed_r = 0;
 7172: 28,42               scall 71b6             Sub_71b6 (); }
-7174: e7,8d,12            jump  8404             goto 8404;
+7174: e7,8d,12            jump  8404             goto EXIT;
 
 #######################################################
 # ? DUMPS OUT HARD ERROR CODES?
@@ -8260,7 +8260,7 @@ ERROR CODE DESCRIPTION
 7292: 88,42,00            cmpw  R0,R42           
 7295: d7,0b               jne   72a2             if (R42 = 0)  {
 7297: a1,12,05,3a         ldw   R3a,512          R3a = 512;                        # 512, KAM Test Failed
-729b: 3e,2d,3a            jb    B6,R2d,72d8      if (Vip_kam = 1) goto 72d8;
+729b: 3e,2d,3a            jb    B6,R2d,72d8      if (VIP_KAM = 1) goto 72d8;
 729e: a1,11,01,3a         ldw   R3a,111          R3a = 111; }                      # 111, PASS 
 72a2: a0,42,30            ldw   R30,R42          R30 = R42;
 72a5: 08,03,30            shrw  R30,3            R30 >>= 3;                        #[ R30 /= 8] 
@@ -8288,10 +8288,10 @@ ERROR CODE DESCRIPTION
 
 72dd: ff                  ???   
 
-72de: a1,7c               vect  7ca1             Do_KOEO
+72de: a1,7c               vect  7ca1             VO_EOTS_COM1
 72e0: ed,7c               vect  7ced             Sub_7ced
-72e2: 3a,7d               vect  7d3a             Sub_7d3a
-72e4: 9e,7d               vect  7d9e             Sub_7d9e
+72e2: 3a,7d               vect  7d3a             TEST_AD_SWITCHES_1
+72e4: 9e,7d               vect  7d9e             TEST_AD_SWITCHES_2
 72e6: d7,7e               vect  7ed7             Sub_7ed7
 72e8: a1,7e               vect  7ea1             ThermactorAirTest
 72ea: c3,7e               vect  7ec3             Sub_7ec3
@@ -8311,9 +8311,9 @@ ERROR CODE DESCRIPTION
 7306: 1a,82               vect  821a             Sub_821a
 7308: 2f,82               vect  822f             Sub_822f
 730a: 4f,82               vect  824f             Sub_824f
-730c: 6a,82               vect  826a             Sub_826a
-730e: 7c,82               vect  827c             Sub_827c
-7310: 8f,82               vect  828f             Sub_828f
+730c: 6a,82               vect  826a             AIR_UPSTREAM
+730e: 7c,82               vect  827c             AIR_DOWNSTREAM
+7310: 8f,82               vect  828f             BLOCK_F2_VR_THERMAIR_COM2
 7312: 0c,83               vect  830c             Sub_830c
 7314: 18,83               vect  8318             Sub_8318
 7316: 26,83               vect  8326             Sub_8326
@@ -8354,7 +8354,7 @@ ERROR CODE DESCRIPTION
 735d: 37,46,1d            jnb   B7,R46,737d      if (PUMP = 0) goto 737d;
 7360: 3e,a5,03            jb    B6,Ra5,7366      if (UNDSP = 0)  {
 7363: 91,20,2e            orb   R2e,20           RMSPRU? = 1; }
-7366: 3b,90,0d            jb    B3,R90,7376      if (B3_Flags_90 = 0)  {
+7366: 3b,90,0d            jb    B3,R90,7376      if (B3_V_FPMFLG_90 = 0)  {
 7369: b3,e4,40,42         ldb   R42,[Re4+40]     R42 = [1c0];
 736d: 9b,fe,7d,42         cmpb  R42,[Rfe+7d]     
 7371: d3,03               jnc   7376             if (R42 >= [cbd7])  {
@@ -8370,12 +8370,10 @@ ERROR CODE DESCRIPTION
 7383: ef,65,fe            call  71eb             Get_DiagCodes ();
 7386: ef,5c,0c            call  7fe5             Sub_7fe5 ();
 7389: c9,94,73            push  7394             push(Sub_7394);
-738c: ef,c2,0b            call  7f51             Test_IO (
-738f: 04                        #arg 1              4,
-7390: 00                        #arg 2              0,
-7391: 80                        #arg 3              80,
-7392: 46                        #arg 4              46
-7393: 00                        #arg 5              0 );
+738c: ef,c2,0b            call  7f51             VO_OCC_COM12_Func1 (
+738f: 04,00                     #arg 1              4,
+7391: 80,46                     #arg 2              4680
+7393: 00                        #arg 3              0 );
    Sub_7394:
 7394: 90,1a,2f            orb   R2f,R1a          VIP_flags4 |= R1a;
 7397: 20,15               sjmp  73ae             goto 73ae; }
@@ -8383,7 +8381,7 @@ ERROR CODE DESCRIPTION
 7399: b3,e4,40,42         ldb   R42,[Re4+40]     R42 = [1c0];
 739d: 9b,fe,7d,42         cmpb  R42,[Rfe+7d]     
 73a1: d3,06               jnc   73a9             if (R42 >= [cbd7])  {
-73a3: 33,90,03            jnb   B3,R90,73a9      if (B3_Flags_90 = 1)  {
+73a3: 33,90,03            jnb   B3,R90,73a9      if (B3_V_FPMFLG_90 = 1)  {
 73a6: 91,04,2f            orb   R2f,4            B2_VIP_flags4 = 1; } }
 73a9: ef,52,07            call  7afe             ?Fault_Filter_Routine? (
 73ac: 1a                        #arg 1              1a
@@ -8477,13 +8475,13 @@ ERROR CODE DESCRIPTION
 7486: 0f                        #arg 2              f );
 7485: 07,0f               #args                  }
 7487: ef,b6,09            call  7e40             Sub_7e40 (
-748a: 78,f0                     #arg 1              f078,
-748c: 1c,01                     #arg 2              11c,
-748e: 04,01                     #arg 3              104 );
+748a: 78,f0                     #arg 1              TAPMIN,
+748c: 1c,01                     #arg 2              ITP,
+748e: 04,01                     #arg 3              EGRBAR );
 7490: ef,ad,09            call  7e40             Sub_7e40 (
-7493: 1c,01                     #arg 1              11c,
-7495: 76,f0                     #arg 2              f076,
-7497: 05,00                     #arg 3              5 );
+7493: 1c,01                     #arg 1              ITP,
+7495: 76,f0                     #arg 2              TAPMAX,
+7497: 05,00                     #arg 3              AD_High );
 7499: af,fe,43,1c         ldzbw R1c,[Rfe+43]     wR1c = fuel_adaptive_min;
 749d: 65,80,00,1c         ad2w  R1c,80           R1c += 80;
 74a1: af,fe,44,1e         ldzbw R1e,[Rfe+44]     wR1e = fuel_adaptive_max;
@@ -8936,13 +8934,11 @@ ERROR CODE DESCRIPTION
 7920: 3c,2e,03            jb    B4,R2e,7926      if (WIGFLG = 0)  {
 7923: 37,2f,24            jnb   B7,R2f,794a      if (B7_VIP_flags4 = 0) goto 794a; }
 7926: ef,99,0a            call  83c2             Sub_83c2 (
-7929: 14,01                     #arg 1              IEGR,
+7929: 14,01                     #arg 1              114,
 792b: d6,f0                     #arg 2              cc30,
 792d: d2,f0                     #arg 3              EVPMIN,
-792f: 28                        #arg 4              28,
-7930: 03                        #arg 5              3,
-7931: 00                        #arg 6              0
-7932: 00                        #arg 7              0 );
+792f: 28,03                     #arg 4              328,
+7931: 00,00                     #arg 5              0 );
 7929: 14,01,d6,f0,d2,f0,28,03,00,00  #args   
 7933: 3c,2e,03            jb    B4,R2e,7939      if (WIGFLG = 0)  {
 7936: 37,2f,11            jnb   B7,R2f,794a      if (B7_VIP_flags4 = 0) goto 794a; }
@@ -9060,12 +9056,9 @@ ERROR CODE DESCRIPTION
 7a25: 0f,80               #args  
 7a27: 3e,53,0b            jb    B6,R53,7a35      if (B6_IDM_BYPASS_53 = 0)  {
 7a2a: ef,13,04            call  7e40             Sub_7e40 (
-7a2d: 3c                        #arg 1              3c,
-7a2e: 02                        #arg 2              2,
-7a2f: 88                        #arg 3              88,
-7a30: f0                        #arg 4              f0,
-7a31: 10                        #arg 5              10
-7a32: 80                        #arg 6              80 );
+7a2d: 3c,02                     #arg 1              TSLIDM,
+7a2f: 88,f0                     #arg 2              cbe2,
+7a31: 10,80                     #arg 3              8010 );
 7a33: 20,11               sjmp  7a46             goto 7a46; }
 
 7a35: a3,e6,bc,42         ldw   R42,[Re6+bc]     R42 = TSLIDM;
@@ -9353,27 +9346,28 @@ ERROR CODE DESCRIPTION
 7c9c: c3,e8,c0,1e         stw   R1e,[Re8+c0]     [340] = R1e;
 7ca0: f0                  ret                    return;
 
-   Do_KOEO:
+   VO_EOTS_COM1:
 7ca1: 3e,2e,22            jb    B6,R2e,7cc6      if (Egrfg2 = 0)  {
 7ca4: ef,21,ff            call  7bc8             Reset_STO ();
 7ca7: ef,96,09            call  8640             HW_Check ();
 7caa: ef,3e,f5            call  71eb             Get_DiagCodes ();
 7cad: 34,2a,08            jnb   B4,R2a,7cb8      if (DISABLE_NOSTART = 1)  {
+   FAIL_Loop:
 7cb0: ef,0d,ff            call  7bc0             Set_STO ();
 7cb3: b1,ff,d5            ldb   Rd5,ff           Rd5 = ff;
-7cb6: 27,f8               sjmp  7cb0             goto 7cb0; }
+7cb6: 27,f8               sjmp  7cb0             goto FAIL_Loop; }
 
-7cb8: ef,51,00            call  7d0c             ROM_Checksum ();
+7cb8: ef,51,00            call  7d0c             VO_ROM_COM1 ();
 7cbb: 11,38               clrb  R38              R38 = 0;
 7cbd: 91,40,2e            orb   R2e,40           Egrfg2 = 1;
 7cc0: 91,40,2a            orb   R2a,40           No_Start = 1;
 7cc3: 39,30,25            jb    B1,R30,7ceb      if (B1_R30 = 1) goto 7ceb; }
 7cc6: a3,e4,b6,3a         ldw   R3a,[Re4+b6]     R3a = PUTMR;
 7cca: 8b,e2,85,3a         cmpw  R3a,[Re2+85]     
-7cce: d3,28               jnc   7cf8             if (R3a < [c143]) return;
-7cd0: a3,e4,3c,3a         ldw   R3a,[Re4+3c]     R3a = [1bc];
+7cce: d3,28               jnc   7cf8             if (R3a < V_LANSDTM) return;
+7cd0: a3,e4,3c,3a         ldw   R3a,[Re4+3c]     R3a = TSSTIL_TMR;
 7cd4: 8b,e2,83,3a         cmpw  R3a,[Re2+83]     
-7cd8: d3,1e               jnc   7cf8             if (R3a < [c141]) return;
+7cd8: d3,1e               jnc   7cf8             if (R3a < V_HICKOKTM) return;
 7cda: fa                  di                     disable intps;
 7cdb: ff                  nop                    
 7cdc: 71,df,48            an2b  R48,df           ?Sto_trigger? = 0;
@@ -9382,13 +9376,13 @@ ERROR CODE DESCRIPTION
 7ce6: 28,11               scall 7cf9             Sub_7cf9 ();
 7ce8: 28,0f               scall 7cf9             Sub_7cf9 ();
 7cea: fb                  ei                     enable intps; }
-7ceb: 20,aa               sjmp  7d97             goto 7d97;
+7ceb: 20,aa               sjmp  7d97             goto EXIT_THIS_TEST;
 
    Sub_7ced:
 7ced: 3f,46,08            jb    B7,R46,7cf8      if (PUMP = 0)  {
 7cf0: 32,2a,05            jnb   B2,R2a,7cf8      if (VIP_ENABLE = 1)  {
 7cf3: ef,ef,02            call  7fe5             Sub_7fe5 ();
-7cf6: 20,9f               sjmp  7d97             goto 7d97; } } } }
+7cf6: 20,9f               sjmp  7d97             goto EXIT_THIS_TEST; } } } }
 
 7cf8: f0                  ret                    return;
 
@@ -9408,7 +9402,7 @@ ERROR CODE DESCRIPTION
 ############################################################
 # ROM Checksum
 ############################################################
-   ROM_Checksum:
+   VO_ROM_COM1:
 7d0c: 01,30               clrw  R30              R30 = 0;
 7d0e: 01,3c               clrw  R3c              R3c = 0;
 7d10: a1,34,7d,42         ldw   R42,7d34         R42 = CheckSumBase;
@@ -9421,16 +9415,16 @@ ERROR CODE DESCRIPTION
 7d25: 66,3b,3c            ad2w  R3c,[R3a++]      R3c += [R3a++];
 7d28: 88,3c,00            cmpw  R0,R3c           
 7d2b: df,05               je    7d32             if (R3c != 0)  {
-7d2d: ef,99,03            call  80c9             SaveTCode1 (                      #511   | ROM test failed                    |    X    |      |       |
+7d2d: ef,99,03            call  80c9             SET_SERVICE_CODE (                #511   | ROM test failed                    |    X    |      |       |
 7d30: 11,05                     #arg 1              511 );
 7d30: 11,05               #args                  }
-7d32: 20,63               sjmp  7d97             goto 7d97;
+7d32: 20,63               sjmp  7d97             goto EXIT_THIS_TEST;
 
 7d34: 00,20               word   2000            CheckSumBase                      # Start address (0x2000)
 7d36: fe,df               word   dffe            CheckSumEnd                       # End address  (0xdffe)
 7d38: 00,00               word      0
 
-   Sub_7d3a:
+   TEST_AD_SWITCHES_1:
 7d3a: 28,f9               scall 7e35             Sub_7e35 (
 7d3c: 7e,f0                     #arg 1              ECTMIN,
 7d3e: 10,01                     #arg 2              IECT,
@@ -9444,12 +9438,11 @@ ERROR CODE DESCRIPTION
 7d47: 10,01,80,f0,18,01   #args  
 7d4d: 3a,2f,0b            jb    B2,R2f,7d5b      if (B2_VIP_flags4 = 0)  {
 7d50: ef,8a,03            call  80dd             Sub_80dd (
-7d53: 10                        #arg 1              10,
-7d54: 01                        #arg 2              1,
-7d55: ea,f0                     #arg 3              cc44,
-7d57: e8,f0                     #arg 4              cc42,
-7d59: 16                        #arg 5              16
-7d5a: 01                        #arg 6              1 );
+7d53: 10,01                     #arg 1              110,
+7d55: ea,f0                     #arg 2              cc44,
+7d57: e8,f0                     #arg 3              cc42,
+7d59: 16                        #arg 4              16
+7d5a: 01                        #arg 5              1 );
 7d53: 10,01,ea,f0,e8,f0,16,01  #args             } }
 7d5b: 28,d8               scall 7e35             Sub_7e35 (
 7d5d: 12,b0                     #arg 1              TOTMIN,
@@ -9464,34 +9457,33 @@ ERROR CODE DESCRIPTION
 7d68: 08,01,14,b0,37,06   #args  
 7d6e: 3a,2f,0b            jb    B2,R2f,7d7c      if (B2_VIP_flags4 = 0)  {
 7d71: ef,69,03            call  80dd             Sub_80dd (
-7d74: 08                        #arg 1              8,
-7d75: 01                        #arg 2              1,
-7d76: 48,f1                     #arg 3              cca2,
-7d78: 46,f1                     #arg 4              cca0,
-7d7a: 36                        #arg 5              36
-7d7b: 06                        #arg 6              6 );
+7d74: 08,01                     #arg 1              108,
+7d76: 48,f1                     #arg 2              cca2,
+7d78: 46,f1                     #arg 3              cca0,
+7d7a: 36                        #arg 4              36
+7d7b: 06                        #arg 5              6 );
 7d74: 08,01,48,f1,46,f1,36,06  #args             } }
 7d7c: b3,e6,96,42         ldb   R42,[Re6+96]     R42 = MAPTMR;
 7d80: 9b,e2,1d,42         cmpb  R42,[Re2+1d]     
 7d84: d1,06               jleu  7d8c             if (R42 > [c1db])  {
-7d86: 2b,41               scall 80c9             SaveTCode1 (                      #126   | MAP/BP out of S-T range.           |    X    |  XX  |   X   |
+7d86: 2b,41               scall 80c9             SET_SERVICE_CODE (                #126   | MAP/BP out of S-T range.           |    X    |  XX  |   X   |
 7d88: 26,01                     #arg 1              126 );
 7d88: 26,01               #args  
-7d8a: 20,0b               sjmp  7d97             goto 7d97; }
+7d8a: 20,0b               sjmp  7d97             goto EXIT_THIS_TEST; }
 
 7d8c: ef,4e,03            call  80dd             Sub_80dd (
-7d8f: 00                        #arg 1              0,
-7d90: 02                        #arg 2              2,
-7d91: 0a,f1                     #arg 3              cc64,
-7d93: 0c,f1                     #arg 4              cc66,
-7d95: 26                        #arg 5              26
-7d96: 01                        #arg 6              1 );
+7d8f: 00,02                     #arg 1              200,
+7d91: 0a,f1                     #arg 2              cc64,
+7d93: 0c,f1                     #arg 3              cc66,
+7d95: 26                        #arg 4              26
+7d96: 01                        #arg 5              1 );
 7d8f: 00,02,0a,f1,0c,f1,26,01  #args   
+   EXIT_THIS_TEST:
 7d97: c7,e4,41,00         stb   R0,[Re4+41]      Vip_timer_ex = 0;
 7d9b: 17,38               incb  R38              R38++;
 7d9d: f0                  ret                    return;
 
-   Sub_7d9e:
+   TEST_AD_SWITCHES_2:
 7d9e: 28,95               scall 7e35             Sub_7e35 (
 7da0: 78,f0                     #arg 1              TAPMIN,
 7da2: 1c,01                     #arg 2              ITP,
@@ -9505,14 +9497,11 @@ ERROR CODE DESCRIPTION
 7dab: 1c,01,76,f0,23,01   #args  
 7db1: 3a,2f,0b            jb    B2,R2f,7dbf      if (B2_VIP_flags4 = 0)  {
 7db4: ef,26,03            call  80dd             Sub_80dd (
-7db7: 1c                        #arg 1              1c,
-7db8: 01                        #arg 2              1,
-7db9: 64                        #arg 3              64,
-7dba: f0                        #arg 4              f0,
-7dbb: 66                        #arg 5              66,
-7dbc: f0                        #arg 6              f0,
-7dbd: 21                        #arg 7              21
-7dbe: 01                        #arg 8              1 );
+7db7: 1c,01                     #arg 1              11c,
+7db9: 64,f0                     #arg 2              cbbe,
+7dbb: 66,f0                     #arg 3              cbc0,
+7dbd: 21                        #arg 4              21
+7dbe: 01                        #arg 5              1 );
 7db7: 1c,01,64,f0,66,f0,21,01  #args             } }
 7dbf: 28,74               scall 7e35             Sub_7e35 (
 7dc1: 70,f0                     #arg 1              ACTMIN,
@@ -9527,67 +9516,57 @@ ERROR CODE DESCRIPTION
 7dcc: 12,01,72,f0,13,01   #args  
 7dd2: 3a,2f,0a            jb    B2,R2f,7ddf      if (B2_VIP_flags4 = 0)  {
 7dd5: 2b,06               scall 80dd             Sub_80dd (
-7dd7: 12                        #arg 1              12,
-7dd8: 01                        #arg 2              1,
-7dd9: e2,f0                     #arg 3              cc3c,
-7ddb: e0,f0                     #arg 4              cc3a,
-7ddd: 14                        #arg 5              14
-7dde: 01                        #arg 6              1 );
+7dd7: 12,01                     #arg 1              112,
+7dd9: e2,f0                     #arg 2              cc3c,
+7ddb: e0,f0                     #arg 3              cc3a,
+7ddd: 14                        #arg 4              14
+7dde: 01                        #arg 5              1 );
 7dd7: 12,01,e2,f0,e0,f0,14,01  #args             } }
 7ddf: 3c,9e,0d            jb    B4,R9e,7def      if (B4_EGREN_9e = 0)  {
 7de2: ef,dd,05            call  83c2             Sub_83c2 (
-7de5: 14                        #arg 1              14,
-7de6: 01                        #arg 2              1,
-7de7: d6,f0                     #arg 3              cc30,
-7de9: d2,f0                     #arg 4              EVPMIN,
-7deb: 28                        #arg 5              28,
-7dec: 03                        #arg 6              3,
-7ded: 34                        #arg 7              34
-7dee: 03                        #arg 8              3 );
+7de5: 14,01                     #arg 1              114,
+7de7: d6,f0                     #arg 2              cc30,
+7de9: d2,f0                     #arg 3              EVPMIN,
+7deb: 28,03                     #arg 4              328,
+7ded: 34,03                     #arg 5              334 );
 7de5: 14,01,d6,f0,d2,f0,28,03,34,03  #args       }
 7def: 34,8e,04            jnb   B4,R8e,7df6      if (B4_R8e = 1)  {
-7df2: 2a,d5               scall 80c9             SaveTCode1 (                      #539   | A/C Swith error                    |    X    |      |       |
+7df2: 2a,d5               scall 80c9             SET_SERVICE_CODE (                #539   | A/C Swith error                    |    X    |      |       |
 7df4: 39,05                     #arg 1              539 );
 7df4: 39,05               #args                  }
 7df6: 9b,e2,2f,00         cmpb  R0,[Re2+2f]      
 7dfa: df,0c               je    7e08             if ([c1ed] != 0)  {
 7dfc: 2a,df               scall 80dd             Sub_80dd (
-7dfe: 18                        #arg 1              18,
-7dff: 01                        #arg 2              1,
-7e00: 26                        #arg 3              26,
-7e01: f1                        #arg 4              f1,
-7e02: 28                        #arg 5              28,
-7e03: f1                        #arg 6              f1,
-7e04: 54                        #arg 7              54
-7e05: 06                        #arg 8              6 );
+7dfe: 18,01                     #arg 1              118,
+7e00: 26,f1                     #arg 2              cc80,
+7e02: 28,f1                     #arg 3              cc82,
+7e04: 54                        #arg 4              54
+7e05: 06                        #arg 5              6 );
 7dfe: 18,01,26,f1,28,f1,54,06  #args   
 7e06: 20,0a               sjmp  7e12             goto 7e12; }
 
 7e08: 2a,d3               scall 80dd             Sub_80dd (
-7e0a: 18                        #arg 1              18,
-7e0b: 01                        #arg 2              1,
-7e0c: 2a                        #arg 3              2a,
-7e0d: f1                        #arg 4              f1,
-7e0e: 2c                        #arg 5              2c,
-7e0f: f1                        #arg 6              f1,
-7e10: 55                        #arg 7              55
-7e11: 06                        #arg 8              6 );
+7e0a: 18,01                     #arg 1              118,
+7e0c: 2a,f1                     #arg 2              cc84,
+7e0e: 2c,f1                     #arg 3              cc86,
+7e10: 55                        #arg 4              55
+7e11: 06                        #arg 5              6 );
 7e0a: 18,01,2a,f1,2c,f1,55,06  #args   
 7e12: b3,fe,2a,42         ldb   R42,[Rfe+2a]     R42 = [cb84];
 7e16: e0,42,08            djnz  R42,7e21         R42--;
                                                  if (R42 != 0) goto 7e21;
 7e19: 30,8f,05            jnb   B0,R8f,7e21      if (B0_R8f = 1)  {
-7e1c: ef,aa,02            call  80c9             SaveTCode1 (                      #519   | PSPS ckt. open.                    |    X    |      |       |
+7e1c: ef,aa,02            call  80c9             SET_SERVICE_CODE (                #519   | PSPS ckt. open.                    |    X    |      |       |
 7e1f: 19,05                     #arg 1              519 );
 7e1f: 19,05               #args                  } }
-7e21: 28,12               scall 7e35             Sub_7e35 (
+7e21: 28,12               scall 7e35             Sub_7e35 (                        #VO_IVPWR_COM1
 7e23: 50,f0                     #arg 1              VKYPWR,
 7e25: 0a,01                     #arg 2              IIVPWR,
 7e27: 13,05                     #arg 3              513 );
-7e23: 50,f0,0a,01,13,05   #args  
+7e23: 50,f0,0a,01,13,05   #args                                                    #513   | Failure in EEC ref. voltage.       |    X    |      |       |
 7e29: 31,9e,07            jnb   B1,R9e,7e33      if (Reg_9e = 1)  {
 7e2c: 32,90,04            jnb   B2,R90,7e33      if (B2_Flags_90 = 1)  {
-7e2f: 2a,98               scall 80c9             SaveTCode1 (                      #633   | 4X4 Switch closed                  |    X    |      |       |
+7e2f: 2a,98               scall 80c9             SET_SERVICE_CODE (                #633   | 4X4 Switch closed                  |    X    |      |       |
 7e31: 33,06                     #arg 1              633 );
 7e31: 33,06               #args                  } }
 7e33: 20,9c               sjmp  7ed1             goto 7ed1;
@@ -9659,31 +9638,31 @@ ERROR CODE DESCRIPTION
                                                  if (R3a != 0) goto 7eab;
 7ea8: 33,2c,04            jnb   B3,R2c,7eaf      if (Vip_knock = 0) goto 7eaf; }
 7eab: 17,38               incb  R38              R38++;
-7ead: 26,e8               sjmp  7d97             goto 7d97; }
+7ead: 26,e8               sjmp  7d97             goto EXIT_THIS_TEST; }
 
 7eaf: 91,04,2c            orb   R2c,4            VIP_FP_OVERRIDE = 1;
 7eb2: 91,80,46            orb   R46,80           PUMP = 1;
-7eb5: ef,43,04            call  82fb             Sub_82fb (
+7eb5: ef,43,04            call  82fb             DELAY_SEC (
 7eb8: 7c,f0                     #arg 1              cbd6 );
 7eb8: 7c,f0               #args  
-7eba: 3b,90,04            jb    B3,R90,7ec1      if (B3_Flags_90 = 0)  {
-7ebd: 2a,0a               scall 80c9             SaveTCode1 (                      #543   | FP Ckt Open Bat. to Relay          |    X    |      |   X   |
+7eba: 3b,90,04            jb    B3,R90,7ec1      if (B3_V_FPMFLG_90 = 0)  {
+7ebd: 2a,0a               scall 80c9             SET_SERVICE_CODE (                #543   | FP Ckt Open Bat. to Relay          |    X    |      |   X   |
 7ebf: 43,05                     #arg 1              543 );
 7ebf: 43,05               #args                  }
-7ec1: 26,d4               sjmp  7d97             goto 7d97;
+7ec1: 26,d4               sjmp  7d97             goto EXIT_THIS_TEST;
 
    Sub_7ec3:
-7ec3: ef,35,04            call  82fb             Sub_82fb (
+7ec3: ef,35,04            call  82fb             DELAY_SEC (
 7ec6: 7c,f0                     #arg 1              cbd6 );
 7ec6: 7c,f0               #args  
-7ec8: 33,90,04            jnb   B3,R90,7ecf      if (B3_Flags_90 = 1)  {
-7ecb: 29,fc               scall 80c9             SaveTCode1 (
+7ec8: 33,90,04            jnb   B3,R90,7ecf      if (B3_V_FPMFLG_90 = 1)  {
+7ecb: 29,fc               scall 80c9             SET_SERVICE_CODE (
 7ecd: 42,05                     #arg 1              542 );
 7ecd: 42,05               #args                  }
-7ecf: 26,c6               sjmp  7d97             goto 7d97;
+7ecf: 26,c6               sjmp  7d97             goto EXIT_THIS_TEST;
 
 7ed1: a1,dc,7e,34         ldw   R34,7edc         R34 = 7edc;
-7ed5: 26,c0               sjmp  7d97             goto 7d97;
+7ed5: 26,c0               sjmp  7d97             goto EXIT_THIS_TEST;
 
    Sub_7ed7:
 7ed7: 29,0c               scall 7fe5             Sub_7fe5 ();
@@ -9693,30 +9672,27 @@ ERROR CODE DESCRIPTION
 7edc: b3,fe,2b,3a         ldb   R3a,[Rfe+2b]     R3a = THRMHP;
 7ee0: e0,3a,0e            djnz  R3a,7ef1         R3a--;
                                                  if (R3a != 0) goto 7ef1;
-7ee3: 28,6c               scall 7f51             Test_IO (
-7ee5: 53                        #arg 1              53,
-7ee6: 05,40                     #arg 2              4005,
-7ee8: 47,f8                     #arg 3              f847 );
-7eea: 28,65               scall 7f51             Test_IO (
-7eec: 52                        #arg 1              52,
-7eed: 05                        #arg 2              5,
-7eee: 01                        #arg 3              1,
-7eef: 46                        #arg 4              46
-7ef0: fa                        #arg 5              fa );
+7ee3: 28,6c               scall 7f51             VO_OCC_COM12_Func1 (
+7ee5: 53,05                     #arg 1              553,
+7ee7: 40,47                     #arg 2              4740
+7ee9: f8                        #arg 3              f8 );
+7eea: 28,65               scall 7f51             VO_OCC_COM12_Func1 (
+7eec: 52,05                     #arg 1              552,
+7eee: 01,46                     #arg 2              4601
+7ef0: fa                        #arg 3              fa );
 7ef1: 9b,fe,27,00         cmpb  R0,[Rfe+27]      
 7ef5: df,0e               je    7f05             if (0 = 0) goto 7f05;
 7ef7: b1,14,42            ldb   R42,14           R42 = 14;
 7efa: c7,e6,90,42         stb   R42,[Re6+90]     [210] = R42;
-7efe: 28,69               scall 7f69             7f69 (
-7f00: 65                        #arg 1              65,
-7f01: 05                        #arg 2              5,
-7f02: 11                        #arg 3              11,
-7f03: 02                        #arg 4              2
-7f04: fe                        #arg 5              fe );
-7f05: 28,4a               scall 7f51             Test_IO (
-7f07: 56                        #arg 1              56,
-7f08: 05,80                     #arg 2              8005,
-7f0a: 46,00                     #arg 3              46 );
+7efe: 28,69               scall 7f69             VO_OCC_COM12_Func2 (
+7f00: 65,05                     #arg 1              565,
+7f02: 11                        #arg 2              11,
+7f03: 02                        #arg 3              2
+7f04: fe                        #arg 4              fe );
+7f05: 28,4a               scall 7f51             VO_OCC_COM12_Func1 (
+7f07: 56,05                     #arg 1              556,
+7f09: 80,46                     #arg 2              4680
+7f0b: 00                        #arg 3              0 );
 7f0c: 88,30,00            cmpw  R0,R30           
 7f0f: df,0e               je    7f1f             if (0 = 0) goto 7f1f;
 7f11: a3,31,8e,02,3a      ldw   R3a,[R30+28e]    R3a = [R30+28e];
@@ -9724,55 +9700,44 @@ ERROR CODE DESCRIPTION
 7f1a: d7,03               jne   7f1f             if (0 != 0) goto 7f1f;
 7f1c: 91,08,2c            orb   R2c,8            Vip_knock = 1;
 7f1f: 3c,9e,07            jb    B4,R9e,7f29      if (B4_EGREN_9e = 1) goto 7f29;
-7f22: 28,2d               scall 7f51             Test_IO (
-7f24: 58                        #arg 1              58,
-7f25: 05                        #arg 2              5,
-7f26: 04                        #arg 3              4,
-7f27: 46                        #arg 4              46
-7f28: fc                        #arg 5              fc );
+7f22: 28,2d               scall 7f51             VO_OCC_COM12_Func1 (
+7f24: 58,05                     #arg 1              558,
+7f26: 04,46                     #arg 2              4604
+7f28: fc                        #arg 3              fc );
 7f29: 31,9e,23            jnb   B1,R9e,7f4f      if (Reg_9e = 0) goto 7f4f;
-7f2c: 28,23               scall 7f51             Test_IO (
-7f2e: 21                        #arg 1              21,
-7f2f: 06                        #arg 2              6,
-7f30: 10,46                     #arg 3              4610
-7f32: 02                        #arg 4              2 );
-7f33: 28,1c               scall 7f51             Test_IO (
-7f35: 22                        #arg 1              22,
-7f36: 06                        #arg 2              6,
-7f37: 20                        #arg 3              20,
-7f38: 46                        #arg 4              46
-7f39: 04                        #arg 5              4 );
-7f3a: 28,15               scall 7f51             Test_IO (
-7f3c: 31                        #arg 1              31,
-7f3d: 06                        #arg 2              6,
-7f3e: 04                        #arg 3              4,
-7f3f: 44                        #arg 4              44
-7f40: 0a                        #arg 5              a );
-7f41: 28,0e               scall 7f51             Test_IO (
-7f43: 29                        #arg 1              29,
-7f44: 06                        #arg 2              6,
-7f45: 08                        #arg 3              8,
-7f46: a2                        #arg 4              a2
-7f47: 08                        #arg 5              8 );
-7f48: 28,2e               scall 7f78             7f78 (
-7f4a: 26                        #arg 1              26,
-7f4b: 06                        #arg 2              6,
-7f4c: 03                        #arg 3              3,
-7f4d: 00                        #arg 4              0
-7f4e: 06                        #arg 5              6 );
-7f4f: 26,46               sjmp  7d97             goto 7d97;
+7f2c: 28,23               scall 7f51             VO_OCC_COM12_Func1 (
+7f2e: 21,06                     #arg 1              621,
+7f30: 10,46                     #arg 2              4610
+7f32: 02                        #arg 3              2 );
+7f33: 28,1c               scall 7f51             VO_OCC_COM12_Func1 (
+7f35: 22,06                     #arg 1              622,
+7f37: 20,46                     #arg 2              4620
+7f39: 04                        #arg 3              4 );
+7f3a: 28,15               scall 7f51             VO_OCC_COM12_Func1 (
+7f3c: 31,06                     #arg 1              631,
+7f3e: 04,44                     #arg 2              4404
+7f40: 0a                        #arg 3              a );
+7f41: 28,0e               scall 7f51             VO_OCC_COM12_Func1 (
+7f43: 29,06                     #arg 1              629,
+7f45: 08,a2                     #arg 2              a208
+7f47: 08                        #arg 3              8 );
+7f48: 28,2e               scall 7f78             VO_OCC_COM12_Func4 (
+7f4a: 26,06                     #arg 1              626,
+7f4c: 03,00                     #arg 2              3
+7f4e: 06                        #arg 3              6 );
+7f4f: 26,46               sjmp  7d97             goto EXIT_THIS_TEST;
 
 #################################################################
-# Four data bytes follow calls to this function (R1A,1B,1C,1D)
-# R1A - is Trouble Code if there is an error
-# R1B - ROM loc for limit 8F86 + this offset (word)
-# R1C - parameter flag - mask to select the device (Fan, CANP, FuelPump etc)
-# R1D - pointer to SFR flag byte usually R46 or 47 for output lines
+# Five data bytes follow calls to this function (R1A,1B,1C,1D,1E)
+# R1A, R1B - is Trouble Code if there is an error
+# R1C - MASK
+# R1D - parameter flag to select device?
+# R1E - TIME???????
 # The OCC AD channel must be a supply voltage to the actuators
 # This performs 'circuit' tests
 # Measure any variation in voltage when the selected output line is switched
 #################################################################
-   Test_IO:
+   VO_OCC_COM12_Func1:
 7f51: 28,44               scall 7f97             Sub_7f97 ();
 7f53: ac,1d,20            ldzbw R20,R1d          wR20 = yR1d;
 7f56: b2,20,1d            ldb   R1d,[R20]        R1d = [R20];
@@ -9783,6 +9748,7 @@ ERROR CODE DESCRIPTION
 7f64: c6,20,1d            stb   R1d,[R20]        [R20] = R1d;
 7f67: 20,2b               sjmp  7f94             goto 7f94;
 
+   VO_OCC_COM12_Func2:
 7f69: 28,2c               scall 7f97             Sub_7f97 ();
 7f6b: b1,80,42            ldb   R42,80           R42 = 80;
 7f6e: c6,1c,42            stb   R42,[R1c]        [R1c] = R42;
@@ -9790,6 +9756,7 @@ ERROR CODE DESCRIPTION
 7f73: c6,1c,00            stb   R0,[R1c]         [R1c] = 0;
 7f76: 20,1c               sjmp  7f94             goto 7f94;
 
+   VO_OCC_COM12_Func4:
 7f78: 28,1d               scall 7f97             Sub_7f97 ();
 7f7a: fa                  di                     disable intps;
 7f7b: ff                  nop                    
@@ -9812,15 +9779,15 @@ ERROR CODE DESCRIPTION
 7f9e: 05                        #arg 1              5 );
 7f9f: c8,20               push  R20              push(R20);
 7fa1: 16,1e               sexb  R1e              swR1e = R1e;
-7fa3: 65,bc,01,1e         ad2w  R1e,1bc          R1e += 1bc;
+7fa3: 65,bc,01,1e         ad2w  R1e,1bc          R1e += TSSTIL_TMR;
 7fa7: 64,fe,1e            ad2w  R1e,Rfe          R1e += Rfe;
 7faa: a3,e4,8c,16         ldw   R16,[Re4+8c]     R16 = IOCC;
-7fae: c3,e4,04,16         stw   R16,[Re4+4]      [184] = R16;
+7fae: c3,e4,04,16         stw   R16,[Re4+4]      OCCSAV = R16;
 7fb2: f0                  ret                    return;
 
    Sub_7fb3:
 7fb3: 28,17               scall 7fcc             Sub_7fcc ();
-7fb5: a3,e4,04,16         ldw   R16,[Re4+4]      R16 = [184];
+7fb5: a3,e4,04,16         ldw   R16,[Re4+4]      R16 = OCCSAV;
 7fb9: 6b,e4,8c,16         sb2w  R16,[Re4+8c]     R16 -= IOCC;
 7fbd: db,02               jc    7fc1             if (R16 < 0)  {
 7fbf: 03,16               negw  R16              R16 = -R16; }
@@ -9861,10 +9828,10 @@ ERROR CODE DESCRIPTION
 8005: df,4b               je    8052             if ([c18d] != 0)  {
 8007: b3,e2,cd,42         ldb   R42,[Re2+cd]     R42 = [c18b];
 800b: c7,e8,d1,42         stb   R42,[Re8+d1]     [351] = R42;
-800f: ef,e9,02            call  82fb             Sub_82fb (
+800f: ef,e9,02            call  82fb             DELAY_SEC (
 8012: cb,f0                     #arg 1              cc25 );
 8012: cb,f0               #args  
-8014: 25,81               sjmp  7d97             goto 7d97;
+8014: 25,81               sjmp  7d97             goto EXIT_THIS_TEST;
 
    Sub_8016:
 8016: ef,f7,f1            call  7210             Set_DiagCodes ();
@@ -9874,7 +9841,7 @@ ERROR CODE DESCRIPTION
 8023: c3,e4,2e,42         stw   R42,[Re4+2e]     [1ae] = R42;
 8027: 88,42,1e            cmpw  R1e,R42          
 802a: d1,29               jleu  8055             if (R1e <= R42) goto 8055;
-802c: 28,9b               scall 80c9             SaveTCode1 (
+802c: 28,9b               scall 80c9             SET_SERVICE_CODE (
 802e: 24,06                     #arg 1              624 );
 802e: 24,06               #args  
 8030: 20,1c               sjmp  804e             goto 804e;
@@ -9890,12 +9857,12 @@ ERROR CODE DESCRIPTION
 8042: 03,3a               negw  R3a              R3a = -R3a; }
 8044: 8b,e2,d1,3a         cmpw  R3a,[Re2+d1]     
 8048: db,04               jc    804e             if (R3a < [c18f])  {
-804a: 28,7d               scall 80c9             SaveTCode1 (
+804a: 28,7d               scall 80c9             SET_SERVICE_CODE (
 804c: 25,06                     #arg 1              625 );
 804c: 25,06               #args                  }
 804e: c7,e8,d1,00         stb   R0,[Re8+d1]      [351] = 0; } }
 8052: b1,0a,38            ldb   R38,a            R38 = a; }
-8055: 25,40               sjmp  7d97             goto 7d97;
+8055: 25,40               sjmp  7d97             goto EXIT_THIS_TEST;
 
    Sub_8057:
 8057: 3b,2b,13            jb    B3,R2b,806d      if (STO_WORKING = 0)  {
@@ -9948,7 +9915,7 @@ ERROR CODE DESCRIPTION
 
 80c7: 27,ab               sjmp  8074             return;
 
-   SaveTCode1:
+   SET_SERVICE_CODE:
 80c9: ef,06,fb            call  7bd2             GetBytes_R1a (
 80cc: 02                        #arg 1              2 );
    Sub_80cd:
@@ -9987,42 +9954,42 @@ ERROR CODE DESCRIPTION
                                                  B1_Flags_a3 = 0;
 810a: 51,ac,a6,22         an3b  R22,Ra6,ac       R22 = FMEM_FLAGS & ac;
 810e: df,46               je    8156             if (R22 != 0)  {
-8110: 2f,b7               scall 80c9             SaveTCode1 (
+8110: 2f,b7               scall 80c9             SET_SERVICE_CODE (
 8112: 98,09                     #arg 1              998 );
 8112: 98,09               #args                                                    # 998,FMEM failure/Failed (open)EPC Output Driver
 8114: 33,a6,0d            jnb   B3,Ra6,8124      if (B3_FMEM_FLAGS = 1)  {
 8117: 30,a7,06            jnb   B0,Ra7,8120      if (B0_FMEM_FLAG2 = 1)  {
-811a: 2f,ad               scall 80c9             SaveTCode1 (
+811a: 2f,ad               scall 80c9             SET_SERVICE_CODE (
 811c: 28,01                     #arg 1              128 );
 811c: 28,01               #args                                                    # 128,MAP vacuum circuit failure
 811e: 20,04               sjmp  8124             goto 8124; }
 
-8120: 2f,a7               scall 80c9             SaveTCode1 (
+8120: 2f,a7               scall 80c9             SET_SERVICE_CODE (
 8122: 26,01                     #arg 1              126 );
 8122: 26,01               #args                  }                                 # 126,MAP/BP out of S-T range.
 8124: a3,e4,26,22         ldw   R22,[Re4+26]     R22 = [1a6];
 8128: 37,22,04            jnb   B7,R22,812f      if (B7_R22 = 1)  {
-812b: 2f,9c               scall 80c9             SaveTCode1 (
+812b: 2f,9c               scall 80c9             SET_SERVICE_CODE (
 812d: 12,01                     #arg 1              112 );
 812d: 12,01               #args                  }                                 # 112,254 deg. ind. ACT-ckt. grounded.
 812f: 36,22,04            jnb   B6,R22,8136      if (B6_R22 = 1)  {
-8132: 2f,95               scall 80c9             SaveTCode1 (
+8132: 2f,95               scall 80c9             SET_SERVICE_CODE (
 8134: 13,01                     #arg 1              113 );
 8134: 13,01               #args                  }                                 # 113,-40 deg. ind. ACT-sensor ckt. open.
 8136: 35,22,04            jnb   B5,R22,813d      if (B5_R22 = 1)  {
-8139: 2f,8e               scall 80c9             SaveTCode1 (
+8139: 2f,8e               scall 80c9             SET_SERVICE_CODE (
 813b: 17,01                     #arg 1              117 );
 813b: 17,01               #args                  }                                 # 117,254 deg. ind. ECT-ckt. grounded.
 813d: 34,22,04            jnb   B4,R22,8144      if (B4_R22 = 1)  {
-8140: 2f,87               scall 80c9             SaveTCode1 (
+8140: 2f,87               scall 80c9             SET_SERVICE_CODE (
 8142: 18,01                     #arg 1              118 );
 8142: 18,01               #args                  }                                 # 118,-40 deg. ind. ECT-sensor ckt. open.
 8144: 31,22,04            jnb   B1,R22,814b      if (B1_R22 = 1)  {
-8147: 2f,80               scall 80c9             SaveTCode1 (
+8147: 2f,80               scall 80c9             SET_SERVICE_CODE (
 8149: 22,01                     #arg 1              122 );
 8149: 22,01               #args                  }                                 # 122,TPS ckt. below minimum voltage.
 814b: 30,22,04            jnb   B0,R22,8152      if (B0_R22 = 1)  {
-814e: 2f,79               scall 80c9             SaveTCode1 (
+814e: 2f,79               scall 80c9             SET_SERVICE_CODE (
 8150: 23,01                     #arg 1              123 );
 8150: 23,01               #args                  }                                 # 123,TPS ckt. above max. voltage.
 8152: b1,1f,38            ldb   R38,1f           R38 = 1f;
@@ -10049,10 +10016,10 @@ ERROR CODE DESCRIPTION
                                                  B1_R29 = 0;
 818f: 71,f9,49            an2b  R49,f9           B1_R49 = 0;
                                                  B2_R49 = 0;
-8192: e7,6f,02            jump  8404             goto 8404;
+8192: e7,6f,02            jump  8404             goto EXIT;
 
    Sub_8195:
-8195: 29,64               scall 82fb             Sub_82fb (
+8195: 29,64               scall 82fb             DELAY_SEC (
 8197: aa,f0                     #arg 1              cc04 );
 8197: aa,f0               #args  
 8199: 28,0b               scall 81a6             Sub_81a6 (
@@ -10062,7 +10029,7 @@ ERROR CODE DESCRIPTION
 81a0: 04                        #arg 4              4 );
 819b: 32,00,a4,f0,12,04   #args  
 81a1: 91,20,2f            orb   R2f,20           Disable_isc = 1;
-81a4: 22,5e               sjmp  8404             goto 8404;
+81a4: 22,5e               sjmp  8404             goto EXIT;
 
    Sub_81a6:
 81a6: af,e4,e3,32         ldzbw R32,[Re4+e3]     wR32 = DSDRPM;
@@ -10074,25 +10041,23 @@ ERROR CODE DESCRIPTION
 
    Sub_81b8:
 81b8: 2f,23               scall 80dd             Sub_80dd (
-81ba: 10                        #arg 1              10,
-81bb: 01                        #arg 2              1,
-81bc: ee,f0                     #arg 3              cc48,
-81be: ec,f0                     #arg 4              cc46,
-81c0: 16                        #arg 5              16
-81c1: 01                        #arg 6              1 );
+81ba: 10,01                     #arg 1              110,
+81bc: ee,f0                     #arg 2              cc48,
+81be: ec,f0                     #arg 3              cc46,
+81c0: 16                        #arg 4              16
+81c1: 01                        #arg 5              1 );
 81ba: 10,01,ee,f0,ec,f0,16,01  #args   
 81c2: 2f,19               scall 80dd             Sub_80dd (
-81c4: 08                        #arg 1              8,
-81c5: 01                        #arg 2              1,
-81c6: 4c,f1                     #arg 3              cca6,
-81c8: 4a,f1                     #arg 4              cca4,
-81ca: 36                        #arg 5              36
-81cb: 06                        #arg 6              6 );
+81c4: 08,01                     #arg 1              108,
+81c6: 4c,f1                     #arg 2              cca6,
+81c8: 4a,f1                     #arg 3              cca4,
+81ca: 36                        #arg 4              36
+81cb: 06                        #arg 5              6 );
 81c4: 08,01,4c,f1,4a,f1,36,06  #args   
 81cc: b3,e6,96,42         ldb   R42,[Re6+96]     R42 = MAPTMR;
 81d0: 9b,e2,1d,42         cmpb  R42,[Re2+1d]     
 81d4: d1,06               jleu  81dc             if (R42 > [c1db])  {
-81d6: 2e,f1               scall 80c9             SaveTCode1 (
+81d6: 2e,f1               scall 80c9             SET_SERVICE_CODE (
 81d8: 26,01                     #arg 1              126 );
 81d8: 26,01               #args                                                    # 126,MAP/BP out of S-T range.
 81da: 20,0b               sjmp  81e7             goto 81e7; }
@@ -10121,13 +10086,13 @@ ERROR CODE DESCRIPTION
 81f9: 14                        #arg 5              14
 81fa: 01                        #arg 6              1 );
 81f3: 12,01,e6,f0,e4,f0,14,01  #args   
-81fb: 22,07               sjmp  8404             goto 8404;
+81fb: 22,07               sjmp  8404             goto EXIT;
 
    Sub_81fd:
 81fd: 9b,fe,74,00         cmpb  R0,[Rfe+74]      
 8201: d7,05               jne   8208             if ([cbce] = 0)  {
 8203: b1,0a,38            ldb   R38,a            R38 = a;
-8206: 21,fc               sjmp  8404             goto 8404; }
+8206: 21,fc               sjmp  8404             goto EXIT; }
 
 8208: a3,e4,9e,42         ldw   R42,[Re4+9e]     R42 = [11e];
 820c: 8b,fe,5c,42         cmpw  R42,[Rfe+5c]     
@@ -10136,26 +10101,26 @@ ERROR CODE DESCRIPTION
 8215: f0                  ret                    return; }
 
 8216: 28,de               scall 82f6             Sub_82f6 ();
-8218: 21,ea               sjmp  8404             goto 8404;
+8218: 21,ea               sjmp  8404             goto EXIT;
 
    Sub_821a:
 821a: 35,28,04            jnb   B5,R28,8221      if (EGOSTE = 1)  {
 821d: 28,d7               scall 82f6             Sub_82f6 ();
-821f: 21,e3               sjmp  8404             goto 8404; }
+821f: 21,e3               sjmp  8404             goto EXIT; }
 
 8221: 28,97               scall 82ba             Sub_82ba (
 8223: 5a,f0                     #arg 1              cbb4 );
-8225: 28,d4               scall 82fb             Sub_82fb (
+8225: 28,d4               scall 82fb             DELAY_SEC (
 8227: 62,f0                     #arg 1              cbbc );
 8227: 62,f0               #args  
-8229: 2e,9e               scall 80c9             SaveTCode1 (
+8229: 2e,9e               scall 80c9             SET_SERVICE_CODE (
 822b: 73,01                     #arg 1              173 );
 822b: 73,01               #args  
-822d: 20,7a               sjmp  82a9             goto 82a9;
+822d: 20,7a               sjmp  82a9             goto BLOCK_AA;
 
    Sub_822f:
 822f: 3d,28,02            jb    B5,R28,8234      if (EGOSTE = 0)  {
-8232: 21,d0               sjmp  8404             goto 8404; }
+8232: 21,d0               sjmp  8404             goto EXIT; }
 
 8234: 28,7f               scall 82b5             Sub_82b5 (
 8236: 58,f0                     #arg 1              cbb2 );
@@ -10163,15 +10128,15 @@ ERROR CODE DESCRIPTION
 823b: 8b,fe,54,42         cmpw  R42,[Rfe+54]     
 823f: d1,04               jleu  8245             if (R42 > [cbae])  {
 8241: 15,38               decb  R38              R38--;
-8243: 21,bf               sjmp  8404             goto 8404; }
+8243: 21,bf               sjmp  8404             goto EXIT; }
 
-8245: 28,b4               scall 82fb             Sub_82fb (
+8245: 28,b4               scall 82fb             DELAY_SEC (
 8247: 63,f0                     #arg 1              cbbd );
 8247: 63,f0               #args  
-8249: 2e,7e               scall 80c9             SaveTCode1 (
+8249: 2e,7e               scall 80c9             SET_SERVICE_CODE (
 824b: 72,01                     #arg 1              172 );
 824b: 72,01               #args                                                    # 172,EGO sensor ckt. ind. system lean.
-824d: 20,5a               sjmp  82a9             goto 82a9;
+824d: 20,5a               sjmp  82a9             goto BLOCK_AA;
 
    Sub_824f:
 824f: 9b,e2,9b,00         cmpb  R0,[Re2+9b]      
@@ -10181,57 +10146,59 @@ ERROR CODE DESCRIPTION
                                                  if (R42 != 0) goto 82a4;
 825c: 28,57               scall 82b5             Sub_82b5 (
 825e: 58,f0                     #arg 1              cbb2 );
-8260: 28,99               scall 82fb             Sub_82fb (
+8260: 28,99               scall 82fb             DELAY_SEC (
 8262: 39,f1                     #arg 1              cc93 );
 8262: 39,f1               #args  
 8264: 81,01,40,46         orw   R46,4001         AM1 = 1;
                                                  AM2 = 1;
-8268: 21,9a               sjmp  8404             goto 8404;
+8268: 21,9a               sjmp  8404             goto EXIT;
 
-   Sub_826a:
+   AIR_UPSTREAM:
 826a: 3d,28,0a            jb    B5,R28,8277      if (EGOSTE = 0)  {
-826d: 28,8c               scall 82fb             Sub_82fb (
-826f: 3b,f1                     #arg 1              cc95 );
+826d: 28,8c               scall 82fb             DELAY_SEC (
+826f: 3b,f1                     #arg 1              VIPTM2 );
 826f: 3b,f1               #args  
-8271: 2e,56               scall 80c9             SaveTCode1 (
+8271: 2e,56               scall 80c9             SET_SERVICE_CODE (
 8273: 11,03                     #arg 1              311 );
 8273: 11,03               #args  
-8275: 20,29               sjmp  82a0             goto 82a0; }
+8275: 20,29               sjmp  82a0             goto AM1_AM2_OFF; }
 
 8277: 71,bf,47            an2b  R47,bf           AM2 = 0;
-827a: 21,88               sjmp  8404             goto 8404;
+827a: 21,88               sjmp  8404             goto EXIT;
 
-   Sub_827c:
+   AIR_DOWNSTREAM:
 827c: 35,28,08            jnb   B5,R28,8287      if (EGOSTE = 1)  {
-827f: 28,7a               scall 82fb             Sub_82fb (
-8281: 3c,f1                     #arg 1              cc96 );
+827f: 28,7a               scall 82fb             DELAY_SEC (
+8281: 3c,f1                     #arg 1              VATMR2 );
 8281: 3c,f1               #args  
-8283: 2e,44               scall 80c9             SaveTCode1 (
+8283: 2e,44               scall 80c9             SET_SERVICE_CODE (
 8285: 12,03                     #arg 1              312 );
 8285: 12,03               #args                  }
 8287: 71,fe,46            an2b  R46,fe           AM1 = 0;
 828a: 91,40,47            orb   R47,40           AM2 = 1;
-828d: 21,75               sjmp  8404             goto 8404;
+828d: 21,75               sjmp  8404             goto EXIT;
 
-   Sub_828f:
+   BLOCK_F2_VR_THERMAIR_COM2:
 828f: 9b,e2,9c,00         cmpb  R0,[Re2+9c]      
-8293: df,0b               je    82a0             if ([c15a] != 0)  {
-8295: 28,64               scall 82fb             Sub_82fb (
-8297: 3a,f1                     #arg 1              cc94 );
+8293: df,0b               je    82a0             if (VTABFL != 0)  {
+8295: 28,64               scall 82fb             DELAY_SEC (
+8297: 3a,f1                     #arg 1              VDLY2 );
 8297: 3a,f1               #args  
 8299: 35,28,04            jnb   B5,R28,82a0      if (EGOSTE = 1)  {
-829c: 2e,2b               scall 80c9             SaveTCode1 (
+829c: 2e,2b               scall 80c9             SET_SERVICE_CODE (
 829e: 13,03                     #arg 1              313 );
 829e: 13,03               #args                  } }
+   AM1_AM2_OFF:
 82a0: 61,fe,bf,46         an2w  R46,bffe         AM1 = 0;
                                                  AM2 = 0; } }
 82a4: b1,0a,38            ldb   R38,a            R38 = a;
 82a7: 20,03               sjmp  82ac             goto 82ac;
 
+   BLOCK_AA:
 82a9: b1,0a,38            ldb   R38,a            R38 = a;
 82ac: a3,fe,60,1c         ldw   R1c,[Rfe+60]     R1c = VRLAM;
 82b0: c0,96,1c            stw   R1c,R96          LAMBSE1 = R1c;
-82b3: 21,4f               sjmp  8404             goto 8404;
+82b3: 21,4f               sjmp  8404             goto EXIT;
 
    Sub_82b5:
 82b5: 91,01,a4            orb   Ra4,1            B0_Ra4 = 1;
@@ -10264,7 +10231,7 @@ ERROR CODE DESCRIPTION
 82f6: c3,e4,06,06         stw   R6,[Re4+6]       [186] = IO_Timer;
 82fa: f0                  ret                    return;
 
-   Sub_82fb:
+   DELAY_SEC:
 82fb: ef,d4,f8            call  7bd2             GetBytes_R1a (
 82fe: 02                        #arg 1              2 );
 82ff: ef,7a,fb            call  7e7c             Sub_7e7c (
@@ -10279,15 +10246,15 @@ ERROR CODE DESCRIPTION
 830c: 9b,e2,37,00         cmpb  R0,[Re2+37]      
 8310: df,51               je    8363             if ([c1f5] != 0)  {
 8312: a3,e2,35,cc         ldw   Rcc,[Re2+35]     Rcc = [c1f3];
-8316: 20,ec               sjmp  8404             goto 8404;
+8316: 20,ec               sjmp  8404             goto EXIT;
 
    Sub_8318:
-8318: 2f,e1               scall 82fb             Sub_82fb (
+8318: 2f,e1               scall 82fb             DELAY_SEC (
 831a: 5e,f0                     #arg 1              cbb8 );
 831a: 5e,f0               #args  
 831c: a3,e4,9e,42         ldw   R42,[Re4+9e]     R42 = [11e];
 8320: c3,e4,44,42         stw   R42,[Re4+44]     [1c4] = R42;
-8324: 20,de               sjmp  8404             goto 8404;
+8324: 20,de               sjmp  8404             goto EXIT;
 
    Sub_8326:
 8326: 5f,e2,38,18,1c      ml3b  R1c,R18,[Re2+38] wR1c = R18 * [c1f6];
@@ -10304,20 +10271,20 @@ ERROR CODE DESCRIPTION
 834c: da,02               jle   8350             if (Rcc > [c1f1])  {
 834e: 20,ba               sjmp  840a             return; }
 
-8350: 2d,77               scall 80c9             SaveTCode1 (
+8350: 2d,77               scall 80c9             SET_SERVICE_CODE (
 8352: 13,02                     #arg 1              213 );
 8352: 13,02               #args                  }
 8354: a3,fe,52,cc         ldw   Rcc,[Rfe+52]     Rcc = [cbac];
-8358: 20,aa               sjmp  8404             goto 8404;
+8358: 20,aa               sjmp  8404             goto EXIT;
 
    Sub_835a:
-835a: 2f,9f               scall 82fb             Sub_82fb (
+835a: 2f,9f               scall 82fb             DELAY_SEC (
 835c: 38,f1                     #arg 1              cc92 );
 835c: 38,f1               #args  
 835e: b1,0e,38            ldb   R38,e            R38 = e;
-8361: 20,a1               sjmp  8404             goto 8404; }
+8361: 20,a1               sjmp  8404             goto EXIT; }
 
-8363: 2f,96               scall 82fb             Sub_82fb (
+8363: 2f,96               scall 82fb             DELAY_SEC (
 8365: 5e,f0                     #arg 1              cbb8 );
 8365: 5e,f0               #args  
 8367: 27,f5               sjmp  835e             goto 835e;
@@ -10328,14 +10295,11 @@ ERROR CODE DESCRIPTION
 836f: f0                  ret                    return; }
 
 8370: 28,50               scall 83c2             Sub_83c2 (
-8372: 14                        #arg 1              14,
-8373: 01                        #arg 2              1,
-8374: d6,f0                     #arg 3              cc30,
-8376: d2,f0                     #arg 4              EVPMIN,
-8378: 28                        #arg 5              28,
-8379: 03                        #arg 6              3,
-837a: 34                        #arg 7              34
-837b: 03                        #arg 8              3 );
+8372: 14,01                     #arg 1              114,
+8374: d6,f0                     #arg 2              cc30,
+8376: d2,f0                     #arg 3              EVPMIN,
+8378: 28,03                     #arg 4              328,
+837a: 34,03                     #arg 5              334 );
 8372: 14,01,d6,f0,d2,f0,28,03,34,03  #args   
 837c: 88,00,1a            cmpw  R1a,R0           
 837f: df,04               je    8385             if (R1a != 0)  {
@@ -10345,7 +10309,7 @@ ERROR CODE DESCRIPTION
 8385: a3,e4,94,42         ldw   R42,[Re4+94]     R42 = IEGR;
 8389: c3,e4,46,42         stw   R42,[Re4+46]     [1c6] = R42;
 838d: b3,e2,c9,c1         ldb   Rc1,[Re2+c9]     Rc1 = [c187];
-8391: 20,71               sjmp  8404             goto 8404;
+8391: 20,71               sjmp  8404             goto EXIT;
 
    Sub_8393:
 8393: a3,e4,94,42         ldw   R42,[Re4+94]     R42 = IEGR;
@@ -10359,12 +10323,12 @@ ERROR CODE DESCRIPTION
 83af: 57,e2,c9,42,c1      ad3b  Rc1,R42,[Re2+c9] Rc1 = R42 + [c187];
 83b4: f0                  ret                    return; }
 
-83b5: ef,11,fd            call  80c9             SaveTCode1 (
+83b5: ef,11,fd            call  80c9             SET_SERVICE_CODE (
 83b8: 32,03                     #arg 1              332 );
 83b8: 32,03               #args                  }
 83ba: c0,c0,00            stw   R0,Rc0           EGRDC = 0;
 83bd: b1,10,38            ldb   R38,10           R38 = 10;
-83c0: 20,42               sjmp  8404             goto 8404;
+83c0: 20,42               sjmp  8404             goto EXIT;
 
    Sub_83c2:
 83c2: ef,0d,f8            call  7bd2             GetBytes_R1a (
@@ -10398,6 +10362,7 @@ ERROR CODE DESCRIPTION
 8400: ef,ca,fc            call  80cd             Sub_80cd (); } }
 8403: f0                  ret                    return;
 
+   EXIT:
 8404: c7,e4,41,00         stb   R0,[Re4+41]      Vip_timer_ex = 0;
 8408: 17,38               incb  R38              R38++;
 840a: f0                  ret                    return;
@@ -10406,10 +10371,10 @@ ERROR CODE DESCRIPTION
 840b: a3,e2,a7,3e         ldw   R3e,[Re2+a7]     R3e = [c165];
 840f: c3,e4,36,3e         stw   R3e,[Re4+36]     [1b6] = R3e;
 8413: 71,df,2f            an2b  R2f,df           Disable_isc = 0;
-8416: 27,ec               sjmp  8404             goto 8404;
+8416: 27,ec               sjmp  8404             goto EXIT;
 
    Sub_8418:
-8418: 2e,e1               scall 82fb             Sub_82fb (
+8418: 2e,e1               scall 82fb             DELAY_SEC (
 841a: ab,f0                     #arg 1              cc05 );
 841a: ab,f0               #args  
 841c: 2d,88               scall 81a6             Sub_81a6 (
@@ -10418,7 +10383,7 @@ ERROR CODE DESCRIPTION
 8422: 11                        #arg 3              11
 8423: 04                        #arg 4              4 );
 841e: 32,00,a2,f0,11,04   #args  
-8424: 27,de               sjmp  8404             goto 8404;
+8424: 27,de               sjmp  8404             goto EXIT;
 
    Sub_8426:
 8426: 9b,e2,07,00         cmpb  R0,[Re2+7]       
@@ -10434,10 +10399,10 @@ ERROR CODE DESCRIPTION
 8441: a3,e2,03,96         ldw   R96,[Re2+3]      LAMBSE1 = [c1c1];
 8445: af,e2,09,1a         ldzbw R1a,[Re2+9]      wR1a = [c1c7];
 8449: c3,e4,1a,1a         stw   R1a,[Re4+1a]     [19a] = R1a;
-844d: 2e,ac               scall 82fb             Sub_82fb (
+844d: 2e,ac               scall 82fb             DELAY_SEC (
 844f: 07,f1                     #arg 1              cc61 );
 844f: 07,f1               #args                  }
-8451: 27,b1               sjmp  8404             goto 8404;
+8451: 27,b1               sjmp  8404             goto EXIT;
 
    Sub_8453:
 8453: 91,f0,2c            orb   R2c,f0           Vip_flags_2c |= f0;
@@ -10447,7 +10412,7 @@ ERROR CODE DESCRIPTION
 8462: c7,e4,39,ba         stb   Rba,[Re4+39]     [1b9] = MAP;
 8466: 71,fe,2e            an2b  R2e,fe           Idm_bypass = 0;
 8469: ef,98,ec            call  7104             Sub_7104 ();
-846c: 27,96               sjmp  8404             goto 8404;
+846c: 27,96               sjmp  8404             goto EXIT;
 
    Sub_846e:
 846e: 36,2f,06            jnb   B6,R2f,8477      if (B6_VIP_flags4 = 1)  {
@@ -10478,28 +10443,28 @@ ERROR CODE DESCRIPTION
 84bc: db,02               jc    84c0             if (R1a < 0)  {
 84be: 11,1a               clrb  R1a              R1a = 0; }
 84c0: c7,e4,41,1a         stb   R1a,[Re4+41]     Vip_timer_ex = R1a; } }
-84c4: 2e,35               scall 82fb             Sub_82fb (
+84c4: 2e,35               scall 82fb             DELAY_SEC (
 84c6: 05,f1                     #arg 1              cc5f );
 84c6: 05,f1               #args  
 84c8: 36,2f,04            jnb   B6,R2f,84cf      if (B6_VIP_flags4 = 1)  {
 84cb: a3,fe,60,96         ldw   R96,[Rfe+60]     LAMBSE1 = VRLAM; }
 84cf: 34,2c,07            jnb   B4,R2c,84d9      if (Kam_codes = 1)  {
-84d2: ef,f4,fb            call  80c9             SaveTCode1 (
+84d2: ef,f4,fb            call  80c9             SET_SERVICE_CODE (
 84d5: 38,05                     #arg 1              538 );
 84d5: 38,05               #args                                                    # 538,Operator error-dyn response test.
 84d7: 20,1b               sjmp  84f4             goto 84f4; }
 
 84d9: 36,2c,05            jnb   B6,R2c,84e1      if (Vegrbp = 1)  {
-84dc: ef,ea,fb            call  80c9             SaveTCode1 (
+84dc: ef,ea,fb            call  80c9             SET_SERVICE_CODE (
 84df: 29,01                     #arg 1              129 );
 84df: 29,01               #args                  }                                 # 129,Insuff. MAP change-dyn resp. test.
 84e1: 35,2c,05            jnb   B5,R2c,84e9      if (Vvsfl1 = 1)  {
-84e4: ef,e2,fb            call  80c9             SaveTCode1 (
+84e4: ef,e2,fb            call  80c9             SET_SERVICE_CODE (
 84e7: 67,01                     #arg 1              167 );
 84e7: 67,01               #args                  }
 84e9: 36,2f,08            jnb   B6,R2f,84f4      if (B6_VIP_flags4 = 1)  {
 84ec: 37,2c,05            jnb   B7,R2c,84f4      if (Rmspru = 1)  {
-84ef: ef,d7,fb            call  80c9             SaveTCode1 (
+84ef: ef,d7,fb            call  80c9             SET_SERVICE_CODE (
 84f2: 25,02                     #arg 1              225 );
 84f2: 25,02               #args                  } }
 84f4: a3,fe,52,cc         ldw   Rcc,[Rfe+52]     Rcc = [cbac];
@@ -10511,7 +10476,7 @@ ERROR CODE DESCRIPTION
                                                  if (R42 != 0) goto 8511;
 8506: 3b,a4,03            jb    B3,Ra4,850c      if (BRK_NEVER_ON = 0)  {
 8509: 31,a4,05            jnb   B1,Ra4,8511      if (BRK_NEVER_OFF = 0) goto 8511; }
-850c: ef,ba,fb            call  80c9             SaveTCode1 (
+850c: ef,ba,fb            call  80c9             SET_SERVICE_CODE (
 850f: 36,05                     #arg 1              536 );
 850f: 36,05               #args                  } } }
 8511: b3,e2,30,42         ldb   R42,[Re2+30]     R42 = [c1ee];
@@ -10522,20 +10487,20 @@ ERROR CODE DESCRIPTION
                                                  if (R42 != 0) goto 852a;
 851f: 30,29,03            jnb   B0,R29,8525      if (B0_R29 = 1)  {
 8522: 39,29,05            jb    B1,R29,852a      if (B1_R29 = 1) goto 852a; }
-8525: ef,a1,fb            call  80c9             SaveTCode1 (
+8525: ef,a1,fb            call  80c9             SET_SERVICE_CODE (
 8528: 21,05                     #arg 1              521 );
 8528: 21,05               #args                  } } }
 852a: 31,9e,0b            jnb   B1,R9e,8538      if (Reg_9e = 1)  {
 852d: 32,49,03            jnb   B2,R49,8533      if (B2_R49 = 1)  {
 8530: 39,49,05            jb    B1,R49,8538      if (B1_R49 = 1) goto Sub_8538; }
-8533: ef,93,fb            call  80c9             SaveTCode1 (
+8533: ef,93,fb            call  80c9             SET_SERVICE_CODE (
 8536: 32,06                     #arg 1              632 );
 8536: 32,06               #args                  } }
    Sub_8538:
 8538: 91,07,2b            orb   R2b,7            STO_HighSpeed = 1;
                                                  STO_Lowspeed_r = 1;
                                                  STO_Lowspeed = 1;
-853b: 26,c7               sjmp  8404             goto 8404;
+853b: 26,c7               sjmp  8404             goto EXIT;
 
    Check_PS_PB:
 853d: 34,25,05            jnb   B4,R25,8545      if (BIFLG = 1)  {
@@ -10579,14 +10544,14 @@ ERROR CODE DESCRIPTION
 
 8595: 99,1a,38            cmpb  R38,1a           
 8598: df,02               je    859c             if (R38 != 1a)  {
-859a: 26,68               sjmp  8404             goto 8404; }
+859a: 26,68               sjmp  8404             goto EXIT; }
 
 859c: b1,1d,38            ldb   R38,1d           R38 = 1d;
 859f: 26,67               sjmp  8408             goto 8408; }
 
 85a1: 3b,45,ea            jb    B3,R45,858e      if (B3_Flags_2B = 1) goto 858e;
 85a4: b1,1a,38            ldb   R38,1a           R38 = 1a;
-85a7: 26,5b               sjmp  8404             goto 8404;
+85a7: 26,5b               sjmp  8404             goto EXIT;
 
    Sub_85a9:
 85a9: 99,02,18            cmpb  R18,2            
@@ -10604,19 +10569,19 @@ ERROR CODE DESCRIPTION
 85c3: a3,e2,5b,42         ldw   R42,[Re2+5b]     R42 = [c219];
 85c7: 08,05,42            shrw  R42,5            R42 >>= 5;                        #[ R42 /= 32] 
 85ca: c3,e4,36,42         stw   R42,[Re4+36]     [1b6] = R42;
-85ce: e7,33,fe            jump  8404             goto 8404;
+85ce: e7,33,fe            jump  8404             goto EXIT;
 
    Sub_85d1:
 85d1: c3,e4,02,00         stw   R0,[Re4+2]       [182] = 0;
 85d5: 33,45,10            jnb   B3,R45,85e8      if (B3_Flags_2B = 1)  {
-85d8: ef,20,fd            call  82fb             Sub_82fb (
+85d8: ef,20,fd            call  82fb             DELAY_SEC (
 85db: 5c,f1                     #arg 1              ccb6 );
 85db: 5c,f1               #args  
 85dd: ef,24,eb            call  7104             Sub_7104 ();
-85e0: e7,21,fe            jump  8404             goto 8404;
+85e0: e7,21,fe            jump  8404             goto EXIT;
 
    Sub_85e3:
-85e3: ef,15,fd            call  82fb             Sub_82fb (
+85e3: ef,15,fd            call  82fb             DELAY_SEC (
 85e6: 5e,f1                     #arg 1              ccb8 );
 85e6: 5e,f1               #args                  }
 85e8: a3,e4,02,1a         ldw   R1a,[Re4+2]      R1a = [182];
@@ -10651,7 +10616,7 @@ ERROR CODE DESCRIPTION
 8637: e7,8e,f5            jump  7bc8             goto Reset_STO; }
 
 863a: ef,8b,f5            call  7bc8             Reset_STO ();
-863d: e7,c4,fd            jump  8404             goto 8404;
+863d: e7,c4,fd            jump  8404             goto EXIT;
 
    HW_Check:
 8640: fa                  di                     disable intps;
@@ -12292,7 +12257,7 @@ ERROR CODE DESCRIPTION
 968b: c7,e8,d1,40         stb   R40,[Re8+d1]     [351] = R40;
 968f: 91,20,e0            orb   Re0,20           B5_Re0 = 1;
 9692: 9b,fd,b2,00,30      cmpb  R30,[Rfc+b2]     
-9697: d1,04               jleu  969d             if (R30 > [c15a])  {
+9697: d1,04               jleu  969d             if (R30 > VTABFL)  {
 9699: c3,e8,e4,00         stw   R0,[Re8+e4]      [364] = 0; }
 969d: 99,a0,91            cmpb  R91,a0           
 96a0: d3,3e               jnc   96e0             if (VBAT >= a0)  {
@@ -13880,7 +13845,7 @@ a6d6: 20,03               sjmp  a6db             goto a6db; }
 
 a6d8: 91,08,a0            orb   Ra0,8            B3_Power_up = 1;
 a6db: 3b,45,04            jb    B3,R45,a6e2      if (B3_Flags_2B = 0)  {
-a6de: c3,e4,3c,00         stw   R0,[Re4+3c]      [1bc] = 0; }
+a6de: c3,e4,3c,00         stw   R0,[Re4+3c]      TSSTIL_TMR = 0; }
 a6e2: b3,f6,4e,42         ldb   R42,[Rf6+4e]     R42 = [b962];
 a6e6: 57,f6,4f,42,30      ad3b  R30,R42,[Rf6+4f] R30 = R42 + [b963];
 a6eb: db,0a               jc    a6f7             if (R30 <= ff)  {
@@ -14087,7 +14052,7 @@ a8f8: 20,84,03            timer 20,   384,
 a8fb: 81,4b,01,01,28      timer 81,   14b,  B0_28
 a900: 81,4a,01,04,a1      timer 81,   14a, Flags_a1, 
 a905: 85,4a,01,02,a1      timer 85,   14a, Flags_a1, 
-a90a: 23,bc,01,08,45      timer 23,   1bc, Flags_2B, 
+a90a: 23,bc,01,08,45      timer 23, TSSTIL_TMR, Flags_2B, 
 a90f: 40,c2,01            timer 40,   1c2, 
 a912: 81,4c,01,80,24      timer 81,   14c,  B7_24
 a917: 22,3c,01            timer 22,   13c, 
@@ -16273,7 +16238,7 @@ c155: ff                  ???
 c156: 80,70               word   7080
 c158: 80                  byte     80
 c159: 5a                  byte     5a
-c15a: 19                  byte     19
+c15a: 19                  byte     19            VTABFL
 c15b: ff                  byte     ff            VTCEGO
 c15c: cd,00               word     cd
 c15e: 8c                  byte     8c
@@ -17259,8 +17224,12 @@ cc75: 01                  ???
 cc76: 9a                  byte     9a
 
 cc77: ff,24,00,01,00,50,00,01,ff,c0,de,00,e4,40,22,40  ???  
-cc87: 39,01,00,58,02,18,00,a0,00,01,0e,18,08,28,40,40  ???  
-cc97: 00,73,55            ???   
+cc87: 39,01,00,58,02,18,00,a0,00,01,0e,18,08  ???  
+
+cc94: 28,40               word   4028            VDLY2
+
+   VATMR2:
+cc96: 40,00,73,55         ???   
 
 cc9a: 05                  byte      5
 
