@@ -1074,9 +1074,10 @@ word    c138 c139
 word    c140 c141
 word    c142 c143
 byte    c145 c145
-word    c146 c147
-word    c148 c149
-word    c14a c14b
+byte    c146 c146
+word    c147 c148
+word    c149 c14a
+word    c14b c14c
 byte    c14d c14d
 word    c14e c14f
 word    c150 c151
@@ -1372,7 +1373,7 @@ func    cd40 cd49  "Func_cd40"   : UY  : UY
 func    cd4a cd61  "Func_cd4a"   : UW  : UW 
 func    cd62 cd6d  "Func_cd62"   : UY  : UY 
 table   cd6e cda5  "Table_cd6e"   : O 8 UY 
-func    cda6 cdc5  "Func_cda6"   : UW  : UW 
+func    cda6 cdc5  "FN031"   : UW  : UW 
 func    cdc6 cde1  "FN070L"   : UW  : UW 
 func    cde2 cded  "Func_cde2"   : SY  : UY 
 byte    cdee cdee
@@ -1540,7 +1541,8 @@ sub  8500e 8501b  "Sub_500e"
 sub  8501c 85130  "Sub_501c"  
 sub  85131 8513e  "UYTabLU_5131"  $ F uytlu 38 34
 sub  8513f 85368  "Sub_513f"  
-sub  85369 85401  "Sub_5369"  
+sub  851ce "EGO_Switch_Logic"
+sub  85369 "NEW_UPRATE_CALC"  
 sub  85402 8577a  "Sub_5402"  
 sub  8577b 8578e  "Sub_577b"  
 sub  8578f 8582f  "Sub_578f"  
@@ -1582,6 +1584,7 @@ sub  86986 "MODE_SELECT"
 sub  86a3a "ISC_IPSIBR_COM1"  
 sub  86b8c "ISC_ISCDTY_COM1"  
 sub  86c18 "Manifold_VACUUM"  
+sub  86c27 "ISC_ISCKAM_COM1"
 sub  86ca9 86cd6  "Sub_6ca9"  
 sub  86cd7 86d27  "Sub_6cd7"  
 sub  86d5b 86dac  "Sub_6d5b"  
@@ -1612,6 +1615,8 @@ sub  87394 87aeb  "Sub_7394"
 sub  8766a 87689  "Sub_766a"  
 sub  87673 87689  "Sub_7673"  
 sub  879a3 87aeb  "Sub_79a3"  
+sub  87a91 "WARM_UP_COUNTER_LOGIC"
+sub  87aaf "KAM_CODE_ERASE_LOGIC"
 sub  87aec 87bae  "Sub_7aec"  
 sub  87afe "?Fault_Filter_Routine?"  
 sub  87b00 87bae  "Sub_7b00"  
@@ -1667,6 +1672,7 @@ sub  880cd 880dc  "Sub_80cd"
 sub  880dd 880fb  "Sub_80dd"  
 sub  880fc 8853c  "Sub_80fc"  
 sub  88102 "VR_RUN_INIT_COM8"  
+sub  8810e "FMEM_FAULT_PRESENT_and_INITIALATION_LOGIC"
 sub  88195 8840a  "Sub_8195"  
 sub  881a6 881b7  "Sub_81a6"  
 sub  881b8 8840a  "Sub_81b8"  
@@ -1709,6 +1715,7 @@ sub  88797 88801  "Sub_8797"
 sub  8879a 8879e  "Sub_879a"  
 sub  887ea 887ec  "Sub_87ea"  
 sub  88802 8882c  "Sub_8802"  
+
 sub  8882d 888be  "Sub_882d"  
 sub  888bf 888dd  "Sub_88bf"  
 sub  888de 8890b  "Sub_88de"  
@@ -1811,6 +1818,7 @@ sym 26 "PSFLAG" : B 3
 sym 26 "RUNUP_FLG" : B 4
 sym 26 "PTSCR" : B 5
 sym 26 "DNDSUP" : B 6
+sym 26 "B7_HCAMFG_26" : B 7
 
 sym 27 "Flags_27"
 sym 27 "B0_R27" : B 0
@@ -1856,7 +1864,7 @@ sym 2c "Goose" : B 1
 sym 2c "VIP_FP_OVERRIDE" : B 2
 sym 2c "Vip_knock" : B 3
 sym 2c "Kam_codes" : B 4
-sym 2c "Vvsfl1" : B 5
+# sym 2c "Vvsfl1" : B 5
 sym 2c "Vegrbp" : B 6
 sym 2c "Rmspru" : B 7
 
@@ -1877,7 +1885,7 @@ sym 2f "B0_GOOSE" :T 0
 sym 2f "B1_OneDigit_output?" :T 1
 sym 2f "B2_VIP_flags4" :T 2
 sym 2f "B3_VIP_flags4" :T 3
-sym 2f "Vvsfl1" : T 4
+# sym 2f "Vvsfl1" : T 4
 sym 2f "Disable_isc" :T 5
 sym 2f "B6_VIP_flags4" :T 6
 sym 2f "B7_VIP_flags4" :T 7
@@ -2027,7 +2035,7 @@ sym 9e "B4_EGREN_9e" : B 4
 # sym 9e "Vegrbp" : T4
 
 sym 9f "Flags_9f"
-#sym 9f "Swtfl" : B 0
+sym 9f "SWTFL" : B 0
 #sym 9f "Egofl" : B 1
 sym 9f "B2_OLFLG" : B 2
 #sym 9f "Qclol" : B 3
@@ -2045,7 +2053,7 @@ sym a1 "Flags_a1"
 
 sym a3 "Flags_a3"
 sym a3 "B0_V_MODE_SETUP_a3" : T 0
-sym a3 "B1_Flags_a3" : B 1
+sym a3 "B1_STI_RESET_a3" : B 1
 sym a3 "B2_Flags_a3" : B 2
 sym a3 "B3_Flags_a3" : B 3
 sym a3 "B4_Flags_a3" : B 4
@@ -2073,13 +2081,15 @@ sym a6 "FMEM_FLAGS"
 sym a6 "B0_FMEM_FLAGS" : B 0
 sym a6 "B1_FMEM_FLAGS" : B 1
 sym a6 "B2_TFMFLG_a6" : B 2
-sym a6 "B3_FMEM_FLAGS" : B 3
+sym a6 "B3_MFMFLG_a6" : B 3
 sym a6 "B4_EFMFLG" : B 4
 sym a6 "B5_FMEM_FLAGS" : B 5
 sym a6 "B6_FMEM_FLAGS" : B 6
 sym a6 "B7_AFMFLG" : B 7
 
 sym a7 "FMEM_FLAG2"
+sym a7 "B0_V_VACFLG_a7" : B 0
+
 
 sym a8 "APT"
 sym a8 "APT_WOT" : B 0
@@ -2156,6 +2166,7 @@ sym 15c "NLAST"
 sym 162 "ISCFLG"
 sym 163 "DSDRPM"
 sym 164 "ISCTMR"
+sym 165 "ISFLAG"
 sym 167 "LOACT"
 sym 168 "BPCOR"
 
@@ -2188,6 +2199,9 @@ sym 216 "MAPTMR"
 
 sym 217 "VACUUM"
 
+sym 222 "LSTROW"
+sym 224 "LSTCOL"
+
 sym 22c "Tsladv"
 
 sym 22e "MAPBAR"
@@ -2219,6 +2233,9 @@ sym 2bc "Xram3L"
 sym 2bd "Xram1H"
 sym 2be "Xram4L"
 sym 2bf "Xram4H"
+
+sym 2c6 "COLTBU"
+sym 2c7 "ROWTBU"
 
 sym 2cc "SIGKAL"
 
@@ -2255,9 +2272,13 @@ sym 3e4 "DWLIDM"
 sym 3ea "POFFENG"
 sym 3ec "PPERENG"
 
+sym 3fc "UPRATE"
+
 sym 413 "C41FIL_TroubleCode"
 
 sym 428 "V_BOOSPD_TMR"
+sym 42a "EGOCNT"
+
 sym 43e "AC_PPM"
 
 sym 509 "XDCL_BAUD"
@@ -2394,6 +2415,7 @@ sym b008 "CHGRPM"
 sym b00c "ISCMOD_TPREL"
 sym b00e "ISCMOD_MAX"
 sym b010 "ISCMOD_MIN"
+# sym b016 "PSIBRM"
 sym b018 "ISCMOD_RPM"
 
 sym b01a "PSIBRM"
@@ -2522,6 +2544,8 @@ sym c141 "V_HICKOKTM"
 sym c142 "SARCHG"
 sym c143 "V_LANSDTM"
 
+sym c149 "VLORPM"
+
 sym c154 "trans_min_tv_pressure"
 
 sym c15a "VTABFL"
@@ -2535,8 +2559,12 @@ sym c184 "trans_wot_shift_12"
 sym c188 "trans_wot_shift_23"
 sym c18c "trans_wot_shift_34"
 
+sym c1af "VECT3"
+
 sym c1d6 "RTNVMN"
 sym c1d8 "RTNVMX"
+
+sym c1db "VMPMAX"
 
 # sym cb5a "RFe"
 
@@ -2564,6 +2592,8 @@ sym cb91 "AFACT2"
 sym cb9d "fuel_adaptive_min"
 sym cb9e "fuel_adaptive_max"
 
+sym cba5 "HCAMSW"
+
 sym cba8 "fuel_max_load_verification_value"
 sym cbaa "VKYPWR"
 
@@ -2582,6 +2612,7 @@ sym cbda "ECTMAX"
 sym cc2c "EVPMIN"
 sym cc2e "EVPMAX"
 
+sym cc4a "VECT3" 
 #sym cc52 "OCCDT1" 
 
 sym cc94 "VDLY2"

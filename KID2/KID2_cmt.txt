@@ -387,9 +387,25 @@
 
 4b3f # 29.875 * 8 = 239 = 0xEF
 
+
 5174 # ISCFLG = 1 CLOSED LOOP RPM CONTROL
+51a1 # kamcol
+51bd # kamrow
+
 523a # ISCFLG = 1 CLOSED LOOP RPM CONTROL
 5252 \n# CLOSED LOOP RPM CONTROL
+
+537b # kamrow = kamrow_spec
+537d # Read the value in FN1325L specified by kamcol.
+5380 # Load this value in UPRATE.
+53b6 # (use FN1325L 4 times so not to wrap around table or use special idle cells)
+53c7 # uprat_cnt
+53c9 # (adapt1_uprat + adapt2_uprat + adapt3_uprat + adapt4_uprat) 
+53cf # UPRATE = 127 (maximum value)
+53d5 # uprat_cnt != 0
+53d7 # uprat_avg = R20 / uprat_cnt
+53e4 # If, however, one or more  of  the  cells  in  the  four  points  is  a reference  cell,
+53e6 # then the average of the values in the positive cells is used in place of the negative values.
 58b3 # 60.000
 
 5c86 # 1024 = 1 second
@@ -463,6 +479,8 @@
 
 6ba3 # 29.875 * 8 = 239 = 0xEF
 
+6c2d # Clip to Maximum
+
 6c64 # if(IBGPSI < UPDATM) Exit ISCKAM_UPDATE logic;
 6c66 # IBGPSI = 0
 
@@ -474,6 +492,7 @@
 6c91 # Increment ISCKAMn
 6c93 # Increment ISKSUM
 6c95 # Decrement IPSIBR
+
 
 6de0 # Minimum coolant temperature to bypass thermactor air, deg F.
 6dee # CTBYS - CTBYSH = Hysteresis term for CTBYS, deg F.
@@ -622,6 +641,13 @@
 729e # 111, PASS 
 
 78ab # BOO_SPD_TMR
+
+7aac # KAM CODE(N)
+7aaf # WARM-UP COUNTER(N)
+7ab4 # INCREMENT ALL CODE WARM-UP COUNTERS
+7ab8 # Set all non-zero upcounts to 255 except as noted in test descriptions
+                                              
+7abd # WARM-UP COUNTER(N) >= 80
 
 7bb7 #  R16 = [718 + {2f or 2e}]
 7bbc #  clear Table from 747 or 746 down to 719
@@ -920,10 +946,14 @@ beaa # Used as an adder to calculate MAPOPE based on calculated airmass
 
 c0a8 # Register Rfc 
 
+c1af # coolant temp.  limit to trigger warm up counters (150 deg.  F).
+
 c1d6 # 11469
 
 cb83 # EGR Type 0 = Sonic
 
 # cb5a # Register Rfe 
+
+cc4a # VECT3 = Minimum coolant temperature, engine on.
 
 ce5c # FN348(ECT) = Crank fuel pulsewidth as a function of ECT.
