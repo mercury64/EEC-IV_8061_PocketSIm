@@ -228,6 +228,7 @@
 343a # 0 = Thick Film Ignition (TFI)
 
 
+
 3b55 # KAMQA = 10101010 BINARY
 3b58 # KAMQB = 11000110 BINARY
 3b5b # KAMQC = 01110101 BINARY
@@ -313,6 +314,14 @@
 
 3f77 # RATCH + FN090(MAP)
 3f7f # TP = RATCH (TP sensor out of limits)
+
+3f89 \n# CHANGE OF THROTTLE POSITION FILTER (TPDLBR)
+3f89 \n# 
+3f89 \n# TPDLBR is a time dependent rolling average filter of the change (or delta) in
+3f89 \n# TP  on successive background loops.  It is updated each background pass while
+3f89 \n# in Run or Underspeed mode.  TPDLBR is used in the light load RPM  oscillation
+3f89 \n# spark  multiplier  logic.   The  time  constant,  TCTPDL,  is  a  calibration
+3f89 \n# parameter.
 
 4089 \n# BATTERY VOLTAGE (VBAT)
 
