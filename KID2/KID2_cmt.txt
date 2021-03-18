@@ -844,16 +844,14 @@ aa1c # [2022] = 0xb000
 
 aa28 # R1a = 8
 
-aa30 \n# R1a = 8, R1c = b000, R18 = f0
-aa30 \n# R1a = 7, R1c = b43e, R18 = f2
-aa30 \n# R1a = 6, R1c = b442, R18 = f4
-aa30 \n# R1a = 5, R1c = b914, R18 = f6
-aa30 \n# R1a = 4, R1c = bab0, R18 = f8
-aa30 \n# R1a = 3, R1c = bb7a, R18 = fa
-aa30 \n# R1a = 2, R1c = c0a8, R18 = fb
-aa30 \n# R1a = 1, R1c = cb5a, R18 = fc
-
-
+aa30 \n# R1a = 8, R1c = b000, R18 = f0, Rf0 = b000
+aa30 \n# R1a = 7, R1c = b43e, R18 = f2, Rf2 = b43e
+aa30 \n# R1a = 6, R1c = b442, R18 = f4, Rf4 = b442
+aa30 \n# R1a = 5, R1c = b914, R18 = f6, Rf6 = b914
+aa30 \n# R1a = 4, R1c = bab0, R18 = f8, Rf8 = bab0
+aa30 \n# R1a = 3, R1c = bb7a, R18 = fa, Rfa = bb7a
+aa30 \n# R1a = 2, R1c = c0a8, R18 = fc, Rfc = c0a8
+aa30 \n# R1a = 1, R1c = cb5a, R18 = fe, Rfe = cb5a
 
 aa64 # Original: 71,ef,45     an2b  R45,ef    Disable_isc = 0;
 
