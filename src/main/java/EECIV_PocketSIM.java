@@ -31,7 +31,7 @@ public class EECIV_PocketSIM {
 	    logger.addHandler(logHandler);
 	   
 	   // Calibration KID2 = new Calibration("KID2/KID2patchedNew.bin");
-	    Calibration KID2 = new Calibration("KID2/LAD1.bin");
+	    Calibration KID2 = new Calibration("KID2/KID2.bin");
 	    
 		int[] fileBytes = KID2.readFile();
        
@@ -87,7 +87,7 @@ public class EECIV_PocketSIM {
 			//System.out.println("CONSOLE STATUS " + String.format("0x%04X",state.getWordRegister((short) 0xd00)));
 			    
 			//System.out.println("PSW: " + state.psw.getMemory());
-			if (count == 100) {
+			if (count == 5000) {
 				System.err.println("Count reached, ending");
 				break;
 			}

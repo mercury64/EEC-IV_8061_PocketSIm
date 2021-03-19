@@ -14,6 +14,7 @@ import ca.nerret.emu.emulator.opcodes.OpCodeSJMP;
 import ca.nerret.emu.emulator.opcodes.OpCodeSTB;
 import ca.nerret.emu.emulator.opcodes.OpCodeSTW;
 import ca.nerret.emu.emulator.opcodes.OpCode31;
+import ca.nerret.emu.emulator.opcodes.OpCodeAD2B;
 import ca.nerret.emu.emulator.opcodes.OpCodeAD2W;
 import ca.nerret.emu.emulator.opcodes.OpCodeAD3W;
 import ca.nerret.emu.emulator.opcodes.OpCodeAN2B;
@@ -122,6 +123,11 @@ public final class OpcodeCache {
         _OPCODES.put(0x71, new OpCodeAN2B(0x71, "AN2B"));
         _OPCODES.put(0x72, new OpCodeAN2B(0x72, "AN2B"));
         _OPCODES.put(0x73, new OpCodeAN2B(0x73, "AN2B"));
+        
+        _OPCODES.put(0x74, new OpCodeAD2B(0x74, "AD2B"));
+        _OPCODES.put(0x75, new OpCodeAD2B(0x75, "AD2B"));
+        _OPCODES.put(0x76, new OpCodeAD2B(0x76, "AD2B"));
+        _OPCODES.put(0x77, new OpCodeAD2B(0x77, "AD2B"));
         
         _OPCODES.put(0x50, new OpCodeAN3B(0x50, "AN3B"));
         _OPCODES.put(0x51, new OpCodeAN3B(0x51, "AN3B"));

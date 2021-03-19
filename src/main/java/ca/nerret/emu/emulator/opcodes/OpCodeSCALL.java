@@ -92,7 +92,7 @@ public class OpCodeSCALL extends OpCode implements IOpCode {
         short stack = state_.getWordRegister((short)0x10);
         // Stack <- PC;
         state_.setWordRegister(stack, (short)ret);
-        this.setOffset((short)offset & 0x0000ffff);
+        this.setOffset((short)offset & 0x00ff);
         
         state_.setPc(offset);
         
@@ -103,7 +103,7 @@ public class OpCodeSCALL extends OpCode implements IOpCode {
     public String toString()
     {
     	String out = super.toString();
-    	out = out + System.lineSeparator() + " Call to: " + String.format("0x%02X",this.getOffset());
+    	out = out + System.lineSeparator() + " SCall to: " + String.format("0x%02X",this.getOffset());
     	
     	return out+ System.lineSeparator();
     }

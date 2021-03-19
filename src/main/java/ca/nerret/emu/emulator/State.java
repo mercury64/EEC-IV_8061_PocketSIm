@@ -316,7 +316,7 @@ public class State {
 	
 	public short getWordRegister(short register) {
         
-		int regIndex = register & 0xffff;
+		int regIndex = (int)(register & 0x00ff);
 		
 		byte lo = this.register_memory[regIndex];
         byte hi = this.register_memory[regIndex + 1];
@@ -336,7 +336,7 @@ public class State {
 
 	public void setWordRegister(short dest_dwreg, byte value) {
 	
-		int index = (dest_dwreg & 0xff);
+		int index = (int)(dest_dwreg & 0x00ff);
 		
 		if (index == 0)
 		{
