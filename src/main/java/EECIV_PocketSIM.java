@@ -54,7 +54,7 @@ public class EECIV_PocketSIM {
 	{
         int count = 1;
         
-      // state.setPc(8280);
+       //state.setPc(17330);
         
 		while (true) {
 		        
@@ -71,7 +71,7 @@ public class EECIV_PocketSIM {
 			}
 			
 			
-			if (state.getPc() == 0xaa64)
+			if (state.getPc() == 0x3be7)
 			{
 				//pause
 				System.out.println("Break Point");
@@ -87,7 +87,7 @@ public class EECIV_PocketSIM {
 			//System.out.println("CONSOLE STATUS " + String.format("0x%04X",state.getWordRegister((short) 0xd00)));
 			    
 			//System.out.println("PSW: " + state.psw.getMemory());
-			if (count == 5000) {
+			if (count == 10000) {
 				System.err.println("Count reached, ending");
 				break;
 			}

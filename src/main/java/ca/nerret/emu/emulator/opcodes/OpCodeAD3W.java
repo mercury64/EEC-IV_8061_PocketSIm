@@ -76,7 +76,7 @@ public class OpCodeAD3W  extends OpCode implements IOpCode {
 			operands[i] = (byte)memory[pc + i];
 		}
 
-        short dest_dwreg = 0;
+        byte dest_dwreg = 0;
 
         short sum = 0;
         
@@ -88,11 +88,14 @@ public class OpCodeAD3W  extends OpCode implements IOpCode {
 		}
         if (this.getAddressModeType() == AddressMode.IMMEDIATE)
 		{
+        	// Rfc = c0a8
+        	//state_.setWordRegister((short)0xfc, (short)0xc0a8);
+        	//state_.setWordRegister((short)0xfd, (short)0xc0);
             dest_dwreg = operands[4];
-            short src1_Swreg = operands[3];
+            byte src1_Swreg = operands[3];
             short src2_waop  = (short) ((operands[2] << 8) | operands[1]);;
             
-            short src1_value =  state_.getWordRegister((byte)src1_Swreg);
+            short src1_value =  state_.getWordRegister(src1_Swreg);
          
             sum =  (short) (src1_value + src2_waop) ;
             

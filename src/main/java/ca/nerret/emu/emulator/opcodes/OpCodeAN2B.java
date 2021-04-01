@@ -87,8 +87,13 @@ public class OpCodeAN2B  extends OpCode implements IOpCode {
 		}
         if (this.getAddressModeType() == AddressMode.IMMEDIATE)
 		{
-        	System.err.println("Not Implemented yet.");
-        	//System.exit(1);
+        	// Logical AND
+        	byte sourceRb   = operands[2];
+        	byte dataByte = operands[1];
+        	byte valueRb = state_.getByteRegister(sourceRb);
+        	byte result = (byte) (dataByte & valueRb);
+        	
+        	System.out.println(result);
 		}
         if (this.getAddressModeType() == AddressMode.INDIRECT)
 		{

@@ -316,7 +316,7 @@ public class State {
 	
 	public short getWordRegister(short register) {
         
-		int regIndex = (int)(register & 0x00ff);
+		int regIndex = (int)(register & 0xffff);
 		
 		byte lo = this.register_memory[regIndex];
         byte hi = this.register_memory[regIndex + 1];
@@ -351,7 +351,7 @@ public class State {
 	
 	public void setWordRegister(short dest_dwreg, short value) {
         
-		int index = dest_dwreg & 0xffff;
+		int index = dest_dwreg & 0x0000ffff;
 
         if ( index <= 0x10)
         {
@@ -387,7 +387,7 @@ public class State {
 	
 	private void setGeneralRegister(short dest_dwreg, short value)
 	{
-		int index = dest_dwreg & 0xffff;
+		int index = dest_dwreg & 0xff;
 		
         byte hi = (byte) ((value >> 8) & 0xff ) ;
         byte lo = (byte) (value  & 0xff) ;
@@ -602,5 +602,20 @@ public class State {
 	public ProgramStatusWord getPsw() {
 		// TODO Auto-generated method stub
 		return this.psw;
+	}
+
+	public int getIntRegister(byte operandRB) {
+		
+		short word1 = this.getWordRegister(operandRB);
+		
+		short word2 = this.getWordRegister((short)(operandRB + 2));
+
+		
+        int hi = (short) ((word1 >> 8) & 0xffff ) ;
+        int lo = (short) (word2  & 0xffff) ;
+        
+        int RBB = (hi | lo);
+        
+		return RBB;
 	}	
 }

@@ -64,7 +64,7 @@ public class OpCodeLDZBW extends OpCode<OpCodeLDZBW> implements IOpCode {
 			operands[i] = (byte)memory[pc + i];
 		}
        
-        byte areg = 0;
+        short areg = 0;
         short  breg = 0;
         byte data;
         byte indirreg;
@@ -78,11 +78,17 @@ public class OpCodeLDZBW extends OpCode<OpCodeLDZBW> implements IOpCode {
         switch (this.getAddressModeInt())
         {
 	        case AddressMode.DIRECT:
-
+	        	byte destRb = operands[numberOfBytes-1];
+	        	byte sourceRa = operands[numberOfBytes-2];
+	        	byte valueRa = state_.getByteRegister(sourceRa);
+	        	
+	        	short zeroExtend = (short) (0x00ff & valueRa);
+	        	breg = destRb;
+	        	areg = zeroExtend;
 	        	break;
 	        case AddressMode.IMMEDIATE:
 	        	data = (byte)operands[numberOfBytes-2];
-	        	areg = data;
+	        	areg = (short) (0x00ff & data);
 	        	breg = operands[numberOfBytes-1];
 	        	break;
 	        case AddressMode.INDIRECT:

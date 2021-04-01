@@ -43,7 +43,7 @@ public class OpCodeCALL extends OpCode implements IOpCode {
         byte byteHi = (byte)memory[pc + 2];
 
         int offset  = (short) (byteHi << 8);
-        offset = offset  | ((byteLo) & 0x0f);
+        offset = offset  | ((byteLo) & 0xff);
         
         
         //2088: ef,4c,89            call  a9d7
@@ -77,10 +77,10 @@ public class OpCodeCALL extends OpCode implements IOpCode {
         short stack = state_.getWordRegister((short)0x10);
         // Stack <- PC;
         state_.setWordRegister(stack, (short)ret);
-        this.setOffset((short)offset & 0x00ff);
+        this.setOffset((short)offset & 0xffff);
         
         
-        state_.setPc((short)offset  & 0x00ff);
+        state_.setPc((short)offset  & 0x0000ffff);
         
         state_.updateStateTime(stateTime);
         

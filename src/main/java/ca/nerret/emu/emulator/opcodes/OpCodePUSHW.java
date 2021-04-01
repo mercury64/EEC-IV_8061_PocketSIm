@@ -76,14 +76,14 @@ public class OpCodePUSHW extends OpCode<OpCodePUSHW> implements IOpCode {
 		if (this.getAddressModeType() == AddressMode.DIRECT)
 		{
 			RA = state_.getWordRegister(operands[numberOfBytes-1]);
-			RB = 0x10;//stack
+			RB = state_.getWordRegister((short) 0x10);//stack
 			
 			state_.setWordRegister(RB, RA);
 		}
 		if (this.getAddressModeType() == AddressMode.IMMEDIATE)
 		{
 			RA = (short) (operands[2] << 8 |   operands[1] & 0xff);
-			RB = 0x10;//stack
+			RB = state_.getWordRegister((short) 0x10);//stack
 			
 			state_.setWordRegister(RB, RA);
 			
@@ -91,11 +91,17 @@ public class OpCodePUSHW extends OpCode<OpCodePUSHW> implements IOpCode {
 		if (this.getAddressModeType() == AddressMode.INDIRECT)
 		{
 			RA = (short) (operands[numberOfBytes-1]  & 0xfe);
-			RB = 0x10;//stack
+			RB = state_.getWordRegister((short) 0x10);//stack
 			
 			// [RA]
         	RA = state_.getWordRegister(RA);
-			
+        	
+            byte byteLo = (byte)memory[RA];
+            byte byteHi = (byte)memory[RA + 1];
+
+            int offset  = (short) (byteHi << 8);
+            offset = offset  | ((byteLo) & 0xff);
+			RA = (short) offset;
         	// ([SP]) <- ([RA])
 			state_.setWordRegister(RB, RA);
 			
@@ -103,7 +109,7 @@ public class OpCodePUSHW extends OpCode<OpCodePUSHW> implements IOpCode {
 		if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
 		{
 			short indirectRA = (short) (operands[numberOfBytes-1]  & 0xfe);
-			RB = 0x10;//stack
+			RB = state_.getWordRegister((short) 0x10);//stack
 			
 			// RA
 			RA = state_.getWordRegister(indirectRA);
@@ -135,7 +141,7 @@ public class OpCodePUSHW extends OpCode<OpCodePUSHW> implements IOpCode {
 	    	//RA = state_.getWordRegister((byte)operands[numberOfBytes-1]);
 			//RB = state_.getWordRegister(operands[numberOfBytes-2]);
         	byte indexRa  = (byte) (operands[numberOfBytes-3] & 0xfe);
-        	RB = 0x10;//stack
+        	RB = state_.getWordRegister((short) 0x10);//stack
         	byte offset_lo = operands[numberOfBytes-2];
         	byte offset_hi = operands[numberOfBytes-1];
         	

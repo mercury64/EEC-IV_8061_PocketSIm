@@ -21,18 +21,20 @@ import ca.nerret.emu.emulator.State;
  *  
  * @author Warren White
  */
-public class OpCodeNEGW extends OpCode<OpCodeNEGW> implements IOpCode {
+public class OpCodeCPLB extends OpCode<OpCodeCPLB> implements IOpCode {
 
 	private short result;
 	private short operandLocation;
 	
-    public OpCodeNEGW(int opcode, String mnemonic) {
+    public OpCodeCPLB(int opcode, String mnemonic) {
 		super(opcode, mnemonic);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
     public final void exec(State state) {
+		System.err.println(this.getClass().getName() + " Not Implemented Yet.");
+		System.exit(1);
       super.exec(state);
       
       state.setWordRegister(getOperandLocation(),getResult());

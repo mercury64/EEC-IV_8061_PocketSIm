@@ -21,20 +21,21 @@ import ca.nerret.emu.emulator.State;
  *  
  * @author Warren White
  */
-public class OpCodeNEGW extends OpCode<OpCodeNEGW> implements IOpCode {
+public class OpCodeCPLW extends OpCode<OpCodeCPLW> implements IOpCode {
 
 	private short result;
 	private short operandLocation;
 	
-    public OpCodeNEGW(int opcode, String mnemonic) {
+    public OpCodeCPLW(int opcode, String mnemonic) {
 		super(opcode, mnemonic);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
     public final void exec(State state) {
+
       super.exec(state);
-      
+
       state.setWordRegister(getOperandLocation(),getResult());
      
       
@@ -49,10 +50,10 @@ public class OpCodeNEGW extends OpCode<OpCodeNEGW> implements IOpCode {
 	
 	public void execDirect()
 	{
-		// Assembler Format: NEGW breg
-		// Instruction Operation:  (RB)<-0-(RB)
+		// Assembler Format: CPLW breg
+		// Instruction Operation:  (RB)<- 1's Complement(RB)
 		// Execution States: 4
-		// MachineFormat: [ ^03 ], [ Source RB ]
+		// MachineFormat: [ ^02 ], [ Source RB ]
     	numberOfBytes = 2;
     	executionStates = 4;
 
@@ -62,9 +63,8 @@ public class OpCodeNEGW extends OpCode<OpCodeNEGW> implements IOpCode {
     	
     	short breg = this.getWordValue(sourceRB);
     	
-    	breg = (short) (breg ^ 0xffff);
-    	breg= (short) (breg+1);
-    	
+    	breg = (short) (~breg);
+
     	this.setOperandLocation((short)(sourceRB & 0x00ff));
     	this.setResult(breg);
     	

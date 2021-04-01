@@ -9,6 +9,8 @@ import ca.nerret.emu.emulator.opcodes.OpCodeCLRB;
 import ca.nerret.emu.emulator.opcodes.OpCodeCLRW;
 import ca.nerret.emu.emulator.opcodes.OpCodeCMPB;
 import ca.nerret.emu.emulator.opcodes.OpCodeCMPW;
+import ca.nerret.emu.emulator.opcodes.OpCodeCPLB;
+import ca.nerret.emu.emulator.opcodes.OpCodeCPLW;
 import ca.nerret.emu.emulator.opcodes.OpCodeSCALL;
 import ca.nerret.emu.emulator.opcodes.OpCodeSJMP;
 import ca.nerret.emu.emulator.opcodes.OpCodeSTB;
@@ -23,6 +25,7 @@ import ca.nerret.emu.emulator.opcodes.OpCodeC3;
 import ca.nerret.emu.emulator.opcodes.OpCodeCALL;
 import ca.nerret.emu.emulator.opcodes.OpCodeCD;
 import ca.nerret.emu.emulator.opcodes.OpCodeDI;
+import ca.nerret.emu.emulator.opcodes.OpCodeDIVW;
 import ca.nerret.emu.emulator.opcodes.OpCodeDJNZ;
 import ca.nerret.emu.emulator.opcodes.OpCodeEI;
 import ca.nerret.emu.emulator.opcodes.OpCodeFF;
@@ -39,11 +42,14 @@ import ca.nerret.emu.emulator.opcodes.OpCodeJNE;
 import ca.nerret.emu.emulator.opcodes.OpCodeLDB;
 import ca.nerret.emu.emulator.opcodes.OpCodeLDW;
 import ca.nerret.emu.emulator.opcodes.OpCodeLDZBW;
+import ca.nerret.emu.emulator.opcodes.OpCodeML2B;
+import ca.nerret.emu.emulator.opcodes.OpCodeML2W;
 import ca.nerret.emu.emulator.opcodes.OpCodeNEGW;
 import ca.nerret.emu.emulator.opcodes.OpCodeNop;
 import ca.nerret.emu.emulator.opcodes.OpCodeORRB;
 import ca.nerret.emu.emulator.opcodes.OpCodePUSHW;
 import ca.nerret.emu.emulator.opcodes.OpCodeRET;
+import ca.nerret.emu.emulator.opcodes.OpCodeSB2B;
 import ca.nerret.emu.emulator.opcodes.OpCodeSB2W;
 import ca.nerret.emu.emulator.opcodes.OpCodeSB3W;
 
@@ -57,6 +63,8 @@ public final class OpcodeCache {
 
         _OPCODES.put(0x03, new OpCodeNEGW(0x03, "NEGW"));
 
+        _OPCODES.put(0x02, new OpCodeCPLW(0x02, "CPLW"));
+        _OPCODES.put(0x12, new OpCodeCPLB(0x12, "CPLB"));
         
         _OPCODES.put(0x11, new OpCodeCLRB(0x11, "CLRB"));
         _OPCODES.put(0x01, new OpCodeCLRW(0x01, "CLRW"));
@@ -149,6 +157,13 @@ public final class OpcodeCache {
         _OPCODES.put(0xAE, new OpCodeLDZBW(0xae, "LDZBW"));
         _OPCODES.put(0xAF, new OpCodeLDZBW(0xaf, "LDZBW"));
 
+        _OPCODES.put(0x7B, new OpCodeSB2B(0x7b, "SB2B"));
+        
+        _OPCODES.put(0x7F, new OpCodeML2B(0x7f, "ML2B"));
+        _OPCODES.put(0x6D, new OpCodeML2W(0x6d, "ML2W"));
+        
+        _OPCODES.put(0x8C, new OpCodeDIVW(0x8c, "DIVW"));
+        
         
         _OPCODES.put(0xC4, new OpCodeSTB(0xc4, "STB"));
         _OPCODES.put(0xC6, new OpCodeSTB(0xc6, "STB"));

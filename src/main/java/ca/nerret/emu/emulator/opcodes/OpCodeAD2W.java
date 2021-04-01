@@ -81,11 +81,13 @@ public class OpCodeAD2W extends OpCode<OpCodeAD2W> implements IOpCode {
 			state_.setWordRegister(breg, sum);
 		}
 		if (this.getAddressModeType() == AddressMode.IMMEDIATE) {
-            short data  = (short) ((operands[2] << 8) | operands[1]);;
+			short hi = (short) ((short) (operands[2]) << 8);
+			short lo = (short) (operands[1] & 0x00ff);
+            short data  = (short) (hi  + lo);
 			byte breg = (byte)(operands[3]);
 	        short bregValue = state_.getWordRegister((byte)breg);
 	         
-	            sum =  (short) (data + bregValue) ;
+	        sum =  (short) (data + bregValue) ;
 	            
 	        state_.setWordRegister(breg, (short) (sum));
 		}

@@ -147,8 +147,8 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 	}
 	
 	protected short getWordValue(short location) {
-		int index = (int)location & 0xffff; // byte index, LSB
-		int index2 = (int)location+1 & 0xffff;// byte index2, MSB
+		int index = (int)location & 0x0000ffff; // byte index, LSB
+		int index2 = (int)location+1 & 0x0000ffff;// byte index2, MSB
 	   
 		short value = (short) memory[(int)index]; // LSB
 		short value2 = (short) memory[(int)index2]; // MSB
@@ -194,7 +194,7 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 	 * @return
 	 */
 	protected byte getByteValue(int[] memory, short location) {
-	 	   int index = (int)location & 0xffff; // byte index, LSB
+	 	   int index = (int)location & 0x0000ffff; // byte index, LSB
 	 	   //int index2 = (int)location+1 & 0xffff;// byte index2, MSB
 	 	   
 	 	   byte value = (byte) memory[(int)index]; // LSB
@@ -206,6 +206,31 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 	 	   //value = RA;
 			return value;
 		}
+	
+	protected byte getByteValue(short location) {
+	 	   int index = (int)location & 0x0000ffff; // byte index, LSB
+	 	   //int index2 = (int)location+1 & 0xffff;// byte index2, MSB
+	 	   
+	 	   byte value = (byte) memory[(int)index]; // LSB
+	 	  // short value2 = (short) memory[(int)index2]; // MSB
+	  	  
+	 	   //short RA = (short) (value2 << 8 |  value & 0xff); // put MSB | LSB
+	 	   
+	 	   System.out.println(" Get Byte from address: " + String.format("0x%02X",location));
+	 	   //value = RA;
+			return value;
+		}
+	public byte getByteRegister(short register) {
+		return this.state.getByteRegister(register);
+	}
+	public short getWordRegister(short register) {
+		return this.state.getWordRegister(register);
+	}
+
+
+	public int getIntRegister(byte operandRB) {
+		return this.state.getIntRegister(operandRB);
+	}
 
 	public short setSubResult(short RB, short RA) {
 		 short result = state.doSub(RB, RA);
@@ -217,7 +242,10 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 		this.result = result;
 	}
 	
-	
+	protected void setOperandLocation(short operandLocation)
+	{
+		this.operandLocation = operandLocation;
+	}
 
 	protected short getOperandLocation() {
 		

@@ -87,9 +87,17 @@ public class OpCodeSTW extends OpCode implements IOpCode {
         	// Instruction operation: ([RA])<-(RB)
         	// Execution states: 7/12
         	// Machine Format: [ ^C2 ],[ DestRA |0_MB],[ SourceRB ]
+        	registerRA = (short) (registerRA & 0xfe);
+        	
+        	// [RA]
+    		short valueRA = (short) state_.getWordRegister((byte) (registerRA));
+    		
+    		// RB
+    		short valueRB = (short) state_.getWordRegister((byte) (registerRB));
+    		 
+    		// ([RA])<-(RB);
+    		state_.setWordRegister((short) (valueRA), (short) (valueRB));
 
-        	System.err.println("Not Implemented");
-     	   System.exit(1);
         }
         
         if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
