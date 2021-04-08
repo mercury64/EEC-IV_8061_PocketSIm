@@ -77,9 +77,14 @@ public class OpCodeSTW extends OpCode implements IOpCode {
         dest_reg = registerRA;
     	if ( this.getAddressModeType() == AddressMode.DIRECT )
     	{
-        	System.err.println("Not Implemented");
-     	   System.exit(1);
-        	
+            // AssemblerFormat: STW breg, areg
+            // Instruction operation: (RA)<-(RB)
+            // Execution states: 4
+            // Machine Format: [ ^C0 ],[ DestRA ],[ SourceRB ]
+            
+            short sourceRB = state_.getWordRegister(registerRB);
+            
+            state_.setWordRegister((short)registerRA,(short) sourceRB);
     	}
         if (this.getAddressModeType() == AddressMode.INDIRECT)
         {
