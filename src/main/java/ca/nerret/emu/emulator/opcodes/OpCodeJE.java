@@ -29,7 +29,7 @@ public class OpCodeJE  extends OpCode implements IOpCode {
 	        
 	        boolean zeroFlag = state_.getPswBit(ProgramStatusWord.ZERO);
 	        
-	        System.out.println(state_.pswFlagsToString());
+	       // System.out.println(state_.pswFlagsToString());
 	        // Jump on =
 	        // Instruction Operation: (PC)<-(PC)+Displacement if Z=1,or (PC) unchanged if Z=0.
 	        // If Z=1

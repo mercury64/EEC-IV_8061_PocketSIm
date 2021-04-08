@@ -149,8 +149,8 @@ public class OpCodePUSHW extends OpCode<OpCodePUSHW> implements IOpCode {
         	
         	short offset = (short) ((offset_hi << 8) | (offset_lo & 0xff));
         	
-        	System.out.println(String.format(" [0x%04X + 0x%04X]", Ravalue, offset));
-        	System.out.println(String.format("Offset hi & lo : [0x%04X + 0x%04X]", (short) (offset_hi << 8), offset_lo));
+        	//System.out.println(String.format(" [0x%04X + 0x%04X]", Ravalue, offset));
+        	//System.out.println(String.format("Offset hi & lo : [0x%04X + 0x%04X]", (short) (offset_hi << 8), offset_lo));
         	
         	Ravalue = (short) (Ravalue + offset);
         	

@@ -52,8 +52,8 @@ public class OpCodeJNB  extends OpCode implements IOpCode {
 	        byte bitToTest = (byte) (this.getOpcode() & 0B00000111);
 	        String opcodeString = Integer.toBinaryString(bitToTest);
 
-			System.out.println( " Bit to test: " + bitToTest+  String.format(" 0B%8s", opcodeString).replace(' ', '0')) ; 
-			System.out.println(" On register " + String.format("R%02X", breg) + " Value: " + Integer.toBinaryString(value));
+			//System.out.println( " Bit to test: " + bitToTest+  String.format(" 0B%8s", opcodeString).replace(' ', '0')) ; 
+			//System.out.println(" On register " + String.format("R%02X", breg) + " Value: " + Integer.toBinaryString(value));
 			
 			int setBit = (value >>> bitToTest) & 0x1;
 			

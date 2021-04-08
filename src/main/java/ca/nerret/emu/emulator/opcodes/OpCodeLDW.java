@@ -75,20 +75,28 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
         
         if (this.getAddressModeType() == AddressMode.DIRECT)
         {
-     	   System.err.println("Not Implemented");
-     	   System.exit(1);
+            // AssemblerFormat: LDW areg, breg
+            // Instruction operation: (RB)<-(RA)
+            // Execution states: 4
+            // Machine Format: [ ^A0 ],[ SourceRB ], [ DestRA ]
+            // little endian
+          
+            short registerRB = (short) (operands[1] & 0xfe);
+            short registerRA = (short) (operands[2] & 0xff);
+                
+          
+            short sourceRB = state_.getWordRegister(registerRB);
+            
+            state_.setWordRegister((short)registerRA,(short) sourceRB);
+
         }
        if (this.getAddressModeType() == AddressMode.INDIRECT)
        {
     	   
-    	   // aa98: 9a,aa word aa91
+     	   System.err.println("Not Implemented");
+     	   System.exit(1);
     	   
-    	   value = (short) operands[numberOfBytes-2]; // operand
-    	   value = state_.getWordRegister((byte) value); // value of [Register]
-    	   
-    	   value = this.getWordValue(memory, value);
-    	   
-    	   state_.setWordRegister(dest_dwreg, value);
+
     	   
        }
        

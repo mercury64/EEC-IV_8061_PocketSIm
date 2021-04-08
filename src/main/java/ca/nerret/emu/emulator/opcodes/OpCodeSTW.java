@@ -170,7 +170,7 @@ public class OpCodeSTW extends OpCode implements IOpCode {
         	registerRA = state_.getWordRegister((byte) registerRA);
         	
         	dest_reg = (short) ((operands[numberOfBytes-2] << 8) | operands[numberOfBytes-3]);
-        	System.out.println(String.format(" [0x%04X + 0x%04X]", registerRA, dest_reg));
+        	//System.out.println(String.format(" [0x%04X + 0x%04X]", registerRA, dest_reg));
         	
         	dest_reg = (short) (registerRA + dest_reg);
         	src_reg = (short) (operands[4] & 0xff);

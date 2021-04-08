@@ -202,7 +202,7 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 	  	  
 	 	   //short RA = (short) (value2 << 8 |  value & 0xff); // put MSB | LSB
 	 	   
-	 	   System.out.println(" Get Byte from address: " + String.format("0x%02X",location));
+	 	  // System.out.println(" Get Byte from address: " + String.format("0x%02X",location));
 	 	   //value = RA;
 			return value;
 		}
@@ -216,7 +216,7 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 	  	  
 	 	   //short RA = (short) (value2 << 8 |  value & 0xff); // put MSB | LSB
 	 	   
-	 	   System.out.println(" Get Byte from address: " + String.format("0x%02X",location));
+	 	  // System.out.println(" Get Byte from address: " + String.format("0x%02X",location));
 	 	   //value = RA;
 			return value;
 		}

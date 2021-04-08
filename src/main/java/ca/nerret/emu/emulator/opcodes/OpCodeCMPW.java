@@ -125,8 +125,8 @@ public class OpCodeCMPW extends OpCode implements IOpCode {
 		//state_.doSub((short) state_.setWordRegister(RB), RA);
 		long cmpResult = state_.doSub( RB, RA);
 		
-		System.out.println(" Compare: (" + String.format("0x%04X", RB) + ", "+ String.format("0x%04X", RA) + ")");
-		System.out.println(state_.pswFlagsToString());
+		//System.out.println(" Compare: (" + String.format("0x%04X", RB) + ", "+ String.format("0x%04X", RA) + ")");
+	//	System.out.println(state_.pswFlagsToString());
 		
 		if ( compare == 0) // Z Flag
 		{
@@ -160,7 +160,7 @@ public class OpCodeCMPW extends OpCode implements IOpCode {
 		else {
 			state_.setPswBit(ProgramStatusWord.CARRY, false);
 		}
-		System.out.println(state_.pswFlagsToString());
+		//System.out.println(state_.pswFlagsToString());
 		
     }
 }

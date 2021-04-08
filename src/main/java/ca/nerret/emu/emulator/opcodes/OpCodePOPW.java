@@ -5,11 +5,11 @@ import ca.nerret.emu.emulator.OpCode;
 import ca.nerret.emu.emulator.State;
 
 /**
- * PUSHW - Push Word on Stack
+ * POPW - Push Word off Stack
  * 
- * DESCRIPTION: PUSHW decrements the stack pointer(SP) by two, and then transfers a 16-bit "A" operand to the 
- * 	stack location pointed to by the stack pointer(SP).The SP must be an even address for proper 8061/8065 stack operations.
-
+ * DESCRIPTION: POPW transfers a 16-bit word from the stack locatio npointed to by the stack pointer(SP) to a 16- bit "A" operand location, 
+ *   and then increments the SP by two. 
+ * The SP must be an even address for proper 8061/8065 stack operations.
  * 
  * PSW FLAGS AFFECTED:
  *  Z  N  V  VT C  ST 
@@ -75,9 +75,13 @@ public class OpCodePOPW extends OpCode<OpCodePUSHW> implements IOpCode {
 		
 		if (this.getAddressModeType() == AddressMode.DIRECT)
 		{
-			RA = state_.getWordRegister(operands[numberOfBytes-1]);
+			// Assembler Format: POPW areg
+			// Instruction Operation: (RA)<-([SP]); (SP)+2
+			// Execution States: 12
+			// Machine Format: [ ^CC ], [ DestRA ]
+			RA = (short)(operands[numberOfBytes-1] & 0xff);
 			RB = state_.getWordRegister((short) 0x10);//stack
-			
+			RB = state_.getWordRegister(RB);
 			state_.setWordRegister(RA, RB);
 		}
 		if (this.getAddressModeType() == AddressMode.IMMEDIATE)
@@ -147,8 +151,8 @@ public class OpCodePOPW extends OpCode<OpCodePUSHW> implements IOpCode {
         	
         	short offset = (short) ((offset_hi << 8) | (offset_lo & 0xff));
         	
-        	System.out.println(String.format(" [0x%04X + 0x%04X]", Ravalue, offset));
-        	System.out.println(String.format("Offset hi & lo : [0x%04X + 0x%04X]", (short) (offset_hi << 8), offset_lo));
+        	//System.out.println(String.format(" [0x%04X + 0x%04X]", Ravalue, offset));
+        //	System.out.println(String.format("Offset hi & lo : [0x%04X + 0x%04X]", (short) (offset_hi << 8), offset_lo));
         	
         	Ravalue = (short) (Ravalue + offset);
         	
@@ -159,14 +163,8 @@ public class OpCodePOPW extends OpCode<OpCodePUSHW> implements IOpCode {
         //state.setSP(sp);
         //mem.setWord((state.getSS() << 4) + sp, (short) value);
 
+        state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
-
-        short stack = state_.getWordRegister((short)0x10);
-        int stackValue = (int) (this.getWordValue(memory, stack) & 0x00ff);
-
-        final int programCounter = stackValue;
-
-        state_.setPc(programCounter);
         state_.incrementSP();
 
     }

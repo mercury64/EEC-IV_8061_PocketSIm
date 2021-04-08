@@ -35,7 +35,7 @@ public class OpCodeRET extends OpCode implements IOpCode {
         
         state_.updateStateTime(stateTime);
         
-        System.out.println(" Return to: " + String.format("0x%02X",(short)programCounter));
+        //System.out.println(" Return to: " + String.format("0x%02X",(short)programCounter));
 
     }
 

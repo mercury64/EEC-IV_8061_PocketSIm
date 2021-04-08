@@ -94,7 +94,7 @@ public class OpCodeSJMP extends OpCode implements IOpCode {
         
         state_.updateStateTime(stateTime);
         
-    	System.out.println( " Jump to: " + String.format("0x%02X",this.getOffset()) + System.lineSeparator());
+    	//System.out.println( " Jump to: " + String.format("0x%02X",this.getOffset()) + System.lineSeparator());
     	
         
     }

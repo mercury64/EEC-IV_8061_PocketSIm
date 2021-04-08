@@ -46,7 +46,7 @@ public class OpCodeJLEU  extends OpCode implements IOpCode {
 	    	// ExecutionStates: 4 if no jump, 8 if jump taken.
 	    	// MachineFormat: [ ^D1 ],[+-| Displacement ]
 	        
-	        System.out.println(state_.getPsw());
+	       // System.out.println(state_.getPsw());
 	        
 	        if ( (notCarryFlag && zeroFlag) == ProgramStatusWord.SET)
 	        {

@@ -151,7 +151,7 @@ public class OpCodeCMPB extends OpCode implements IOpCode {
 	        	areg = data;
 	        	breg = state_.getByteRegister(operands[numberOfBytes-1]);
 	        	
-	        	System.out.println("Unsigned " + ((areg & 0xf)));
+	        	//System.out.println("Unsigned " + ((areg & 0xf)));
 	        	break;
 	        case AddressMode.INDIRECT:
 	        	System.err.println("Not Implemented");
@@ -211,7 +211,7 @@ public class OpCodeCMPB extends OpCode implements IOpCode {
 
         cmpResult = state_.doByteSub( (byte) (breg & 0xf), (byte) (areg & 0xf));
         
-        System.out.println(" Compare: (" + String.format("0x%04X", breg) + ", "+ String.format("0x%04X", areg) + ")");
+        //System.out.println(" Compare: (" + String.format("0x%04X", breg) + ", "+ String.format("0x%04X", areg) + ")");
 		
 		if ( compare == 0) // Z Flag
 		{
@@ -250,7 +250,7 @@ public class OpCodeCMPB extends OpCode implements IOpCode {
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
 
-        System.out.println(state_.pswFlagsToString());
+        //System.out.println(state_.pswFlagsToString());
  
     }
 }

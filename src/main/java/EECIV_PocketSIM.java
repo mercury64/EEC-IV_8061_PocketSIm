@@ -32,7 +32,7 @@ public class EECIV_PocketSIM {
 	   
 	   // Calibration KID2 = new Calibration("KID2/KID2patchedNew.bin");
 	   // Calibration KID2 = new Calibration("KID2/KID2.bin");
-	   Calibration KID2 = new Calibration("KID2/0x100_v001"); 
+	   Calibration KID2 = new Calibration("KID2/0x100_v001.bin"); 
 		int[] fileBytes = KID2.readFile();
        
 		state = new State(fileBytes);
@@ -77,17 +77,23 @@ public class EECIV_PocketSIM {
 				System.out.println("Break Point");
 			}
 			
-			logger.info( String.format("0x%04X: ", state.getPc()) );
+			//logger.info( String.format("0x%04X: ", state.getPc()) );
 			
 			System.out.print(String.format("0x%04X: %s", state.getPc(), opcode));
 			opcode.exec(state);
 			
-			logger.info( String.format("%s", opcode) );
+			//logger.info( String.format("%s", opcode) );
 			    
 			//System.out.println("CONSOLE STATUS " + String.format("0x%04X",state.getWordRegister((short) 0xd00)));
-			    
-			//System.out.println("PSW: " + state.psw.getMemory());
-			if (count == 10000) {
+		/*	System.out.println("Scalar 0x2204: " + state.getMemory()[0x2204]);
+			System.out.println("Reg 0x410: " + state.getWordRegister((short) 0x0410));
+			System.out.println("Reg 0x402: " + state.getWordRegister((short) 0x0402));
+			System.out.println("Reg 0x403: " + state.getWordRegister((short) 0x0403));
+			System.out.println("Reg 0x404: " + state.getWordRegister((short) 0x0404));
+			System.out.println("Scalar 0x2005: " + state.getMemory()[0x2005]);
+			*/
+			//System.out.println(state.pswFlagsToString());
+			if (count == 2000) {
 				System.err.println("Count reached, ending");
 				break;
 			}

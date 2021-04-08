@@ -190,13 +190,13 @@ public class State {
 	public void setByteRegister(short reg, byte value) {
 
 		
-		System.out.println(
+		/*System.out.println(
 				" Set Byte Register:" + 
 				String.format("R%02X", (byte)reg) + 
 				" = " + 
 				String.format("0x%02X", value)
 				);
-				
+				*/
 		int index = (byte)reg & 0xff;
 		if ( index > 0x1fff )
 		{
@@ -309,7 +309,7 @@ public class State {
 		
 		byte value = register_memory[regIndex];
 		
-		System.out.println(" Get Register:" + String.format("R%02X",regIndex) + " = " + String.format("0x%02X",value));
+		//System.out.println(" Get Register:" + String.format("R%02X",regIndex) + " = " + String.format("0x%02X",value));
 		
 		return value; 
 	}
@@ -330,6 +330,7 @@ public class State {
 				" = " + 
 				String.format("0x%04X",temp)
 			);
+			
 		
 		return temp;
 	}
@@ -343,10 +344,11 @@ public class State {
 			System.out.println("Zero Reg R0, return 0");
 		}
 		register_memory[index] = value;
-		System.out.println(" Set Word Register with a Byte:" + 
+		/*System.out.println(" Set Word Register with a Byte:" + 
 				String.format("R%02X",dest_dwreg) + 
 				" = " + 
 				String.format("0x%02X",value));
+				*/
 	}
 	
 	public void setWordRegister(short dest_dwreg, short value) {
@@ -375,7 +377,7 @@ public class State {
         
 		register_memory[dest_dwreg] = lo;
 		register_memory[dest_dwreg + 1] = hi;
-		System.out.println(
+		/*System.out.println(
 				" Set word in RAM:" + 
 						String.format("0x%02X",dest_dwreg) + 
 						" = " + 
@@ -383,6 +385,7 @@ public class State {
 						String.format("[hi: 0x%02X ",hi) + String.format("lo: 0x%02X]",lo) +
 						String.format("= 0x%02X%02X",lo,hi)
 				);
+				*/
 	}
 	
 	private void setGeneralRegister(short dest_dwreg, short value)
@@ -403,22 +406,23 @@ public class State {
 						String.format("[hi: 0x%02X ",hi) + String.format("lo: 0x%02X]",lo) +
 						String.format("= 0x%02X%02X",lo,hi)
 				);
+				
 	}
 
 	private void setSFR(short dest_dwreg, short value) {
-    	System.out.println("Set SFR");
+    	//System.out.println("Set SFR");
     	
     	switch (dest_dwreg)
     	{
     	case 0x06:
-    		System.out.println("Setting IO_Timer:");
+    		//System.out.println("Setting IO_Timer:");
     		break;
     	case 0x0e:
-    		System.out.println("Setting HSI_Time:");
+    		//System.out.println("Setting HSI_Time:");
     		break;
     	case 0x10: // Stack Pointer
     		this._sp = value;
-    		System.out.println("Setting Stack Pointer:");
+    		//System.out.println("Setting Stack Pointer:");
     		break;
     	}
     	
@@ -628,5 +632,16 @@ public class State {
         int RBB = (hi | lo);
         
 		return RBB;
+	}
+
+	public int getPSWFlags() {
+		
+		return this.PSW_FLAGS;
+		
+	}
+
+	public String getWordValue(short s) {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 }
