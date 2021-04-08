@@ -565,6 +565,17 @@ public class State {
 		return orrb;
 	}
 	
+	public boolean getZeroFlag()
+	{
+		int bit = ((this.PSW_FLAGS & ProgramStatusWord.F_Z) >>> ProgramStatusWord.ZERO);
+		
+		if (bit == 0)
+		{
+			return ProgramStatusWord.CLEAR;
+		}
+
+		return ProgramStatusWord.SET;
+	}
 	public String pswFlagsToString()
 	{
 		String pswTableHeader 			= "________________________\n";

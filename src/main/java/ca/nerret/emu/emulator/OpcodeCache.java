@@ -47,6 +47,7 @@ import ca.nerret.emu.emulator.opcodes.OpCodeML2W;
 import ca.nerret.emu.emulator.opcodes.OpCodeNEGW;
 import ca.nerret.emu.emulator.opcodes.OpCodeNop;
 import ca.nerret.emu.emulator.opcodes.OpCodeORRB;
+import ca.nerret.emu.emulator.opcodes.OpCodePOPW;
 import ca.nerret.emu.emulator.opcodes.OpCodePUSHW;
 import ca.nerret.emu.emulator.opcodes.OpCodeRET;
 import ca.nerret.emu.emulator.opcodes.OpCodeSB2B;
@@ -173,6 +174,10 @@ public final class OpcodeCache {
         _OPCODES.put(0xC2, new OpCodeSTW(0xc2, "STW"));
         _OPCODES.put(0xC3, new OpCodeSTW(0xc3, "STW"));
 
+        _OPCODES.put(0xCC, new OpCodePOPW(0xcc, "POPW"));
+        _OPCODES.put(0xCE, new OpCodePOPW(0xce, "POPW"));
+        _OPCODES.put(0xCF, new OpCodePOPW(0xcf, "POPW"));
+
         _OPCODES.put(0xC8, new OpCodePUSHW(0xc8, "PUSHW"));
         _OPCODES.put(0xC9, new OpCodePUSHW(0xc9, "PUSHW"));
         _OPCODES.put(0xCA, new OpCodePUSHW(0xca, "PUSHW"));
@@ -239,6 +244,7 @@ public final class OpcodeCache {
         {
             System.err.println("OPCODE Not found: " + String.format("0x%02X: ", opCode));
 
+            //System.out.println("Exception: " + e.toString());
             return null;
         }
 

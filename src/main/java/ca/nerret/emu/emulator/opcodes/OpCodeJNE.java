@@ -26,8 +26,9 @@ public class OpCodeJNE  extends OpCode implements IOpCode {
 	      
 	        int newPC = pc + 2;
 	        
-	        boolean zeroFlag = state_.getPswBit(ProgramStatusWord.ZERO);
-	        
+	        boolean zeroFlag = state_.getZeroFlag();
+	        // (this.PSW_FLAGS & ProgramStatusWord.F_Z)  >>> ProgramStatusWord.ZERO);
+
 	        // Instruction Operation: 
 	        // (PC)<-(PC + Displacement if Z=0,
 	        // or (PC)unchanged if Z=1.

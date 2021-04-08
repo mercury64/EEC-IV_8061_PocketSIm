@@ -180,16 +180,39 @@ public class OpCodeCMPB extends OpCode implements IOpCode {
 	        	areg = value;
 	        	break;	
 	        case AddressMode.LONG_INDEXED:
-	        	System.err.println("Not Implemented");
-	     	   System.exit(1);
+	        	// Assembler Format: CMPB offset(indexreg),breg
+	        	// Instruction Operation: (Rb) - ([Ra] + Offset); PSW Flags <- Compare Results
+	        	// Execution States: 7/12
+	        	// Machine Format: [ ^9B ], [ Base Ra | 1 MB ], [ Offset lo Byte ], [ +-| Offset Hi Byte ], [ Source Rb ]
+	       	    breg   = (byte)operands[numberOfBytes-1];
+	        	byte hi_offset = (byte) (operands[numberOfBytes-2]);
+	        	byte lo_offset = (byte) (operands[numberOfBytes-3]);
+	        	areg   = (byte) (operands[numberOfBytes-4] & 0xfe);
+
+	        	short wordOffset = (short) (hi_offset);
+	        	wordOffset = (short) (wordOffset << 8);
+	        	wordOffset = (short) (wordOffset | (lo_offset & 0xff));
+
+	        	short indexValue = state_.getWordRegister((short) (areg & 0xff));
+			    valueRb = state_.getByteRegister(breg);
+
+	        	//short sOffset = (short) ((offset_hi << 8) | (offset_lo & 0xff));
+
+	        	short offsetWord = (short) (indexValue + wordOffset);
+
+	        	areg = this.getByteValue(memory, offsetWord);
+				breg = valueRb;
+				//areg = state_.getByteRegister((short) ());
 	        	break;
         }
         
     	// TODO:  Need to implement compare, and setting of PSW!!!
 		int compare = Short.compare( breg, (byte) (areg & 0xf));
 
-        cmpResult = state_.doByteSub( breg, (byte) (areg & 0xf));
+        cmpResult = state_.doByteSub( (byte) (breg & 0xf), (byte) (areg & 0xf));
         
+        System.out.println(" Compare: (" + String.format("0x%04X", breg) + ", "+ String.format("0x%04X", areg) + ")");
+		
 		if ( compare == 0) // Z Flag
 		{
 			state_.setPswBit(ProgramStatusWord.ZERO, true);
@@ -226,6 +249,8 @@ public class OpCodeCMPB extends OpCode implements IOpCode {
         
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
+
+        System.out.println(state_.pswFlagsToString());
  
     }
 }
