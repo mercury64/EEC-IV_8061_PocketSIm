@@ -34,7 +34,11 @@
 2101 # error register is initialized to BC1FH on EEC power-up/initialize
 21cd \n# "Task_List_1"
 220b \n# "Task_List_2"
+
 2231 \n# "Task_List_3"
+
+22a1 # EGR IS DISABLED, NO EGR CONTROL REQUIRED
+
 
 2381 \n# UART Mode
 2382 # R34 = 1818h (CART_Status = R34 later, may change to 4040 or 9393)
@@ -387,6 +391,11 @@
 
 4b3f # 29.875 * 8 = 239 = 0xEF
 
+4f71 # (closed throttle decel/idle, FN1360 not available)
+4f76 # (neutral idle)
+4f7d # (drive idle)
+4fa5 # FN303(N) * FN310(WOTTMR) //(wide open throttle)
+
 
 5174 # ISCFLG = 1 CLOSED LOOP RPM CONTROL
 51a1 # kamcol
@@ -418,7 +427,15 @@
 61bf # PPERENG = PACPER / ENGCYL
 61cc # POFFENG = PACOFF / ENGCYL
 
-6466 # 29.875 * 8 = 239 = 0xEF
+635e # DO SONIC EGR CONTROL
+
+6364 # (EOFF - EGRDED)
+
+644a # EVP-EOFF
+645c # FN218(MAPOPE) * FN219(EVP-EOFF)
+6462 #  * (BP/29.875
+6466 # / 29.875 * 8 = 239 = 0xEF
+646e # Clip EM to 1.99 ppm as a maximum
 
 65d2 # ISCFLG = 0 DASHPOT PRE-POSITION
 
@@ -748,6 +765,31 @@
 88cf # 1 = Thick Film Ignition - Improved Computer Control Dwell (TFI_ICCD)
 
 8ba5 # (ENGCYL * N)
+
+8bc9 # R18 = AMT/(ENGCYL * N)
+8bd3 # R18 = UROLAV(AMT/[ENGCYL*N], TCTTA) (Filter ARCHG in torque truncation)
+8bec # LOAD = ARCHG / SARCHG
+
+8c09 # FN1617(N,LOAD)
+8c14 # MBTEGR * EGRACT 
+8c1b # FN1617(N,LOAD) + MBTEGR * EGRACT 
+8c1e # SPK_LAMBSE = 1 (air/fuel mixture is close to stoichiometry)
+8c24 # SPK_LAMBSE = LAMBSE1
+8c34 # FN1617(N,LOAD) + MBTEGR * EGRACT  + FN730(SPK_LAMBSE)
+8c37 # FN1617(N,LOAD) + MBTEGR * EGRACT  + FN730(SPK_LAMBSE) - SAFTOT
+
+8c47 # (clip SPK_DELTA to ZERO minimum)
+8c52 # FN1615A(N,LOAD)
+8c5f # FN1615A(N,LOAD)*FN621(SPK_DELTA)
+8c6c # [FN1615A(N,LOAD)*FN621(SPK_DELTA)*FN623(LAMBSE)]
+8c82 # - FN618(N_BYTE)
+8c8c # FN1616(N,LOAD)
+8c8f # - FN1616(N,LOAD)
+
+8c94 # Include FN619 in TQ_NET
+8c9e # [- FN619(N_BYTE)]
+8cb1 # TQ_NET * FN617(SPD_RATIO)
+8cc4 # (clip TQ_NET to ZERO minimum)
 
 a777 # IOTimer delta time since last mSec
 a783 # *128/52083 = 1 mSec
