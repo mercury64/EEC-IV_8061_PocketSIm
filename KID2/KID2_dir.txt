@@ -646,15 +646,15 @@ func    b074 b08b  "y_isc_base_air_atmr3"   : UW  : UW
 func    b08c b097  "Func_b08c"   : SY  : UY 
 func    b098 b0bf  "FN800"   : UW  : UW 
 func    b0c0 b0cb  "FN820A"   : UY  : UY 
-func    b0cc b0df  "isc_ect_rpm_adder"   : SY  : UY 
-func    b0e0 b0ed  "isc_ect_rpm_adder2"   : SY  : UY 
-func    b0ee b0fb  "isc_act_rpm_adder"   : SY  : UY 
+func    b0cc b0df  "FN825A"   : SY  : UY 
+func    b0e0 b0ed  "FN825A_ALT"   : SY  : UY 
+func    b0ee b0fb  "FN826A"   : SY  : UY 
 func    b0fc b109  "Func_b0fc"   : UY  : UY 
 func    b10a b111  "FN862"   : UY  : UY 
 func    b112 b129  "isc_idle_air_drive"   : UW  : UW 
 func    b12a b141  "isc_idle_air_neutral"   : UW  : UW 
 func    b142 b15d  "FN879"   : UW  : UW 
-func    b15e b16b  "Func_b15e"   : UY  : UY 
+func    b15e b16b  "FN880"   : UY  : UY 
 func    b16c b187  "Func_b16c"   : UW  : UW 
 func    b188 b19f  "FN885"   : UW  : UW 
 func    b1a0 b1ab  "FN887A"   : SY  : UY 
@@ -990,7 +990,7 @@ word    bbc4 bbc5
 byte    bbc6 bbc6
 byte    bbc7 bbc7
 byte    bbc8 bbc8
-func    bbc9 bbd2  "Func_bbc9"   : UY  : UY 
+func    bbc9 bbd2  "FN821A"   : UY  : UY 
 func    bbd3 bbdc  "FN004"   : UY  : UY 
 func    bbde bbf5  "Func_bbde"   : SW  : UW 
 func    bbf6 bc19  "x_spark_91"   : SW  : UW 
