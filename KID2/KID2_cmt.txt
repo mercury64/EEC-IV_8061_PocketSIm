@@ -457,6 +457,8 @@
 666b # [+FN826A] Logic: (Engine Cleanout adder)
 6672 # (Kickdown time not up)
 
+6679 # Add FN826A to DSDRPM
+667c # } //else Do NOT add FN826A
 667e # [+ (FN880 + FN821A)] Logic: (Battery charge control and Inspection Maintenance)
 6685 # Add (FN880 + FN821A) to DSDRPM
 669e # Clip DSDRPM to CHGRPM as a maximum

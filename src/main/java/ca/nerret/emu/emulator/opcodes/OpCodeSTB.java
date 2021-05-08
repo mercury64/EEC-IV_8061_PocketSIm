@@ -107,10 +107,10 @@ public class OpCodeSTB extends OpCode implements IOpCode {
         	short offset = (short) ((operands[3] << 8) | operands[2]);
         	byte sourceRb = (byte) (operands[4] & 0xff); 
         	
-        	short indexValue = state_.getWordRegister((short) (indexRa & 0xff));
+        	short indexValue = state_.getWordRegister((short) (indexRa & 0xfe));
 			byte breg = state_.getByteRegister((short) (sourceRb  & 0xff));
 			
-			state_.setWordRegister((short)(indexValue + offset), breg);
+			state_.setByteRegister((short)(indexValue + offset), breg);
      	}
     	
         if (this.getAddressModeType() == AddressMode.INDIRECT)

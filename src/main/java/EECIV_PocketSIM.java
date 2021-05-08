@@ -33,9 +33,13 @@ public class EECIV_PocketSIM {
 	   // Calibration KID2 = new Calibration("KID2/KID2patchedNew.bin");
 	   //Calibration KID2 = new Calibration("KID2/KID2.bin");
 	   // Calibration KID2 = new Calibration("KID2/0x100_v001.bin"); 
-	   Calibration KID2 = new Calibration("KID2/JFA2.bin");	
-	    int[] fileBytes = KID2.readFile();
-       
+	   //Calibration KID2 = new Calibration("KID2/JFA2.bin");	
+	   // Calibration KID2 = new Calibration("KID2/KID2.bin");
+	   //Calibration KID2 = new Calibration("KID2/0x100_v001.bin"); 
+	   //Calibration KID2 = new Calibration("KID2/T4M0.bin"); 
+	   //Calibration KID2 = new Calibration("KID2/P3M.bin"); 
+		int[] fileBytes = KID2.readFile();
+   
 		state = new State(fileBytes);
        
         //Emulator emu = new Emulator(state);
@@ -72,18 +76,19 @@ public class EECIV_PocketSIM {
 			}
 			
 			
-			if (state.getPc() == 0x3be7)
+			if (state.getPc() == 0x2340)
 			{
 				//pause
-				System.out.println("Break Point");
+				System.out.println(String.format("** LOG 0x%04X", state.getWordRegister((short) 0x0410)));
 			}
 			
 			//logger.info( String.format("0x%04X: ", state.getPc()) );
-			
+			//System.out.println(String.format(" STACK SFR10 0x%04X", state.getWordRegister((short) 0x10)));
+			//System.out.println(String.format(" STACK R26 0x%04X", state.getWordRegister((short) 0x26)));
 			System.out.print(String.format("0x%04X: %s", state.getPc(), opcode));
 			opcode.exec(state);
 			
-			//logger.info( String.format("%s", opcode) );
+			logger.info( String.format("%s", opcode) );
 			    
 			//System.out.println("CONSOLE STATUS " + String.format("0x%04X",state.getWordRegister((short) 0xd00)));
 		/*	System.out.println("Scalar 0x2204: " + state.getMemory()[0x2204]);

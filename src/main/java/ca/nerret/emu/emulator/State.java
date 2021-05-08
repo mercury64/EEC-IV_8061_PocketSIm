@@ -309,7 +309,7 @@ public class State {
 		
 		byte value = register_memory[regIndex];
 		
-		//System.out.println(" Get Register:" + String.format("R%02X",regIndex) + " = " + String.format("0x%02X",value));
+		System.out.println(" Get Register:" + String.format("R%02X",regIndex) + " = " + String.format("0x%02X",value));
 		
 		return value; 
 	}
@@ -337,18 +337,18 @@ public class State {
 
 	public void setWordRegister(short dest_dwreg, byte value) {
 	
-		int index = (int)(dest_dwreg & 0x00ff);
+		int index = (int)(dest_dwreg & 0xffff);
 		
 		if (index == 0)
 		{
 			System.out.println("Zero Reg R0, return 0");
 		}
 		register_memory[index] = value;
-		/*System.out.println(" Set Word Register with a Byte:" + 
+		System.out.println(" Set Word Register with a Byte:" + 
 				String.format("R%02X",dest_dwreg) + 
 				" = " + 
 				String.format("0x%02X",value));
-				*/
+				
 	}
 	
 	public void setWordRegister(short dest_dwreg, short value) {
