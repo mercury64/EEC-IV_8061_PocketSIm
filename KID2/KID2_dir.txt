@@ -642,8 +642,8 @@ word    b06e b06f
 word    b070 b071
 byte    b072 b072
 byte    b073 b073
-func    b074 b08b  "y_isc_base_air_atmr3"   : UW  : UW 
-func    b08c b097  "Func_b08c"   : SY  : UY 
+func    b074 b08b  "FN018B"   : UW  : UW 
+func    b08c b097  "FN394F"   : SY  : UY 
 func    b098 b0bf  "FN800"   : UW  : UW 
 func    b0c0 b0cb  "FN820A"   : UY  : UY 
 func    b0cc b0df  "FN825A"   : SY  : UY 
@@ -660,7 +660,7 @@ func    b188 b19f  "FN885"   : UW  : UW
 func    b1a0 b1ab  "FN887A"   : SY  : UY 
 func    b1ac b1b3  "FN890"   : UY  : UY 
 func    b1b4 b1bf  "Func_b1b4"   : UY  : UY 
-table   b1c0 b1e9  "isc_base_air_neutral"   : O 7 UY 
+table   b1c0 b1e9  "FN1861"   : O 7 UY 
 func    b1ea b211  "FN703"   : UW  : SW 
 func    b212 b23d  "FN703D"   : UW  : SW 
 func    b23e b259  "y_fuel_cold_decay"   : UW  : UW 
@@ -2165,7 +2165,10 @@ sym 144 "Loop_time"
 
 sym 152 "WOTTMR"
 #sym 152 "AWOTMR"
-sym 154 "DESMAF"
+
+sym 154 "IPSIBR"
+#sym 154 "DESMAF"
+
 sym 158 "DASPOT"
 sym 15a "IBGPSI"
 sym 15c "NLAST"
@@ -2265,7 +2268,9 @@ sym 351 "TV_COUNTS"
 sym 35b "TV_PRES"
 sym 35e "TQ_NET"
 
-sym 386 "CTTMR"
+#sym 386 "CTTMR"
+sym 386 "ATMR3"
+
 sym 38e "SAFTOT"
 
 sym 390 "DEBYMA"
