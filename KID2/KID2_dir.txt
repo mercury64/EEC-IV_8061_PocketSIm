@@ -651,8 +651,8 @@ func    b0e0 b0ed  "FN825A_ALT"   : SY  : UY
 func    b0ee b0fb  "FN826A"   : SY  : UY 
 func    b0fc b109  "Func_b0fc"   : UY  : UY 
 func    b10a b111  "FN862"   : UY  : UY 
-func    b112 b129  "isc_idle_air_drive"   : UW  : UW 
-func    b12a b141  "isc_idle_air_neutral"   : UW  : UW 
+func    b112 b129  "FN875D"   : UW  : UW 
+func    b12a b141  "FN875N"   : UW  : UW 
 func    b142 b15d  "FN879"   : UW  : UW 
 func    b15e b16b  "FN880"   : UY  : UY 
 func    b16c b187  "Func_b16c"   : UW  : UW 
