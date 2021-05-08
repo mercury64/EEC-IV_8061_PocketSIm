@@ -666,7 +666,7 @@ func    b212 b23d  "FN703D"   : UW  : SW
 func    b23e b259  "y_fuel_cold_decay"   : UW  : UW 
 func    b25a b26d  "Func_b25a"   : UW  : UW 
 func    b26e b28d  "x_isc_base_air_ect"   : SW  : UW 
-func    b28e b2bd  "FN021_MAOPE_y_load"   : UW  : UW 
+func    b28e b2bd  "FN021_MAPOPE_y_load"   : UW  : UW 
 func    b2be b2e5  "x_fuel_cold"   : SW  : UW 
 func    b2e6 b2fd  "FN070B"   : UW  : UW 
 func    b2fe b319  "FN070_N_x_rpm"   : UW  : UW 
@@ -2142,10 +2142,9 @@ sym e1 "B2_CCD_HP" : B 2
 sym 104 "EGRBAR"
 sym 106 "EGOBAR"
 sym 108 "ITOT"
-sym 10e "IVCAL"
 sym 10a "IIVPWR"
 sym 10c "IOCC"
-Sam 10e "IVCAL"
+sym 10e "IVCAL"
 sym 110 "IECT"
 sym 112 "IACT"
 sym 114 "IEGR"
@@ -2168,6 +2167,7 @@ sym 152 "WOTTMR"
 #sym 152 "AWOTMR"
 
 sym 154 "IPSIBR"
+#sym 154 "DESMAF"
 
 sym 158 "DASPOT"
 sym 15a "IBGPSI"
@@ -2179,6 +2179,7 @@ sym 165 "ISFLAG"
 sym 167 "LOACT"
 sym 168 "BPCOR"
 
+sym 16e "AMPEM"
 sym 176 "KAMRF1"
 
 sym 181 "CRKPIP_CTR"
@@ -2198,6 +2199,7 @@ sym 1d0 "SparkAdvance"
 sym 1ea "N_BYTE"
 sym 1eb "MAPOPE"
 sym 1f2 "AMT"
+sym 1f4 "AMPEMT"
 sym 1f6 "PURGDC"
 sym 1f8 "BCSDC"
 sym 1fa "SPK_LAMBSE"
@@ -2389,7 +2391,7 @@ sym 714 "ISCKAM5"
 
 sym 718 "KAMQB"
 
-sym 73c "ISCKAMn"
+#sym 73c "ISCKAMn"
 
 sym 747 "KWUCTR"
 sym 748 "KAMQC"
@@ -2443,12 +2445,15 @@ sym b020 "ITHBMA"
 sym b022 "DEBYCP"
 sym b024 "DASCTL"
 sym b026 "DASPTK"
-
+sym b02e "RPMDED"
 sym b030 "DELRAT"
 sym b033 "ACMAP"
 
+sym b035 "UPDISC"
 sym b036 "UPDATM"
 sym b037 "MINMPH"
+sym b038 "IDCMUL"
+sym b03a "IDCOFS"
 
 sym b03c "Stall_RPM"
 
@@ -2640,6 +2645,8 @@ sym cc2e "EVPMAX"
 
 sym cc4a "VECT3" 
 #sym cc52 "OCCDT1" 
+
+sym cc54 "V820A"
 
 sym cc94 "VDLY2"
 sym cc95 "VIPTM2"
