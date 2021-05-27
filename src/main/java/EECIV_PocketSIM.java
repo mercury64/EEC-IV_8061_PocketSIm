@@ -31,7 +31,7 @@ public class EECIV_PocketSIM {
 	    logger.addHandler(logHandler);
 	   
 	   // Calibration KID2 = new Calibration("KID2/KID2patchedNew.bin");
-	   //Calibration KID2 = new Calibration("KID2/KID2.bin");
+	   Calibration KID2 = new Calibration("KID2/KID2.bin");
 	   // Calibration KID2 = new Calibration("KID2/0x100_v001.bin"); 
 	   //Calibration KID2 = new Calibration("KID2/JFA2.bin");	
 	   // Calibration KID2 = new Calibration("KID2/KID2.bin");
@@ -76,7 +76,7 @@ public class EECIV_PocketSIM {
 			}
 			
 			
-			if (state.getPc() == 0x2340)
+			if (state.getPc() == 0x612f)
 			{
 				//pause
 				System.out.println(String.format("** LOG 0x%04X", state.getWordRegister((short) 0x0410)));

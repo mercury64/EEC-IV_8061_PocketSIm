@@ -18,7 +18,7 @@ public class Bus {
     public byte read(short address, boolean readonly)
     {
 
-        return;
+        return 0x0;
     }
 }
  
