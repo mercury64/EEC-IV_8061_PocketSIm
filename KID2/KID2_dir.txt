@@ -100,6 +100,10 @@ args    433b 433e : E 2 f0 N  : UW N
 args    4346 4349 : E 2 f0 N  : UW N 
 word    4360 4361
 word    4362 4363
+word	4364 4365
+word	4366 4367
+word	4368 4369
+word	436a 436b
 
 code    436c 43ab
 args    436f 4372 : E 2 f0 N  : UW N 
@@ -208,7 +212,7 @@ args    711e 711f : W
 args    7123 7124 : W
 vect    72de 733f
 
-rbase	Re2 cc59
+rbase	e2 cc59
 
 code    7340 7426
 args    7379 737a : O 2 UY 
@@ -655,11 +659,11 @@ func    b112 b129  "FN875D"   : UW  : UW
 func    b12a b141  "FN875N"   : UW  : UW 
 func    b142 b15d  "FN879"   : UW  : UW 
 func    b15e b16b  "FN880"   : UY  : UY 
-func    b16c b187  "Func_b16c"   : UW  : UW 
+func    b16c b187  "FN882A"   : UW  : UW 
 func    b188 b19f  "FN885"   : UW  : UW 
 func    b1a0 b1ab  "FN887A"   : SY  : UY 
 func    b1ac b1b3  "FN890"   : UY  : UY 
-func    b1b4 b1bf  "Func_b1b4"   : UY  : UY 
+func    b1b4 b1bf  "FN891"   : UY  : UY 
 table   b1c0 b1e9  "FN1861"   : O 7 UY 
 func    b1ea b211  "FN703"   : UW  : SW 
 func    b212 b23d  "FN703D"   : UW  : SW 
@@ -667,15 +671,15 @@ func    b23e b259  "y_fuel_cold_decay"   : UW  : UW
 func    b25a b26d  "Func_b25a"   : UW  : UW 
 func    b26e b28d  "x_isc_base_air_ect"   : SW  : UW 
 func    b28e b2bd  "FN021_MAPOPE_y_load"   : UW  : UW 
-func    b2be b2e5  "x_fuel_cold"   : SW  : UW 
+func    b2be b2e5  "FN070"   : SW  : UW 
 func    b2e6 b2fd  "FN070B"   : UW  : UW 
-func    b2fe b319  "FN070_N_x_rpm"   : UW  : UW 
-func    b31a b335  "y_fuel_base_cold"   : UW  : UW 
+func    b2fe b319  "FN070L"   : UW  : UW 
+func    b31a b335  "FN071"   : UW  : UW 
 func    b336 b351  "FN072C"   : UW  : UW 
 func    b352 b365  "Func_b352"   : UW  : UW 
 func    b366 b379  "Func_b366"   : UW  : UW 
 func    b37a b395  "y_map_emissions"   : UW  : UW 
-func    b396 b3b5  "x_rpm_emissions"   : UW  : UW 
+func    b396 b3b5  "FN039"   : UW  : UW 
 func    b3b6 b3d1  "y_spark"   : UW  : UW 
 func    b3d2 b3e9  "Func_b3d2"   : SW  : UW 
 func    b3ea b3fd  "Func_b3ea"   : UW  : UW 
@@ -805,10 +809,10 @@ word    b4f2 b4f3
 byte    b4f4 b4f4
 word    b4f6 b4f7
 word    b4f8 b4f9
-func    b4fa b511  "Func_b4fa"   : UW  : UW 
+func    b4fa b511  "FN839"   : UW  : UW 
 func    b512 b529  "FN852"   : SW  : SW 
 func    b52a b535  "Func_b52a"   : SY  : UY 
-func    b536 b549  "Func_b536"   : UW  : UW 
+func    b536 b549  "FN894"   : UW  : UW 
 func    b54a b565  "Func_b54a"   : UW  : UW 
 table   b566 b595  "FN1354"   : O 6 UY 
 table   b596 b5c5  "emissions_lambda_bias"   : O 6 SY 
@@ -1581,7 +1585,7 @@ sub  86840 86849  "Sub_6840"
 sub  86846 86849  "Sub_6846"  
 sub  8684a 86852  "Sub_684a"  
 sub  86853 "RPMERR_CALC"  
-sub  868ad "DASPOT_CALC"  
+sub  868ad "ISC_DASPOT_COM1"  
 sub  86986 "MODE_SELECT"  
 sub  86a3a "ISC_IPSIBR_COM1"  
 sub  86b8c "ISC_ISCDTY_COM1"  
@@ -1889,7 +1893,7 @@ sym 2f "B0_GOOSE" :T 0
 sym 2f "B1_OneDigit_output?" :T 1
 sym 2f "B2_VIP_flags4" :T 2
 sym 2f "B3_VIP_flags4" :T 3
-# sym 2f "Vvsfl1" : T 4
+sym 2f "B4_VRUN_ISCFLG_2f" : T 4
 sym 2f "Disable_isc" :T 5
 sym 2f "B6_VIP_flags4" :T 6
 sym 2f "B7_VIP_flags4" :T 7
@@ -1912,7 +1916,8 @@ sym 3e "Lseconds" : B 7
 
 #sym 42 "HSI_Mask"
 
-sym 44 "V_SPDTOZ_FLG" : B 4
+sym 44 "B0_FLG_DASMNQ_44" : T 0
+sym 44 "V_SPDTOZ_FLG" : T 4
 
 sym 45 "Flags_2B"
 sym 45 "Rvip_cyl_quit" : B 0
@@ -2169,8 +2174,10 @@ sym 152 "WOTTMR"
 sym 154 "IPSIBR"
 #sym 154 "DESMAF"
 
+sym 156 "DSTPBR"
 sym 158 "DASPOT"
 sym 15a "IBGPSI"
+sym 15e "N_RATCH"
 sym 15c "NLAST"
 sym 162 "ISCFLG"
 sym 163 "DSDRPM"
@@ -2253,6 +2260,10 @@ sym 2c7 "ROWTBU"
 
 sym 2cc "SIGKAL"
 
+
+sym 2d8 "FN070L_N_x"
+sym 2da "FN039_N_x"
+
 sym 2e2 "ACSTRT"
 
 sym 314 "TOT"
@@ -2264,7 +2275,12 @@ sym 33e "LOAD"
 sym 342 "ETVOCM"
 sym 344 "Vsc_Raw"
 
+sym 346 "FN071_MAP_y"
+
 sym 351 "TV_COUNTS"
+
+
+
 sym 35b "TV_PRES"
 sym 35e "TQ_NET"
 
@@ -2445,6 +2461,8 @@ sym b020 "ITHBMA"
 sym b022 "DEBYCP"
 sym b024 "DASCTL"
 sym b026 "DASPTK"
+sym b028 "DELHYS"
+
 sym b02e "RPMDED"
 sym b030 "DELRAT"
 sym b033 "ACMAP"
@@ -2486,6 +2504,8 @@ sym b073 "VBAT_DWL_HYS"
 
 #sym b43e "RF2"
 #sym b442 "RF4"
+
+sym b44c "DPNEU_MUL"
 
 sym b44e "fuel_injector_slope"
 
@@ -2531,6 +2551,8 @@ sym bad6 "TCTOT"
 sym bad8 "TCVBAT"
 
 #sym bab0 "RF8"
+sym babc "TCDASD"
+sym babe "TCDASU"
 sym bac4 "TCECT"
 sym bac8 "TCEGR"
 
@@ -2569,11 +2591,12 @@ sym c0ca "trans_ratio_5"
 sym c0e5 "trans_tv_engagement_high"
 sym c0e6 "trans_tv_engagement_moderate"
 
-sym c141 "V_HICKOKTM"
-sym c142 "SARCHG"
-sym c143 "V_LANSDTM"
 
-sym c149 "VLORPM"
+sym c142 "SARCHG"
+
+sym c147 "V_HICKOKTM"
+sym c149 "V_LANSDTM"
+sym c14f "VLORPM"
 
 sym c154 "trans_min_tv_pressure"
 
@@ -2644,6 +2667,8 @@ sym cc2c "EVPMIN"
 sym cc2e "EVPMAX"
 
 sym cc4a "VECT3" 
+sym cc4c "V_879_MULT"
+
 #sym cc52 "OCCDT1" 
 
 sym cc54 "V820A"
