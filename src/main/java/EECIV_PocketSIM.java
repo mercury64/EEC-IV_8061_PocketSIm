@@ -76,7 +76,7 @@ public class EECIV_PocketSIM {
 			}
 			
 			
-			if (state.getPc() == 0x2340)
+			if (state.getPc() == 0x612f)
 			{
 				//pause
 				System.out.println(String.format("** LOG 0x%04X", state.getWordRegister((short) 0x0410)));

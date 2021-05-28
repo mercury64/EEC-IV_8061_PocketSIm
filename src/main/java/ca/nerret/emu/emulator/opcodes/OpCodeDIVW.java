@@ -69,7 +69,7 @@ public class OpCodeDIVW  extends OpCode implements IOpCode {
     	}
     	catch(ArithmeticException e)
     	{
-    		
+    		System.err.println(e.getMessage());
     	}
     	
     	this.setOperandLocation(destRBB);

@@ -485,7 +485,19 @@
 6890 # (TCSTRT OK to use)  
 6892 # (first time this start) 
 
-68bb #  if (TP <= RATCH)
+68bb #  if (TP <= DSTPBR)
+68c8 # DASHPOT MODE  ( APT = -1 )
+68d5 # (FN879(DASPOT) * V_879_MULT)
+68e1 # DASPOT = DASPOT - FN879(DASPOT)
+68e6 # DASPOT is clipped to either 0
+68ea # DASHPOT-PREPOSITION MODE ( APT >= 0 )
+
+6907 # (N - DSDRPM)
+690d # (N - DSDRPM) is clipped to 0 as a minimum.
+6920 # FN882 * FN891
+692c # Clip daspot to 2.99 as a maximum
+
+6956 # N_RATCH - DSDRPM
 
 6986 # APT 0 -> part throttle
 698d # ISCFLG = 0 DASHPOT PRE-POSITION
