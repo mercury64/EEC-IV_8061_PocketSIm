@@ -109,7 +109,7 @@ code    436c 43ab
 args    436f 4372 : E 2 f0 N  : UW N 
 byte    43ac 43ac
 
-rbase 	e2 c1c4
+rbase 	e2 c1c4 43b2
 
 code    43b2 657d
 args    4544 4547 : E 2 f0 N  : UW N  
@@ -1726,7 +1726,7 @@ sub  8882d 888be  "Sub_882d"
 sub  888bf 888dd  "Sub_88bf"  
 sub  888de 8890b  "Sub_88de"  
 sub  8890c 88932  "Sub_890c"  
-sub  88933 88b18  "Sub_8933"  
+sub  88933 "E4OD_SYS_EQU_COM1"  
 sub  88b19 88b2b  "Sub_8b19"  
 sub  88b2c 88b70  "Sub_8b2c"  
 sub  88b71 88cc8  "Sub_8b71"  
@@ -2593,14 +2593,17 @@ sym c0e6 "trans_tv_engagement_moderate"
 
 sym c142 "SARCHG"
 
-sym c147 "V_HICKOKTM"
-sym c149 "V_LANSDTM"
-sym c14f "VLORPM"
+#sym c147 "V_HICKOKTM"
+#sym c149 "V_LANSDTM"
+#sym c14f "VLORPM"
 
 sym c154 "trans_min_tv_pressure"
 
 sym c15a "VTABFL"
 sym c15b "VTCEGO"
+
+sym c162 "V_HICKOKTM"
+sym c164 "V_LANSDTM"
 
 sym c16a "TCTTA"
 sym c16e "V_BOO_SPD"
@@ -2618,8 +2621,6 @@ sym c1d6 "RTNVMN"
 sym c1d8 "RTNVMX"
 
 sym c1db "VMPMAX"
-
-# sym cb5a "RFe"
 
 sym cb67 "MAP_CYCLE"
 sym cb72 "NCNT"

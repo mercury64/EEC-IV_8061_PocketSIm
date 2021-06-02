@@ -991,7 +991,7 @@ ab7a # 0x6Ah = 106  LTMTBLrc CELLS
 ab7d # ADAPTIVE FUEL TABLE
 
 ab85 # KAM checksum, 0x3500 = 0x80 x 0x6a = (128 * (10*10+6))
-ab85 \w # SET CHKSUM = 13568
+ab85 \w# SET CHKSUM = 13568
 
 ac31 \n## Payloads - Datalogging Lists!
 
