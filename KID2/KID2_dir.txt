@@ -6,6 +6,7 @@ rbase e2 cc59 7340 7bae
 rbase e2 cc59 855f 8581
 rbase e2 c1c4 43b2 443a
 rbase e2 c1be 8938 8b18
+rbase e2 c1be 8f94 901e
 
 rbase e4 180
 rbase e6 280
@@ -904,11 +905,11 @@ byte    b970 b970
 byte    b971 b971
 word    b972 b973
 byte    b974 b974
-func    b975 b97e  "fuel_ve_multiplier_for_act"   : SY  : UY 
-func    b97f b988  "fuel_ve_multiplier_for_ect"   : SY  : UY 
+func    b975 b97e  "FN305"   : SY  : UY 
+func    b97f b988  "FN326"   : SY  : UY 
 func    b989 b99a  "fuel_injector_offset_vs_volts"   : UY  : UY 
 func    b99b b9a0  "Func_b99b"   : UY  : UY 
-table   b9a1 ba04  "fuel_ve_table"   : O 10 UY 
+table   b9a1 ba04  "FN1320"   : O 10 UY 
 func    ba06 ba1d  "Func_ba06"   : UW  : UW 
 table   ba1e ba4a  "Table_ba1e"   : O 5 UY 
 func    ba4b ba56  "FN600"   : UY  : UY 
@@ -1253,7 +1254,7 @@ func    c516 c531  "Func_c516"   : UW  : UW
 func    c532 c54d  "trans_3rd_upshift_lock_ratio"   : UW  : UW 
 func    c54e c569  "Func_c54e"   : UW  : UW 
 func    c56a c585  "trans_4th_upshift_lock_ratio"   : UW  : UW 
-func    c586 c59d  "Func_c586"   : UW  : UW 
+func    c586 c59d  "FN624"   : UW  : UW 
 func    c59e c5b1  "Func_c59e"   : UW  : UW 
 func    c5b2 c5b9  "trans_tv_pressure_21" : UY : UY
 func    c5ba c5cd  "trans_tv_pressure_12"   : UY  : UY 
@@ -1271,14 +1272,14 @@ func    c7ae c7dd  "FN617"   : UW  : UW
 func    c7de c7f3  "Func_c7de"   : UY  : UY 
 func    c7f6 c825  "Func_c7f6"   : SW  : SW 
 func    c826 c845  "Func_c826"   : SW  : UW 
-func    c846 c851  "Func_c846"   : SY  : UY 
+func    c846 c851  "FN405"   : SY  : UY 
 func    c852 c85b  "FN618"   : UY  : UY 
 func    c85c c865  "FN619"   : UY  : UY 
 func    c866 c875  "FN621"   : UY  : UY 
 func    c876 c891  "FN623"   : UW  : UW 
 func    c892 c8ad  "FN034A"   : UW  : UW 
 func    c8ae c8c9  "FN070C"   : UW  : UW 
-table   c8ca c92d  "fuel_ve_table2"   : O 10 UY 
+table   c8ca c92d  "FN1420"   : O 10 UY 
 table   c92e c951  "FN1615A"   : O 6 UY 
 table   c952 c975  "FN1616"   : O 6 UY 
 table   c976 c999  "FN1617"   : O 6 UY 
@@ -1510,12 +1511,12 @@ sub  83df2 "INPUT_ACT_COM2"
 sub  840b8 "Compute_TCSTRT"  
 sub  840db "Compute_INIT_TOT"  
 sub  840f7 "Sub_40f7"  
-sub  8436c "Sub_436c"  
+sub  8436c "ENGINE_SPEED_OVER_VEHICLE_SPEED_NOVS_&_BPCOR"  
 sub  843b2 "Sub_43b2"  
 sub  8443b "Sub_443b"  
-sub  84533  "Sub_4533"  
-sub  845a9  "Sub_45a9"  
-sub  84623 "Sub_4623"  
+sub  84533 "SPEED_DENSITY_AIR_MASS_CALCULATION"  
+sub  845a9 "Compute_AMPEM_AMPEMT"  
+sub  84623 "Subtract_EM"  
 sub  84632 "Sub_4632"  
 sub  84735 "Sub_4735"  
 sub  84763 "Sub_4763"  
@@ -1743,7 +1744,7 @@ sub  88ee6   "Sub_8ee6"
 sub  88efe   "Sub_8efe"  
 sub  88f28   "Sub_8f28"  
 sub  88f83   "Sub_8f83"  
-sub  88f94   "Sub_8f94"  
+sub  88f94 "SC_CM_GR_DETR_COM1"  
 sub  8901f   "Sub_901f"  
 sub  8905e   "Sub_905e"  
 sub  89099   "Sub_9099"  
@@ -2066,6 +2067,9 @@ sym a0 "SIGNED_TBL_FLG" : B 4
 sym a1 "Flags_a1" 
 # sym a1 "Console_flag"  : B 0
 
+sym a2 "B2_FLG_FRST_DS_a2" : B 2
+sym a2 "B3_FLG_LK_CM_a2" : B 3
+
 sym a3 "Flags_a3"
 sym a3 "B0_V_MODE_SETUP_a3" : B 0
 sym a3 "B1_STI_RESET_a3" : B 1
@@ -2146,6 +2150,8 @@ sym d6 "FLG_NOT_ADP" : B 4
 sym d9 "GR_CM"
 sym db "PDL"
 
+sym de "B1_FLG_FRST_CM_de" : B 1
+
 sym e1 "CCD?"
 sym e1 "B2_CCD_HP" : B 2
 
@@ -2224,6 +2230,8 @@ sym 216 "MAPTMR"
 
 sym 217 "VACUUM"
 sym 21b "AEFUEL"
+sym 21f "NOVS"
+
 sym 222 "LSTROW"
 sym 224 "LSTCOL"
 
@@ -2270,6 +2278,7 @@ sym 2d8 "FN070L_N_x"
 sym 2da "FN039_N_x"
 
 sym 2e2 "ACSTRT"
+sym 2e4 "MAPWBG"
 
 sym 314 "TOT"
 sym 322 "SPD_RATIO"
@@ -2282,12 +2291,17 @@ sym 344 "Vsc_Raw"
 
 sym 346 "FN071_MAP_y"
 
+sym 34d "GR_CM_LST"
+sym 34f "GR_OLD"
+
 sym 351 "TV_COUNTS"
 
 
 
 sym 35b "TV_PRES"
 sym 35e "TQ_NET"
+
+sym 362 "DNUN_TM"
 
 #sym 386 "CTTMR"
 sym 386 "ATMR3"
@@ -2313,6 +2327,7 @@ sym 3e4 "DWLIDM"
 
 sym 3ea "POFFENG"
 sym 3ec "PPERENG"
+
 
 sym 3fc "UPRATE"
 
@@ -2517,6 +2532,7 @@ sym b44e "fuel_injector_slope"
 sym b463 "OLIDRV"
 sym b466 "OLINEUT"
 
+sym b472 "MPGLSW"
 sym b47c "MPGDEC"
 
 sym b49a "NLMT"
@@ -2621,6 +2637,8 @@ sym c188 "trans_wot_shift_23"
 sym c18c "trans_wot_shift_34"
 
 sym c1af "VECT3"
+
+sym c1d1 "SW_MSF"
 
 sym c1d6 "RTNVMN"
 sym c1d8 "RTNVMX"

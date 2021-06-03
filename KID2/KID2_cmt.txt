@@ -327,6 +327,12 @@
 3f89 \n# spark  multiplier  logic.   The  time  constant,  TCTPDL,  is  a  calibration
 3f89 \n# parameter.
 
+3f8e # (clip to 0 as a minimum)
+3f90 # TP_REL = TP - RATCH
+3f97 # Previous value of TP_REL
+3fa1 # TP_REL - TP_REL_LST
+3faf # ROLAV(TP_REL - TP_REL_LST, TCTPDL)
+
 4089 \n# BATTERY VOLTAGE (VBAT)
 
 4089 \n# 
@@ -348,6 +354,22 @@
 40b8 # Calculates (engine coolant temperature)
 40db # Calculates  (transmission oil temperature)
 4243 # 2 = Low Data Rate Distributorless dual plug (LDR_DIS)
+
+4373 # BPCOR = BP corrected = FN004(BP).
+
+437a # (vehicle speed low)  
+437e # TSTRAT = 4 (C6E4)
+438b # (auto trans, clutch unlocked)
+
+4397 # NOVS = N/VSBAR
+43a4 # NOVS = 255
+
+455c # AM is used to calculate fuel flow in the FUELPW calculation
+4585 # FN074A(AM) * (29.875 ... # 29.875 * 2048 = 61184 = 0xEF00
+458f # FN074A(AM) * (29.875/BPCOR)
+4595 # ABSOLUTE EXHAUST PRESSURE(PEXH)= FN074A(AM) * (29.875/BPCOR) + BP
+45a1 # MAP/PEXH
+45a4 # NOTE:  MAPOPE = MAP/PEXH
 
 4689 # 29.875 * 8 = 239 = 0xEF
 
@@ -789,6 +811,7 @@
 
 88cf # 1 = Thick Film Ignition - Improved Computer Control Dwell (TFI_ICCD)
 
+8b97 # AMT is used to calculate ARCHG in the torque calculation
 8ba5 # (ENGCYL * N)
 
 8bc9 # R18 = AMT/(ENGCYL * N)
@@ -815,6 +838,11 @@
 8c9e # [- FN619(N_BYTE)]
 8cb1 # TQ_NET * FN617(SPD_RATIO)
 8cc4 # (clip TQ_NET to ZERO minimum)
+
+8fad # (Manual shift selection) 
+8fb8 # DO "GR_CM, PRNDL = 2" LOGIC
+
+9001 # (A shift has been commanded)  
 
 a777 # IOTimer delta time since last mSec
 a783 # *128/52083 = 1 mSec
@@ -1008,8 +1036,25 @@ b914 # Register Rf6
 bab0 # Register Rf8 
 bb7a # Register Rfa
 
+bbd2 \n######################################
+bbd2 \n# FN004(BP) = Empirical correction  to  PEXH  for  altitude  with  input  a
+bbd2 \n#  function of barometric pressure.
+
+bbd2 \n# FN074A should be calibrated at sea level since  the  altitude  correction  is
+bbd2 \n# made  by  the (29.875/BPCOR) term.  Note that the altitude correction used to
+bbd2 \n# be (29.875/BP)  however  actual  data  obtained  from  the  altitude  chamber
+bbd2 \n# disagreed  with  the calculated correction.  Therefore FN004(BP) was added to
+bbd2 \n# allow an empirical correction.  If no correction is desired, calibrate  FN004
+bbd2 \n# on  a  diagonal, that is, (0,0), (31.875,31.875).  Actual data indicates that
+bbd2 \n# back pressure does not increase linearly with BP, but at about half that rate,
+bbd2 \n# roughly (0,8), (31.875,31.875).  This will generate a corrected BP to be used
+bbd2 \n# in calculating a more accurate PEXH and PE (PFE EGR only).  Over prediction of
+bbd2 \n# PEXH  results in a smaller MAPOPE and PE which in turn results in leaner open
+bbd2 \n# loop fuel values and under prediction of actual EM at altitude.
+
 bbd3 # EGR Exhaust BP Correction
 beaa # Used as an adder to calculate MAPOPE based on calculated airmass
+
 
 c0a8 # Register Rfc 
 
