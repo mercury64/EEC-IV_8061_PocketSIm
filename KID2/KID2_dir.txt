@@ -90,6 +90,7 @@ code    29cd 2d84
 # byte    2c20 2c20
 # byte    2c21 2c21
 #word    2d86 2d87
+word    2d8a 2d8b
 code    2d8c 2f77
 word    2f78 2f79
 code    2f7e 3cfc
@@ -1471,7 +1472,7 @@ sub  82d46  "Sub_2d46"
 sub  82d4d "I_Timer_OVF"  
 sub  82d6a "I_Ignore"  
 sub  82d6b "I_HSO_2"  
-sub  82d8c "PIP_inth"
+sub  82d8c "PIP_DATA"
 sub  82f7e "Knock_Check4"
 sub  82f8c "Knock_Check" 
 sub  83169 "Update_HTime_pend"
@@ -1481,7 +1482,7 @@ sub  83238 "Sub_3238"
 sub  8326a "Add_H_Beta"
 sub  83277 "Sub_3277" 
 sub  832a1 "Add_H_Delta" 
-sub  832a7 "Sub_32a7"  
+sub  832a7 "EOS_KAY_CALCULATIONS"  
 sub  833b7 "Sub_33b7"  
 sub  83430 "Sub_3430"  
 sub  834c8 "Sub_34c8"  
@@ -1841,7 +1842,7 @@ sym 27 "B3_R27" : B 3
 sym 27 "B4_R27" : B 4
 sym 27 "B5_R27" : B 5
 sym 27 "B6_R27_OpenLoop?" : B 6
-sym 27 "B7_R27" : B 7
+sym 27 "B7_SYNFLG" : B 7
 
 
 sym 28 "B0_egr_rdy_28" : B 0
@@ -1995,6 +1996,8 @@ sym 50 "B5_Ctflg" : B 5
 sym 50 "B6_Tipflg" : B 6
 sym 50 "B7_Tblsflg" : B 7
 
+sym 51 "B2_SIGPIP_51" : B 2
+
 sym 52 "Flags_52"
 sym 52 "B2_DCLST_START_52" : B 2
 
@@ -2002,6 +2005,8 @@ sym 52 "B2_DCLST_START_52" : B 2
 sym 53 "B5_CART_MODE_53" : B 5
 sym 53 "B6_IDM_BYPASS_53" : B 6
 # sym 53 "Next_spout_beta" : B 7
+
+sym 58 "B7_TLOFLG_58" : B 7
 
 sym 6c "Event_time"
 sym 6e "Event_timeH"
@@ -2133,10 +2138,12 @@ sym bc "TP_REL"
 sym be "EVP"
 
 sym c0 "EGRDC"
-sym c4 "PIPHi_ETime"
+sym c4 "DT12S"
+sym c7 "KAYCTR"
 sym c8 "HFDLTA"
+sym ca "MKAY"
+sym cf "SYNCTR"
 
-sym ca "Mkay"
 
 # sym cc "?SAFTOT?"
 
@@ -2258,6 +2265,9 @@ sym 27a "Q6"
 sym 268 "Q7"
 sym 280 "Q8"
 
+sym 28c "DT23S"
+sym 28e "PHFDLT"
+
 sym 2b8 "Xram1L"
 sym 2b9 "Xram1H"
 sym 2ba "Xram2L"
@@ -2270,15 +2280,21 @@ sym 2bf "Xram4H"
 sym 2c4 "EGRACT"
 sym 2c6 "COLTBU"
 sym 2c7 "ROWTBU"
-
+sym 2c8 "TLOFLG"
+sym 2c9 "DIFCTR"
 sym 2cc "SIGKAL"
-
+sym 2ce "SIGDLT"
+sym 2d0 "PSGDLT"
+sym 2d2 "DTSIG"
 
 sym 2d8 "FN070L_N_x"
 sym 2da "FN039_N_x"
 
 sym 2e2 "ACSTRT"
 sym 2e4 "MAPWBG"
+
+sym 2ee "DTPCYC"
+sym 2f0 "HFPCYC"
 
 sym 314 "TOT"
 sym 322 "SPD_RATIO"
@@ -2548,7 +2564,11 @@ sym b4d2 "TP_AIR_OFF_H"
 #sym b914 "RF6"
 
 sym b919 "ENGCYL"
+sym b91e "MHPFD"
 
+sym b924 "DFMIN0"
+sym b925 "DFMIN1
+"
 sym b926 "TOTMIN"
 sym b928 "TOTMAX"
 
@@ -2578,7 +2598,13 @@ sym bac4 "TCECT"
 sym bac8 "TCEGR"
 
 sym bace "TCNDT_ISC"
-sym bae4 "Sigklu"
+
+sym badc "SSFCTR"
+sym bade "SKSSLC"
+
+sym bae0 "FKSKAY"
+sym bae2 "SIGKLL"
+sym bae4 "SIGKLU"
 
 #sym bb7a "RFa"
 
@@ -2644,6 +2670,8 @@ sym c1d6 "RTNVMN"
 sym c1d8 "RTNVMX"
 
 sym c1db "VMPMAX"
+
+sym cb60 "FKMKAY"
 
 sym cb67 "MAP_CYCLE"
 sym cb72 "NCNT"

@@ -227,7 +227,31 @@
 2d7d \w# 0x0004 + a9d0 = [a9d4] = 0xe009
 
 2da3 |## Initialise the RAM table() from InjTab table()
+
+2e83 \n# FUEL_INJ_TIM_COM2
+
+2e87 # Previous PIP first half period.
+2e8b # Most recent PIP first half period.
+2e8e # SIGPIP = 0 (not signature PIP)
+2e91 # (PHFDLT - HFDLTA)
+2e99 # (PHFDLT - HFDLTA) / PHFDLT
+2ea0 # MHPFD = Signature PIP difference check value.
+2ea2 # SIGPIP = 1 (this is signature PIP)
+
 2fa6 # Max degrees retard
+
+32ae \n# Do Signature Kay Calculation
+332b \n\n# MKAY CALC. ENTRY POINT
+
+3348 \n\n# Do MKAY Kay Calculation
+338d #  mkay' < 1.2
+
+
+33a5 # KLLIM Lowest value for MKAY multiplier - initial value = 0.9.
+33b0 # KULMT Highest value for MKAY multiplier - initial value = 1.1.
+33c7 # DIFF0 = | DT12S - 2 * HFDLTA * MKAY |
+33e5 # DIFF1 = | DT12S - HFDLTA - (HFDLTA * (DT23S - PHFDLT))/PHFDLT |
+33f6 # DIFF0 <= DIFF1
 
 343a # 0 = Thick Film Ignition (TFI)
 
@@ -372,6 +396,8 @@
 45a4 # NOTE:  MAPOPE = MAP/PEXH
 
 4689 # 29.875 * 8 = 239 = 0xEF
+
+473c # bit 4  Read A/D Values      Parity Error
 
 # BITMAP_0
 47b2 # Bit 6: 1 if not in neutral or park.
@@ -1033,6 +1059,7 @@ b142 # A background driven decrement to the dashpot preposition  airflow registe
 b43e # Register Rf2 
 b442 # Register Rf4 
 b914 # Register Rf6 
+b91e # If 8-cyl & Signature PIP duty cycle <= 35%, then set MHPFD = .20
 bab0 # Register Rf8 
 bb7a # Register Rfa
 
