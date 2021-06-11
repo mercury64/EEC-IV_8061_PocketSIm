@@ -38,16 +38,21 @@ public class OpCodeDIVW  extends OpCode implements IOpCode {
 
     }
     
+    /* SIGNED
+     * Instruction: Divide Word(DIVW)
+	 * Operation:   RBB/RA: where RBB = 32-Bit Operand, and 
+								  RA  = 16-Bit Operand
+     * Results: Rb+1, Rb <- 16-Bit Quotient
+     * 			Rb+3, Rb+2 <- 16-Bit Remainder
+     */
+    
 	public void execDirect()
 	{
-		/*
-		 * AssemblerFormat:
-		 * InstructionOperation: 
-		 * ExecutionStates: 
-		 * Machine Format:
-		 * DIVW areg,breg (Rgg)/(R^^);(RggLowWord)«-Quotient;(RggHighWord)*-Remainder
-26
-*80 Source Dest Rgg
+		/* UNSIGNED
+		 * AssemblerFormat: DIVW areg,breg
+		 * InstructionOperation: (RBB)/(RA); (RBB_LowWord) <- Quotient; (RBB_HighWord) <- Remainder
+		 * ExecutionStates: 26
+		 * Machine Format: [ ^8C ], [ Source RA], [ Dest RBB ]
 		 */
     	numberOfBytes = 3;
     	executionStates = 26;
