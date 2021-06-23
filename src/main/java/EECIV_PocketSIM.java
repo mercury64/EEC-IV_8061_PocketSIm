@@ -59,7 +59,7 @@ public class EECIV_PocketSIM {
 	{
         int count = 1;
         
-       //state.setPc(17330);
+       //state.setPc(18239);
         
 		while (true) {
 		        
@@ -76,7 +76,7 @@ public class EECIV_PocketSIM {
 			}
 			
 			
-			if (state.getPc() == 0x612f)
+			if (state.getPc() == 0x6131)
 			{
 				//pause
 				System.out.println(String.format("** LOG 0x%04X", state.getWordRegister((short) 0x0410)));

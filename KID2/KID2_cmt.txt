@@ -253,6 +253,8 @@
 33e5 # DIFF1 = | DT12S - HFDLTA - (HFDLTA * (DT23S - PHFDLT))/PHFDLT |
 33f6 # DIFF0 <= DIFF1
 
+3409 # No change to TLOFLG
+
 343a # 0 = Thick Film Ignition (TFI)
 
 

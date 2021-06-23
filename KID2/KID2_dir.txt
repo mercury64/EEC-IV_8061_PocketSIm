@@ -1484,7 +1484,7 @@ sub  83277 "Sub_3277"
 sub  832a1 "Add_H_Delta" 
 sub  832a7 "EOS_KAY_CALCULATIONS"  
 sub  833b7 "TRANSIENT_SPARK-COMPENSATION"  
-sub  83430 "Sub_3430"  
+sub  83430 "DWELL_CALCULATION"  
 sub  834c8 "Sub_34c8"  
 sub  835f3 "Sub_35f3"  
 sub  83642 "Sub_3642"  
@@ -2337,13 +2337,19 @@ sym 3be "TP_REL_LST"
 sym 3c0 "TPDLBR"
 
 sym 3da "TCSTRT"
+sym 3dc "DWELL"
+sym 3de "dwell_extra"
 
 sym 3e0 "DWLBSE"
+sym 3e2 "DWLCOR"
 sym 3e4 "DWLIDM"
 
+sym 3e6 "NEXT_SPOUT_ADVANCED"
+sym 3e8 "PIPACL"
 sym 3ea "POFFENG"
 sym 3ec "PPERENG"
-
+sym 3ee "SPOUT_ICCD_DELTA"
+sym 3f0 "SPOUT_LOW_DELTA"
 
 sym 3fc "UPRATE"
 
@@ -2530,9 +2536,18 @@ sym b059 "MINACT"
 
 sym b05b "DWELLA"
 sym b05c "DWELLM"
+sym b05e "DWLMAX"
+sym b060 "DWLMIN"
+sym b062 "DWLTSW"
+sym b064 "DWL_XS_MIN"
+sym b066 "MINDLA"
+sym b068 "MINDLB"
 
+sym b06a "PACLIM"
 sym b06c "PACOFF"
 sym b06e "PACPER"
+
+sym b070 "PACSLO"
 
 sym b072 "VBAT_DWELL"
 sym b073 "VBAT_DWL_HYS"
@@ -2622,6 +2637,7 @@ sym bb85 "Splclp"
 
 sym bb90 "TCTPDL"
 
+sym bbc4 "SPKLIM"
 sym bbc7 "KNKCYL"
 
 # sym c0a8 "RFc"
