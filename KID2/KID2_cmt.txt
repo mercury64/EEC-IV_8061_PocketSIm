@@ -441,10 +441,17 @@
 
 4b3f # 29.875 * 8 = 239 = 0xEF
 
+4e56 # OPEN LOOP/CLOSED LOOP
+4e68 # LOAD STATE CHANGE
+
+4e93 # FAM ENTRY/EXIT
+
 4f71 # (closed throttle decel/idle, FN1360 not available)
 4f76 # (neutral idle)
 4f7d # (drive idle)
 4fa5 # FN303(N) * FN310(WOTTMR) //(wide open throttle)
+
+4fc3 # Clip LAMBSE to 1.0 as a maximum
 
 
 5174 # ISCFLG = 1 CLOSED LOOP RPM CONTROL

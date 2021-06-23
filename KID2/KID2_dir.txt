@@ -822,7 +822,7 @@ func    b52a b535  "Func_b52a"   : SY  : UY
 func    b536 b549  "FN894"   : UW  : UW 
 func    b54a b565  "Func_b54a"   : UW  : UW 
 table   b566 b595  "FN1354"   : O 6 UY 
-table   b596 b5c5  "emissions_lambda_bias"   : O 6 SY 
+table   b596 b5c5  "FN1355"   : O 6 SY 
 func    b5c6 b5dd  "FN301"   : UW  : UW 
 func    b5de b601  "FN303"   : UW  : UW 
 func    b602 b60f  "FN310"   : UY  : UY 
@@ -1008,7 +1008,7 @@ func    bbf6 bc19  "x_spark_91"   : SW  : UW
 func    bc1a bc35  "y_spark_92"   : UW  : UW 
 func    bc36 bc51  "FN093"   : UW  : UW 
 func    bc52 bc6d  "spark_adder_for_wot_fuel"   : UW  : SW 
-func    bc6e bc79  "Func_bc6e"   : UY  : UY 
+func    bc6e bc79  "FN180": UY  : UY 
 table   bc7a bcc9  "spark_table_base"   : O 10 UY 
 table   bcca bd19  "spark_adder_egr"   : O 10 UY 
 table   bd1a bd69  "spark_reduction_for_octane"   : O 10 UY 
@@ -1389,8 +1389,8 @@ table   cd6e cda5  "Table_cd6e"   : O 8 UY
 func    cda6 cdc5  "FN031"   : UW  : UW 
 func    cdc6 cde1  "FN070L"   : UW  : UW 
 func    cde2 cded  "Func_cde2"   : SY  : UY 
-byte    cdee cdee
-byte    ce52 ce52
+
+table   cdee ce5b  "FN1325L"	: O 10 UY
 func    ce5c ce8f  "FN348"   : SW  : UW 
 func    ce90 ce9b  "Func_ce90"   : SY  : UY 
 #word    e002 e003
@@ -1544,14 +1544,14 @@ sub  84a1e "Sub_4a1e"
 sub  84a3f "Sub_4a3f"  
 sub  84a5e "Sub_4a5e"  
 sub  84aaa "FUEL_PULSEWIDTH_CALCULATION_BGFUEL"  
-sub  84e45 "Sub_4e45"  
+sub  84e45 "FUEL_CL_LAMBSE_COM3"  
 sub  84f50 "C_MULTIPLIER_LOGIC"  
 sub  84fb4 "Sub_4fb4"  
-sub  84fbd "Sub_4fbd"  
+sub  84fbd "LAMBSE_RESET"
 sub  84fd3 "Sub_4fd3"  
 sub  84feb "Sub_4feb"  
 sub  8500e "Sub_500e"  
-sub  8501c "Sub_501c"  
+sub  8501c "CALCULATE_PTPAMP_RF_and_RS"
 sub  85131 "UYTabLU_5131"  $ F uytlu 38 34
 sub  8513f "Sub_513f"  
 sub  851ce "EGO_Switch_Logic"
@@ -1828,6 +1828,7 @@ sym 25 "B1_WARM_UP_25" : B 1
 sym 25 "BIFLG" : B 4
 sym 25 "B6_MPGFLG_25" : B 6
 
+sym 26 "B2_JMPFLG_26" : B 2
 sym 26 "PSFLAG" : B 3
 sym 26 "RUNUP_FLG" : B 4
 sym 26 "PTSCR" : B 5
@@ -1851,6 +1852,7 @@ sym 28 "EGOSTE" : B 5
 sym 28 "KAM_error" :B 7
 
 sym 29 "ECT_IN_RANGE" : B 3
+sym 29 "B6_REFFLG_29" : B 6
 sym 29 "B7_PURGING_29" : B 7
 
 #sym 2a "VIP_flags"
@@ -2065,7 +2067,8 @@ sym 9f "B5_SignedInput" : B 5
 #sym 9f "Indflg" : B 6
 #sym 9f "A3C" : B 7
 
-sym a0 "Power_up"
+sym a0 "Flags_a0"
+sym a0 "B1_V_LAMJMP_a0" : B 1
 sym a0 "SIGNED_TBL_FLG" : B 4
 #sym a0 "Tblsflg"  : B 7
 
@@ -2147,6 +2150,8 @@ sym cf "SYNCTR"
 
 # sym cc "?SAFTOT?"
 
+sym d1 "IDLTMR"
+
 sym d4 "ATMR1"
 
 sym d6 "ND_FLAG
@@ -2183,6 +2188,7 @@ sym 138 "Adptmr"
 
 sym 13a "BG_TMR"
 
+sym 140 "TSLEGO"
 sym 142 "TSLPIP"
 sym 144 "Loop_time"
 
@@ -2201,9 +2207,10 @@ sym 162 "ISCFLG"
 sym 163 "DSDRPM"
 sym 164 "ISCTMR"
 sym 165 "ISFLAG"
+sym 166 "ISLAST"
 sym 167 "LOACT"
 sym 168 "BPCOR"
-
+sym 16a "ACCUM"
 sym 16e "AMPEM"
 sym 176 "KAMRF1"
 
@@ -2231,6 +2238,9 @@ sym 1fa "SPK_LAMBSE"
 
 sym 204 "VS"
 sym 208 "TAPBAR"
+sym 20e "LOPCT1"
+sym 20f "LOPCT2"
+
 sym 213 "ECTCNT"
 sym 214 "PRGTMR"
 sym 216 "MAPTMR"
@@ -2268,6 +2278,7 @@ sym 280 "Q8"
 sym 28c "DT23S"
 sym 28e "PHFDLT"
 
+
 sym 2b8 "Xram1L"
 sym 2b9 "Xram1H"
 sym 2ba "Xram2L"
@@ -2287,6 +2298,7 @@ sym 2ce "SIGDLT"
 sym 2d0 "PSGDLT"
 sym 2d2 "DTSIG"
 
+sym 2d6 "FN025_MAP_y"
 sym 2d8 "FN070L_N_x"
 sym 2da "FN039_N_x"
 
@@ -2336,6 +2348,8 @@ sym 3b2 "RPMERR_S"
 sym 3be "TP_REL_LST"
 sym 3c0 "TPDLBR"
 
+sym 3c6 "BIAS"
+
 sym 3da "TCSTRT"
 sym 3dc "DWELL"
 sym 3de "dwell_extra"
@@ -2350,9 +2364,9 @@ sym 3ea "POFFENG"
 sym 3ec "PPERENG"
 sym 3ee "SPOUT_ICCD_DELTA"
 sym 3f0 "SPOUT_LOW_DELTA"
-
+sym 3fa "LAMWIN"
 sym 3fc "UPRATE"
-
+sym 3fd "PTPAMP"
 sym 413 "C41FIL_TroubleCode"
 
 sym 428 "V_BOOSPD_TMR"
@@ -2563,8 +2577,13 @@ sym b44e "fuel_injector_slope"
 sym b463 "OLIDRV"
 sym b466 "OLINEUT"
 
+sym b46b "JMPMUL"
+
 sym b472 "MPGLSW"
 sym b47c "MPGDEC"
+
+sym b484 "LAMMAX"
+sym b486 "LAMMIN"
 
 sym b49a "NLMT"
 sym b49c "NLMTH"
@@ -2678,7 +2697,7 @@ sym c184 "trans_wot_shift_12"
 sym c188 "trans_wot_shift_23"
 sym c18c "trans_wot_shift_34"
 
-sym c1af "VECT3"
+sym c1af "?VECT3_wrong?"
 
 sym c1d1 "SW_MSF"
 
@@ -2710,9 +2729,15 @@ sym cb8e "AFECT1"
 sym cb8f "AFECT2"
 sym cb90 "AFACT1"
 sym cb91 "AFACT2"
-sym cb9d "fuel_adaptive_min"
-sym cb9e "fuel_adaptive_max"
+sym cb94 "AMPMUL"
+sym cb96 "DELAMB"
 
+sym cb9d "MINADP"
+sym cb9e "MAXADP"
+
+sym cba2 "ADEGCT"
+sym cba3 "FAEGCT"
+sym cba4 "KWUCNT"
 sym cba5 "HCAMSW"
 
 sym cba8 "fuel_max_load_verification_value"
@@ -2722,6 +2747,8 @@ sym cbba "VRLAM"
 
 sym cbca "ACTMIN"
 sym cbcc "ACTMAX"
+
+sym cbcf "VECT5"
 
 sym cbd2 "TAPMIN"
 sym cbd0 "TAPMAX"
