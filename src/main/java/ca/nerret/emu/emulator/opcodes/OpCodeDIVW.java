@@ -66,15 +66,15 @@ public class OpCodeDIVW  extends OpCode implements IOpCode {
     	int valueRBB = this.getIntRegister(destRBB);
     	
     	int wordReturned = 0;
-    	try
+    	//try
     	{
     		wordReturned = (int) (valueRBB / valueRA);
     		System.err.println("NotImplemented: Need quotient and remainder");
     		System.exit(1);
     	}
-    	catch(ArithmeticException e)
+    	//catch(ArithmeticException e)
     	{
-    		System.err.println(e.getMessage());
+    		//System.err.println(e.getMessage());
     	}
     	
     	this.setOperandLocation(destRBB);

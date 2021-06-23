@@ -83,7 +83,7 @@ public class OpCodeSHLDW extends OpCode implements IOpCode {
         //lreg = res;
 
     }
-	public  void execSSSSShortIndexed()
+	public  void execShortIndexed()
     {
     	// AssemblerFormat: SB3W offset(basereg),breg,dreg
     	// InstructionOperation:(RD) <- (RB)-([RA]+Offset) 
