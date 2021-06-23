@@ -739,6 +739,11 @@
 7297 # 512, KAM Test Failed
 729e # 111, PASS 
 
+74c1 # (reinitialize due to LAMBSE jump)
+74c8 # V_LEGOTMR
+74cf # LAMBSE
+74e0 # V_LESTMR
+
 78ab # BOO_SPD_TMR
 
 7aac # KAM CODE(N)

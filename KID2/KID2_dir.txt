@@ -1379,7 +1379,9 @@ word	cc94 cc95
 byte    cc9a cc9a
 word    cca8 cca9
 word    ccaa ccab
-word    ccac cd21
+word    ccac ccb5
+byte    ccb6 ccb9
+
 func    cd22 cd35  "Func_cd22"   : UW  : UW 
 func    cd36 cd3d  "Func_cd36"   : UY  : UY 
 func    cd40 cd49  "Func_cd40"   : UY  : UY 
@@ -2226,6 +2228,8 @@ sym 1bc "TSSTIL_TMR"
 sym 1be "Miltmr"
 
 sym 1c1 "Vip_timer_ex"
+sym 1cc "V_LEGOTMR"
+
 sym 1d0 "SparkAdvance"
 
 sym 1ea "N_BYTE"
@@ -2373,6 +2377,8 @@ sym 428 "V_BOOSPD_TMR"
 sym 42a "EGOCNT"
 
 sym 43e "AC_PPM"
+
+sym 448 "V_LESTMR"
 
 sym 509 "XDCL_BAUD"
 
