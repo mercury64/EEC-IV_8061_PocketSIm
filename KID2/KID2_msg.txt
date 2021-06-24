@@ -690,11 +690,8 @@ fill    ba57 ba57
 func    ba58 ba6f: UW X 10 : UW X 10 
 func    ba70 ba8b: UW X 10 : UW X 10 
 func    ba8c baaf: UW X 10 : UW X 10 
-struct  bab0 bab8: O 3 UY 
-struct  bab9 bac1: O 3 UY 
-struct  bac2 bacd: O 4 UY 
-struct  bace bad9: O 4 UY 
-struct  bada bae5: O 4 UY 
+word    bab0 bab1
+byte    bab2 bae5
 func    bae6 baf5: UW X 10 : UW X 10 
 func    baf6 bafd: UY X 10 : UY X 10 
 func    bafe bb0d: SY X 10 : UY X 10 
@@ -1157,11 +1154,11 @@ sub  4f50  "C_MULTIPLIER_LOGIC"   #cmd
 sub  4fb4  "Sub_4fb4"   #cmd
 sub  4fbd  "LAMBSE_RESET"   #cmd
 sub  4fd3  "Sub_4fd3"   #cmd
-sub  4feb  "Sub_4feb"   #cmd
+sub  4feb  "FN1360(N,MAPPA)"   #cmd
 sub  500e  "Sub_500e"   #cmd
 sub  501c  "CALCULATE_PTPAMP_RF_and_RS"   #cmd
 sub  5131  "UYTabLU_5131"   $ F uytlu 38 34 #cmd
-sub  513f  "Sub_513f"   #cmd
+sub  513f  "FUEL_ADAPT_COM4"   #cmd
 sub  51ce  "EGO_Switch_Logic"   #cmd
 sub  5369  "NEW_UPRATE_CALC"   #cmd
 sub  5402  "Sub_5402"   #cmd
@@ -1171,7 +1168,7 @@ sub  5830  "Sub_5830"   #cmd
 sub  58d5  "Sub_58d5"   #cmd
 sub  58ec  "Sub_58ec"   #cmd
 sub  5a31  "Sub_5a31"   #cmd
-sub  5b96  "Sub_5b96"   #cmd
+sub  5b96  "ACCELERATION_ENRICHMENT"   #cmd
 sub  5c7b  "FUEL_PUMP_COM1"   #cmd
 sub  5c90  "Sub_5c90"   #cmd
 sub  5ca7  "Sub_5ca7"   #cmd
@@ -1641,10 +1638,12 @@ sym a8  "APT"
 sym a9  "MAPPA"
 sym aa  "XFRAME"
 sym ac  "VIP_code"
+sym b0  "TAR"
 sym b2  "TP"
 sym b4  "N_RPM"
 sym b6  "ECT"
 sym b7  "ACT"
+sym b9  "TCSTRT"
 sym ba  "MAP"
 sym bb  "BP"
 sym bc  "TP_REL"
@@ -1678,6 +1677,7 @@ sym 116  "EOFF"
 sym 118  "INDS"
 sym 11a  "IEGO1"
 sym 11c  "ITP"
+sym 11e  "NBAR"
 sym 122  "MAP_FREQ"
 sym 124  "MAP_WORD"
 sym 136  "PUTMR"
@@ -1701,8 +1701,10 @@ sym 166  "ISLAST"
 sym 167  "LOACT"
 sym 168  "BPCOR"
 sym 16a  "ACCUM"
+sym 16c  "AEPW"
 sym 16e  "AMPEM"
 sym 176  "KAMRF1"
+sym 17b  "AEPP"
 sym 181  "CRKPIP_CTR"
 sym 184  "OCCSAV"
 sym 192  "Ibeta1"
@@ -1720,6 +1722,7 @@ sym 1f4  "AMPEMT"
 sym 1f6  "PURGDC"
 sym 1f8  "BCSDC"
 sym 1fa  "SPK_LAMBSE"
+sym 200  "MDELTA"
 sym 204  "VS"
 sym 208  "TAPBAR"
 sym 20e  "LOPCT1"
@@ -1772,6 +1775,7 @@ sym 2d2  "DTSIG"
 sym 2d6  "FN025_MAP_y"
 sym 2d8  "FN070L_N_x"
 sym 2da  "FN039_N_x"
+sym 2e0  "A0COR"
 sym 2e2  "ACSTRT"
 sym 2e4  "MAPWBG"
 sym 2ee  "DTPCYC"
@@ -1791,6 +1795,7 @@ sym 35b  "TV_PRES"
 sym 35e  "TQ_NET"
 sym 362  "DNUN_TM"
 sym 386  "ATMR3"
+sym 38c  "RANNUM"
 sym 38e  "SAFTOT"
 sym 390  "DEBYMA"
 sym 394  "IPSIBR"
@@ -1802,6 +1807,7 @@ sym 3b2  "RPMERR_S"
 sym 3be  "TP_REL_LST"
 sym 3c0  "TPDLBR"
 sym 3c6  "BIAS"
+sym 3cc  "TLSPAT"
 sym 3da  "TCSTRT"
 sym 3dc  "DWELL"
 sym 3de  "dwell_extra"
@@ -1989,8 +1995,8 @@ sym b1c0  "FN1861"
 sym b1ea  "FN703"
 sym b212  "FN703D"
 sym b23e  "y_fuel_cold_decay"
-sym b25a  "Func_b25a"
-sym b26e  "x_isc_base_air_ect"
+sym b25a  "FN019A"
+sym b26e  "FN020C"
 sym b28e  "FN021_MAPOPE_y_load"
 sym b2be  "FN070"
 sym b2e6  "FN070B"
@@ -2062,11 +2068,12 @@ sym b934  "fuel_tp_pt"
 sym b936  "fuel_tp_wot"
 sym b940  "TKYON2"
 sym b950  "ACTFMM"
+sym b953  "MAPFMM"
 sym b95e  "CTBYS"
 sym b95f  "CTBYSH"
 sym b975  "FN305"
 sym b97f  "FN326"
-sym b989  "fuel_injector_offset_vs_volts"
+sym b989  "FN367"
 sym b99b  "Func_b99b"
 sym b9a1  "FN1320"
 sym ba06  "Func_ba06"
@@ -2074,7 +2081,7 @@ sym ba1e  "Table_ba1e"
 sym ba4b  "FN600"
 sym ba58  "FN605A"
 sym ba70  "FN090"
-sym ba8c  "Func_ba8c"
+sym ba8c  "FN095"
 sym bab2  "TCBPA"
 sym bab4  "TCFBS"
 sym bab6  "TCMBAR"
@@ -2082,6 +2089,7 @@ sym babc  "TCDASD"
 sym babe  "TCDASU"
 sym bac4  "TCECT"
 sym bac8  "TCEGR"
+sym bacc  "TC"
 sym bace  "TCNDT_ISC"
 sym bad4  "TCTPT"
 sym bad6  "TCTOT"
@@ -2224,6 +2232,9 @@ sym c976  "FN1617"
 sym c99a  "Func_c99a"
 sym cb60  "FKMKAY"
 sym cb67  "MAP_CYCLE"
+sym cb68  "AEM"
+sym cb6e  "FRCTAE"
+sym cb70  "AETAR"
 sym cb72  "NCNT"
 sym cb74  "UNRPM"
 sym cb76  "UNRPMH"
@@ -2256,6 +2267,7 @@ sym cbcc  "ACTMAX"
 sym cbcf  "VECT5"
 sym cbd0  "TAPMAX"
 sym cbd2  "TAPMIN"
+sym cbd4  "WIGLVL"
 sym cbd5  "V_fpmflg"
 sym cbd8  "ECTMIN"
 sym cbda  "ECTMAX"
@@ -2264,15 +2276,18 @@ sym cc2e  "EVPMAX"
 sym cc4a  "VECT3"
 sym cc4c  "V_879_MULT"
 sym cc54  "V820A"
+sym cc6c  "VMDEL1"
+sym cc6e  "VMDEL2"
+sym cc76  "VMPMAX"
 sym cc94  "VDLY2"
 sym cc95  "VIPTM2"
 sym cc96  "VATMR2"
-sym cd22  "Func_cd22"
-sym cd36  "Func_cd36"
-sym cd40  "Func_cd40"
-sym cd4a  "Func_cd4a"
-sym cd62  "Func_cd62"
-sym cd6e  "Table_cd6e"
+sym cd22  "FN331A"
+sym cd36  "FN332"
+sym cd40  "FN378"
+sym cd4a  "FN379"
+sym cd62  "FN324"
+sym cd6e  "FN1303"
 sym cda6  "FN031"
 sym cdc6  "FN070L"
 sym cde2  "Func_cde2"

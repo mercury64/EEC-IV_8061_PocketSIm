@@ -455,11 +455,32 @@
 
 
 5174 # ISCFLG = 1 CLOSED LOOP RPM CONTROL
-51a1 # kamcol
-51bd # kamrow
+
+5185 # kamcol = ISFLAG
+5188 # OLTBU = ISFLAG
+5191 # kamrow = 10
+5194 # ROWTBU = 10
+5194 \w# (special idle cells)
+
+51a1 # kamcol = FN070L(N)
+51a4 # rancol = RANNUM
+51a7 # 0.5
+51ae # COLTBU = kamcol + 0.5 + rancol
+51bd # kamrow = FN031(MAPOPE)
+51c0 # ranrow = RANNUM
+51c3 # 0.5
+51c7 #
+51ca # ROWTBU = kamrow + 0.5 + ranrow
+
 
 523a # ISCFLG = 1 CLOSED LOOP RPM CONTROL
-5252 \n# CLOSED LOOP RPM CONTROL
+5247 # LSTCOL = kamcol
+524b # LSTCOL = kamrow
+
+5251 # Exit FUEL_ADAPT_COM4
+5252 \n# Continue with FUEL_ADAPT_COM4
+5253 # Calculate the LAMBSE window, LAMWIN:
+526a # LAMWIN = DELAMB + (PTPAMP * AMPMUL)
 
 537b # kamrow = kamrow_spec
 537d # Read the value in FN1325L specified by kamcol.
@@ -473,6 +494,23 @@
 53e4 # If, however, one or more  of  the  cells  in  the  four  points  is  a reference  cell,
 53e6 # then the average of the values in the positive cells is used in place of the negative values.
 58b3 # 60.000
+
+5bb5 # Disable AE
+5bb5 \n# Enable AE
+5bbd # FN019A(TAR) = x-axis input to FN1303.
+5bce # FN020(FRCTAE * ACT + (1-FRCTAE) * ECT) = y-axis input to FN1303.
+5bdc # FN1303(TAR,TEMP) = Desired AE fuel flow, lbm/hr.
+5be6 # FN331A(TP-RATCH) = Accel enrichment fuel flow multiplier, unitless.
+5bf0 # FN378(BP) = Accel enrichment fuel flow multiplier, unitless.
+5c00 # FN379(NBAR) = Accel enrichment fuel flow multiplier, unitless.
+5c06 # AEM = ECT/ACT weighting factor, unitless.
+5c19 # FN324(MAP) = Accel enrichment fuel flow multiplier, unitless.
+5c25 # AEFUEL = AEM * FN1303 * FN331A * FN378 * FN379 * FN324
+5c30 # FN332(AEFUEL) = Accel enrichment pulse period, seconds.
+5c40 # AEFUEL * FN332
+5c43 # AEFUEL * FN332 * 3600 
+5c47 # (AEFUEL * FN332 * 3600) / A0COR
+
 
 5c86 # 1024 = 1 second
 
@@ -514,10 +552,13 @@
 666b # [+FN826A] Logic: (Engine Cleanout adder)
 6672 # (Kickdown time not up)
 
-6679 # Add FN826A to DSDRPM
-667c # } //else Do NOT add FN826A
-667e # [+ (FN880 + FN821A)] Logic: (Battery charge control and Inspection Maintenance)
-6685 # Add (FN880 + FN821A) to DSDRPM
+
+667c # Add FN826A(TCSTRT) to DSDRPM
+6685 # [+ (FN880 + FN821A)] Logic: 
+6685 \w# DSDRPM < CHGRPM
+6685 \w#  (Battery charge control and Inspection Maintenance)
+668e # Add (FN880A) to DSDRPM
+6697 # Add (FN821A) to DSDRPM
 669e # Clip DSDRPM to CHGRPM as a maximum
 
 66c1 # [+RPMINC] Logic: (Low ACT and A/C panel switch adder)
@@ -535,6 +576,8 @@
 671c # A/C air flow correction based on ACT.
 6722 # AC_PPM = FN885 * FN887A
 6740 # Add DNAC to DSDRPM
+
+67f6 # FN1861(ECT,ATMR3)
 
 685f # (RPM control or lockout)
 686c # (calculate RPM error for airflow control)
@@ -855,6 +898,8 @@
 8ba5 # (ENGCYL * N)
 
 8bc9 # R18 = AMT/(ENGCYL * N)
+8bc9 \n# INTRN_EQ_TQ_CALC_COM2
+
 8bd3 # R18 = UROLAV(AMT/[ENGCYL*N], TCTTA) (Filter ARCHG in torque truncation)
 8bec # LOAD = ARCHG / SARCHG
 
