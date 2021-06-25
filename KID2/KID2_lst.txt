@@ -11150,16 +11150,16 @@ ERROR CODE DESCRIPTION
 
 8d77: 39,e0,41            jb    B1,Re0,8dbb      if (B1_Re0 = 0)  {
 8d7a: 31,30,12            jnb   B1,R30,8d8f      if (B1_R30 = 1)  {
-8d7d: a3,e2,c6,32         ldw   R32,[Re2+c6]     R32 = [Re2-3a];
-8d81: a3,e2,c4,34         ldw   R34,[Re2+c4]     R34 = [Re2-3c];
+8d7d: a3,e2,c6,32         ldw   R32,[Re2+c6]     R32 = NE12S;
+8d81: a3,e2,c4,34         ldw   R34,[Re2+c4]     R34 = NE12A;
 8d85: 29,2e               scall 8eb5             Sub_8eb5 ();
 8d87: 33,df,31            jnb   B3,Rdf,8dbb      if (B3_Rdf = 0) goto 8dbb;
 8d8a: b1,04,d8            ldb   Rd8,4            Rd8 = 4;
 8d8d: 21,15               sjmp  8ea4             goto 8ea4; }
 
 8d8f: 32,30,12            jnb   B2,R30,8da4      if (B2_R30 = 1)  {
-8d92: a3,e2,ca,32         ldw   R32,[Re2+ca]     R32 = [Re2-36];
-8d96: a3,e2,c8,34         ldw   R34,[Re2+c8]     R34 = [Re2-38];
+8d92: a3,e2,ca,32         ldw   R32,[Re2+ca]     R32 = NE23S;
+8d96: a3,e2,c8,34         ldw   R34,[Re2+c8]     R34 = NE23A;
 8d9a: 29,19               scall 8eb5             Sub_8eb5 ();
 8d9c: 33,df,1c            jnb   B3,Rdf,8dbb      if (B3_Rdf = 0) goto 8dbb;
 8d9f: b1,06,d8            ldb   Rd8,6            Rd8 = 6;
@@ -11167,8 +11167,8 @@ ERROR CODE DESCRIPTION
 
 8da4: 99,08,db            cmpb  Rdb,8            
 8da7: d7,12               jne   8dbb             if (PDL = 8)  {
-8da9: a3,e2,ce,32         ldw   R32,[Re2+ce]     R32 = [Re2-32];
-8dad: a3,e2,cc,34         ldw   R34,[Re2+cc]     R34 = [Re2-34];
+8da9: a3,e2,ce,32         ldw   R32,[Re2+ce]     R32 = NS34S;
+8dad: a3,e2,cc,34         ldw   R34,[Re2+cc]     R34 = NS34A;
 8db1: 29,02               scall 8eb5             Sub_8eb5 ();
 8db3: 33,df,05            jnb   B3,Rdf,8dbb      if (B3_Rdf = 1)  {
 8db6: b1,08,d8            ldb   Rd8,8            Rd8 = 8;
@@ -16191,31 +16191,19 @@ c17c: 2c,01               word    12c
 c17e: 00                  byte      0
 c17f: 10                  byte     10
 c180: 03                  byte      3
-c181: ff                  byte     ff
-c182: e0                  byte     e0
-c183: fc                  byte     fc
-c184: a0                  byte     a0            trans_wot_shift_12
-c185: 41                  byte     41
-c186: 50                  byte     50
-c187: fb                  byte     fb
-c188: 68                  byte     68            trans_wot_shift_23
-c189: 42                  byte     42
 
-c18a: e0                  ???   
+c181: ff                  ???   
 
-c18b: fc                  byte     fc
-c18c: 60                  byte     60            trans_wot_shift_34
-c18d: 3b                  byte     3b
-c18e: 02                  byte      2
-c18f: 28                  byte     28
-c190: 00                  byte      0
-c191: 04                  byte      4
-c192: 04                  byte      4
-c193: 02                  byte      2
-c194: 5e                  byte     5e
-
-c195: ff                  fill  
-
+c182: e0,fc               word   fce0            NE12A                             #  NE12A = WOT RPM 1 - 2 shift point, altitude.
+c184: a0,41               word   41a0            NE12S                             #  NE12S = WOT RPM 1 - 2 shift point, sea level.
+c186: 50,fb               word   fb50            NE23A                             #  NE23A = WOT RPM 2 - 3 shift point, altitude.
+c188: 68,42               word   4268            NE23S                             #  NE23S = WOT RPM 2 - 3 shift point, sea level.
+c18a: e0,fc               word   fce0            NS34A                             #  NE34A = WOT RPM 3 - 4 shift point, altitude.
+c18c: 60,3b               word   3b60            NS34S                             #  NE34S = WOT RPM 3 - 4 shift point, sea level.
+c18e: 02,28               word   2802
+c190: 00,04               word    400
+c192: 04,02               word    204
+c194: 5e,ff               word   ff5e
 c196: 90,01               word    190
 c198: 40,01               word    140
 c19a: 00,02               word    200

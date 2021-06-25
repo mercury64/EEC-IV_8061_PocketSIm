@@ -1144,6 +1144,15 @@ beaa # Used as an adder to calculate MAPOPE based on calculated airmass
 
 c0a8 # Register Rfc 
 
+c182 #  NE12A = WOT RPM 1 - 2 shift point, altitude.
+c184 #  NE12S = WOT RPM 1 - 2 shift point, sea level.
+c186 #  NE23A = WOT RPM 2 - 3 shift point, altitude.
+c188 #  NE23S = WOT RPM 2 - 3 shift point, sea level.
+c18a #  NE34A = WOT RPM 3 - 4 shift point, altitude.
+c18c #  NE34S = WOT RPM 3 - 4 shift point, sea level.
+       
+       
+       
 c1af # coolant temp.  limit to trigger warm up counters (150 deg.  F).
 
 c1d6 # 11469

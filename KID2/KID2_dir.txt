@@ -7,6 +7,7 @@ rbase e2 cc59 855f 8581
 rbase e2 c1c4 43b2 443a
 rbase e2 c1be 8938 8b18
 rbase e2 c1be 8f94 901e
+rbase e2 c1be 8d5f 8eb4
 
 rbase e4 180
 rbase e6 280
@@ -1102,23 +1103,7 @@ byte    c17e c17e
 byte    c17f c17f
 byte    c180 c180
 byte    c183 c183
-byte    c184 c184
-byte    c185 c185
-byte    c186 c186
-byte    c187 c187
-byte    c188 c188
-byte    c189 c189
-byte    c18b c18b
-byte    c18c c18c
-byte    c18d c18d
-byte    c18e c18e
-byte    c18f c18f
-byte    c190 c190
-byte    c191 c191
-byte    c192 c192
-byte    c193 c193
-byte    c194 c194
-word    c196 c197
+word    c184 c197
 word    c198 c199
 word    c19a c19b
 byte    c19c c19c
@@ -2685,9 +2670,13 @@ sym c16f "V_BOOSPD_TM"
 
 sym c17b "MBTEGR"
 
-sym c184 "trans_wot_shift_12"
-sym c188 "trans_wot_shift_23"
-sym c18c "trans_wot_shift_34"
+sym c182 "NE12A"
+sym c184 "NE12S"
+sym c186 "NE23A"
+sym c188 "NE23S"
+sym c18a "NS34A"
+sym c18c "NS34S"
+
 
 sym c1af "?VECT3_wrong?"
 
