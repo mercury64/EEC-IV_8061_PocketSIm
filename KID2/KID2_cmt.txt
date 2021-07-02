@@ -439,7 +439,28 @@
 49ee \n# SIGNED interpolate calc
 4a0a \n# UNSIGNED interpolate calc
 
+4b5b # (EGO switch)
+4b5e # Increment EGOSSS 
+4b62 # Clip at 255
+
 4b3f # 29.875 * 8 = 239 = 0xEF
+
+4bcd # (N/D fuel enrichment)  
+4bd7 # (LAMMUL reset)
+4bdb # (free running timer)  
+4be3 #  MULTMR >= MULTM
+4bed # LAMMUL + .0039
+4bef # Clip at .996 maximum
+4bfe # FN1360 <= LAMRICH
+4c03 #  (enrichment required)
+4c94 # (thermactor forced open loop)
+
+4cc4 # |1.0 + BIAS - LAMAVE|
+
+4d20 # MPGTFG RESET LOGIC
+4d44 # (decel fuel shut-off)
+
+4e43 # (lean cruise mode exit into closed loop fuel (ramp fuel))
 
 4e56 # OPEN LOOP/CLOSED LOOP
 4e68 # LOAD STATE CHANGE
@@ -786,6 +807,8 @@
 74c8 # V_LEGOTMR
 74cf # LAMBSE
 74e0 # V_LESTMR
+
+7576 # (past decel fuel shutoff)
 
 78ab # BOO_SPD_TMR
 
