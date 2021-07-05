@@ -451,8 +451,23 @@
 4be3 #  MULTMR >= MULTM
 4bed # LAMMUL + .0039
 4bef # Clip at .996 maximum
-4bfe # FN1360 <= LAMRICH
+4bfe # |S FN1360 <= LAMRICH
+4c00 # |Q Set flip flop
 4c03 #  (enrichment required)
+4c0e # |C FN1360 > LAMRICH + LAMRHYS 
+4c10 # |Q Clear flip flop
+
+4c21 # |S TP_REL > FN311(N)
+4c23 # |Q Set flip flop
+4c28 # FN311(N) - TP_HYS_OL 
+4c31 # |C TP_REL <= FN311(N) - TP_HYS_OL
+4c33 # |Q Clear flip flop
+ 
+4c44 # |S MAP < LMAP - LOMAPH (decel load)
+4c46 # |Q Set flip flop
+4c4e # |C MAP >= LMAP
+4c50 # |Q Clear flip flop
+
 4c94 # (thermactor forced open loop)
 
 4cc4 # |1.0 + BIAS - LAMAVE|
@@ -515,6 +530,9 @@
 53e4 # If, however, one or more  of  the  cells  in  the  four  points  is  a reference  cell,
 53e6 # then the average of the values in the positive cells is used in place of the negative values.
 58b3 # 60.000
+
+5acf # (rpm high enough)   
+5b20 # (in higher gear) 
 
 5bb5 # Disable AE
 5bb5 \n# Enable AE
@@ -808,7 +826,10 @@
 74cf # LAMBSE
 74e0 # V_LESTMR
 
+7560 #  (max AEFUEL to perform test)   
 7576 # (past decel fuel shutoff)
+
+757b # Set PSW Flags
 
 78ab # BOO_SPD_TMR
 
