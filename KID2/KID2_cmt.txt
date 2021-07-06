@@ -37,6 +37,8 @@
 
 2231 \n# "Task_List_3"
 
+2270 #  A/C CLUTCH STATUS (ACCFLG)
+
 22a1 # EGR IS DISABLED, NO EGR CONTROL REQUIRED
 
 
@@ -314,6 +316,8 @@
 3d1b # EGR Valve position
 3d1e # end of table
 
+3d64 # AETP = UROLAV(TP,TCAETP)
+
 3d67 \n
 3d67 \n# THROTTLE POSITION FILTER (TAPBAR)
 3d67 \n#   The TAPBAR calculation is a time and MAP dependent rolling average filter  of
@@ -391,11 +395,17 @@
 43a4 # NOVS = 255
 
 455c # AM is used to calculate fuel flow in the FUELPW calculation
+456f # Previous value of REFFLG = 0
+4571 # FUEL STRATEGY, IDLE FUEL MODULATION
+4574 # Current value of REFFLG = 1
+
 4585 # FN074A(AM) * (29.875 ... # 29.875 * 2048 = 61184 = 0xEF00
 458f # FN074A(AM) * (29.875/BPCOR)
 4595 # ABSOLUTE EXHAUST PRESSURE(PEXH)= FN074A(AM) * (29.875/BPCOR) + BP
 45a1 # MAP/PEXH
 45a4 # NOTE:  MAPOPE = MAP/PEXH
+
+45b0 # R3c is either FN305 or FN405
 
 4689 # 29.875 * 8 = 239 = 0xEF
 
@@ -444,7 +454,7 @@
 4b62 # Clip at 255
 
 4b3f # 29.875 * 8 = 239 = 0xEF
-
+4b6c # Increment EGO_CNT_IDLE 
 4bcd # (N/D fuel enrichment)  
 4bd7 # (LAMMUL reset)
 4bdb # (free running timer)  
@@ -529,6 +539,16 @@
 53d7 # uprat_avg = R20 / uprat_cnt
 53e4 # If, however, one or more  of  the  cells  in  the  four  points  is  a reference  cell,
 53e6 # then the average of the values in the positive cells is used in place of the negative values.
+
+5607 # (determine the value of D)
+560d # D * ISCMOD
+561f # FUEL_A = D * ISCMOD
+5632 # FUEL_A = D * ISCMOD * fn387(ECT)
+
+5793 # (freeze ISCDTY for VIP) 
+5798 # (throttle adjust mode) 
+57ac # (initial runup complete)
+
 58b3 # 60.000
 
 5acf # (rpm high enough)   
@@ -868,6 +888,7 @@
 7d36 # End address  (0xdffe)
 
 7d86 #126   | MAP/BP out of S-T range.           |    X    |  XX  |   X   |
+7def # STRATEGY MODULE: VO_ACCS_COM2
 7df2 #539   | A/C Swith error                    |    X    |      |       |
 7e1c #519   | PSPS ckt. open.                    |    X    |      |       |
 7e21 #VO_IVPWR_COM1
@@ -938,6 +959,23 @@
 
 88cf # 1 = Thick Film Ignition - Improved Computer Control Dwell (TFI_ICCD)
 
+8938 # BP INTERPOLATION FACTOR
+893f # BP_INTR = FN615(BP)
+
+8947 # FILTERED ENGINE SPEED FOR TRANSMISSIONS USE
+
+8951 # NEBART = UROLAV(N,TCNE)
+
+8959 # FILTERED THROTTLE POSITION FOR TRANSMISSION USE
+8963 # TPBART = UROLAV(TP,TCTPTE)
+
+896e # THROTTLE POSITION RATE
+8974 # TP - TBART
+8978 # TP_RATE = TP - TPBART (TP_RATE is clipped to +/- 512 counts)
+
+8980 # FILTERED VEHICLE SPEED FOR TRANSMISSION USE
+898b # VSBART = UROLAV(VS,TCVST)
+
 8b97 # AMT is used to calculate ARCHG in the torque calculation
 8ba5 # (ENGCYL * N)
 
@@ -968,10 +1006,36 @@
 8cb1 # TQ_NET * FN617(SPD_RATIO)
 8cc4 # (clip TQ_NET to ZERO minimum)
 
+8f98 # (new desired gear)  
+8fa2 # (time to delay downshift to unlock converter)
+
 8fad # (Manual shift selection) 
-8fb8 # DO "GR_CM, PRNDL = 2" LOGIC
+8faf # GR_CM = GRMSFT
+
+8fb8 # DO "GR_CM, PRNDL = 1" LOGIC
+8fc2 # DO "GR_CM, PRNDL = 2" LOGIC
+8fc4 # GR_CM, PRNDL = 2 LOGIC
+8fd3 # DO "GR_CM, PRNDL = 3 OR 4 DOWNSHIFT"
+8fd5 # GR_CM, PRNDL = 3 OR 4, DOWNSHIFT LOGIC
+8fda # GR_DS > GR_CM 
+
+8ffa # (No shift this program pass)
 
 9001 # (A shift has been commanded)  
+9003 # (New commanded gear for this program pass only)
+900e # GR_OLD = GR_CM_LST (Update old gear)
+9065 # (current gear is first)  
+90a6 # (command downshift)
+
+9cbe # (Failure Mode Lock Requested)  
+9cc1 # (Unconditional Unlock Requested)
+9cc4 # (Reset FMEM lock-up flag)
+9ccf # (Speed Ratio above failure mode minimum)
+9cd1 # (TP Sensor failure)
+9cd4 # (FMEM lock-up activated this power-up)
+
+9ceb # (Engine Speed above failure  mode minimum)
+a492 # (run OR underspeed)  
 
 a777 # IOTimer delta time since last mSec
 a783 # *128/52083 = 1 mSec
@@ -1161,6 +1225,7 @@ b0c0 # ISC duty cycle multiplier versus VACUUM.
 b142 # A background driven decrement to the dashpot preposition  airflow register  (DASPOT)  as  a function of DASPOT.
 b43e # Register Rf2 
 b442 # Register Rf4 
+
 b914 # Register Rf6 
 b91e # If 8-cyl & Signature PIP duty cycle <= 35%, then set MHPFD = .20
 bab0 # Register Rf8 

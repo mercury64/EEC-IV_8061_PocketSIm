@@ -1191,7 +1191,7 @@ byte    c23a c23a
 word    c23e c23f
 word    c24e c24f
 func    c25e c279  "Func_c25e"   : UW  : UW 
-func    c27a c285  "Func_c27a"   : UY  : UY 
+func    c27a c285  "FN615"   : UY  : UY 
 func    c286 c29d  "Func_c286"   : SW  : SW 
 func    c2b2 c2c5  "trans_shift_12"   : UY  : UY 
 func    c2da c309  "Func_c2da"   : UW  : UW 
@@ -1218,7 +1218,7 @@ func    c532 c54d  "trans_3rd_upshift_lock_ratio"   : UW  : UW
 func    c54e c569  "Func_c54e"   : UW  : UW 
 func    c56a c585  "trans_4th_upshift_lock_ratio"   : UW  : UW 
 func    c586 c59d  "FN624"   : UW  : UW 
-func    c59e c5b1  "Func_c59e"   : UW  : UW 
+func    c59e c5b1  "FN689L"   : UW  : UW 
 func    c5b2 c5b9  "trans_tv_pressure_21" : UY : UY
 func    c5ba c5cd  "trans_tv_pressure_12"   : UY  : UY 
 func    c5ce c5d5  "trans_tv_pressure_32" : UY : UY
@@ -1337,12 +1337,21 @@ word    cc50 cc51
 word    cc52 cc53
 byte    cc54 cc54
 byte    cc76 cc76
-word	cc94 cc95
-byte    cc9a cc9a
-word    cca8 cca9
-word    ccaa ccab
-word    ccac ccb5
-byte    ccb6 ccb9
+word    cc92 cc97
+byte    cc98 cc9a
+
+
+
+byte  cc9b cca9
+word    cca0 ccb9
+
+
+
+#word    cca6 cca7
+#word    cca8 cca9
+#word    ccaa ccab
+#word    ccac ccb5
+#byte    ccb6 ccb9
 
 func    cd22 cd35  "FN331A"   : UW  : UW 
 func    cd36 cd3d  "FN332"   : UY  : UY 
@@ -1356,7 +1365,7 @@ func    cde2 cded  "FN371"   : SY  : UY
 
 table   cdee ce5b  "FN1325L"	: O 10 UY
 func    ce5c ce8f  "FN348"   : SW  : UW 
-func    ce90 ce9b  "Func_ce90"   : SY  : UY 
+func    ce90 ce9b  "FN387"   : SY  : UY 
 #word    e002 e003
 #word    f07e f07f
 #word    f0a4 f0a5
@@ -1379,7 +1388,7 @@ sub  82148 "Reset_RAM_ptr"
 sub  82161 "Infinite_Loop_DEAD"
 sub  82164 "Set_TaskList"  
 sub  8226a "Sub_226a"  
-sub  822b2 "Sub_22b2"  
+sub  822b2 "BRAKE_INPUT"  
 sub  82358 "Clear_Cell"
 
 sub  82370 "I_External_Vector"  
@@ -1478,7 +1487,7 @@ sub  840db "Compute_INIT_TOT"
 sub  840f7 "Sub_40f7"  
 sub  8436c "ENGINE_SPEED_OVER_VEHICLE_SPEED_NOVS_&_BPCOR"  
 sub  843b2 "Sub_43b2"  
-sub  8443b "Sub_443b"  
+sub  8443b "INFERRED_BAROMETRIC_PRESSURE_STRATEGY"  
 sub  84533 "SPEED_DENSITY_AIR_MASS_CALCULATION"  
 sub  845a9 "Compute_AMPEM_AMPEMT"  
 sub  84623 "Subtract_EM"  
@@ -1523,7 +1532,7 @@ sub  851ce "EGO_Switch_Logic"
 sub  85369 "NEW_UPRATE_CALC"  
 sub  85402 "Sub_5402"  
 sub  8577b "Sub_577b"  
-sub  8578f "Sub_578f"  
+sub  8578f "FUEL_IDLE_MOD_COM3"  
 sub  85830 "FUEL_KAM_ADAPT_COM3"  
 sub  858d5 "Sub_58d5"  
 sub  858ec "Sub_58ec"  
@@ -1699,22 +1708,22 @@ sub  8882d   "Sub_882d"
 sub  888bf   "Sub_88bf"  
 sub  888de   "Sub_88de"  
 sub  8890c   "Sub_890c"  
-sub  88933 "E4OD_SYS_EQU_COM1"  
+sub  88933 "INTRN_E4OD_SYS_EQU_COM1"  
 sub  88b19   "Sub_8b19"  
 sub  88b2c   "Sub_8b2c"  
 sub  88b71 "E4OD_INPUT_PROCESSING_COM1"  
-sub  88cc9   "Sub_8cc9"  
-sub  88cd6   "Sub_8cd6"  
-sub  88d5f   "Sub_8d5f"  
+sub  88cc9   "FN161x(N,LOAD)"  
+sub  88cd6 "SC_DESRD_GR_DETR_COM1"  
+sub  88d5f "SC_GR_DS_AUTO_COM1"  
 sub  88eb5   "Sub_8eb5"  
 sub  88ee6   "Sub_8ee6"  
 sub  88efe   "Sub_8efe"  
 sub  88f28   "Sub_8f28"  
 sub  88f83   "Sub_8f83"  
 sub  88f94 "SC_CM_GR_DETR_COM1"  
-sub  8901f   "Sub_901f"  
-sub  8905e   "Sub_905e"  
-sub  89099   "Sub_9099"  
+sub  8901f "SC_CM_GR_MAN1_COM1"  
+sub  8905e "SC_CM_GR_MAN2_COM1"  
+sub  89099 "SC_CM_GR_AUTO_DWN_COM1"  
 sub  890aa   "Sub_90aa"  
 sub  8912a   "Sub_912a"  
 sub  891af   "Sub_91af"  
@@ -1731,7 +1740,7 @@ sub  89b10   "Sub_9b10"
 sub  89c21   "Sub_9c21"  
 sub  89c56   "Sub_9c56"  
 sub  89c85   "Sub_9c85"  
-sub  89cbe   "Sub_9cbe"  
+sub  89cbe   "CCC_FMEM_COM2"  
 sub  89cfb   "Sub_9cfb"  
 sub  89e95   "Sub_9e95"  
 sub  89e9e   "Sub_9e9e"  
@@ -1872,7 +1881,7 @@ sym 2f "B1_OneDigit_output?" : B 1
 sym 2f "B2_VIP_flags4" : B 2
 sym 2f "B3_VIP_flags4" : B 3
 sym 2f "B4_VRUN_ISCFLG_2f" : B 4
-sym 2f "Disable_isc" : B 5
+sym 2f "B5_DISABLE_ISC_2f" : B 5
 sym 2f "B6_VIP_flags4" : B 6
 sym 2f "B7_VIP_flags4" : B 7
 
@@ -2006,6 +2015,8 @@ sym 88 "TablePTR"
 sym 8a "RATCH"
 sym 8d "VSBAR"
 
+sym 8e "B4_A3C_8e" : B 4
+
 sym 90 "Flags_90"
 sym 90 "B3_V_FPMFLG_90" : B 3
 sym 90 "B4_BRAKE_INPUT_90" : B 4
@@ -2084,7 +2095,7 @@ sym a6 "B2_TFMFLG_a6" : B 2
 sym a6 "B3_MFMFLG_a6" : B 3
 sym a6 "B4_EFMFLG_a6" : B 4
 sym a6 "B5_CFMFLG_a6" : B 5
-sym a6 "B6__a6" : B 6
+sym a6 "B6_VSFMFLG_a6" : B 6
 sym a6 "B7_AFMFLG_a6" : B 7
 
 sym a7 "FMEM_FLAG2"
@@ -2129,15 +2140,18 @@ sym d1 "IDLTMR"
 sym d2 "NACTMR"
 sym d4 "ATMR1"
 
-sym d6 "ND_FLAG
+
 sym d6 "TP_AIR_OFF_F" : B 2
 sym d6 "FLG_NOT_ADP" : B 4
+sym d6 "B6_FLG_FMM_LK_d6" : B 6
+sym d6 "B7_FLG_FMM_CC_d6" : B 7
 
-
+sym d8 "GR_DS"
 sym d9 "GR_CM"
 sym db "PDL"
 
 sym de "B1_FLG_FRST_CM_de" : B 1
+sym de "B2_FLG_UNC_UNLK_de" : B 2
 
 sym e1 "CCD?"
 sym e1 "B2_CCD_HP" : B 2
@@ -2159,6 +2173,7 @@ sym 11e "NBAR"
 
 sym 122 "MAP_FREQ"
 sym 124 "MAP_WORD"
+sym 12e "AETP"
 sym 136 "PUTMR"
 sym 138 "Adptmr"
 
@@ -2203,6 +2218,7 @@ sym 192 "Ibeta1"
 sym 196 "A3CTMR"
 
 sym 19c "TBART"
+sym 1ba "EGO_CNT_IDLE"
 sym 1bc "TSSTIL_TMR"
 sym 1be "Miltmr"
 
@@ -2234,6 +2250,8 @@ sym 216 "MAPTMR"
 sym 217 "VACUUM"
 sym 21b "AEFUEL"
 sym 21f "NOVS"
+
+sym 220 "OLDTP"
 
 sym 222 "LSTROW"
 sym 224 "LSTCOL"
@@ -2290,16 +2308,22 @@ sym 2d2 "DTSIG"
 sym 2d6 "FN025_MAP_y"
 sym 2d8 "FN070L_N_x"
 sym 2da "FN039_N_x"
-
+sym 2dc "FN021_MAPOPE_y"
 sym 2e0 "A0COR"
 sym 2e2 "ACSTRT"
 sym 2e4 "MAPWBG"
 
+sym 2ec "FUEL_A"
+
 sym 2ee "DTPCYC"
 sym 2f0 "HFPCYC"
+sym 2f3 "VOLTMR"
 
+sym 30c "NEBART"
 sym 314 "TOT"
 sym 322 "SPD_RATIO"
+sym 32c "TPBART"
+sym 32e "TP_RATE"
 
 sym 330 "TQ_OFM"
 sym 33c "ARCHG"
@@ -2309,17 +2333,23 @@ sym 344 "Vsc_Raw"
 
 sym 346 "FN071_MAP_y"
 
+sym 348 "VSBART"
+
+sym 34a "BP_INTR"
 sym 34d "GR_CM_LST"
+sym 34e "GR_DS_LST
 sym 34f "GR_OLD"
+sym 350 "GR_DS_TV"
 
 sym 351 "TV_COUNTS"
 
-
+sym 357 "VSBART_RT"
 
 sym 35b "TV_PRES"
 sym 35e "TQ_NET"
 
 sym 362 "DNUN_TM"
+sym 368 "TM_SFT_CCO"
 
 #sym 386 "CTTMR"
 sym 386 "ATMR3"
@@ -2504,9 +2534,11 @@ sym b003 "bit7HSI_Line_Select" : B 7
 
 sym b008 "CHGRPM"
 
-sym b00c "ISCMOD_TPREL"
+sym b00c "?ISCMOD_TPREL?"
 sym b00e "ISCMOD_MAX"
 sym b010 "ISCMOD_MIN"
+sym b012 "KDNDT"
+
 # sym b016 "PSIBRM"
 sym b018 "ISCMOD_RPM"
 
@@ -2598,6 +2630,7 @@ sym b472 "MPGLSW"
 sym b47c "MPGDEC"
 
 sym b482 "MPG_CL_SW"
+sym b483 "EGO_IDLE"
 sym b484 "LAMMAX"
 sym b486 "LAMMIN"
 
@@ -2655,6 +2688,7 @@ sym b95f "CTBYSH"
 sym bab2 "TCBPA"
 sym bab4 "TCFBS"
 sym bab6 "TCMBAR"
+sym bab8 "TCAETP"
 sym bad4 "TCTPT"
 sym bad6 "TCTOT"
 sym bad8 "TCVBAT"
@@ -2698,6 +2732,9 @@ sym c0aa "trans_max_torque_limit1"
 sym c0ac "trans_max_torque_limit2"
 sym c0ae "trans_max_tq_hysterisis"
 
+sym c0bc "SRLK_FM"
+sym c0be "NELK_FM"
+
 sym c0c2 "trans_ratio_1"
 sym c0c4 "trans_ratio_2"
 sym c0c6 "trans_ratio_3"
@@ -2709,18 +2746,14 @@ sym c0e6 "trans_tv_engagement_moderate"
 
 sym c142 "SARCHG"
 
-#sym c147 "V_HICKOKTM"
-#sym c149 "V_LANSDTM"
-#sym c14f "VLORPM"
-
 sym c154 "trans_min_tv_pressure"
 
 sym c15a "VTABFL"
 sym c15b "VTCEGO"
 
-sym c162 "V_HICKOKTM"
-sym c164 "V_LANSDTM"
-
+sym c162 "TCNE"
+sym c164 "TCTPTE"
+sym c166 "TCVST"
 sym c16a "TCTTA"
 sym c16e "V_BOO_SPD"
 sym c16f "V_BOOSPD_TM"
@@ -2737,6 +2770,9 @@ sym c18c "NS34S"
 
 sym c1af "?VECT3_wrong?"
 
+sym c1ce "VS_NEU"
+sym c1cf "GR_NEU"
+sym c1d0 "GRMSFT"
 sym c1d1 "SW_MSF"
 
 sym c1d6 "RTNVMN"
@@ -2826,6 +2862,10 @@ sym cc76 "VMPMAX"
 sym cc94 "VDLY2"
 sym cc95 "VIPTM2"
 sym cc96 "VATMR2"
+
+sym cca8 "V_ISCMOD_MAX"
+sym ccaa "V_ISCMOD_MIN"
+sym ccac "V_KDNDT"
 
 # ----- END of disassembly run -----
 
