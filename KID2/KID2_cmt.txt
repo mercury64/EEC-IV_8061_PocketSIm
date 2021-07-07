@@ -1035,6 +1035,14 @@
 9cd4 # (FMEM lock-up activated this power-up)
 
 9ceb # (Engine Speed above failure  mode minimum)
+9e9e # (Shift desired this pass)
+9ea4 # (Downshift)  
+9eaa # (Shift commanded this pass)
+9eb1 # (Upshift) 
+
+9fb6 # (enable high speed unlock check)
+9fbc # (upshift commanded on an unlocked converter)
+
 a492 # (run OR underspeed)  
 
 a777 # IOTimer delta time since last mSec

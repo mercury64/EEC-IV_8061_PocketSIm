@@ -1201,8 +1201,8 @@ func    c362 c375  "trans_shift_34"   : UY  : UY
 func    c38a c39d  "trans_shift_21"   : UY  : UY 
 func    c3b2 c3c5  "trans_shift_32"   : UY  : UY 
 func    c3da c3ed  "trans_shift_43"   : UY  : UY 
-func    c3ee c401  "Func_c3ee"   : UW  : UW 
-func    c402 c41d  "Func_c402"   : UW  : UW 
+func    c3ee c401  "FN689D"   : UW  : UW 
+func    c402 c41d  "FN689U"   : UW  : UW 
 func    c41e c431  "trans_converter_lock_2nd"   : UY  : UY
 func    c432 c445  "trans_converter_lock_3rd"   : UY  : UY 
 func    c446 c44d  "trans_converter_lock_4th"   : UY  : UY 
@@ -1211,12 +1211,12 @@ Func 	c47e c491  "trans_converter_unlock_2nd"  : UY  : UY
 func    c492 c4a5  "trans_converter_unlock_3rd"  : UY  : UY
 func    c4a6 c4ad  "trans_converter_unlock_4th"   : UY  : UY 
 func    c4ae c4c1  "Func_c4ae"   : UY  : UY 
-func    c4de c4f9  "Func_c4de"   : UW  : UW 
-func    c4fa c515  "trans_2nd_upshift_lock_ratio"   : UW  : UW 
-func    c516 c531  "Func_c516"   : UW  : UW 
-func    c532 c54d  "trans_3rd_upshift_lock_ratio"   : UW  : UW 
-func    c54e c569  "Func_c54e"   : UW  : UW 
-func    c56a c585  "trans_4th_upshift_lock_ratio"   : UW  : UW 
+func    c4de c4f9  "FN2ULK"   : UW  : UW 
+func    c4fa c515  "FN2LK"   : UW  : UW 
+func    c516 c531  "FN3ULK"   : UW  : UW 
+func    c532 c54d  "FN3LK"   : UW  : UW 
+func    c54e c569  "FN4ULK"   : UW  : UW 
+func    c56a c585  "FN4LK"   : UW  : UW 
 func    c586 c59d  "FN624"   : UW  : UW 
 func    c59e c5b1  "FN689L"   : UW  : UW 
 func    c5b2 c5b9  "trans_tv_pressure_21" : UY : UY
@@ -1715,6 +1715,7 @@ sub  88b71 "E4OD_INPUT_PROCESSING_COM1"
 sub  88cc9   "FN161x(N,LOAD)"  
 sub  88cd6 "SC_DESRD_GR_DETR_COM1"  
 sub  88d5f "SC_GR_DS_AUTO_COM1"  
+sub  8e6a  "VEHICLE_SPEED_SENSOR_FAILURE_SHIFT_LOGIC"
 sub  88eb5   "Sub_8eb5"  
 sub  88ee6   "Sub_8ee6"  
 sub  88efe   "Sub_8efe"  
@@ -1743,12 +1744,12 @@ sub  89c85   "Sub_9c85"
 sub  89cbe   "CCC_FMEM_COM2"  
 sub  89cfb   "Sub_9cfb"  
 sub  89e95   "Sub_9e95"  
-sub  89e9e   "Sub_9e9e"  
-sub  89ece   "Sub_9ece"  
-sub  89ed9   "Sub_9ed9"  
-sub  89f04   "Sub_9f04"  
-sub  89fc3   "Sub_9fc3"  
-sub  89ff1   "Sub_9ff1"  
+sub  89e9e   "CCC_SHFT_UNLCK_COM1"  
+sub  89ece   "CCC_INI_DWN_COM1"  
+sub  89ed9   "CCC_DWN_CNVR_CLCH_COM1"  
+sub  89f04   "CCC_INI_UP_COM1"  
+sub  89fc3   "Calc_SR_PP_LIM"  
+sub  89ff1   "CCC_UP_CNVR_CLCH_COM2"  
 sub  8a097   "Sub_a097"  
 sub  8a163   "Sub_a163"  
 sub  8a206   "Sub_a206"  
@@ -1906,6 +1907,7 @@ sym 3e "Lseconds" : B 7
 sym 44 "B0_FLG_DASMNQ_44" : B 0
 sym 44 "B1_FN311_Q_44" : B 1
 sym 44 "V_SPDTOZ_FLG" : B 4
+sym 44 "B7_FLG_TIP_RATE_44" : B 7
 
 sym 45 "Flags_2B"
 sym 45 "Rvip_cyl_quit" : B 0
@@ -1977,6 +1979,7 @@ sym 50 "B5_Ctflg" : B 5
 sym 50 "B6_Tipflg" : B 6
 sym 50 "B7_Tblsflg" : B 7
 
+sym 51 "B1_FLG_UN_UPSFT_51" : B 1
 sym 51 "B2_SIGPIP_51" : B 2
 
 sym 52 "Flags_52"
@@ -2148,11 +2151,17 @@ sym d6 "B7_FLG_FMM_CC_d6" : B 7
 
 sym d8 "GR_DS"
 sym d9 "GR_CM"
+sym da "GEAR_CUR"
 sym db "PDL"
+
+sym dd "FLG_dd"
+sym dd "B2_FLG_HS_UNLK_dd" : B 2
+sym dd "B6_FLG_UP_UNLK_dd" : B 6
 
 sym de "B1_FLG_FRST_CM_de" : B 1
 sym de "B2_FLG_UNC_UNLK_de" : B 2
 
+sym df "B6_FLG_PWR_df" : B 6
 sym e1 "CCD?"
 sym e1 "B2_CCD_HP" : B 2
 
@@ -2319,9 +2328,16 @@ sym 2ee "DTPCYC"
 sym 2f0 "HFPCYC"
 sym 2f3 "VOLTMR"
 
+sym 308 "RT_ULK_PWR"
+sym 30a "RT_LK_PWR"
 sym 30c "NEBART"
+sym 30e "NOBART"
 sym 314 "TOT"
+sym 31c "RT_GR_CUR"
+sym 31e "RT_GR_OLD"
 sym 322 "SPD_RATIO"
+sym 326 "SPD_RT_STRT"
+sym 328 "SR_PP_LIM"
 sym 32c "TPBART"
 sym 32e "TP_RATE"
 
@@ -2336,6 +2352,7 @@ sym 346 "FN071_MAP_y"
 sym 348 "VSBART"
 
 sym 34a "BP_INTR"
+sym 34c "GEAR_OLD"
 sym 34d "GR_CM_LST"
 sym 34e "GR_DS_LST
 sym 34f "GR_OLD"
@@ -2779,6 +2796,8 @@ sym c1d6 "RTNVMN"
 sym c1d8 "RTNVMX"
 
 sym c1db "VMPMAX"
+
+sym c202 "UP_TIP_RATE"
 
 sym cb60 "FKMKAY"
 sym cb6e "FRCTAE"
