@@ -1,10 +1,10 @@
 <roms>
-   <rom base="SD4xx">
+   <rom>
       <romid>
 	<xmlid>SD48x</xmlid>
 	<internalidaddress>10</internalidaddress>
 	<internalidstring>k-M-j-j-p</internalidstring>
-        <filesize>57kb</filesize>
+        <filesize>56kb</filesize>
 
 	<year>1994</year>
 	<market>Canada</market>
@@ -14,76 +14,72 @@
 	<transmission>E40D</transmission>
 
       </romid>
+      <table name="FN070_rpm" storageaddress="0x92fe" />
+      <table name="FN070_column" storageaddress="0x9300" />
+      <table name="FN070L" storageaddress="0x92fe" />
+      <table name="FN021" storageaddress="0x928e" />
+      <table type="2D" name="FN070_rpm" userlevel="4" category="Functions" storagetype="uint16" endian="little" sizex="2" sizey="7">
+          <scaling  expression="x" to_byte="x" format="#" />
+               <description>""</description>
+               <table type="Static X Axis" name="Condition" units="" sizex="2">
+                   
+                           <data>RPM</data>
+                           <data>Column</data>
+                        </table>
+               <table type="FN070_column" name="Condition" units="" sizey="7">
+                   
+                        </table>
+            </table>
+      <table type="3D" name="FN070L" userlevel="4" category="Functions" storagetype="uint16" endian="little" sizex="2" sizey="7">
+          <scaling  expression="x" to_byte="x" format="#" />
+               <description>""</description>
+               <table type="Static X Axis" name="Condition" units="" sizex="2">
+                   <scaling  expression="x" to_byte="x" format="#" />
+                           <data>RPM</data>
+                           <data>Column</data>
+                        </table>
+               <table type="Static Y Axis" name="Condition" units="" sizey="7">
+                   <scaling  expression="x" to_byte="x" format="#" />
+                           <data>on</data>
+                           <data>off</data>
+                        </table>
+            </table>
+      <table type="3D" name="FN021" userlevel="4" category="Functions" storagetype="uint16" endian="little" sizex="2" sizey="7">
+               <description>""</description>
+               <scaling  expression="x" to_byte="x" format="#" />
+               <table type="Static X Axis" name="Condition" units="" sizex="2">
+                   <scaling  expression="x" to_byte="x" format="#" />
+                           <data>MAPOPE</data>
+                           <data>Column</data>
+                        </table>
+               <table type="Static Y Axis" name="Condition" units="" sizey="7">
+                   <scaling  expression="x" to_byte="x" format="#" />
+                           <data>on</data>
+                           <data>off</data>
+                        </table>
+            </table>
+
+
+        
     
-    <parameter name="SARCHG" category="Manifold Pressure Sensor" address="a142">
-        <description>Scalar Air Charge</description>
-        </parameter>
-        
-	<scaling name="TargetBoostCompensation(%)" units="Target Boost Compensation (%)" toexpr="(x*.78125)-100" frexpr="(x+100)/.78125" format="%.1f" min="-100.0" max="100.0" inc=".4" storagetype="uint8" endian="big" />
-    <scaling name="C" units="C" toexpr="(x*.00244140625)-40" frexpr="(x+40)/.00244140625" format="%.1f" min="-20.0" max="120.0" inc="1" storagetype="uint16" endian="big" />
-    <scaling name="RPM" units="RPM" toexpr="x*.1953125" frexpr="x/.1953125" format="%.0f" min="0" max="8000" inc="50" storagetype="uint16" endian="big" />
-  
-        
-        <table type="3D">
-         <scaling units="PSI" />
-         <table type="X Axis" />
-         <table type="Y Axis" />
-      </table>
-   <table name="Boost Limit (CEL)" storageaddress="0x9BFD" />
-      <table type="2D" name="Boost Limit (CEL)" category="Boost Control - Limits" storagetype="uint16" endian="big" sizey="6" userlevel="1" >
-   <scaling units="bar absolute" expression="x*.001333224" to_byte="x/.001333224" format="0.000" fineincrement=".01" coarseincrement=".1" />
-   <table type="Static Y Axis" name="Atmospheric Pressure (bar)" sizey="6" storageaddress="9c7a">
-    <data>.587</data>
-    <data>.672</data>
-    <data>.757</data>
-    <data>.843</data>
-    <data>.928</data>
-    <data>1.013</data>
-   </table>
-   <description>A check engine light will be triggered when actual boost continuously exceeds the corresponding threshold in this table for a period of time as determined by the 'Boost Limit CEL Delay' table.</description>
-  </table>
-
-    <table name="FN211" storageaddress="9c7a" size="7"/>
- 
-    <table type="2D" name="FN211" category="Manifold Pressure Sensor" storagetype="float" endian="little" sizey="2" userlevel="4">
-      <scaling units="psi absolute" expression="x/1024" to_byte="x*1024" format="0.000" />
-      <table type="Static Y Axis" name="MPS Voltage to Manifold Absolute Pressure" sizey="2">
-        <data>Offset (psia)</data>
-        <data>Multiplier (psia/v)</data>
-      </table>
-      <description>This is the scaling for the manifold pressure sensor. The multiplier is applied to manifold pressure sensor voltage and the offset is added to the result to determine manifold absolute pressure.</description>
+    <table type="3D" name="FN1320" category="Tables" endian="little" storagetype="uint8" sizex="10" sizey="10" userlevel="1">
+        <scaling expression="x/1" to_byte="x*1" format="#"/>
+     <table type="X Axis" name="Normalized FN070(RPM)" storagetype="uint16" endian="little" >
+         <scaling   expression="x/4" to_byte="x*4" format="#"/>
+         </table>
+     <table type="Y Axis" name="Normalized FN021(MAPOPE)" storagetype="uint16" endian="little">
+         <scaling  expression="x/256" to_byte="x*256" format="#"/>
+         </table>
+     <description>FN1320(NORM_N070,NORM_MAPOPE21) = TABLVF is a 10 x 10 table of volumetric efficiency   multipliers  for  air  mass  as  a  function  of  NORM_N070, normalized engine speed, and NORM_MAPOPE21, normalized MAPOPE.</description>
     </table>
-
-  
-  
-      <table name="CL to OL Transition with Delay Throttle Hysteresis" storageaddress="0xa184" />
-  <table name="CL to OL Transition with Delay (Base Pulse Width)" storageaddress="0xaDD4">
-   <table type="Y Axis" storageaddress="0xaD94" />
-  </table>
-      <table type="2D" name="CL to OL Transition with Delay Throttle Hysteresis" category="Fueling - CL/OL Transition" storagetype="float" endian="little" sizey="1" userlevel="2">
-   <scaling units="Throttle Plate Opening Angle (%)" expression="x/.84" to_byte="x*.84" format="0.0" fineincrement=".3" coarseincrement="1" />
-   <table type="Static Y Axis" name="OL to CL Transition" sizey="1">
-    <data>Hysteresis Below 'CL to OL Transition with Delay Throttle' Map Value</data>
-   </table>
-   <description>When throttle position is equal to or less than this hysteresis subtracted from the 'CL to OL Transition with Delay Throttle' map value, the potential transition from open loop to closed loop begins (dependent on the primary open loop fuel map value and 'CL to OL Transition with Delay Load' threshold).</description>
-  </table>
+    
+    <table name="FN1320" storageaddress="0x99a1">
+        <table type="X Axis" storageaddress="0x92fe" />
+        <table type="Y Axis" storageaddress="0x928e" />
+    </table>
     
 
    </rom>
-  <rom>
-    <romid>
-      <xmlid>SD4xx</xmlid>
-      <market>USDM</market>
-      <make>Ford</make>
-      <model>EEC-IV</model>
-      <submodel>V8</submodel>
-      <transmission>MT/AT</transmission>
-      <filesize>256kb</filesize>
-      <memmodel>SH7055</memmodel>
-      <flashmethod>QuarterHorse</flashmethod>
-    </romid>
-  
 
-  </rom>
 
 </roms>

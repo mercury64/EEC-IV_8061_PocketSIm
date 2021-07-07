@@ -969,6 +969,8 @@
 8959 # FILTERED THROTTLE POSITION FOR TRANSMISSION USE
 8963 # TPBART = UROLAV(TP,TCTPTE)
 
+
+
 896e # THROTTLE POSITION RATE
 8974 # TP - TBART
 8978 # TP_RATE = TP - TPBART (TP_RATE is clipped to +/- 512 counts)
@@ -1005,6 +1007,15 @@
 8c9e # [- FN619(N_BYTE)]
 8cb1 # TQ_NET * FN617(SPD_RATIO)
 8cc4 # (clip TQ_NET to ZERO minimum)
+
+8d66 # (Start fresh every time)
+
+8d6c # (VS sensor OK)
+8d73 # (stable VS values)    
+
+8eab # (Do not allow an upshift
+8ead #  if a previous shift is
+8eb1 #  still in progress)
 
 8f98 # (new desired gear)  
 8fa2 # (time to delay downshift to unlock converter)
@@ -1256,6 +1267,8 @@ bbd2 \n# PEXH  results in a smaller MAPOPE and PE which in turn results in leane
 bbd2 \n# loop fuel values and under prediction of actual EM at altitude.
 
 bbd3 # EGR Exhaust BP Correction
+
+
 beaa # Used as an adder to calculate MAPOPE based on calculated airmass
 
 

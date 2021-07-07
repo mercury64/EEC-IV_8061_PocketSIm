@@ -1715,6 +1715,7 @@ sub  88b71 "E4OD_INPUT_PROCESSING_COM1"
 sub  88cc9   "FN161x(N,LOAD)"  
 sub  88cd6 "SC_DESRD_GR_DETR_COM1"  
 sub  88d5f "SC_GR_DS_AUTO_COM1"  
+sub  8d77  "VEHICLE_SPEED_SENSOR_OK_SHIFT_LOGIC"
 sub  8e6a  "VEHICLE_SPEED_SENSOR_FAILURE_SHIFT_LOGIC"
 sub  88eb5   "Sub_8eb5"  
 sub  88ee6   "Sub_8ee6"  
@@ -2161,7 +2162,10 @@ sym dd "B6_FLG_UP_UNLK_dd" : B 6
 sym de "B1_FLG_FRST_CM_de" : B 1
 sym de "B2_FLG_UNC_UNLK_de" : B 2
 
+sym df "B3_FLG_UP_NE_df" : B 3
 sym df "B6_FLG_PWR_df" : B 6
+sym df "B7_FLG_SFT_IN_df" : B 7
+
 sym e1 "CCD?"
 sym e1 "B2_CCD_HP" : B 2
 
@@ -2277,6 +2281,7 @@ sym 232 "EGOSSS"
 sym 239 "Pip_counter"
 sym 23a "ATMR1_LST"
 
+sym 23b "VSCTR"
 sym 23c "TSLIDM"
 
 sym 240 "HSOQ"   # HSO queue entries 
