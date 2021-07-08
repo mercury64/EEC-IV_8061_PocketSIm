@@ -9,6 +9,7 @@ rbase e2 c1be 8938 8b18
 rbase e2 c1be 8f94 901e
 rbase e2 c1be 8d5f 8eb4
 rbase e2 cc59 7cb8 7ceb
+rbase e2 c1be 9308 93b1
 
 rbase e4 180
 rbase e6 280
@@ -1105,7 +1106,9 @@ byte    c17e c17e
 byte    c17f c17f
 byte    c180 c180
 byte    c183 c183
-word    c184 c197
+word    c184 c18d
+byte    c18e c195
+word    c196 c197
 word    c198 c199
 word    c19a c19b
 byte    c19c c19c
@@ -1720,16 +1723,18 @@ sub  8e6a  "VEHICLE_SPEED_SENSOR_FAILURE_SHIFT_LOGIC"
 sub  88eb5   "Sub_8eb5"  
 sub  88ee6   "Sub_8ee6"  
 sub  88efe   "Sub_8efe"  
-sub  88f28   "Sub_8f28"  
-sub  88f83   "Sub_8f83"  
+sub  88f28   "Delay_Shift_Logic"  
+sub  88f83   "MANUAL_DOWNSHIFT_DETERMINATION"  
 sub  88f94 "SC_CM_GR_DETR_COM1"  
 sub  8901f "SC_CM_GR_MAN1_COM1"  
 sub  8905e "SC_CM_GR_MAN2_COM1"  
 sub  89099 "SC_CM_GR_AUTO_DWN_COM1"  
 sub  890aa   "Sub_90aa"  
 sub  8912a   "Sub_912a"  
-sub  891af   "Sub_91af"  
-sub  89308   "Sub_9308"  
+sub  891af   "SC_VALID_COM1"  
+sub  9231 "SHIFT_VERIFICATION_LOGIC_(Part_1)"
+sub  9278 "SHIFT_VERIFICATION_LOGIC_(Part_2)"
+sub  89308   "CCC_CST_CLTCH_CTL_COM1"  
 sub  893b2   "Sub_93b2"  
 sub  896e1   "Sub_96e1"  
 sub  896e5   "Sub_96e5"  
@@ -1950,6 +1955,11 @@ sym 48 "Egoste1" : B 7
 
 sym 49 "DWLELD" : B 3
 
+sym 4a "B7_FLG_DEL_MDN_4a" : B7
+
+sym 4b "B4_SFT_ERROR_4b" : B4
+sym 4b "B7_SFT_FM_FLG_4b" : B7
+
 sym 4c "B3_Immediate" : B 3
 sym 4c "B4_No_service" : B 4
 sym 4c "B5_Late_output" : B 5
@@ -2065,6 +2075,10 @@ sym a1 "Flags_a1"
 
 sym a2 "B2_FLG_FRST_DS_a2" : B 2
 sym a2 "B3_FLG_LK_CM_a2" : B 3
+sym a2 "B4_FLG_TIP_OUT_a2" : B 4
+sym a2 "B5_FLG_CS_FRST_a2" : B 5
+sym a2 "B6_FLG_CS_ENG_a2" : B 6
+sym a2 "B7_FLG_CS_CM_a2" : B 7
 
 sym a3 "Flags_a3"
 sym a3 "B0_V_MODE_SETUP_a3" : B 0
@@ -2156,17 +2170,22 @@ sym da "GEAR_CUR"
 sym db "PDL"
 
 sym dd "FLG_dd"
+sym dd "B0_FLG_SFT_UNLK_dd" : B 0
 sym dd "B2_FLG_HS_UNLK_dd" : B 2
+sym dd "B3_FLG_HS_LK_dd" : B 3
 sym dd "B6_FLG_UP_UNLK_dd" : B 6
 
 sym de "B1_FLG_FRST_CM_de" : B 1
 sym de "B2_FLG_UNC_UNLK_de" : B 2
 
 sym df "B3_FLG_UP_NE_df" : B 3
+sym df "B5_FLG_SF_AUTO_df" : B 5
 sym df "B6_FLG_PWR_df" : B 6
 sym df "B7_FLG_SFT_IN_df" : B 7
 
 sym e1 "CCD?"
+sym e1 "B0_FLG_SFT_VAL_e1" : B0
+sym e1 "B1_CCV_STRT_SFT_e1" : B1
 sym e1 "B2_CCD_HP" : B 2
 
 sym 104 "EGRBAR"
@@ -2338,6 +2357,8 @@ sym 30a "RT_LK_PWR"
 sym 30c "NEBART"
 sym 30e "NOBART"
 sym 314 "TOT"
+sym 316 "TPV_STRT_SFT"
+sym 318 "NEV_STRT_SFT"
 sym 31c "RT_GR_CUR"
 sym 31e "RT_GR_OLD"
 sym 322 "SPD_RATIO"
@@ -2364,14 +2385,20 @@ sym 34f "GR_OLD"
 sym 350 "GR_DS_TV"
 
 sym 351 "TV_COUNTS"
+sym 353 "VSV_STRT_SFT"
 
 sym 357 "VSBART_RT"
-
+sym 359 "PDL_LST"
 sym 35b "TV_PRES"
 sym 35e "TQ_NET"
 
 sym 362 "DNUN_TM"
 sym 368 "TM_SFT_CCO"
+
+sym 36e "TM_DEL_SFT"
+
+sym 37a "TM_CS_DLY"
+sym 37b "TM_CS_ENG"
 
 #sym 386 "CTTMR"
 sym 386 "ATMR3"
@@ -2412,7 +2439,11 @@ sym 3f0 "SPOUT_LOW_DELTA"
 sym 3fa "LAMWIN"
 sym 3fc "UPRATE"
 sym 3fd "PTPAMP"
+
 sym 413 "C41FIL_TroubleCode"
+sym 41d "C617FIL"
+sym 41e "C618FIL"
+sym 41f "C619FIL"
 
 sym 428 "V_BOOSPD_TMR"
 sym 42a "EGOCNT"
@@ -2516,7 +2547,15 @@ sym 714 "ISCKAM5"
 
 sym 718 "KAMQB"
 
-#sym 73c "ISCKAMn"
+sym 71c "CXXX_KAM_BIT"
+sym 71c "B5_C617_KAM_BIT_71c" : B5
+sym 71c "B6_C618_KAM_BIT_71c" : B6
+sym 71c "B7_C619_KAM_BIT_71c" : B7
+
+
+sym 73c "C617CNT"
+sym 73d "C618CNT"
+sym 73e "C619CNT"
 
 sym 747 "KWUCTR"
 sym 748 "KAMQC"
@@ -2789,6 +2828,15 @@ sym c188 "NE23S"
 sym c18a "NS34A"
 sym c18c "NS34S"
 
+sym c191 "TMCSE2"
+sym c192 "TMCSE3"
+
+sym c196 "S_VAL_NESUB"
+sym c198 "S_VAL_TPADD"
+sym c19a "S_VAL_TPSUB"
+sym c19c "S_VAL_VSADD"
+sym c19d "S_VAL_VSSUB"
+
 
 sym c1af "?VECT3_wrong?"
 
@@ -2805,6 +2853,7 @@ sym c1db "VMPMAX"
 sym c202 "UP_TIP_RATE"
 
 sym cb60 "FKMKAY"
+sym cb62 "SFT_FM_LVL"
 sym cb6e "FRCTAE"
 
 sym cb67 "MAP_CYCLE"

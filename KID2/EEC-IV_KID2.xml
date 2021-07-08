@@ -14,21 +14,14 @@
 	<transmission>E40D</transmission>
 
       </romid>
-      <table name="FN070_rpm" storageaddress="0x92fe" />
-      <table name="FN070_column" storageaddress="0x9300" />
-      <table name="FN070L" storageaddress="0x92fe" />
-      <table name="FN021" storageaddress="0x928e" />
-      <table type="2D" name="FN070_rpm" userlevel="4" category="Functions" storagetype="uint16" endian="little" sizex="2" sizey="7">
-          <scaling  expression="x" to_byte="x" format="#" />
+
+      <table type="2D" name="FN070_rpm" userlevel="4" category="Functions" storagetype="uint16" endian="little" sizex="1" sizey="12">
+          <scaling  expression="x/4" to_byte="x*4" format="#" />
                <description>""</description>
-               <table type="Static X Axis" name="Condition" units="" sizex="2">
-                   
-                           <data>RPM</data>
-                           <data>Column</data>
-                        </table>
-               <table type="FN070_column" name="Condition" units="" sizey="7">
-                   
-                        </table>
+               <table type="X Axis" name="RPM" storagetype="uint16"  endian="little">
+ 					<scaling expression="x" to_byte="x" format="#"/>
+               </table>
+
             </table>
       <table type="3D" name="FN070L" userlevel="4" category="Functions" storagetype="uint16" endian="little" sizex="2" sizey="7">
           <scaling  expression="x" to_byte="x" format="#" />
@@ -44,18 +37,16 @@
                            <data>off</data>
                         </table>
             </table>
-      <table type="3D" name="FN021" userlevel="4" category="Functions" storagetype="uint16" endian="little" sizex="2" sizey="7">
+      <table type="3D" name="FN021" userlevel="4" category="Functions" storagetype="uint16" endian="little" sizex="2" sizey="12">
                <description>""</description>
                <scaling  expression="x" to_byte="x" format="#" />
-               <table type="Static X Axis" name="Condition" units="" sizex="2">
+               <table type="Static X Axis" name="Table (x,y)"  sizex="2">
                    <scaling  expression="x" to_byte="x" format="#" />
                            <data>MAPOPE</data>
                            <data>Column</data>
                         </table>
-               <table type="Static Y Axis" name="Condition" units="" sizey="7">
+               <table type="Y Axis" name="FN021" storagetype="uint16" sizey="12">
                    <scaling  expression="x" to_byte="x" format="#" />
-                           <data>on</data>
-                           <data>off</data>
                         </table>
             </table>
 
@@ -77,6 +68,18 @@
         <table type="X Axis" storageaddress="0x92fe" />
         <table type="Y Axis" storageaddress="0x928e" />
     </table>
+    
+      <table name="FN070_rpm" storageaddress="0x92fe">
+        <table type="X Axis" storageaddress="0x92fe" />
+       </table>
+       
+       
+      <table name="FN070_column" storageaddress="0x9300" />
+      <table name="FN070L" storageaddress="0x92fe" />
+      <table name="FN021" storageaddress="0x928e">
+        <table type="Y Axis" storageaddress="0x928e" />
+      </table>
+        
     
 
    </rom>

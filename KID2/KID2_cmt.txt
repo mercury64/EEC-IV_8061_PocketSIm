@@ -1007,7 +1007,7 @@
 8c9e # [- FN619(N_BYTE)]
 8cb1 # TQ_NET * FN617(SPD_RATIO)
 8cc4 # (clip TQ_NET to ZERO minimum)
-
+8d04 # Do "GR_DS, PRNDL = 3 OR 4" Logic
 8d66 # (Start fresh every time)
 
 8d6c # (VS sensor OK)
@@ -1016,6 +1016,9 @@
 8eab # (Do not allow an upshift
 8ead #  if a previous shift is
 8eb1 #  still in progress)
+
+8f2f # (desired gear has changed)
+8f8b # (driver did manual 4-3)
 
 8f98 # (new desired gear)  
 8fa2 # (time to delay downshift to unlock converter)
@@ -1037,6 +1040,68 @@
 900e # GR_OLD = GR_CM_LST (Update old gear)
 9065 # (current gear is first)  
 90a6 # (command downshift)
+
+91af # (new commanded gear this pass)
+91c2 # (automatic shift) 
+91c9 # (upshift)
+920e # (record CC state at start of shift)
+9214 # (record TP at start of shift)
+9218 # (record filtered engine
+921c #  speed at start of shift)
+9220 # (record filtered vehicle
+9224 #  speed at start of shift)
+9228 # (shift may be checked for validity)
+922b # (shift complete, may be verified)
+922e # (shift can be verified)
+9231 # (reset valid shift flag)
+
+9244 # (unsteady conditions)
+9246 # (steady vehicle speed)  
+9251 # (unsteady conditions)
+9253 # (steady vehicle speed)  
+9262 # (unsteady conditions)
+9264 # (steady TP)
+926e # (unsteady conditions)
+
+9276 #  EXIT "SHIFT VALIDATION" MODULE
+
+92d9 # (1-2 shift error detected)
+92ea # (2-3 shift error detected) 
+92f7 # (3-4 shift error detected) 
+
+9308 \n# TM_CS_DLY TIMER CONTROL
+930b # (shift commanded) 
+931d # TM_CS_DLY = TMCSOD
+931d \w# (delay coast clutch engagement
+931d \w# in third gear to prevent two
+931d \w# elements being on at once)
+
+9321 \n# TM_CS_ENG TIMER CONTROL
+9324 # (PRNDL = 3)
+9326 # (coast clutch commanded on)
+9329 # (1st pass thru)
+
+9330 # (coast clutch will be engaged when timer expires)
+9334 # (set first pass flag)
+9347 # (4-2 or 4-1)
+9349 # (first pass thru)
+9350 # coast clutch will be engaged when timer expires)
+9354 # (set first pass flag)
+
+9357 \n# COAST CLUTCH OUTPUT CONTROL
+935d # (verifing a 3-4 upshift, de-energize Coast clutch)
+
+937a # GR_CM <> 4
+937c # (energize coast clutch output)
+
+9381 # (de-energize coast clutch output. 
+9381 \w# Coast clutch is off hydraulically
+9381 \w# in 4th. Coast clutch is on       
+9381 \w# hydraulically when PDL = 2 or 1) 
+
+938f # (coast clutch is hydraulically off)
+939a # (timer expired)
+93a2 # (power on)
 
 9cbe # (Failure Mode Lock Requested)  
 9cc1 # (Unconditional Unlock Requested)
