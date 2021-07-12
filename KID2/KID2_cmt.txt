@@ -341,14 +341,52 @@
 3dd9 # TCxxxx
 3de0 # EGRBAR = UROLAV(EVP,TCEGR)
 
-3df8 # (sensor OK)
+3e09 # (sensor OK)
+3e16 # ACT = FN703(IACT)
 
+3e18 # (start up Open Loop)
+
+3e1e # (sensor bad, use ECT if OK)
+3e25 # ACT = FN703(IECT)
+3e27 # ACT = ACTFMM
+
+3e2a # Do not update ACT
+3e2a \n\n# STRATEGY MODULE: INPUT_ECT_COM2
+
+3e48 #  (sensor bad, start rolling average at ACT)
+
+3e4d # (crank mode)
+3e50 # ECT = ROLAV(ACT),TCECT)
+3e53 # (sensor bad, infer ECT from ACT)
+3e55 # (every background loop)
+3e5e # (clip at 255 as a max)
+
+3e60 \n\n# Perform ECT RAMP LOGIC
+3e6b # (ECT is already ECTFMM)
+3e6d # - 2 deg. F
+
+3e77 # ECT = ECT +/- 2 deg. F (ramp up/down to ECTFMM)
+
+3e8a \n\n# STRATEGY MODULE: INPUT_TOT_COM1
+3e98 # (sensor OK, start rolling average at actual value)
+3e9e # TOT
+3ea2 # FN703D(ITOT)
+3ea9 # ROLAV(FN703D(ITOT),TCTOT)
+3eac # (sensor OK)
+3eae # (sensor bad, use ECT)
+
+
+3ec2 # PUTMR > TKYON2
+3ecb # ECTCNT < 8
 3ecf # ECTCNT = ECTCNT + 1
 3ede # ACSTRT + ACT/8
 
+3f44 \n\n# STRATEGY MODULE: INPUT_TP_COM3 
+3f5e # (TP sensor within acceptable range)
 3f77 # RATCH + FN090(MAP)
 3f7f # TP = RATCH (TP sensor out of limits)
 
+3f88 # TP_REL = TP - RATCH
 3f89 \n# CHANGE OF THROTTLE POSITION FILTER (TPDLBR)
 3f89 \n# 
 3f89 \n# TPDLBR is a time dependent rolling average filter of the change (or delta) in
@@ -383,7 +421,19 @@
 
 40b8 # Calculates (engine coolant temperature)
 40db # Calculates  (transmission oil temperature)
+
+40f7 # (MAP sensor failure)
+40fd # 29.875
+4101 # (crank mode and SCAP sensor have failed)
+4122 # (throttle position sensor okay)
+
+421a # (engine is stopped)
+
+
 4243 # 2 = Low Data Rate Distributorless dual plug (LDR_DIS)
+4257 \n\w# (new PIP information is available for calculation of rpm)
+
+435d # EXIT RPM LOGIC
 
 4373 # BPCOR = BP corrected = FN004(BP).
 
@@ -1042,8 +1092,12 @@
 90a6 # (command downshift)
 
 91af # (new commanded gear this pass)
+91b2 # (shift may be checked for validity)
+
 91c2 # (automatic shift) 
 91c9 # (upshift)
+91d0 # (off idle) 
+
 920e # (record CC state at start of shift)
 9214 # (record TP at start of shift)
 9218 # (record filtered engine

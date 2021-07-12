@@ -1465,7 +1465,7 @@
 2df3: c7,01,60,02,6e      stb   R6e,[R0+260]     [260] = Event_timeH;
 2df8: 11,5a               clrb  R5a              R5a = 0;
 2dfa: c7,e4,fc,5a         stb   R5a,[Re4+fc]     PPCTR = R5a; }
-2dfe: 91,08,4e            orb   R4e,8            B3_R4e = 1;
+2dfe: 91,08,4e            orb   R4e,8            B3_NEW_RPM_4e = 1;
 2e01: 3f,27,0a            jb    B7,R27,2e0e      if (B7_SYNFLG = 0)  {
 2e04: a3,f6,0a,5c         ldw   R5c,[Rf6+a]      R5c = MHPFD;
 2e08: 3f,5d,03            jb    B7,R5d,2e0e      if (B7_R5d = 0)  {
@@ -3031,29 +3031,31 @@
    INPUT_ACT_COM2:
 3df2: 2a,c4               scall 40b8             Compute_TCSTRT ();
 3df4: b3,f6,3c,39         ldb   R39,[Rf6+3c]     R39 = ACTFMM;
-3df8: 3f,a6,1d            jb    B7,Ra6,3e18      if (B7_AFMFLG_a6 = 0)  {          # (sensor OK)
+3df8: 3f,a6,1d            jb    B7,Ra6,3e18      if (B7_AFMFLG_a6 = 0)  {
 3dfb: a3,e4,92,34         ldw   R34,[Re4+92]     R34 = IACT;
 3dff: 8b,fe,72,34         cmpw  R34,[Rfe+72]     
 3e03: d9,13               jgtu  3e18             if (R34 <= ACTMAX)  {
 3e05: 8b,fe,70,34         cmpw  R34,[Rfe+70]     
-3e09: d3,0d               jnc   3e18             if (R34 >= ACTMIN)  {
+3e09: d3,0d               jnc   3e18             if (R34 >= ACTMIN)  {             # (sensor OK)
 3e0b: ef,d5,0a            call  48e3             USWFuncLU_48e3 (
 3e0e: ea,01                     #arg 1              FN703,
 3e10: 12,01                     #arg 2              IACT );
 3e12: 65,80,00,38         ad2w  R38,80           R38 += 80;
-3e16: 20,12               sjmp  3e2a             goto 3e2a; } } }
+3e16: 20,12               sjmp  3e2a             goto 3e2a; } } }                  # ACT = FN703(IACT)
 
-3e18: 3a,a0,0c            jb    B2,Ra0,3e27      if (B2_WRMEGO_a0 = 0)  {
+3e18: 3a,a0,0c            jb    B2,Ra0,3e27      if (B2_WRMEGO_a0 = 0)  {          # (start up Open Loop)
 3e1b: 3d,a6,09            jb    B5,Ra6,3e27      if (B5_CFMFLG_a6 = 0)  {
-3e1e: 33,29,06            jnb   B3,R29,3e27      if (ECT_IN_RANGE = 1)  {
+3e1e: 33,29,06            jnb   B3,R29,3e27      if (IECT_IN_RANGE = 1)  {         # (sensor bad, use ECT if OK)
 3e21: a3,e8,5a,38         ldw   R38,[Re8+5a]     R38 = TCSTRT;
-3e25: 20,03               sjmp  3e2a             goto 3e2a; } } }
+3e25: 20,03               sjmp  3e2a             goto 3e2a; } } }                  # ACT = FN703(IECT)
 
-3e27: 37,a6,03            jnb   B7,Ra6,3e2d      if (B7_AFMFLG_a6 = 1)  {
-3e2a: b0,39,b7            ldb   Rb7,R39          ACT = R39; }
+3e27: 37,a6,03            jnb   B7,Ra6,3e2d      if (B7_AFMFLG_a6 = 1)  {          # ACT = ACTFMM
+3e2a: b0,39,b7            ldb   Rb7,R39          ACT = R39; }                      # Do not update ACT
+
+# STRATEGY MODULE: INPUT_ECT_COM2
 3e2d: 3d,a6,12            jb    B5,Ra6,3e42      if (B5_CFMFLG_a6 = 0)  {
-3e30: 33,29,0f            jnb   B3,R29,3e42      if (ECT_IN_RANGE = 1)  {
-3e33: bf,e8,5b,34         ldsbw R34,[Re8+5b]     swR34 = [3db];
+3e30: 33,29,0f            jnb   B3,R29,3e42      if (IECT_IN_RANGE = 1)  {
+3e33: bf,e8,5b,34         ldsbw R34,[Re8+5b]     swR34 = [3DB];
 3e37: 9b,e6,93,00         cmpb  R0,[Re6+93]      
 3e3b: d7,43               jne   3e80             if (ECTCNT != 0) goto 3e80;
 3e3d: c4,b6,34            stb   R34,Rb6          ECT = R34;
@@ -3061,57 +3063,61 @@
 
 3e42: 9b,e6,93,00         cmpb  R0,[Re6+93]      
 3e46: d7,05               jne   3e4d             if (ECTCNT = 0)  {
-3e48: b0,b7,b6            ldb   Rb6,Rb7          ECT = ACT;
+3e48: b0,b7,b6            ldb   Rb6,Rb7          ECT = ACT;                        #  (sensor bad, start rolling average at ACT)
 3e4b: 20,40               sjmp  3e8d             goto 3e8d; }
 
-3e4d: 37,a5,05            jnb   B7,Ra5,3e55      if (CRKFLG = 1)  {
-3e50: bc,b7,34            ldsbw R34,Rb7          swR34 = ACT;
-3e53: 20,2b               sjmp  3e80             goto 3e80; }
+3e4d: 37,a5,05            jnb   B7,Ra5,3e55      if (CRKFLG = 1)  {                # (crank mode)
+3e50: bc,b7,34            ldsbw R34,Rb7          swR34 = ACT;                      # ECT = ROLAV(ACT),TCECT)
+3e53: 20,2b               sjmp  3e80             goto 3e80; }                      # (sensor bad, infer ECT from ACT)
 
-3e55: 35,a6,35            jnb   B5,Ra6,3e8d      if (B5_CFMFLG_a6 = 0) goto 3e8d;
-3e58: b3,e4,15,30         ldb   R30,[Re4+15]     R30 = [195];
+3e55: 35,a6,35            jnb   B5,Ra6,3e8d      if (B5_CFMFLG_a6 = 0) goto 3e8d;  # (every background loop)
+3e58: b3,e4,15,30         ldb   R30,[Re4+15]     R30 = FMECTR;
 3e5c: 17,30               incb  R30              R30++;
-3e5e: d3,02               jnc   3e62             if (R30 > ff)  {
+3e5e: d3,02               jnc   3e62             if (R30 > ff)  {                  # (clip at 255 as a max)
 3e60: 15,30               decb  R30              R30--; }
+
+# Perform ECT RAMP LOGIC
 3e62: b1,01,34            ldb   R34,1            R34 = 1;
 3e65: 9b,f6,3d,b6         cmpb  Rb6,[Rf6+3d]     
-3e69: de,04               jlt   3e6f             if (ECT >= [b951])  {
-3e6b: df,0d               je    3e7a             if (ECT = [b951]) goto 3e7a;
-3e6d: 13,34               negb  R34              R34 = -R34; }
+3e69: de,04               jlt   3e6f             if (ECT >= ECTFMM)  {
+3e6b: df,0d               je    3e7a             if (ECT = ECTFMM) goto 3e7a;      # (ECT is already ECTFMM)
+3e6d: 13,34               negb  R34              R34 = -R34; }                     # - 2 deg. F
 3e6f: 9b,f6,3e,30         cmpb  R30,[Rf6+3e]     
-3e73: d3,05               jnc   3e7a             if (R30 >= [b952])  {
+3e73: d3,05               jnc   3e7a             if (R30 >= FMECNT)  {
 3e75: 11,30               clrb  R30              R30 = 0;
-3e77: 74,34,b6            ad2b  Rb6,R34          ECT += R34; } }
-3e7a: c7,e4,15,30         stb   R30,[Re4+15]     [195] = R30;
+3e77: 74,34,b6            ad2b  Rb6,R34          ECT += R34; } }                   # ECT = ECT +/- 2 deg. F (ramp up/down to ECTFMM)
+3e7a: c7,e4,15,30         stb   R30,[Re4+15]     FMECTR = R30;
 3e7e: 20,0d               sjmp  3e8d             goto 3e8d; }
 
 3e80: bc,b6,32            ldsbw R32,Rb6          swR32 = ECT;
 3e83: a3,f8,14,36         ldw   R36,[Rf8+14]     R36 = TCECT;
 3e87: ef,cc,0a            call  4956             ROLAV ();
 3e8a: b0,3e,b6            ldb   Rb6,R3e          ECT = R3e; }
-3e8d: 2a,4c               scall 40db             Compute_INIT_TOT ();
+
+# STRATEGY MODULE: INPUT_TOT_COM1
+3e8d: 2a,4c               scall 40db             INPUT_TOT_COM1 ();
 3e8f: 30,30,1c            jnb   B0,R30,3eae      if (B0_R30 = 1)  {
 3e92: 9b,e6,93,00         cmpb  R0,[Re6+93]      
 3e96: d7,06               jne   3e9e             if (ECTCNT = 0)  {
-3e98: c3,e8,94,38         stw   R38,[Re8+94]     TOT = R38;
+3e98: c3,e8,94,38         stw   R38,[Re8+94]     TOT = R38;                        # (sensor OK, start rolling average at actual value)
 3e9c: 20,1c               sjmp  3eba             goto 3eba; }
 
-3e9e: a3,e8,94,32         ldw   R32,[Re8+94]     R32 = TOT;
-3ea2: a0,38,34            ldw   R34,R38          R34 = R38;
+3e9e: a3,e8,94,32         ldw   R32,[Re8+94]     R32 = TOT;                        # TOT
+3ea2: a0,38,34            ldw   R34,R38          R34 = R38;                        # FN703D(ITOT)
 3ea5: a3,f8,26,36         ldw   R36,[Rf8+26]     R36 = TCTOT;
-3ea9: ef,aa,0a            call  4956             ROLAV ();
-3eac: 20,08               sjmp  3eb6             goto 3eb6; }
+3ea9: ef,aa,0a            call  4956             ROLAV ();                         # ROLAV(FN703D(ITOT),TCTOT)
+3eac: 20,08               sjmp  3eb6             goto 3eb6; }                      # (sensor OK)
 
-3eae: b0,b6,3f            ldb   R3f,Rb6          R3f = ECT;
+3eae: b0,b6,3f            ldb   R3f,Rb6          R3f = ECT;                        # (sensor bad, use ECT)
 3eb1: 11,3e               clrb  R3e              R3e = 0;
 3eb3: 0a,04,3e            asrw  R3e,4            swR3e >>= 4;
 3eb6: c3,e8,94,3e         stw   R3e,[Re8+94]     TOT = R3e;
 3eba: a3,e4,b6,14         ldw   R14,[Re4+b6]     R14 = PUTMR;
 3ebe: 8b,f6,2c,14         cmpw  R14,[Rf6+2c]     
-3ec2: d1,4e               jleu  3f12             if (R14 > TKYON2)  {
+3ec2: d1,4e               jleu  3f12             if (R14 > TKYON2)  {              # PUTMR > TKYON2
 3ec4: b3,e6,93,14         ldb   R14,[Re6+93]     R14 = ECTCNT;
 3ec8: 99,08,14            cmpb  R14,8            
-3ecb: db,45               jc    3f12             if (R14 < 8)  {
+3ecb: db,45               jc    3f12             if (R14 < 8)  {                   # ECTCNT < 8
 3ecd: 17,14               incb  R14              R14++;
 3ecf: c7,e6,93,14         stb   R14,[Re6+93]     ECTCNT = R14;                     # ECTCNT = ECTCNT + 1
 3ed3: b0,b7,41            ldb   R41,Rb7          R41 = ACT;
@@ -3120,14 +3126,14 @@
 3edb: 0a,03,40            asrw  R40,3            swR40 >>= 3;
 3ede: 67,e6,62,40         ad2w  R40,[Re6+62]     R40 += ACSTRT;                    # ACSTRT + ACT/8
 3ee2: c3,e6,62,40         stw   R40,[Re6+62]     ACSTRT = R40;
-3ee6: 33,29,04            jnb   B3,R29,3eed      if (ECT_IN_RANGE = 1)  {
+3ee6: 33,29,04            jnb   B3,R29,3eed      if (IECT_IN_RANGE = 1)  {
 3ee9: a3,e8,5a,42         ldw   R42,[Re8+5a]     R42 = TCSTRT; }
 3eed: 0a,03,42            asrw  R42,3            swR42 >>= 3;
 3ef0: 64,42,b8            ad2w  Rb8,R42          Rb8 += R42;
-3ef3: 29,e6               scall 40db             Compute_INIT_TOT ();
+3ef3: 29,e6               scall 40db             INPUT_TOT_COM1 ();
 3ef5: 38,30,0f            jb    B0,R30,3f07      if (B0_R30 = 0)  {
 3ef8: a3,e8,5a,38         ldw   R38,[Re8+5a]     R38 = TCSTRT;
-3efc: 3b,29,05            jb    B3,R29,3f04      if (ECT_IN_RANGE = 0)  {
+3efc: 3b,29,05            jb    B3,R29,3f04      if (IECT_IN_RANGE = 0)  {
 3eff: b0,b7,39            ldb   R39,Rb7          R39 = ACT;
 3f02: 11,38               clrb  R38              R38 = 0; }
 3f04: 0a,04,38            asrw  R38,4            swR38 >>= 4; }
@@ -3152,6 +3158,8 @@
 3f3e: 30,32,03            jnb   B0,R32,3f44      if (B0_R32 = 1)  {
 3f41: bd,ff,30            ldsbw R30,ff           swR30 = ff; }
 3f44: c3,e8,c2,30         stw   R30,[Re8+c2]     ETVOCM = R30;
+
+# STRATEGY MODULE: INPUT_TP_COM3 
 3f48: a3,e4,9c,16         ldw   R16,[Re4+9c]     R16 = ITP;
 3f4c: a0,8a,1a            ldw   R1a,R8a          R1a = RATCH;
 3f4f: 3a,a6,11            jb    B2,Ra6,3f63      if (B2_TFMFLG_a6 = 0)  {
@@ -3159,7 +3167,7 @@
 3f56: d3,0b               jnc   3f63             if (R16 >= TAPMIN)  {
 3f58: 8b,fe,76,16         cmpw  R16,[Rfe+76]     
 3f5c: d9,05               jgtu  3f63             if (R16 <= TAPMAX)  {
-3f5e: a0,16,b2            ldw   Rb2,R16          TP = R16;
+3f5e: a0,16,b2            ldw   Rb2,R16          TP = R16;                         # (TP sensor within acceptable range)
 3f61: 20,1f               sjmp  3f82             goto 3f82; } } }
 
 3f63: 3f,a5,19            jb    B7,Ra5,3f7f      if (CRKFLG = 0)  {
@@ -3175,7 +3183,7 @@
 3f7f: a0,1a,b2            ldw   Rb2,R1a          TP = R1a; }                       # TP = RATCH (TP sensor out of limits)
 3f82: ef,b6,04            call  443b             INFERRED_BAROMETRIC_PRESSURE_STRATEGY ();
 3f85: ef,0e,1c            call  5b96             ACCELERATION_ENRICHMENT ();
-3f88: 48,8a,b2,34         sb3w  R34,Rb2,R8a      R34 = TP - RATCH;
+3f88: 48,8a,b2,34         sb3w  R34,Rb2,R8a      R34 = TP - RATCH;                 # TP_REL = TP - RATCH
 # CHANGE OF THROTTLE POSITION FILTER (TPDLBR)
 # 
 # TPDLBR is a time dependent rolling average filter of the change (or delta) in
@@ -3299,24 +3307,24 @@
 40aa: b0,38,31            ldb   R31,R38          R31 = R38;
 40ad: 6d,83,06,30         ml2w  R30,683          lR30 *= 683;
 40b1: c3,e4,f8,32         stw   R32,[Re4+f8]     [178] = R32;
-40b5: 28,40               scall 40f7             Sub_40f7 ();
+40b5: 28,40               scall 40f7             CNVRT ();
 40b7: f0                  ret                    return;
 
    Compute_TCSTRT:
-40b8: 71,f7,29            an2b  R29,f7           ECT_IN_RANGE = 0;                 # Calculates (engine coolant temperature)
+40b8: 71,f7,29            an2b  R29,f7           IECT_IN_RANGE = 0;                # Calculates (engine coolant temperature)
 40bb: a3,e4,90,38         ldw   R38,[Re4+90]     R38 = IECT;
 40bf: 8b,ff,80,00,38      cmpw  R38,[Rfe+80]     
 40c4: d9,14               jgtu  40da             if (R38 <= ECTMAX)  {
 40c6: 8b,fe,7e,38         cmpw  R38,[Rfe+7e]     
 40ca: d3,0e               jnc   40da             if (R38 >= ECTMIN)  {
-40cc: 91,08,29            orb   R29,8            ECT_IN_RANGE = 1;
+40cc: 91,08,29            orb   R29,8            IECT_IN_RANGE = 1;
 40cf: ef,11,08            call  48e3             USWFuncLU_48e3 (
 40d2: ea,01                     #arg 1              FN703,
 40d4: 10,01                     #arg 2              IECT );
 40d6: c3,e8,5a,38         stw   R38,[Re8+5a]     TCSTRT = R38; } }
 40da: f0                  ret                    return;
 
-   Compute_INIT_TOT:
+   INPUT_TOT_COM1:
 40db: 11,30               clrb  R30              R30 = 0;                          # Calculates  (transmission oil temperature)
 40dd: a3,e4,88,38         ldw   R38,[Re4+88]     R38 = ITOT;
 40e1: 8b,f6,14,38         cmpw  R38,[Rf6+14]     
@@ -3329,11 +3337,11 @@
 40f4: 38,00                     #arg 2              38 ); } }
 40f6: f0                  ret                    return;
 
-   Sub_40f7:
-40f7: 33,a6,09            jnb   B3,Ra6,4103      if (B3_MFMFLG_a6 = 1)  {
+   CNVRT:
+40f7: 33,a6,09            jnb   B3,Ra6,4103      if (B3_MFMFLG_a6 = 1)  {          # (MAP sensor failure)
 40fa: 37,a5,1e            jnb   B7,Ra5,411b      if (CRKFLG = 0) goto 411b;
-40fd: a1,ef,00,38         ldw   R38,ef           R38 = ef;
-4101: 20,29               sjmp  412c             goto 412c; }
+40fd: a1,ef,00,38         ldw   R38,ef           R38 = ef;                         # 29.875
+4101: 20,29               sjmp  412c             goto 412c; }                      # (crank mode and SCAP sensor have failed)
 
 4103: b3,e6,96,38         ldb   R38,[Re6+96]     R38 = MAPTMR;
 4107: 9b,ff,1c,01,38      cmpb  R38,[Rfe+11c]    
@@ -3346,7 +3354,7 @@
 4119: d7,21               jne   413c             if (R42 != [19e]) goto 413c; } }
 411b: 91,08,a6            orb   Ra6,8            B3_MFMFLG_a6 = 1;
 411e: af,f6,3f,38         ldzbw R38,[Rf6+3f]     wR38 = MAPFMM;
-4122: 3a,a6,07            jb    B2,Ra6,412c      if (B2_TFMFLG_a6 = 0)  {
+4122: 3a,a6,07            jb    B2,Ra6,412c      if (B2_TFMFLG_a6 = 0)  {          # (throttle position sensor okay)
 4125: ef,be,07            call  48e6             UUWFuncLU_48e6 (
 4128: 78,61                     #arg 1              FN095,
 412a: bc,00                     #arg 2              TP_REL ); }
@@ -3431,7 +3439,7 @@
 420f: c0,8c,3e            stw   R3e,R8c          R8c = R3e;
 4212: a3,e4,c2,14         ldw   R14,[Re4+c2]     R14 = TSLPIP;
 4216: 89,33,03,14         cmpw  R14,333          
-421a: d3,38               jnc   4254             if (R14 >= 333)  {
+421a: d3,38               jnc   4254             if (R14 >= 333)  {                # (engine is stopped)
 421c: 71,ef,50            an2b  R50,ef           B4_First_pip = 0;
 421f: 71,7f,45            an2b  R45,7f           Egoste1 = 0;
 4222: 01,b4               clrw  Rb4              N_RPM = 0;
@@ -3452,10 +3460,11 @@
 4251: fb                  ei                     interrupts ON; }
 4252: 20,e4               sjmp  4338             goto 4338; }
 
-4254: 3b,4e,02            jb    B3,R4e,4259      if (B3_R4e = 0)  {
+4254: 3b,4e,02            jb    B3,R4e,4259      if (B3_NEW_RPM_4e = 0)  {
 4257: 21,04               sjmp  435d             goto 435d; }
 
-4259: 71,f7,4e            an2b  R4e,f7           B3_R4e = 0;
+                                                                                   # (new PIP information is available for calculation of rpm)
+4259: 71,f7,4e            an2b  R4e,f7           B3_NEW_RPM_4e = 0;
 425c: af,f6,05,34         ldzbw R34,[Rf6+5]      wR34 = ENGCYL;
 4260: a3,35,5c,43,32      ldw   R32,[R34+435c]   R32 = [R34+435c];
 4265: a3,35,62,43,30      ldw   R30,[R34+4362]   R30 = [R34+4362];
@@ -3538,7 +3547,7 @@
 4354: 8b,f0,3c,b4         cmpw  Rb4,[Rf0+3c]     
 4358: d3,03               jnc   435d             if (N_RPM >= Stall_RPM)  {
 435a: 91,80,45            orb   R45,80           Egoste1 = 1; } }
-435d: 28,0d               scall 436c             ENGINE_SPEED_OVER_VEHICLE_SPEED_NOVS_&_BPCOR ();
+435d: 28,0d               scall 436c             ENGINE_SPEED_OVER_VEHICLE_SPEED_NOVS_&_BPCOR ();  # EXIT RPM LOGIC
 435f: f0                  ret                    return;
 
 4360: fa,02               word    2fa
@@ -11577,16 +11586,16 @@ ERROR CODE DESCRIPTION
 
    SC_VALID_COM1:
 91af: 31,de,79            jnb   B1,Rde,922b      if (B1_FLG_FRST_CM_de = 1)  {     # (new commanded gear this pass)
-91b2: 71,fe,e1            an2b  Re1,fe           B0_FLG_SFT_VAL_e1 = 0;
-91b5: a3,e8,90,42         ldw   R42,[Re8+90]     R42 = [310];
+91b2: 71,fe,e1            an2b  Re1,fe           B0_FLG_SFT_VAL_e1 = 0;            # (shift may be checked for validity)
+91b5: a3,e8,90,42         ldw   R42,[Re8+90]     R42 = SFT_TOTAL;
 91b9: 07,42               incw  R42              R42++;
-91bb: c3,e8,90,42         stw   R42,[Re8+90]     [310] = R42;
+91bb: c3,e8,90,42         stw   R42,[Re8+90]     SFT_TOTAL = R42;
 91bf: 3a,4b,69            jb    B2,R4b,922b      if (B2_R4b = 0)  {
 91c2: 35,df,66            jnb   B5,Rdf,922b      if (B5_FLG_SF_AUTO_df = 1)  {     # (automatic shift) 
 91c5: 9b,e8,cc,da         cmpb  Rda,[Re8+cc]     
 91c9: d1,60               jleu  922b             if (GEAR_CUR > GEAR_OLD)  {       # (upshift)
 91cb: 8b,fd,f6,00,bc      cmpw  Rbc,[Rfc+f6]     
-91d0: d1,59               jleu  922b             if (TP_REL > [c19e])  {
+91d0: d1,59               jleu  922b             if (TP_REL > TP_SH_VALID)  {      # (off idle) 
 91d2: b3,e8,d7,32         ldb   R32,[Re8+d7]     R32 = VSBART_RT;
 91d6: 01,42               clrw  R42              R42 = 0;
 91d8: 32,da,05            jnb   B2,Rda,91e0      if (B2_GEAR_CUR = 1)  {
@@ -11598,7 +11607,7 @@ ERROR CODE DESCRIPTION
 91e7: 20,02               sjmp  91eb             goto 91eb; }
 
 91e9: 07,42               incw  R42              R42++;
-91eb: 45,f8,00,fc,30      ad3w  R30,Rfc,f8       R30 = c1a0;
+91eb: 45,f8,00,fc,30      ad3w  R30,Rfc,f8       R30 = VS_SH_VAL2;
 91f0: 64,30,42            ad2w  R42,R30          R42 += R30;
 91f3: 9a,42,32            cmpb  R32,[R42]        
 91f6: d1,33               jleu  922b             if (R32 > [R42])  {
@@ -11706,7 +11715,7 @@ ERROR CODE DESCRIPTION
 9312: d7,0d               jne   9321             if (R33 = GR_OLD)  {
 9314: 99,06,d9            cmpb  Rd9,6            
 9317: d7,08               jne   9321             if (GR_CM = 6)  {
-9319: b3,e2,d5,38         ldb   R38,[Re2+d5]     R38 = [c193];
+9319: b3,e2,d5,38         ldb   R38,[Re2+d5]     R38 = TMCSOD;
 931d: c7,e8,fa,38         stb   R38,[Re8+fa]     TM_CS_DLY = R38; } } }            # TM_CS_DLY = TMCSOD
                                                                                    # (delay coast clutch engagement
                                                                                    # in third gear to prevent two
@@ -15409,8 +15418,8 @@ b94c: 01                  byte      1
 b94d: 3c                  byte     3c
 b94e: 66,46               word   4666
 b950: 3c                  byte     3c            ACTFMM
-b951: 5f                  byte     5f
-b952: b9                  byte     b9
+b951: 5f                  byte     5f            ECTFMM
+b952: b9                  byte     b9            FMECNT
 b953: 98                  byte     98            MAPFMM
 b954: 01                  byte      1
 b955: 00                  byte      0
@@ -16233,7 +16242,7 @@ c18f: 28                  byte     28
 c190: 00                  byte      0
 c191: 04                  byte      4            TMCSE2
 c192: 04                  byte      4            TMCSE3
-c193: 02                  byte      2
+c193: 02                  byte      2            TMCSOD
 c194: 5e                  byte     5e
 c195: ff                  byte     ff
 c196: 90,01               word    190            S_VAL_NESUB
@@ -16241,10 +16250,10 @@ c198: 40,01               word    140            S_VAL_TPADD
 c19a: 00,02               word    200            S_VAL_TPSUB
 c19c: 12                  byte     12            S_VAL_VSADD
 c19d: 02                  byte      2            S_VAL_VSSUB
-c19e: 80,2a               word   2a80
-c1a0: 22                  byte     22
-c1a1: 3b                  byte     3b
-c1a2: 5a                  byte     5a
+c19e: 80,2a               word   2a80            TP_SH_VALID
+c1a0: 22                  byte     22            VS_SH_VAL2
+c1a1: 3b                  byte     3b            VS_SH_VAL3
+c1a2: 5a                  byte     5a            VS_SH_VAL4
 c1a3: ff                  byte     ff
 c1a4: 1f,05               word    51f
 c1a6: 00,2d               word   2d00

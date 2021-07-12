@@ -1486,8 +1486,8 @@ sub  83cd3 "Enable_Int"
 sub  83d1f "Update_EGR?" 
 sub  83df2 "INPUT_ACT_COM2"  
 sub  840b8 "Compute_TCSTRT"  
-sub  840db "Compute_INIT_TOT"  
-sub  840f7 "Sub_40f7"  
+sub  840db "INPUT_TOT_COM1"  
+sub  840f7 "CNVRT"  
 sub  8436c "ENGINE_SPEED_OVER_VEHICLE_SPEED_NOVS_&_BPCOR"  
 sub  843b2 "Sub_43b2"  
 sub  8443b "INFERRED_BAROMETRIC_PRESSURE_STRATEGY"  
@@ -1836,7 +1836,7 @@ sym 28 "B6_FPWQ3_Q_28" : B 6
 sym 28 "KAM_error" :B 7
 
 sym 29 "B2_FLG_DFSO_NOVS_Q_29" : B 2
-sym 29 "ECT_IN_RANGE" : B 3
+sym 29 "IECT_IN_RANGE" : B 3
 sym 29 "B6_REFFLG_29" : B 6
 sym 29 "B7_PURGING_29" : B 7
 
@@ -1965,6 +1965,7 @@ sym 4c "B4_No_service" : B 4
 sym 4c "B5_Late_output" : B 5
 sym 4c "B6_Queued" : B 6
 
+sym 4e "B3_NEW_RPM_4e" : B 3
 sym 4e "B4_NEW_IDM" : B 4
 sym 4e "B6_NEW_BAP" : B 6
 sym 4e "B7_NEW_PIP" : B 7
@@ -2247,6 +2248,8 @@ sym 181 "CRKPIP_CTR"
 sym 184 "OCCSAV"
 
 sym 192 "Ibeta1"
+
+sym 195 "FMECTR"
 sym 196 "A3CTMR"
 
 sym 19c "TBART"
@@ -2356,6 +2359,8 @@ sym 308 "RT_ULK_PWR"
 sym 30a "RT_LK_PWR"
 sym 30c "NEBART"
 sym 30e "NOBART"
+sym 310 "SFT_TOTAL"
+
 sym 314 "TOT"
 sym 316 "TPV_STRT_SFT"
 sym 318 "NEV_STRT_SFT"
@@ -2423,6 +2428,7 @@ sym 3c8 "LAMAVE"
 sym 3cc "TLSPAT"
 
 sym 3da "TCSTRT"
+sym 3db "[3DB]"
 sym 3dc "DWELL"
 sym 3de "dwell_extra"
 
@@ -2742,6 +2748,8 @@ sym b936 "fuel_tp_wot"
 sym b940 "TKYON2"
 
 sym b950 "ACTFMM"
+sym b951 "ECTFMM"
+sym b952 "FMECNT"
 sym b953 "MAPFMM"
 sym b95e "CTBYS"
 sym b95f "CTBYSH"
@@ -2830,6 +2838,7 @@ sym c18c "NS34S"
 
 sym c191 "TMCSE2"
 sym c192 "TMCSE3"
+sym c193 "TMCSOD"
 
 sym c196 "S_VAL_NESUB"
 sym c198 "S_VAL_TPADD"
@@ -2837,6 +2846,10 @@ sym c19a "S_VAL_TPSUB"
 sym c19c "S_VAL_VSADD"
 sym c19d "S_VAL_VSSUB"
 
+sym c19e "TP_SH_VALID"
+sym c1a0 "VS_SH_VAL2"
+sym c1a1 "VS_SH_VAL3"
+sym c1a2 "VS_SH_VAL4"
 
 sym c1af "?VECT3_wrong?"
 
