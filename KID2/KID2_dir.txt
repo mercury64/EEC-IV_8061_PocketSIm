@@ -682,7 +682,7 @@ func    b23e b259  "y_fuel_cold_decay"   : UW  : UW
 func    b25a b26d  "FN019A"   : UW  : UW 
 func    b26e b28d  "FN020C"   : SW  : UW 
 func    b28e b2bd  "FN021_MAPOPE_y_load"   : UW  : UW 
-func    b2be b2e5  "FN070"   : SW  : UW 
+func    b2be b2e5  "Func_b2be"   : SW  : UW 
 func    b2e6 b2fd  "FN070B"   : UW  : UW 
 func    b2fe b319  "FN070L"   : UW  : UW 
 func    b31a b335  "FN071"   : UW  : UW 
@@ -691,7 +691,7 @@ func    b352 b365  "Func_b352"   : UW  : UW
 func    b366 b379  "Func_b366"   : UW  : UW 
 func    b37a b395  "y_map_emissions"   : UW  : UW 
 func    b396 b3b5  "FN039"   : UW  : UW 
-func    b3b6 b3d1  "y_spark"   : UW  : UW 
+func    b3b6 b3d1  "FN025"   : UW  : UW 
 func    b3d2 b3e9  "Func_b3d2"   : SW  : UW 
 func    b3ea b3fd  "Func_b3ea"   : UW  : UW 
 func    b3fe b411  "Func_b3fe"   : UW  : UW 
@@ -836,9 +836,9 @@ func    b63a b655  "FND_TP_DT_A"   : UW  : SW
 func    b656 b679  "FNTP_AIR_OFF"   : UW  : UW 
 table   b67a b6c9  "fuel_base_table_cold"   : O 10 UY 
 table   b6ca b719  "fuel_base_table_cold_decay"   : O 10 UY 
-func    b71a b727  "fuel_equil_constant_multiplier"   : UY  : UY 
-table   b728 b777  "fuel_equil_surface"   : O 10 UY 
-table   b778 b7c7  "fuel_equil_constant"   : O 10 UY 
+func    b71a b727  "FN307"   : UY  : UY 
+table   b728 b777  "FN1321"   : O 10 UY 
+table   b778 b7c7  "FN1322"   : O 10 UY 
 table   b7c8 b817  "FN1328"   : O 10 SY 
 table   b818 b847  "FN1343"   : O 6 UY 
 func    b848 b85f  "FN222A"   : UW  : UW 
@@ -983,8 +983,8 @@ byte    bbc8 bbc8
 func    bbc9 bbd2  "FN821A"   : UY  : UY 
 func    bbd3 bbdc  "FN004"   : UY  : UY 
 func    bbde bbf5  "Func_bbde"   : SW  : UW 
-func    bbf6 bc19  "x_spark_91"   : SW  : UW 
-func    bc1a bc35  "y_spark_92"   : UW  : UW 
+func    bbf6 bc19  "FN091"   : SW  : UW 
+func    bc1a bc35  "FN092"   : UW  : UW 
 func    bc36 bc51  "FN093"   : UW  : UW 
 func    bc52 bc6d  "spark_adder_for_wot_fuel"   : UW  : SW 
 func    bc6e bc79  "FN180": UY  : UY 
@@ -1003,8 +1003,8 @@ func    bf16 bf23  "FN220"   : SY  : UY
 func    bf24 bf4b  "FN221"   : UW  : UW 
 func    bf4c bf67  "Func_bf4c"   : SW  : SW 
 func    bf68 bf6f  "FN240"   : UY  : UY 
-table   bf70 bfbf  "egr_base_table"   : O 10 UY 
-table   bfc0 c00f  "egr_base_table_mpg"   : O 10 UY 
+table   bf70 bfbf  "FN1220"   : O 10 UY 
+table   bfc0 c00f  "FN1222"   : O 10 UY 
 func    c010 c023  "FN218"   : UY  : UY 
 func    c024 c03b  "spark_retard_vs_rpm"   : UW  : UW 
 func    c03c c073  "Func_c03c"   : UW  : UW 
@@ -1514,7 +1514,7 @@ sub  84958 "ROLLING_AVERAGE_ROUTINE"
 sub  84987 "ROLLING_AVERAGE_FILTER_ROUTINE" 
 sub  849a7 "SYTabLU_49a7"  $ F sytlu 38 34
 sub  849b6 "SYTabLU_49b6"  $ F sytlu 38 34
-sub  849b9 "UYTabLU_49b9"  $ F uytlu 38 34
+sub  849b9 "Four_Point_Interpolation" $ F uytlu 38 34
 sub  849ee "TableInterpolation"  
 sub  84a1e "Sub_4a1e"  
 sub  84a3f "Sub_4a3f"  
@@ -1525,7 +1525,7 @@ sub  84e45 "FUEL_CL_LAMBSE_COM3"
 sub  84f50 "C_MULTIPLIER_LOGIC"  
 sub  84fb4 "Sub_4fb4"  
 sub  84fbd "LAMBSE_RESET"
-sub  84fd3 "Sub_4fd3"  
+sub  84fd3 "ACT_to_ECT_proportioning_factor(R36)"  
 sub  84feb "FN1360(N,MAPPA)"  
 sub  8500e "Sub_500e"  
 sub  8501c "CALCULATE_PTPAMP_RF_and_RS"
@@ -1538,7 +1538,7 @@ sub  8577b "Sub_577b"
 sub  8578f "FUEL_IDLE_MOD_COM3"  
 sub  85830 "FUEL_KAM_ADAPT_COM3"  
 sub  858d5 "Sub_58d5"  
-sub  858ec "Sub_58ec"  
+sub  858ec "FUEL_TRANS_COM5"  
 sub  85a31 "FUEL_DFSO_COM2"  
 sub  85b96 "ACCELERATION_ENRICHMENT"  
 sub  85c7b "FUEL_PUMP_COM1"
@@ -1548,7 +1548,7 @@ sub  85ca9 "Sub_5ca9"
 sub  85cce "Sub_5cce"  
 sub  85cd1 "Sub_5cd1"  
 sub  85cff "Sub_5cff"  
-sub  85d03 "Sub_5d03"  
+sub  85d03 "SPARK_BASE_COM2"  
 
 sub  85f0a "Sub_5f0a"  
 sub  85f12 "UYTabLU_5f12"  $ F uytlu 38 34
@@ -1831,6 +1831,7 @@ sym 27 "B7_SYNFLG" : B 7
 
 sym 28 "B0_egr_rdy_28" : B 0
 sym 28 "Newsa" : B 2
+sym 28 "B3_EFFLG1_28" : B 3
 sym 28 "EGOSTE" : B 5
 sym 28 "B6_FPWQ3_Q_28" : B 6
 sym 28 "KAM_error" :B 7
@@ -1913,6 +1914,7 @@ sym 3e "Lseconds" : B 7
 sym 44 "B0_FLG_DASMNQ_44" : B 0
 sym 44 "B1_FN311_Q_44" : B 1
 sym 44 "V_SPDTOZ_FLG" : B 4
+sym 44 "B6_LIMIT_PURGE_44" : B 6
 sym 44 "B7_FLG_TIP_RATE_44" : B 7
 
 sym 45 "Flags_2B"
@@ -2040,6 +2042,7 @@ sym 91 "VBAT"
 sym 92 "ISCDTY"
 sym 94 "FUELPW1"
 sym 96 "LAMBSE1"
+sym 98 "EFTR"
 
 sym 9a "AM"
 
@@ -2208,7 +2211,7 @@ sym 122 "MAP_FREQ"
 sym 124 "MAP_WORD"
 sym 12e "AETP"
 sym 136 "PUTMR"
-sym 138 "Adptmr"
+sym 138 "ADPTMR"
 
 sym 13a "BG_TMR"
 
@@ -2710,6 +2713,9 @@ sym b4a4 "OLITD1"
 sym b4ac "WOTRPL"
 sym b4ae "WOTRPH"
 sym b4b0 "LAMDLT"
+sym b4b2 "KFT"
+sym b4b3 "TFCTM"
+sym b4b5 "KFTMPG"
 
 sym b4c0 "DFNOVS"
 sym b4c1 "DFNOVH"
@@ -2777,7 +2783,12 @@ sym bae0 "FKSKAY"
 sym bae2 "SIGKLL"
 sym bae4 "SIGKLU"
 
+
+
 #sym bb7a "RFa"
+
+sym bb84 "FRCCTM"
+
 
 sym bb92 "spark_addr_global"
 
@@ -2867,6 +2878,7 @@ sym c202 "UP_TIP_RATE"
 
 sym cb60 "FKMKAY"
 sym cb62 "SFT_FM_LVL"
+sym cb6a "ALPHA"
 sym cb6e "FRCTAE"
 
 sym cb67 "MAP_CYCLE"
@@ -2892,12 +2904,17 @@ sym cb8e "AFECT1"
 sym cb8f "AFECT2"
 sym cb90 "AFACT1"
 sym cb91 "AFACT2"
+sym cb92 "ADAPTM"
 sym cb94 "AMPMUL"
 sym cb96 "DELAMB"
+sym cb98 "DELROW"
+cym cb9a "DELCOL"
 
 sym cb9d "MINADP"
 sym cb9e "MAXADP"
+sym cb9f "AELIM"
 
+sym cba0 "ADEFTR"
 sym cba2 "ADEGCT"
 sym cba3 "FAEGCT"
 sym cba4 "KWUCNT"

@@ -218,7 +218,7 @@
 21f6: fc,47               vect  47fc             Sub_47fc
 21f8: 6a,22               vect  226a             Sub_226a
 21fa: 52,65               vect  6552             Update_EGR2?
-21fc: 03,5d               vect  5d03             Sub_5d03
+21fc: 03,5d               vect  5d03             SPARK_BASE_COM2
 21fe: d4,61               vect  61d4             Sub_61d4
 2200: 84,65               vect  6584             Sub_6584
 2202: a9,6c               vect  6ca9             Sub_6ca9
@@ -3791,7 +3791,7 @@
 45c6: a0,38,32            ldw   R32,R38          R32 = R38;
 45c9: a0,1e,38            ldw   R38,R1e          R38 = R1e;
 45cc: ad,0a,34            ldzbw R34,a            wR34 = a;
-45cf: ef,e7,03            call  49b9             UYTabLU_49b9 ();
+45cf: ef,e7,03            call  49b9             Four_Point_Interpolation ();
 45d2: 69,80,00,3a         sb2w  R3a,80           R3a -= 80;
 45d6: 6c,3a,3c            ml2w  R3c,R3a          lR3c *= R3a;
 45d9: a3,f6,16,3c         ldw   R3c,[Rf6+16]     R3c = BASEMD;
@@ -3904,7 +3904,7 @@
 46fc: a0,38,32            ldw   R32,R38          R32 = R38;
 46ff: ad,05,34            ldzbw R34,5            wR34 = 5;
 4702: 45,0a,01,f6,38      ad3w  R38,Rf6,10a      R38 = Table_ba1e;
-4707: ef,af,02            call  49b9             UYTabLU_49b9 ();
+4707: ef,af,02            call  49b9             Four_Point_Interpolation ();
 470a: 5c,bb,3b,3e         ml3b  R3e,R3b,Rbb      wR3e = yR3b * BP;
 470e: 74,ba,3f            ad2b  R3f,Rba          R3f += MAP;
 4711: d3,03               jnc   4716             if (R3f > ff)  {
@@ -4188,11 +4188,11 @@
 49ac: 09,04,30            shlw  R30,4            R30 <<= 4;
 49af: 11,33               clrb  R33              R33 = 0;
 49b1: 09,04,32            shlw  R32,4            R32 <<= 4;
-49b4: 20,03               sjmp  49b9             goto UYTabLU_49b9;
+49b4: 20,03               sjmp  49b9             goto Four_Point_Interpolation;
 
    SYTabLU_49b6:
 49b6: 91,10,a0            orb   Ra0,10           SIGNED_TBL_FLG = 1;
-   UYTabLU_49b9:
+   Four_Point_Interpolation:
 49b9: 5c,33,34,36         ml3b  R36,R34,R33      wR36 = yR34 * R33;
 49bd: 74,31,36            ad2b  R36,R31          R36 += R31;
 49c0: d3,02               jnc   49c4             if (R36 > ff)  {
@@ -4265,10 +4265,10 @@
 4a42: ef,a1,fe            call  48e6             UUWFuncLU_48e6 (
 4a45: 7a,03                     #arg 1              y_map_emissions,
 4a47: 38,00                     #arg 2              38 );
-4a49: c3,e6,54,38         stw   R38,[Re6+54]     [2d4] = R38;
+4a49: c3,e6,54,38         stw   R38,[Re6+54]     [2d4] = R38;                      # TEISF or TEFTC?
 4a4d: ac,ba,38            ldzbw R38,Rba          wR38 = MAP;
 4a50: ef,93,fe            call  48e6             UUWFuncLU_48e6 (
-4a53: b6,03                     #arg 1              y_spark,
+4a53: b6,03                     #arg 1              FN025,
 4a55: 38,00                     #arg 2              38 );
 4a57: c3,e6,56,38         stw   R38,[Re6+56]     FN025_MAP_y = R38;
 4a5b: 71,fe,a1            an2b  Ra1,fe           B0_Flags_a1 = 0;
@@ -4341,7 +4341,7 @@
 4b19: a0,38,32            ldw   R32,R38          R32 = R38;
 4b1c: 45,68,04,f4,38      ad3w  R38,Rf4,468      R38 = FN1350;
 4b21: ad,05,34            ldzbw R34,5            wR34 = 5;
-4b24: ef,92,fe            call  49b9             UYTabLU_49b9 ();
+4b24: ef,92,fe            call  49b9             Four_Point_Interpolation ();
 4b27: ac,3b,38            ldzbw R38,R3b          wR38 = yR3b;
 4b2a: 6c,3e,38            ml2w  R38,R3e          lR38 *= R3e;
 4b2d: 0c,06,38            shrdw R38,6            lR38 >>= 6;
@@ -4563,14 +4563,14 @@
 4d92: a0,38,32            ldw   R32,R38          R32 = R38;
 4d95: ad,0a,34            ldzbw R34,a            wR34 = a;
 4d98: 45,88,02,f4,38      ad3w  R38,Rf4,288      R38 = fuel_base_table_cold_decay;
-4d9d: ef,19,fc            call  49b9             UYTabLU_49b9 ();
+4d9d: ef,19,fc            call  49b9             Four_Point_Interpolation ();
 4da0: b0,3b,42            ldb   R42,R3b          R42 = R3b;
 4da3: b3,f4,60,36         ldb   R36,[Rf4+60]     R36 = [b4a2];
 4da7: 2a,65               scall 500e             Sub_500e ();
 4da9: a3,e8,c6,32         ldw   R32,[Re8+c6]     R32 = FN071_MAP_y;
 4dad: ad,0a,34            ldzbw R34,a            wR34 = a;
 4db0: 45,38,02,f4,38      ad3w  R38,Rf4,238      R38 = fuel_base_table_cold;
-4db5: ef,01,fc            call  49b9             UYTabLU_49b9 ();
+4db5: ef,01,fc            call  49b9             Four_Point_Interpolation ();
 4db8: 58,42,3b,40         sb3b  R40,R3b,R42      R40 = R3b - R42;
 4dbc: db,02               jc    4dc0             if (R40 < 0)  {
 4dbe: 11,40               clrb  R40              R40 = 0; }
@@ -4774,7 +4774,7 @@
 4fcf: 91,02,a0            orb   Ra0,2            B1_V_LAMJMP_a0 = 1; }
 4fd2: f0                  ret                    return;
 
-   Sub_4fd3:
+   ACT_to_ECT_proportioning_factor(R36):
 4fd3: fe,5c,b7,36,38      sml3b R38,R36,Rb7      swR38 = syR36 * ACT;
 4fd8: 13,36               negb  R36              R36 = -R36;
 4fda: 75,7f,36            ad2b  R36,7f           R36 += 7f;
@@ -4796,13 +4796,13 @@
 4fff: a0,38,32            ldw   R32,R38          R32 = R38;
 5002: 45,81,04,f4,38      ad3w  R38,Rf4,481      R38 = FN1360;
 5007: ad,0a,34            ldzbw R34,a            wR34 = a;
-500a: ef,ac,f9            call  49b9             UYTabLU_49b9 ();
+500a: ef,ac,f9            call  49b9             Four_Point_Interpolation ();
 500d: f0                  ret                    return;
 
    Sub_500e:
-500e: ef,c2,ff            call  4fd3             Sub_4fd3 ();
+500e: ef,c2,ff            call  4fd3             ACT_to_ECT_proportioning_factor(R36) ();
 5011: ef,c7,f8            call  48db             SUWFuncLU_48db (
-5014: be,02                     #arg 1              FN070,
+5014: be,02                     #arg 1              Func_b2be,
 5016: 38,00                     #arg 2              38 );
 5018: a0,38,30            ldw   R30,R38          R30 = R38;
 501b: f0                  ret                    return;
@@ -4909,7 +4909,7 @@
 5131: a3,e6,5a,30         ldw   R30,[Re6+5a]     R30 = FN039_N_x;
 5135: a3,e6,56,32         ldw   R32,[Re6+56]     R32 = FN025_MAP_y;
 5139: ad,06,34            ldzbw R34,6            wR34 = 6;
-513c: e7,7a,f8            jump  49b9             goto UYTabLU_49b9;
+513c: e7,7a,f8            jump  49b9             goto Four_Point_Interpolation;
 
    FUEL_ADAPT_COM4:
 513f: 3e,a5,11            jb    B6,Ra5,5153      if (UNDSP = 0)  {
@@ -4920,7 +4920,7 @@
 514e: 91,01,a5            orb   Ra5,1            Adptmr_on = 1;
 5151: 20,07               sjmp  515a             goto 515a; } } }
 
-5153: c3,e4,b8,00         stw   R0,[Re4+b8]      Adptmr = 0;
+5153: c3,e4,b8,00         stw   R0,[Re4+b8]      ADPTMR = 0;
 5157: 71,fe,a5            an2b  Ra5,fe           Adptmr_on = 0;
 515a: a3,e8,0c,14         ldw   R14,[Re8+c]      R14 = RANNUM;
 515e: 6d,05,02,14         ml2w  R14,205          lR14 *= 205;
@@ -4962,18 +4962,18 @@
 51c7: 64,3c,38            ad2w  R38,R3c          R38 += R3c;                       #
 51ca: c7,e6,47,39         stb   R39,[Re6+47]     ROWTBU = R39;                     # ROWTBU = kamrow + 0.5 + ranrow
    EGO_Switch_Logic:
-51ce: 30,9f,0a            jnb   B0,R9f,51db      if (SWTFL = 1)  {
+51ce: 30,9f,0a            jnb   B0,R9f,51db      if (SWTFL = 1)  {                 # (EGO switch)
 51d1: b3,ea,aa,38         ldb   R38,[Rea+aa]     R38 = EGOCNT;
-51d5: 17,38               incb  R38              R38++;
+51d5: 17,38               incb  R38              R38++;                            # Increment EGOCNT
 51d7: c7,ea,aa,38         stb   R38,[Rea+aa]     EGOCNT = R38; }
-51db: 3a,9f,61            jb    B2,R9f,523f      if (B2_OLFLG = 0)  {
+51db: 3a,9f,61            jb    B2,R9f,523f      if (B2_OLFLG = 0)  {              # OPEN LOOP FUEL CONTROL
 51de: 9b,fe,36,b7         cmpb  Rb7,[Rfe+36]     
 51e2: da,5b               jle   523f             if (ACT > AFACT1)  {
 51e4: 9b,fe,37,b7         cmpb  Rb7,[Rfe+37]     
 51e8: d6,55               jge   523f             if (ACT < AFACT2)  {
-51ea: a3,e4,b8,38         ldw   R38,[Re4+b8]     R38 = Adptmr;
+51ea: a3,e4,b8,38         ldw   R38,[Re4+b8]     R38 = ADPTMR;
 51ee: 8b,fe,38,38         cmpw  R38,[Rfe+38]     
-51f2: d3,4b               jnc   523f             if (R38 >= [cb92])  {
+51f2: d3,4b               jnc   523f             if (R38 >= ADAPTM)  {
 51f4: 3f,9f,48            jb    B7,R9f,523f      if (B7_Flags_9f = 0)  {
 51f7: 51,ac,a6,38         an3b  R38,Ra6,ac       R38 = (B2_TFMFLG_a6|
                                                         B3_MFMFLG_a6|
@@ -4982,17 +4982,17 @@
 51fb: d7,42               jne   523f             if (R38 = 0)  {
 51fd: b3,e6,9b,38         ldb   R38,[Re6+9b]     R38 = AEFUEL;
 5201: 9b,fe,45,38         cmpb  R38,[Rfe+45]     
-5205: d9,38               jgtu  523f             if (R38 <= [cb9f])  {
-5207: a0,98,38            ldw   R38,R98          R38 = R98;
+5205: d9,38               jgtu  523f             if (R38 <= AELIM)  {
+5207: a0,98,38            ldw   R38,R98          R38 = EFTR;
 520a: 37,39,02            jnb   B7,R39,520f      if (B7_R39 = 1)  {
 520d: 03,38               negw  R38              R38 = -R38; }
 520f: 8b,fe,46,38         cmpw  R38,[Rfe+46]     
-5213: db,2a               jc    523f             if (R38 < [cba0])  {
+5213: db,2a               jc    523f             if (R38 < ADEFTR)  {
 5215: 4b,e6,a2,16,38      sb3w  R38,R16,[Re6+a2] R38 = R16 - LSTROW;
 521a: db,02               jc    521e             if (R38 < 0)  {
 521c: 03,38               negw  R38              R38 = -R38; }
 521e: 8b,fe,3e,38         cmpw  R38,[Rfe+3e]     
-5222: d9,1b               jgtu  523f             if (R38 <= [cb98])  {
+5222: d9,1b               jgtu  523f             if (R38 <= DELROW)  {
 5224: 4b,e6,a4,18,38      sb3w  R38,R18,[Re6+a4] R38 = R18 - LSTCOL;
 5229: db,02               jc    522d             if (R38 < 0)  {
 522b: 03,38               negw  R38              R38 = -R38; }
@@ -5006,11 +5006,13 @@
 5243: c7,ea,aa,00         stb   R0,[Rea+aa]      EGOCNT = 0;
 5247: c3,e6,a4,18         stw   R18,[Re6+a4]     LSTCOL = R18;                     # LSTCOL = kamcol
 524b: c3,e6,a2,16         stw   R16,[Re6+a2]     LSTROW = R16;                     # LSTCOL = kamrow
-524f: 29,18               scall 5369             NEW_UPRATE_CALC ();
+524f: 29,18               scall 5369             NEW_UPRATE_CALC ();               # Do: NEW_UPRATE_CALC
 5251: 21,15               sjmp  5368             return; } }                       # Exit FUEL_ADAPT_COM4
 
-# Continue with FUEL_ADAPT_COM4
-5253: b3,e8,7d,42         ldb   R42,[Re8+7d]     R42 = PTPAMP;                     # Calculate the LAMBSE window, LAMWIN:
+# Continue with FUEL_ADAPT_COM4:
+
+# Calculate the LAMBSE window, LAMWIN:
+5253: b3,e8,7d,42         ldb   R42,[Re8+7d]     R42 = PTPAMP;
 5257: b3,fe,3a,43         ldb   R43,[Rfe+3a]     R43 = AMPMUL;
 525b: 7c,43,42            ml2b  R42,R43          wR42 *= R43;
 525e: 08,02,42            shrw  R42,2            R42 >>= 2;
@@ -5018,6 +5020,8 @@
 5265: d3,03               jnc   526a             if (R42 > ffff)  {
 5267: bd,ff,42            ldsbw R42,ff           swR42 = ff; }
 526a: c3,e8,7a,42         stw   R42,[Re8+7a]     LAMWIN = R42;                     # LAMWIN = DELAMB + (PTPAMP * AMPMUL)
+
+# Calculate the EGO based learning rate:
 526e: 39,25,22            jb    B1,R25,5293      if (B1_WARM_UP_25 = 0)  {
 5271: 3e,a5,1f            jb    B6,Ra5,5293      if (UNDSP = 0)  {
 5274: b0,b9,38            ldb   R38,Rb9          R38 = TCSTRT;
@@ -5028,18 +5032,20 @@
 5284: 91,02,25            orb   R25,2            B1_WARM_UP_25 = 1;
 5287: b3,ee,c7,38         ldb   R38,[Ree+c7]     R38 = KWUCTR;
 528b: 17,38               incb  R38              R38++;
-528d: db,04               jc    5293             if (R38 <= ff)  {
+528d: db,04               jc    5293             if (R38 <= ff)  {                 # Clip KWUCTR to 255
 528f: c7,ee,c7,38         stb   R38,[Ree+c7]     KWUCTR = R38; } } } } }
 5293: b3,ee,c7,32         ldb   R32,[Ree+c7]     R32 = KWUCTR;
 5297: 9b,fe,4a,32         cmpb  R32,[Rfe+4a]     
 529b: d3,06               jnc   52a3             if (R32 >= KWUCNT)  {
-529d: b3,fe,48,32         ldb   R32,[Rfe+48]     R32 = ADEGCT;
+529d: b3,fe,48,32         ldb   R32,[Rfe+48]     R32 = ADEGCT;                     # egolearn_rat = ADEGCT (use normal learning rate)
 52a1: 20,04               sjmp  52a7             goto 52a7; }
 
-52a3: b3,fe,49,32         ldb   R32,[Rfe+49]     R32 = FAEGCT;
+52a3: b3,fe,49,32         ldb   R32,[Rfe+49]     R32 = FAEGCT;                     # egolearn_rat = FAEGCT (use fast learning rate)
+
+# Calculate loop counters:
 52a7: b3,ea,aa,38         ldb   R38,[Rea+aa]     R38 = EGOCNT;
 52ab: 98,32,38            cmpb  R38,R32          
-52ae: d3,48               jnc   52f8             if (R38 >= R32)  {
+52ae: d3,48               jnc   52f8             if (R38 >= R32)  {                # EGOCNT >= egolearn_rat
 52b0: a3,e8,46,38         ldw   R38,[Re8+46]     R38 = BIAS;
 52b4: 09,04,38            shlw  R38,4            R38 <<= 4;
 52b7: 75,80,39            ad2b  R39,80           R39 += 80;
@@ -5047,13 +5053,13 @@
 52bd: 67,e8,7a,38         ad2w  R38,[Re8+7a]     R38 += LAMWIN;
 52c1: 88,96,38            cmpw  R38,R96          
 52c4: d9,32               jgtu  52f8             if (R38 > LAMBSE1) goto 52f8;
-52c6: 36,44,06            jnb   B6,R44,52cf      if (B6_R44 = 1)  {
+52c6: 36,44,06            jnb   B6,R44,52cf      if (B6_LIMIT_PURGE_44 = 1)  {
 52c9: 8b,e4,76,00         cmpw  R0,[Re4+76]      
 52cd: d7,29               jne   52f8             if (PURGDC != 0) goto 52f8; }
 52cf: b3,e6,8e,38         ldb   R38,[Re6+8e]     R38 = LOPCT1;
 52d3: 99,ff,38            cmpb  R38,ff           
-52d6: df,20               je    52f8             if (R38 = ff) goto 52f8;
-52d8: 17,38               incb  R38              R38++;
+52d6: df,20               je    52f8             if (R38 = ff) goto 52f8;          # (max 255)
+52d8: 17,38               incb  R38              R38++;                            # Increment LOPCT1
 52da: c7,e6,8e,38         stb   R38,[Re6+8e]     LOPCT1 = R38;
 52de: 20,18               sjmp  52f8             goto 52f8; }
 
@@ -5062,9 +5068,13 @@
 52e7: d3,0f               jnc   52f8             if (R38 >= LAMBSE1)  {
 52e9: b3,e6,8f,38         ldb   R38,[Re6+8f]     R38 = LOPCT2;
 52ed: 99,ff,38            cmpb  R38,ff           
-52f0: df,06               je    52f8             if (R38 != ff)  {
-52f2: 17,38               incb  R38              R38++;
+52f0: df,06               je    52f8             if (R38 != ff)  {                 # (max 255)
+52f2: 17,38               incb  R38              R38++;                            # Increment LOPCT2
 52f4: c7,e6,8f,38         stb   R38,[Re6+8f]     LOPCT2 = R38; } } } } } }
+
+# Determine if adaptive cells should be incremented/decremented:
+#  LTMTBL cells are updated when the following conditions are satisfied:
+#   Note that r = ROWTBU and c = COLTBU in the following charts.
 52f8: 45,94,02,fe,42      ad3w  R42,Rfe,294      R42 = FN1325L;
 52fd: b3,e6,47,14         ldb   R14,[Re6+47]     R14 = ROWTBU;
 5301: 7d,0a,14            ml2b  R14,a            wR14 *= a;
@@ -5073,22 +5083,22 @@
 530b: 64,42,14            ad2w  R14,R42          R14 += R42;
 530e: b1,ff,3d            ldb   R3d,ff           R3d = ff;
 5311: 9a,14,00            cmpb  R0,[R14]         
-5314: d2,02               jgt   5318             if ([R14] >= 0)  {
+5314: d2,02               jgt   5318             if ([R14] >= 0)  {                # FN1325Lrc >= 0
 5316: 17,3d               incb  R3d              R3d++; }
 5318: a1,4e,07,40         ldw   R40,74e          R40 = 74e;
 531c: 64,3a,40            ad2w  R40,R3a          R40 += R3a;
-531f: b2,40,36            ldb   R36,[R40]        R36 = [R40];
+531f: b2,40,36            ldb   R36,[R40]        R36 = [R40];                      # LTMTBLrc
 5322: a3,ee,cc,34         ldw   R34,[Ree+cc]     R34 = KAM_CHKSUM;
 5326: b3,e8,7c,32         ldb   R32,[Re8+7c]     R32 = UPRATE;
-532a: 19,01,32            shlb  R32,1            R32 <<= 1;
+532a: 19,01,32            shlb  R32,1            R32 <<= 1;                        # 2 * UPRATE 
 532d: 9b,e6,8e,32         cmpb  R32,[Re6+8e]     
-5331: db,13               jc    5346             if (R32 < LOPCT1)  {
+5331: db,13               jc    5346             if (R32 < LOPCT1)  {              # LOPCT1 > 2 * UPRATE
 5333: c7,e6,8e,00         stb   R0,[Re6+8e]      LOPCT1 = 0;
 5337: 3f,3d,2a            jb    B7,R3d,5364      if (B7_R3d = 1) goto 5364;
 533a: 9b,fe,43,36         cmpb  R36,[Rfe+43]     
 533e: d1,24               jleu  5364             if (R36 <= MINADP) goto 5364;
-5340: 05,34               decw  R34              R34--;
-5342: 15,36               decb  R36              R36--;
+5340: 05,34               decw  R34              R34--;                            # Decrement CHKSUM
+5342: 15,36               decb  R36              R36--;                            # LTMTBLrc = LTMBLrc - 0.0039
 5344: 20,17               sjmp  535d             goto 535d; }
 
 5346: 9b,e6,8f,32         cmpb  R32,[Re6+8f]     
@@ -5096,9 +5106,9 @@
 534c: c7,e6,8f,00         stb   R0,[Re6+8f]      LOPCT2 = 0;
 5350: 3f,3d,11            jb    B7,R3d,5364      if (B7_R3d = 0)  {
 5353: 9b,fe,44,36         cmpb  R36,[Rfe+44]     
-5357: db,0b               jc    5364             if (R36 < MAXADP)  {
-5359: 07,34               incw  R34              R34++;
-535b: 17,36               incb  R36              R36++;
+5357: db,0b               jc    5364             if (R36 < MAXADP)  {              # LTMTBLrc < MAXADP
+5359: 07,34               incw  R34              R34++;                            # Increment CHKSUM
+535b: 17,36               incb  R36              R36++;                            # LTMTBLrc = LTMTBLrc + 0.0039
 535d: c3,ee,cc,34         stw   R34,[Ree+cc]     KAM_CHKSUM = R34;
 5361: c6,40,36            stb   R36,[R40]        [R40] = R36; } } } }
 5364: c7,ea,aa,00         stb   R0,[Rea+aa]      EGOCNT = 0; }
@@ -5114,14 +5124,15 @@
 537d: b2,14,3b            ldb   R3b,[R14]        R3b = [R14];                      # Read the value in FN1325L specified by kamcol.
 5380: 20,7b               sjmp  53fd             goto 53fd; }                      # Load this value in UPRATE.
 
+# Continue with subroutine NEW_UPRATE_CALC
 5382: b2,15,3b            ldb   R3b,[R14++]      R3b = [R14++];
 5385: b0,3b,1a            ldb   R1a,R3b          R1a = R3b;
 5388: b0,3b,1b            ldb   R1b,R3b          R1b = R3b;
 538b: a0,1a,1c            ldw   R1c,R1a          R1c = R1a;
 538e: 99,09,19            cmpb  R19,9            
-5391: d7,0e               jne   53a1             if (R19 = 9)  {
+5391: d7,0e               jne   53a1             if (R19 = 9)  {                   # Column
 5393: 99,09,17            cmpb  R17,9            
-5396: df,1e               je    53b6             if (R17 = 9) goto 53b6;
+5396: df,1e               je    53b6             if (R17 = 9) goto 53b6;           # Row
 5398: b3,14,09,1c         ldb   R1c,[R14+9]      R1c = [R14+9];
 539c: b0,1c,1d            ldb   R1d,R1c          R1d = R1c;
 539f: 20,15               sjmp  53b6             goto 53b6; }
@@ -5159,18 +5170,18 @@
 53f0: ac,16,32            ldzbw R32,R16          wR32 = yR16;
 53f3: ad,02,34            ldzbw R34,2            wR34 = 2;
 53f6: a1,1a,00,38         ldw   R38,1a           R38 = 1a;
-53fa: ef,bc,f5            call  49b9             UYTabLU_49b9 (); }
+53fa: ef,bc,f5            call  49b9             Four_Point_Interpolation (); }
 53fd: c7,e8,7c,3b         stb   R3b,[Re8+7c]     UPRATE = R3b;
-5401: f0                  ret                    return;
+5401: f0                  ret                    return;                           # Exit the subroutine NEW_UPRATE_CALC
 
    Sub_5402:
-5402: 37,a5,02            jnb   B7,Ra5,5407      if (CRKFLG = 1)  {
+5402: 37,a5,02            jnb   B7,Ra5,5407      if (CRKFLG = 1)  {                # (crank mode)   
 5405: 23,38               sjmp  573f             goto 573f; }
 
 5407: ef,26,04            call  5830             FUEL_KAM_ADAPT_COM3 ();
-540a: ef,df,04            call  58ec             Sub_58ec ();
+540a: ef,df,04            call  58ec             FUEL_TRANS_COM5 ();
 540d: b3,f5,94,00,36      ldb   R36,[Rf4+94]     R36 = [b4d6];
-5412: ef,be,fb            call  4fd3             Sub_4fd3 ();
+5412: ef,be,fb            call  4fd3             ACT_to_ECT_proportioning_factor(R36) ();
 5415: 0a,07,38            asrw  R38,7            swR38 >>= 7;
 5418: ef,c0,f4            call  48db             SUWFuncLU_48db (
 541b: d2,03                     #arg 1              Func_b3d2,
@@ -5183,7 +5194,7 @@
 542d: a0,38,32            ldw   R32,R38          R32 = R38;
 5430: ad,05,34            ldzbw R34,5            wR34 = 5;
 5433: 45,4f,04,f4,38      ad3w  R38,Rf4,44f      R38 = Table_b891;
-5438: ef,7e,f5            call  49b9             UYTabLU_49b9 ();
+5438: ef,7e,f5            call  49b9             Four_Point_Interpolation ();
 543b: b0,3b,3c            ldb   R3c,R3b          R3c = R3b;
 543e: af,e8,06,38         ldzbw R38,[Re8+6]      wR38 = ATMR3;
 5442: ef,a1,f4            call  48e6             UUWFuncLU_48e6 (
@@ -5196,7 +5207,7 @@
 5453: a0,38,32            ldw   R32,R38          R32 = R38;
 5456: ad,05,34            ldzbw R34,5            wR34 = 5;
 5459: 45,36,04,f4,38      ad3w  R38,Rf4,436      R38 = Table_b878;
-545e: ef,58,f5            call  49b9             UYTabLU_49b9 ();
+545e: ef,58,f5            call  49b9             Four_Point_Interpolation ();
 5461: 7c,3b,3c            ml2b  R3c,R3b          wR3c *= R3b;
 5464: c3,e6,b4,3c         stw   R3c,[Re6+b4]     [234] = R3c;
 5468: 01,38               clrw  R38              R38 = 0;
@@ -5224,7 +5235,7 @@
 54ae: 0c,0a,3c            shrdw R3c,a            lR3c >>= a;
 54b1: c3,e6,6a,3c         stw   R3c,[Re6+6a]     [2ea] = R3c;
 54b5: 7d,f0,18            ml2b  R18,f0           wR18 *= f0;
-54b8: a0,98,38            ldw   R38,R98          R38 = R98;
+54b8: a0,98,38            ldw   R38,R98          R38 = EFTR;
 54bb: 37,99,02            jnb   B7,R99,54c0      if (B7_R99 = 1)  {
 54be: 03,38               negw  R38              R38 = -R38; }
 54c0: 6c,18,38            ml2w  R38,R18          lR38 *= R18;
@@ -5553,8 +5564,8 @@
 5846: af,e4,e5,32         ldzbw R32,[Re4+e5]     wR32 = ISFLAG;
 584a: 64,32,30            ad2w  R30,R32          R30 += R32;
 584d: a0,30,40            ldw   R40,R30          R40 = R30;
-5850: 28,83               scall 58d5             Sub_58d5 ();
-5852: af,33,4e,07,3a      ldzbw R3a,[R32+74e]    wR3a = [R32+74e]; }
+5850: 28,83               scall 58d5             Sub_58d5 ();                      # (use no interpolation) 
+5852: af,33,4e,07,3a      ldzbw R3a,[R32+74e]    wR3a = [R32+74e]; }               # KAMREF = 0.5 + LTMTBLrc
 5857: 20,64               sjmp  58bd             goto 58bd; } }
 
 5859: af,e4,6b,38         ldzbw R38,[Re4+6b]     wR38 = MAPOPE;
@@ -5590,7 +5601,7 @@
 58ad: ac,14,32            ldzbw R32,R14          wR32 = yR14;
 58b0: ad,02,34            ldzbw R34,2            wR34 = 2;
 58b3: a1,3c,00,38         ldw   R38,3c           R38 = 3c;                         # 60.000
-58b7: ef,ff,f0            call  49b9             UYTabLU_49b9 ();
+58b7: ef,ff,f0            call  49b9             Four_Point_Interpolation ();
 58ba: ac,3b,3a            ldzbw R3a,R3b          wR3a = yR3b;
 58bd: 65,80,00,3a         ad2w  R3a,80           R3a += 80;
 58c1: c3,e4,f6,3a         stw   R3a,[Re4+f6]     KAMRF1 = R3a;
@@ -5610,40 +5621,40 @@
 58e8: a0,34,32            ldw   R32,R34          R32 = R34; }
 58eb: f0                  ret                    return;
 
-   Sub_58ec:
+   FUEL_TRANS_COM5:
 58ec: b3,f4,75,18         ldb   R18,[Rf4+75]     R18 = [b4b7];
 58f0: 3e,a5,06            jb    B6,Ra5,58f9      if (UNDSP = 0)  {
 58f3: 9b,f4,71,d4         cmpb  Rd4,[Rf4+71]     
-58f7: db,06               jc    58ff             if (ATMR1 >= [b4b3]) goto 58ff; }
-58f9: 71,f7,28            an2b  R28,f7           B3_R28 = 0;
-58fc: 01,98               clrw  R98              R98 = 0;
-58fe: f0                  ret                    return; }
+58f7: db,06               jc    58ff             if (ATMR1 >= TFCTM) goto 58ff; }
+58f9: 71,f7,28            an2b  R28,f7           B3_EFFLG1_28 = 0;
+58fc: 01,98               clrw  R98              EFTR = 0;
+58fe: f0                  ret                    return; }                         # (do not run transient fuel compensation)
 
-58ff: b3,fe,10,36         ldb   R36,[Rfe+10]     R36 = [cb6a];
-5903: ef,cd,f6            call  4fd3             Sub_4fd3 ();
+58ff: b3,fe,10,36         ldb   R36,[Rfe+10]     R36 = ALPHA;
+5903: ef,cd,f6            call  4fd3             ACT_to_ECT_proportioning_factor(R36) ();
 5906: ef,d2,ef            call  48db             SUWFuncLU_48db (
-5909: be,02                     #arg 1              FN070,
+5909: be,02                     #arg 1              Func_b2be,
 590b: 38,00                     #arg 2              38 );
 590d: a0,38,1a            ldw   R1a,R38          R1a = R38;
 5910: a0,1a,30            ldw   R30,R1a          R30 = R1a;
 5913: a3,e6,54,32         ldw   R32,[Re6+54]     R32 = [2d4];
 5917: ad,0a,34            ldzbw R34,a            wR34 = a;
-591a: 45,36,03,f4,38      ad3w  R38,Rf4,336      R38 = fuel_equil_constant;
-591f: ef,97,f0            call  49b9             UYTabLU_49b9 ();
+591a: 45,36,03,f4,38      ad3w  R38,Rf4,336      R38 = FN1322;
+591f: ef,97,f0            call  49b9             Four_Point_Interpolation ();
 5922: ef,4b,ef            call  4870             UUYFuncLU_4870 (
-5925: d8,42                     #arg 1              fuel_equil_constant_multiplier,
+5925: d8,42                     #arg 1              FN307,
 5927: ea,01                     #arg 2              N_BYTE );
-5929: 5c,38,3b,40         ml3b  R40,R3b,R38      wR40 = yR3b * R38;
+5929: 5c,38,3b,40         ml3b  R40,R3b,R38      wR40 = yR3b * R38;                # (EFTC * FN307(N_BYTE))
 592d: a0,1a,30            ldw   R30,R1a          R30 = R1a;
 5930: a3,e6,54,32         ldw   R32,[Re6+54]     R32 = [2d4];
 5934: ad,0a,34            ldzbw R34,a            wR34 = a;
-5937: 45,e6,02,f4,38      ad3w  R38,Rf4,2e6      R38 = fuel_equil_surface;
-593c: ef,7a,f0            call  49b9             UYTabLU_49b9 ();
+5937: 45,e6,02,f4,38      ad3w  R38,Rf4,2e6      R38 = FN1321;
+593c: ef,7a,f0            call  49b9             Four_Point_Interpolation ();
 593f: 5f,f4,72,3b,3a      ml3b  R3a,R3b,[Rf4+72] wR3a = yR3b * [b4b4];
 5944: 08,01,3a            shrw  R3a,1            R3a >>= 1;
-5947: 33,28,16            jnb   B3,R28,5960      if (B3_R28 = 1)  {
+5947: 33,28,16            jnb   B3,R28,5960      if (B3_EFFLG1_28 = 1)  {
 594a: 31,27,28            jnb   B1,R27,5975      if (B1_DFSFLG_R27 = 0) goto 5975;
-594d: 01,98               clrw  R98              R98 = 0;
+594d: 01,98               clrw  R98              EFTR = 0;
 594f: af,f4,7d,38         ldzbw R38,[Rf4+7d]     wR38 = [b4bf];
 5953: 6c,3a,38            ml2w  R38,R3a          lR38 *= R3a;
 5956: 0d,09,38            shldw R38,9            lR38 <<= 9;
@@ -5656,14 +5667,14 @@
 5967: 01,3a               clrw  R3a              R3a = 0; } }
 5969: c3,e6,a6,00         stw   R0,[Re6+a6]      [226] = 0;
 596d: c3,e6,a8,3a         stw   R3a,[Re6+a8]     [228] = R3a;
-5971: 91,08,28            orb   R28,8            B3_R28 = 1;
+5971: 91,08,28            orb   R28,8            B3_EFFLG1_28 = 1;
 5974: f0                  ret                    return; }
 
 5975: 4b,e6,aa,06,34      sb3w  R34,R6,[Re6+aa]  R34 = IO_Timer - [22a];
 597a: c3,e6,aa,06         stw   R6,[Re6+aa]      [22a] = IO_Timer;
 597e: 6d,44,28,34         ml2w  R34,2844         lR34 *= 2844;
 5982: a0,36,34            ldw   R34,R36          R34 = R36;
-5985: fe,6c,98,34         sml2w R34,R98          slR34 *= R98;
+5985: fe,6c,98,34         sml2w R34,R98          slR34 *= EFTR;
 5989: 37,37,23            jnb   B7,R37,59af      if (B7_R37 = 1)  {
 598c: a0,36,32            ldw   R32,R36          R32 = R36;
 598f: a0,34,30            ldw   R30,R34          R30 = R34;
@@ -5709,18 +5720,18 @@
 5a05: db,04               jc    5a0b             if (R3a < 0)  {
 5a07: 17,42               incb  R42              R42++;
 5a09: 03,3a               negw  R3a              R3a = -R3a; }
-5a0b: af,f4,70,38         ldzbw R38,[Rf4+70]     wR38 = [b4b2];
-5a0f: 36,25,04            jnb   B6,R25,5a16      if (B6_MPGFLG_25 = 1)  {
-5a12: af,f4,73,38         ldzbw R38,[Rf4+73]     wR38 = [b4b5]; }
-5a16: 6c,3a,38            ml2w  R38,R3a          lR38 *= R3a;
+5a0b: af,f4,70,38         ldzbw R38,[Rf4+70]     wR38 = KFT;                       # A = KFT
+5a0f: 36,25,04            jnb   B6,R25,5a16      if (B6_MPGFLG_25 = 1)  {          # (in MPG mode)
+5a12: af,f4,73,38         ldzbw R38,[Rf4+73]     wR38 = KFTMPG; }                  # A = KFTMPG
+5a16: 6c,3a,38            ml2w  R38,R3a          lR38 *= R3a;                      # A * [(EISF * MTEISF - AISF) 
 5a19: 0d,01,38            shldw R38,1            lR38 <<= 1;
-5a1c: 8c,40,38            divw  R38,R40          wR38 /= R40;
+5a1c: 8c,40,38            divw  R38,R40          wR38 /= R40;                      # EFTR = A * [(EISF * MTEISF - AISF) / (EFTC * FN307(N_BYTE))]
 5a1f: dd,03               jv    5a24             if (OVF = 0)  {
 5a21: 37,39,04            jnb   B7,R39,5a28      if (B7_R39 = 0) goto 5a28; }
 5a24: a1,ff,7f,38         ldw   R38,7fff         R38 = 7fff; }
-5a28: a0,38,98            ldw   R98,R38          R98 = R38;
+5a28: a0,38,98            ldw   R98,R38          EFTR = R38;
 5a2b: 30,42,02            jnb   B0,R42,5a30      if (B0_R42 = 1)  {
-5a2e: 03,98               negw  R98              R98 = -R98; }
+5a2e: 03,98               negw  R98              EFTR = -EFTR; }
 5a30: f0                  ret                    return;
 
    FUEL_DFSO_COM2:
@@ -5867,14 +5878,14 @@
 5bbb: b0,00                     #arg 2              TAR );
 5bbd: a0,38,30            ldw   R30,R38          R30 = R38;                        # FN019A(TAR) = x-axis input to FN1303.
 5bc0: b3,fe,14,36         ldb   R36,[Rfe+14]     R36 = FRCTAE;
-5bc4: ef,0c,f4            call  4fd3             Sub_4fd3 ();
+5bc4: ef,0c,f4            call  4fd3             ACT_to_ECT_proportioning_factor(R36) ();
 5bc7: ef,11,ed            call  48db             SUWFuncLU_48db (
 5bca: 6e,02                     #arg 1              FN020C,
 5bcc: 38,00                     #arg 2              38 );
 5bce: a0,38,32            ldw   R32,R38          R32 = R38;                        # FN020(FRCTAE * ACT + (1-FRCTAE) * ECT) = y-axis input to FN1303.
 5bd1: ad,08,34            ldzbw R34,8            wR34 = 8;
 5bd4: 45,14,02,fe,38      ad3w  R38,Rfe,214      R38 = FN1303;
-5bd9: ef,dd,ed            call  49b9             UYTabLU_49b9 ();
+5bd9: ef,dd,ed            call  49b9             Four_Point_Interpolation ();
 5bdc: ac,3b,3c            ldzbw R3c,R3b          wR3c = yR3b;                      # FN1303(TAR,TEMP) = Desired AE fuel flow, lbm/hr.
 5bdf: ef,04,ed            call  48e6             UUWFuncLU_48e6 (
 5be2: c8,e1                     #arg 1              FN331A,
@@ -6001,7 +6012,7 @@
 5cff: 38,a3,01            jb    B0,Ra3,5d03      if (B0_V_MODE_SETUP_a3 = 0)  {
 5d02: f0                  ret                    return; }
 
-   Sub_5d03:
+   SPARK_BASE_COM2:
 5d03: b3,fa,06,32         ldb   R32,[Rfa+6]      R32 = [bb80];
 5d07: 57,fa,07,32,34      ad3b  R34,R32,[Rfa+7]  R34 = R32 + [bb81];
 5d0c: b3,e4,6a,42         ldb   R42,[Re4+6a]     R42 = N_BYTE;
@@ -6047,19 +6058,19 @@
 5d6b: 45,40,02,fa,38      ad3w  R38,Rfa,240      R38 = spark_adder_temp_and_tip;
 5d70: 29,a0               scall 5f12             UYTabLU_5f12 ();
 5d72: ac,3b,14            ldzbw R14,R3b          wR14 = yR3b;
-5d75: b3,fa,0a,36         ldb   R36,[Rfa+a]      R36 = [bb84];
-5d79: ef,57,f2            call  4fd3             Sub_4fd3 ();
+5d75: b3,fa,0a,36         ldb   R36,[Rfa+a]      R36 = FRCCTM;
+5d79: ef,57,f2            call  4fd3             ACT_to_ECT_proportioning_factor(R36) ();  # TEMP_FRAC = FRCCTM * ACT + (1 - FRCCTM) * ECT.
 5d7c: ef,5c,eb            call  48db             SUWFuncLU_48db (
-5d7f: 7c,a0                     #arg 1              x_spark_91,
+5d7f: 7c,a0                     #arg 1              FN091,
 5d81: 38,00                     #arg 2              38 );
-5d83: a0,38,30            ldw   R30,R38          R30 = R38;
+5d83: a0,38,30            ldw   R30,R38          R30 = R38;                        # FN091(TEMP_FRAC) =  TEMP_FRAC  normalizing  function  for  FN1128,
 5d86: 4b,e6,88,b2,38      sb3w  R38,Rb2,[Re6+88] R38 = TP - TAPBAR;
 5d8b: db,02               jc    5d8f             if (R38 < 0)  {
 5d8d: 01,38               clrw  R38              R38 = 0; }
 5d8f: ef,54,eb            call  48e6             UUWFuncLU_48e6 (
-5d92: a0,a0                     #arg 1              y_spark_92,
+5d92: a0,a0                     #arg 1              FN092,
 5d94: 38,00                     #arg 2              38 );
-5d96: a0,38,32            ldw   R32,R38          R32 = R38;
+5d96: a0,38,32            ldw   R32,R38          R32 = R38;                        # N092(TP - TAPBAR) = TP - TAPBAR normalizing function for FN1128.
 5d99: 45,90,02,fa,38      ad3w  R38,Rfa,290      R38 = spark_ect_vs_tp_multiplier;
 5d9e: ad,0a,34            ldzbw R34,a            wR34 = a;
 5da1: ef,12,ec            call  49b6             SYTabLU_49b6 ();
@@ -6194,7 +6205,7 @@
 5f12: a3,e6,58,30         ldw   R30,[Re6+58]     R30 = FN070L_N_x;
 5f16: a3,e6,54,32         ldw   R32,[Re6+54]     R32 = [2d4];
 5f1a: ad,0a,34            ldzbw R34,a            wR34 = a;
-5f1d: e7,99,ea            jump  49b9             goto UYTabLU_49b9;
+5f1d: e7,99,ea            jump  49b9             goto Four_Point_Interpolation;
 
    Sub_5f20:
 5f20: a3,e8,2a,3c         ldw   R3c,[Re8+2a]     R3c = [3aa];
@@ -6627,10 +6638,10 @@
 6396: a3,e6,58,30         ldw   R30,[Re6+58]     R30 = FN070L_N_x;
 639a: a3,e6,54,32         ldw   R32,[Re6+54]     R32 = [2d4];
 639e: ad,0a,34            ldzbw R34,a            wR34 = a;
-63a1: 45,f6,03,fa,38      ad3w  R38,Rfa,3f6      R38 = egr_base_table;
+63a1: 45,f6,03,fa,38      ad3w  R38,Rfa,3f6      R38 = FN1220;                     # (Base EGR table)
 63a6: 36,25,05            jnb   B6,R25,63ae      if (B6_MPGFLG_25 = 1)  {
-63a9: 45,46,04,fa,38      ad3w  R38,Rfa,446      R38 = egr_base_table_mpg; }
-63ae: ef,08,e6            call  49b9             UYTabLU_49b9 ();
+63a9: 45,46,04,fa,38      ad3w  R38,Rfa,446      R38 = FN1222; }                   # (MPG mode table)
+63ae: ef,08,e6            call  49b9             Four_Point_Interpolation ();
 63b1: ef,b1,e4            call  4865             SUYFuncLU_4865 (
 63b4: 5c,a3                     #arg 1              FN211,
 63b6: b6,00                     #arg 2              ECT );
@@ -7040,7 +7051,7 @@
 67c6: 09,06,40            shlw  R40,6            R40 <<= 6;
 67c9: a0,20,18            ldw   R18,R20          R18 = R20;
 67cc: b3,fe,14,36         ldb   R36,[Rfe+14]     R36 = FRCTAE;
-67d0: ef,00,e8            call  4fd3             Sub_4fd3 ();
+67d0: ef,00,e8            call  4fd3             ACT_to_ECT_proportioning_factor(R36) ();
 67d3: ef,05,e1            call  48db             SUWFuncLU_48db (
 67d6: 6e,02                     #arg 1              FN020C,
 67d8: 38,00                     #arg 2              38 );
@@ -7052,7 +7063,7 @@
 67e8: a0,38,32            ldw   R32,R38          R32 = R38;
 67eb: ad,07,34            ldzbw R34,7            wR34 = 7;
 67ee: 45,c0,01,f0,38      ad3w  R38,Rf0,1c0      R38 = FN1861;
-67f3: ef,c3,e1            call  49b9             UYTabLU_49b9 ();
+67f3: ef,c3,e1            call  49b9             Four_Point_Interpolation ();
 67f6: ac,3b,20            ldzbw R20,R3b          wR20 = yR3b;                      # FN1861(ECT,ATMR3)
 67f9: 45,12,01,f0,32      ad3w  R32,Rf0,112      R32 = FN875D;
 67fe: b3,e4,e5,3e         ldb   R3e,[Re4+e5]     R3e = ISFLAG;
@@ -7749,7 +7760,7 @@
 6f32: 14,02                     #arg 2              PRGTMR );
 6f34: 7c,16,38            ml2b  R38,R16          wR38 *= R16;
 6f37: 09,01,38            shlw  R38,1            R38 <<= 1;
-6f3a: 3e,44,04            jb    B6,R44,6f41      if (B6_R44 = 0)  {
+6f3a: 3e,44,04            jb    B6,R44,6f41      if (B6_LIMIT_PURGE_44 = 0)  {
 6f3d: c3,e4,76,38         stw   R38,[Re4+76]     PURGDC = R38; }
 6f41: a0,38,30            ldw   R30,R38          R30 = R38;
 6f44: a3,e4,76,3c         ldw   R3c,[Re4+76]     R3c = PURGDC;
@@ -7783,10 +7794,10 @@
 6f96: d3,03               jnc   6f9b             if (R3c >= R30)  {
 6f98: a0,30,3c            ldw   R3c,R30          R3c = R30; }
 6f9b: c3,e4,76,3c         stw   R3c,[Re4+76]     PURGDC = R3c;
-6f9f: 71,bf,44            an2b  R44,bf           B6_R44 = 0;
+6f9f: 71,bf,44            an2b  R44,bf           B6_LIMIT_PURGE_44 = 0;
 6fa2: 88,30,3c            cmpw  R3c,R30          
 6fa5: df,03               je    6faa             if (R3c != R30)  {
-6fa7: 91,40,44            orb   R44,40           B6_R44 = 1; }
+6fa7: 91,40,44            orb   R44,40           B6_LIMIT_PURGE_44 = 1; }
 6faa: 88,00,3c            cmpw  R3c,R0           
 6fad: df,03               je    6fb2             if (R3c != 0)  {
 6faf: 91,20,25            orb   R25,20           B5_R25 = 1; }
@@ -9847,7 +9858,7 @@ ERROR CODE DESCRIPTION
 8160: a3,e2,a9,3e         ldw   R3e,[Re2+a9]     R3e = [Re2-57];
 8164: c3,e4,36,3e         stw   R3e,[Re4+36]     [1b6] = R3e;
 8168: 71,bf,4f            an2b  R4f,bf           B6_Knock_enabled = 0;
-816b: c0,98,00            stw   R0,R98           R98 = 0;
+816b: c0,98,00            stw   R0,R98           EFTR = 0;
 816e: a1,00,01,42         ldw   R42,100          R42 = 100;
 8172: c3,e4,f6,42         stw   R42,[Re4+f6]     KAMRF1 = R42;
 8176: a3,fe,52,cc         ldw   Rcc,[Rfe+52]     Rcc = [cbac];
@@ -11092,7 +11103,7 @@ ERROR CODE DESCRIPTION
 8cc9: c0,30,16            stw   R16,R30          R30 = R16;
 8ccc: c0,32,1a            stw   R1a,R32          R32 = R1a;
 8ccf: ad,06,34            ldzbw R34,6            wR34 = 6;
-8cd2: ef,e4,bc            call  49b9             UYTabLU_49b9 ();
+8cd2: ef,e4,bc            call  49b9             Four_Point_Interpolation ();
 8cd5: f0                  ret                    return;
 
    SC_DESRD_GR_DETR_COM1:
@@ -13819,7 +13830,7 @@ a889: 87,2c,04,08,24      timer 87,   42c,  B3_24
 a88e: 41,36,04,80,a8      timer 41,   436, APT_Closed_Throttle, 
 a893: 81,14,02,10,79      timer 81, PRGTMR,  B4_79
 a898: 4b,d2,00,80,a8      timer 4b, NACTMR, APT_Closed_Throttle, 
-a89d: 83,38,01,01,a5      timer 83, Adptmr, Adptmr_on, 
+a89d: 83,38,01,01,a5      timer 83, ADPTMR, Adptmr_on, 
 a8a2: 20,51,01            timer 20,   151, 
 a8a5: 40,c1,01            timer 40, Vip_timer_ex, 
 a8a8: 22,36,01            timer 22, PUTMR,                                         #PUTMR          Time since CPU power-up (0.001 seconds)
@@ -14848,7 +14859,7 @@ b2b2: 00,00,00,00         func      0,     0
 b2b6: 00,00,00,00         func      0,     0
 b2ba: 00,00,00,00         func      0,     0
 
-   FN070:
+   Func_b2be:
 b2be: ff,7f,00,09         func   32767,  2304
 b2c2: 80,39,00,09         func   14720,  2304
 b2c6: 80,1b,00,05         func    7040,  1280
@@ -14928,7 +14939,7 @@ b3aa: 00,00,00,00         func      0,     0
 b3ae: 00,00,00,00         func      0,     0
 b3b2: 00,00,00,00         func      0,     0
 
-   y_spark:
+   FN025:
 b3b6: ff,ff,00,07         func  65535,  1792
 b3ba: e8,00,00,07         func    232,  1792
 b3be: c8,00,00,05         func    200,  1280
@@ -15067,10 +15078,10 @@ b4aa: 00,b4               word   b400
 b4ac: 40,9c               word   9c40            WOTRPL
 b4ae: fc,ff               word   fffc            WOTRPH
 b4b0: 00,00               word      0            LAMDLT
-b4b2: 80                  byte     80
-b4b3: 00                  byte      0
+b4b2: 80                  byte     80            KFT
+b4b3: 00                  byte      0            TFCTM
 b4b4: 08                  byte      8
-b4b5: 1a                  byte     1a
+b4b5: 1a                  byte     1a            KFTMPG
 b4b6: 01                  byte      1
 b4b7: 3c                  byte     3c
 b4b8: 5d                  byte     5d
@@ -15276,7 +15287,7 @@ b6fc: 1c,16,12,0d,09,04,00,00,00,00  table   28,  22,  18,  13,   9,   4,   0,  
 b706: 14,0d,0a,06,04,00,00,00,00,00  table   20,  13,  10,   6,   4,   0,   0,   0,   0,   0    
 b710: 0d,0a,05,01,00,00,00,00,00,00  table   13,  10,   5,   1,   0,   0,   0,   0,   0,   0    
 
-   fuel_equil_constant_multiplier:
+   FN307:
 b71a: ff,20               func  255,  32
 b71c: 00,20               func    0,  32
 b71e: 00,20               func    0,  32
@@ -15285,7 +15296,7 @@ b722: 00,20               func    0,  32
 b724: 00,20               func    0,  32
 b726: 00,20               func    0,  32
 
-   fuel_equil_surface:
+   FN1321:
 b728: 2f,2f,17,06,04,03,02,02,02,01  table   47,  47,  23,   6,   4,   3,   2,   2,   2,   1    
 b732: 37,37,1b,0d,08,05,04,04,02,02  table   55,  55,  27,  13,   8,   5,   4,   4,   2,   2    
 b73c: 47,47,23,19,13,0b,0a,05,04,04  table   71,  71,  35,  25,  19,  11,  10,   5,   4,   4    
@@ -15295,7 +15306,7 @@ b75a: 8c,8c,46,2f,23,13,0e,09,08,08  table  140, 140,  70,  47,  35,  19,  14,  
 b764: 8c,8c,46,2f,23,18,12,0b,0b,0b  table  140, 140,  70,  47,  35,  24,  18,  11,  11,  11    
 b76e: 8c,8c,46,2f,23,23,1a,10,10,10  table  140, 140,  70,  47,  35,  35,  26,  16,  16,  16    
 
-   fuel_equil_constant:
+   FN1322:
 b778: 02,02,02,02,04,06,06,05,06,06  table    2,   2,   2,   2,   4,   6,   6,   5,   6,   6    
 b782: 02,02,02,02,04,06,06,06,06,06  table    2,   2,   2,   2,   4,   6,   6,   6,   6,   6    
 b78c: 02,02,02,02,04,05,06,06,06,06  table    2,   2,   2,   2,   4,   5,   6,   6,   6,   6    
@@ -15680,7 +15691,7 @@ bb7f: 3a                  byte     3a
 bb80: 00                  byte      0
 bb81: 00                  byte      0
 bb82: 00,00               word      0
-bb84: 20                  byte     20
+bb84: 20                  byte     20            FRCCTM
 bb85: 00                  byte      0            Splclp
 bb86: bc                  byte     bc
 
@@ -15780,7 +15791,7 @@ bbea: 00,80,9a,99         func  -32768, 39322
 bbee: 00,80,9a,99         func  -32768, 39322
 bbf2: 00,80,9a,99         func  -32768, 39322
 
-   x_spark_91:
+   FN091:
 bbf6: ff,7f,00,09         func   32767,  2304
 bbfa: 80,34,00,09         func   13440,  2304
 bbfe: 00,1e,00,06         func    7680,  1536
@@ -15791,7 +15802,7 @@ bc0e: 00,80,00,00         func  -32768,     0
 bc12: 00,80,00,00         func  -32768,     0
 bc16: 00,80,00,00         func  -32768,     0
 
-   y_spark_92:
+   FN092:
 bc1a: ff,ff,00,07         func  65535,  1792
 bc1e: 00,af,00,07         func  44800,  1792
 bc22: 00,32,00,00         func  12800,     0
@@ -15973,7 +15984,7 @@ bf6a: 64,00               func  100,   0
 bf6c: 00,80               func    0, 128
 bf6e: 00,80               func    0, 128
 
-   egr_base_table:
+   FN1220:
 bf70: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
 bf7a: 00,00,00,14,16,16,00,00,00,00  table    0,   0,   0,  20,  22,  22,   0,   0,   0,   0    
 bf84: 00,08,10,28,24,16,00,00,00,00  table    0,   8,  16,  40,  36,  22,   0,   0,   0,   0    
@@ -15983,7 +15994,7 @@ bfa2: 00,00,10,14,14,10,00,00,00,00  table    0,   0,  16,  20,  20,  16,   0,  
 bfac: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
 bfb6: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
 
-   egr_base_table_mpg:
+   FN1222:
 bfc0: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
 bfca: 00,10,18,20,20,18,00,00,00,00  table    0,  16,  24,  32,  32,  24,   0,   0,   0,   0    
 bfd4: 00,20,28,2c,2c,18,00,00,00,00  table    0,  32,  40,  44,  44,  24,   0,   0,   0,   0    
@@ -17263,7 +17274,7 @@ cb64: 00,18               word   1800
 cb66: 00                  byte      0
 cb67: 02                  byte      2            MAP_CYCLE
 cb68: 5a,00               word     5a            AEM
-cb6a: 00                  byte      0
+cb6a: 00                  byte      0            ALPHA
 
 cb6b: ff                  fill  
 
@@ -17303,19 +17314,19 @@ cb8e: 53                  byte     53            AFECT1
 cb8f: 69                  byte     69            AFECT2
 cb90: 19                  byte     19            AFACT1
 cb91: 64                  byte     64            AFACT2
-cb92: 19,00               word     19
+cb92: 19,00               word     19            ADAPTM
 cb94: b3                  byte     b3            AMPMUL
 
 cb95: 00                  ???   
 
 cb96: 8f,02               word    28f            DELAMB
-cb98: 33,00               word     33
+cb98: 33,00               word     33            DELROW
 cb9a: 33,00               word     33
 cb9c: 00                  byte      0
 cb9d: 40                  byte     40            MINADP
 cb9e: c0                  byte     c0            MAXADP
-cb9f: 00                  byte      0
-cba0: 42,00               word     42
+cb9f: 00                  byte      0            AELIM
+cba0: 42,00               word     42            ADEFTR
 cba2: 02                  byte      2            ADEGCT
 cba3: 00                  byte      0            FAEGCT
 cba4: 00                  byte      0            KWUCNT

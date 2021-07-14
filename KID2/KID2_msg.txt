@@ -12,6 +12,8 @@
 
 ## "
  Error -   Invalid  Command
+## cym cb9a "DELCOL"
+ Error -   Invalid  Command
 # ----- Start Disassembly phase 1 -----
 
 # ----- End   Disassembly phase 1 -----
@@ -1143,7 +1145,7 @@ sub  4958  "ROLLING_AVERAGE_ROUTINE"   #cmd
 sub  4987  "ROLLING_AVERAGE_FILTER_ROUTINE"   #cmd
 sub  49a7  "SYTabLU_49a7"   $ F sytlu 38 34 #cmd
 sub  49b6  "SYTabLU_49b6"   $ F sytlu 38 34 #cmd
-sub  49b9  "UYTabLU_49b9"   $ F uytlu 38 34 #cmd
+sub  49b9  "Four_Point_Interpolation"   $ F uytlu 38 34 #cmd
 sub  49ee  "TableInterpolation"   #cmd
 sub  4a1e  "Sub_4a1e"   #cmd
 sub  4a3f  "Sub_4a3f"   #cmd
@@ -1154,7 +1156,7 @@ sub  4e45  "FUEL_CL_LAMBSE_COM3"   #cmd
 sub  4f50  "C_MULTIPLIER_LOGIC"   #cmd
 sub  4fb4  "Sub_4fb4"   #cmd
 sub  4fbd  "LAMBSE_RESET"   #cmd
-sub  4fd3  "Sub_4fd3"   #cmd
+sub  4fd3  "ACT_to_ECT_proportioning_factor(R36)"   #cmd
 sub  4feb  "FN1360(N,MAPPA)"   #cmd
 sub  500e  "Sub_500e"   #cmd
 sub  501c  "CALCULATE_PTPAMP_RF_and_RS"   #cmd
@@ -1167,7 +1169,7 @@ sub  577b  "Sub_577b"   #cmd
 sub  578f  "FUEL_IDLE_MOD_COM3"   #cmd
 sub  5830  "FUEL_KAM_ADAPT_COM3"   #cmd
 sub  58d5  "Sub_58d5"   #cmd
-sub  58ec  "Sub_58ec"   #cmd
+sub  58ec  "FUEL_TRANS_COM5"   #cmd
 sub  5a31  "FUEL_DFSO_COM2"   #cmd
 sub  5b96  "ACCELERATION_ENRICHMENT"   #cmd
 sub  5c7b  "FUEL_PUMP_COM1"   #cmd
@@ -1177,7 +1179,7 @@ sub  5ca9  "Sub_5ca9"   #cmd
 sub  5cce  "Sub_5cce"   #cmd
 sub  5cd1  "Sub_5cd1"   #cmd
 sub  5cff  "Sub_5cff"   #cmd
-sub  5d03  "Sub_5d03"   #cmd
+sub  5d03  "SPARK_BASE_COM2"   #cmd
 sub  5f0a  "Sub_5f0a"   #cmd
 sub  5f12  "UYTabLU_5f12"   $ F uytlu 38 34 #cmd
 sub  5f20  "Sub_5f20"   #cmd
@@ -1447,6 +1449,7 @@ sym 27  "B7_SYNFLG" :B 7
 sym 27  "Flags_27"
 sym 28  "B0_egr_rdy_28" :B 0
 sym 28  "Newsa" :B 2
+sym 28  "B3_EFFLG1_28" :B 3
 sym 28  "EGOSTE" :B 5
 sym 28  "B6_FPWQ3_Q_28" :B 6
 sym 28  "KAM_error" :B 7
@@ -1512,6 +1515,7 @@ sym 3e  "Lseconds" :B 7
 sym 44  "B0_FLG_DASMNQ_44" :B 0
 sym 44  "B1_FN311_Q_44" :B 1
 sym 44  "V_SPDTOZ_FLG" :B 4
+sym 44  "B6_LIMIT_PURGE_44" :B 6
 sym 44  "B7_FLG_TIP_RATE_44" :B 7
 sym 45  "Rvip_cyl_quit" :B 0
 sym 45  "Rvip_cyl_bal" :B 1
@@ -1599,6 +1603,7 @@ sym 91  "VBAT"
 sym 92  "ISCDTY"
 sym 94  "FUELPW1"
 sym 96  "LAMBSE1"
+sym 98  "EFTR"
 sym 9a  "AM"
 sym 9d  "TIPRET"
 sym 9e  "Reg_9e" :B 0
@@ -1724,7 +1729,7 @@ sym 122  "MAP_FREQ"
 sym 124  "MAP_WORD"
 sym 12e  "AETP"
 sym 136  "PUTMR"
-sym 138  "Adptmr"
+sym 138  "ADPTMR"
 sym 13a  "BG_TMR"
 sym 140  "TSLEGO"
 sym 142  "TSLPIP"
@@ -2098,7 +2103,7 @@ sym b23e  "y_fuel_cold_decay"
 sym b25a  "FN019A"
 sym b26e  "FN020C"
 sym b28e  "FN021_MAPOPE_y_load"
-sym b2be  "FN070"
+sym b2be  "Func_b2be"
 sym b2e6  "FN070B"
 sym b2fe  "FN070L"
 sym b31a  "FN071"
@@ -2107,7 +2112,7 @@ sym b352  "Func_b352"
 sym b366  "Func_b366"
 sym b37a  "y_map_emissions"
 sym b396  "FN039"
-sym b3b6  "y_spark"
+sym b3b6  "FN025"
 sym b3d2  "Func_b3d2"
 sym b3ea  "Func_b3ea"
 sym b3fe  "Func_b3fe"
@@ -2143,6 +2148,9 @@ sym b4a4  "OLITD1"
 sym b4ac  "WOTRPL"
 sym b4ae  "WOTRPH"
 sym b4b0  "LAMDLT"
+sym b4b2  "KFT"
+sym b4b3  "TFCTM"
+sym b4b5  "KFTMPG"
 sym b4c0  "DFNOVS"
 sym b4c1  "DFNOVH"
 sym b4c3  "DFSO_ECT"
@@ -2171,9 +2179,9 @@ sym b63a  "FND_TP_DT_A"
 sym b656  "FNTP_AIR_OFF"
 sym b67a  "fuel_base_table_cold"
 sym b6ca  "fuel_base_table_cold_decay"
-sym b71a  "fuel_equil_constant_multiplier"
-sym b728  "fuel_equil_surface"
-sym b778  "fuel_equil_constant"
+sym b71a  "FN307"
+sym b728  "FN1321"
+sym b778  "FN1322"
 sym b7c8  "FN1328"
 sym b818  "FN1343"
 sym b848  "FN222A"
@@ -2238,6 +2246,7 @@ sym bb1e  "Func_bb1e"
 sym bb3e  "spark_vss_multiplier"
 sym bb48  "spark_ect_vs_act_multiplier"
 sym bb6c  "FN730"
+sym bb84  "FRCCTM"
 sym bb85  "Splclp"
 sym bb90  "TCTPDL"
 sym bb92  "spark_addr_global"
@@ -2252,8 +2261,8 @@ sym bbc7  "KNKCYL"
 sym bbc9  "FN821A"
 sym bbd3  "FN004"
 sym bbde  "Func_bbde"
-sym bbf6  "x_spark_91"
-sym bc1a  "y_spark_92"
+sym bbf6  "FN091"
+sym bc1a  "FN092"
 sym bc36  "FN093"
 sym bc52  "spark_adder_for_wot_fuel"
 sym bc6e  "FN180"
@@ -2272,8 +2281,8 @@ sym bf16  "FN220"
 sym bf24  "FN221"
 sym bf4c  "Func_bf4c"
 sym bf68  "FN240"
-sym bf70  "egr_base_table"
-sym bfc0  "egr_base_table_mpg"
+sym bf70  "FN1220"
+sym bfc0  "FN1222"
 sym c010  "FN218"
 sym c024  "spark_retard_vs_rpm"
 sym c03c  "Func_c03c"
@@ -2387,6 +2396,7 @@ sym cb60  "FKMKAY"
 sym cb62  "SFT_FM_LVL"
 sym cb67  "MAP_CYCLE"
 sym cb68  "AEM"
+sym cb6a  "ALPHA"
 sym cb6e  "FRCTAE"
 sym cb70  "AETAR"
 sym cb72  "NCNT"
@@ -2405,10 +2415,14 @@ sym cb8e  "AFECT1"
 sym cb8f  "AFECT2"
 sym cb90  "AFACT1"
 sym cb91  "AFACT2"
+sym cb92  "ADAPTM"
 sym cb94  "AMPMUL"
 sym cb96  "DELAMB"
+sym cb98  "DELROW"
 sym cb9d  "MINADP"
 sym cb9e  "MAXADP"
+sym cb9f  "AELIM"
+sym cba0  "ADEFTR"
 sym cba2  "ADEGCT"
 sym cba3  "FAEGCT"
 sym cba4  "KWUCNT"

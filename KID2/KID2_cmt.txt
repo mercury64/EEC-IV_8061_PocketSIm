@@ -499,6 +499,9 @@
 49ee \n# SIGNED interpolate calc
 4a0a \n# UNSIGNED interpolate calc
 
+4a49 # TEISF or TEFTC?
+
+
 4b5b # (EGO switch)
 4b5e # Increment EGOSSS 
 4b62 # Clip at 255
@@ -567,20 +570,58 @@
 51c3 # 0.5
 51c7 #
 51ca # ROWTBU = kamrow + 0.5 + ranrow
-
+51ce # (EGO switch)
+51d5 # Increment EGOCNT
+51db # OPEN LOOP FUEL CONTROL
 
 523a # ISCFLG = 1 CLOSED LOOP RPM CONTROL
 5247 # LSTCOL = kamcol
 524b # LSTCOL = kamrow
+524f # Do: NEW_UPRATE_CALC
 
 5251 # Exit FUEL_ADAPT_COM4
-5252 \n# Continue with FUEL_ADAPT_COM4
-5253 # Calculate the LAMBSE window, LAMWIN:
+5252 \n# Continue with FUEL_ADAPT_COM4:
+5252 \n\n# Calculate the LAMBSE window, LAMWIN:
 526a # LAMWIN = DELAMB + (PTPAMP * AMPMUL)
+526a \n\n# Calculate the EGO based learning rate:
+528d # Clip KWUCTR to 255
+529d # egolearn_rat = ADEGCT (use normal learning rate)
+52a3 # egolearn_rat = FAEGCT (use fast learning rate)
+52a3 \n\n# Calculate loop counters:
+
+52ae # EGOCNT >= egolearn_rat
+52d6 # (max 255)
+52d8 # Increment LOPCT1
+52f0 # (max 255)
+52f2 # Increment LOPCT2
+
+52f4 \n\n# Determine if adaptive cells should be incremented/decremented:
+52f4 \n#  LTMTBL cells are updated when the following conditions are satisfied:
+52f4 \n#   Note that r = ROWTBU and c = COLTBU in the following charts.
+
+
+
+5314 # FN1325Lrc >= 0
+531f # LTMTBLrc
+
+532a # 2 * UPRATE 
+5331 # LOPCT1 > 2 * UPRATE
+5340 # Decrement CHKSUM
+5342 # LTMTBLrc = LTMBLrc - 0.0039
+
+5357 # LTMTBLrc < MAXADP
+5359 # Increment CHKSUM
+535b # LTMTBLrc = LTMTBLrc + 0.0039
+
 
 537b # kamrow = kamrow_spec
 537d # Read the value in FN1325L specified by kamcol.
 5380 # Load this value in UPRATE.
+5380 \n# Continue with subroutine NEW_UPRATE_CALC
+
+5391 # Column
+5396 # Row
+
 53b6 # (use FN1325L 4 times so not to wrap around table or use special idle cells)
 53c7 # uprat_cnt
 53c9 # (adapt1_uprat + adapt2_uprat + adapt3_uprat + adapt4_uprat) 
@@ -589,6 +630,10 @@
 53d7 # uprat_avg = R20 / uprat_cnt
 53e4 # If, however, one or more  of  the  cells  in  the  four  points  is  a reference  cell,
 53e6 # then the average of the values in the positive cells is used in place of the negative values.
+
+5401 # Exit the subroutine NEW_UPRATE_CALC
+
+5402 # (crank mode)   
 
 5607 # (determine the value of D)
 560d # D * ISCMOD
@@ -599,7 +644,22 @@
 5798 # (throttle adjust mode) 
 57ac # (initial runup complete)
 
+ 
+5852 # KAMREF = 0.5 + LTMTBLrc
+5857 # (use no interpolation)
+
 58b3 # 60.000
+
+58fe # (do not run transient fuel compensation)
+
+5929 # (EFTC * FN307(N_BYTE))
+
+
+5a0b # A = KFT
+5a0f # (in MPG mode)
+5a12 # A = KFTMPG
+5a16 # A * [(EISF * MTEISF - AISF) 
+5a1c # EFTR = A * [(EISF * MTEISF - AISF) / (EFTC * FN307(N_BYTE))]
 
 5acf # (rpm high enough)   
 5b20 # (in higher gear) 
@@ -623,6 +683,11 @@
 
 5c86 # 1024 = 1 second
 
+5d79 # TEMP_FRAC = FRCCTM * ACT + (1 - FRCCTM) * ECT.
+5d83 # FN091(TEMP_FRAC) =  TEMP_FRAC  normalizing  function  for  FN1128,
+5d96 # N092(TP - TAPBAR) = TP - TAPBAR normalizing function for FN1128.
+
+
 5ec0 # ISCFLG = -1 DASHPOT CONTROL
 
 6116 # 
@@ -634,6 +699,9 @@
 635e # DO SONIC EGR CONTROL
 
 6364 # (EOFF - EGRDED)
+
+63a1 # (Base EGR table)
+63a9 # (MPG mode table)
 
 644a # EVP-EOFF
 645c # FN218(MAPOPE) * FN219(EVP-EOFF)
