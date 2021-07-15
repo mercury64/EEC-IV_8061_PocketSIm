@@ -1114,7 +1114,7 @@ sub  3c02  "RUN_MODE_SELECTION"   #cmd
 sub  3c6c  "Sub_3c6c"   #cmd
 sub  3ccf  "Read_AD"   #cmd
 sub  3cd3  "Enable_Int"   #cmd
-sub  3d1f  "Update_EGR?"   #cmd
+sub  3d1f  "SYSTEM_EQUATIONS_EQUA_LH"   #cmd
 sub  3df2  "INPUT_ACT_COM2"   #cmd
 sub  40b8  "Compute_TCSTRT"   #cmd
 sub  40db  "INPUT_TOT_COM1"   #cmd
@@ -1150,7 +1150,7 @@ sub  49ee  "TableInterpolation"   #cmd
 sub  4a1e  "Sub_4a1e"   #cmd
 sub  4a3f  "Sub_4a3f"   #cmd
 sub  4a5e  "Sub_4a5e"   #cmd
-sub  4aaa  "FUEL_PULSEWIDTH_CALCULATION_BGFUEL"   #cmd
+sub  4aaa  "TIMERS"   #cmd
 sub  4bf5  "FUEL_OLFLG_COM7"   #cmd
 sub  4e45  "FUEL_CL_LAMBSE_COM3"   #cmd
 sub  4f50  "C_MULTIPLIER_LOGIC"   #cmd
@@ -1171,7 +1171,7 @@ sub  5830  "FUEL_KAM_ADAPT_COM3"   #cmd
 sub  58d5  "Sub_58d5"   #cmd
 sub  58ec  "FUEL_TRANS_COM5"   #cmd
 sub  5a31  "FUEL_DFSO_COM2"   #cmd
-sub  5b96  "ACCELERATION_ENRICHMENT"   #cmd
+sub  5b96  "FUEL_AE_COM5"   #cmd
 sub  5c7b  "FUEL_PUMP_COM1"   #cmd
 sub  5c90  "Sub_5c90"   #cmd
 sub  5ca7  "Sub_5ca7"   #cmd
@@ -1180,7 +1180,7 @@ sub  5cce  "Sub_5cce"   #cmd
 sub  5cd1  "Sub_5cd1"   #cmd
 sub  5cff  "Sub_5cff"   #cmd
 sub  5d03  "SPARK_BASE_COM2"   #cmd
-sub  5f0a  "Sub_5f0a"   #cmd
+sub  5f0a  "Include_in_SPK_NORM"   #cmd
 sub  5f12  "UYTabLU_5f12"   $ F uytlu 38 34 #cmd
 sub  5f20  "Sub_5f20"   #cmd
 sub  608b  "Sub_608b"   #cmd
@@ -1426,7 +1426,9 @@ sym d  "HSI_Data"
 sym e  "HSI_Time"
 sym 10  "StackPtr"
 sym 12  "Tmr_OVF_cnt"
+sym 22  "B5_LESFLG_22" :B 5
 sym 24  "B5_FLG_LAMRICH_Q_24" :B 5
+sym 24  "B7_HUMTMR_FLG_24" :B 7
 sym 25  "B1_WARM_UP_25" :B 1
 sym 25  "CHKAIR" :B 2
 sym 25  "BIFLG" :B 4
@@ -1455,6 +1457,8 @@ sym 28  "B6_FPWQ3_Q_28" :B 6
 sym 28  "KAM_error" :B 7
 sym 29  "B2_FLG_DFSO_NOVS_Q_29" :B 2
 sym 29  "IECT_IN_RANGE" :B 3
+sym 29  "B4_CSSFLG_29" :B 4
+sym 29  "B5_TARFLG_29" :B 5
 sym 29  "B6_REFFLG_29" :B 6
 sym 29  "B7_PURGING_29" :B 7
 sym 2a  "Vscdt" :B 0
@@ -1519,7 +1523,7 @@ sym 44  "B6_LIMIT_PURGE_44" :B 6
 sym 44  "B7_FLG_TIP_RATE_44" :B 7
 sym 45  "Rvip_cyl_quit" :B 0
 sym 45  "Rvip_cyl_bal" :B 1
-sym 45  "Sto_trigger" :B 2
+sym 45  "B2_LOWVOLTAGE_Q_45" :B 2
 sym 45  "?B4_ATMR2_FLAG_45?" :B 4
 sym 45  "Stiflg" :B 5
 sym 45  "Egoste2" :B 6
@@ -1621,6 +1625,7 @@ sym 9f  "Flags_9f"
 sym a0  "B1_V_LAMJMP_a0" :B 1
 sym a0  "B2_WRMEGO_a0" :B 2
 sym a0  "SIGNED_TBL_FLG" :B 4
+sym a0  "B6_MUPET_FLAG_a0" :B 6
 sym a0  "Flags_a0"
 sym a1  "Flags_a1"
 sym a2  "B2_FLG_FRST_DS_a2" :B 2
@@ -1645,7 +1650,7 @@ sym a4  "MAPOFL" :B 4
 sym a4  "TAQ1" :B 5
 sym a5  "Adptmr_on" :B 0
 sym a5  "BG_TMR_DISABLE" :B 1
-sym a5  "?Undsp?" :B 2
+sym a5  "?APT?" :B 2
 sym a5  "Dmflg" :B 3
 sym a5  "FLG_STALL" :B 4
 sym a5  "B5_FLAGS_a5" :B 5
@@ -1711,6 +1716,7 @@ sym e1  "B0_FLG_SFT_VAL_e1" :B 0
 sym e1  "B1_CCV_STRT_SFT_e1" :B 1
 sym e1  "B2_CCD_HP" :B 2
 sym e1  "CCD?"
+sym 100  "TPBAR"
 sym 104  "EGRBAR"
 sym 106  "EGOBAR"
 sym 108  "ITOT"
@@ -1734,6 +1740,7 @@ sym 13a  "BG_TMR"
 sym 140  "TSLEGO"
 sym 142  "TSLPIP"
 sym 144  "Loop_time"
+sym 14c  "HMUTMR"
 sym 152  "WOTTMR"
 sym 154  "IPSIBR"
 sym 156  "DSTPBR"
@@ -1755,7 +1762,8 @@ sym 176  "KAMRF1"
 sym 17b  "AEPP"
 sym 17c  "PPCTR"
 sym 17e  "MFAMUL"
-sym 181  "CRKPIP_CTR"
+sym 180  "CRKPIP_CTR"
+sym 181  "CRKPIP_CTR_BG"
 sym 184  "OCCSAV"
 sym 192  "Ibeta1"
 sym 195  "FMECTR"
@@ -1791,10 +1799,11 @@ sym 220  "OLDTP"
 sym 222  "LSTROW"
 sym 224  "LSTCOL"
 sym 22c  "Tsladv"
-sym 22e  "MAPBAR"
-sym 22f  "MAP"
+sym 22e  "AEMAP"
+sym 22f  "MAPAEF"
 sym 230  "Retinc"
 sym 232  "EGOSSS"
+sym 233  "AEMTMR"
 sym 239  "Pip_counter"
 sym 23a  "ATMR1_LST"
 sym 23b  "VSCTR"
@@ -1889,8 +1898,10 @@ sym 39e  "ISCMOD"
 sym 3ae  "RPMERR"
 sym 3b0  "RPMERR_A"
 sym 3b2  "RPMERR_S"
+sym 3b6  "OSCTMR"
 sym 3be  "TP_REL_LST"
 sym 3c0  "TPDLBR"
+sym 3c2  "DNDT_SPK"
 sym 3c6  "BIAS"
 sym 3c8  "LAMAVE"
 sym 3cc  "TLSPAT"
@@ -2028,6 +2039,9 @@ sym b003  "bit5HSI_Line_Select" :B 5
 sym b003  "bit6HSI_Line_Select" :B 6
 sym b003  "bit7HSI_Line_Select" :B 7
 sym b003  "HSI_Line_Select"
+sym b005  "LOWVOL"
+sym b006  "VOLHYS"
+sym b007  "VOLTCLP"
 sym b008  "CHGRPM"
 sym b00c  "?ISCMOD_TPREL?"
 sym b00e  "ISCMOD_MAX"
@@ -2052,8 +2066,8 @@ sym b038  "IDCMUL"
 sym b03a  "IDCOFS"
 sym b03c  "Stall_RPM"
 sym b03f  "BPCOR_SW"
-sym b042  "pre_nubase"
-sym b044  "pre_drbase"
+sym b042  "NUBASE"
+sym b044  "DRBASE"
 sym b046  "idle_rpm_adder_startup"
 sym b048  "idle_rpm_adder_max_time_on_startup"
 sym b04a  "DNAC"
@@ -2085,7 +2099,7 @@ sym b0c0  "FN820A"
 sym b0cc  "FN825A"
 sym b0e0  "FN825A_ALT"
 sym b0ee  "FN826A"
-sym b0fc  "Func_b0fc"
+sym b0fc  "FN839"
 sym b10a  "FN862"
 sym b112  "FN875D"
 sym b12a  "FN875N"
@@ -2134,17 +2148,31 @@ sym b463  "OLIDRV"
 sym b466  "OLINEUT"
 sym b468  "LAMDLT_OL"
 sym b46b  "JMPMUL"
+sym b46c  "MAPAHI"
+sym b46d  "MPAHIH"
+sym b46e  "MAPLO"
+sym b46f  "MAPLOH"
 sym b472  "MPGLSW"
+sym b473  "MPGNOV"
+sym b474  "MPNOVH"
+sym b475  "MPGRPM"
+sym b476  "MPGRPH"
 sym b47c  "MPGDEC"
+sym b47e  "MPMNBP"
+sym b47f  "MPNBPH"
+sym b480  "VSMPG"
+sym b481  "VSMPGH"
 sym b482  "MPG_CL_SW"
 sym b483  "EGO_IDLE"
 sym b484  "LAMMAX"
 sym b486  "LAMMIN"
+sym b48c  "CRKCTR_RESET"
 sym b49a  "NLMT"
 sym b49c  "NLMTH"
 sym b49e  "speed_limiter1"
 sym b49f  "speed_limiter1_hysteresis"
 sym b4a4  "OLITD1"
+sym b4aa  "LESTM"
 sym b4ac  "WOTRPL"
 sym b4ae  "WOTRPH"
 sym b4b0  "LAMDLT"
@@ -2163,6 +2191,7 @@ sym b4ce  "DFSTM"
 sym b4d0  "DFSVSH"
 sym b4d2  "TP_AIR_OFF_H"
 sym b4d4  "D_TP_DT_F"
+sym b4ec  "SPKCTL"
 sym b4fa  "FN839"
 sym b512  "FN852"
 sym b52a  "Func_b52a"
@@ -2203,12 +2232,16 @@ sym b92c  "fuel_ve_multiplier"
 sym b934  "fuel_tp_pt"
 sym b936  "fuel_tp_wot"
 sym b940  "TKYON2"
+sym b94d  "FULPRGTM"
 sym b950  "ACTFMM"
 sym b951  "ECTFMM"
 sym b952  "FMECNT"
 sym b953  "MAPFMM"
 sym b95e  "CTBYS"
 sym b95f  "CTBYSH"
+sym b962  "HMUMAP"
+sym b963  "HMUMPH"
+sym b972  "SMTPDL"
 sym b975  "FN305"
 sym b97f  "FN326"
 sym b989  "FN367"
@@ -2222,7 +2255,7 @@ sym ba70  "FN090"
 sym ba8c  "FN095"
 sym bab2  "TCBPA"
 sym bab4  "TCFBS"
-sym bab6  "TCMBAR"
+sym bab6  "TCAEMP"
 sym bab8  "TCAETP"
 sym babc  "TCDASD"
 sym babe  "TCDASU"
@@ -2230,6 +2263,7 @@ sym bac4  "TCECT"
 sym bac8  "TCEGR"
 sym bacc  "TC"
 sym bace  "TCNDT_ISC"
+sym bad2  "TCTP"
 sym bad4  "TCTPT"
 sym bad6  "TCTOT"
 sym bad8  "TCVBAT"
@@ -2242,14 +2276,22 @@ sym bae6  "Func_bae6"
 sym baf6  "Func_baf6"
 sym bafe  "x_spark_knock"
 sym bb0e  "y_ect_fuel"
-sym bb1e  "Func_bb1e"
-sym bb3e  "spark_vss_multiplier"
+sym bb1e  "FN182"
+sym bb3e  "FN183"
 sym bb48  "spark_ect_vs_act_multiplier"
 sym bb6c  "FN730"
+sym bb7c  "CSHIGH"
+sym bb7d  "CSLOW"
+sym bb7e  "CSSPRK"
+sym bb7f  "CSSTIM"
+sym bb80  "DFTRPM"
+sym bb81  "DFTRPH"
 sym bb84  "FRCCTM"
 sym bb85  "Splclp"
+sym bb8c  "TPDLMX"
 sym bb90  "TCTPDL"
 sym bb92  "spark_addr_global"
+sym bb98  "OSCDLY"
 sym bbaa  "EGRTD8"
 sym bbae  "EGRDED"
 sym bbb0  "spark_max_retard_control"
@@ -2397,6 +2439,7 @@ sym cb62  "SFT_FM_LVL"
 sym cb67  "MAP_CYCLE"
 sym cb68  "AEM"
 sym cb6a  "ALPHA"
+sym cb6c  "TPDLTA"
 sym cb6e  "FRCTAE"
 sym cb70  "AETAR"
 sym cb72  "NCNT"
@@ -2405,6 +2448,8 @@ sym cb76  "UNRPMH"
 sym cb78  "1200_RPM"
 sym cb7a  "400_RPM"
 sym cb7c  "CRKTM1"
+sym cb7d  "CRKPIPCNT2"
+sym cb7e  "CRKTMR_INC"
 sym cb80  "BIHP"
 sym cb83  "PFEHP"
 sym cb85  "THRMHP"

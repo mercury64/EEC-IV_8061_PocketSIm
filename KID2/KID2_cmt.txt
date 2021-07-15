@@ -259,8 +259,6 @@
 
 343a # 0 = Thick Film Ignition (TFI)
 
-
-
 3b55 # KAMQA = 10101010 BINARY
 3b58 # KAMQB = 11000110 BINARY
 3b5b # KAMQC = 01110101 BINARY
@@ -316,6 +314,22 @@
 3d1b # EGR Valve position
 3d1e # end of table
 
+3d22 # No change to RATCH
+3d22 \n# THROTTLE POSITION FILTER (TPBAR)
+3d22 \n#   The  TPBAR  calculation  is  a  time  dependent  rolling  average  filter  of
+3d22 \n#   instantaneous  throttle  position  (TP).   It is updated each background pass
+3d22 \n#   while in RUN or UNDERSPEED  mode.   The  TPBAR  time  constant,  TCTP,  is  a
+3d22 \n#   calibration parameter and should be set to 2.0 seconds.
+
+3d32 # TPBAR = UROLAV(TP,TCTP)
+3d3a # N > 450 RPM
+3d48 # (clip RATCH to RACHIV as maximum)
+3d53 # RATCH = TPBAR
+
+3d53 \n\n#ACCEL ENRICHMENT TP FILTER (AETP)
+3d53 \n# It is used to sense stable TP for purposes of resetting TARFLG to enable  AE.
+3d53 \n# The  AETP  time  constant  TCAETP is a calibratable parameter which should be
+3d53 \n# large enough to prevent TARFLG reset before the TP stops moving.
 3d64 # AETP = UROLAV(TP,TCAETP)
 
 3d67 \n
@@ -328,6 +342,15 @@
 3d75 # old average
 3d79 # new value
 3d7f # TAPBAR = UROLAV(TP,FN093(MAP))
+
+3d7f \n\n# ACCEL ENRICHMENT MAP FILTER (AEMAP)
+3d86 # (store current MAP for AEMAP filter and TAR calculation)
+3d96 # AEMTMR is the sample rate (filter AE MAP)
+3da0 # AEMAP = UROLAV(MAPAEF,TCAEMP)
+3da4 # (wait for MAP update)
+3da7 # (reset AEMAP timer for next update)
+
+3db1 \n# EVP SENSOR FMEM (PFEHP = 0)
 
 3dd1 \n
 3dd1 \n# EGR POSITION FILTER (EGRBAR)
@@ -501,6 +524,31 @@
 
 4a49 # TEISF or TEFTC?
 
+4aaa \n\n#CRKPIP_CTR - PIP COUNTER FOR CRANKING FUEL
+4aaa \n#CRKPIP_CTR is used as a Crank Fuel Multiplier to do a lean-out or fuel  shut-off
+4aaa \n# during sub-zero cold operation.  Some calibrators are using the logic to improve
+4aaa \n# restarts following a stall during -20 deg F testing  by  turning  off  the  fuel
+4aaa \n# during  the  first  seconds  of crank.  This allows the engine to restart on the
+4aaa \n# residual fuel remaining in the manifold after the stall.
+
+4abf # (in run or underspeed less than CRKTM1 seconds)
+4ac1 # CRKPIP_CTR = CRKPIPCNT2
+4ac5 # CRKPIP_CTR_BG = CRKPIPCNT2
+
+4ad4 # Increment CRKPIP_CTR every rising edge of PIP
+4ad8 # CRKPIP_CTR_BG = CRKPIP_CTR
+4ade # Freeze CRKPIP_CTR
+4ae2 # CRKPIP_CTR = CRKPIP_CTR_BG
+
+4afe # FN348(ECT)
+4b0c # X = FN023(CRKPIP_CTR)
+4b19 # Y = FN024(ACT)
+4b1c # Cranking  fuel  pulsewidth  multiplier 
+4b1c \w# as a function of number of PIPs in crank and air charge temperature.
+4b27 # FN1350(CRKPIP_CTR_BG,ACT)
+4b2a # FN348(ECT) * FN1350(CRKPIP_CTR_BG,ACT)
+
+4b56 # Exit FUELPW Routine
 
 4b5b # (EGO switch)
 4b5e # Increment EGOSSS 
@@ -644,6 +692,8 @@
 5798 # (throttle adjust mode) 
 57ac # (initial runup complete)
 
+5846 # c = ISFLAG
+
  
 5852 # KAMREF = 0.5 + LTMTBLrc
 5857 # (use no interpolation)
@@ -663,9 +713,10 @@
 
 5acf # (rpm high enough)   
 5b20 # (in higher gear) 
+5b96 # (RUN/UNDERSPEED)
 
 5bb5 # Disable AE
-5bb5 \n# Enable AE
+5bb5 \n# AE ENABLE LOGIC
 5bbd # FN019A(TAR) = x-axis input to FN1303.
 5bce # FN020(FRCTAE * ACT + (1-FRCTAE) * ECT) = y-axis input to FN1303.
 5bdc # FN1303(TAR,TEMP) = Desired AE fuel flow, lbm/hr.
@@ -689,6 +740,8 @@
 
 
 5ec0 # ISCFLG = -1 DASHPOT CONTROL
+
+5ed0 \n\n# COLD START SPARK FLAG AND MULTIPLIER
 
 6116 # 
 6134 #  [1 / (DWELLM * (VBAT - DWELLA))] * FREQ18 (ticks/sec)
@@ -1241,7 +1294,38 @@
 9fb6 # (enable high speed unlock check)
 9fbc # (upshift commanded on an unlocked converter)
 
+a470 # (CRANK mode)
+a473 # PRGTMR = 0
+a478#  PURGING = 1
+a483 # (clip to FULPRGTM as a maximum
+
 a492 # (run OR underspeed)  
+
+a549 \n\n#TSLEGO - TIME SINCE LAST EGO SWITCH
+
+a54b # SWTFL = EGO switch flag; 
+a54b \w# 0 ->  no  EGO  switch,  
+a54b \w# 1  ->  EGO  switch  this background loop.
+
+a55b # TSLEGO > LESTM
+
+a57f # N_BYTE >= MPGRPM + MPGRPH
+a58e # MAP >= MAPLO + MAPLOH
+a59d # MAPPA <= MAPAHI - MPAHIH
+a5ac # BP >= MPMNBP + MPNBPH
+a5bc # NOVS <= MPGNOV - MPNOVH
+a5cb # VSBAR >= VSMPG + VSMPGH
+
+a6de \n\n#HMUTMR - HIGH MAPPA UPSTREAM AIR TIMER
+
+a6f0 # MAPPA >= HMUMAP + HMUMPH
+a6fa # MAPPA < HMUMAP
+
+a706 \n\n#VOLTMR - LOW VOLTAGE TIMER
+
+a710 # VBAT < LOWVOL
+a7a7 # LOWVOL + VOLHYS
+a720 # VBAT >= LOWVOL + VOLHYS
 
 a777 # IOTimer delta time since last mSec
 a783 # *128/52083 = 1 mSec
