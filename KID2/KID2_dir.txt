@@ -2006,6 +2006,7 @@ sym 51 "B2_SIGPIP_51" : B 2
 
 sym 52 "Flags_52"
 sym 52 "B2_DCLST_START_52" : B 2
+sym 52 "B4_LONG_ISF_UP_FLG_52" : B 4
 
 
 sym 53 "B5_CART_MODE_53" : B 5
@@ -2446,6 +2447,11 @@ sym 3c2 "DNDT_SPK"
 sym 3c6 "BIAS"
 sym 3c8 "LAMAVE"
 sym 3cc "TLSPAT"
+
+sym 3d2 "LONG_DT12SA"
+
+sym 3d6 "LONG_MAPCNT"
+sym 3d7 "MAP_PIPCNT"
 
 sym 3da "TCSTRT"
 sym 3db "[3DB]"

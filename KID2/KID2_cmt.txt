@@ -259,6 +259,9 @@
 
 343a # 0 = Thick Film Ignition (TFI)
 
+39c0 # (increment PIP period counter)
+39c6 # (PIP period accumulator)
+
 3b55 # KAMQA = 10101010 BINARY
 3b58 # KAMQB = 11000110 BINARY
 3b5b # KAMQC = 01110101 BINARY
