@@ -264,6 +264,8 @@
 39c0 # (increment PIP period counter)
 39c6 # (PIP period accumulator)
 
+3a6b # MAP  CALC
+
 3b55 # KAMQA = 10101010 BINARY
 3b58 # KAMQB = 11000110 BINARY
 3b5b # KAMQC = 01110101 BINARY
@@ -455,12 +457,27 @@
 4101 # (crank mode and SCAP sensor have failed)
 4122 # (throttle position sensor okay)
 
+420f \n\nENGINE SPEED CALCULATION (EQNCALC)
 421a # (engine is stopped)
 
 
 4243 # 2 = Low Data Rate Distributorless dual plug (LDR_DIS)
 4257 \n\w# (new PIP information is available for calculation of rpm)
 
+42d9 # DNDTI = (N - N_PREV)/DT_DNDT
+42ef # DNDT_SPK = ROLAV(DNDTI,TCNDT_SPK)
+4305 # DNDT_ISC = ROLAV(DNDTI,TCNDT_ISC)
+
+4305 \n\nN_BYTE = byte value of N
+4317 # (resolution = 16, max value = 4080)
+
+4317 \n\nCalculate NBAR
+
+4334 # NBAR = UROLAV(N,TCN)
+4334 \n\nLook up normalized N
+
+434a \n\nFIRST_RPM and REFLG LOGIC
+435a # (this is a re-init)
 435d # EXIT RPM LOGIC
 
 4373 # BPCOR = BP corrected = FN004(BP).
@@ -743,10 +760,29 @@
 5d83 # FN091(TEMP_FRAC) =  TEMP_FRAC  normalizing  function  for  FN1128,
 5d96 # N092(TP - TAPBAR) = TP - TAPBAR normalizing function for FN1128.
 
+5e40 \n\nLIGHT LOAD RPM OSCILLATION ADDER
+5e49 # (Near closed throttle) 
+5e59 # TP_REL > TPOBP2 + TPOH2
+5e65 # (Not at high speed)
+5e75 # VSBAR > VSOMAX + VSOMXH
+5e88 # (Not a quick tip in) 
+5e92 # (Gear change delay)
+5e98 # (Dashpot or preposition)
+5eab # FN182(DNDT_SPK) * FN183(VSBAR)
 
+5eb9 # Include OSCMOD = FN182(DNDT_SPK) * FN183(VSBAR) in SPK_NORM
 5ec0 # ISCFLG = -1 DASHPOT CONTROL
 
+5ed0 # Include FN839(DASPOT) in SPK_NORM
+
 5ed0 \n\n# COLD START SPARK FLAG AND MULTIPLIER
+5ef3 # Y = Calibration development spark multiplier, unitless.
+5ef9 # KS1 = Spark Adder, deg BTDC.
+
+5f26 # (Cold Start spark not in use)
+5f2d # (RPM control or lockout)  
+5f4e # ENTRY CONDITIONS NOT TRUE
+60ab # Delayed neutral/drive flag; 1 -> in drive, loaded.
 
 6116 # 
 6134 #  [1 / (DWELLM * (VBAT - DWELLA))] * FREQ18 (ticks/sec)
@@ -767,7 +803,18 @@
 6466 # / 29.875 * 8 = 239 = 0xEF
 646e # Clip EM to 1.99 ppm as a maximum
 
+658b # (Not a reinit)   
 65d2 # ISCFLG = 0 DASHPOT PRE-POSITION
+65d6 # EXIT ISC LOGIC
+
+65ed \nFLG_DASMNQ and N_RATCH LOGIC
+65ed \n# FLG_DASMNQ
+65fe # Set (Prepare to add dashpot to prevent declutch stall)
+6606 # Clear FLG_DASMNQ = 0
+
+6606 \n# N_RATCH
+
+
 
 6632 \n# 1)  DSDRPM_CALC - calculation of DSDRPM & DESMAF_PRE
 6632 \n# 2)  RPMERR_CALC - calculation of RPMERR_A & RPMERR_S
@@ -778,23 +825,27 @@
 6632 \n# 7)  ISCKAM_UPDATE - adaptive update of ISCKAM
 6632 \n#
 
-6655 # [+RPMINC] Logic: (Low ACT and A/C panel switch adder)
+6655 \n\n# [+RPMINC] Logic: (Low ACT and A/C panel switch adder)
 665b # LOACT = ACT (lowest ACT since startup)
 
-6663 # [+pre_bzzrpm] Logic: (Buzz up adder)
+665f \n\n# [+pre_bzzrpm] Logic: (Buzz up adder)
+6663 # (Buzz time not expired) 
 6665 # Add pre_bzzrpm to Hicam
 
-666b # [+FN826A] Logic: (Engine Cleanout adder)
+6669 \n# [+FN826A] Logic: (Engine Cleanout adder)
+666b # (Not PT since Crank)
 6672 # (Kickdown time not up)
-
-
 667c # Add FN826A(TCSTRT) to DSDRPM
-6685 # [+ (FN880 + FN821A)] Logic: 
-6685 \w# DSDRPM < CHGRPM
-6685 \w#  (Battery charge control and Inspection Maintenance)
+
+667c \n\n# [+ (FN880 + FN821A)] Logic: 
+667c \n#  (Battery charge control and Inspection Maintenance)
+6685 # DSDRPM < CHGRPM
+
 668e # Add (FN880A) to DSDRPM
 6697 # Add (FN821A) to DSDRPM
 669e # Clip DSDRPM to CHGRPM as a maximum
+669e \n\n# HCAMFG Logic: (Enable/Disable Adaptive airflow updates)
+66a1 # (In running VIP)
 
 66c1 # [+RPMINC] Logic: (Low ACT and A/C panel switch adder)
 66c5 # (ACT above normal)
@@ -807,15 +858,40 @@
 66ea # Use pre_nubase in DSDRPM calculation
 66f3 # Use pre_drbase in DSDRPM calculation
 
+66f3 \n\n#[+AC_PPM] Logic:
+6705 \n\n#[+DNAC] Logic: (Air Conditioning adder)
+6709 # A3CTMR < DACTM (Delay to turn off A/C adder)
+670b # Do NOT add DNAC
+
 6712 # A/C DESMAF adder based on N.
 671c # A/C air flow correction based on ACT.
 6722 # AC_PPM = FN885 * FN887A
+
+673e # DESMAF_PRE add R18 to R20 [+AC_PPM]
+
 6740 # Add DNAC to DSDRPM
+6744 \n\n[+DNPOWS] Logic: (Power Steering adder)
+6744 \n[+PSPPM] Logic:
+6744 \nPSFLAG Logic: (Last state of POWSFG)
 
-67f6 # FN1861(ECT,ATMR3)
+674d # Add DNPOWS to DSDRPM
+6755 # Add PSPPM to DESMAF_PRE
 
+67bd # DSDRPM > ISCLPD
+67bf # Clip DSDRPM to pre_isclpd as a maximum
+
+67f6 # DESMAF_PRE = FN1861(ECT,ATMR3)
+6813 # DESMAF_PRE = ((FN875N or FN875D) * FN1861
+
+6819 \n\n#[*CSSMAF] Logic:
+681b # (Cold Start spark in use)
+6822 # Multiply DESMAF_PRE by CSSMAF
+
+6853 # RPMERR = DSDRPM - N
 685f # (RPM control or lockout)
+6869 # RPMERR_A = ROLAV(RPMERR,TCBPA)
 686c # (calculate RPM error for airflow control)
+6878 # RPMERR_S = ROLAV(RPMERR,TCFBS)
 687b # (calculate RPM error for spark control)
 6890 # (TCSTRT OK to use)  
 6892 # (first time this start) 
@@ -838,6 +914,8 @@
 698d # ISCFLG = 0 DASHPOT PRE-POSITION
 
 699b # ISCFLG = 1 CLOSED LOOP RPM CONTROL
+69d1 # N <= (DSDRPM + RPMCTL)
+
 6a08 # ISCFLG = -1 DASHPOT CONTROL
 6a2d # ISCFLG = -1 DASHPOT CONTROL
 6a32 # ISCFLG = 2 CLOSED LOOP RPM CONTROL (Lock-out entry to RPM control)
