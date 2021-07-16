@@ -82,7 +82,7 @@
 207d: a2,16,14            ldw   R14,[R16]        R14 = [R16];                      # next list
 2080: 27,da               sjmp  205c             goto 205c; }
 
-2082: 91,01,a1            orb   Ra1,1            B0_Flags_a1 = 1;
+2082: 91,01,a1            orb   Ra1,1            B0_MAPUP_NORM_a1 = 1;
 2085: 91,10,45            orb   R45,10           ?B4_ATMR2_FLAG_45? = 1;
 2088: ef,4c,89            call  a9d7             Check_Console ();
 208b: 28,bb               scall 2148             Reset_RAM_ptr ();
@@ -1173,7 +1173,7 @@
 
    I_HSO_1:
 2ae5: f2                  pushp                  push(PSW);
-2ae6: c0,80,06            stw   R6,R80           7f = IO_Timer;
+2ae6: c0,80,06            stw   R6,R80           76 = IO_Timer;
 2ae9: c3,e6,c2,10         stw   R10,[Re6+c2]     SvStack = StackPtr;
 2aed: ad,6c,10            ldzbw R10,6c           StackPtr = 6c;
 2af0: 3e,2a,2f            jb    B6,R2a,2b22      if (No_Start = 0)  {
@@ -2550,7 +2550,7 @@
 3936: 88,58,56            cmpw  R56,R58          
 3939: d1,02               jleu  393d             if (R56 > R58)  {
 393b: 07,54               incw  R54              R54++; }
-393d: 37,52,16            jnb   B7,R52,3956      if (B7_Flags_52 = 1)  {
+393d: 37,52,16            jnb   B7,R52,3956      if (B4_LONG_MAP_AVG_52 = 1)  {
 3940: 34,52,09            jnb   B4,R52,394c      if (B4_LONG_ISF_UP_FLG_52 = 1)  {
 3943: 71,ef,52            an2b  R52,ef           B4_LONG_ISF_UP_FLG_52 = 0;
 3946: c3,e8,54,54         stw   R54,[Re8+54]     [3d4] = R54;
@@ -2578,7 +2578,7 @@
 3989: f0                  ret                    return;
 
    SYSEQ_MAP_COM1:
-398a: 71,ef,a4            an2b  Ra4,ef           MAPOFL = 0;
+398a: 71,ef,a4            an2b  Ra4,ef           MAPOFL = 0;                       # (clear MAP overflow flag)
 398d: 37,a5,01            jnb   B7,Ra5,3991      if (CRKFLG = 1)  {
 3990: f0                  ret                    return; }
 
@@ -2593,14 +2593,14 @@
 39aa: 3d,52,09            jb    B5,R52,39b6      if (B5_Flags_52 = 0)  {
 39ad: 47,e4,a0,c4,5c      ad3w  R5c,Rc4,[Re4+a0] R5c = DT12S + [120];
 39b2: c3,e4,a0,5c         stw   R5c,[Re4+a0]     [120] = R5c; }
-39b6: 37,52,30            jnb   B7,R52,39e9      if (B7_Flags_52 = 1)  {
+39b6: 37,52,30            jnb   B7,R52,39e9      if (B4_LONG_MAP_AVG_52 = 1)  {
 39b9: 3c,52,2d            jb    B4,R52,39e9      if (B4_LONG_ISF_UP_FLG_52 = 0)  {
 39bc: b3,e8,57,58         ldb   R58,[Re8+57]     R58 = MAP_PIPCNT;
 39c0: 17,58               incb  R58              R58++;                            # (increment PIP period counter)
 39c2: c7,e8,57,58         stb   R58,[Re8+57]     MAP_PIPCNT = R58;
 39c6: 47,e8,52,c4,58      ad3w  R58,Rc4,[Re8+52] R58 = DT12S + LONG_DT12SA;        # (PIP period accumulator)
 39cb: d3,07               jnc   39d4             if (R58 > ffff)  {
-39cd: 71,7f,52            an2b  R52,7f           B7_Flags_52 = 0;
+39cd: 71,7f,52            an2b  R52,7f           B4_LONG_MAP_AVG_52 = 0;
 39d0: 28,89               scall 3a5b             Sub_3a5b ();
 39d2: 20,15               sjmp  39e9             goto 39e9; }
 
@@ -2615,7 +2615,7 @@
 39f0: 69,00,08,56         sb2w  R56,800          R56 -= 800;
 39f4: 8b,e4,a8,56         cmpw  R56,[Re4+a8]     
 39f8: d9,70               jgtu  3a6a             if (R56 > [128]) return;
-39fa: 37,52,05            jnb   B7,R52,3a02      if (B7_Flags_52 = 1)  {
+39fa: 37,52,05            jnb   B7,R52,3a02      if (B4_LONG_MAP_AVG_52 = 1)  {
 39fd: 36,52,02            jnb   B6,R52,3a02      if (B6_Flags_52 = 1)  {
 3a00: 21,0d               sjmp  3b0f             goto 3b0f; } }
 
@@ -2625,7 +2625,7 @@
 3a0c: bd,ff,58            ldsbw R58,ff           swR58 = ff; }
 3a0f: 6d,00,40,58         ml2w  R58,4000         lR58 *= 4000;
 3a13: 28,2a               scall 3a3f             Sub_3a3f ();
-3a15: 37,52,43            jnb   B7,R52,3a5b      if (B7_Flags_52 = 0) goto Sub_3a5b;
+3a15: 37,52,43            jnb   B7,R52,3a5b      if (B4_LONG_MAP_AVG_52 = 0) goto Sub_3a5b;
 3a18: f0                  ret                    return; }
 
 3a19: 91,40,52            orb   R52,40           B6_Flags_52 = 1;
@@ -2713,7 +2713,7 @@
 3af2: 68,5c,5a            sb2w  R5a,R5c          R5a -= R5c;
 3af5: c3,e4,a6,5a         stw   R5a,[Re4+a6]     [126] = R5a;
 3af9: 91,40,a0            orb   Ra0,40           B6_MUPET_FLAG_a0 = 1;
-3afc: 91,01,a1            orb   Ra1,1            B0_Flags_a1 = 1;
+3afc: 91,01,a1            orb   Ra1,1            B0_MAPUP_NORM_a1 = 1;
 3aff: 38,a7,19            jb    B0,Ra7,3b1b      if (B0_V_VACFLG_a7 = 0)  {
 3b02: 71,f7,a6            an2b  Ra6,f7           B3_MFMFLG_a6 = 0;
 3b05: c3,e4,a4,5a         stw   R5a,[Re4+a4]     MAP_WORD = R5a;
@@ -3370,16 +3370,16 @@
 412c: c4,ba,38            stb   R38,Rba          MAP = R38;
 412f: 09,05,38            shlw  R38,5            R38 <<= 5;                        #[ R38 *= 32] 
 4132: c3,e4,a4,38         stw   R38,[Re4+a4]     MAP_WORD = R38;
-4136: 91,01,a1            orb   Ra1,1            B0_Flags_a1 = 1;
+4136: 91,01,a1            orb   Ra1,1            B0_MAPUP_NORM_a1 = 1;
 4139: 91,40,a0            orb   Ra0,40           B6_MUPET_FLAG_a0 = 1; }
 413c: 32,a5,0e            jnb   B2,Ra5,414d      if (?APT? = 1)  {
 413f: 3e,a5,0b            jb    B6,Ra5,414d      if (UNDSP = 0)  {
 4142: 9b,fe,0c,00         cmpb  R0,[Rfe+c]       
-4146: df,05               je    414d             if ([cb66] != 0)  {
-4148: 91,80,52            orb   R52,80           B7_Flags_52 = 1;
+4146: df,05               je    414d             if (LONG_MAP_RQD != 0)  {
+4148: 91,80,52            orb   R52,80           B4_LONG_MAP_AVG_52 = 1;
 414b: 20,03               sjmp  4150             goto 4150; } } }
 
-414d: 71,7f,52            an2b  R52,7f           B7_Flags_52 = 0;
+414d: 71,7f,52            an2b  R52,7f           B4_LONG_MAP_AVG_52 = 0;
 4150: ac,ba,3e            ldzbw R3e,Rba          wR3e = MAP;
 4153: 09,07,3e            shlw  R3e,7            R3e <<= 7;                        #[ R3e *= 128] 
 4156: 9c,bb,3e            divb  R3e,Rbb          yR3e /= BP;
@@ -4274,7 +4274,7 @@
 4a53: b6,03                     #arg 1              FN025,
 4a55: 38,00                     #arg 2              38 );
 4a57: c3,e6,56,38         stw   R38,[Re6+56]     FN025_MAP_y = R38;
-4a5b: 71,fe,a1            an2b  Ra1,fe           B0_Flags_a1 = 0;
+4a5b: 71,fe,a1            an2b  Ra1,fe           B0_MAPUP_NORM_a1 = 0;
    Sub_4a5e:
 4a5e: fa                  di                     interrupts OFF;
 4a5f: ff                  nop                    
@@ -4329,7 +4329,7 @@
 
 4ade: b3,e4,01,14         ldb   R14,[Re4+1]      R14 = CRKPIP_CTR_BG;              # Freeze CRKPIP_CTR
 4ae2: c7,e4,00,14         stb   R14,[Re4+0]      CRKPIP_CTR = R14;                 # CRKPIP_CTR = CRKPIP_CTR_BG
-4ae6: 30,a1,03            jnb   B0,Ra1,4aec      if (B0_Flags_a1 = 1)  {
+4ae6: 30,a1,03            jnb   B0,Ra1,4aec      if (B0_MAPUP_NORM_a1 = 1)  {
 4ae9: ef,53,ff            call  4a3f             Sub_4a3f (); }
 4aec: 01,38               clrw  R38              R38 = 0;
 4aee: 37,a5,66            jnb   B7,Ra5,4b57      if (CRKFLG = 1)  {
@@ -6057,7 +6057,7 @@
 5d4a: 3a,28,01            jb    B2,R28,5d4e      if (Newsa = 0)  {
 5d4d: f0                  ret                    return; }
 
-5d4e: 30,a1,03            jnb   B0,Ra1,5d54      if (B0_Flags_a1 = 1)  {
+5d4e: 30,a1,03            jnb   B0,Ra1,5d54      if (B0_MAPUP_NORM_a1 = 1)  {
 5d51: ef,eb,ec            call  4a3f             Sub_4a3f (); }
 5d54: 45,00,01,fa,38      ad3w  R38,Rfa,100      R38 = B0_R39 ;
 5d59: 29,b7               scall 5f12             UYTabLU_5f12 ();
@@ -6646,7 +6646,7 @@
 638f: f0                  ret                    return;
 
    Sub_6390:
-6390: 30,a1,03            jnb   B0,Ra1,6396      if (B0_Flags_a1 = 1)  {
+6390: 30,a1,03            jnb   B0,Ra1,6396      if (B0_MAPUP_NORM_a1 = 1)  {
 6393: ef,a9,e6            call  4a3f             Sub_4a3f (); }
 6396: a3,e6,58,30         ldw   R30,[Re6+58]     R30 = FN070L_N_x;
 639a: a3,e6,54,32         ldw   R32,[Re6+54]     R32 = [2d4];
@@ -9359,7 +9359,7 @@ ERROR CODE DESCRIPTION
 7d7b: 06                        #arg 5              6 ); } }
 7d7c: b3,e6,96,42         ldb   R42,[Re6+96]     R42 = MAPTMR;
 7d80: 9b,e2,1d,42         cmpb  R42,[Re2+1d]     
-7d84: d1,06               jleu  7d8c             if (R42 > [Re2+1d])  {
+7d84: d1,06               jleu  7d8c             if (R42 > VMPMAX)  {
 7d86: 2b,41               scall 80c9             SET_SERVICE_CODE (                #126   | MAP/BP out of S-T range.           |    X    |  XX  |   X   |
 7d88: 26,01                     #arg 1              126 );
 7d8a: 20,0b               sjmp  7d97             goto EXIT_THIS_TEST; }
@@ -10984,7 +10984,7 @@ ERROR CODE DESCRIPTION
 8b70: f0                  ret                    return;
 
    E4OD_INPUT_PROCESSING_COM1:
-8b71: 30,a1,03            jnb   B0,Ra1,8b77      if (B0_Flags_a1 = 1)  {
+8b71: 30,a1,03            jnb   B0,Ra1,8b77      if (B0_MAPUP_NORM_a1 = 1)  {
 8b74: ef,e7,be            call  4a5e             Sub_4a5e (); }
 8b77: b1,01,22            ldb   R22,1            R22 = 1;
 8b7a: ef,e8,bc            call  4865             SUYFuncLU_4865 (
@@ -16919,7 +16919,7 @@ cb60: 00,20               word   2000            FKMKAY
 cb62: 0a                  byte      a            SFT_FM_LVL
 cb63: 05                  byte      5
 cb64: 00,18               word   1800
-cb66: 00                  byte      0
+cb66: 00                  byte      0            LONG_MAP_RQD
 cb67: 02                  byte      2            MAP_CYCLE
 cb68: 5a,00               word     5a            AEM
 cb6a: 00                  byte      0            ALPHA

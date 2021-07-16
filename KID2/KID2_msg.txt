@@ -48,6 +48,7 @@ rbase e2 c1c4  43b2 443a       # cmd
 rbase e2 cc59  7231 7256       # cmd
 rbase e2 cc59  7340 7bae       # cmd
 rbase e2 cc59  7cb8 7ceb       # cmd
+rbase e2 cc59  7d3a 7d9d       # cmd
 rbase e2 cc59  855f 8581       # cmd
 rbase e2 c1be  8938 8b18       # cmd
 rbase e2 c1be  8d5f 8eb4       # cmd
@@ -1959,6 +1960,7 @@ sym 51  "B2_SIGPIP_51" :B 2
 sym 52  "Flags_52"
 sym 52  "B2_DCLST_START_52" :B 2
 sym 52  "B4_LONG_ISF_UP_FLG_52" :B 4
+sym 52  "B4_LONG_MAP_AVG_52" :B 7
 sym 53  "B5_CART_MODE_53" :B 5
 sym 53  "B6_IDM_BYPASS_53" :B 6
 sym 58  "B7_TLOFLG_58" :B 7
@@ -2010,6 +2012,7 @@ sym a0  "B2_WRMEGO_a0" :B 2
 sym a0  "SIGNED_TBL_FLG" :B 4
 sym a0  "B6_MUPET_FLAG_a0" :B 6
 sym a1  "Flags_a1"
+sym a1  "B0_MAPUP_NORM_a1" :B 0
 sym a2  "B2_FLG_FRST_DS_a2" :B 2
 sym a2  "B3_FLG_LK_CM_a2" :B 3
 sym a2  "B4_FLG_TIP_OUT_a2" :B 4
@@ -2821,6 +2824,7 @@ sym c976  "FN1617"
 sym c99a  "Func_c99a"
 sym cb60  "FKMKAY"
 sym cb62  "SFT_FM_LVL"
+sym cb66  "LONG_MAP_RQD"
 sym cb67  "MAP_CYCLE"
 sym cb68  "AEM"
 sym cb6a  "ALPHA"

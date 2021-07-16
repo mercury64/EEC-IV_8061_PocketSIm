@@ -10,6 +10,7 @@ rbase e2 c1be 8f94 901e
 rbase e2 c1be 8d5f 8eb4
 rbase e2 cc59 7cb8 7ceb
 rbase e2 c1be 9308 93b1
+rbase e2 cc59 7d3a 7d9d
 
 rbase e4 180
 rbase e6 280
@@ -2007,12 +2008,11 @@ sym 51 "B2_SIGPIP_51" : B 2
 sym 52 "Flags_52"
 sym 52 "B2_DCLST_START_52" : B 2
 sym 52 "B4_LONG_ISF_UP_FLG_52" : B 4
-
+sym 52 "B4_LONG_MAP_AVG_52" : B 7
 
 sym 53 "B5_CART_MODE_53" : B 5
 sym 53 "B6_IDM_BYPASS_53" : B 6
-# sym 53 "Next_spout_beta" : B 7
-
+# sym 53 "Next_spout_beta" : B 77
 sym 58 "B7_TLOFLG_58" : B 7
 
 sym 6c "Event_time"
@@ -2084,7 +2084,7 @@ sym a0 "SIGNED_TBL_FLG" : B 4
 #sym a0 "Tblsflg"  : B 7
 
 sym a1 "Flags_a1" 
-# sym a1 "Console_flag"  : B 0
+sym a1 "B0_MAPUP_NORM_a1"  : B 0
 
 sym a2 "B2_FLG_FRST_DS_a2" : B 2
 sym a2 "B3_FLG_LK_CM_a2" : B 3
@@ -2946,6 +2946,7 @@ sym cb62 "SFT_FM_LVL"
 sym cb6a "ALPHA"
 sym cb6e "FRCTAE"
 
+sym cb66 "LONG_MAP_RQD"
 sym cb67 "MAP_CYCLE"
 sym cb68 "AEM"
 sym cb6c "TPDLTA"

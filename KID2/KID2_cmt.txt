@@ -259,6 +259,8 @@
 
 343a # 0 = Thick Film Ignition (TFI)
 
+398a # (clear MAP overflow flag)
+
 39c0 # (increment PIP period counter)
 39c6 # (PIP period accumulator)
 
