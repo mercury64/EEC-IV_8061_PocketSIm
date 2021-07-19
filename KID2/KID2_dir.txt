@@ -2450,8 +2450,9 @@ sym 39c "FKEXIT"
 sym 39e "ISCMOD"
 
 sym 3a4 "N_PREV"
-
+sym 3a6 "SPK_IDLE"
 sym 3aa "SPK_NORM"
+
 sym 3ae "RPMERR"
 
 sym 3b0 "RPMERR_A"
@@ -2815,6 +2816,7 @@ sym b4e0 "FKEXIT_MAX"
 sym b4e2 "FKEXIT_MIN"
 
 sym b4ec "SPKCTL"
+sym b4f0 "SPKINU"
 sym b4f6 "TARMAX"
 
 #sym b914 "RF6"
@@ -2900,7 +2902,7 @@ sym bb8c "TPDLMX"
 sym bb92 "VSOMAX"
 sym bb93 "VSOMXH"
 sym bb94 "Y"
-
+sym bb96 "SHFDLT"
 sym bb98 "OSCDLY"
 
 sym bbaa "EGRTD8"

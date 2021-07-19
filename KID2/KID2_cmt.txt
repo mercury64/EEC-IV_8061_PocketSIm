@@ -622,6 +622,10 @@
 
 4fc3 # Clip LAMBSE to 1.0 as a maximum
 
+5031 # PTPAMP = FN1354(N,MAP)
+
+5048 # |BIAS/PTPAMP|
+
 
 5174 # ISCFLG = 1 CLOSED LOOP RPM CONTROL
 
@@ -1400,15 +1404,16 @@ a5bc # NOVS <= MPGNOV - MPNOVH
 a5cb # VSBAR >= VSMPG + VSMPGH
 
 a6de \n\n#HMUTMR - HIGH MAPPA UPSTREAM AIR TIMER
-
 a6f0 # MAPPA >= HMUMAP + HMUMPH
 a6fa # MAPPA < HMUMAP
 
 a706 \n\n#VOLTMR - LOW VOLTAGE TIMER
-
 a710 # VBAT < LOWVOL
-a7a7 # LOWVOL + VOLHYS
+a717 # LOWVOL + VOLHYS
 a720 # VBAT >= LOWVOL + VOLHYS
+
+a746 \n\nOSCTMR - OSCMOD DELAY TIMER (0.125 SEC)
+a746 \n #This timer is used to prevent OSCMOD spark feedback during  manual  transmission shifts.
 
 a777 # IOTimer delta time since last mSec
 a783 # *128/52083 = 1 mSec
