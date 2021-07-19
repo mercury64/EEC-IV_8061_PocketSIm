@@ -230,7 +230,11 @@
 
 2da3 |## Initialise the RAM table() from InjTab table()
 
-2e83 \n# FUEL_INJ_TIM_COM2
+2e4a # Call DWELL_CALCULATION
+2e53 # Increment CRKPIP_CTR every rising edge of PIP
+2e5b # Clip CRKPIP_CTR at 255 as a maximum
+
+2e83 \n\n# FUEL_INJ_TIM_COM2
 
 2e87 # Previous PIP first half period.
 2e8b # Most recent PIP first half period.
@@ -239,6 +243,10 @@
 2e99 # (PHFDLT - HFDLTA) / PHFDLT
 2ea0 # MHPFD = Signature PIP difference check value.
 2ea2 # SIGPIP = 1 (this is signature PIP)
+
+2eb0 # (not in synch)
+2eb7 # SYNCTR = (2 * ENGCYL) - 1
+2eb9 # EXIT FUEL_INJ_TIM_COM2
 
 2fa6 # Max degrees retard
 
@@ -260,6 +268,8 @@
 343a # 0 = Thick Film Ignition (TFI)
 
 398a # (clear MAP overflow flag)
+398d # (in crank)
+39b2 # (PIP period accumulator)
 
 39c0 # (increment PIP period counter)
 39c6 # (PIP period accumulator)
@@ -546,6 +556,8 @@
 
 4a49 # TEISF or TEFTC?
 
+4aa2 # MAPBAR = ROLAV(MAP_WORD,TCMAPW)
+
 4aaa \n\n#CRKPIP_CTR - PIP COUNTER FOR CRANKING FUEL
 4aaa \n#CRKPIP_CTR is used as a Crank Fuel Multiplier to do a lean-out or fuel  shut-off
 4aaa \n# during sub-zero cold operation.  Some calibrators are using the logic to improve
@@ -760,9 +772,16 @@
 
 5c86 # 1024 = 1 second
 
+5d13 # N_BYTE < DFTRPM
+5d15 # APT = 1
+5d18 # |SET
+
+5d25 # |CLEAR
+5d46 # SAF = 10 deg BTDC
+
 5d79 # TEMP_FRAC = FRCCTM * ACT + (1 - FRCCTM) * ECT.
 5d83 # FN091(TEMP_FRAC) =  TEMP_FRAC  normalizing  function  for  FN1128,
-5d96 # N092(TP - TAPBAR) = TP - TAPBAR normalizing function for FN1128.
+5d96 # FN092(TP - TAPBAR) = TP - TAPBAR normalizing function for FN1128.
 
 5e40 \n\nLIGHT LOAD RPM OSCILLATION ADDER
 5e49 # (Near closed throttle) 
@@ -800,6 +819,8 @@
 
 63a1 # (Base EGR table)
 63a9 # (MPG mode table)
+
+6437 # EGR IS OFF
 
 644a # EVP-EOFF
 645c # FN218(MAPOPE) * FN219(EVP-EOFF)
@@ -1137,6 +1158,14 @@
 7be3 # Get no of bytes into dest. addr
 7be8 # and push modded returns back.
 
+7c65 # (VBAT - 10.0)
+7c6A # (Clip to zero)
+7c71 # ((VBAT - 10.0) * ETV_GAIN_BAT)
+7c7d # (ETV_GAIN * TV_COUNTS)
+7c85 # (ETV_BIAS - (ETV_GAIN * TV_COUNTS))
+7c8a #  (Clip to zero)
+
+
 7d0b \n############################################################
 7d0b \n# ROM Checksum
 7d0b \n############################################################
@@ -1186,6 +1215,10 @@
 
 7fd3 # loop until 5161 IO times have passed(12.4ms)
 
+803c # (V_ETVOCM_SAV - ETVOCM)
+8042 # ABS(V_ETVOCM_SAV - ETVOCM)
+8048 # VETVDT
+
 8112 # 998,FMEM failure/Failed (open)EPC Output Driver
 811c # 128,MAP vacuum circuit failure
 8122 # 126,MAP/BP out of S-T range.
@@ -1196,10 +1229,16 @@
 8149 # 122,TPS ckt. below minimum voltage.
 8150 # 123,TPS ckt. above max. voltage.
 81d8 # 126,MAP/BP out of S-T range.
+
+822f # (RICH) ? 
+
 824b # 172,EGO sensor ckt. ind. system lean.
 
+840e # SET TV_COUNTS =0 
 84d5 # 538,Operator error-dyn response test.
 84df # 129,Insuff. MAP change-dyn resp. test.
+
+856e # EGOBAR = EGOBAR UROLAV(IEGO1,R36)
 
 8754 \n#############################################################
 8754 \n# memory RAM test from 100 to 8FF
@@ -1299,6 +1338,10 @@
 9065 # (current gear is first)  
 90a6 # (command downshift)
 
+9138 # CYCCTR >= CLDCTM
+916a # CYCCTR > CLDCTM/2
+916a \w# (cycle shift solenoids)  
+
 91af # (new commanded gear this pass)
 91b2 # (shift may be checked for validity)
 
@@ -1364,6 +1407,8 @@
 938f # (coast clutch is hydraulically off)
 939a # (timer expired)
 93a2 # (power on)
+
+96ae # Do "ETV Current Monitor Test"
 
 9cbe # (Failure Mode Lock Requested)  
 9cc1 # (Unconditional Unlock Requested)

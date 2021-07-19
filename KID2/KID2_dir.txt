@@ -11,6 +11,8 @@ rbase e2 c1be 8d5f 8eb4
 rbase e2 cc59 7cb8 7ceb
 rbase e2 c1be 9308 93b1
 rbase e2 cc59 7d3a 7d9d
+# rbase e2 cc59 8038 8055
+
 
 rbase e4 180
 rbase e6 280
@@ -838,8 +840,8 @@ func    b656 b679  "FNTP_AIR_OFF"   : UW  : UW
 table   b67a b6c9  "fuel_base_table_cold"   : O 10 UY 
 table   b6ca b719  "fuel_base_table_cold_decay"   : O 10 UY 
 func    b71a b727  "FN307"   : UY  : UY 
-table   b728 b777  "FN1321"   : O 10 UY 
-table   b778 b7c7  "FN1322"   : O 10 UY 
+table   b728 b777  "EISF"   : O 10 UY 
+table   b778 b7c7  "EFTC"   : O 10 UY 
 table   b7c8 b817  "FN1328"   : O 10 SY 
 table   b818 b847  "FN1343"   : O 6 UY 
 func    b848 b85f  "FN222A"   : UW  : UW 
@@ -923,9 +925,10 @@ func    ba58 ba6f  "FN605A"   : UW  : UW
 func    ba70 ba8b  "FN090"   : UW  : UW 
 func    ba8c baaf  "FN095"   : UW  : UW 
 word    bab0 bab1
-byte    bab2 bae5
-func    bae6 baf5  "Func_bae6"   : UW  : UW 
-func    baf6 bafd  "Func_baf6"   : UY  : UY 
+word    bab2 bac1
+byte    bac2 bae5
+func    bae6 baf5  "FN500"   : UW  : UW 
+func    baf6 bafd  "FN501"   : UY  : UY 
 func    bafe bb0d  "x_spark_knock"   : SY  : UY 
 func    bb0e bb1d  "y_ect_fuel"   : SY  : UY 
 func    bb1e bb3d  "FN182"   : SW  : SW 
@@ -1622,7 +1625,7 @@ sub  87beb "Sub_7beb"
 sub  87c10 "Sub_7c10"  
 sub  87c22 "Sub_7c22"  
 sub  87c40 "EGO_TEST_TMR_CLEAR"  
-sub  87c62 "Sub_7c62"  
+sub  87c62 "Calculate_ETV_OCM_MIN"  
 sub  87ca1 "VO_EOTS_COM1"
 sub  87cb0 "FAIL_Loop"
 sub  87ced "Sub_7ced"  
@@ -1668,10 +1671,10 @@ sub  8810e "FMEM_FAULT_PRESENT_and_INITIALATION_LOGIC"
 sub  88195 "Sub_8195"  
 sub  881a6 "Sub_81a6"  
 sub  881b8   "Sub_81b8"  
-sub  881fd   "Sub_81fd"  
+sub  881fd   "VR_EGO_COM1"  
 sub  8821a   "Sub_821a"  
 sub  8822f   "Sub_822f"  
-sub  8824f   "Sub_824f"  
+sub  8824f   "VR_THERMAIR_COM2"  
 sub  8826a "AIR_UPSTREAM"  
 sub  8827c "AIR_DOWNSTREAM"  
 sub  8828f "BLOCK_F2_VR_THERMAIR_COM2"  
@@ -1696,7 +1699,7 @@ sub  88453 "Sub_8453"
 sub  8846e  "Sub_846e"  
 sub  88538  "Sub_8538"  
 sub  8853d "Check_PS_PB"
-sub  8855f "Check_HEGO" 
+sub  8855f "VR_EGOBAR_COM1" 
 sub  88582 "Sub_8582"  
 sub  885a9  "Sub_85a9"  
 sub  885d1 "Sub_85d1"  
@@ -1713,7 +1716,7 @@ sub  888bf   "Sub_88bf"
 sub  888de   "Sub_88de"  
 sub  8890c   "Sub_890c"  
 sub  88933 "INTRN_E4OD_SYS_EQU_COM1"  
-sub  88b19   "Sub_8b19"  
+sub  88b19 "SPEED_RATIO_ACROSS_TORQUE_CONVERTER"  
 sub  88b2c   "Sub_8b2c"  
 sub  88b71 "E4OD_INPUT_PROCESSING_COM1"  
 sub  88cc9   "FN161x(N,LOAD)"  
@@ -1725,14 +1728,14 @@ sub  88eb5   "Sub_8eb5"
 sub  88ee6   "Sub_8ee6"  
 sub  88efe   "Sub_8efe"  
 sub  88f28   "Delay_Shift_Logic"  
-sub  88f83   "MANUAL_DOWNSHIFT_DETERMINATION"  
+sub  88f83 "MANUAL_DOWNSHIFT_DETERMINATION"  
 sub  88f94 "SC_CM_GR_DETR_COM1"  
 sub  8901f "SC_CM_GR_MAN1_COM1"  
 sub  8905e "SC_CM_GR_MAN2_COM1"  
 sub  89099 "SC_CM_GR_AUTO_DWN_COM1"  
 sub  890aa   "Sub_90aa"  
-sub  8912a   "Sub_912a"  
-sub  891af   "SC_VALID_COM1"  
+sub  8912a "SC_SOL_CTL_COM1"  
+sub  891af "SC_VALID_COM1"  
 sub  9231 "SHIFT_VERIFICATION_LOGIC_(Part_1)"
 sub  9278 "SHIFT_VERIFICATION_LOGIC_(Part_2)"
 sub  89308   "CCC_CST_CLTCH_CTL_COM1"  
@@ -1967,8 +1970,10 @@ sym 48 "?Sto_trigger?" : B 5
 
 sym 49 "DWLELD" : B 3
 
+sym 4a "B4_ETV_TEST_4a" : B 4
 sym 4a "B7_FLG_DEL_MDN_4a" : B7
 
+sym 4b "B1_EPC_OPEN_FLG_4b" : B4
 sym 4b "B4_SFT_ERROR_4b" : B4
 sym 4b "B7_SFT_FM_FLG_4b" : B7
 
@@ -2009,6 +2014,7 @@ sym 51 "B2_SIGPIP_51" : B 2
 sym 52 "Flags_52"
 sym 52 "B2_DCLST_START_52" : B 2
 sym 52 "B4_LONG_ISF_UP_FLG_52" : B 4
+sym 52 "B5_ISF_UP_FLG_52" : B 5
 sym 52 "B4_LONG_MAP_AVG_52" : B 7
 
 sym 53 "B5_CART_MODE_53" : B 5
@@ -2087,6 +2093,8 @@ sym a0 "SIGNED_TBL_FLG" : B 4
 
 sym a1 "Flags_a1" 
 sym a1 "B0_MAPUP_NORM_a1"  : B 0
+sym a1 "B7_SA10FG_a1" : B 7
+
 
 sym a2 "B2_FLG_FRST_DS_a2" : B 2
 sym a2 "B3_FLG_LK_CM_a2" : B 3
@@ -2122,7 +2130,7 @@ sym a5 "UNDSP" : B 6
 sym a5 "CRKFLG" : B 7
 
 sym a6 "FMEM_FLAGS"
-sym a6 "B0__a6" : B 0
+sym a6 "B0_ETV_ERROR_a6" : B 0
 sym a6 "B1__a6" : B 1
 sym a6 "B2_TFMFLG_a6" : B 2
 sym a6 "B3_MFMFLG_a6" : B 3
@@ -2226,7 +2234,7 @@ sym 122 "MAP_FREQ"
 sym 124 "MAP_WORD"
 sym 126 "IMAP_WORD"
 sym 128 "MAPCNT"
-
+sym 12a "MAPBAR"
 sym 12e "AETP"
 sym 136 "PUTMR"
 sym 138 "ADPTMR"
@@ -2279,6 +2287,7 @@ sym 195 "FMECTR"
 sym 196 "A3CTMR"
 
 sym 19c "TBART"
+sym 1ae "V_ETVOCM_SAV"
 sym 1ba "EGO_CNT_IDLE"
 sym 1bc "TSSTIL_TMR"
 sym 1be "Miltmr"
@@ -2288,6 +2297,7 @@ sym 1cc "V_LEGOTMR"
 
 sym 1d0 "SparkAdvance"
 
+sym 1e4 "DELOPT"
 sym 1e8 "MULTMR"
 sym 1e9 "LAMMUL"
 sym 1ea "N_BYTE"
@@ -2402,6 +2412,8 @@ sym 32e "TP_RATE"
 sym 330 "TQ_OFM"
 sym 33c "ARCHG"
 sym 33e "LOAD"
+
+sym 340 "ETV_OCM_MIN"
 sym 342 "ETVOCM"
 sym 344 "Vsc_Raw"
 
@@ -2425,9 +2437,13 @@ sym 35b "TV_PRES"
 sym 35e "TQ_NET"
 
 sym 362 "DNUN_TM"
+sym 364 "TM_TV_SS"
+
 sym 368 "TM_SFT_CCO"
 
 sym 36e "TM_DEL_SFT"
+
+sym 376 "CYCCTR"
 
 sym 37a "TM_CS_DLY"
 sym 37b "TM_CS_ENG"
@@ -2944,9 +2960,15 @@ sym c142 "SARCHG"
 
 sym c154 "trans_min_tv_pressure"
 
+sym c156 "ETV_BIAS
+sym c158 "ETV_GAIN"
+sym c159 "ETV_GAIN_BAT"
+
 sym c15a "VTABFL"
 sym c15b "VTCEGO"
+sym c15c "TV_SLT_TM"
 
+sym c160 "TCMAPW"
 sym c162 "TCNE"
 sym c164 "TCTPTE"
 sym c166 "TCVST"
@@ -3048,11 +3070,13 @@ sym cba6 "MULTM"
 sym cba8 "fuel_max_load_verification_value"
 sym cbaa "VKYPWR"
 
+sym cbb6 "VNMIN"
 sym cbba "VRLAM"
 
 sym cbca "ACTMIN"
 sym cbcc "ACTMAX"
 
+sym cbce "V_EGOHP"
 sym cbcf "VECT5"
 
 
