@@ -1173,7 +1173,7 @@
 
    I_HSO_1:
 2ae5: f2                  pushp                  push(PSW);
-2ae6: c0,80,06            stw   R6,R80           76 = IO_Timer;
+2ae6: c0,80,06            stw   R6,R80           ba = IO_Timer;
 2ae9: c3,e6,c2,10         stw   R10,[Re6+c2]     SvStack = StackPtr;
 2aed: ad,6c,10            ldzbw R10,6c           StackPtr = 6c;
 2af0: 3e,2a,2f            jb    B6,R2a,2b22      if (No_Start = 0)  {
@@ -5206,32 +5206,32 @@ FIRST_RPM and REFLG LOGIC
 5412: ef,be,fb            call  4fd3             ACT_to_ECT_proportioning_factor(R36) ();
 5415: 0a,07,38            asrw  R38,7            wR38 >>= 7;                       #[ R38 /= 128] 
 5418: ef,c0,f4            call  48db             SUWFuncLU_48db (
-541b: d2,03                     #arg 1              Func_b3d2,
+541b: d2,03                     #arg 1              FN005,
 541d: 38,00                     #arg 2              38 );
 541f: a0,38,30            ldw   R30,R38          R30 = R38;
 5422: bf,e6,63,38         ldsbw R38,[Re6+63]     swR38 = [2e3];
 5426: ef,b2,f4            call  48db             SUWFuncLU_48db (
-5429: d2,03                     #arg 1              Func_b3d2,
+5429: d2,03                     #arg 1              FN005,
 542b: 38,00                     #arg 2              38 );
 542d: a0,38,32            ldw   R32,R38          R32 = R38;
 5430: ad,05,34            ldzbw R34,5            wR34 = 5;
-5433: 45,4f,04,f4,38      ad3w  R38,Rf4,44f      R38 = Table_b891;
+5433: 45,4f,04,f4,38      ad3w  R38,Rf4,44f      R38 = FN1349;
 5438: ef,7e,f5            call  49b9             Four_Point_Interpolation ();
 543b: b0,3b,3c            ldb   R3c,R3b          R3c = R3b;
 543e: af,e8,06,38         ldzbw R38,[Re8+6]      wR38 = ATMR3;
 5442: ef,a1,f4            call  48e6             UUWFuncLU_48e6 (
-5445: fe,03                     #arg 1              Func_b3fe,
+5445: fe,03                     #arg 1              FN008,
 5447: 38,00                     #arg 2              38 );
 5449: a0,38,30            ldw   R30,R38          R30 = R38;
 544c: ef,97,f4            call  48e6             UUWFuncLU_48e6 (
-544f: ea,03                     #arg 1              Func_b3ea,
+544f: ea,03                     #arg 1              FN007,
 5451: 9a,00                     #arg 2              AM );
 5453: a0,38,32            ldw   R32,R38          R32 = R38;
 5456: ad,05,34            ldzbw R34,5            wR34 = 5;
-5459: 45,36,04,f4,38      ad3w  R38,Rf4,436      R38 = Table_b878;
+5459: 45,36,04,f4,38      ad3w  R38,Rf4,436      R38 = FN1348;
 545e: ef,58,f5            call  49b9             Four_Point_Interpolation ();
 5461: 7c,3b,3c            ml2b  R3c,R3b          wR3c *= R3b;
-5464: c3,e6,b4,3c         stw   R3c,[Re6+b4]     [234] = R3c;
+5464: c3,e6,b4,3c         stw   R3c,[Re6+b4]     HICOMP = R3c;
 5468: 01,38               clrw  R38              R38 = 0;
 546a: a3,f4,0c,3a         ldw   R3a,[Rf4+c]      R3a = fuel_injector_slope;
 546e: 0c,04,38            shrdw R38,4            lR38 >>= 4;                       #[ R38 /= 16] 
@@ -6114,7 +6114,7 @@ FIRST_RPM and REFLG LOGIC
 5dd6: d1,04               jleu  5ddc             if (R34 <= ff) goto 5ddc; }
 5dd8: a1,ff,00,34         ldw   R34,ff           R34 = ff; }
 5ddc: af,e6,44,32         ldzbw R32,[Re6+44]     wR32 = EGRACT;
-5de0: a3,f8,16,36         ldw   R36,[Rf8+16]     R36 = [bac6];
+5de0: a3,f8,16,36         ldw   R36,[Rf8+16]     R36 = TCEACT;
 5de4: ef,68,eb            call  494f             UROLAV ();
 5de7: c7,e6,44,3e         stb   R3e,[Re6+44]     EGRACT = R3e;                     # UROLAV(EM * 100/AMPEM, TCEACT).
 5deb: 5c,3e,30,3c         ml3b  R3c,R30,R3e      wR3c = yR30 * R3e;
@@ -14938,7 +14938,7 @@ b3c6: 60,00,00,01         func     60,   100
 b3ca: 40,00,00,00         func     40,     0
 b3ce: 00,00,00,00         func      0,     0
 
-   Func_b3d2:
+   FN005:
 b3d2: ff,7f,00,04         func    7fff,   400
 b3d6: 71,00,00,04         func      71,   400
 b3da: 5d,00,00,00         func      5d,     0
@@ -14946,14 +14946,14 @@ b3de: 00,80,00,00         func    8000,     0
 b3e2: 00,80,00,00         func    8000,     0
 b3e6: 00,80,00,00         func    8000,     0
 
-   Func_b3ea:
+   FN007:
 b3ea: ff,ff,00,04         func   ffff,   400
 b3ee: 00,20,00,04         func   2000,   400
 b3f2: 00,10,00,00         func   1000,     0
 b3f6: 00,00,00,00         func      0,     0
 b3fa: 00,00,00,00         func      0,     0
 
-   Func_b3fe:
+   FN008:
 b3fe: ff,ff,00,04         func   ffff,   400
 b402: 3c,00,00,04         func     3c,   400
 b406: 00,00,00,00         func      0,     0
@@ -15337,14 +15337,14 @@ b86c: 00,00,33,00         func      0,    33
 b870: 00,00,33,00         func      0,    33
 b874: 00,00,33,00         func      0,    33
 
-   Table_b878:
+   FN1348:
 b878: 00,00,00,00,00      table   0,   0,   0,   0,   0
 b87d: 00,00,00,00,00      table   0,   0,   0,   0,   0
 b882: 00,00,00,00,00      table   0,   0,   0,   0,   0
 b887: 00,00,00,00,00      table   0,   0,   0,   0,   0
 b88c: 00,00,00,00,00      table   0,   0,   0,   0,   0
 
-   Table_b891:
+   FN1349:
 b891: 00,00,04,07,0a      table   0,   0,   4,   7,   a
 b896: 00,00,04,07,0a      table   0,   0,   4,   7,   a
 b89b: 04,04,04,07,0a      table   4,   4,   4,   7,   a
@@ -15563,7 +15563,7 @@ bac2: cd                  byte     cd
 bac3: 00                  byte      0
 bac4: cd                  byte     cd            TCECT
 bac5: 04                  byte      4
-bac6: cd                  byte     cd
+bac6: cd                  byte     cd            TCEACT
 bac7: 00                  byte      0
 bac8: 00                  byte      0            TCEGR
 bac9: 08                  byte      8
