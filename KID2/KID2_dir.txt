@@ -1562,7 +1562,7 @@ sub  860f1 "DWLBSE-DWLCOR_CALCULATION"
 sub  861d4 "Sub_61d4"  
 sub  862ed "Sub_62ed"  
 sub  862fc "Sub_62fc"  
-sub  8630b "Sub_630b"  
+sub  8630b "EGR_ENABLE_LH"  
 sub  86390 "Sub_6390"  
 sub  86422 "Sub_6422"  
 sub  864f7 "Sub_64f7"  
@@ -1811,6 +1811,7 @@ sym 12 "Tmr_OVF_cnt"
 
 sym 22 "B5_LESFLG_22" : B 5
 
+sym 24 "B2_EGRTPQ_Q_24" : B 2
 sym 24 "B5_FLG_LAMRICH_Q_24" : B 5
 sym 24 "B7_HUMTMR_FLG_24" : B 7
 
@@ -1839,7 +1840,7 @@ sym 27 "B6_R27_OpenLoop?" : B 6
 sym 27 "B7_SYNFLG" : B 7
 
 
-sym 28 "B0_egr_rdy_28" : B 0
+sym 28 "?B0_EGREN_28?" : B 0
 sym 28 "Newsa" : B 2
 sym 28 "B3_EFFLG1_28" : B 3
 sym 28 "EGOSTE" : B 5
@@ -1855,7 +1856,7 @@ sym 29 "B7_PURGING_29" : B 7
 
 #sym 2a "VIP_flags"
 sym 2a "Vscdt" :B 0
-sym 2a "Vscst" :B 1
+sym 2a "B1_WOT_EGR_FLG_2a" :B 1
 sym 2a "VIP_ENABLE" :B 2
 sym 2a "DISABLE_RUNNING" :B 3
 sym 2a "DISABLE_NOSTART" :B 4
@@ -2070,7 +2071,7 @@ sym 9e "Reg_9e" : B 0
 sym 9e "Reg_9e" : B 1
 sym 9e "Reg_9e" : B 2
 sym 9e "Reg_9e" : B 3
-sym 9e "B4_EGREN_9e" : B 4
+sym 9e "?B4_EGREN_9e?" : B 4
 
 # sym 9e "Pfehp_flg" : B 1
 # sym 9e "Vegrbp" : B4
@@ -2888,6 +2889,7 @@ sym babc "TCDASD"
 sym babe "TCDASU"
 sym bac0 "TCDESN"
 sym bac4 "TCECT"
+sym bac6 "TCEACT"
 sym bac8 "TCEGR"
 sym bacc "TC"
 sym bace "TCNDT_ISC"
@@ -2921,6 +2923,10 @@ sym bb94 "Y"
 sym bb96 "SHFDLT"
 sym bb98 "OSCDLY"
 
+sym bba0 "MAP_WOT_EGRC"
+sym bba1 "MAP_WOT_EGRS"
+sym bba6 "EGRTB1"
+sym bba8 "EGTB1H"
 sym bbaa "EGRTD8"
 sym bbae "EGRDED"
 

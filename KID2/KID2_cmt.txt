@@ -783,6 +783,8 @@
 5d83 # FN091(TEMP_FRAC) =  TEMP_FRAC  normalizing  function  for  FN1128,
 5d96 # FN092(TP - TAPBAR) = TP - TAPBAR normalizing function for FN1128.
 
+5de7 # UROLAV(EM * 100/AMPEM, TCEACT).
+
 5e40 \n\nLIGHT LOAD RPM OSCILLATION ADDER
 5e49 # (Near closed throttle) 
 5e59 # TP_REL > TPOBP2 + TPOH2
