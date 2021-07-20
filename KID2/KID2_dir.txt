@@ -681,18 +681,18 @@ func    b1b4 b1bf  "FN891"   : UY  : UY
 table   b1c0 b1e9  "FN1861"   : O 7 UY 
 func    b1ea b211  "FN703"   : UW  : SW 
 func    b212 b23d  "FN703D"   : UW  : SW 
-func    b23e b259  "y_fuel_cold_decay"   : UW  : UW 
+func    b23e b259  "FN018A"   : UW  : UW 
 func    b25a b26d  "FN019A"   : UW  : UW 
 func    b26e b28d  "FN020C"   : SW  : UW 
 func    b28e b2bd  "FN021_MAPOPE_y_load"   : UW  : UW 
-func    b2be b2e5  "Func_b2be"   : SW  : UW 
+func    b2be b2e5  "FN022A"   : SW  : UW 
 func    b2e6 b2fd  "FN070B"   : UW  : UW 
 func    b2fe b319  "FN070L"   : UW  : UW 
-func    b31a b335  "FN071"   : UW  : UW 
+func    b31a b335  "FN071?"   : UW  : UW 
 func    b336 b351  "FN072C"   : UW  : UW 
 func    b352 b365  "Func_b352"   : UW  : UW 
 func    b366 b379  "Func_b366"   : UW  : UW 
-func    b37a b395  "y_map_emissions"   : UW  : UW 
+func    b37a b395  "FN071"   : UW  : UW 
 func    b396 b3b5  "FN039"   : UW  : UW 
 func    b3b6 b3d1  "FN025"   : UW  : UW 
 func    b3d2 b3e9  "FN005"   : SW  : UW 
@@ -834,14 +834,14 @@ func    b5c6 b5dd  "FN301"   : UW  : UW
 func    b5de b601  "FN303"   : UW  : UW 
 func    b602 b60f  "FN310"   : UY  : UY 
 func    b610 b62b  "FN311"   : UW  : UW 
-func    b62c b639  "fuel_open_loop_multiplier"   : SY  : UY 
+func    b62c b639  "FN325"   : SY  : UY 
 func    b63a b655  "FND_TP_DT_A"   : UW  : SW 
 func    b656 b679  "FNTP_AIR_OFF"   : UW  : UW 
-table   b67a b6c9  "fuel_base_table_cold"   : O 10 UY 
-table   b6ca b719  "fuel_base_table_cold_decay"   : O 10 UY 
+table   b67a b6c9  "FN1362"   : O 10 UY 
+table   b6ca b719  "FN1361"   : O 10 UY 
 func    b71a b727  "FN307"   : UY  : UY 
-table   b728 b777  "EISF"   : O 10 UY 
-table   b778 b7c7  "EFTC"   : O 10 UY 
+table   b728 b777  "FN1321"   : O 10 UY 
+table   b778 b7c7  "FN1322"   : O 10 UY 
 table   b7c8 b817  "FN1328"   : O 10 SY 
 table   b818 b847  "FN1343"   : O 6 UY 
 func    b848 b85f  "FN222A"   : UW  : UW 
@@ -997,7 +997,7 @@ table   bcca bd19  "spark_adder_egr"   : O 10 UY
 table   bd1a bd69  "spark_reduction_for_octane"   : O 10 UY 
 table   bd6a bdb9  "spark_table_base_mpg"   : O 10 UY 
 table   bdba be09  "spark_adder_temp_and_tip"   : O 10 UY 
-table   be0a be59  "spark_ect_vs_tp_multiplier"   : O 10 SY 
+table   be0a be59  "FN1128"   : O 10 SY 
 table   be5a bea9  "spark_adder_egr_mpg"   : O 10 UY 
 func    beaa bed5  "FN074A"   : UW  : UW 
 func    bed6 bee3  "FN211"   : SY  : UY 
@@ -1465,7 +1465,7 @@ sub  832a1 "Add_H_Delta"
 sub  832a7 "EOS_KAY_CALCULATIONS"  
 sub  833b7 "TRANSIENT_SPARK-COMPENSATION"  
 sub  83430 "DWELL_CALCULATION"  
-sub  834c8 "Sub_34c8"  
+sub  834c8 "FUEL_INJ_OUT_COM6"  
 sub  835f3 "Sub_35f3"  
 sub  83642 "Sub_3642"  
 sub  83659 "Sub_3659"  
@@ -1971,6 +1971,9 @@ sym 48 "?Sto_trigger?" : B 5
 
 sym 49 "DWLELD" : B 3
 
+sym 4a "B1_TLS_34_FLG_4a" : B 1
+sym 4a "B2_TLS_24_FLG_4a" : B 2
+sym 4a "B3_TLS_NV_FLG_4a" : B 3
 sym 4a "B4_ETV_TEST_4a" : B 4
 sym 4a "B7_FLG_DEL_MDN_4a" : B7
 
@@ -1982,6 +1985,10 @@ sym 4c "B3_Immediate" : B 3
 sym 4c "B4_No_service" : B 4
 sym 4c "B5_Late_output" : B 5
 sym 4c "B6_Queued" : B 6
+
+sym 4d "B0_INJ_BANK_4d" : B 0
+sym 4d "B6_INJ2_PIP_4d" : B 6
+sym 4d "B7_INJ1_PIP_4d" : B 7
 
 sym 4e "B3_NEW_RPM_4e" : B 3
 sym 4e "B4_NEW_IDM" : B 4
@@ -2006,11 +2013,13 @@ sym 50 "B2_Douple_edge" : B 2
 sym 50 "B3_No_fuel_save" : B 3
 sym 50 "B4_First_pip" : B 4
 sym 50 "B5_Ctflg" : B 5
-sym 50 "B6_Tipflg" : B 6
+sym 50 "B6_FUEL_FINISHED_50" : B 6
 sym 50 "B7_Tblsflg" : B 7
 
 sym 51 "B1_FLG_UN_UPSFT_51" : B 1
 sym 51 "B2_SIGPIP_51" : B 2
+sym 51 "B5_NEW_DELAY_51" : B 5
+sym 51 "B6_NO_SYNC_51" : B 6
 
 sym 52 "Flags_52"
 sym 52 "B2_DCLST_START_52" : B 2
@@ -2111,11 +2120,11 @@ sym a3 "B2_Flags_a3" : B 2
 sym a3 "B3_FLIPFLOP_Q_a3" : B 3
 sym a3 "B4_Flags_a3" : B 4
 sym a3 "B5_Flags_a3" : B 5
-sym a3 "B6_Flags_a3" : B 6
+sym a3 "B6_NUMOUT_a3" : B 6
 sym a3 "B7_Flags_a3" : B 7
 
 sym a4 "BRK_NEVER_OFF" : B 1
-sym a4 "B2_TLS_NV_FLG_a4" : B2
+sym a4 "B2_FLIPFLOP_Q_b2" : B2
 sym a4 "BRK_NEVER_ON" : B 3
 sym a4 "MAPOFL" : B 4
 sym a4 "TAQ1" : B 5
@@ -2125,8 +2134,8 @@ sym a5 "Adptmr_on" : B 0
 sym a5 "BG_TMR_DISABLE" : B 1
 sym a5 "B2_APT_a5" : B 2
 sym a5 "Dmflg" : B 3
-sym a5 "FLG_STALL" : B 4
-sym a5 "B5_FLAGS_a5" : B 5
+sym a5 "B4_FLG_STALL_a5" : B 4
+sym a5 "B5_STALL_a5" : B 5
 sym a5 "UNDSP" : B 6
 sym a5 "CRKFLG" : B 7
 
@@ -2275,6 +2284,7 @@ sym 16e "AMPEM"
 sym 176 "KAMRF1"
 sym 17b "AEPP"
 sym 17c "PPCTR"
+sym 17d "CLFLG"
 sym 17e "MFAMUL"
 
 sym 180 "CRKPIP_CTR"
@@ -2380,14 +2390,20 @@ sym 2ce "SIGDLT"
 sym 2d0 "PSGDLT"
 sym 2d2 "DTSIG"
 
+sym 2d4 "FN031_MAPOPE_y
 sym 2d6 "FN025_MAP_y"
 sym 2d8 "FN070L_N_x"
 sym 2da "FN039_N_x"
 sym 2dc "FN021_MAPOPE_y"
 sym 2e0 "A0COR"
 sym 2e2 "ACSTRT"
+sym 2e3 "ACSTRT"
 sym 2e4 "MAPWBG"
 
+sym 2e6 "PWCF"
+
+sym 2e8 "BASEFF"
+sym 2ea "BASE_EM"
 sym 2ec "FUEL_A"
 
 sym 2ee "DTPCYC"
@@ -2419,7 +2435,7 @@ sym 340 "ETV_OCM_MIN"
 sym 342 "ETVOCM"
 sym 344 "Vsc_Raw"
 
-sym 346 "FN071_MAP_y"
+sym 346 "FN0??_MAPPA_y"
 
 sym 348 "VSBART"
 
@@ -2489,7 +2505,8 @@ sym 3c4 "OSCMOD"
 sym 3c6 "BIAS"
 sym 3c8 "LAMAVE"
 sym 3cc "TLSPAT"
-
+sym 3ce "TLS_SHFTR"
+sym 3d0 "TLSCTR"
 sym 3d2 "LONG_DT12SA"
 
 sym 3d6 "LONG_MAPCNT"
@@ -2525,6 +2542,7 @@ sym 42e "DFSO_A_TMR"
 sym 430 "DFSO_F_TMR"
 sym 432 "D_TP_DT"
 sym 434 "OLD_TP_DFSO"
+sym 436 "CTTMR"
 sym 43e "AC_PPM"
 
 sym 444 "KAMREF"
@@ -2757,7 +2775,7 @@ sym b448 "V_RUNUP_DIFF"
 sym b44a "SETLNG_TM"
 sym b44c "DPNEU_MUL"
 
-sym b44e "fuel_injector_slope"
+sym b44e "A0"
 
 sym b456 "TP_HYS_OL"
 sym b458 "DFSLAM"
@@ -2773,7 +2791,7 @@ sym b45f "MFARMP"
 sym b461 "LAMRICH"
 sym b462 "LAMRHYS"
 
-
+sym b464 "OLMCL"
 sym b463 "OLIDRV"
 sym b466 "OLINEUT"
 sym b468 "LAMDLT_OL"
@@ -2818,17 +2836,23 @@ sym b4b5 "KFTMPG"
 
 sym b4c0 "DFNOVS"
 sym b4c1 "DFNOVH"
+sym b4c2 "DFSECT"
 sym b4c3 "DFSO_ECT"
+sym b4c4 "DFSO_OUT"
 sym b4c5 "DFSRPM"
 sym b4c6 "DFSRPH"
 sym b4c7 "DFSMAP"
 sym b4c8 "DFSMPH"
+sym b4c9 "CTEDSO"
 sym b4cd "DFSVS"
+sym b4cc "CTDSFO"
+
 sym b4ce "DFSTM"
 sym b4d0 "DFSVSH"
 
 sym b4d2 "TP_AIR_OFF_H"
 sym b4d4 "D_TP_DT_F"
+sym b4d6 "FRCHIC"
 
 sym b4e0 "FKEXIT_MAX"
 sym b4e2 "FKEXIT_MIN"

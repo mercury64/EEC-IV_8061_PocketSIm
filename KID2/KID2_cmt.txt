@@ -721,10 +721,28 @@
 
 5402 # (crank mode)   
 
+540a \n\nSTRATEGY MODULE: FUEL_HOT_INJ_COMP_COM2
+
+5433 # Fuel enrichment factor.  X = FN005(TEMP) Y = FN005(ACSTRT)
+546a # Hot Injector compensation has therefore been applied  to  the  fuel delivery  slope  A0.
+
+547d \n\nDETERMINE BASE FUEL FLOW (BASEFF)
+547d \n# BASEFF is used in the foreground fuel  calculation  and  contains  base  fuel
+547d \n#   flow, unadjusted for transient fuel, AE fuel, or injector hardware.
+5485 # 0x8be5 = 35813; 2^19 = 524288; 524288/35813 = 14.64
+
+54a4 \n\nDETERMINE BASE EM (BASE_EM)
+54a4 \n# BASE_EM is used in the foreground fuel calculation to adjust  the  base  fuel
+54a4 \n#   for EGR mass that may be present at the time.
+
+54b1 \n\n
+
 5607 # (determine the value of D)
 560d # D * ISCMOD
 561f # FUEL_A = D * ISCMOD
 5632 # FUEL_A = D * ISCMOD * fn387(ECT)
+
+56b6 # (BASEFF + BASE_EM)
 
 5793 # (freeze ISCDTY for VIP) 
 5798 # (throttle adjust mode) 
@@ -742,6 +760,12 @@
 
 5929 # (EFTC * FN307(N_BYTE))
 
+59be \n\nTRANSIENT FUEL FLOW MULTIPLIER
+
+5a09 \n\nEQUILIBRIUM FUEL TRANSFER CALCULATIONS
+5109 \n# These calculations are performed during each program pass  (background  loop)
+5109 \n#   while  Transient  Fuel Compensation is enabled.  The general form of the rate
+5109 \n#   calculation is:
 
 5a0b # A = KFT
 5a0f # (in MPG mode)
@@ -749,8 +773,29 @@
 5a16 # A * [(EISF * MTEISF - AISF) 
 5a1c # EFTR = A * [(EISF * MTEISF - AISF) / (EFTC * FN307(N_BYTE))]
 
+5a62 # (ECT high enough)       
+5a64 # (TP sensor OK)   
+5a6b # (initialize once)
+5a72 # (tipping out)
+5a7b # DFSO_F_TMR = FN222F(N)
+5a83 # (initialize once) 
+5a8f # D_TP_DT < FND_TP_DT_A(N) (tipping out)
+
+5aae # VSBAR >= DFSVS
+5ab0 # | SET
+5ab8 # VSBAR < DFSVS - DFSVSH
+5aba # | CLEAR
+
 5acf # (rpm high enough)   
+
+5b06 # (long tip-in)
+
+
 5b20 # (in higher gear) 
+5b30 # NOVS > DFNOVS + DFNOVH 
+5b32 # | CLEAR
+5b49 # (engine warm enough) 
+
 5b96 # (RUN/UNDERSPEED)
 
 5bb5 # Disable AE
