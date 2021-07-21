@@ -248,7 +248,9 @@
 2eb7 # SYNCTR = (2 * ENGCYL) - 1
 2eb9 # EXIT FUEL_INJ_TIM_COM2
 
-2fa6 # Max degrees retard
+2fa0 # SPKAD(n-1) = SPKAD(n-1) - RETINC
+
+2fac # (Clip min. SPKAD(n-1) to RETLIM)
 
 32ae \n# Do Signature Kay Calculation
 332b \n\n# MKAY CALC. ENTRY POINT
@@ -319,16 +321,16 @@
 3cfc \n# no Speed control system?
 3cfc \n######
 3cfd # Throttle position sensor rate
-3d00 # Voltage Calibration Level?
-3d03 # Voltage level (->793d)?
-3d06 # Open Circuit Check?
-3d09 # Exhaust Gas Oxygen sensor 2? or Speed control system?
-3d0c # Throttle position sensor (->794d)?
-3d0f # Engine Coolant Temperature?
-3d12 # Air charge temperature?
-3d15 # Auto shift posn (neutral/drive) NDS
+3d00 # A to D conversion of the calibration input voltage, counts.
+3d03 # Ignition voltage, A/D counts.
+3d06 # Output Circuit Check (OCC) A/D input level.
+3d09 # A to D conversion  of  the  ETV  over current  monitor  voltage, counts
+3d0c # Throttle position value from A/D conversion, counts.
+3d0f # A/D conversion of ECT sensor, counts.
+3d12 # A/D conversion of ACT sensor input, counts.
+3d15 # Input Neutral/drive switch, counts.
 3d18 # Exhaust Gas Oxygen sensor 1
-3d1b # EGR Valve position
+3d1b # A/D conversion of EGR sensor input, EVP or EPT sensor, counts. 
 3d1e # end of table
 
 3d22 # No change to RATCH
@@ -440,6 +442,12 @@
 3f97 # Previous value of TP_REL
 3fa1 # TP_REL - TP_REL_LST
 3faf # ROLAV(TP_REL - TP_REL_LST, TCTPDL)
+
+3fe7 # (neutral indication)
+3ff9 # (drive indication)
+
+400d # (transmission engaged)
+401d # (transmission disengaged)
 
 4089 \n# BATTERY VOLTAGE (VBAT)
 
@@ -617,8 +625,24 @@
 
 4cc4 # |1.0 + BIAS - LAMAVE|
 
+4ce3 \n\nSTRATEGY MODULE: FUEL_OL_LAMBSE_COM3
+4ce3 \n# FINAL FUEL MODE DETERMINATION (OLFLG/CLFLG)
+4ce3 \n#  AND OPEN LOOP LAMBSE CALCULATION
+
 4d20 # MPGTFG RESET LOGIC
 4d44 # (decel fuel shut-off)
+4d7b # (not enough EGO switches)
+4d7d # Do: CLOSED LOOP LAMBSE CALCULATION
+
+
+4d98 # FN1361(TEMP,ATMR1)
+4db0 # fn1362(TEMP,MAPPA)
+
+4db8 # [fn1362(TEMP,MAPPA) - FN1361(TEMP,ATMR1)]
+4dc2 # C * [fn1362(TEMP,MAPPA) - FN1361(TEMP,ATMR1)]
+4dca # LAMMUL * OLMCL
+4df7 # C * FN325(ECT)
+4e01 # LAMMUL * OLMCL
 
 4e43 # (lean cruise mode exit into closed loop fuel (ramp fuel))
 
@@ -633,6 +657,8 @@
 4fa5 # FN303(N) * FN310(WOTTMR) //(wide open throttle)
 
 4fc3 # Clip LAMBSE to 1.0 as a maximum
+
+5002 # FN1360(N,MAPPA)
 
 5031 # PTPAMP = FN1354(N,MAP)
 
@@ -860,6 +886,8 @@
 61bf # PPERENG = PACPER / ENGCYL
 61cc # POFFENG = PACOFF / ENGCYL
 
+62e0 # SPKAD(ALL) = 0
+
 635e # DO SONIC EGR CONTROL
 
 6364 # (EOFF - EGRDED)
@@ -867,6 +895,9 @@
 63a1 # (Base EGR table)
 63a9 # (MPG mode table)
 
+63b8 # A * FN211(ECT)
+63c3 # A * FN211(ECT) * FN212A(BP)
+63d0 # * FN220(ACT)
 6437 # EGR IS OFF
 
 644a # EVP-EOFF
@@ -874,6 +905,12 @@
 6462 #  * (BP/29.875
 6466 # / 29.875 * 8 = 239 = 0xEF
 646e # Clip EM to 1.99 ppm as a maximum
+
+64de # DELOPT' = FN221 + EOFF
+64e5 # DELOPT = UROLAV(DELOPT',TCDLOP) (counts)
+64ec # Clip DELOPT from 0 to 1023.99 counts.
+
+6524 # EGR valve position error = EGRERR = DELOPT - EVP
 
 658b # (Not a reinit)   
 65d2 # ISCFLG = 0 DASHPOT PRE-POSITION
@@ -1385,6 +1422,9 @@
 9065 # (current gear is first)  
 90a6 # (command downshift)
 
+90aa # (shift has been commanded)
+
+
 9138 # CYCCTR >= CLDCTM
 916a # CYCCTR > CLDCTM/2
 916a \w# (cycle shift solenoids)  
@@ -1495,6 +1535,7 @@ a5ac # BP >= MPMNBP + MPNBPH
 a5bc # NOVS <= MPGNOV - MPNOVH
 a5cb # VSBAR >= VSMPG + VSMPGH
 
+a678 \n\nIDLTMR - TIME AT IDLE
 a6de \n\n#HMUTMR - HIGH MAPPA UPSTREAM AIR TIMER
 a6f0 # MAPPA >= HMUMAP + HMUMPH
 a6fa # MAPPA < HMUMAP
