@@ -1,6 +1,6 @@
 
 # ----------------------------
-# SAD Version 4.0.7.14 (22 Mar 2021)
+# SAD Version 4.0.7.6 (13 Sep 2020)
 # ----------------------------
 
 # Input file is 'KID2.bin'
@@ -9,6 +9,9 @@
 
 
 # Read commands from directive file at 'KID2_dir.txt'
+
+## word    cca0 ccb9
+ Error - Commands Overlap
 
 ## "
  Error -   Invalid  Command
@@ -25,45 +28,81 @@
 
 
 # ---------------------------------------------------------------------------------------------
-# The disassembler has scanned the binary and produced the following command list.
+# The disassembler has scanned the binary and arrived at the following final command list.
 # This list is not guaranteed to be perfect, but should be a good base.
-# Commented lines for information bu may be uncommented for use (e.g. banks)
-# This following list can be copied and pasted into a directives file.
+# Extra gap and data scans (Phase 2) are shown above as they may be incorrect
+# This following list can be copied and pasted into a directives file from here.
 # ---------------------------------------------------------------------------------------------
 
 
 setopts  : default 
 
-# Banks Found.  For information, can uncomment to manually override
+# Banks Found.  For information, can uncomment to modify
 
-# bank  8     0 2000 ffff 
+# bank  8     0  2000  ffff
 
-rbase 80 235e 
-rbase e4 180        # cmd
-rbase e6 280        # cmd
-rbase e8 380        # cmd
-rbase ea 480        # cmd
-rbase ec 580        # cmd
-rbase ee 780        # cmd
-rbase f0 b000        # cmd
-rbase f2 b43e        # cmd
-rbase f4 b442        # cmd
-rbase f6 b914        # cmd
-rbase f8 bab0        # cmd
-rbase fa bb7a        # cmd
-rbase fc c0a8        # cmd
-rbase fe cb5a        # cmd
+rbase 80 235e
+rbase e2 c1c4  43b2 443a       # cmd
+rbase e2 cc59  7231 7256       # cmd
+rbase e2 cc59  7340 7bae       # cmd
+rbase e2 cc59  7cb8 7ceb       # cmd
+rbase e2 cc59  7d3a 7d9d       # cmd
+rbase e2 cc59  855f 8581       # cmd
+rbase e2 c1be  8938 8b18       # cmd
+rbase e2 c1be  8d5f 8eb4       # cmd
+rbase e2 c1be  8f94 901e       # cmd
+rbase e2 c1be  9308 93b1       # cmd
+rbase e4 180       # cmd
+rbase e6 280       # cmd
+rbase e8 380       # cmd
+rbase ea 480       # cmd
+rbase ec 580       # cmd
+rbase ee 780       # cmd
+rbase f0 b000       # cmd
+rbase f2 b43e       # cmd
+rbase f4 b442       # cmd
+rbase f6 b914       # cmd
+rbase f8 bab0       # cmd
+rbase fa bb7a       # cmd
+rbase fc c0a8       # cmd
+rbase fe cb5a       # cmd
 
 
 
 code    2000 2003
+code    2032 21cd
+code    226a 22c7
+code    2358 235d
+code    2370 28b3
+code    28e7 28e7
+code    29cd 2d84
+code    2d8c 2f77
+code    2f7e 3cfc
+code    3d1e 435f
+code    436c 43ab
+code    43b2 657d
+code    6584 6fc4
+code    7016 72dd
+code    7340 75ec
+code    75f1 7696
+code    76ac 7731
+code    7743 7d33
+code    7d3a 96ec
+code    96fa 9c42
+code    9c56 a3d8
+code    a3e1 a840
+code    a99b a9bc
+code    a9d6 aa67
+code    ab2a ac30
+xcode   ce9c ffff     # auto
+
+
+word    2002 2003
 word    200a 200f
 vect    2010 201f
 byte    2020 2021
 word    2022 2031
-code    2032 21cd
 vect    21ce 2269
-code    226a 22c7
 vect    22c8 22c9
 struct  22ca 22e9: R N : O 3 UY : D 240 UY N : R N 
 struct  22ea 2319: R N : O 3 UY : D 240 UY N : O 2 UY : UW : UW N 
@@ -72,25 +111,31 @@ word    231c 231d
 vect    231e 231f
 struct  2320 234f: R N : O 3 UY : D 240 UY N : R N 
 word    2350 2357
-code    2358 235d
-word    235e 236f
-code    2370 28b3
+word    235e 235f
+word    2360 2361
+word    2362 2363
+word    2364 2365
+word    2366 2367
+word    2368 2369
+word    236a 236b
+word    236c 236d
+word    236e 236f
 struct  28b4 28e6: UY : R N 
-code    28e7 28e7
-word    28e8 2921
+word    28e8 28ef
+word    28f0 28ff
+word    2900 2905
+word    2906 2907
+word    2908 291f
+word    2920 2921
 struct  2922 29cc: UW N : UY 
-code    29cd 2d84
-struct  2d85 2d86: UY 
+word    2d86 2d89
 word    2d8a 2d8b
-code    2d8c 2f77
+word    2f7a 2f7d
 word    2f78 2f79
-struct  2f7a 2f7b: UY 
-word    2f7c 2f7d
-code    2f7e 3cfc
 struct  3cfd 3d1d: UY : UW N 
-code    3d1e 435f
 args    3d6e 3d71: E 2 f0 N : UW N 
 args    3e0e 3e11: E 2 f0 N : UW N 
+byte    3f04 3f04
 args    3f73 3f76: E 2 f0 N : UW N 
 args    4004 4007: E 2 f0 N : UW N 
 args    40a0 40a3: E 2 f0 N : UW N 
@@ -100,13 +145,15 @@ args    4128 412b: E 2 f0 N : UW N
 args    416a 416d: E 2 f0 N : UW N 
 args    433b 433e: E 2 f0 N : UW N 
 args    4346 4349: E 2 f0 N : UW N 
-word    4360 436b
-code    436c 43ab
+word    4360 4361
+word    4362 4363
+word    4364 4365
+word    4366 4367
+word    4368 4369
+word    436a 436b
 args    436f 4372: E 2 f0 N : UW N 
+byte    43ad 43b1
 byte    43ac 43ac
-struct  43ad 43ae: UY 
-byte    43af 43b1
-code    43b2 657d
 args    4544 4547: E 2 f0 N : UW N 
 args    4581 4584: E 2 f0 N : UW N 
 args    45ac 45af: E 2 f0 N : UW N 
@@ -173,10 +220,8 @@ args    643e 6441: E 2 f0 N : UW N
 args    6455 6458: E 2 f0 N : UW N 
 args    64c6 64c9: E 2 f0 N : UW N 
 args    652b 652e: E 2 f0 N : UW N 
+byte    657f 6583
 byte    657e 657e
-struct  657f 6580: UY 
-byte    6581 6583
-code    6584 6fc4
 args    65df 65e2: E 2 f0 N : UW N 
 args    668a 668d: E 2 f0 N : UW N 
 args    6693 6696: E 2 f0 N : UW N 
@@ -200,13 +245,10 @@ args    6dfd 6e00: E 2 f0 N : UW N
 args    6f13 6f16: E 2 f0 N : UW N 
 args    6f30 6f33: E 2 f0 N : UW N 
 args    6f55 6f58: E 2 f0 N : UW N 
-fill    6fc5 6fc5
 word    6fc6 7015
-code    7016 72dd
 args    711e 711f: UW 
 args    7123 7124: UW 
 vect    72de 733f
-code    7340 75ec
 args    7379 737a: O 2 UY 
 args    738f 7393: UW : UW : UY 
 args    73ac 73ad: O 2 UY 
@@ -223,18 +265,15 @@ args    7437 7438: O 2 UY
 args    7485 7486: O 2 UY 
 args    748a 748f: E 3 f0 N : E 3 f0 N : UW N 
 args    7493 7498: E 3 f0 N : E 3 f0 N : UW N 
-byte    75ed 75ef
-word    75f0 75f0
-code    75f1 7696
-fill    7697 7697
+byte    75ed 75ed
+byte    75ee 75ee
+byte    75ef 75ef
 word    7698 7699
 byte    769a 76ab
-code    76ac 7731
 args    76af 76b2: O 2 UY : UW N 
 args    772c 772f: O 2 UY : UW N 
 word    7732 7733
 byte    7734 7742
-code    7743 7d33
 args    77fc 77fd: O 2 UY 
 args    7811 7812: O 2 UY 
 args    7816 7817: O 2 UY 
@@ -264,8 +303,9 @@ args    7a75 7a78: O 2 UY : O 2 UY
 args    7a7b 7a7e: O 2 UY : O 2 UY 
 args    7a81 7a84: O 2 UY : O 2 UY 
 args    7d30 7d31: UW 
-word    7d34 7d39
-code    7d3a 96ec
+word    7d34 7d35
+word    7d36 7d37
+word    7d38 7d39
 args    7d3c 7d41: E 3 f0 N : E 3 f0 N : UW 
 args    7d47 7d4c: E 3 f0 N : E 3 f0 N : UW 
 args    7d53 7d5a: UW : E 3 f0 N : E 3 f0 N : O 2 UY 
@@ -393,19 +433,14 @@ args    95ba 95bd: UW N : UW N
 args    964e 9651: E 2 f0 N : UW N 
 args    9663 9666: E 2 f0 N : UW N 
 args    966d 9670: E 2 f0 N : UW N 
-fill    96ed 96ed
 word    96ee 96ef
-struct  96f0 96f8: O 3 UY 
-code    96fa 9c42
 args    96fd 9700: E 2 f0 N : UW N 
 args    972f 9732: E 2 f0 N : UW N 
 args    98bb 98be: E 2 f0 N : UW N 
 args    9b13 9b16: UW N : UW N 
-fill    9c43 9c43
 word    9c44 9c45
-struct  9c46 9c4b: UY 
-word    9c4c 9c51
-code    9c56 a3d8
+word    9c4c 9c4d
+word    9c50 9c51
 args    9ce4 9ce7: E 2 f0 N : UW N 
 args    9f1a 9f1d: E 2 f0 N : UW N 
 args    9f25 9f28: E 2 f0 N : UW N 
@@ -415,9 +450,7 @@ args    9f55 9f58: E 2 f0 N : UW N
 args    9f60 9f63: E 2 f0 N : UW N 
 args    a32b a32c: O 2 UY 
 args    a39e a39f: O 2 UY 
-struct  a3d9 a3de: UY 
-byte    a3df a3e0
-code    a3e1 a840
+byte    a3e0 a3e0
 args    a56a a56d: E 2 f0 N : UW N 
 # timer   a841 a843: UW 
 # timer   a844 a846: UW N 
@@ -509,918 +542,1268 @@ args    a56a a56d: E 2 f0 N : UW N
 # timer   a992 a996: UW N 
 # timer   a997 a999: UW N 
 byte    a99a a99a
-code    a99b a9bc
-fill    a9bd a9bd
-word    a9be a9d5
-code    a9d6 aa67
+word    a9be a9bf
+word    a9c0 a9c3
+word    a9c4 a9c5
+word    a9c6 a9d5
 word    aa68 aa6b
 byte    aa6c aa97
-word    aa98 aa9d
+word    aa98 aa99
+word    aa9a aa9b
+word    aa9c aa9d
 byte    aa9e aadd
-word    aade aae3
+word    aade aadf
+word    aae0 aae1
+word    aae2 aae3
 byte    aae4 aae7
-word    aae8 aaed
+word    aae8 aae9
+word    aaea aaeb
+word    aaec aaed
 byte    aaee ab1f
-word    ab20 ab25
+word    ab20 ab21
+word    ab22 ab23
+word    ab24 ab25
 byte    ab26 ab29
-code    ab2a ac30
-fill    ac31 ac31
 word    ac32 acbf
-struct  acc0 ad07: O 4 UY 
-struct  ad08 ad4f: O 4 UY 
-struct  ad50 ad97: O 4 UY 
-struct  ad98 addf: O 4 UY 
-struct  ade0 ae23: O 4 UY 
-byte    ae24 ae27
-fill    ae28 afff
+byte    ae27 ae27
 word    b000 b001
-byte    b002 b008
-fill    b009 b009
-word    b00a b017
+byte    b002 b002
+byte    b003 b003
+byte    b004 b004
+byte    b005 b005
+byte    b006 b006
+byte    b007 b007
+byte    b008 b008
+word    b00a b00b
+word    b00c b00d
+word    b00e b00f
+word    b010 b011
+word    b012 b013
+word    b014 b015
+word    b016 b017
 byte    b018 b018
-fill    b019 b019
-word    b01a b031
-byte    b032 b037
-word    b038 b03d
-byte    b03e b041
-word    b042 b051
-byte    b052 b053
+word    b01a b01b
+word    b01c b01d
+word    b01e b01f
+word    b020 b021
+word    b022 b023
+word    b024 b025
+word    b026 b027
+word    b028 b029
+word    b02a b02b
+word    b02c b02d
+word    b02e b02f
+word    b030 b031
+byte    b032 b032
+byte    b033 b033
+byte    b035 b035
+byte    b036 b036
+byte    b037 b037
+word    b038 b039
+word    b03a b03b
+word    b03c b03d
+byte    b03e b03e
+byte    b03f b03f
+byte    b041 b041
+word    b042 b043
+word    b044 b045
+word    b048 b049
+word    b04a b04b
+word    b04c b04d
+word    b04e b04f
+word    b050 b051
+byte    b052 b052
+byte    b053 b053
 word    b054 b055
-byte    b056 b05c
-fill    b05d b05d
-word    b05e b071
-byte    b072 b073
-func    b074 b08b: UW X 10 : UW X 10 
-func    b08c b097: SY X 10 : UY X 10 
-func    b098 b0bf: UW X 10 : UW X 10 
-func    b0c0 b0cb: UY X 10 : UY X 10 
-func    b0cc b0df: SY X 10 : UY X 10 
-func    b0e0 b0ed: SY X 10 : UY X 10 
-func    b0ee b0fb: SY X 10 : UY X 10 
-func    b0fc b109: UY X 10 : UY X 10 
-func    b10a b111: UY X 10 : UY X 10 
-func    b112 b129: UW X 10 : UW X 10 
-func    b12a b141: UW X 10 : UW X 10 
-func    b142 b15d: UW X 10 : UW X 10 
-func    b15e b16b: UY X 10 : UY X 10 
-func    b16c b187: UW X 10 : UW X 10 
-func    b188 b19f: UW X 10 : UW X 10 
-func    b1a0 b1ab: SY X 10 : UY X 10 
-func    b1ac b1b3: UY X 10 : UY X 10 
-func    b1b4 b1bf: UY X 10 : UY X 10 
-table   b1c0 b1e9: O 7 UY X 10 
-func    b1ea b211: UW X 10 : SW X 10 
-func    b212 b23d: UW X 10 : SW X 10 
-func    b23e b259: UW X 10 : UW X 10 
-func    b25a b26d: UW X 10 : UW X 10 
-func    b26e b28d: SW X 10 : UW X 10 
-func    b28e b2bd: UW X 10 : UW X 10 
-func    b2be b2e5: SW X 10 : UW X 10 
-func    b2e6 b2fd: UW X 10 : UW X 10 
-func    b2fe b319: UW X 10 : UW X 10 
-func    b31a b335: UW X 10 : UW X 10 
-func    b336 b351: UW X 10 : UW X 10 
-func    b352 b365: UW X 10 : UW X 10 
-func    b366 b379: UW X 10 : UW X 10 
-func    b37a b395: UW X 10 : UW X 10 
-func    b396 b3b5: UW X 10 : UW X 10 
-func    b3b6 b3d1: UW X 10 : UW X 10 
-func    b3d2 b3e9: SW X 10 : UW X 10 
-func    b3ea b3fd: UW X 10 : UW X 10 
-func    b3fe b411: UW X 10 : UW X 10 
-func    b412 b425: UW X 10 : UW X 10 
-func    b426 b43d: SW X 10 : UW X 10 
+byte    b056 b056
+byte    b057 b057
+byte    b058 b058
+byte    b059 b059
+byte    b05a b05a
+byte    b05b b05b
+byte    b05c b05c
+word    b05e b05f
+word    b060 b061
+word    b062 b063
+word    b064 b065
+word    b066 b067
+word    b068 b069
+word    b06a b06b
+word    b06c b06d
+word    b06e b06f
+word    b070 b071
+byte    b072 b072
+byte    b073 b073
+func    b074 b08b: UW X 16 : UW X 16 
+func    b08c b097: SY X 16 : UY X 16 
+func    b098 b0bf: UW X 16 : UW X 16 
+func    b0c0 b0cb: UY X 16 : UY X 16 
+func    b0cc b0df: SY X 16 : UY X 16 
+func    b0e0 b0ed: SY X 16 : UY X 16 
+func    b0ee b0fb: SY X 16 : UY X 16 
+func    b0fc b109: UY X 16 : UY X 16 
+func    b10a b111: UY X 16 : UY X 16 
+func    b112 b129: UW X 16 : UW X 16 
+func    b12a b141: UW X 16 : UW X 16 
+func    b142 b15d: UW X 16 : UW X 16 
+func    b15e b16b: UY X 16 : UY X 16 
+func    b16c b187: UW X 16 : UW X 16 
+func    b188 b19f: UW X 16 : UW X 16 
+func    b1a0 b1ab: SY X 16 : UY X 16 
+func    b1ac b1b3: UY X 16 : UY X 16 
+func    b1b4 b1bf: UY X 16 : UY X 16 
+table   b1c0 b1e9: O 7 UY X 16 
+func    b1ea b211: UW X 16 : SW X 16 
+func    b212 b23d: UW X 16 : SW X 16 
+func    b23e b259: UW X 16 : UW X 16 
+func    b25a b26d: UW X 16 : UW X 16 
+func    b26e b28d: SW X 16 : UW X 16 
+func    b28e b2bd: UW X 16 : UW X 16 
+func    b2be b2e5: SW X 16 : UW X 16 
+func    b2e6 b2fd: UW X 16 : UW X 16 
+func    b2fe b319: UW X 16 : UW X 16 
+func    b31a b335: UW X 16 : UW X 16 
+func    b336 b351: UW X 16 : UW X 16 
+func    b352 b365: UW X 16 : UW X 16 
+func    b366 b379: UW X 16 : UW X 16 
+func    b37a b395: UW X 16 : UW X 16 
+func    b396 b3b5: UW X 16 : UW X 16 
+func    b3b6 b3d1: UW X 16 : UW X 16 
+func    b3d2 b3e9: SW X 16 : UW X 16 
+func    b3ea b3fd: UW X 16 : UW X 16 
+func    b3fe b411: UW X 16 : UW X 16 
+func    b412 b425: UW X 16 : UW X 16 
+func    b426 b43d: SW X 16 : UW X 16 
 word    b43e b43f
-byte    b440 b441
+byte    b440 b440
+byte    b441 b441
 word    b442 b443
 byte    b444 b444
-fill    b445 b445
-word    b446 b449
+word    b446 b447
+word    b448 b449
 byte    b44a b44a
-fill    b44b b44b
-word    b44c b451
-byte    b452 b455
-word    b456 b459
-byte    b45a b463
+word    b44c b44d
+word    b44e b44f
+word    b450 b451
+byte    b455 b455
+word    b456 b457
+word    b458 b459
+byte    b45a b45a
+byte    b45b b45b
+byte    b45c b45c
+byte    b45d b45d
+byte    b45e b45e
+byte    b45f b45f
+byte    b460 b460
+byte    b461 b461
+byte    b462 b462
+byte    b463 b463
 word    b464 b465
-byte    b466 b467
+byte    b466 b466
+byte    b467 b467
 word    b468 b469
-byte    b46a b478
-fill    b479 b479
-word    b47a b47d
-byte    b47e b483
-word    b484 b489
-byte    b48a b48e
-struct  b48f b497: O 3 UY 
-word    b498 b49d
-byte    b49e b4a5
-word    b4a6 b4b1
-byte    b4b2 b4b9
-word    b4ba b4bd
-byte    b4be b4cd
+byte    b46a b46a
+byte    b46b b46b
+byte    b46c b46c
+byte    b46d b46d
+byte    b46e b46e
+byte    b46f b46f
+byte    b470 b470
+byte    b471 b471
+byte    b472 b472
+byte    b473 b473
+byte    b474 b474
+byte    b475 b475
+byte    b476 b476
+byte    b477 b477
+byte    b478 b478
+word    b47a b47b
+word    b47c b47d
+byte    b47e b47e
+byte    b47f b47f
+byte    b480 b480
+byte    b481 b481
+byte    b482 b482
+byte    b483 b483
+word    b484 b485
+word    b486 b487
+word    b488 b489
+byte    b48a b48a
+byte    b48b b48b
+byte    b48c b48c
+byte    b48d b48d
+byte    b48e b48e
+word    b49a b49b
+word    b49c b49d
+byte    b49e b49e
+byte    b49f b49f
+byte    b4a0 b4a0
+byte    b4a1 b4a1
+byte    b4a2 b4a2
+byte    b4a3 b4a3
+byte    b4a4 b4a4
+byte    b4a5 b4a5
+word    b4a6 b4a7
+word    b4a8 b4a9
+word    b4aa b4ab
+word    b4ac b4ad
+word    b4ae b4af
+word    b4b0 b4b1
+byte    b4b2 b4b2
+byte    b4b3 b4b3
+byte    b4b4 b4b4
+byte    b4b5 b4b5
+byte    b4b6 b4b6
+byte    b4b7 b4b7
+byte    b4b8 b4b8
+byte    b4b9 b4b9
+word    b4ba b4bb
+word    b4bc b4bd
+byte    b4be b4be
+byte    b4bf b4bf
+byte    b4c0 b4c0
+byte    b4c1 b4c1
+byte    b4c2 b4c2
+byte    b4c3 b4c3
+byte    b4c4 b4c4
+byte    b4c5 b4c5
+byte    b4c6 b4c6
+byte    b4c7 b4c7
+byte    b4c8 b4c8
+byte    b4c9 b4c9
+byte    b4ca b4ca
+byte    b4cb b4cb
+byte    b4cc b4cc
+byte    b4cd b4cd
 word    b4ce b4cf
 byte    b4d0 b4d0
-fill    b4d1 b4d1
-word    b4d2 b4d5
+word    b4d2 b4d3
+word    b4d4 b4d5
 byte    b4d6 b4d6
-fill    b4d7 b4d7
-word    b4d8 b4db
+word    b4d8 b4d9
+word    b4da b4db
 byte    b4dc b4dc
-fill    b4dd b4dd
-word    b4de b4f3
+word    b4de b4df
+word    b4e0 b4e1
+word    b4e2 b4e3
+word    b4e4 b4e5
+word    b4e6 b4e7
+word    b4e8 b4e9
+word    b4ea b4eb
+word    b4ec b4ed
+word    b4ee b4ef
+word    b4f0 b4f1
+word    b4f2 b4f3
 byte    b4f4 b4f4
-fill    b4f5 b4f5
-struct  b4f6 b4f7: UY 
+word    b4f6 b4f7
 word    b4f8 b4f9
-func    b4fa b511: UW X 10 : UW X 10 
-func    b512 b529: SW X 10 : SW X 10 
-func    b52a b535: SY X 10 : UY X 10 
-func    b536 b549: UW X 10 : UW X 10 
-func    b54a b565: UW X 10 : UW X 10 
-table   b566 b595: O 6 UY X 10 
-table   b596 b5c5: O 6 SY X 10 
-func    b5c6 b5dd: UW X 10 : UW X 10 
-func    b5de b601: UW X 10 : UW X 10 
-func    b602 b60f: UY X 10 : UY X 10 
-func    b610 b62b: UW X 10 : UW X 10 
-func    b62c b639: SY X 10 : UY X 10 
-func    b63a b655: UW X 10 : SW X 10 
-func    b656 b679: UW X 10 : UW X 10 
-table   b67a b6c9: O 10 UY X 10 
-table   b6ca b719: O 10 UY X 10 
-func    b71a b727: UY X 10 : UY X 10 
-table   b728 b777: O 10 UY X 10 
-table   b778 b7c7: O 10 UY X 10 
-table   b7c8 b817: O 10 SY X 10 
-table   b818 b847: O 6 UY X 10 
-func    b848 b85f: UW X 10 : UW X 10 
-func    b860 b877: UW X 10 : UW X 10 
-table   b878 b890: O 5 UY X 10 
-table   b891 b8a9: O 5 UY X 10 
-table   b8aa b8c2: O 5 UY X 10 
-table   b8c3 b912: O 10 UY X 10 
-fill    b913 b913
+func    b4fa b511: UW X 16 : UW X 16 
+func    b512 b529: SW X 16 : SW X 16 
+func    b52a b535: SY X 16 : UY X 16 
+func    b536 b549: UW X 16 : UW X 16 
+func    b54a b565: UW X 16 : UW X 16 
+table   b566 b595: O 6 UY X 16 
+table   b596 b5c5: O 6 SY X 16 
+func    b5c6 b5dd: UW X 16 : UW X 16 
+func    b5de b601: UW X 16 : UW X 16 
+func    b602 b60f: UY X 16 : UY X 16 
+func    b610 b62b: UW X 16 : UW X 16 
+func    b62c b639: SY X 16 : UY X 16 
+func    b63a b655: UW X 16 : SW X 16 
+func    b656 b679: UW X 16 : UW X 16 
+table   b67a b6c9: O 10 UY X 16 
+table   b6ca b719: O 10 UY X 16 
+func    b71a b727: UY X 16 : UY X 16 
+table   b728 b777: O 10 UY X 16 
+table   b778 b7c7: O 10 UY X 16 
+table   b7c8 b817: O 10 SY X 16 
+table   b818 b847: O 6 UY X 16 
+func    b848 b85f: UW X 16 : UW X 16 
+func    b860 b877: UW X 16 : UW X 16 
+table   b878 b890: O 5 UY X 16 
+table   b891 b8a9: O 5 UY X 16 
+table   b8aa b8c2: O 5 UY X 16 
+table   b8c3 b912: O 10 UY X 16 
 word    b914 b915
-byte    b916 b919
-word    b91a b923
-byte    b924 b925
-word    b926 b937
-byte    b938 b93c
-word    b93e b943
+byte    b916 b916
+byte    b917 b917
+byte    b918 b918
+byte    b919 b919
+word    b91a b91b
+word    b91c b91d
+word    b91e b91f
+word    b920 b921
+word    b922 b923
+byte    b924 b924
+byte    b925 b925
+word    b926 b927
+word    b928 b929
+word    b92a b92b
+word    b92c b92d
+word    b92e b92f
+word    b930 b931
+word    b932 b933
+word    b934 b935
+word    b936 b937
+byte    b938 b938
+byte    b939 b939
+byte    b93c b93c
+word    b93e b93f
+word    b940 b941
+word    b942 b943
 byte    b944 b944
-fill    b945 b945
 word    b946 b947
-byte    b948 b949
+byte    b948 b948
+byte    b949 b949
 word    b94a b94b
-byte    b94c b94d
+byte    b94c b94c
+byte    b94d b94d
 word    b94e b94f
-byte    b950 b968
-byte    b96f b971
+byte    b950 b950
+byte    b951 b951
+byte    b952 b952
+byte    b953 b953
+byte    b954 b954
+byte    b955 b955
+byte    b956 b956
+byte    b957 b957
+byte    b958 b958
+byte    b95b b95b
+byte    b95c b95c
+byte    b95d b95d
+byte    b95e b95e
+byte    b95f b95f
+byte    b960 b960
+byte    b961 b961
+byte    b962 b962
+byte    b963 b963
+byte    b964 b964
+byte    b965 b965
+byte    b966 b966
+byte    b967 b967
+byte    b968 b968
+byte    b96f b96f
+byte    b970 b970
+byte    b971 b971
 word    b972 b973
 byte    b974 b974
-func    b975 b97e: SY X 10 : UY X 10 
-func    b97f b988: SY X 10 : UY X 10 
-func    b989 b99a: UY X 10 : UY X 10 
-func    b99b b9a0: UY X 10 : UY X 10 
-table   b9a1 ba04: O 10 UY X 10 
-fill    ba05 ba05
-func    ba06 ba1d: UW X 10 : UW X 10 
-table   ba1e ba4a: O 5 UY X 10 
-func    ba4b ba56: UY X 10 : UY X 10 
-fill    ba57 ba57
-func    ba58 ba6f: UW X 10 : UW X 10 
-func    ba70 ba8b: UW X 10 : UW X 10 
-func    ba8c baaf: UW X 10 : UW X 10 
-word    bab0 bac1
+func    b975 b97e: SY X 16 : UY X 16 
+func    b97f b988: SY X 16 : UY X 16 
+func    b989 b99a: UY X 16 : UY X 16 
+func    b99b b9a0: UY X 16 : UY X 16 
+table   b9a1 ba04: O 10 UY X 16 
+func    ba06 ba1d: UW X 16 : UW X 16 
+table   ba1e ba4a: O 5 UY X 16 
+func    ba4b ba56: UY X 16 : UY X 16 
+func    ba58 ba6f: UW X 16 : UW X 16 
+func    ba70 ba8b: UW X 16 : UW X 16 
+func    ba8c baaf: UW X 16 : UW X 16 
+word    bab0 bab1
+word    bab2 bac1
 byte    bac2 bae5
-func    bae6 baf5: UW X 10 : UW X 10 
-func    baf6 bafd: UY X 10 : UY X 10 
-func    bafe bb0d: SY X 10 : UY X 10 
-func    bb0e bb1d: SY X 10 : UY X 10 
-func    bb1e bb3d: SW X 10 : SW X 10 
-func    bb3e bb47: UY X 10 : UY X 10 
-table   bb48 bb6b: O 6 SY X 10 
-func    bb6c bb79: UY X 10 : SY X 10 
+func    bae6 baf5: UW X 16 : UW X 16 
+func    baf6 bafd: UY X 16 : UY X 16 
+func    bafe bb0d: SY X 16 : UY X 16 
+func    bb0e bb1d: SY X 16 : UY X 16 
+func    bb1e bb3d: SW X 16 : SW X 16 
+func    bb3e bb47: UY X 16 : UY X 16 
+table   bb48 bb6b: O 6 SY X 16 
+func    bb6c bb79: UY X 16 : SY X 16 
 word    bb7a bb7b
-byte    bb7c bb81
+byte    bb7c bb7c
+byte    bb7d bb7d
+byte    bb7e bb7e
+byte    bb7f bb7f
+byte    bb80 bb80
+byte    bb81 bb81
 word    bb82 bb83
-byte    bb84 bb86
-fill    bb87 bb87
-word    bb88 bb91
-byte    bb92 bb94
-fill    bb95 bb95
+byte    bb84 bb84
+byte    bb85 bb85
+byte    bb86 bb86
+word    bb88 bb89
+word    bb8a bb8b
+word    bb8c bb8d
+word    bb8e bb8f
+word    bb90 bb91
+byte    bb92 bb92
+byte    bb93 bb93
+byte    bb94 bb94
 word    bb96 bb97
 byte    bb98 bb98
-struct  bb99 bb9e: UY 
-byte    bb9f bba2
-fill    bba3 bba3
-word    bba4 bbab
-byte    bbac bbad
-word    bbae bbb1
-byte    bbb2 bbb6
-fill    bbb7 bbb7
+byte    bb9f bb9f
+byte    bba0 bba0
+byte    bba1 bba1
+byte    bba2 bba2
+word    bba4 bba5
+word    bba6 bba7
+word    bba8 bba9
+word    bbaa bbab
+byte    bbac bbac
+byte    bbad bbad
+word    bbae bbaf
+word    bbb0 bbb1
+byte    bbb2 bbb2
+byte    bbb3 bbb3
+byte    bbb4 bbb4
+byte    bbb5 bbb5
+byte    bbb6 bbb6
 word    bbb8 bbb9
-byte    bbba bbbb
-word    bbbc bbc5
-byte    bbc6 bbc8
-func    bbc9 bbd2: UY X 10 : UY X 10 
-func    bbd3 bbdc: UY X 10 : UY X 10 
-fill    bbdd bbdd
-func    bbde bbf5: SW X 10 : UW X 10 
-func    bbf6 bc19: SW X 10 : UW X 10 
-func    bc1a bc35: UW X 10 : UW X 10 
-func    bc36 bc51: UW X 10 : UW X 10 
-func    bc52 bc6d: UW X 10 : SW X 10 
-func    bc6e bc79: UY X 10 : UY X 10 
-table   bc7a bcc9: O 10 UY X 10 
-table   bcca bd19: O 10 UY X 10 
-table   bd1a bd69: O 10 UY X 10 
-table   bd6a bdb9: O 10 UY X 10 
-table   bdba be09: O 10 UY X 10 
-table   be0a be59: O 10 SY X 10 
-table   be5a bea9: O 10 UY X 10 
-func    beaa bed5: UW X 10 : UW X 10 
-func    bed6 bee3: SY X 10 : UY X 10 
-func    bee4 beed: UY X 10 : UY X 10 
-func    beee bf15: UW X 10 : UW X 10 
-func    bf16 bf23: SY X 10 : UY X 10 
-func    bf24 bf4b: UW X 10 : UW X 10 
-func    bf4c bf67: SW X 10 : SW X 10 
-func    bf68 bf6f: UY X 10 : UY X 10 
-table   bf70 bfbf: O 10 UY X 10 
-table   bfc0 c00f: O 10 UY X 10 
-func    c010 c023: UY X 10 : UY X 10 
-func    c024 c03b: UW X 10 : UW X 10 
-func    c03c c073: UW X 10 : UW X 10 
-func    c074 c087: UW X 10 : UW X 10 
-func    c088 c09f: UW X 10 : UW X 10 
-func    c0a0 c0a7: UY X 10 : UY X 10 
-word    c0a8 c0af
+byte    bbba bbba
+byte    bbbb bbbb
+word    bbbc bbbd
+word    bbbe bbbf
+word    bbc0 bbc1
+word    bbc2 bbc3
+word    bbc4 bbc5
+byte    bbc6 bbc6
+byte    bbc7 bbc7
+byte    bbc8 bbc8
+func    bbc9 bbd2: UY X 16 : UY X 16 
+func    bbd3 bbdc: UY X 16 : UY X 16 
+func    bbde bbf5: SW X 16 : UW X 16 
+func    bbf6 bc19: SW X 16 : UW X 16 
+func    bc1a bc35: UW X 16 : UW X 16 
+func    bc36 bc51: UW X 16 : UW X 16 
+func    bc52 bc6d: UW X 16 : SW X 16 
+func    bc6e bc79: UY X 16 : UY X 16 
+table   bc7a bcc9: O 10 UY X 16 
+table   bcca bd19: O 10 UY X 16 
+table   bd1a bd69: O 10 UY X 16 
+table   bd6a bdb9: O 10 UY X 16 
+table   bdba be09: O 10 UY X 16 
+table   be0a be59: O 10 SY X 16 
+table   be5a bea9: O 10 UY X 16 
+func    beaa bed5: UW X 16 : UW X 16 
+func    bed6 bee3: SY X 16 : UY X 16 
+func    bee4 beed: UY X 16 : UY X 16 
+func    beee bf15: UW X 16 : UW X 16 
+func    bf16 bf23: SY X 16 : UY X 16 
+func    bf24 bf4b: UW X 16 : UW X 16 
+func    bf4c bf67: SW X 16 : SW X 16 
+func    bf68 bf6f: UY X 16 : UY X 16 
+table   bf70 bfbf: O 10 UY X 16 
+table   bfc0 c00f: O 10 UY X 16 
+func    c010 c023: UY X 16 : UY X 16 
+func    c024 c03b: UW X 16 : UW X 16 
+func    c03c c073: UW X 16 : UW X 16 
+func    c074 c087: UW X 16 : UW X 16 
+func    c088 c09f: UW X 16 : UW X 16 
+func    c0a0 c0a7: UY X 16 : UY X 16 
+word    c0a8 c0a9
+word    c0aa c0ab
+word    c0ac c0ad
+word    c0ae c0af
 byte    c0b0 c0b0
-fill    c0b1 c0b1
-word    c0b2 c0b5
+word    c0b2 c0b3
+word    c0b4 c0b5
 byte    c0b6 c0b6
-fill    c0b7 c0b7
-word    c0b8 c0bf
-byte    c0c0 c0c1
-word    c0c2 c0c9
-byte    c0ca c0cb
-struct  c0cc c0cd: UY 
-word    c0ce c0d1
-struct  c0d2 c0d3: UY 
-word    c0d4 c0d9
-byte    c0da c0e1
-byte    c0e4 c0e6
-fill    c0e7 c0e7
-struct  c0e8 c0f3: O 4 UY 
-struct  c0f4 c0f5: UY 
-word    c0f6 c0fb
+word    c0b8 c0b9
+word    c0ba c0bb
+word    c0bc c0bd
+word    c0be c0bf
+byte    c0c0 c0c0
+byte    c0c1 c0c1
+word    c0c2 c0c3
+word    c0c4 c0c5
+word    c0c6 c0c7
+word    c0c8 c0c9
+byte    c0ca c0ca
+byte    c0cb c0cb
+word    c0d0 c0d1
+word    c0d6 c0d7
+word    c0d8 c0d9
+byte    c0da c0da
+byte    c0db c0db
+byte    c0dc c0dc
+byte    c0dd c0dd
+byte    c0e0 c0e0
+byte    c0e1 c0e1
+byte    c0e4 c0e4
+byte    c0e5 c0e5
+byte    c0e6 c0e6
+word    c0f8 c0f9
+word    c0fa c0fb
 byte    c0fc c0fc
-fill    c0fd c0fd
-word    c0fe c101
-byte    c102 c105
-struct  c106 c10e: O 3 UY 
-byte    c10f c112
-struct  c113 c118: UY 
-byte    c119 c11b
-word    c11c c127
-struct  c128 c12d: UY 
-word    c12e c131
+word    c0fe c0ff
+word    c100 c101
+byte    c102 c102
+byte    c103 c103
+byte    c104 c104
+byte    c105 c105
+byte    c111 c111
+byte    c112 c112
+byte    c11b c11b
+word    c11e c11f
+word    c120 c121
+word    c122 c123
+word    c124 c125
+word    c126 c127
+word    c130 c131
 byte    c132 c132
-struct  c133 c134: UY 
 word    c138 c139
-struct  c13a c13f: UY 
-word    c140 c149
-byte    c14a c14d
-word    c14e c151
-byte    c152 c154
-fill    c155 c155
+word    c140 c141
+word    c142 c143
+word    c144 c145
+word    c146 c147
+word    c148 c149
+byte    c14b c14c
+byte    c14d c14d
+word    c14e c14f
+word    c150 c151
+byte    c152 c152
+byte    c153 c153
+byte    c154 c154
 word    c156 c157
-byte    c158 c15b
+byte    c158 c158
+byte    c159 c159
+byte    c15a c15a
+byte    c15b c15b
 word    c15c c15d
-byte    c15e c15f
-word    c160 c16b
+byte    c15e c15e
+byte    c15f c15f
+word    c160 c161
+word    c162 c163
+word    c164 c165
+word    c166 c167
+word    c168 c169
+word    c16a c16b
 byte    c16c c16d
 word    c16e c16f
-byte    c170 c172
-word    c174 c177
-byte    c178 c17b
+byte    c170 c170
+byte    c171 c171
+byte    c172 c172
+word    c174 c175
+word    c176 c177
+byte    c178 c178
+byte    c179 c179
+byte    c17a c17a
+byte    c17b c17b
 word    c17c c17d
-byte    c17e c180
-word    c182 c18d
+byte    c17e c17e
+byte    c17f c17f
+byte    c180 c180
+byte    c183 c183
+word    c184 c18d
 byte    c18e c195
-word    c196 c19b
-byte    c19c c19d
+word    c196 c197
+word    c198 c199
+word    c19a c19b
+byte    c19c c19c
+byte    c19d c19d
 word    c19e c19f
-byte    c1a0 c1a3
-word    c1a4 c1ab
-byte    c1ac c1b0
-struct  c1b1 c1b9: O 3 UY 
-byte    c1ba c1bb
-word    c1bc c1bf
-byte    c1c0 c1c1
-word    c1c2 c1c2
+byte    c1a0 c1a0
+byte    c1a3 c1a3
+word    c1a4 c1a5
+word    c1a6 c1a7
+word    c1a8 c1a9
+word    c1aa c1ab
+byte    c1af c1af
+byte    c1b0 c1b0
+byte    c1ba c1ba
+word    c1bc c1bd
+word    c1be c1bf
+byte    c1c0 c1c0
+byte    c1c1 c1c1
 byte    c1c3 c1c3
-word    c1c4 c1cd
-byte    c1ce c1d5
-word    c1d6 c1db
-byte    c1dc c1dd
+word    c1c4 c1c5
+word    c1c6 c1c7
+word    c1c8 c1c9
+word    c1ca c1cb
+word    c1cc c1cd
+byte    c1ce c1ce
+byte    c1cf c1cf
+byte    c1d0 c1d0
+byte    c1d1 c1d1
+byte    c1d2 c1d2
+byte    c1d3 c1d3
+byte    c1d4 c1d4
+byte    c1d5 c1d5
+word    c1d6 c1d7
+word    c1d8 c1d9
+word    c1da c1db
+byte    c1dc c1dc
+byte    c1dd c1dd
 word    c1de c1df
-byte    c1e0 c1e3
+byte    c1e0 c1e0
+byte    c1e1 c1e1
+byte    c1e2 c1e2
+byte    c1e3 c1e3
 word    c1e4 c1e5
 byte    c1e6 c1e6
-struct  c1e7 c1e8: UY 
-byte    c1ec c1ef
-word    c1f0 c1fb
-byte    c1fc c1fe
-byte    c200 c202
+byte    c1ec c1ec
+byte    c1ed c1ed
+byte    c1ee c1ee
+byte    c1ef c1ef
+word    c1f2 c1f3
+word    c1f4 c1f5
+word    c1f6 c1f7
+word    c1f8 c1f9
+word    c1fa c1fb
+byte    c1fc c1fc
+byte    c1fd c1fd
+byte    c1fe c1fe
+byte    c200 c200
+byte    c201 c201
+byte    c202 c202
 word    c204 c205
 byte    c206 c206
-fill    c207 c207
-word    c208 c21d
-byte    c21e c225
-struct  c226 c231: O 4 UY 
-word    c232 c234
-byte    c235 c236
+word    c208 c209
+word    c20a c20b
+word    c20c c20d
+word    c20e c20f
+word    c210 c211
+word    c212 c213
+word    c214 c215
+word    c216 c217
+word    c218 c219
+word    c21a c21b
+word    c21c c21d
+byte    c21e c21e
+byte    c21f c21f
+byte    c220 c220
+byte    c221 c221
+byte    c222 c222
+byte    c223 c223
+byte    c224 c224
+byte    c225 c225
+byte    c235 c235
+byte    c236 c236
 byte    c23a c23a
 word    c23e c23f
-struct  c240 c248: O 3 UY 
-struct  c249 c24a: UY 
 word    c24e c24f
-struct  c250 c258: O 3 UY 
-struct  c259 c25a: UY 
-byte    c25b c25d
-func    c25e c279: UW X 10 : UW X 10 
-func    c27a c285: UY X 10 : UY X 10 
-func    c286 c29d: SW X 10 : SW X 10 
-struct  c29e c2a6: O 3 UY 
-struct  c2a7 c2af: O 3 UY 
-word    c2b0 c2b1
-func    c2b2 c2c5: UY X 10 : UY X 10 
-struct  c2c6 c2ce: O 3 UY 
-struct  c2cf c2d7: O 3 UY 
-word    c2d8 c2d9
-func    c2da c309: UW X 10 : UW X 10 
-func    c30a c31d: UY X 10 : UY X 10 
-struct  c31e c326: O 3 UY 
-struct  c327 c32f: O 3 UY 
-word    c330 c331
-func    c332 c361: UW X 10 : UW X 10 
-func    c362 c375: UY X 10 : UY X 10 
-struct  c376 c37e: O 3 UY 
-struct  c37f c388: UY 
-func    c38a c39d: UY X 10 : UY X 10 
-struct  c39e c3a6: O 3 UY 
-struct  c3a7 c3af: O 3 UY 
-word    c3b0 c3b1
-func    c3b2 c3c5: UY X 10 : UY X 10 
-struct  c3c6 c3ce: O 3 UY 
-struct  c3cf c3d7: O 3 UY 
-word    c3d8 c3d9
-func    c3da c3ed: UY X 10 : UY X 10 
-func    c3ee c401: UW X 10 : UW X 10 
-func    c402 c41d: UW X 10 : UW X 10 
-func    c41e c431: UY X 10 : UY X 10 
-func    c432 c445: UY X 10 : UY X 10 
-func    c446 c44d: UY X 10 : UY X 10 
-func    c44e c461: UY X 10 : UY X 10 
-struct  c462 c47d: O 4 UY 
-func    c47e c491: UY X 10 : UY X 10 
-func    c492 c4a5: UY X 10 : UY X 10 
-func    c4a6 c4ad: UY X 10 : UY X 10 
-func    c4ae c4c1: UY X 10 : UY X 10 
-struct  c4c2 c4dd: UY 
-func    c4de c4f9: UW X 10 : UW X 10 
-func    c4fa c515: UW X 10 : UW X 10 
-func    c516 c531: UW X 10 : UW X 10 
-func    c532 c54d: UW X 10 : UW X 10 
-func    c54e c569: UW X 10 : UW X 10 
-func    c56a c585: UW X 10 : UW X 10 
-func    c586 c59d: UW X 10 : UW X 10 
-func    c59e c5b1: UW X 10 : UW X 10 
-func    c5b2 c5b9: UY X 10 : UY X 10 
-func    c5ba c5cd: UY X 10 : UY X 10 
-func    c5ce c5d5: UY X 10 : UY X 10 
-func    c5d6 c5e9: UY X 10 : UY X 10 
-func    c5ea c5f1: UY X 10 : UY X 10 
-func    c5f2 c605: UY X 10 : UY X 10 
-struct  c606 c64d: O 4 UY 
-struct  c64e c695: O 4 UY 
-struct  c696 c6dd: O 4 UY 
-struct  c6de c725: O 4 UY 
-struct  c726 c76d: O 4 UY 
-struct  c76e c779: O 4 UY 
-func    c77a c785: UY X 10 : UY X 10 
-struct  c786 c78e: O 3 UY 
-struct  c78f c797: O 3 UY 
-struct  c798 c79d: UY 
-func    c79e c7ad: UY X 10 : UY X 10 
-func    c7ae c7dd: UW X 10 : UW X 10 
-func    c7de c7f3: UY X 10 : UY X 10 
-word    c7f4 c7f5
-func    c7f6 c825: SW X 10 : SW X 10 
-func    c826 c845: SW X 10 : UW X 10 
-func    c846 c851: SY X 10 : UY X 10 
-func    c852 c85b: UY X 10 : UY X 10 
-func    c85c c865: UY X 10 : UY X 10 
-func    c866 c875: UY X 10 : UY X 10 
-func    c876 c891: UW X 10 : UW X 10 
-func    c892 c8ad: UW X 10 : UW X 10 
-func    c8ae c8c9: UW X 10 : UW X 10 
-table   c8ca c92d: O 10 UY X 10 
-table   c92e c951: O 6 UY X 10 
-table   c952 c975: O 6 UY X 10 
-table   c976 c999: O 6 UY X 10 
-func    c99a c9b5: UY X 10 : UY X 10 
-struct  c9b6 c9fd: O 4 UY 
-struct  c9fe ca45: O 4 UY 
-struct  ca46 ca8d: O 4 UY 
-struct  ca8e cad5: O 4 UY 
-struct  cad6 cb1d: O 4 UY 
-struct  cb1e cb59: O 4 UY 
-word    cb5a cb61
-byte    cb62 cb63
+func    c25e c279: UW X 16 : UW X 16 
+func    c27a c285: UY X 16 : UY X 16 
+func    c286 c29d: SW X 16 : SW X 16 
+func    c2b2 c2c5: UY X 16 : UY X 16 
+func    c2da c309: UW X 16 : UW X 16 
+func    c30a c31d: UY X 16 : UY X 16 
+func    c332 c361: UW X 16 : UW X 16 
+func    c362 c375: UY X 16 : UY X 16 
+func    c38a c39d: UY X 16 : UY X 16 
+func    c3b2 c3c5: UY X 16 : UY X 16 
+func    c3da c3ed: UY X 16 : UY X 16 
+func    c3ee c401: UW X 16 : UW X 16 
+func    c402 c41d: UW X 16 : UW X 16 
+func    c41e c431: UY X 16 : UY X 16 
+func    c432 c445: UY X 16 : UY X 16 
+func    c446 c44d: UY X 16 : UY X 16 
+func    c44e c461: UY X 16 : UY X 16 
+func    c47e c491: UY X 16 : UY X 16 
+func    c492 c4a5: UY X 16 : UY X 16 
+func    c4a6 c4ad: UY X 16 : UY X 16 
+func    c4ae c4c1: UY X 16 : UY X 16 
+func    c4de c4f9: UW X 16 : UW X 16 
+func    c4fa c515: UW X 16 : UW X 16 
+func    c516 c531: UW X 16 : UW X 16 
+func    c532 c54d: UW X 16 : UW X 16 
+func    c54e c569: UW X 16 : UW X 16 
+func    c56a c585: UW X 16 : UW X 16 
+func    c586 c59d: UW X 16 : UW X 16 
+func    c59e c5b1: UW X 16 : UW X 16 
+func    c5b2 c5b9: UY X 16 : UY X 16 
+func    c5ba c5cd: UY X 16 : UY X 16 
+func    c5ce c5d5: UY X 16 : UY X 16 
+func    c5d6 c5e9: UY X 16 : UY X 16 
+func    c5ea c5f1: UY X 16 : UY X 16 
+func    c5f2 c605: UY X 16 : UY X 16 
+func    c77a c785: UY X 16 : UY X 16 
+func    c79e c7ad: UY X 16 : UY X 16 
+func    c7ae c7dd: UW X 16 : UW X 16 
+func    c7de c7f3: UY X 16 : UY X 16 
+func    c7f6 c825: SW X 16 : SW X 16 
+func    c826 c845: SW X 16 : UW X 16 
+func    c846 c851: SY X 16 : UY X 16 
+func    c852 c85b: UY X 16 : UY X 16 
+func    c85c c865: UY X 16 : UY X 16 
+func    c866 c875: UY X 16 : UY X 16 
+func    c876 c891: UW X 16 : UW X 16 
+func    c892 c8ad: UW X 16 : UW X 16 
+func    c8ae c8c9: UW X 16 : UW X 16 
+table   c8ca c92d: O 10 UY X 16 
+table   c92e c951: O 6 UY X 16 
+table   c952 c975: O 6 UY X 16 
+table   c976 c999: O 6 UY X 16 
+func    c99a c9b5: UY X 16 : UY X 16 
+word    cb5a cb5b
+word    cb5c cb5d
+word    cb5e cb5f
+word    cb60 cb61
+byte    cb62 cb62
+byte    cb63 cb63
 word    cb64 cb65
-byte    cb66 cb67
+byte    cb66 cb66
+byte    cb67 cb67
 word    cb68 cb69
 byte    cb6a cb6a
-fill    cb6b cb6b
 word    cb6c cb6d
 byte    cb6e cb6e
-fill    cb6f cb6f
 word    cb70 cb71
 byte    cb72 cb72
-fill    cb73 cb73
-word    cb74 cb7b
-byte    cb7c cb91
+word    cb74 cb75
+word    cb76 cb77
+word    cb78 cb79
+word    cb7a cb7b
+byte    cb7c cb7c
+byte    cb7d cb7d
+byte    cb7e cb7e
+byte    cb7f cb7f
+byte    cb80 cb80
+byte    cb81 cb81
+byte    cb82 cb82
+byte    cb83 cb83
+byte    cb84 cb84
+byte    cb85 cb85
+byte    cb86 cb86
+byte    cb87 cb87
+byte    cb88 cb88
+byte    cb89 cb89
+byte    cb8a cb8a
+byte    cb8e cb8e
+byte    cb8f cb8f
+byte    cb90 cb90
+byte    cb91 cb91
 word    cb92 cb93
 byte    cb94 cb94
-word    cb96 cb9b
-byte    cb9c cb9f
+word    cb96 cb97
+word    cb98 cb99
+word    cb9a cb9b
+byte    cb9c cb9c
+byte    cb9d cb9d
+byte    cb9e cb9e
+byte    cb9f cb9f
 word    cba0 cba1
-byte    cba2 cba8
-fill    cba9 cba9
-word    cbaa cbcd
-byte    cbce cbcf
-word    cbd0 cbd3
-byte    cbd4 cbd5
-word    cbd6 cbdb
-struct  cbdc cbe1: UY 
+byte    cba2 cba2
+byte    cba3 cba3
+byte    cba4 cba4
+byte    cba5 cba5
+byte    cba6 cba6
+byte    cba7 cba7
+byte    cba8 cba8
+word    cbaa cbab
+word    cbac cbad
+word    cbae cbaf
+word    cbb0 cbb1
+word    cbb2 cbb3
+word    cbb4 cbb5
+word    cbb6 cbb7
+word    cbb8 cbb9
+word    cbba cbbb
+word    cbbc cbbd
+word    cbbe cbbf
+word    cbc0 cbc1
+word    cbc2 cbc3
+word    cbc4 cbc5
+word    cbc6 cbc7
+word    cbc8 cbc9
+word    cbca cbcb
+word    cbcc cbcd
+byte    cbce cbce
+byte    cbcf cbcf
+word    cbd0 cbd1
+word    cbd2 cbd3
+byte    cbd4 cbd4
+byte    cbd5 cbd5
+byte    cbd7 cbd7
+word    cbd8 cbd9
+word    cbda cbdb
+word    cbdc cbdd
+word    cbde cbdf
+byte    cbe0 cbe0
 word    cbe2 cbe3
-struct  cbe4 cbec: O 3 UY 
-struct  cbed cbf5: O 3 UY 
-word    cbf6 cbf9
-byte    cbfa cbfb
-word    cbfc cbff
-struct  cc00 cc01: UY 
-word    cc02 cc07
-struct  cc08 cc13: O 4 UY 
-byte    cc14 cc1b
+word    cbe4 cbe5
+byte    cbe8 cbe8
+word    cbea cbeb
+word    cbec cbed
+byte    cbee cbee
+byte    cbef cbef
+word    cbf0 cbf1
+word    cbf2 cbf3
+word    cbf6 cbf7
+word    cbf8 cbf9
+word    cbfc cbfd
+word    cbfe cbff
+word    cc04 cc05
+word    cc06 cc07
+byte    cc09 cc09
+byte    cc0a cc0a
+byte    cc0b cc0b
+byte    cc0c cc0c
+byte    cc0d cc0d
+word    cc0e cc0f
+byte    cc10 cc10
+byte    cc11 cc11
+byte    cc12 cc12
+byte    cc13 cc13
+byte    cc14 cc14
+byte    cc15 cc15
+byte    cc16 cc16
+byte    cc17 cc17
+byte    cc18 cc18
+byte    cc19 cc19
+byte    cc1a cc1a
+byte    cc1b cc1b
 word    cc1c cc1d
-byte    cc1e cc24
-byte    cc26 cc28
-word    cc2a cc31
-struct  cc32 cc37: UY 
-byte    cc38 cc39
-word    cc3a cc49
-byte    cc4a cc4b
+byte    cc1e cc1e
+byte    cc1f cc1f
+byte    cc20 cc20
+byte    cc24 cc24
+word    cc2c cc2d
+word    cc2e cc2f
+word    cc30 cc31
+byte    cc38 cc38
+word    cc3a cc3b
+word    cc3c cc3d
+word    cc3e cc3f
+word    cc40 cc41
+word    cc42 cc43
+word    cc44 cc45
+word    cc46 cc47
+word    cc48 cc49
+byte    cc4a cc4a
+byte    cc4b cc4b
 word    cc4c cc4d
 byte    cc4e cc4e
-fill    cc4f cc4f
-word    cc50 cc53
+word    cc50 cc51
+word    cc52 cc53
 byte    cc54 cc54
-fill    cc55 cc55
-struct  cc56 cc5e: O 3 UY 
-struct  cc5f cc60: UY 
-byte    cc61 cc63
-word    cc64 cc6f
-struct  cc70 cc75: UY 
+word    cc64 cc65
+word    cc66 cc67
+word    cc68 cc69
+word    cc6a cc6b
+word    cc6c cc6d
+word    cc6e cc6f
+word    cc70 cc71
+word    cc72 cc73
+byte    cc74 cc74
+byte    cc75 cc75
 byte    cc76 cc76
-struct  cc77 cc7f: O 3 UY 
-word    cc80 cc87
-struct  cc88 cc90: O 3 UY 
-byte    cc91 cc91
+word    cc80 cc81
+word    cc82 cc83
+word    cc84 cc85
+word    cc86 cc87
 word    cc92 cc97
-struct  cc98 cc9d: UY 
-word    cc9e ccb9
-struct  ccba cce5: O 4 UY 
-struct  cce6 ccf9: O 4 UY 
-struct  ccfa cd02: O 3 UY 
-struct  cd03 cd0e: O 4 UY 
-struct  cd0f cd20: UY 
-byte    cd21 cd21
-func    cd22 cd35: UW X 10 : UW X 10 
-func    cd36 cd3d: UY X 10 : UY X 10 
-byte    cd3e cd3f
-func    cd40 cd49: UY X 10 : UY X 10 
-func    cd4a cd61: UW X 10 : UW X 10 
-func    cd62 cd6d: UY X 10 : UY X 10 
-table   cd6e cda5: O 8 UY X 10 
-func    cda6 cdc5: UW X 10 : UW X 10 
-func    cdc6 cde1: UW X 10 : UW X 10 
-func    cde2 cded: SY X 10 : UY X 10 
-table   cdee ce5b: O 10 UY X 10 
-func    ce5c ce8f: SW X 10 : UW X 10 
-func    ce90 ce9b: SY X 10 : UY X 10 
-xcode   ce9c ffff     # auto
+byte    cc98 cc9a
+byte    cc9b cca9
+word    ccaa ccab
+word    ccac ccad
+word    ccb6 ccb7
+word    ccb8 ccb9
+byte    ccba ccba
+byte    ccbb ccbb
+byte    ccbc ccbc
+byte    ccd0 ccd0
+byte    ccd1 ccd1
+byte    ccd5 ccd5
+func    cd22 cd35: UW X 16 : UW X 16 
+func    cd36 cd3d: UY X 16 : UY X 16 
+func    cd40 cd49: UY X 16 : UY X 16 
+func    cd4a cd61: UW X 16 : UW X 16 
+func    cd62 cd6d: UY X 16 : UY X 16 
+table   cd6e cda5: O 8 UY X 16 
+func    cda6 cdc5: UW X 16 : UW X 16 
+func    cdc6 cde1: UW X 16 : UW X 16 
+func    cde2 cded: SY X 16 : UY X 16 
+table   cdee ce5b: O 10 UY X 16 
+func    ce5c ce8f: SW X 16 : UW X 16 
+func    ce90 ce9b: SY X 16 : UY X 16 
 fill    ce9c ffff     # auto
 
 
 # ------------ Subroutine list----------
-sub  2032  "Reset_All"   #cmd
-sub  2121  "Initialize"   #cmd
-sub  2131  "Background_Loop"   #cmd
-sub  2148  "Reset_RAM_ptr"   #cmd
-sub  2161  "Infinite_Loop_DEAD"   #cmd
-sub  2164  "Set_TaskList"   #cmd
-sub  226a  "Sub_226a"   #cmd
-sub  22b2  "BRAKE_INPUT"   #cmd
-sub  2358  "Clear_Cell"   #cmd
-sub  2370  "I_External_Vector"   #cmd
-sub  2543  "DCL_Mode_Scheduler"   #cmd
-sub  256c  "DCL_DM_PermanentDeviceDisconnect"   #cmd
-sub  257b  "DCL_DM_TransmitPID"   #cmd
-sub  25bd  "Sub_25bd"   #cmd
-sub  25c5  "Sub_25c5"   #cmd
-sub  25d9  "DCL_DM_ParameterRefByAddressOffset"   #cmd
-sub  25e2  "DCL_DM_ParameterRefByName"   #cmd
-sub  2601  "DCL_DM_A-D_SensorValueSubstitution"   #cmd
-sub  2630  "Sub_2630"   #cmd
-sub  264b  "Sub_264b"   #cmd
-sub  266a  "DCL_DM_ClearContinuousVIPCodes"   #cmd
-sub  2682  "DCL_DM_ClearDCLErrorFlags"   #cmd
-sub  268f  "Sub_268f"   #cmd
-sub  269e  "DCL_DM_TransmitDMRMap"   #cmd
-sub  26a4  "DCL_DM_TransmitPIDMap"   #cmd
-sub  26ba  "DCL_DM_TransmitDMR"   #cmd
-sub  26f1  "DCL_DM_ProgramDataDownload"   #cmd
-sub  2747  "DCL_DM_ProgramExecution"   #cmd
-sub  2787  "Sub_2787"   #cmd
-sub  27a4  "DCL_DM_DisplayDCLStatusInformation"   #cmd
-sub  27a5  "DCL_DM_RunningOnDemand_SelfTest"   #cmd
-sub  282d  "DCL_DM_TransmitContinuous_SelfTestCodes"   #cmd
-sub  28a2  "DCL_DM_SetCommLinkBAUDRate"   #cmd
-sub  28ad  "DCL_DM_TransmitBoth_PID-DMR"   #cmd
-sub  29cd  "Send_HSO_Cmd"   #cmd
-sub  29d1  "Sub_29d1"   #cmd
-sub  2a4a  "Sub_2a4a"   #cmd
-sub  2a4c  "Do_Cmd_N"   #cmd
-sub  2a5c  "Reschedule_Event_DoCmdP"   #cmd
-sub  2a5e  "Do_Cmd_P"   #cmd
-sub  2a76  "I_HSI_0"   #cmd
-sub  2a85  "Read_HSI"   #cmd
-sub  2ae5  "I_HSO_1"   #cmd
-sub  2c09  "Sub_2c09"   #cmd
-sub  2c19  "Sub_2c19"   #cmd
-sub  2c46  "Sub_2c46"   #cmd
-sub  2d46  "Sub_2d46"   #cmd
-sub  2d4d  "I_Timer_OVF"   #cmd
-sub  2d6a  "I_Ignore"   #cmd
-sub  2d6b  "I_HSO_2"   #cmd
-sub  2d8c  "PIP_DATA"   #cmd
-sub  2f7e  "Knock_Check4"   #cmd
-sub  2f8c  "Knock_Check"   #cmd
-sub  3169  "Update_HTime_pend"   #cmd
-sub  3179  "Update_HTime_prev"   #cmd
-sub  31d2  "Sub_31d2"   #cmd
-sub  3238  "Sub_3238"   #cmd
-sub  326a  "Add_H_Beta"   #cmd
-sub  3277  "Sub_3277"   #cmd
-sub  32a1  "Add_H_Delta"   #cmd
-sub  32a7  "EOS_KAY_CALCULATIONS"   #cmd
-sub  33b7  "TRANSIENT_SPARK-COMPENSATION"   #cmd
-sub  3430  "DWELL_CALCULATION"   #cmd
-sub  34c8  "FUEL_INJ_OUT_COM6"   #cmd
-sub  35f3  "Sub_35f3"   #cmd
-sub  3642  "Sub_3642"   #cmd
-sub  3659  "Sub_3659"   #cmd
-sub  3677  "Sub_3677"   #cmd
-sub  3683  "Sub_3683"   #cmd
-sub  368a  "Sub_368a"   #cmd
-sub  37f9  "Sub_37f9"   #cmd
-sub  3829  "Sub_3829"   #cmd
-sub  38f4  "SYSEQ_MAP_COM1"   #cmd
-sub  398a  "Sub_398a"   #cmd
-sub  3a3f  "Sub_3a3f"   #cmd
-sub  3a5b  "Sub_3a5b"   #cmd
-sub  3a6b  "MAP_CALC"   #cmd
-sub  3b20  "Sub_3b20"   #cmd
-sub  3b4c  "VIP_THROTTLE_MODE_SET"   #cmd
-sub  3b52  "KAM_Qualification_Test_Logic"   #cmd
-sub  3be7  "ReInitialize_ISCKAM"   #cmd
-sub  3c02  "RUN_MODE_SELECTION"   #cmd
-sub  3c6c  "Sub_3c6c"   #cmd
-sub  3ccf  "Read_AD"   #cmd
-sub  3cd3  "Enable_Int"   #cmd
-sub  3d1f  "SYSTEM_EQUATIONS_EQUA_LH"   #cmd
-sub  3df2  "INPUT_ACT_COM2"   #cmd
-sub  40b8  "Compute_TCSTRT"   #cmd
-sub  40db  "INPUT_TOT_COM1"   #cmd
-sub  40f7  "CNVRT"   #cmd
-sub  436c  "ENGINE_SPEED_OVER_VEHICLE_SPEED_NOVS_&_BPCOR"   #cmd
-sub  43b2  "Sub_43b2"   #cmd
-sub  443b  "INFERRED_BAROMETRIC_PRESSURE_STRATEGY"   #cmd
-sub  4533  "SPEED_DENSITY_AIR_MASS_CALCULATION"   #cmd
-sub  45a9  "Compute_AMPEM_AMPEMT"   #cmd
-sub  4623  "Subtract_EM"   #cmd
-sub  4632  "Sub_4632"   #cmd
-sub  4735  "Sub_4735"   #cmd
-sub  4763  "Sub_4763"   #cmd
-sub  47a8  "BIMAP_DEFINITIONS"   #cmd
-sub  47fc  "Sub_47fc"   #cmd
-sub  4865  "SUYFuncLU_4865"   $ F suyflu 32 #cmd
-sub  486d  "USYFuncLU_486d"   $ F usyflu 32 #cmd
-sub  4870  "UUYFuncLU_4870"   $ F uuyflu 32 #cmd
-sub  4891  "UUYFuncLU_4891"   $ F uuyflu 32 #cmd
-sub  48db  "SUWFuncLU_48db"   $ F suwflu 32 #cmd
-sub  48e0  "SSWFuncLU_48e0"   $ F sswflu 32 #cmd
-sub  48e3  "USWFuncLU_48e3"   $ F uswflu 32 #cmd
-sub  48e6  "UUWFuncLU_48e6"   $ F uuwflu 32 #cmd
-sub  4907  "UUWFuncLU_4907"   $ F uuwflu 32 #cmd
-sub  494f  "UROLAV"   #cmd
-sub  4956  "ROLAV"   #cmd
-sub  4958  "ROLLING_AVERAGE_ROUTINE"   #cmd
-sub  4987  "ROLLING_AVERAGE_FILTER_ROUTINE"   #cmd
-sub  49a7  "SYTabLU_49a7"   $ F sytlu 38 34 #cmd
-sub  49b6  "SYTabLU_49b6"   $ F sytlu 38 34 #cmd
-sub  49b9  "Four_Point_Interpolation"   $ F uytlu 38 34 #cmd
-sub  49ee  "TableInterpolation"   #cmd
-sub  4a1e  "Sub_4a1e"   #cmd
-sub  4a3f  "Sub_4a3f"   #cmd
-sub  4a5e  "Sub_4a5e"   #cmd
-sub  4aaa  "TIMERS"   #cmd
-sub  4bf5  "FUEL_OLFLG_COM7"   #cmd
-sub  4e45  "FUEL_CL_LAMBSE_COM3"   #cmd
-sub  4f50  "C_MULTIPLIER_LOGIC"   #cmd
-sub  4fb4  "Sub_4fb4"   #cmd
-sub  4fbd  "LAMBSE_RESET"   #cmd
-sub  4fd3  "ACT_to_ECT_proportioning_factor(R36)"   #cmd
-sub  4feb  "FN1360(N,MAPPA)"   #cmd
-sub  500e  "Sub_500e"   #cmd
-sub  501c  "CALCULATE_PTPAMP_RF_and_RS"   #cmd
-sub  5131  "UYTabLU_5131"   $ F uytlu 38 34 #cmd
-sub  513f  "FUEL_ADAPT_COM4"   #cmd
-sub  51ce  "EGO_Switch_Logic"   #cmd
-sub  5369  "NEW_UPRATE_CALC"   #cmd
-sub  5402  "Sub_5402"   #cmd
-sub  577b  "Sub_577b"   #cmd
-sub  578f  "FUEL_IDLE_MOD_COM3"   #cmd
-sub  5830  "FUEL_KAM_ADAPT_COM3"   #cmd
-sub  58d5  "Sub_58d5"   #cmd
-sub  58ec  "FUEL_TRANS_COM5"   #cmd
-sub  5a31  "FUEL_DFSO_COM2"   #cmd
-sub  5b96  "FUEL_AE_COM5"   #cmd
-sub  5c7b  "FUEL_PUMP_COM1"   #cmd
-sub  5c90  "Sub_5c90"   #cmd
-sub  5ca7  "Sub_5ca7"   #cmd
-sub  5ca9  "Sub_5ca9"   #cmd
-sub  5cce  "Sub_5cce"   #cmd
-sub  5cd1  "Sub_5cd1"   #cmd
-sub  5cff  "Sub_5cff"   #cmd
-sub  5d03  "SPARK_BASE_COM2"   #cmd
-sub  5f0a  "Include_in_SPK_NORM"   #cmd
-sub  5f12  "UYTabLU_5f12"   $ F uytlu 38 34 #cmd
-sub  5f20  "ENTRY_INTO_IDLE_SPARK"   #cmd
-sub  608b  "Sub_608b"   #cmd
-sub  60f1  "DWLBSE-DWLCOR_CALCULATION"   #cmd
-sub  61d4  "Sub_61d4"   #cmd
-sub  62ed  "Sub_62ed"   #cmd
-sub  62fc  "Sub_62fc"   #cmd
-sub  630b  "EGR_ENABLE_LH"   #cmd
-sub  6390  "Sub_6390"   #cmd
-sub  6422  "Sub_6422"   #cmd
-sub  64f7  "Sub_64f7"   #cmd
-sub  6552  "Update_EGR2?"   #cmd
-sub  6584  "ISC_OVERVIEW_COM3"   #cmd
-sub  6635  "DSDRPM_CALC"   #cmd
-sub  6840  "Sub_6840"   #cmd
-sub  6846  "Sub_6846"   #cmd
-sub  684a  "Sub_684a"   #cmd
-sub  6853  "RPMERR_CALC"   #cmd
-sub  68ad  "ISC_DASPOT_COM1"   #cmd
-sub  6986  "ISC_MODE_SELECT_COM1"   #cmd
-sub  6a3a  "ISC_IPSIBR_COM1"   #cmd
-sub  6b8c  "ISC_ISCDTY_COM1"   #cmd
-sub  6c18  "Manifold_VACUUM"   #cmd
-sub  6c27  "ISC_ISCKAM_COM1"   #cmd
-sub  6ca9  "Sub_6ca9"   #cmd
-sub  6cd7  "Sub_6cd7"   #cmd
-sub  6d5b  "Sub_6d5b"   #cmd
-sub  6de0  "THERMACTOR_AIR_STRATEGY"   #cmd
-sub  6ee6  "Sub_6ee6"   #cmd
-sub  6fb2  "Update_Can_Purge"   #cmd
-sub  7016  "Do_Self_Test"   #cmd
-sub  70d8  "Sub_70d8"   #cmd
-sub  70de  "Sub_70de"   #cmd
-sub  70f5  "Sub_70f5"   #cmd
-sub  7104  "Sub_7104"   #cmd
-sub  710a  "Sub_710a"   #cmd
-sub  7113  "StackErrorCodes"   #cmd
-sub  7177  "Sub_7177"   #cmd
-sub  7188  "Sub_7188"   #cmd
-sub  71a4  "Sub_71a4"   #cmd
-sub  71aa  "Sub_71aa"   #cmd
-sub  71ad  "Sub_71ad"   #cmd
-sub  71b6  "Sub_71b6"   #cmd
-sub  71c1  "Sub_71c1"   #cmd
-sub  71eb  "Get_DiagCodes"   #cmd
-sub  7210  "Set_DiagCodes"   #cmd
-sub  7231  "EGR_SELECT_LOGIC"   #cmd
-sub  7245  "TRANS_SELECT_LOGIC"   #cmd
-sub  728a  "Sub_728a"   #cmd
-sub  7340  "Check_Sensors"   #cmd
-sub  7394  "Sub_7394"   #cmd
-sub  7558  "EGOTST_TMR_CONTROL"   #cmd
-sub  766a  "Sub_766a"   #cmd
-sub  7673  "Sub_7673"   #cmd
-sub  79a3  "Sub_79a3"   #cmd
-sub  7a91  "WARM_UP_COUNTER_LOGIC"   #cmd
-sub  7aaf  "KAM_CODE_ERASE_LOGIC"   #cmd
-sub  7aec  "Sub_7aec"   #cmd
-sub  7afe  "?Fault_Filter_Routine?"   #cmd
-sub  7b00  "Sub_7b00"   #cmd
-sub  7b08  "Sub_7b08"   #cmd
-sub  7baf  "Clear_KAM"   #cmd
-sub  7bb4  "Clear_Kam_SelfTest"   #cmd
-sub  7bc0  "Set_STO"   #cmd
-sub  7bc8  "Reset_STO"   #cmd
-sub  7bd2  "GetBytes_R1a"   #cmd
-sub  7beb  "Sub_7beb"   #cmd
-sub  7c10  "Sub_7c10"   #cmd
-sub  7c22  "Sub_7c22"   #cmd
-sub  7c40  "EGO_TEST_TMR_CLEAR"   #cmd
-sub  7c62  "Calculate_ETV_OCM_MIN"   #cmd
-sub  7ca1  "VO_EOTS_COM1"   #cmd
-sub  7cb0  "FAIL_Loop"   #cmd
-sub  7ced  "Sub_7ced"   #cmd
-sub  7cf9  "Sub_7cf9"   #cmd
-sub  7d04  "Sub_7d04"   #cmd
-sub  7d08  "Sub_7d08"   #cmd
-sub  7d0c  "VO_ROM_COM1"   #cmd
-sub  7d3a  "TEST_AD_SWITCHES_1"   #cmd
-sub  7d97  "EXIT_THIS_TEST"   #cmd
-sub  7d9e  "TEST_AD_SWITCHES_2"   #cmd
-sub  7e35  "Sub_7e35"   #cmd
-sub  7e3d  "Sub_7e3d"   #cmd
-sub  7e40  "Sub_7e40"   #cmd
-sub  7e7c  "Sub_7e7c"   #cmd
-sub  7e86  "GET_ADDRESS"   #cmd
-sub  7ea1  "ThermactorAirTest"   #cmd
-sub  7ec3  "Sub_7ec3"   #cmd
-sub  7ed7  "Sub_7ed7"   #cmd
-sub  7f51  "VO_OCC_COM12_Func1"   #cmd
-sub  7f69  "VO_OCC_COM12_Func2"   #cmd
-sub  7f78  "VO_OCC_COM12_Func4"   #cmd
-sub  7f97  "Sub_7f97"   #cmd
-sub  7fb3  "Sub_7fb3"   #cmd
-sub  7fcc  "Sub_7fcc"   #cmd
-sub  7fe5  "Sub_7fe5"   #cmd
-sub  7ffe  "Sub_7ffe"   #cmd
-sub  8016  "Sub_8016"   #cmd
-sub  8032  "Sub_8032"   #cmd
-sub  8038  "Sub_8038"   #cmd
-sub  8057  "Sub_8057"   #cmd
-sub  8075  "Sub_8075"   #cmd
-sub  80c9  "SET_SERVICE_CODE"   #cmd
-sub  80cd  "Sub_80cd"   #cmd
-sub  80dd  "Sub_80dd"   #cmd
-sub  80fc  "Sub_80fc"   #cmd
-sub  8102  "VR_RUN_INIT_COM8"   #cmd
-sub  810e  "FMEM_FAULT_PRESENT_and_INITIALATION_LOGIC"   #cmd
-sub  8195  "Sub_8195"   #cmd
-sub  81a6  "Sub_81a6"   #cmd
-sub  81b8  "Sub_81b8"   #cmd
-sub  81fd  "VR_EGO_COM1"   #cmd
-sub  821a  "Sub_821a"   #cmd
-sub  822f  "Sub_822f"   #cmd
-sub  824f  "VR_THERMAIR_COM2"   #cmd
-sub  826a  "AIR_UPSTREAM"   #cmd
-sub  827c  "AIR_DOWNSTREAM"   #cmd
-sub  828f  "BLOCK_F2_VR_THERMAIR_COM2"   #cmd
-sub  82a0  "AM1_AM2_OFF"   #cmd
-sub  82a9  "BLOCK_AA"   #cmd
-sub  82b5  "Sub_82b5"   #cmd
-sub  82ba  "Sub_82ba"   #cmd
-sub  82f6  "Sub_82f6"   #cmd
-sub  82fb  "DELAY_SEC"   #cmd
-sub  830c  "Sub_830c"   #cmd
-sub  8318  "Sub_8318"   #cmd
-sub  8326  "Sub_8326"   #cmd
-sub  835a  "Sub_835a"   #cmd
-sub  8369  "Sub_8369"   #cmd
-sub  8393  "Sub_8393"   #cmd
-sub  83c2  "Sub_83c2"   #cmd
-sub  8404  "EXIT"   #cmd
-sub  840b  "Sub_840b"   #cmd
-sub  8418  "Sub_8418"   #cmd
-sub  8426  "Sub_8426"   #cmd
-sub  8453  "Sub_8453"   #cmd
-sub  846e  "Sub_846e"   #cmd
-sub  8538  "Sub_8538"   #cmd
-sub  853d  "Check_PS_PB"   #cmd
-sub  855f  "VR_EGOBAR_COM1"   #cmd
-sub  8582  "Sub_8582"   #cmd
-sub  85a9  "Sub_85a9"   #cmd
-sub  85d1  "Sub_85d1"   #cmd
-sub  85e3  "Sub_85e3"   #cmd
-sub  8640  "HW_Check"   #cmd
-sub  873d  "Disable_No_Start"   #cmd
-sub  8742  "POP_test"   #cmd
-sub  8755  "VO_KAMRAM_COM1"   #cmd
-sub  8794  "RAM_ERROR"   #cmd
-sub  8797  "Sub_8797"   #cmd
-sub  879a  "Sub_879a"   #cmd
-sub  87ea  "Sub_87ea"   #cmd
-sub  8802  "Sub_8802"   #cmd
-sub  882d  "Sub_882d"   #cmd
-sub  88bf  "Sub_88bf"   #cmd
-sub  88de  "Sub_88de"   #cmd
-sub  890c  "Sub_890c"   #cmd
-sub  8933  "INTRN_E4OD_SYS_EQU_COM1"   #cmd
-sub  8b19  "SPEED_RATIO_ACROSS_TORQUE_CONVERTER"   #cmd
-sub  8b2c  "Sub_8b2c"   #cmd
-sub  8b71  "E4OD_INPUT_PROCESSING_COM1"   #cmd
-sub  8cc9  "FN161x(N,LOAD)"   #cmd
-sub  8cd6  "SC_DESRD_GR_DETR_COM1"   #cmd
-sub  8d5f  "SC_GR_DS_AUTO_COM1"   #cmd
-sub  8d77  "VEHICLE_SPEED_SENSOR_OK_SHIFT_LOGIC"   #cmd
-sub  8e6a  "VEHICLE_SPEED_SENSOR_FAILURE_SHIFT_LOGIC"   #cmd
-sub  8eb5  "Sub_8eb5"   #cmd
-sub  8ee6  "Sub_8ee6"   #cmd
-sub  8efe  "Sub_8efe"   #cmd
-sub  8f28  "Delay_Shift_Logic"   #cmd
-sub  8f83  "MANUAL_DOWNSHIFT_DETERMINATION"   #cmd
-sub  8f94  "SC_CM_GR_DETR_COM1"   #cmd
-sub  901f  "SC_CM_GR_MAN1_COM1"   #cmd
-sub  905e  "SC_CM_GR_MAN2_COM1"   #cmd
-sub  9099  "SC_CM_GR_AUTO_DWN_COM1"   #cmd
-sub  90aa  "Sub_90aa"   #cmd
-sub  912a  "SC_SOL_CTL_COM1"   #cmd
-sub  91af  "SC_VALID_COM1"   #cmd
-sub  9231  "SHIFT_VERIFICATION_LOGIC_(Part_1)"   #cmd
-sub  9278  "SHIFT_VERIFICATION_LOGIC_(Part_2)"   #cmd
-sub  9308  "CCC_CST_CLTCH_CTL_COM1"   #cmd
-sub  93b2  "Sub_93b2"   #cmd
-sub  96e1  "Sub_96e1"   #cmd
-sub  96e5  "Sub_96e5"   #cmd
-sub  97e9  "Sub_97e9"   #cmd
-sub  9820  "Sub_9820"   #cmd
-sub  98a7  "UUWFuncLU_98a7"   $ F uuwflu 32 #cmd
-sub  98ae  "SUWFuncLU_98ae"   $ F suwflu 32 #cmd
-sub  9aa1  "Sub_9aa1"   #cmd
-sub  9b10  "Sub_9b10"   #cmd
-sub  9c21  "Sub_9c21"   #cmd
-sub  9c56  "Sub_9c56"   #cmd
-sub  9c85  "Sub_9c85"   #cmd
-sub  9cbe  "CCC_FMEM_COM2"   #cmd
-sub  9cfb  "Sub_9cfb"   #cmd
-sub  9e95  "Sub_9e95"   #cmd
-sub  9e9e  "CCC_SHFT_UNLCK_COM1"   #cmd
-sub  9ece  "CCC_INI_DWN_COM1"   #cmd
-sub  9ed9  "CCC_DWN_CNVR_CLCH_COM1"   #cmd
-sub  9f04  "CCC_INI_UP_COM1"   #cmd
-sub  9fc3  "Calc_SR_PP_LIM"   #cmd
-sub  9ff1  "CCC_UP_CNVR_CLCH_COM2"   #cmd
-sub  a097  "Sub_a097"   #cmd
-sub  a163  "Sub_a163"   #cmd
-sub  a206  "Sub_a206"   #cmd
-sub  a356  "Sub_a356"   #cmd
-sub  a376  "Sub_a376"   #cmd
-sub  a3b8  "Sub_a3b8"   #cmd
-sub  a3e1  "Sub_a3e1"   #cmd
-sub  a469  "Sub_a469"   #cmd
-sub  a767  "TIMER_LH"   #cmd
-sub  a99b  "Sub_a99b"   #cmd
-sub  a9d6  "Check_ConsoleDI"   #cmd
-sub  a9d7  "Check_Console"   #cmd
-sub  aa02  "Console_Routine"   #cmd
-sub  ab2a  "KAM_VALIDATION_PROCEDURE"   #cmd
-sub  ab92  "DataLoggingPatch"   #cmd
+sub  2032 "Reset_All"   #cmd
+sub  2121 "Initialize"   #cmd
+sub  2131 "Background_Loop"   #cmd
+sub  2148 "Reset_RAM_ptr"   #cmd
+sub  2161 "Infinite_Loop_DEAD"   #cmd
+sub  2164 "Set_TaskList"   #cmd
+sub  226a "Sub_226a"   #cmd
+sub  22b2 "BRAKE_INPUT"   #cmd
+sub  2358 "Clear_Cell"   #cmd
+sub  2370 "I_External_Vector"   #cmd
+sub  2543 "DCL_Mode_Scheduler"   #cmd
+sub  256c "DCL_DM_PermanentDeviceDisconnect"   #cmd
+sub  257b "DCL_DM_TransmitPID"   #cmd
+sub  25bd "Sub_25bd"   #cmd
+sub  25c5 "Sub_25c5"   #cmd
+sub  25d9 "DCL_DM_ParameterRefByAddressOffset"   #cmd
+sub  25e2 "DCL_DM_ParameterRefByName"   #cmd
+sub  2601 "DCL_DM_A-D_SensorValueSubstitution"   #cmd
+sub  2630 "Sub_2630"   #cmd
+sub  264b "Sub_264b"   #cmd
+sub  266a "DCL_DM_ClearContinuousVIPCodes"   #cmd
+sub  2682 "DCL_DM_ClearDCLErrorFlags"   #cmd
+sub  268f "Sub_268f"   #cmd
+sub  269e "DCL_DM_TransmitDMRMap"   #cmd
+sub  26a4 "DCL_DM_TransmitPIDMap"   #cmd
+sub  26ba "DCL_DM_TransmitDMR"   #cmd
+sub  26f1 "DCL_DM_ProgramDataDownload"   #cmd
+sub  2747 "DCL_DM_ProgramExecution"   #cmd
+sub  2787 "Sub_2787"   #cmd
+sub  27a4 "DCL_DM_DisplayDCLStatusInformation"   #cmd
+sub  27a5 "DCL_DM_RunningOnDemand_SelfTest"   #cmd
+sub  282d "DCL_DM_TransmitContinuous_SelfTestCodes"   #cmd
+sub  28a2 "DCL_DM_SetCommLinkBAUDRate"   #cmd
+sub  28ad "DCL_DM_TransmitBoth_PID-DMR"   #cmd
+sub  29cd "Send_HSO_Cmd"   #cmd
+sub  29d1 "Sub_29d1"   #cmd
+sub  2a4a "Sub_2a4a"   #cmd
+sub  2a4c "Do_Cmd_N"   #cmd
+sub  2a5c "Reschedule_Event_DoCmdP"   #cmd
+sub  2a5e "Do_Cmd_P"   #cmd
+sub  2a76 "I_HSI_0"   #cmd
+sub  2a85 "Read_HSI"   #cmd
+sub  2ae5 "I_HSO_1"   #cmd
+sub  2c09 "Sub_2c09"   #cmd
+sub  2c19 "Sub_2c19"   #cmd
+sub  2c46 "Sub_2c46"   #cmd
+sub  2d46 "Sub_2d46"   #cmd
+sub  2d4d "I_Timer_OVF"   #cmd
+sub  2d6a "I_Ignore"   #cmd
+sub  2d6b "I_HSO_2"   #cmd
+sub  2d8c "PIP_DATA"   #cmd
+sub  2f7e "Knock_Check4"   #cmd
+sub  2f8c "Knock_Check"   #cmd
+sub  3169 "Update_HTime_pend"   #cmd
+sub  3179 "Update_HTime_prev"   #cmd
+sub  31d2 "Sub_31d2"   #cmd
+sub  3238 "Sub_3238"   #cmd
+sub  326a "Add_H_Beta"   #cmd
+sub  3277 "Sub_3277"   #cmd
+sub  32a1 "Add_H_Delta"   #cmd
+sub  32a7 "EOS_KAY_CALCULATIONS"   #cmd
+sub  33b7 "TRANSIENT_SPARK-COMPENSATION"   #cmd
+sub  3430 "DWELL_CALCULATION"   #cmd
+sub  34c8 "FUEL_INJ_OUT_COM6"   #cmd
+sub  35f3 "Sub_35f3"   #cmd
+sub  3642 "Sub_3642"   #cmd
+sub  3659 "Sub_3659"   #cmd
+sub  3677 "Sub_3677"   #cmd
+sub  3683 "Sub_3683"   #cmd
+sub  368a "Sub_368a"   #cmd
+sub  37f9 "Sub_37f9"   #cmd
+sub  3829 "Sub_3829"   #cmd
+sub  38f4 "SYSEQ_MAP_COM1"   #cmd
+sub  398a "Sub_398a"   #cmd
+sub  3a3f "Sub_3a3f"   #cmd
+sub  3a5b "Sub_3a5b"   #cmd
+sub  3a6b "MAP_CALC"   #cmd
+sub  3b20 "Sub_3b20"   #cmd
+sub  3b4c "VIP_THROTTLE_MODE_SET"   #cmd
+sub  3b52 "KAM_Qualification_Test_Logic"   #cmd
+sub  3be7 "ReInitialize_ISCKAM"   #cmd
+sub  3c02 "RUN_MODE_SELECTION"   #cmd
+sub  3c6c "Sub_3c6c"   #cmd
+sub  3ccf "Read_AD"   #cmd
+sub  3cd3 "Enable_Int"   #cmd
+sub  3d1f "SYSTEM_EQUATIONS_EQUA_LH"   #cmd
+sub  3df2 "INPUT_ACT_COM2"   #cmd
+sub  40b8 "Compute_TCSTRT"   #cmd
+sub  40db "INPUT_TOT_COM1"   #cmd
+sub  40f7 "CNVRT"   #cmd
+sub  436c "ENGINE_SPEED_OVER_VEHICLE_SPEED_NOVS_&_BPCOR"   #cmd
+sub  43b2 "Sub_43b2"   #cmd
+sub  443b "INFERRED_BAROMETRIC_PRESSURE_STRATEGY"   #cmd
+sub  4533 "SPEED_DENSITY_AIR_MASS_CALCULATION"   #cmd
+sub  45a9 "Compute_AMPEM_AMPEMT"   #cmd
+sub  4623 "Subtract_EM"   #cmd
+sub  4632 "Sub_4632"   #cmd
+sub  4735 "Sub_4735"   #cmd
+sub  4763 "Sub_4763"   #cmd
+sub  47a8 "BIMAP_DEFINITIONS"   #cmd
+sub  47fc "Sub_47fc"   #cmd
+sub  4865 "SUYFuncLU_4865"   $ F suyflu 32 #cmd
+sub  486d "USYFuncLU_486d"   $ F usyflu 32 #cmd
+sub  4870 "UUYFuncLU_4870"   $ F uuyflu 32 #cmd
+sub  4891 "UUYFuncLU_4891"   $ F uuyflu 32 #cmd
+sub  48db "SUWFuncLU_48db"   $ F suwflu 32 #cmd
+sub  48e0 "SSWFuncLU_48e0"   $ F sswflu 32 #cmd
+sub  48e3 "USWFuncLU_48e3"   $ F uswflu 32 #cmd
+sub  48e6 "UUWFuncLU_48e6"   $ F uuwflu 32 #cmd
+sub  4907 "UUWFuncLU_4907"   $ F uuwflu 32 #cmd
+sub  494f "UROLAV"   #cmd
+sub  4956 "ROLAV"   #cmd
+sub  4958 "ROLLING_AVERAGE_ROUTINE"   #cmd
+sub  4987 "ROLLING_AVERAGE_FILTER_ROUTINE"   #cmd
+sub  49a7 "SYTabLU_49a7"   $ F sytlu 38 34 #cmd
+sub  49b6 "SYTabLU_49b6"   $ F sytlu 38 34 #cmd
+sub  49b9 "Four_Point_Interpolation"   $ F uytlu 38 34 #cmd
+sub  49ee "TableInterpolation"   #cmd
+sub  4a1e "Sub_4a1e"   #cmd
+sub  4a3f "Sub_4a3f"   #cmd
+sub  4a5e "Sub_4a5e"   #cmd
+sub  4aaa "TIMERS"   #cmd
+sub  4bf5 "FUEL_OLFLG_COM7"   #cmd
+sub  4e45 "FUEL_CL_LAMBSE_COM3"   #cmd
+sub  4f50 "C_MULTIPLIER_LOGIC"   #cmd
+sub  4fb4 "Sub_4fb4"   #cmd
+sub  4fbd "LAMBSE_RESET"   #cmd
+sub  4fd3 "ACT_to_ECT_proportioning_factor(R36)"   #cmd
+sub  4feb "FN1360(N,MAPPA)"   #cmd
+sub  500e "Sub_500e"   #cmd
+sub  501c "CALCULATE_PTPAMP_RF_and_RS"   #cmd
+sub  5131 "UYTabLU_5131"   $ F uytlu 38 34 #cmd
+sub  513f "FUEL_ADAPT_COM4"   #cmd
+sub  51ce "EGO_Switch_Logic"   #cmd
+sub  5369 "NEW_UPRATE_CALC"   #cmd
+sub  5402 "Sub_5402"   #cmd
+sub  577b "Sub_577b"   #cmd
+sub  578f "FUEL_IDLE_MOD_COM3"   #cmd
+sub  5830 "FUEL_KAM_ADAPT_COM3"   #cmd
+sub  58d5 "Sub_58d5"   #cmd
+sub  58ec "FUEL_TRANS_COM5"   #cmd
+sub  5a31 "FUEL_DFSO_COM2"   #cmd
+sub  5b96 "FUEL_AE_COM5"   #cmd
+sub  5c7b "FUEL_PUMP_COM1"   #cmd
+sub  5c90 "Sub_5c90"   #cmd
+sub  5ca7 "Sub_5ca7"   #cmd
+sub  5ca9 "Sub_5ca9"   #cmd
+sub  5cce "Sub_5cce"   #cmd
+sub  5cd1 "Sub_5cd1"   #cmd
+sub  5cff "Sub_5cff"   #cmd
+sub  5d03 "SPARK_BASE_COM2"   #cmd
+sub  5f0a "Include_in_SPK_NORM"   #cmd
+sub  5f12 "UYTabLU_5f12"   $ F uytlu 38 34 #cmd
+sub  5f20 "ENTRY_INTO_IDLE_SPARK"   #cmd
+sub  608b "Sub_608b"   #cmd
+sub  60f1 "DWLBSE-DWLCOR_CALCULATION"   #cmd
+sub  61d4 "Sub_61d4"   #cmd
+sub  62ed "Sub_62ed"   #cmd
+sub  62fc "Sub_62fc"   #cmd
+sub  630b "EGR_ENABLE_LH"   #cmd
+sub  6390 "Sub_6390"   #cmd
+sub  6422 "Sub_6422"   #cmd
+sub  64f7 "Sub_64f7"   #cmd
+sub  6552 "Update_EGR2?"   #cmd
+sub  6584 "ISC_OVERVIEW_COM3"   #cmd
+sub  6635 "DSDRPM_CALC"   #cmd
+sub  6840 "Sub_6840"   #cmd
+sub  6846 "Sub_6846"   #cmd
+sub  684a "Sub_684a"   #cmd
+sub  6853 "RPMERR_CALC"   #cmd
+sub  68ad "ISC_DASPOT_COM1"   #cmd
+sub  6986 "ISC_MODE_SELECT_COM1"   #cmd
+sub  6a3a "ISC_IPSIBR_COM1"   #cmd
+sub  6b8c "ISC_ISCDTY_COM1"   #cmd
+sub  6c18 "Manifold_VACUUM"   #cmd
+sub  6c27 "ISC_ISCKAM_COM1"   #cmd
+sub  6ca9 "Sub_6ca9"   #cmd
+sub  6cd7 "DOL_LH"   #cmd
+sub  6d5b "Sub_6d5b"   #cmd
+sub  6de0 "THERMACTOR_AIR_STRATEGY"   #cmd
+sub  6ee6 "CANP_COM4"   #cmd
+sub  6fb2 "Update_Can_Purge"   #cmd
+sub  7016 "Do_Self_Test"   #cmd
+sub  70d8 "Sub_70d8"   #cmd
+sub  70de "Sub_70de"   #cmd
+sub  70f5 "Sub_70f5"   #cmd
+sub  7104 "Sub_7104"   #cmd
+sub  710a "Sub_710a"   #cmd
+sub  7113 "StackErrorCodes"   #cmd
+sub  7177 "Sub_7177"   #cmd
+sub  7188 "Sub_7188"   #cmd
+sub  71a4 "Sub_71a4"   #cmd
+sub  71aa "Sub_71aa"   #cmd
+sub  71ad "Sub_71ad"   #cmd
+sub  71b6 "Sub_71b6"   #cmd
+sub  71c1 "Sub_71c1"   #cmd
+sub  71eb "Get_DiagCodes"   #cmd
+sub  7210 "Set_DiagCodes"   #cmd
+sub  7231 "EGR_SELECT_LOGIC"   #cmd
+sub  7245 "TRANS_SELECT_LOGIC"   #cmd
+sub  728a "Sub_728a"   #cmd
+sub  7340 "Check_Sensors"   #cmd
+sub  7394 "Sub_7394"   #cmd
+sub  7558 "EGOTST_TMR_CONTROL"   #cmd
+sub  766a "Sub_766a"   #cmd
+sub  7673 "Sub_7673"   #cmd
+sub  79a3 "Sub_79a3"   #cmd
+sub  7a91 "WARM_UP_COUNTER_LOGIC"   #cmd
+sub  7aaf "KAM_CODE_ERASE_LOGIC"   #cmd
+sub  7aec "Sub_7aec"   #cmd
+sub  7afe "?Fault_Filter_Routine?"   #cmd
+sub  7b00 "Sub_7b00"   #cmd
+sub  7b08 "Sub_7b08"   #cmd
+sub  7baf "Clear_KAM"   #cmd
+sub  7bb4 "Clear_Kam_SelfTest"   #cmd
+sub  7bc0 "Set_STO"   #cmd
+sub  7bc8 "Reset_STO"   #cmd
+sub  7bd2 "GetBytes_R1a"   #cmd
+sub  7beb "Sub_7beb"   #cmd
+sub  7c10 "Sub_7c10"   #cmd
+sub  7c22 "Sub_7c22"   #cmd
+sub  7c40 "EGO_TEST_TMR_CLEAR"   #cmd
+sub  7c62 "Calculate_ETV_OCM_MIN"   #cmd
+sub  7ca1 "VO_EOTS_COM1"   #cmd
+sub  7cb0 "FAIL_Loop"   #cmd
+sub  7ced "Sub_7ced"   #cmd
+sub  7cf9 "Sub_7cf9"   #cmd
+sub  7d04 "Sub_7d04"   #cmd
+sub  7d08 "Sub_7d08"   #cmd
+sub  7d0c "VO_ROM_COM1"   #cmd
+sub  7d3a "TEST_AD_SWITCHES_1"   #cmd
+sub  7d97 "EXIT_THIS_TEST"   #cmd
+sub  7d9e "TEST_AD_SWITCHES_2"   #cmd
+sub  7e35 "Sub_7e35"   #cmd
+sub  7e3d "Sub_7e3d"   #cmd
+sub  7e40 "Sub_7e40"   #cmd
+sub  7e7c "Sub_7e7c"   #cmd
+sub  7e86 "GET_ADDRESS"   #cmd
+sub  7ea1 "ThermactorAirTest"   #cmd
+sub  7ec3 "Sub_7ec3"   #cmd
+sub  7ed7 "Sub_7ed7"   #cmd
+sub  7f51 "VO_OCC_COM12_Func1"   #cmd
+sub  7f69 "VO_OCC_COM12_Func2"   #cmd
+sub  7f78 "VO_OCC_COM12_Func4"   #cmd
+sub  7f97 "Sub_7f97"   #cmd
+sub  7fb3 "Sub_7fb3"   #cmd
+sub  7fcc "Sub_7fcc"   #cmd
+sub  7fe5 "Sub_7fe5"   #cmd
+sub  7ffe "Sub_7ffe"   #cmd
+sub  8016 "Sub_8016"   #cmd
+sub  8032 "Sub_8032"   #cmd
+sub  8038 "Sub_8038"   #cmd
+sub  8057 "Sub_8057"   #cmd
+sub  8075 "Sub_8075"   #cmd
+sub  80c9 "SET_SERVICE_CODE"   #cmd
+sub  80cd "Sub_80cd"   #cmd
+sub  80dd "Sub_80dd"   #cmd
+sub  80fc "Sub_80fc"   #cmd
+sub  8102 "VR_RUN_INIT_COM8"   #cmd
+sub  810e "FMEM_FAULT_PRESENT_and_INITIALATION_LOGIC"   #cmd
+sub  8195 "Sub_8195"   #cmd
+sub  81a6 "Sub_81a6"   #cmd
+sub  81b8 "Sub_81b8"   #cmd
+sub  81fd "VR_EGO_COM1"   #cmd
+sub  821a "Sub_821a"   #cmd
+sub  822f "Sub_822f"   #cmd
+sub  824f "VR_THERMAIR_COM2"   #cmd
+sub  826a "AIR_UPSTREAM"   #cmd
+sub  827c "AIR_DOWNSTREAM"   #cmd
+sub  828f "BLOCK_F2_VR_THERMAIR_COM2"   #cmd
+sub  82a0 "AM1_AM2_OFF"   #cmd
+sub  82a9 "BLOCK_AA"   #cmd
+sub  82b5 "Sub_82b5"   #cmd
+sub  82ba "Sub_82ba"   #cmd
+sub  82f6 "Sub_82f6"   #cmd
+sub  82fb "DELAY_SEC"   #cmd
+sub  830c "Sub_830c"   #cmd
+sub  8318 "Sub_8318"   #cmd
+sub  8326 "Sub_8326"   #cmd
+sub  835a "Sub_835a"   #cmd
+sub  8369 "Sub_8369"   #cmd
+sub  8393 "Sub_8393"   #cmd
+sub  83c2 "Sub_83c2"   #cmd
+sub  8404 "EXIT"   #cmd
+sub  840b "Sub_840b"   #cmd
+sub  8418 "Sub_8418"   #cmd
+sub  8426 "Sub_8426"   #cmd
+sub  8453 "Sub_8453"   #cmd
+sub  846e "Sub_846e"   #cmd
+sub  8538 "Sub_8538"   #cmd
+sub  853d "Check_PS_PB"   #cmd
+sub  855f "VR_EGOBAR_COM1"   #cmd
+sub  8582 "Sub_8582"   #cmd
+sub  85a9 "Sub_85a9"   #cmd
+sub  85d1 "Sub_85d1"   #cmd
+sub  85e3 "Sub_85e3"   #cmd
+sub  8640 "HW_Check"   #cmd
+sub  873d "Disable_No_Start"   #cmd
+sub  8742 "POP_test"   #cmd
+sub  8755 "VO_KAMRAM_COM1"   #cmd
+sub  8794 "RAM_ERROR"   #cmd
+sub  8797 "Sub_8797"   #cmd
+sub  879a "Sub_879a"   #cmd
+sub  87ea "Sub_87ea"   #cmd
+sub  8802 "Sub_8802"   #cmd
+sub  882d "Sub_882d"   #cmd
+sub  88bf "Sub_88bf"   #cmd
+sub  88de "Sub_88de"   #cmd
+sub  890c "Sub_890c"   #cmd
+sub  8933 "INTRN_E4OD_SYS_EQU_COM1"   #cmd
+sub  8b19 "SPEED_RATIO_ACROSS_TORQUE_CONVERTER"   #cmd
+sub  8b2c "Sub_8b2c"   #cmd
+sub  8b71 "E4OD_INPUT_PROCESSING_COM1"   #cmd
+sub  8cc9 "FN161x(N,LOAD)"   #cmd
+sub  8cd6 "SC_DESRD_GR_DETR_COM1"   #cmd
+sub  8d5f "SC_GR_DS_AUTO_COM1"   #cmd
+sub  8d77 "VEHICLE_SPEED_SENSOR_OK_SHIFT_LOGIC"   #cmd
+sub  8e6a "VEHICLE_SPEED_SENSOR_FAILURE_SHIFT_LOGIC"   #cmd
+sub  8eb5 "Sub_8eb5"   #cmd
+sub  8ee6 "Sub_8ee6"   #cmd
+sub  8efe "Sub_8efe"   #cmd
+sub  8f28 "Delay_Shift_Logic"   #cmd
+sub  8f83 "MANUAL_DOWNSHIFT_DETERMINATION"   #cmd
+sub  8f94 "SC_CM_GR_DETR_COM1"   #cmd
+sub  901f "SC_CM_GR_MAN1_COM1"   #cmd
+sub  905e "SC_CM_GR_MAN2_COM1"   #cmd
+sub  9099 "SC_CM_GR_AUTO_DWN_COM1"   #cmd
+sub  90aa "Sub_90aa"   #cmd
+sub  912a "SC_SOL_CTL_COM1"   #cmd
+sub  91af "SC_VALID_COM1"   #cmd
+sub  9231 "SHIFT_VERIFICATION_LOGIC_(Part_1)"   #cmd
+sub  9278 "SHIFT_VERIFICATION_LOGIC_(Part_2)"   #cmd
+sub  9308 "CCC_CST_CLTCH_CTL_COM1"   #cmd
+sub  93b2 "Sub_93b2"   #cmd
+sub  96e1 "Sub_96e1"   #cmd
+sub  96e5 "Sub_96e5"   #cmd
+sub  97e9 "Sub_97e9"   #cmd
+sub  9820 "Sub_9820"   #cmd
+sub  98a7 "UUWFuncLU_98a7"   $ F uuwflu 32 #cmd
+sub  98ae "SUWFuncLU_98ae"   $ F suwflu 32 #cmd
+sub  9aa1 "Sub_9aa1"   #cmd
+sub  9b10 "Sub_9b10"   #cmd
+sub  9c21 "Sub_9c21"   #cmd
+sub  9c56 "Sub_9c56"   #cmd
+sub  9c85 "Sub_9c85"   #cmd
+sub  9cbe "CCC_FMEM_COM2"   #cmd
+sub  9cfb "Sub_9cfb"   #cmd
+sub  9e95 "Sub_9e95"   #cmd
+sub  9e9e "CCC_SHFT_UNLCK_COM1"   #cmd
+sub  9ece "CCC_INI_DWN_COM1"   #cmd
+sub  9ed9 "CCC_DWN_CNVR_CLCH_COM1"   #cmd
+sub  9f04 "CCC_INI_UP_COM1"   #cmd
+sub  9fc3 "Calc_SR_PP_LIM"   #cmd
+sub  9ff1 "CCC_UP_CNVR_CLCH_COM2"   #cmd
+sub  a097 "Sub_a097"   #cmd
+sub  a163 "Sub_a163"   #cmd
+sub  a206 "Sub_a206"   #cmd
+sub  a356 "Sub_a356"   #cmd
+sub  a376 "Sub_a376"   #cmd
+sub  a3b8 "Sub_a3b8"   #cmd
+sub  a3e1 "Sub_a3e1"   #cmd
+sub  a469 "Sub_a469"   #cmd
+sub  a767 "TIMER_LH"   #cmd
+sub  a99b "Sub_a99b"   #cmd
+sub  a9d6 "Check_ConsoleDI"   #cmd
+sub  a9d7 "Check_Console"   #cmd
+sub  aa02 "Console_Routine"   #cmd
+sub  ab2a "KAM_VALIDATION_PROCEDURE"   #cmd
+sub  ab92 "DataLoggingPatch"   #cmd
 
 
 # ------------ Symbol list ----
-sym 2  "CPU_OK" :B 6
 sym 2  "LSO_Port"
+sym 2  "CPU_OK" :B 6
 sym 3  "LIO_Port"
-sym 4  "AD_Cmd" : W
 sym 4  "AD_Low"
-sym 5  "WDG_Timer" : W
+sym 4  "AD_Cmd" : W
 sym 5  "AD_High"
+sym 5  "WDG_Timer" : W
 sym 6  "IO_Timer"
 sym 7  "IO_Timer_Hi"
 sym 8  "INT_Mask"
 sym 9  "INT_Pend"
+sym a  "IO_Status"
 sym a  "B0_HSO_OVF" :B 0
 sym a  "B1_HSI_OVF" :B 1
 sym a  "B2_HSI_Ready" :B 2
 sym a  "B3_AD_Ready" :B 3
 sym a  "B4_INT_Handling" :B 4
 sym a  "B5_INT_Priority" :B 5
-sym a  "IO_Status"
 sym b  "HSI_Sample"
 sym c  "HSI_Mask"
-sym d  "HSO_Cmd" : W
 sym d  "HSI_Data"
+sym d  "HSO_Cmd" : W
 sym e  "HSI_Time"
 sym 10  "StackPtr"
 sym 12  "Tmr_OVF_cnt"
@@ -1439,6 +1822,7 @@ sym 26  "RUNUP_FLG" :B 4
 sym 26  "PTSCR" :B 5
 sym 26  "DNDSUP" :B 6
 sym 26  "B7_HCAMFG_26" :B 7
+sym 27  "Flags_27"
 sym 27  "B0_FLG_OPEN_LOOP_R27" :B 0
 sym 27  "B1_DFSFLG_R27" :B 1
 sym 27  "B2_FPWQ2_Q_R27" :B 2
@@ -1447,7 +1831,6 @@ sym 27  "B4_DFSVS_HYS_FG_Q_R27" :B 4
 sym 27  "B5_R27" :B 5
 sym 27  "B6_R27_OpenLoop?" :B 6
 sym 27  "B7_SYNFLG" :B 7
-sym 27  "Flags_27"
 sym 28  "?B0_EGREN_28?" :B 0
 sym 28  "Newsa" :B 2
 sym 28  "B3_EFFLG1_28" :B 3
@@ -1468,6 +1851,7 @@ sym 2a  "DISABLE_NOSTART" :B 4
 sym 2a  "Self_test" :B 5
 sym 2a  "No_Start" :B 6
 sym 2a  "Disable_vscdt" :B 7
+sym 2b  "STO_Flags"
 sym 2b  "STO_HighSpeed" :B 0
 sym 2b  "STO_Lowspeed_r" :B 1
 sym 2b  "STO_Lowspeed" :B 2
@@ -1476,7 +1860,7 @@ sym 2b  "STO_fast" :B 4
 sym 2b  "STO_code" :B 5
 sym 2b  "STO_off" :B 6
 sym 2b  "STO_on" :B 7
-sym 2b  "STO_Flags"
+sym 2c  "Vip_flags_2c"
 sym 2c  "?Onedigit_out?" :B 0
 sym 2c  "Goose" :B 1
 sym 2c  "VIP_FP_OVERRIDE" :B 2
@@ -1484,8 +1868,8 @@ sym 2c  "Vip_knock" :B 3
 sym 2c  "Kam_codes" :B 4
 sym 2c  "Vegrbp" :B 6
 sym 2c  "Rmspru" :B 7
-sym 2c  "Vip_flags_2c"
 sym 2d  "VIP_KAM" :B 6
+sym 2e  "Flags_2e"
 sym 2e  "Idm_bypass" :B 0
 sym 2e  "Kflg_local" :B 1
 sym 2e  "Flags_bit2" :B 2
@@ -1494,7 +1878,7 @@ sym 2e  "WIGFLG" :B 4
 sym 2e  "RMSPRU?" :B 5
 sym 2e  "Egrfg2" :B 6
 sym 2e  "Egrfg1" :B 7
-sym 2e  "Flags_2e"
+sym 2f  "VIP_flags4"
 sym 2f  "B0_GOOSE" :B 0
 sym 2f  "B1_OneDigit_output?" :B 1
 sym 2f  "B2_VIP_flags4" :B 2
@@ -1503,7 +1887,6 @@ sym 2f  "B4_VRUN_ISCFLG_2f" :B 4
 sym 2f  "B5_DISABLE_ISC_2f" :B 5
 sym 2f  "B6_VIP_flags4" :B 6
 sym 2f  "B7_VIP_flags4" :B 7
-sym 2f  "VIP_flags4"
 sym 3c  "Free_run" :B 0
 sym 3c  "Word_tmr" :B 1
 sym 3c  "Decrement" :B 2
@@ -1521,6 +1904,7 @@ sym 44  "B3_FLIPFLOP_Q_44" :B 3
 sym 44  "V_SPDTOZ_FLG" :B 4
 sym 44  "B6_LIMIT_PURGE_44" :B 6
 sym 44  "B7_FLG_TIP_RATE_44" :B 7
+sym 45  "Flags_45"
 sym 45  "Rvip_cyl_quit" :B 0
 sym 45  "Rvip_cyl_bal" :B 1
 sym 45  "B2_LOWVOLTAGE_Q_45" :B 2
@@ -1528,19 +1912,18 @@ sym 45  "?B4_ATMR2_FLAG_45?" :B 4
 sym 45  "B5_FIRST_RPM_45" :B 5
 sym 45  "B6_ISC_LATCH_45" :B 6
 sym 45  "B7_REFLG_45" :B 7
-sym 45  "Flags_45"
 sym 46  "AM1" :B 0
 sym 46  "WOT_AC" :B 6
 sym 46  "PUMP" :B 7
+sym 47  "Flags_47"
 sym 47  "B0_Flags47" :B 0
 sym 47  "AM2" :B 6
-sym 47  "Flags_47"
+sym 48  "Flags_48"
 sym 48  "Rvip_cyl_quit" :B 0
 sym 48  "Rvip_cyl_bal" :B 1
 sym 48  "?Stiflg?" :B 2
 sym 48  "Disable_isc" :B 4
 sym 48  "?Sto_trigger?" :B 5
-sym 48  "Flags_48"
 sym 49  "DWLELD" :B 3
 sym 4a  "B1_TLS_34_FLG_4a" :B 1
 sym 4a  "B2_TLS_24_FLG_4a" :B 2
@@ -1560,6 +1943,7 @@ sym 4e  "B3_NEW_RPM_4e" :B 3
 sym 4e  "B4_NEW_IDM" :B 4
 sym 4e  "B6_NEW_BAP" :B 6
 sym 4e  "B7_NEW_PIP" :B 7
+sym 4f  "Flags_4f"
 sym 4f  "B0_?Immediate?" :B 0
 sym 4f  "B1_Bypass_time" :B 1
 sym 4f  "B2_Clkext_ovr" :B 2
@@ -1568,7 +1952,7 @@ sym 4f  "B4_No_service" :B 4
 sym 4f  "B5_Late_output" :B 5
 sym 4f  "B6_Knock_enabled" :B 6
 sym 4f  "B7_Knock_occurred" :B 7
-sym 4f  "Flags_4f"
+sym 50  "Flags_50"
 sym 50  "B0_Spout_pending" :B 0
 sym 50  "B1_Undsp_trans" :B 1
 sym 50  "B2_Douple_edge" :B 2
@@ -1577,16 +1961,15 @@ sym 50  "B4_First_pip" :B 4
 sym 50  "B5_Ctflg" :B 5
 sym 50  "B6_FUEL_FINISHED_50" :B 6
 sym 50  "B7_Tblsflg" :B 7
-sym 50  "Flags_50"
 sym 51  "B1_FLG_UN_UPSFT_51" :B 1
 sym 51  "B2_SIGPIP_51" :B 2
 sym 51  "B5_NEW_DELAY_51" :B 5
 sym 51  "B6_NO_SYNC_51" :B 6
+sym 52  "Flags_52"
 sym 52  "B2_DCLST_START_52" :B 2
 sym 52  "B4_LONG_ISF_UP_FLG_52" :B 4
 sym 52  "B5_ISF_UP_FLG_52" :B 5
 sym 52  "B4_LONG_MAP_AVG_52" :B 7
-sym 52  "Flags_52"
 sym 53  "B5_CART_MODE_53" :B 5
 sym 53  "B6_IDM_BYPASS_53" :B 6
 sym 58  "B7_TLOFLG_58" :B 7
@@ -1611,9 +1994,9 @@ sym 8a  "RATCH"
 sym 8d  "VSBAR"
 sym 8e  "B4_A3C_8e" :B 4
 sym 8f  "B0_POWSFG_8f" :B 0
+sym 90  "Flags_90"
 sym 90  "B3_V_FPMFLG_90" :B 3
 sym 90  "B4_BRAKE_INPUT_90" :B 4
-sym 90  "Flags_90"
 sym 91  "VBAT"
 sym 92  "ISCDTY"
 sym 94  "FUELPW1"
@@ -1621,33 +2004,34 @@ sym 96  "LAMBSE1"
 sym 98  "EFTR"
 sym 9a  "AM"
 sym 9d  "TIPRET"
+sym 9e  "Reg_9e"
 sym 9e  "Reg_9e" :B 0
 sym 9e  "Reg_9e" :B 1
 sym 9e  "Reg_9e" :B 2
 sym 9e  "Reg_9e" :B 3
 sym 9e  "?B4_EGREN_9e?" :B 4
-sym 9e  "Reg_9e"
+sym 9f  "Flags_9f"
 sym 9f  "SWTFL" :B 0
 sym 9f  "B2_OLFLG" :B 2
 sym 9f  "B3_FLG_LMAP_Q_9f" :B 3
 sym 9f  "B4_SignedOutput" :B 4
 sym 9f  "B5_SignedInput" :B 5
 sym 9f  "B6_NDSFLG_9f" :B 6
-sym 9f  "Flags_9f"
+sym a0  "Flags_a0"
 sym a0  "B1_V_LAMJMP_a0" :B 1
 sym a0  "B2_WRMEGO_a0" :B 2
 sym a0  "SIGNED_TBL_FLG" :B 4
 sym a0  "B6_MUPET_FLAG_a0" :B 6
-sym a0  "Flags_a0"
+sym a1  "Flags_a1"
 sym a1  "B0_MAPUP_NORM_a1" :B 0
 sym a1  "B7_SA10FG_a1" :B 7
-sym a1  "Flags_a1"
 sym a2  "B2_FLG_FRST_DS_a2" :B 2
 sym a2  "B3_FLG_LK_CM_a2" :B 3
 sym a2  "B4_FLG_TIP_OUT_a2" :B 4
 sym a2  "B5_FLG_CS_FRST_a2" :B 5
 sym a2  "B6_FLG_CS_ENG_a2" :B 6
 sym a2  "B7_FLG_CS_CM_a2" :B 7
+sym a3  "Flags_a3"
 sym a3  "B0_V_MODE_SETUP_a3" :B 0
 sym a3  "B1_STI_RESET_a3" :B 1
 sym a3  "B2_Flags_a3" :B 2
@@ -1656,12 +2040,12 @@ sym a3  "B4_Flags_a3" :B 4
 sym a3  "B5_Flags_a3" :B 5
 sym a3  "B6_NUMOUT_a3" :B 6
 sym a3  "B7_Flags_a3" :B 7
-sym a3  "Flags_a3"
 sym a4  "BRK_NEVER_OFF" :B 1
 sym a4  "B2_FLIPFLOP_Q_b2" :B 2
 sym a4  "BRK_NEVER_ON" :B 3
 sym a4  "MAPOFL" :B 4
 sym a4  "TAQ1" :B 5
+sym a5  "Flags_a5"
 sym a5  "Adptmr_on" :B 0
 sym a5  "BG_TMR_DISABLE" :B 1
 sym a5  "B2_APT_a5" :B 2
@@ -1670,7 +2054,7 @@ sym a5  "B4_FLG_STALL_a5" :B 4
 sym a5  "B5_STALL_a5" :B 5
 sym a5  "UNDSP" :B 6
 sym a5  "CRKFLG" :B 7
-sym a5  "Flags_a5"
+sym a6  "FMEM_FLAGS"
 sym a6  "B0_ETV_ERROR_a6" :B 0
 sym a6  "B1__a6" :B 1
 sym a6  "B2_TFMFLG_a6" :B 2
@@ -1679,12 +2063,11 @@ sym a6  "B4_EFMFLG_a6" :B 4
 sym a6  "B5_CFMFLG_a6" :B 5
 sym a6  "B6_VSFMFLG_a6" :B 6
 sym a6  "B7_AFMFLG_a6" :B 7
-sym a6  "FMEM_FLAGS"
-sym a7  "B0_V_VACFLG_a7" :B 0
 sym a7  "FMEM_FLAG2"
+sym a7  "B0_V_VACFLG_a7" :B 0
+sym a8  "?APT?_a8"
 sym a8  "APT_WOT" :B 0
 sym a8  "APT_Closed_Throttle" :B 7
-sym a8  "?APT?_a8"
 sym a9  "MAPPA"
 sym aa  "XFRAME"
 sym ac  "VIP_code"
@@ -1715,21 +2098,21 @@ sym d8  "GR_DS"
 sym d9  "GR_CM"
 sym da  "GEAR_CUR"
 sym db  "PDL"
+sym dd  "FLG_dd"
 sym dd  "B0_FLG_SFT_UNLK_dd" :B 0
 sym dd  "B2_FLG_HS_UNLK_dd" :B 2
 sym dd  "B3_FLG_HS_LK_dd" :B 3
 sym dd  "B6_FLG_UP_UNLK_dd" :B 6
-sym dd  "FLG_dd"
 sym de  "B1_FLG_FRST_CM_de" :B 1
 sym de  "B2_FLG_UNC_UNLK_de" :B 2
 sym df  "B3_FLG_UP_NE_df" :B 3
 sym df  "B5_FLG_SF_AUTO_df" :B 5
 sym df  "B6_FLG_PWR_df" :B 6
 sym df  "B7_FLG_SFT_IN_df" :B 7
+sym e1  "CCD?"
 sym e1  "B0_FLG_SFT_VAL_e1" :B 0
 sym e1  "B1_CCV_STRT_SFT_e1" :B 1
 sym e1  "B2_CCD_HP" :B 2
-sym e1  "CCD?"
 sym 100  "TPBAR"
 sym 104  "EGRBAR"
 sym 106  "EGOBAR"
@@ -1832,16 +2215,7 @@ sym 23a  "ATMR1_LST"
 sym 23b  "VSCTR"
 sym 23c  "TSLIDM"
 sym 240  "HSOQ"
-sym 242  "SvStack"
-sym 244  "Q0"
-sym 250  "Q1"
-sym 25c  "Q2"
-sym 262  "Q4"
-sym 268  "Q7"
-sym 26e  "Q5"
-sym 274  "Q3"
-sym 27a  "Q6"
-sym 280  "Q8"
+sym 288  "DOL_DUTY"
 sym 28c  "DT23S"
 sym 28e  "PHFDLT"
 sym 2b8  "Xram1L"
@@ -1984,6 +2358,7 @@ sym 447  "V_PRG_DLYTMR"
 sym 448  "V_LESTMR"
 sym 449  "V_EGR_DLYTMR"
 sym 509  "XDCL_BAUD"
+sym 50e  "BITMAP_0"
 sym 50e  "B0_BITMAP_0" :B 0
 sym 50e  "B1_BITMAP_0" :B 1
 sym 50e  "B2_BITMAP_0" :B 2
@@ -1992,7 +2367,7 @@ sym 50e  "B4_BITMAP_0" :B 4
 sym 50e  "B5_BITMAP_0" :B 5
 sym 50e  "B6_BITMAP_0" :B 6
 sym 50e  "B7_BITMAP_0" :B 7
-sym 50e  "BITMAP_0"
+sym 510  "BITMAP_1"
 sym 510  "B0_BITMAP_1" :B 0
 sym 510  "B1_BITMAP_1" :B 1
 sym 510  "B2_BITMAP_1" :B 2
@@ -2001,7 +2376,6 @@ sym 510  "B4_BITMAP_1" :B 4
 sym 510  "B5_BITMAP_1" :B 5
 sym 510  "B6_BITMAP_1" :B 6
 sym 510  "B7_BITMAP_1" :B 7
-sym 510  "BITMAP_1"
 sym 51a  "UART_MSG_51a"
 sym 51b  "CMD_CODE_51b"
 sym 51c  "BYTE_8"
@@ -2010,6 +2384,7 @@ sym 51e  "BYTE_10"
 sym 51f  "SBDS_CHKSUM_51f"
 sym 520  "BYTE_NUM"
 sym 521  "EEC_CHKSUM"
+sym 532  "DCL_XDCL_ERROR_532"
 sym 532  "B0_ReadBytes_lowParity" :B 0
 sym 532  "B1_ReadBytes_highBadValue" :B 1
 sym 532  "B2_ReadBytes_DataChecksumParity" :B 2
@@ -2018,7 +2393,6 @@ sym 532  "B4_Read_AD_Values_ParityError" :B 4
 sym 532  "B5_Read_PID_Map_ParityError" :B 5
 sym 532  "B6_Read_DMR_Offset_ParityError" :B 6
 sym 532  "B7_NOT_USED" :B 7
-sym 532  "DCL_XDCL_ERROR_532"
 sym 533  "B8_NOT_USED" :B 0
 sym 533  "B9_NOT_USED" :B 1
 sym 533  "B10_ReadExecuteVector_ParityError" :B 2
@@ -2045,10 +2419,10 @@ sym 710  "ISCKAM3"
 sym 712  "ISCKAM4"
 sym 714  "ISCKAM5"
 sym 718  "KAMQB"
+sym 71c  "CXXX_KAM_BIT"
 sym 71c  "B5_C617_KAM_BIT_71c" :B 5
 sym 71c  "B6_C618_KAM_BIT_71c" :B 6
 sym 71c  "B7_C619_KAM_BIT_71c" :B 7
-sym 71c  "CXXX_KAM_BIT"
 sym 73c  "C617CNT"
 sym 73d  "C618CNT"
 sym 73e  "C619CNT"
@@ -2058,9 +2432,9 @@ sym 74a  "LTMTBLrc"
 sym 74c  "KAM_CHKSUM"
 sym 901  "UART_tx_buff_901"
 sym 903  "UART_rx_buff_903"
+sym 928  "CART_Status_928"
 sym 928  "B0_CART_Status" :B 0
 sym 928  "B5_CART_Status" :B 5
-sym 928  "CART_Status_928"
 sym c80  "ConsoleMode" :B 6
 sym 2004  "FIXSUM"
 sym 22c8  "HSO_Table"
@@ -2077,6 +2451,7 @@ sym 6dad  "Sub_6dad"                  # auto
 sym 6dc6  "Sub_6dc6"                  # auto
 sym 7d34  "CheckSumBase"
 sym 7d36  "CheckSumEnd"
+sym b003  "HSI_Line_Select"
 sym b003  "bit0HSI_Line_Select" :B 0
 sym b003  "bit1HSI_Line_Select" :B 1
 sym b003  "bit2HSI_Line_Select" :B 2
@@ -2085,7 +2460,6 @@ sym b003  "bit4HSI_Line_Select" :B 4
 sym b003  "bit5HSI_Line_Select" :B 5
 sym b003  "bit6HSI_Line_Select" :B 6
 sym b003  "bit7HSI_Line_Select" :B 7
-sym b003  "HSI_Line_Select"
 sym b005  "LOWVOL"
 sym b006  "VOLHYS"
 sym b007  "VOLTCLP"
@@ -2235,6 +2609,7 @@ sym b49a  "NLMT"
 sym b49c  "NLMTH"
 sym b49e  "speed_limiter1"
 sym b49f  "speed_limiter1_hysteresis"
+sym b4a1  "T75LSW"
 sym b4a4  "OLITD1"
 sym b4aa  "LESTM"
 sym b4ac  "WOTRPL"
@@ -2305,16 +2680,21 @@ sym b92c  "fuel_ve_multiplier"
 sym b934  "fuel_tp_pt"
 sym b936  "fuel_tp_wot"
 sym b940  "TKYON2"
+sym b946  "PRG_DEC"
+sym b94a  "EVTDOT"
+sym b94c  "PURGSW"
 sym b94d  "FULPRGTM"
 sym b94e  "FMMISC"
 sym b950  "ACTFMM"
 sym b951  "ECTFMM"
 sym b952  "FMECNT"
 sym b953  "MAPFMM"
+sym b955  "BYPWOT"
 sym b95e  "CTBYS"
 sym b95f  "CTBYSH"
 sym b962  "HMUMAP"
 sym b963  "HMUMPH"
+sym b966  "SW_MPD"
 sym b972  "SMTPDL"
 sym b975  "FN305"
 sym b97f  "FN326"
@@ -2388,7 +2768,7 @@ sym bbc4  "SPKLIM"
 sym bbc7  "KNKCYL"
 sym bbc9  "FN821A"
 sym bbd3  "FN004"
-sym bbde  "Func_bbde"
+sym bbde  "FN603"
 sym bbf6  "FN091"
 sym bc1a  "FN092"
 sym bc36  "FN093"

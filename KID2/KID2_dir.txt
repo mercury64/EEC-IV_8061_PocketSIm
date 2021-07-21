@@ -986,7 +986,7 @@ byte    bbc7 bbc7
 byte    bbc8 bbc8
 func    bbc9 bbd2  "FN821A"   : UY  : UY 
 func    bbd3 bbdc  "FN004"   : UY  : UY 
-func    bbde bbf5  "Func_bbde"   : SW  : UW 
+func    bbde bbf5  "FN603"   : SW  : UW 
 func    bbf6 bc19  "FN091"   : SW  : UW 
 func    bc1a bc35  "FN092"   : UW  : UW 
 func    bc36 bc51  "FN093"   : UW  : UW 
@@ -1580,10 +1580,10 @@ sub  86b8c "ISC_ISCDTY_COM1"
 sub  86c18 "Manifold_VACUUM"  
 sub  86c27 "ISC_ISCKAM_COM1"
 sub  86ca9 "Sub_6ca9"  
-sub  86cd7 "Sub_6cd7"  
+sub  86cd7 "DOL_LH"  
 sub  86d5b "Sub_6d5b"  
 sub  86de0 "THERMACTOR_AIR_STRATEGY"  
-sub  86ee6 "Sub_6ee6"  
+sub  86ee6 "CANP_COM4"  
 sub  86fb2 "Update_Can_Purge"  
 sub  87016 "Do_Self_Test"  
 sub  870d8 "Sub_70d8"  
@@ -2356,17 +2356,18 @@ sym 23b "VSCTR"
 sym 23c "TSLIDM"
 
 sym 240 "HSOQ"   # HSO queue entries 
-sym 242 "SvStack"
-sym 244 "Q0"
-sym 250 "Q1"
-sym 25c "Q2"
-sym 274 "Q3"
-sym 262 "Q4"
-sym 26e "Q5"
-sym 27a "Q6"
-sym 268 "Q7"
-sym 280 "Q8"
+#sym 242 "SvStack"
+#sym 244 "Q0"
+#sym 250 "Q1"
+#sym 25c "Q2"
+#sym 274 "Q3"
+#sym 262 "Q4"
+#sym 26e "Q5"
+#sym 27a "Q6"
+#sym 268 "Q7"
+#sym 280 "Q8"
 
+sym 288 "DOL_DUTY"
 sym 28c "DT23S"
 sym 28e "PHFDLT"
 
@@ -2824,6 +2825,8 @@ sym b49a "NLMT"
 sym b49c "NLMTH"
 sym b49e "speed_limiter1"
 sym b49f "speed_limiter1_hysteresis"
+
+sym b4a1 "T75LSW"
 sym b4a4 "OLITD1"
 
 sym b4aa "LESTM"
@@ -2882,7 +2885,9 @@ sym b934 "fuel_tp_pt"
 sym b936 "fuel_tp_wot"
 
 sym b940 "TKYON2"
-
+sym b946 "PRG_DEC"
+sym b94a "EVTDOT"
+sym b94c "PURGSW"
 sym b94d "FULPRGTM"
 sym b94e "FMMISC"
 
@@ -2890,12 +2895,13 @@ sym b950 "ACTFMM"
 sym b951 "ECTFMM"
 sym b952 "FMECNT"
 sym b953 "MAPFMM"
+sym b955 "BYPWOT"
 sym b95e "CTBYS"
 sym b95f "CTBYSH"
 
 sym b962 "HMUMAP"
 sym b963 "HMUMPH"
-
+sym b966 "SW_MPD"
 sym b972 "SMTPDL"
 
 
