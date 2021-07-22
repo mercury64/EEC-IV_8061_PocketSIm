@@ -269,8 +269,52 @@
 
 343a # 0 = Thick Film Ignition (TFI)
 
+3505 # IBETA = TOTAL_DELAY - INJCNT
+3508 # IBETA < 0
+350d # IBETA >= 1.0
+350f # IBETA = IBETA - 1
+3512 # INJCNT = INJCNT + 1
+3515 # INJ_PIP_CNT = INJ_PIP_CNT + 1
+3526 # SYNCH_VALUE = (2 * ENGCYL) - INJCNT
+352f # SYNCH_VALUE = 2 * ENGCYL
+3531 # SYNCH_VALUE = 0
+3531 \n\nDo: "FUEL FIRING PIP"
+3533 # (PIP in synch) 
+3539 # (proper PIP for fuel firing)
+353b # (signature PIP must contain bank A)
+3543 # (PIP is synched with fuel)
+3548 # (PIP is synched but fuel is on wrong bank)
+354b # Decrement INJ_PIP_CNT
+354d # EXIT "FUEL SERVICE" routine
+354f #  (no fuel to be output this PIP)
+
+354f \nFOREGROUND FUEL DETERMINATION
+
+357d \n\nMINIMUM PULSEWIDTH CLIP
+357f # (not in VIP)
+
+3582 # (not in DFSO)
+3589 # FUELPW < MINPW (less than minimum pulse)
+358f # R54 * FREQ18
+3593 # (convert to clock ticks)
+
+35a1 # (run mode) 
+35a4 # (fuel not synched)
+35a7 # Decrement INJ_PIP_CNT (walk injector bank B back 1 PIP at a time)
+35ac # INJ_PIP_CNT <= 0
+35b7 # (simultaneous injections)
+35ba # (always start with bank A)
+35bd # (request new IBETA)
+
+35bd \n\nFUEL_REPEAT
+
+360c # (injection A occurred)
+3615 # (injection B occurred)
+3641 # EXIT "FUEL SERVICE" routine
+
 398a # (clear MAP overflow flag)
 398d # (in crank)
+
 39b2 # (PIP period accumulator)
 
 39c0 # (increment PIP period counter)

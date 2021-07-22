@@ -1861,7 +1861,7 @@ sym 2a "B1_WOT_EGR_FLG_2a" :B 1
 sym 2a "VIP_ENABLE" :B 2
 sym 2a "DISABLE_RUNNING" :B 3
 sym 2a "DISABLE_NOSTART" :B 4
-sym 2a "Self_test" :B 5
+sym 2a "?RUNNING?" :B 5
 sym 2a "No_Start" :B 6
 sym 2a "Disable_vscdt" :B 7
 
@@ -2024,6 +2024,7 @@ sym 51 "B3_CTFLG_51" : B 3
 sym 51 "B4_TIPFLG_51" : B 4
 sym 51 "B5_NEW_DELAY_51" : B 5
 sym 51 "B6_NO_SYNC_51" : B 6
+sym 51 "B7_FUEL_SYNC_51" : B 7
 
 sym 52 "Flags_52"
 sym 52 "B2_DCLST_START_52" : B 2
@@ -2053,6 +2054,7 @@ sym 7a "Prev_PIP_time"
 sym 7c "Prev_PIP_timeH"
 sym 7d "EM"
 
+sym 82 "INJ_PIP_CNT"
 sym 83 "HSI_State"
 sym 84 "Reftime"
 sym 86 "ReftimeH"
@@ -2123,10 +2125,10 @@ sym a3 "B0_V_MODE_SETUP_a3" : B 0
 sym a3 "B1_STI_RESET_a3" : B 1
 sym a3 "B2_Flags_a3" : B 2
 sym a3 "B3_FLIPFLOP_Q_a3" : B 3
-sym a3 "B4_Flags_a3" : B 4
-sym a3 "B5_Flags_a3" : B 5
+sym a3 "B4_FFULFG_a3" : B 4
+sym a3 "B5_PIPOUT_a3" : B 5
 sym a3 "B6_NUMOUT_a3" : B 6
-sym a3 "B7_Flags_a3" : B 7
+sym a3 "B7_OUTINJ_a3" : B 7
 
 sym a4 "BRK_NEVER_OFF" : B 1
 sym a4 "B2_FLIPFLOP_Q_a4" : B2
@@ -2291,6 +2293,7 @@ sym 16a "ACCUM"
 sym 16c "AEPW"
 sym 16e "AMPEM"
 
+sym 170 "BGFUEL"
 sym 176 "KAMRF1"
 sym 17b "AEPP"
 sym 17c "PPCTR"
@@ -2302,8 +2305,9 @@ sym 181 "CRKPIP_CTR_BG"
 
 sym 184 "OCCSAV"
 
-sym 192 "Ibeta1"
-
+sym 192 "IBETA"
+sym 193 "INJCNT"
+sym 194 "TOTAL_DELAY"
 sym 195 "FMECTR"
 sym 196 "A3CTMR"
 sym 198 "KTS_timing"
@@ -2488,7 +2492,8 @@ sym 37b "TM_CS_ENG"
 
 #sym 386 "CTTMR"
 sym 386 "ATMR3"
-
+sym 388 "FFULC"
+sym 38a "FFULM"
 sym 38c "RANNUM"
 sym 38e "SAFTOT"
 
@@ -2843,6 +2848,8 @@ sym b482 "MPG_CL_SW"
 sym b483 "EGO_IDLE"
 sym b484 "LAMMAX"
 sym b486 "LAMMIN"
+sym b488 "MINPW"
+sym b48b "CRKPIP"
 sym b48c "CRKCTR_RESET"
 
 sym b49a "NLMT"
