@@ -435,7 +435,8 @@ args    95ba 95bd : UW N  : UW N
 args    964e 9651 : E 2 f0 N  : UW N 
 args    9663 9666 : E 2 f0 N  : UW N 
 args    966d 9670 : E 2 f0 N  : UW N 
-word    96ee 96ef
+
+word    96ee 96f9
 
 code    96fa 9c42
 args    96fd 9700 : E 2 f0 N  : UW N 
@@ -1201,10 +1202,13 @@ func    c25e c279  "Func_c25e"   : UW  : UW
 func    c27a c285  "FN615"   : UY  : UY 
 func    c286 c29d  "FN690"   : SW  : SW 
 func    c2b2 c2c5  "trans_shift_12"   : UY  : UY 
+func    c2c6 c2d9  "Func_c2c6"   : UY  : UY 
 func    c2da c309  "Func_c2da"   : UW  : UW 
 func    c30a c31d  "trans_shift_23"   : UY  : UY 
+func	c31e c331  "Func_c31e"   : UY  : UY 
 func    c332 c361  "Func_c332"   : UW  : UW 
 func    c362 c375  "trans_shift_34"   : UY  : UY 
+func    c376 c389  "Func_c376"   : UW  : UW
 func    c38a c39d  "trans_shift_21"   : UY  : UY 
 func    c3b2 c3c5  "trans_shift_32"   : UY  : UY 
 func    c3da c3ed  "trans_shift_43"   : UY  : UY 
@@ -1234,6 +1238,11 @@ func    c5d6 c5e9  "trans_tv_pressure_23"   : UY  : UY
 
 func    c5ea c5f1  "trans_tv_pressure_43" : UY : UY
 func    c5f2 c605  "trans_tv_pressure_34"   : UY  : UY 
+
+func c606 c621 "Func_c606"  : UW : UW
+func c622 c63d "Func_c622"  : UW : UW
+func c63e c659 "Func_c63e"  : UW : UW
+func c65a c689 "Func_c65a"  : UY : UY
 
 
 func    c77a c785  "Func_c77a"   : UY  : UY 
@@ -1739,20 +1748,20 @@ sub  891af "SC_VALID_COM1"
 sub  9231 "SHIFT_VERIFICATION_LOGIC_(Part_1)"
 sub  9278 "SHIFT_VERIFICATION_LOGIC_(Part_2)"
 sub  89308   "CCC_CST_CLTCH_CTL_COM1"  
-sub  893b2   "Sub_93b2"  
+sub  893b2   "EPC_GUIDE_COM1"  
 sub  896e1   "Sub_96e1"  
 sub  896e5   "Sub_96e5"  
 sub  897e9   "Sub_97e9"  
 sub  89820   "Sub_9820"  
 sub  898a7   "UUWFuncLU_98a7"  
 sub  898ae   "SUWFuncLU_98ae"  
-sub  89aa1   "Sub_9aa1"  
-sub  89b10   "Sub_9b10"  
+sub  89aa1   "EPC_TQ_IALPHA_COM4"  
+sub  89b10   "EPC_DYNAMIC_COM1"  
 sub  89c21   "Sub_9c21"  
 sub  89c56   "Sub_9c56"  
-sub  89c85   "Sub_9c85"  
+sub  89c85   "CCC_COM1"  
 sub  89cbe   "CCC_FMEM_COM2"  
-sub  89cfb   "Sub_9cfb"  
+sub  89cfb   "CCC_UNCOND_UNLCK_COM1"  
 sub  89e95   "Sub_9e95"  
 sub  89e9e   "CCC_SHFT_UNLCK_COM1"  
 sub  89ece   "CCC_INI_DWN_COM1"  
@@ -1760,8 +1769,8 @@ sub  89ed9   "CCC_DWN_CNVR_CLCH_COM1"
 sub  89f04   "CCC_INI_UP_COM1"  
 sub  89fc3   "Calc_SR_PP_LIM"  
 sub  89ff1   "CCC_UP_CNVR_CLCH_COM2"  
-sub  8a097   "Sub_a097"  
-sub  8a163   "Sub_a163"  
+sub  8a097   "CCC_SCHLD_LCK_UNLCK_COM1"  
+sub  8a163   "CCC_WOT_LCK_UP_COM1"  
 sub  8a206   "Sub_a206"  
 sub  8a356   "Sub_a356"  
 sub  8a376   "Sub_a376"  
@@ -2185,6 +2194,7 @@ sym b9 "TCSTRT"
 sym ba "MAP"
 sym bb "BP"
 sym bc "TP_REL"
+sym bd "TP_REL_H"
 sym be "EVP"
 
 sym c0 "EGRDC"
@@ -2196,6 +2206,8 @@ sym cf "SYNCTR"
 
 
 # sym cc "?SAFTOT?"
+
+sym d0 "B6_FLG_ENG_IN_d0" : B 6
 
 sym d1 "IDLTMR"
 sym d2 "NACTMR"
@@ -2215,17 +2227,25 @@ sym db "PDL"
 
 sym dd "FLG_dd"
 sym dd "B0_FLG_SFT_UNLK_dd" : B 0
+sym dd "B1_FLG_WOT_LK_dd" : B 1
 sym dd "B2_FLG_HS_UNLK_dd" : B 2
 sym dd "B3_FLG_HS_LK_dd" : B 3
 sym dd "B6_FLG_UP_UNLK_dd" : B 6
 
+sym de "B0_FLG_RLK_WOT_de" : B 0
 sym de "B1_FLG_FRST_CM_de" : B 1
 sym de "B2_FLG_UNC_UNLK_de" : B 2
+sym de "B7_FLG_CRV_LK_de" : B 7
+
 
 sym df "B3_FLG_UP_NE_df" : B 3
+sym df "B4_FLG_SFT_MDN_df" : B 4
 sym df "B5_FLG_SF_AUTO_df" : B 5
 sym df "B6_FLG_PWR_df" : B 6
 sym df "B7_FLG_SFT_IN_df" : B 7
+
+sym e0 "B2_FLG_FRST_TV_e0" : B 2
+sym e0 "B4_FLG_ENG_TV_e0" : B 4
 
 sym e1 "CCD?"
 sym e1 "B0_FLG_SFT_VAL_e1" : B0
@@ -2319,7 +2339,7 @@ sym 1ba "EGO_CNT_IDLE"
 sym 1bc "TSSTIL_TMR"
 sym 1be "Miltmr"
 
-sym 1c1 "Vip_timer_ex"
+sym 1c1 "VIP_TIMER_EX"
 sym 1cc "V_LEGOTMR"
 
 sym 1d0 "SparkAdvance"
@@ -2429,6 +2449,7 @@ sym 2ee "DTPCYC"
 
 sym 2f0 "HFPCYC"
 sym 2f3 "VOLTMR"
+sym 2ff "EPC_TQ_CONV"
 
 sym 308 "RT_ULK_PWR"
 sym 30a "RT_LK_PWR"
@@ -2450,6 +2471,11 @@ sym 32c "TPBART"
 sym 32e "TP_RATE"
 
 sym 330 "TQ_OFM"
+sym 334 "NE_STRT_SFT"
+sym 336 "TR_STRT_SFT"
+sym 338 "TQ_IALPHA"
+
+sym 33a "TQ_STAT_CAP"
 sym 33c "ARCHG"
 sym 33e "LOAD"
 
@@ -2474,6 +2500,7 @@ sym 353 "VSV_STRT_SFT"
 sym 357 "VSBART_RT"
 sym 359 "PDL_LST"
 sym 35b "TV_PRES"
+sym 35c "TV_STAT"
 sym 35e "TQ_NET"
 sym 35f "SPK_DELTA"
 
@@ -2485,10 +2512,12 @@ sym 368 "TM_SFT_CCO"
 sym 36c "TM_SFT_IN"
 sym 36e "TM_DEL_SFT"
 
+sym 374 "TSFETMR"
 sym 376 "CYCCTR"
 
 sym 37a "TM_CS_DLY"
 sym 37b "TM_CS_ENG"
+sym 37e "TP_STRT_SFT"
 
 #sym 386 "CTTMR"
 sym 386 "ATMR3"
@@ -3053,6 +3082,7 @@ sym c159 "ETV_GAIN_BAT"
 sym c15a "VTABFL"
 sym c15b "VTCEGO"
 sym c15c "TV_SLT_TM"
+sym c15e "TVFMMN"
 
 sym c160 "TCMAPW"
 sym c162 "TCNE"
@@ -3071,6 +3101,7 @@ sym c188 "NE23S"
 sym c18a "NS34A"
 sym c18c "NS34S"
 
+sym c190 "CS_PDL_4"
 sym c191 "TMCSE2"
 sym c192 "TMCSE3"
 sym c193 "TMCSOD"
@@ -3117,8 +3148,8 @@ sym cb70 "AETAR"
 sym cb72 "NCNT"
 sym cb74 "UNRPM"
 sym cb76 "UNRPMH"
-sym cb78 "1200_RPM"
-sym cb7a "400_RPM"
+sym cb78 "NRUN"
+sym cb7a "NSTALL"
 
 sym cb7c "CRKTM1"
 sym cb7d "CRKPIPCNT2"
@@ -3177,6 +3208,9 @@ sym cbd8 "ECTMIN"
 sym cbda "ECTMAX"
 sym cbdc "V_HICKOKTM"
 sym cbde "V_LANSDTM"
+
+sym cbfc "ISLBND"
+sym cbfe "ISUBND"
 
 sym cc06 "VTCDSN"
 sym cc09 "V_BOO_SPD"

@@ -1356,6 +1356,9 @@
 8142 # 118,-40 deg. ind. ECT-sensor ckt. open.
 8149 # 122,TPS ckt. below minimum voltage.
 8150 # 123,TPS ckt. above max. voltage.
+
+81b3 # |DSDRPM - NBAR|
+
 81d8 # 126,MAP/BP out of S-T range.
 
 822f # (RICH) ? 
@@ -1524,7 +1527,7 @@
 9350 # coast clutch will be engaged when timer expires)
 9354 # (set first pass flag)
 
-9357 \n# COAST CLUTCH OUTPUT CONTROL
+9357 \n\n# COAST CLUTCH OUTPUT CONTROL
 935d # (verifing a 3-4 upshift, de-energize Coast clutch)
 
 937a # GR_CM <> 4
@@ -1533,13 +1536,56 @@
 9381 # (de-energize coast clutch output. 
 9381 \w# Coast clutch is off hydraulically
 9381 \w# in 4th. Coast clutch is on       
-9381 \w# hydraulically when PDL = 2 or 1) 
+9381 \w# hydraulically when PDL = 2 or 1)
+ 
+9389 \n\nINFER COAST CLUTCH ENGAGEMENT
 
 938f # (coast clutch is hydraulically off)
 939a # (timer expired)
 93a2 # (power on)
 
+952a \n\nDetermine Transmission Overtemperature FMEM action:
+
+9550 \n\nClip TV_PRES as necessary:
+9556 # TV_PRES = 127.5 (Maximum)
+
+9584 # Clip TV_PRES to TVFMMN as a minimum
+
 96ae # Do "ETV Current Monitor Test"
+
+98b5 \nSTRATEGY MODULE: EPC_NORM_COM7
+98bf # (start of shift)
+98c6 # NE_STRT_SFT = NEBART
+98ca # TR_STRT_SFT = FN617(SPD_RATIO)
+98ce # TP_STRT_SFT = TP_REL
+
+98d2 \n\n Now calculate the minimum static capacity.
+98db # (shift in progress, use IALPHA term)
+98de # (TQ_NET + TQ_IALPHA)
+
+98f9 # (shift done, use steady torque requirement)    
+
+9903 \n\n Calculate steady state pressure for current gear.
+
+990a \n DO "NON-SHIFTING STATIC TV CALCULATION"
+
+99bd \n\n Select larger of TV_STAT and EPC_TQ_CONV.
+
+99cb \n\n Calculate pressure for shift using shifting slopes and Dynamic TV.
+
+9a2b \n\n Select proper value for TV_PRES.
+
+9add # [1 - (RT_GR_CUR/RT_GR_OLD)]
+
+9c92 # SW_MLK = 1
+9c96 # (Development unconditional lock-up)
+9c99 # (Unconditional unlock) 
+9c9c # (Shift control unlock)
+9c9f # (WOT lockup)
+9ca2 # (Scheduled curve lock-up)
+9ca5 # (FMEM lock-up)
+9ca8 # (Lock converter clutch)
+9cb4 # (Unlock converter clutch)
 
 9cbe # (Failure Mode Lock Requested)  
 9cc1 # (Unconditional Unlock Requested)
