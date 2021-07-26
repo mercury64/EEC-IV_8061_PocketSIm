@@ -930,11 +930,11 @@ word    bab2 bac1
 byte    bac2 bae5
 func    bae6 baf5  "FN500"   : UW  : UW 
 func    baf6 bafd  "FN501"   : UY  : UY 
-func    bafe bb0d  "x_spark_knock"   : SY  : UY 
-func    bb0e bb1d  "y_ect_fuel"   : SY  : UY 
+func    bafe bb0d  "FN051"   : SY  : UY 
+func    bb0e bb1d  "FN052"   : SY  : UY 
 func    bb1e bb3d  "FN182"   : SW  : SW 
 func    bb3e bb47  "FN183"   : UY  : UY 
-table   bb48 bb6b  "spark_ect_vs_act_multiplier"   : O 6 SY 
+table   bb48 bb6b  "FN1150"   : O 6 SY 
 func    bb6c bb79  "FN730"   : UY  : SY 
 word    bb7a bb7b  
 byte    bb7c bb7c
@@ -993,13 +993,13 @@ func    bc1a bc35  "FN092"   : UW  : UW
 func    bc36 bc51  "FN093"   : UW  : UW 
 func    bc52 bc6d  "FN153"   : UW  : SW 
 func    bc6e bc79  "FN180": UY  : UY 
-table   bc7a bcc9  "spark_table_base"   : O 10 UY 
-table   bcca bd19  "spark_adder_egr"   : O 10 UY 
-table   bd1a bd69  "spark_reduction_for_octane"   : O 10 UY 
-table   bd6a bdb9  "spark_table_base_mpg"   : O 10 UY 
-table   bdba be09  "spark_adder_temp_and_tip"   : O 10 UY 
+table   bc7a bcc9  "FN1120"   : O 10 UY 
+table   bcca bd19  "FN1121"   : O 10 UY 
+table   bd1a bd69  "FN1122"   : O 10 UY 
+table   bd6a bdb9  "FN1126"   : O 10 UY 
+table   bdba be09  "FN1127"   : O 10 UY 
 table   be0a be59  "FN1128"   : O 10 SY 
-table   be5a bea9  "spark_adder_egr_mpg"   : O 10 UY 
+table   be5a bea9  "FN1129"   : O 10 UY 
 func    beaa bed5  "FN074A"   : UW  : UW 
 func    bed6 bee3  "FN211"   : SY  : UY 
 func    bee4 beed  "FN212A"   : UY  : UY 
@@ -1246,6 +1246,8 @@ func c65a c689 "Func_c65a"  : UY : UY
 
 
 func    c77a c785  "Func_c77a"   : UY  : UY 
+func    c786 c791  "Func_c786"   : UY  : UY
+func    c792 c79d  "Func_c792"   : UY  : UY
 func    c79e c7ad  "Func_c79e"   : UY  : UY 
 func    c7ae c7dd  "FN617"   : UW  : UW 
 func    c7de c7f3  "FN620"   : UY  : UY 
@@ -1771,7 +1773,7 @@ sub  89fc3   "Calc_SR_PP_LIM"
 sub  89ff1   "CCC_UP_CNVR_CLCH_COM2"  
 sub  8a097   "CCC_SCHLD_LCK_UNLCK_COM1"  
 sub  8a163   "CCC_WOT_LCK_UP_COM1"  
-sub  8a206   "Sub_a206"  
+sub  8a206   "INTRN_RT_NOVS_KAM_CALC_COM1"  
 sub  8a356   "Sub_a356"  
 sub  8a376   "Sub_a376"  
 sub  8a3b8   "Sub_a3b8"  
@@ -1850,7 +1852,7 @@ sym 27 "B7_SYNFLG" : B 7
 
 
 sym 28 "B0_EGREN_28" : B 0
-sym 28 "Newsa" : B 2
+sym 28 "NEWSA" : B 2
 sym 28 "B3_EFFLG1_28" : B 3
 sym 28 "B4_EGRFLG_28" : B 4
 sym 28 "EGOSTE" : B 5
@@ -2286,7 +2288,9 @@ sym 140 "TSLEGO"
 sym 142 "TSLPIP"
 sym 144 "Loop_time"
 
+sym 14b "EGRTMR"
 sym 14c "HMUTMR"
+sym 14f "LMBTMR"
 
 sym 150 "NDDTIM"
 sym 152 "WOTTMR"
@@ -2964,6 +2968,7 @@ sym b95f "CTBYSH"
 
 sym b962 "HMUMAP"
 sym b963 "HMUMPH"
+sym b964 "LMBMAP"
 sym b966 "SW_MPD"
 sym b972 "SMTPDL"
 
@@ -3029,7 +3034,8 @@ sym bba4 "DCOFF"
 sym bba6 "EGRTB1"
 sym bba8 "EGTB1H"
 sym bbaa "EGRTD8"
-
+sym bbac "EGRTD7"
+sym bbad "RAMPSW"
 sym bbae "EGRDED"
 
 sym bbb0 "KACRAT"

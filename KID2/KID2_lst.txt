@@ -1737,7 +1737,7 @@
 30e9: db,02               jc    30ed             if (R58 < 0)  {
 30eb: 01,58               clrw  R58              R58 = 0; }
 30ed: c3,e8,6e,58         stw   R58,[Re8+6e]     SPOUT_ICCD_DELTA = R58; } }
-30f1: 91,04,28            orb   R28,4            Newsa = 1;
+30f1: 91,04,28            orb   R28,4            NEWSA = 1;
 30f4: 32,50,11            jnb   B2,R50,3108      if (B2_Douple_edge = 1)  {
 30f7: 89,a1,01,56         cmpw  R56,1a1          
 30fb: d1,06               jleu  3103             if (R56 > 1a1)  {
@@ -4303,7 +4303,7 @@ FIRST_RPM and REFLG LOGIC
 4a53: b6,03                     #arg 1              FN025,
 4a55: 38,00                     #arg 2              38 );
 4a57: c3,e6,56,38         stw   R38,[Re6+56]     FN025_MAP_y = R38;
-4a5b: 71,fe,a1            an2b  Ra1,fe           B0_MAPUP_NORM_a1 = 0;
+4a5b: 71,fe,a1            an2b  Ra1,fe           B0_MAPUP_NORM_a1 = 0;             # Clear -> Normalized value has been calculated.
    Sub_4a5e:
 4a5e: fa                  di                     interrupts OFF;
 4a5f: ff                  nop                    
@@ -6104,21 +6104,21 @@ EQUILIBRIUM FUEL TRANSFER CALCULATIONS
 5d42: 91,20,a1            orb   Ra1,20           B5_Flags_a1 = 1; }
 5d45: fb                  ei                     interrupts ON;
 5d46: ad,28,cc            ldzbw Rcc,28           wRcc = 28;                        # SAF = 10 deg BTDC
-5d49: f0                  ret                    return;
+5d49: f0                  ret                    return;                           # EXIT Base Spark Angle Logic
 
-5d4a: 3a,28,01            jb    B2,R28,5d4e      if (Newsa = 0)  {
-5d4d: f0                  ret                    return; }
+5d4a: 3a,28,01            jb    B2,R28,5d4e      if (NEWSA = 0)  {                 # (previous value not used yet)  
+5d4d: f0                  ret                    return; }                         # Do NOT update SAF EXIT Base Spark Angle Logic
 
-5d4e: 30,a1,03            jnb   B0,Ra1,5d54      if (B0_MAPUP_NORM_a1 = 1)  {
+5d4e: 30,a1,03            jnb   B0,Ra1,5d54      if (B0_MAPUP_NORM_a1 = 1)  {      # Set -> MAP update is complete and ready for  calculation  of normalized value;
 5d51: ef,eb,ec            call  4a3f             Sub_4a3f (); }
-5d54: 45,00,01,fa,38      ad3w  R38,Rfa,100      R38 = spark_table_base;
+5d54: 45,00,01,fa,38      ad3w  R38,Rfa,100      R38 = FN1120;
 5d59: 29,b7               scall 5f12             UYTabLU_5f12 ();
 5d5b: ac,3b,1c            ldzbw R1c,R3b          wR1c = yR3b;
 5d5e: 36,25,07            jnb   B6,R25,5d68      if (B6_MPGFLG_25 = 1)  {
-5d61: 45,f0,01,fa,38      ad3w  R38,Rfa,1f0      R38 = spark_table_base_mpg;
+5d61: 45,f0,01,fa,38      ad3w  R38,Rfa,1f0      R38 = FN1126;
 5d66: 29,aa               scall 5f12             UYTabLU_5f12 (); }
 5d68: ac,3b,40            ldzbw R40,R3b          wR40 = yR3b;
-5d6b: 45,40,02,fa,38      ad3w  R38,Rfa,240      R38 = spark_adder_temp_and_tip;
+5d6b: 45,40,02,fa,38      ad3w  R38,Rfa,240      R38 = FN1127;
 5d70: 29,a0               scall 5f12             UYTabLU_5f12 ();
 5d72: ac,3b,14            ldzbw R14,R3b          wR14 = yR3b;
 5d75: b3,fa,0a,36         ldb   R36,[Rfa+a]      R36 = FRCCTM;
@@ -6141,9 +6141,9 @@ EQUILIBRIUM FUEL TRANSFER CALCULATIONS
 5da7: fe,6c,14,3c         sml2w R3c,R14          slR3c *= R14;
 5dab: 0e,06,3c            asrdw R3c,6            slR3c >>= 6;
 5dae: 64,3c,40            ad2w  R40,R3c          R40 += R3c;
-5db1: 45,50,01,fa,38      ad3w  R38,Rfa,150      R38 = spark_adder_egr;
+5db1: 45,50,01,fa,38      ad3w  R38,Rfa,150      R38 = FN1121;
 5db6: 36,25,05            jnb   B6,R25,5dbe      if (B6_MPGFLG_25 = 1)  {
-5db9: 45,e0,02,fa,38      ad3w  R38,Rfa,2e0      R38 = spark_adder_egr_mpg; }
+5db9: 45,e0,02,fa,38      ad3w  R38,Rfa,2e0      R38 = FN1129; }
 5dbe: 29,52               scall 5f12             UYTabLU_5f12 ();
 5dc0: b0,3b,30            ldb   R30,R3b          R30 = R3b;
 5dc3: 5d,c8,7d,34         ml3b  R34,R7d,c8       wR34 = EM * c8;
@@ -6161,19 +6161,19 @@ EQUILIBRIUM FUEL TRANSFER CALCULATIONS
 5deb: 5c,3e,30,3c         ml3b  R3c,R30,R3e      wR3c = yR30 * R3e;
 5def: 08,06,3c            shrw  R3c,6            R3c >>= 6;
 5df2: 64,3c,40            ad2w  R40,R3c          R40 += R3c;
-5df5: 45,a0,01,fa,38      ad3w  R38,Rfa,1a0      R38 = spark_reduction_for_octane;
+5df5: 45,a0,01,fa,38      ad3w  R38,Rfa,1a0      R38 = FN1122;
 5dfa: 29,16               scall 5f12             UYTabLU_5f12 ();
 5dfc: ac,3b,1a            ldzbw R1a,R3b          wR1a = yR3b;
 5dff: ef,63,ea            call  4865             SUYFuncLU_4865 (
-5e02: 4e,80                     #arg 1              x_spark_knock,
+5e02: 4e,80                     #arg 1              FN051,
 5e04: b6,00                     #arg 2              ECT );
 5e06: ac,38,30            ldzbw R30,R38          wR30 = yR38;
 5e09: ef,59,ea            call  4865             SUYFuncLU_4865 (
-5e0c: 5e,80                     #arg 1              y_ect_fuel,
+5e0c: 5e,80                     #arg 1              FN052,
 5e0e: b7,00                     #arg 2              ACT );
 5e10: ac,38,32            ldzbw R32,R38          wR32 = yR38;
 5e13: ad,06,34            ldzbw R34,6            wR34 = 6;
-5e16: 45,98,00,f8,38      ad3w  R38,Rf8,98       R38 = spark_ect_vs_act_multiplier;
+5e16: 45,98,00,f8,38      ad3w  R38,Rf8,98       R38 = FN1150;
 5e1b: ef,89,eb            call  49a7             SYTabLU_49a7 ();
 5e1e: bc,3b,38            ldsbw R38,R3b          swR38 = yR3b;
 5e21: fe,6c,1a,38         sml2w R38,R1a          slR38 *= R1a;
@@ -6260,7 +6260,7 @@ LIGHT LOAD RPM OSCILLATION ADDER
 5efd: c3,e8,2a,3c         stw   R3c,[Re8+2a]     SPK_NORM = R3c;
 5f01: 28,1d               scall 5f20             ENTRY_INTO_IDLE_SPARK ();
 5f03: a0,3c,cc            ldw   Rcc,R3c          Rcc = R3c;
-5f06: 71,fb,28            an2b  R28,fb           Newsa = 0;
+5f06: 71,fb,28            an2b  R28,fb           NEWSA = 0;
 5f09: f0                  ret                    return;
 
    Include_in_SPK_NORM:
@@ -6727,11 +6727,11 @@ LIGHT LOAD RPM OSCILLATION ADDER
 63d8: b3,fa,28,35         ldb   R35,[Rfa+28]     R35 = X;
 63dc: 4c,34,3a,38         ml3w  R38,R3a,R34      lR38 = wR3a * R34;
 63e0: 08,05,3a            shrw  R3a,5            R3a >>= 5;
-63e3: b3,e4,cb,35         ldb   R35,[Re4+cb]     R35 = [14b];
+63e3: b3,e4,cb,35         ldb   R35,[Re4+cb]     R35 = EGRTMR;
 63e7: 9b,fa,32,35         cmpb  R35,[Rfa+32]     
-63eb: db,14               jc    6401             if (R35 < [bbac])  {
+63eb: db,14               jc    6401             if (R35 < EGRTD7)  {
 63ed: 11,34               clrb  R34              R34 = 0;
-63ef: b3,fa,32,30         ldb   R30,[Rfa+32]     R30 = [bbac];
+63ef: b3,fa,32,30         ldb   R30,[Rfa+32]     R30 = EGRTD7;
 63f3: 9c,30,34            divb  R34,R30          yR34 /= R30;
 63f6: dd,09               jv    6401             if (OVF = 0)  {
 63f8: 11,35               clrb  R35              R35 = 0;
@@ -7779,7 +7779,7 @@ PSFLAG Logic: (Last state of POWSFG)
 6e75: 9b,f4,5f,00         cmpb  R0,[Rf4+5f]      
 6e79: df,03               je    6e7e             if (T75LSW != 0)  {
 6e7b: 32,9f,1a            jnb   B2,R9f,6e98      if (B2_OLFLG = 0) goto 6e98; }
-6e7e: b3,e4,cf,30         ldb   R30,[Re4+cf]     R30 = [14f];
+6e7e: b3,e4,cf,30         ldb   R30,[Re4+cf]     R30 = LMBTMR;
 6e82: 9b,f6,48,30         cmpb  R30,[Rf6+48]     
 6e86: db,0a               jc    6e92             if (R30 < [b95c])  {
 6e88: b3,e4,ca,30         ldb   R30,[Re4+ca]     R30 = [14a];
@@ -10848,7 +10848,7 @@ ERROR CODE DESCRIPTION
 88f6: ef,0f,0a            call  9308             CCC_CST_CLTCH_CTL_COM1 ();
 88f9: ef,b6,0a            call  93b2             EPC_GUIDE_COM1 ();
 88fc: ef,86,13            call  9c85             CCC_COM1 ();
-88ff: ef,04,19            call  a206             Sub_a206 ();
+88ff: ef,04,19            call  a206             INTRN_RT_NOVS_KAM_CALC_COM1 ();
 8902: ef,71,1a            call  a376             Sub_a376 ();
 8905: ef,b0,1a            call  a3b8             Sub_a3b8 ();
 8908: ef,d6,1a            call  a3e1             EPC_OTEMP_TEST_COM2 ();
@@ -13304,7 +13304,7 @@ a200: 20,03               sjmp  a205             return; } }
 a202: 91,02,dd            orb   Rdd,2            B1_FLG_WOT_LK_dd = 1; }
 a205: f0                  ret                    return;
 
-   Sub_a206:
+   INTRN_RT_NOVS_KAM_CALC_COM1:
 a206: 71,fe,49            an2b  R49,fe           B0_R49 = 0;
 a209: 3b,a2,0a            jb    B3,Ra2,a216      if (B3_FLG_LK_CM_a2 = 0)  {
 a20c: c7,e8,01,00         stb   R0,[Re8+1]       [381] = 0;
@@ -13314,7 +13314,7 @@ a214: 20,04               sjmp  a21a             goto a21a; }
 a216: c3,e8,ea,00         stw   R0,[Re8+ea]      [36a] = 0;
 a21a: 3c,4b,43            jb    B4,R4b,a260      if (B1_EPC_OPEN_FLG_4b = 0)  {
 a21d: 99,06,da            cmpb  Rda,6            
-a220: d3,3e               jnc   a260             if (GEAR_CUR >= 6)  {
+a220: d3,3e               jnc   a260             if (GEAR_CUR >= 6)  {             # (3rd or 4th)
 a222: b3,e8,01,30         ldb   R30,[Re8+1]      R30 = [381];
 a226: 9b,e2,1e,30         cmpb  R30,[Re2+1e]     
 a22a: d3,34               jnc   a260             if (R30 >= [Re2+1e])  {
@@ -13747,19 +13747,23 @@ a6a1: 91,40,a4            orb   Ra4,40           B6_IDLFLG_a4 = 1;
 a6a4: 9b,f4,63,d1         cmpb  Rd1,[Rf4+63]     
 a6a8: d1,02               jleu  a6ac             if (IDLTMR > OLITD3)  {
 a6aa: 11,d1               clrb  Rd1              IDLTMR = 0; }
+
+EGRTMR - EGR ENABLED TIMER
 a6ac: 30,28,10            jnb   B0,R28,a6bf      if (B0_EGREN_28 = 1)  {
-a6af: b3,fa,32,30         ldb   R30,[Rfa+32]     R30 = [bbac];
+a6af: b3,fa,32,30         ldb   R30,[Rfa+32]     R30 = EGRTD7;
 a6b3: 9b,e4,cb,30         cmpb  R30,[Re4+cb]     
-a6b7: db,10               jc    a6c9             if (R30 >= [14b]) goto a6c9;
-a6b9: c7,e4,cb,30         stb   R30,[Re4+cb]     [14b] = R30;
+a6b7: db,10               jc    a6c9             if (R30 >= EGRTMR) goto a6c9;
+a6b9: c7,e4,cb,30         stb   R30,[Re4+cb]     EGRTMR = R30;                     # Clip at EGRTD7
 a6bd: 20,0a               sjmp  a6c9             goto a6c9; }
 
 a6bf: 9b,fa,33,00         cmpb  R0,[Rfa+33]      
-a6c3: d7,04               jne   a6c9             if ([bbad] = 0)  {
-a6c5: c7,e4,cb,00         stb   R0,[Re4+cb]      [14b] = 0; } }
+a6c3: d7,04               jne   a6c9             if (RAMPSW = 0)  {
+a6c5: c7,e4,cb,00         stb   R0,[Re4+cb]      EGRTMR = 0; } }                   # (prepare for next ramp)
+
+LMBTMR - LOW MAP BYPASS TIMER
 a6c9: 9b,f6,50,ba         cmpb  Rba,[Rf6+50]     
-a6cd: d1,09               jleu  a6d8             if (MAP > [b964])  {
-a6cf: c7,e4,cf,00         stb   R0,[Re4+cf]      [14f] = 0;
+a6cd: d1,09               jleu  a6d8             if (MAP > LMBMAP)  {
+a6cf: c7,e4,cf,00         stb   R0,[Re4+cf]      LMBTMR = 0;
 a6d3: 71,f7,a0            an2b  Ra0,f7           B3_Flags_a0 = 0;
 a6d6: 20,03               sjmp  a6db             goto a6db; }
 
@@ -13767,7 +13771,7 @@ a6d8: 91,08,a0            orb   Ra0,8            B3_Flags_a0 = 1;
 a6db: 3b,45,04            jb    B3,R45,a6e2      if (B3_Flags_45 = 0)  {
 a6de: c3,e4,3c,00         stw   R0,[Re4+3c]      TSSTIL_TMR = 0; }
 
-#HMUTMR - HIGH MAPPA UPSTREAM AIR TIMER
+HMUTMR - HIGH MAPPA UPSTREAM AIR TIMER
 a6e2: b3,f6,4e,42         ldb   R42,[Rf6+4e]     R42 = HMUMAP;
 a6e6: 57,f6,4f,42,30      ad3b  R30,R42,[Rf6+4f] R30 = R42 + HMUMPH;
 a6eb: db,0a               jc    a6f7             if (R30 <= ff)  {
@@ -13940,7 +13944,7 @@ a859: 89,86,03,40,a5      timer 89, ATMR3, UNDSP,                               
 a85e: 83,74,03,04,e0      timer 83, TSFETMR, B2_FLG_FRST_TV_e0, 
 a863: 81,d1,00,40,a4      timer 81, IDLTMR, B6_IDLFLG_a4, 
 a868: 41,bb,03,10,26      timer 41, RUNUPTMR, RUNUP_FLG, 
-a86d: 41,4f,01,08,a0      timer 41,   14f, Flags_a0, 
+a86d: 41,4f,01,08,a0      timer 41, LMBTMR, Flags_a0, 
 a872: 23,40,01,40,27      timer 23, TSLEGO, B6_R27_OpenLoop?, 
 a877: 23,2c,02,40,4f      timer 23, TSLADV, B6_KNOCK_STRATEGY_4f, 
 a87c: 22,fc,02            timer 22,   2fc, 
@@ -13976,7 +13980,7 @@ a8e9: 85,4e,01,08,a1      timer 85,   14e, Flags_a1,
 a8ee: 81,52,01,04,a5      timer 81, WOTTMR, B2_APT_a5,                             #AWOTMR         Time in wide open throttle (seconds)
 a8f3: 8d,52,01,04,a5      timer 8d, WOTTMR, B2_APT_a5,                             #AWOTMR         Time in wide open throttle (seconds)
 a8f8: 20,84,03            timer 20,   384, 
-a8fb: 81,4b,01,01,28      timer 81,   14b, B0_EGREN_28, 
+a8fb: 81,4b,01,01,28      timer 81, EGRTMR, B0_EGREN_28, 
 a900: 81,4a,01,04,a1      timer 81,   14a, Flags_a1, 
 a905: 85,4a,01,02,a1      timer 85,   14a, Flags_a1, 
 a90a: 23,bc,01,08,45      timer 23, TSSTIL_TMR, Flags_45, 
@@ -15569,7 +15573,7 @@ b960: 01                  byte      1
 b961: 8d                  byte     8d
 b962: 80                  byte     80            HMUMAP
 b963: 06                  byte      6            HMUMPH
-b964: 50                  byte     50
+b964: 50                  byte     50            LMBMAP
 b965: 5a                  byte     5a
 b966: 01                  byte      1            SW_MPD
 b967: 00                  byte      0
@@ -15742,7 +15746,7 @@ baf8: 80,70               func  128, 112
 bafa: 00,10               func    0,  16
 bafc: 00,10               func    0,  16
 
-   x_spark_knock:
+   FN051:
 bafe: 7f,50               func   127,  80
 bb00: 6a,50               func   106,  80
 bb02: 67,40               func   103,  64
@@ -15752,7 +15756,7 @@ bb08: 19,20               func    25,  32
 bb0a: 00,00               func     0,   0
 bb0c: 80,00               func  -128,   0
 
-   y_ect_fuel:
+   FN052:
 bb0e: 7f,50               func   127,  80
 bb10: 64,50               func   100,  80
 bb12: 58,40               func    88,  64
@@ -15779,7 +15783,7 @@ bb42: 00,80               func    0, 128
 bb44: 00,80               func    0, 128
 bb46: 00,80               func    0, 128
 
-   spark_ect_vs_act_multiplier:
+   FN1150:
 bb48: 20,26,30,40,40,40   table   32,   38,   48,   64,   64,   64
 bb4e: 23,2a,33,40,40,40   table   35,   42,   51,   64,   64,   64
 bb54: 2a,30,3a,40,46,53   table   42,   48,   58,   64,   70,   83
@@ -15842,8 +15846,8 @@ bba4: ec,31               word   31ec            DCOFF
 bba6: 00,64               word   6400            EGRTB1
 bba8: 40,06               word    640            EGTB1H
 bbaa: 00,00               word      0            EGRTD8
-bbac: 01                  byte      1
-bbad: 01                  byte      1
+bbac: 01                  byte      1            EGRTD7
+bbad: 01                  byte      1            RAMPSW
 bbae: 00,04               word    400            EGRDED
 bbb0: 80,02               word    280            KACRAT
 bbb2: 00                  byte      0            RETLIM
@@ -15950,7 +15954,7 @@ bc74: 00,00               func    0,   0
 bc76: 00,00               func    0,   0
 bc78: 00,00               func    0,   0
 
-   spark_table_base:
+   FN1120:
 bc7a: 54,54,54,54,54,94,94,94,94,94  table   84,  84,  84,  84,  84, 148, 148, 148, 148, 148    
 bc84: 68,78,80,88,8c,94,94,94,94,94  table  104, 120, 128, 136, 140, 148, 148, 148, 148, 148    
 bc8e: 68,78,80,88,8c,78,94,94,98,98  table  104, 120, 128, 136, 140, 120, 148, 148, 152, 152    
@@ -15960,7 +15964,7 @@ bcac: 38,50,56,5c,5e,60,60,60,64,6c  table   56,  80,  86,  92,  94,  96,  96,  
 bcb6: 2c,44,4c,54,58,5c,60,60,64,68  table   44,  68,  76,  84,  88,  92,  96,  96, 100, 104    
 bcc0: 2c,38,44,50,52,54,5c,64,64,68  table   44,  56,  68,  80,  82,  84,  92, 100, 100, 104    
 
-   spark_adder_egr:
+   FN1121:
 bcca: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
 bcd4: 00,1c,1c,1c,1c,1c,1c,00,00,00  table    0,  28,  28,  28,  28,  28,  28,   0,   0,   0    
 bcde: 00,1c,1c,1c,1c,1c,1c,00,00,00  table    0,  28,  28,  28,  28,  28,  28,   0,   0,   0    
@@ -15970,7 +15974,7 @@ bcfc: 00,00,00,1c,1c,1c,1c,00,00,00  table    0,   0,   0,  28,  28,  28,  28,  
 bd06: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
 bd10: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
 
-   spark_reduction_for_octane:
+   FN1122:
 bd1a: 0a,0f,0b,08,02,00,00,00,00,00  table   10,  15,  11,   8,   2,   0,   0,   0,   0,   0    
 bd24: 0f,12,11,12,11,00,00,00,00,00  table   15,  18,  17,  18,  17,   0,   0,   0,   0,   0    
 bd2e: 05,0d,10,14,17,03,06,06,06,04  table    5,  13,  16,  20,  23,   3,   6,   6,   6,   4    
@@ -15980,7 +15984,7 @@ bd4c: 00,0c,0f,0e,1b,0f,1e,1e,1e,18  table    0,  12,  15,  14,  27,  15,  30,  
 bd56: 0d,14,24,20,1c,1c,1e,20,20,20  table   13,  20,  36,  32,  28,  28,  30,  32,  32,  32    
 bd60: 0c,20,26,26,26,26,28,28,28,20  table   12,  32,  38,  38,  38,  38,  40,  40,  40,  32    
 
-   spark_table_base_mpg:
+   FN1126:
 bd6a: 68,3c,3c,3c,3c,94,94,94,94,94  table  104,  60,  60,  60,  60, 148, 148, 148, 148, 148    
 bd74: 68,78,80,88,8e,94,94,94,94,94  table  104, 120, 128, 136, 142, 148, 148, 148, 148, 148    
 bd7e: 68,78,80,88,8e,78,94,94,98,98  table  104, 120, 128, 136, 142, 120, 148, 148, 152, 152    
@@ -15990,7 +15994,7 @@ bd9c: 38,50,56,5c,5e,60,60,60,64,6c  table   56,  80,  86,  92,  94,  96,  96,  
 bda6: 2c,44,4c,54,58,5c,60,60,64,68  table   44,  68,  76,  84,  88,  92,  96,  96, 100, 104    
 bdb0: 2c,38,44,50,52,54,5c,64,64,68  table   44,  56,  68,  80,  82,  84,  92, 100, 100, 104    
 
-   spark_adder_temp_and_tip:
+   FN1127:
 bdba: 00,00,00,00,00,34,34,34,24,00  table    0,   0,   0,   0,   0,  52,  52,  52,  36,   0    
 bdc4: 00,00,00,00,0c,3c,3c,3c,24,00  table    0,   0,   0,   0,  12,  60,  60,  60,  36,   0    
 bdce: 00,00,00,00,0c,20,38,38,24,00  table    0,   0,   0,   0,  12,  32,  56,  56,  36,   0    
@@ -16010,7 +16014,7 @@ be3c: 00,e0,c0,c0,c0,c0,c0,e0,00,00  table     0,  -32,  -64,  -64,  -64,  -64, 
 be46: 00,e0,c0,c0,c0,c0,c0,e0,00,00  table     0,  -32,  -64,  -64,  -64,  -64,  -64,  -32,    0,    0    
 be50: 00,e0,c0,c0,c0,c0,c0,e0,00,00  table     0,  -32,  -64,  -64,  -64,  -64,  -64,  -32,    0,    0    
 
-   spark_adder_egr_mpg:
+   FN1129:
 be5a: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
 be64: 00,2d,2d,2d,2d,2d,00,00,00,00  table    0,  45,  45,  45,  45,  45,   0,   0,   0,   0    
 be6e: 00,2d,2d,2d,2d,2d,00,00,00,00  table    0,  45,  45,  45,  45,  45,   0,   0,   0,   0    
@@ -17089,20 +17093,21 @@ c780: 00,00               func    0,   0
 c782: 00,00               func    0,   0
 c784: 00,00               func    0,   0
 
-c786: ff,6e,78            struct   ff,  6e,  78
-c789: 50,3c,14            struct   50,  3c,  14
-c78c: 00,00,00            struct    0,   0,   0
+   Func_c786:
+c786: ff,6e               func  255, 110
+c788: 78,50               func  120,  80
+c78a: 3c,14               func   60,  20
+c78c: 00,00               func    0,   0
+c78e: 00,00               func    0,   0
+c790: 00,00               func    0,   0
 
-c78f: 00,00,00            struct    0,   0,   0
-c792: ff,8c,8c            struct   ff,  8c,  8c
-c795: 42,64,34            struct   42,  64,  34
-
-c798: 50                  struct   50
-c799: 1e                  struct   1e
-c79a: 00                  struct    0
-c79b: 00                  struct    0
-c79c: 00                  struct    0
-c79d: 00                  struct    0
+   Func_c792:
+c792: ff,8c               func  255, 140
+c794: 8c,42               func  140,  66
+c796: 64,34               func  100,  52
+c798: 50,1e               func   80,  30
+c79a: 00,00               func    0,   0
+c79c: 00,00               func    0,   0
 
    Func_c79e:
 c79e: ff,aa               func  255, 170

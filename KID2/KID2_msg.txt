@@ -907,9 +907,8 @@ struct  c6d2 c719: O 4 UY
 struct  c71a c761: O 4 UY 
 struct  c762 c779: O 4 UY 
 func    c77a c785: UY X 10 : UY X 10 
-struct  c786 c78e: O 3 UY 
-struct  c78f c797: O 3 UY 
-struct  c798 c79d: UY 
+func    c786 c791: UY X 10 : UY X 10 
+func    c792 c79d: UY X 10 : UY X 10 
 func    c79e c7ad: UY X 10 : UY X 10 
 func    c7ae c7dd: UW X 10 : UW X 10 
 func    c7de c7f3: UY X 10 : UY X 10 
@@ -1379,7 +1378,7 @@ sub  9fc3  "Calc_SR_PP_LIM"   #cmd
 sub  9ff1  "CCC_UP_CNVR_CLCH_COM2"   #cmd
 sub  a097  "CCC_SCHLD_LCK_UNLCK_COM1"   #cmd
 sub  a163  "CCC_WOT_LCK_UP_COM1"   #cmd
-sub  a206  "Sub_a206"   #cmd
+sub  a206  "INTRN_RT_NOVS_KAM_CALC_COM1"   #cmd
 sub  a356  "Sub_a356"   #cmd
 sub  a376  "Sub_a376"   #cmd
 sub  a3b8  "Sub_a3b8"   #cmd
@@ -1445,7 +1444,7 @@ sym 27  "B6_R27_OpenLoop?" :B 6
 sym 27  "B7_SYNFLG" :B 7
 sym 27  "Flags_27"
 sym 28  "B0_EGREN_28" :B 0
-sym 28  "Newsa" :B 2
+sym 28  "NEWSA" :B 2
 sym 28  "B3_EFFLG1_28" :B 3
 sym 28  "B4_EGRFLG_28" :B 4
 sym 28  "EGOSTE" :B 5
@@ -1772,7 +1771,9 @@ sym 13a  "BG_TMR"
 sym 140  "TSLEGO"
 sym 142  "TSLPIP"
 sym 144  "Loop_time"
+sym 14b  "EGRTMR"
 sym 14c  "HMUTMR"
+sym 14f  "LMBTMR"
 sym 150  "NDDTIM"
 sym 152  "WOTTMR"
 sym 154  "IPSIBR"
@@ -2356,6 +2357,7 @@ sym b95e  "CTBYS"
 sym b95f  "CTBYSH"
 sym b962  "HMUMAP"
 sym b963  "HMUMPH"
+sym b964  "LMBMAP"
 sym b966  "SW_MPD"
 sym b972  "SMTPDL"
 sym b975  "FN305"
@@ -2393,11 +2395,11 @@ sym bae2  "SIGKLL"
 sym bae4  "SIGKLU"
 sym bae6  "FN500"
 sym baf6  "FN501"
-sym bafe  "x_spark_knock"
-sym bb0e  "y_ect_fuel"
+sym bafe  "FN051"
+sym bb0e  "FN052"
 sym bb1e  "FN182"
 sym bb3e  "FN183"
-sym bb48  "spark_ect_vs_act_multiplier"
+sym bb48  "FN1150"
 sym bb6c  "FN730"
 sym bb7c  "CSHIGH"
 sym bb7d  "CSLOW"
@@ -2425,6 +2427,8 @@ sym bba4  "DCOFF"
 sym bba6  "EGRTB1"
 sym bba8  "EGTB1H"
 sym bbaa  "EGRTD8"
+sym bbac  "EGRTD7"
+sym bbad  "RAMPSW"
 sym bbae  "EGRDED"
 sym bbb0  "KACRAT"
 sym bbb2  "RETLIM"
@@ -2449,13 +2453,13 @@ sym bc1a  "FN092"
 sym bc36  "FN093"
 sym bc52  "FN153"
 sym bc6e  "FN180"
-sym bc7a  "spark_table_base"
-sym bcca  "spark_adder_egr"
-sym bd1a  "spark_reduction_for_octane"
-sym bd6a  "spark_table_base_mpg"
-sym bdba  "spark_adder_temp_and_tip"
+sym bc7a  "FN1120"
+sym bcca  "FN1121"
+sym bd1a  "FN1122"
+sym bd6a  "FN1126"
+sym bdba  "FN1127"
 sym be0a  "FN1128"
-sym be5a  "spark_adder_egr_mpg"
+sym be5a  "FN1129"
 sym beaa  "FN074A"
 sym bed6  "FN211"
 sym bee4  "FN212A"
@@ -2578,6 +2582,8 @@ sym c622  "Func_c622"
 sym c63e  "Func_c63e"
 sym c65a  "Func_c65a"
 sym c77a  "Func_c77a"
+sym c786  "Func_c786"
+sym c792  "Func_c792"
 sym c79e  "Func_c79e"
 sym c7ae  "FN617"
 sym c7de  "FN620"

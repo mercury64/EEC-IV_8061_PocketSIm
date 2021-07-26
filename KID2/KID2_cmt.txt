@@ -607,6 +607,7 @@
 4a0a \n# UNSIGNED interpolate calc
 
 4a49 # TEISF or TEFTC?
+4a5b # Clear -> Normalized value has been calculated.
 
 4aa2 # MAPBAR = ROLAV(MAP_WORD,TCMAPW)
 
@@ -893,6 +894,10 @@
 
 5d25 # |CLEAR
 5d46 # SAF = 10 deg BTDC
+5d49 # EXIT Base Spark Angle Logic
+5d4a # (previous value not used yet)  
+5d4d # Do NOT update SAF EXIT Base Spark Angle Logic
+5d4e # Set -> MAP update is complete and ready for  calculation  of normalized value;
 
 5d79 # TEMP_FRAC = FRCCTM * ACT + (1 - FRCCTM) * ECT.
 5d83 # FN091(TEMP_FRAC) =  TEMP_FRAC  normalizing  function  for  FN1128,
@@ -1603,6 +1608,7 @@
 9fb6 # (enable high speed unlock check)
 9fbc # (upshift commanded on an unlocked converter)
 
+a220 # (3rd or 4th)
 a470 # (CRANK mode)
 a473 # PRGTMR = 0
 a478#  PURGING = 1
@@ -1626,7 +1632,13 @@ a5bc # NOVS <= MPGNOV - MPNOVH
 a5cb # VSBAR >= VSMPG + VSMPGH
 
 a678 \n\nIDLTMR - TIME AT IDLE
-a6de \n\n#HMUTMR - HIGH MAPPA UPSTREAM AIR TIMER
+a6aa \n\nEGRTMR - EGR ENABLED TIMER
+a6b9 # Clip at EGRTD7
+a6c5 # (prepare for next ramp)
+a6c5 \n\nLMBTMR - LOW MAP BYPASS TIMER
+
+a6de \n\nHMUTMR - HIGH MAPPA UPSTREAM AIR TIMER
+
 a6f0 # MAPPA >= HMUMAP + HMUMPH
 a6fa # MAPPA < HMUMAP
 
