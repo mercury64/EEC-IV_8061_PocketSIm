@@ -251,7 +251,10 @@
 2fa0 # SPKAD(n-1) = SPKAD(n-1) - RETINC
 
 2fac # (Clip min. SPKAD(n-1) to RETLIM)
-
+2fe8 # (Clip MAX TIPRET to 0)
+2ff5 # SPKAD(n+1)
+3001 # CALCULATED SPARK OUT (n+1) = SAF + SPKAD(n+1) + TIPRET
+301f # SAFTOT = SAF + SPKAD(n) + TIPRET
 32ae \n# Do Signature Kay Calculation
 332b \n\n# MKAY CALC. ENTRY POINT
 
@@ -927,13 +930,43 @@
 5f26 # (Cold Start spark not in use)
 5f2d # (RPM control or lockout)  
 5f4e # ENTRY CONDITIONS NOT TRUE
+
+608b \n\nTRANS_T CALCULATION
+60a0 # Clip TRANS_T to 1.0 as a maximum
+60a3 # TRANS_T = SPKTMR / STTIM
+60a3 \n\nSPK_IDLE SELECT LOGIC
+60ae \n\nKSPARK SELECT LOGIC
+
 60ab # Delayed neutral/drive flag; 1 -> in drive, loaded.
+60b3 # (Drive, speed high)
+60bb # (Drive, speed low)
+60d1 # (Neutral, speed high)
+60d9 # (Neutral, speed low)
 
 6116 # 
 6134 #  [1 / (DWELLM * (VBAT - DWELLA))] * FREQ18 (ticks/sec)
 
 61bf # PPERENG = PACPER / ENGCYL
 61cc # POFFENG = PACOFF / ENGCYL
+
+61d7 \nKNOCK THRESHOLD SENSE (KTS) LOGIC
+61e4 # (WOPEN + FN145(N)) * ("LAST PIP PERIOD")
+61f9 # WINLEN + FN144(N) * ("LAST PIP PERIOD")
+61f9 \n\nSPARK RETARD LOGIC
+6204 \n\nSPARK ADVANCE LOGIC
+6208 # KNOCK STRATEGY ENABLED
+6216 # TSLADV >= FN146A/4
+621f # TSLADV = TSLADV - FN146A/4
+622c #  0.25 deg.
+6232 # SPKAD(ALL) = SPKAD(ALL) + 0.25 deg. 
+623f # (Clip SPKAD(ALL) to FN190(N_BYTE) as a maximum)
+6242 # SPKAD(ALL) = SPKAD(ALL) + 0.25 deg. 
+
+6266 \n\nCTFLG LOGIC
+6284 # TIPMAP + TIPHYS is clipped to 31.875 in. Hg.
+628c \n\nTIPFLG LOGIC
+
+62aa \n\nKNOCK STRATEGY ENABLE LOGIC
 
 62e0 # SPKAD(ALL) = 0
 

@@ -219,7 +219,7 @@
 21f8: 6a,22               vect  226a             Sub_226a
 21fa: 52,65               vect  6552             Update_EGR2?
 21fc: 03,5d               vect  5d03             SPARK_BASE_COM2
-21fe: d4,61               vect  61d4             Sub_61d4
+21fe: d4,61               vect  61d4             SPKKNOCK_LL
 2200: 84,65               vect  6584             ISC_OVERVIEW_COM3
 2202: a9,6c               vect  6ca9             Sub_6ca9
 2204: fc,62               vect  62fc             Sub_62fc
@@ -1650,27 +1650,27 @@
 2fdf: b0,9d,58            ldb   R58,R9d          R58 = TIPRET;
 2fe2: 77,fa,3a,58         ad2b  R58,[Rfa+3a]     R58 += TIPINC;
 2fe6: da,02               jle   2fea             if (R58 > 0)  {
-2fe8: 11,58               clrb  R58              R58 = 0; }
+2fe8: 11,58               clrb  R58              R58 = 0; }                        # (Clip MAX TIPRET to 0)
 2fea: c4,9d,58            stb   R58,R9d          TIPRET = R58;
 2fed: b0,9d,56            ldb   R56,R9d          R56 = TIPRET;
 2ff0: 36,4f,0c            jnb   B6,R4f,2fff      if (B6_KNOCK_STRATEGY_4f = 1)  {
 2ff3: 2f,89               scall 2f7e             Knock_Check4 ();
-2ff5: 77,55,d0,01,56      ad2b  R56,[R54+1d0]    R56 += [R54+1d0];
+2ff5: 77,55,d0,01,56      ad2b  R56,[R54+1d0]    R56 += [R54+1d0];                 # SPKAD(n+1)
 2ffa: d5,03               jnv   2fff             if (R56 > ff)  {
 2ffc: b1,80,56            ldb   R56,80           R56 = 80; } }
 2fff: 16,56               sexb  R56              swR56 = R56;
-3001: 44,cc,56,58         ad3w  R58,R56,Rcc      R58 = R56 + Rcc;
-3005: bf,fa,0b,56         ldsbw R56,[Rfa+b]      swR56 = Splclp;
+3001: 44,cc,56,58         ad3w  R58,R56,Rcc      R58 = R56 + SAF;                  # CALCULATED SPARK OUT (n+1) = SAF + SPKAD(n+1) + TIPRET
+3005: bf,fa,0b,56         ldsbw R56,[Rfa+b]      swR56 = SPLCLP;
 3009: 88,56,58            cmpw  R58,R56          
 300c: d6,05               jge   3013             if (R58 < R56)  {
 300e: a0,56,58            ldw   R58,R56          R58 = R56;
 3011: 20,0c               sjmp  301f             goto 301f; }
 
-3013: af,fa,0c,56         ldzbw R56,[Rfa+c]      wR56 = [bb86];
+3013: af,fa,0c,56         ldzbw R56,[Rfa+c]      wR56 = SPUCLP;
 3017: 88,56,58            cmpw  R58,R56          
 301a: da,03               jle   301f             if (R58 > R56)  {
 301c: a0,56,58            ldw   R58,R56          R58 = R56; }
-301f: c3,e8,0e,58         stw   R58,[Re8+e]      SAFTOT = R58;
+301f: c3,e8,0e,58         stw   R58,[Re8+e]      SAFTOT = R58;                     # SAFTOT = SAF + SPKAD(n) + TIPRET
 3023: af,f6,05,5a         ldzbw R5a,[Rf6+5]      wR5a = ENGCYL;
 3027: a3,5b,74,2f,5a      ldw   R5a,[R5a+2f74]   R5a = [R5a+2f74];
 302c: 45,28,00,5a,56      ad3w  R56,R5a,28       R56 = R5a + 28;
@@ -6103,7 +6103,7 @@ EQUILIBRIUM FUEL TRANSFER CALCULATIONS
 5d3f: 91,40,a1            orb   Ra1,40           B6_Flags_a1 = 1;
 5d42: 91,20,a1            orb   Ra1,20           B5_Flags_a1 = 1; }
 5d45: fb                  ei                     interrupts ON;
-5d46: ad,28,cc            ldzbw Rcc,28           wRcc = 28;                        # SAF = 10 deg BTDC
+5d46: ad,28,cc            ldzbw Rcc,28           SAF = 28;                         # SAF = 10 deg BTDC
 5d49: f0                  ret                    return;                           # EXIT Base Spark Angle Logic
 
 5d4a: 3a,28,01            jb    B2,R28,5d4e      if (NEWSA = 0)  {                 # (previous value not used yet)  
@@ -6259,7 +6259,7 @@ LIGHT LOAD RPM OSCILLATION ADDER
 5ef9: 67,fa,08,3c         ad2w  R3c,[Rfa+8]      R3c += KS1;                       # KS1 = Spark Adder, deg BTDC.
 5efd: c3,e8,2a,3c         stw   R3c,[Re8+2a]     SPK_NORM = R3c;
 5f01: 28,1d               scall 5f20             ENTRY_INTO_IDLE_SPARK ();
-5f03: a0,3c,cc            ldw   Rcc,R3c          Rcc = R3c;
+5f03: a0,3c,cc            ldw   Rcc,R3c          SAF = R3c;
 5f06: 71,fb,28            an2b  R28,fb           NEWSA = 0;
 5f09: f0                  ret                    return;
 
@@ -6301,21 +6301,21 @@ LIGHT LOAD RPM OSCILLATION ADDER
 5f64: 98,00,22            cmpb  R22,R0           
 5f67: d7,24               jne   5f8d             if (R22 = 0)  {
 5f69: 3c,26,07            jb    B4,R26,5f73      if (RUNUP_FLG = 0)  {
-5f6c: a3,f5,b0,00,3c      ldw   R3c,[Rf4+b0]     R3c = [b4f2];
+5f6c: a3,f5,b0,00,3c      ldw   R3c,[Rf4+b0]     R3c = SPK_RUNUP;
 5f71: 21,13               sjmp  6086             goto 6086; }
 
 5f73: 38,23,02            jb    B0,R23,5f78      if (B0_R23 = 0)  {
 5f76: 21,0e               sjmp  6086             goto 6086; }
 
-5f78: c7,e8,3c,00         stb   R0,[Re8+3c]      [3bc] = 0;
-5f7c: a0,cc,34            ldw   R34,Rcc          R34 = Rcc;
+5f78: c7,e8,3c,00         stb   R0,[Re8+3c]      SPKTMR = 0;
+5f7c: a0,cc,34            ldw   R34,Rcc          R34 = SAF;
 5f7f: 09,06,34            shlw  R34,6            R34 <<= 6;
 5f82: c3,e8,28,34         stw   R34,[Re8+28]     [3a8] = R34;
 5f86: b1,01,22            ldb   R22,1            R22 = 1;
-5f89: 29,00               scall 608b             Sub_608b ();
+5f89: 29,00               scall 608b             MISCELLANEOUS_SPARK_CALCULATIONS ();
 5f8b: 20,28               sjmp  5fb5             goto 5fb5; }
 
-5f8d: 28,fc               scall 608b             Sub_608b ();
+5f8d: 28,fc               scall 608b             MISCELLANEOUS_SPARK_CALCULATIONS ();
 5f8f: 99,01,22            cmpb  R22,1            
 5f92: d7,64               jne   5ff8             if (R22 = 1)  {
 5f94: 31,23,02            jnb   B1,R23,5f99      if (B1_R23 = 1)  {
@@ -6373,7 +6373,7 @@ LIGHT LOAD RPM OSCILLATION ADDER
 602b: 30,23,02            jnb   B0,R23,6030      if (B0_R23 = 1)  {
 602e: 27,48               sjmp  5f78             goto 5f78; }
 
-6030: 4b,e8,2a,cc,1a      sb3w  R1a,Rcc,[Re8+2a] R1a = Rcc - SPK_NORM;
+6030: 4b,e8,2a,cc,1a      sb3w  R1a,Rcc,[Re8+2a] R1a = SAF - SPK_NORM;
 6035: d6,02               jge   6039             if (R1a < 0)  {
 6037: 03,1a               negw  R1a              R1a = -R1a; }
 6039: 8b,f5,98,00,1a      cmpw  R1a,[Rf4+98]     
@@ -6397,28 +6397,34 @@ LIGHT LOAD RPM OSCILLATION ADDER
 6072: c3,e8,1c,18         stw   R18,[Re8+1c]     FKEXIT = R18;
 6076: a0,18,36            ldw   R36,R18          R36 = R18;
 6079: a3,e8,2a,34         ldw   R34,[Re8+2a]     R34 = SPK_NORM;
-607d: a0,cc,32            ldw   R32,Rcc          R32 = Rcc;
+607d: a0,cc,32            ldw   R32,Rcc          R32 = SAF;
 6080: ef,d5,e8            call  4958             ROLLING_AVERAGE_ROUTINE ();
 6083: a0,3e,3c            ldw   R3c,R3e          R3c = R3e; }
 6086: c7,e8,16,22         stb   R22,[Re8+16]     SPK_STATE = R22;
 608a: f0                  ret                    return;
 
-   Sub_608b:
+   MISCELLANEOUS_SPARK_CALCULATIONS:
 608b: 11,14               clrb  R14              R14 = 0;
-608d: b3,e8,3c,15         ldb   R15,[Re8+3c]     R15 = [3bc];
+
+TRANS_T CALCULATION
+608d: b3,e8,3c,15         ldb   R15,[Re8+3c]     R15 = SPKTMR;
 6091: 08,01,14            shrw  R14,1            R14 >>= 1;
-6094: 9f,f5,b2,00,14      divb  R14,[Rf4+b2]     yR14 /= [b4f4];
+6094: 9f,f5,b2,00,14      divb  R14,[Rf4+b2]     yR14 /= STTIM;
 6099: dd,05               jv    60a0             if (OVF = 0)  {
 609b: 99,80,14            cmpb  R14,80           
 609e: d1,03               jleu  60a3             if (R14 <= 80) goto 60a3; }
-60a0: b1,80,14            ldb   R14,80           R14 = 80; }
-60a3: c7,e8,17,14         stb   R14,[Re8+17]     [397] = R14;
+60a0: b1,80,14            ldb   R14,80           R14 = 80; }                       # Clip TRANS_T to 1.0 as a maximum
+60a3: c7,e8,17,14         stb   R14,[Re8+17]     TRANS_T = R14;                    # TRANS_T = SPKTMR / STTIM
+
+SPK_IDLE SELECT LOGIC
 60a7: a3,e8,32,3e         ldw   R3e,[Re8+32]     R3e = RPMERR_S;
-60ab: 36,26,14            jnb   B6,R26,60c2      if (DNDSUP = 1)  {                # Delayed neutral/drive flag; 1 -> in drive, loaded.
-60ae: a3,f5,ac,00,1a      ldw   R1a,[Rf4+ac]     R1a = [b4ee];
-60b3: a3,f5,a2,00,18      ldw   R18,[Rf4+a2]     R18 = [b4e4];
+60ab: 36,26,14            jnb   B6,R26,60c2      if (DNDSUP = 1)  {
+60ae: a3,f5,ac,00,1a      ldw   R1a,[Rf4+ac]     R1a = SPKIDR;
+
+KSPARK SELECT LOGIC                                                                # Delayed neutral/drive flag; 1 -> in drive, loaded.
+60b3: a3,f5,a2,00,18      ldw   R18,[Rf4+a2]     R18 = KSPKDO;                     # (Drive, speed high)
 60b8: 3f,3f,23            jb    B7,R3f,60de      if (B7_R3f = 1) goto 60de;
-60bb: a3,f5,a4,00,18      ldw   R18,[Rf4+a4]     R18 = [b4e6];
+60bb: a3,f5,a4,00,18      ldw   R18,[Rf4+a4]     R18 = KSPKDU;                     # (Drive, speed low)
 60c0: 20,1c               sjmp  60de             goto 60de; }
 
 60c2: a3,f5,ae,00,1a      ldw   R1a,[Rf4+ae]     R1a = SPKINU;
@@ -6426,14 +6432,14 @@ LIGHT LOAD RPM OSCILLATION ADDER
 60ca: f4,a0                     #arg 1              FN180,
 60cc: d1,00                     #arg 2              IDLTMR );
 60ce: 68,38,1a            sb2w  R1a,R38          R1a -= R38;
-60d1: a3,f5,a6,00,18      ldw   R18,[Rf4+a6]     R18 = [b4e8];
+60d1: a3,f5,a6,00,18      ldw   R18,[Rf4+a6]     R18 = KSPKNO;                     # (Neutral, speed high)
 60d6: 3f,3f,05            jb    B7,R3f,60de      if (B7_R3f = 0)  {
-60d9: a3,f5,a8,00,18      ldw   R18,[Rf4+a8]     R18 = [b4ea]; } }
+60d9: a3,f5,a8,00,18      ldw   R18,[Rf4+a8]     R18 = KSPKNU; } }                 # (Neutral, speed low)
 60de: 30,a3,07            jnb   B0,Ra3,60e8      if (B0_V_MODE_SETUP_a3 = 1)  {
 60e1: 01,18               clrw  R18              R18 = 0;
 60e3: a3,f5,ae,00,1a      ldw   R1a,[Rf4+ae]     R1a = SPKINU; }
 60e8: c3,e8,26,1a         stw   R1a,[Re8+26]     SPK_IDLE = R1a;
-60ec: c3,e8,22,18         stw   R18,[Re8+22]     [3a2] = R18;
+60ec: c3,e8,22,18         stw   R18,[Re8+22]     KSPARK = R18;
 60f0: f0                  ret                    return;
 
    DWLBSE-DWLCOR_CALCULATION:
@@ -6517,48 +6523,53 @@ LIGHT LOAD RPM OSCILLATION ADDER
 61cf: c3,e8,6a,38         stw   R38,[Re8+6a]     POFFENG = R38;
 61d3: f0                  ret                    return;
 
-   Sub_61d4:
+   SPKKNOCK_LL:
 61d4: 3f,4e,02            jb    B7,R4e,61d9      if (B7_NEW_PIP = 0)  {
 61d7: 20,72               sjmp  624b             goto 624b; }
 
+KNOCK THRESHOLD SENSE (KTS) LOGIC
 61d9: ef,0a,e7            call  48e6             UUWFuncLU_48e6 (
 61dc: fa,a4                     #arg 1              FN145,
 61de: b4,00                     #arg 2              N_RPM );
 61e0: 67,fa,44,38         ad2w  R38,[Rfa+44]     R38 += WOPEN;
-61e4: c3,e4,18,38         stw   R38,[Re4+18]     KTS_timing = R38;
+61e4: c3,e4,18,38         stw   R38,[Re4+18]     KTS_timing = R38;                 # (WOPEN + FN145(N)) * ("LAST PIP PERIOD")
 61e8: ef,fb,e6            call  48e6             UUWFuncLU_48e6 (
 61eb: c2,a4                     #arg 1              FN144,
 61ed: b4,00                     #arg 2              N_RPM );
 61ef: 6c,c4,38            ml2w  R38,Rc4          lR38 *= DT12S;
 61f2: 0d,01,38            shldw R38,1            lR38 <<= 1;
 61f5: 67,fa,46,3a         ad2w  R3a,[Rfa+46]     R3a += WINLEN;
-61f9: c3,e4,1a,3a         stw   R3a,[Re4+1a]     KTS_pulsewidth = R3a;
+61f9: c3,e4,1a,3a         stw   R3a,[Re4+1a]     KTS_pulsewidth = R3a;             # WINLEN + FN144(N) * ("LAST PIP PERIOD")
+
+SPARK RETARD LOGIC
 61fd: ef,e6,e6            call  48e6             UUWFuncLU_48e6 (
 6200: aa,a4                     #arg 1              FN143,
 6202: b4,00                     #arg 2              N_RPM );
 6204: c7,e6,b0,39         stb   R39,[Re6+b0]     RETINC = R39;
-6208: 36,4f,40            jnb   B6,R4f,624b      if (B6_KNOCK_STRATEGY_4f = 1)  {
+
+SPARK ADVANCE LOGIC
+6208: 36,4f,40            jnb   B6,R4f,624b      if (B6_KNOCK_STRATEGY_4f = 1)  {  # KNOCK STRATEGY ENABLED
 620b: ef,d8,e6            call  48e6             UUWFuncLU_48e6 (
 620e: 0e,a5                     #arg 1              FN146A,
 6210: b4,00                     #arg 2              N_RPM );
 6212: 8b,e6,ac,38         cmpw  R38,[Re6+ac]     
-6216: d9,33               jgtu  624b             if (R38 <= TSLADV)  {
+6216: d9,33               jgtu  624b             if (R38 <= TSLADV)  {             # TSLADV >= FN146A/4
 6218: a3,e6,ac,40         ldw   R40,[Re6+ac]     R40 = TSLADV;
 621c: 68,38,40            sb2w  R40,R38          R40 -= R38;
-621f: c3,e6,ac,40         stw   R40,[Re6+ac]     TSLADV = R40;
+621f: c3,e6,ac,40         stw   R40,[Re6+ac]     TSLADV = R40;                     # TSLADV = TSLADV - FN146A/4
 6223: ef,4a,e6            call  4870             UUYFuncLU_4870 (
 6226: 26,a5                     #arg 1              FN190,
 6228: ea,01                     #arg 2              N_BYTE );
 622a: fa                  di                     interrupts OFF;
 622b: ff                  nop                    
-622c: b1,01,40            ldb   R40,1            R40 = 1;
+622c: b1,01,40            ldb   R40,1            R40 = 1;                          #  0.25 deg.
 622f: ad,08,42            ldzbw R42,8            wR42 = 8;
-6232: 57,43,d0,01,40,30   ad3b  R30,R40,[R42+1d0]  R30 = R40 + [R42+1d0];
+6232: 57,43,d0,01,40,30   ad3b  R30,R40,[R42+1d0]  R30 = R40 + [R42+1d0];          # SPKAD(ALL) = SPKAD(ALL) + 0.25 deg. 
 6238: dd,05               jv    623f             if (R30 <= ff)  {
 623a: 98,38,30            cmpb  R30,R38          
 623d: da,03               jle   6242             if (R30 <= R38) goto 6242; }
-623f: b0,38,30            ldb   R30,R38          R30 = R38; }
-6242: c7,43,d0,01,30      stb   R30,[R42+1d0]    [R42+1d0] = R30;
+623f: b0,38,30            ldb   R30,R38          R30 = R38; }                      # (Clip SPKAD(ALL) to FN190(N_BYTE) as a maximum)
+6242: c7,43,d0,01,30      stb   R30,[R42+1d0]    [R42+1d0] = R30;                  # SPKAD(ALL) = SPKAD(ALL) + 0.25 deg. 
 6247: e0,42,e8            djnz  R42,6232         R42--;
                                                  if (R42 != 0) goto 6232;
 624a: fb                  ei                     interrupts ON; } }
@@ -6571,6 +6582,8 @@ LIGHT LOAD RPM OSCILLATION ADDER
 6260: 08,01,34            shrw  R34,1            R34 >>= 1;
 6263: 68,3e,34            sb2w  R34,R3e          R34 -= R3e;
 6266: c3,e6,86,34         stw   R34,[Re6+86]     TCF = R34;
+
+CTFLG LOGIC
 626a: 98,a8,00            cmpb  R0,Ra8           
 626d: da,0b               jle   627a             if (?APT?_a8 < 0)  {
 626f: 9b,fa,3b,ba         cmpb  Rba,[Rfa+3b]     
@@ -6581,10 +6594,12 @@ LIGHT LOAD RPM OSCILLATION ADDER
 627a: b3,fa,3c,38         ldb   R38,[Rfa+3c]     R38 = TIPHYS;
 627e: 77,fa,3b,38         ad2b  R38,[Rfa+3b]     R38 += TIPMAP;
 6282: d3,03               jnc   6287             if (R38 > ff)  {
-6284: b1,ff,38            ldb   R38,ff           R38 = ff; }
+6284: b1,ff,38            ldb   R38,ff           R38 = ff; }                       # TIPMAP + TIPHYS is clipped to 31.875 in. Hg.
 6287: 98,ba,38            cmpb  R38,Rba          
 628a: db,03               jc    628f             if (R38 < MAP)  {
 628c: 71,f7,51            an2b  R51,f7           B3_CTFLG_51 = 0; }
+
+TIPFLG LOGIC
 628f: a3,fa,36,14         ldw   R14,[Rfa+36]     R14 = KACRAT;
 6293: 8b,e6,86,14         cmpw  R14,[Re6+86]     
 6297: d2,11               jgt   62aa             if (R14 <= TCF)  {
@@ -6596,6 +6611,8 @@ LIGHT LOAD RPM OSCILLATION ADDER
 62a8: 20,03               sjmp  62ad             goto 62ad; } } }
 
 62aa: 71,ef,51            an2b  R51,ef           B4_TIPFLG_51 = 0;
+
+KNOCK STRATEGY ENABLE LOGIC
 62ad: ef,3d,00            call  62ed             KNOCK_HARDWARE_PRESENT ();
 62b0: 37,9e,1e            jnb   B7,R9e,62d1      if (B7_KIHP_9e = 1)  {
 62b3: fa                  di                     interrupts OFF;
@@ -9949,7 +9966,7 @@ ERROR CODE DESCRIPTION
 816b: c0,98,00            stw   R0,R98           EFTR = 0;
 816e: a1,00,01,42         ldw   R42,100          R42 = TPBAR;
 8172: c3,e4,f6,42         stw   R42,[Re4+f6]     KAMRF1 = R42;
-8176: a3,fe,52,cc         ldw   Rcc,[Rfe+52]     Rcc = [cbac];
+8176: a3,fe,52,cc         ldw   Rcc,[Rfe+52]     SAF = VIPSPK;
 817a: 01,c0               clrw  Rc0              EGRDC = 0;
 817c: 91,40,46            orb   R46,40           WOT_AC = 1;
 817f: 71,fe,46            an2b  R46,fe           AM1 = 0;
@@ -10167,7 +10184,7 @@ ERROR CODE DESCRIPTION
    Sub_830c:
 830c: 9b,e2,37,00         cmpb  R0,[Re2+37]      
 8310: df,51               je    8363             if ([Re2+37] != 0)  {
-8312: a3,e2,35,cc         ldw   Rcc,[Re2+35]     Rcc = [Re2+35];
+8312: a3,e2,35,cc         ldw   Rcc,[Re2+35]     SAF = [Re2+35];
 8316: 20,ec               sjmp  8404             goto EXIT;
 
    Sub_8318:
@@ -10181,7 +10198,7 @@ ERROR CODE DESCRIPTION
 8326: 5f,e2,38,18,1c      ml3b  R1c,R18,[Re2+38] wR1c = yR18 * [Re2+38];
 832b: 08,03,1c            shrw  R1c,3            R1c >>= 3;
 832e: a3,e2,35,42         ldw   R42,[Re2+35]     R42 = [Re2+35];
-8332: 48,1c,42,cc         sb3w  Rcc,R42,R1c      Rcc = R42 - R1c;
+8332: 48,1c,42,cc         sb3w  Rcc,R42,R1c      SAF = R42 - R1c;
 8336: a3,e4,9e,22         ldw   R22,[Re4+9e]     R22 = NBAR;
 833a: 6b,e4,44,22         sb2w  R22,[Re4+44]     R22 -= [1c4];
 833e: db,02               jc    8342             if (R22 < 0)  {
@@ -10189,12 +10206,12 @@ ERROR CODE DESCRIPTION
 8342: 8b,e2,31,22         cmpw  R22,[Re2+31]     
 8346: db,0c               jc    8354             if (R22 < [Re2+31])  {
 8348: 8b,e2,33,cc         cmpw  Rcc,[Re2+33]     
-834c: da,02               jle   8350             if (Rcc > [Re2+33])  {
+834c: da,02               jle   8350             if (SAF > [Re2+33])  {
 834e: 20,ba               sjmp  840a             return; }
 
 8350: 2d,77               scall 80c9             SET_SERVICE_CODE (
 8352: 13,02                     #arg 1              213 ); }
-8354: a3,fe,52,cc         ldw   Rcc,[Rfe+52]     Rcc = [cbac];
+8354: a3,fe,52,cc         ldw   Rcc,[Rfe+52]     SAF = VIPSPK;
 8358: 20,aa               sjmp  8404             goto EXIT;
 
    Sub_835a:
@@ -10308,7 +10325,7 @@ ERROR CODE DESCRIPTION
 8434: 9b,fe,28,00         cmpb  R0,[Rfe+28]      
 8438: df,17               je    8451             if (KIHP != 0)  {
 843a: 91,40,2f            orb   R2f,40           B6_VIP_flags4 = 1;
-843d: a3,e2,01,cc         ldw   Rcc,[Re2+1]      Rcc = [Re2+1];
+843d: a3,e2,01,cc         ldw   Rcc,[Re2+1]      SAF = [Re2+1];
 8441: a3,e2,03,96         ldw   R96,[Re2+3]      LAMBSE1 = [Re2+3];
 8445: af,e2,09,1a         ldzbw R1a,[Re2+9]      wR1a = [Re2+9];
 8449: c3,e4,1a,1a         stw   R1a,[Re4+1a]     KTS_pulsewidth = R1a;
@@ -10377,7 +10394,7 @@ ERROR CODE DESCRIPTION
 84ec: 37,2c,05            jnb   B7,R2c,84f4      if (Rmspru = 1)  {
 84ef: ef,d7,fb            call  80c9             SET_SERVICE_CODE (
 84f2: 25,02                     #arg 1              225 ); } }
-84f4: a3,fe,52,cc         ldw   Rcc,[Rfe+52]     Rcc = [cbac];
+84f4: a3,fe,52,cc         ldw   Rcc,[Rfe+52]     SAF = VIPSPK;
 84f8: b3,e2,af,42         ldb   R42,[Re2+af]     R42 = [Re2-51];
 84fc: e0,42,12            djnz  R42,8511         R42--;
                                                  if (R42 != 0) goto 8511;
@@ -13971,7 +13988,7 @@ a8ca: 80,64,01            timer 80, ISCTMR,
 a8cd: 20,e8,01            timer 20, MULTMR, 
 a8d0: 22,96,01            timer 22, A3CTMR, 
 a8d3: 81,49,01,04,a5      timer 81,   149, B2_APT_a5, 
-a8d8: 40,bc,03            timer 40,   3bc, 
+a8d8: 40,bc,03            timer 40, SPKTMR, 
 a8db: 40,bd,03            timer 40, SETTMR, 
 a8de: 22,3c,02            timer 22, TSLIDM, 
 a8e1: 40,50,01            timer 40, NDDTIM, 
@@ -15248,15 +15265,15 @@ b4dd: ff                  fill
 b4de: 20,00               word     20
 b4e0: 33,f3               word   f333            FKEXIT_MAX
 b4e2: 00,80               word   8000            FKEXIT_MIN
-b4e4: 8f,02               word    28f
-b4e6: 8f,02               word    28f
-b4e8: 48,01               word    148
-b4ea: 48,01               word    148
+b4e4: 8f,02               word    28f            KSPKDO
+b4e6: 8f,02               word    28f            KSPKDU
+b4e8: 48,01               word    148            KSPKNO
+b4ea: 48,01               word    148            KSPKNU
 b4ec: 3f,00               word     3f            SPKCTL
-b4ee: 50,00               word     50
+b4ee: 50,00               word     50            SPKIDR
 b4f0: 50,00               word     50            SPKINU
-b4f2: 60,00               word     60
-b4f4: 10                  byte     10
+b4f2: 60,00               word     60            SPK_RUNUP
+b4f4: 10                  byte     10            STTIM
 
 b4f5: ff                  fill  
 
@@ -15809,8 +15826,8 @@ bb80: 00                  byte      0            DFTRPM
 bb81: 00                  byte      0            DFTRPH
 bb82: 00,00               word      0            KS1
 bb84: 20                  byte     20            FRCCTM
-bb85: 00                  byte      0            Splclp
-bb86: bc                  byte     bc
+bb85: 00                  byte      0            SPLCLP
+bb86: bc                  byte     bc            SPUCLP
 
 bb87: ff                  fill  
 
@@ -17468,7 +17485,7 @@ cba8: 8d                  byte     8d            fuel_max_load_verification_valu
 cba9: ff                  fill  
 
 cbaa: 00,32               word   3200            VKYPWR
-cbac: 78,00               word     78
+cbac: 78,00               word     78            VIPSPK
 cbae: 00,60               word   6000
 cbb0: 00,a0               word   a000
 cbb2: 9a,09               word    99a
