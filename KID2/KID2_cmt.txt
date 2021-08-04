@@ -230,6 +230,8 @@
 
 2da3 |## Initialise the RAM table() from InjTab table()
 
+2e40 \n\nRISING EDGE CALCULATIONS
+
 2e4a # Call DWELL_CALCULATION
 2e53 # Increment CRKPIP_CTR every rising edge of PIP
 2e5b # Clip CRKPIP_CTR at 255 as a maximum
@@ -310,14 +312,31 @@
 35bd # (request new IBETA)
 
 35bd \n\nFUEL_REPEAT
+35d8 # Shift TLS_SHFTR 1 bit to the left
+35e6 # TLSCTR = 16
+35e9 # TLS_SHFTR = TLSPAT
+35f1 # carry bit = 1
+35f1 \w# (OK to output fuel this PIP)
 
 360c # (injection A occurred)
 3615 # (injection B occurred)
+3621 # Toggle INJ_BANK (do next bank)
+
 3641 # EXIT "FUEL SERVICE" routine
+
+3911 # MAP_FREQ = 1/(DATA_TIME - LAST_MAP2)
+3969 # After incrementing MAPCNT, check the following:
+396d # MAPCNT >= MAX_SCAP_EDGES
+396f # (too many SCAP edges)
+
+3976 # (move time of previous SCAP edge)
+397a # (store time of current SCAP edge)
+3982 # (time between SCAP edges)
+3986 # (notify self test of new edge)
 
 398a # (clear MAP overflow flag)
 398d # (in crank)
-
+399b # LAST_MAP - LAST_MAP2
 39b2 # (PIP period accumulator)
 
 39c0 # (increment PIP period counter)
@@ -522,12 +541,19 @@
 4101 # (crank mode and SCAP sensor have failed)
 4122 # (throttle position sensor okay)
 
+41d2 \n\nVSCTR LOGIC
+
 420f \n\nENGINE SPEED CALCULATION (EQNCALC)
 421a # (engine is stopped)
 
+423c # Indicator of ignition type
 
 4243 # 2 = Low Data Rate Distributorless dual plug (LDR_DIS)
-4257 \n\w# (new PIP information is available for calculation of rpm)
+4254 # No action
+4257 # EXIT RPM LOGIC
+
+4257 \n# (new PIP information is available for calculation of rpm)
+4288 # N = 60/(ENGCYL * PIP period)
 
 42d9 # DNDTI = (N - N_PREV)/DT_DNDT
 42ef # DNDT_SPK = ROLAV(DNDTI,TCNDT_SPK)

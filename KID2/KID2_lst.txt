@@ -1141,11 +1141,11 @@
 2a85: 48,84,06,76         sb3w  R76,R6,R84       R76 = IO_Timer - Reftime;
 2a89: 64,76,84            ad2w  R84,R76          Reftime += R76;
 2a8c: b4,00,86            adcb  R86,R0           ReftimeH += CY;
-2a8f: b0,86,6e            ldb   R6e,R86          Event_timeH = ReftimeH;
+2a8f: b0,86,6e            ldb   R6e,R86          DATA_TIMEH = ReftimeH;
 2a92: 48,0e,84,76         sb3w  R76,R84,Re       R76 = Reftime - HSI_Time;
 2a96: 65,02,00,76         ad2w  R76,2            R76 += 2;
-2a9a: 48,76,84,6c         sb3w  R6c,R84,R76      Event_time = Reftime - R76;
-2a9e: b8,00,6e            sbbb  R6e,R0           Event_timeH -= CY;
+2a9a: 48,76,84,6c         sb3w  R6c,R84,R76      DATA_TIME = Reftime - R76;
+2a9e: b8,00,6e            sbbb  R6e,R0           DATA_TIMEH -= CY;
 2aa1: b0,83,75            ldb   R75,R83          NEW_IRQs = HSI_State;
 2aa4: b0,0d,83            ldb   R83,Rd           HSI_State = HSI_Data;
 2aa7: 94,83,75            xorb  R75,R83          NEW_IRQs ^= HSI_State;
@@ -1162,11 +1162,11 @@
 2ac3: 30,75,02            jnb   B0,R75,2ac8      if (B0_NEW_IRQs = 1)  {
 2ac6: 2a,c4               scall 2d8c             PIP_DATA (); }
 2ac8: 37,75,03            jnb   B7,R75,2ace      if (B7_NEW_IRQs = 1)  {
-2acb: ef,f1,5d            call  88bf             Sub_88bf (); }
+2acb: ef,f1,5d            call  88bf             VIP_EOS_IDM (); }
 2ace: 35,75,03            jnb   B5,R75,2ad4      if (B5_NEW_IRQs = 1)  {
 2ad1: ef,4c,10            call  3b20             Sub_3b20 (); }
 2ad4: 32,75,03            jnb   B2,R75,2ada      if (B2_NEW_IRQs = 1)  {
-2ad7: ef,1a,0e            call  38f4             SYSEQ_MAP_COM1 (); }
+2ad7: ef,1a,0e            call  38f4             SCAP_Sensor_Edge (); }
 2ada: 34,75,04            jnb   B4,R75,2ae1      if (B4_NEW_IRQs = 1)  {
 2add: c3,e4,16,00         stw   R0,[Re4+16]      A3CTMR = 0; }
 2ae1: 3a,0a,a1            jb    B2,Ra,2a85       if (B2_HSI_Ready = 1) goto Read_HSI;
@@ -1430,8 +1430,8 @@
    PIP_DATA:
 2d8c: af,f6,05,58         ldzbw R58,[Rf6+5]      wR58 = ENGCYL;
 2d90: a3,59,82,2d,58      ldw   R58,[R58+2d82]   R58 = [R58+2d82];
-2d95: 48,7a,6c,54         sb3w  R54,R6c,R7a      R54 = Event_time - Prev_PIP_time;
-2d99: b0,6e,56            ldb   R56,R6e          R56 = Event_timeH;
+2d95: 48,7a,6c,54         sb3w  R54,R6c,R7a      R54 = DATA_TIME - LAST_HI_PIP;
+2d99: b0,6e,56            ldb   R56,R6e          R56 = DATA_TIMEH;
 2d9c: b8,7c,56            sbbb  R56,R7c          R56 -= Prev_PIP_timeH - CY;
 2d9f: 38,83,02            jb    B0,R83,2da4      if (B0_HSI_State = 0)  {
 2da2: 20,cb               sjmp  2e6f             goto 2e6f; }                      |## Initialise the RAM table() from InjTab table()
@@ -1444,12 +1444,12 @@
 2db1: f0                  ret                    return; }
 
 2db2: 91,10,50            orb   R50,10           B4_First_pip = 1;
-2db5: c3,01,52,02,6c      stw   R6c,[R0+252]     [252] = Event_time;
-2dba: c7,01,54,02,6e      stb   R6e,[R0+254]     [254] = Event_timeH;
-2dbf: c3,01,5e,02,6c      stw   R6c,[R0+25e]     [25e] = Event_time;
-2dc4: c7,01,60,02,6e      stb   R6e,[R0+260]     [260] = Event_timeH;
-2dc9: c3,e8,38,6c         stw   R6c,[Re8+38]     [3b8] = Event_time;
-2dcd: c7,e8,3a,6e         stb   R6e,[Re8+3a]     [3ba] = Event_timeH;
+2db5: c3,01,52,02,6c      stw   R6c,[R0+252]     [252] = DATA_TIME;
+2dba: c7,01,54,02,6e      stb   R6e,[R0+254]     [254] = DATA_TIMEH;
+2dbf: c3,01,5e,02,6c      stw   R6c,[R0+25e]     [25e] = DATA_TIME;
+2dc4: c7,01,60,02,6e      stb   R6e,[R0+260]     [260] = DATA_TIMEH;
+2dc9: c3,e8,38,6c         stw   R6c,[Re8+38]     PREV_N_PIP = DATA_TIME;
+2dcd: c7,e8,3a,6e         stb   R6e,[Re8+3a]     [3ba] = DATA_TIMEH;
 2dd1: 20,44               sjmp  2e17             goto 2e17; } }
 
 2dd3: b3,e4,fc,5a         ldb   R5a,[Re4+fc]     R5a = PPCTR;
@@ -1459,10 +1459,10 @@
 2de0: 17,5a               incb  R5a              R5a++;
 2de2: 20,16               sjmp  2dfa             goto 2dfa; }
 
-2de4: c3,01,52,02,6c      stw   R6c,[R0+252]     [252] = Event_time;
-2de9: c7,01,54,02,6e      stb   R6e,[R0+254]     [254] = Event_timeH;
-2dee: c3,01,5e,02,6c      stw   R6c,[R0+25e]     [25e] = Event_time;
-2df3: c7,01,60,02,6e      stb   R6e,[R0+260]     [260] = Event_timeH;
+2de4: c3,01,52,02,6c      stw   R6c,[R0+252]     [252] = DATA_TIME;
+2de9: c7,01,54,02,6e      stb   R6e,[R0+254]     [254] = DATA_TIMEH;
+2dee: c3,01,5e,02,6c      stw   R6c,[R0+25e]     [25e] = DATA_TIME;
+2df3: c7,01,60,02,6e      stb   R6e,[R0+260]     [260] = DATA_TIMEH;
 2df8: 11,5a               clrb  R5a              R5a = 0;
 2dfa: c7,e4,fc,5a         stb   R5a,[Re4+fc]     PPCTR = R5a; }
 2dfe: 91,08,4e            orb   R4e,8            B3_NEW_RPM_4e = 1;
@@ -1488,16 +1488,18 @@
 2e39: 48,56,c2,5a         sb3w  R5a,Rc2,R56      R5a = Rc2 - R56;
 2e3d: 08,58,54            shrw  R54,R58          R54 >>= R58;
 2e40: 44,54,5a,c2         ad3w  Rc2,R5a,R54      Rc2 = R5a + R54;
+
+RISING EDGE CALCULATIONS
 2e44: 32,e1,03            jnb   B2,Re1,2e4a      if (B2_CCD_HP = 1)  {
 2e47: 3b,49,03            jb    B3,R49,2e4d      if (DWLELD = 1) goto 2e4d; }
 2e4a: ef,e3,05            call  3430             DWELL_CALCULATION (); }           # Call DWELL_CALCULATION
-2e4d: c0,7a,6c            stw   R6c,R7a          Prev_PIP_time = Event_time;
-2e50: c4,7c,6e            stb   R6e,R7c          Prev_PIP_timeH = Event_timeH;
+2e4d: c0,7a,6c            stw   R6c,R7a          LAST_HI_PIP = DATA_TIME;
+2e50: c4,7c,6e            stb   R6e,R7c          Prev_PIP_timeH = DATA_TIMEH;
 2e53: b3,e4,00,54         ldb   R54,[Re4+0]      R54 = CRKPIP_CTR;                 # Increment CRKPIP_CTR every rising edge of PIP
 2e57: 17,54               incb  R54              R54++;
 2e59: db,04               jc    2e5f             if (R54 <= ff)  {
 2e5b: c7,e4,00,54         stb   R54,[Re4+0]      CRKPIP_CTR = R54; }               # Clip CRKPIP_CTR at 255 as a maximum
-2e5f: ef,28,0b            call  398a             Sub_398a ();
+2e5f: ef,28,0b            call  398a             SYSEQ_MAP_COM1 ();
 2e62: 15,cf               decb  Rcf              SYNCTR--;
 2e64: ef,40,04            call  32a7             EOS_KAY_CALCULATIONS ();
 2e67: 30,4f,03            jnb   B0,R4f,2e6d      if (B0_?Immediate? = 1)  {
@@ -1592,8 +1594,8 @@
 2f52: 38,4f,19            jb    B0,R4f,2f6e      if (B0_?Immediate? = 0)  {
 2f55: 35,a1,14            jnb   B5,Ra1,2f6c      if (B5_Flags_a1 = 1)  {
 2f58: 91,80,53            orb   R53,80           B7_R53 = 1;
-2f5b: c3,e8,76,6c         stw   R6c,[Re8+76]     [3f6] = Event_time;
-2f5f: c7,e8,78,6e         stb   R6e,[Re8+78]     [3f8] = Event_timeH;
+2f5b: c3,e8,76,6c         stw   R6c,[Re8+76]     [3f6] = DATA_TIME;
+2f5f: c7,e8,78,6e         stb   R6e,[Re8+78]     [3f8] = DATA_TIMEH;
 2f63: 91,08,4c            orb   R4c,8            B3_Immediate = 1;
 2f66: ef,e3,fa            call  2a4c             Do_Cmd_N ();
 2f69: 71,df,a1            an2b  Ra1,df           B5_Flags_a1 = 0; }
@@ -1794,7 +1796,7 @@
    Update_HTime_prev:
 3179: 3f,53,17            jb    B7,R53,3193      if (B7_R53 = 0)  {
 317c: 71,ef,49            an2b  R49,ef           B4_R49 = 0;
-317f: a3,e8,72,72         ldw   R72,[Re8+72]     HSO_time = [3f2];
+317f: a3,e8,72,72         ldw   R72,[Re8+72]     HSO_time = SPOUT_LOW_EDGE;
 3183: b3,e8,74,74         ldb   R74,[Re8+74]     HSO_timeH = [3f4];
 3187: 67,e8,5c,72         ad2w  R72,[Re8+5c]     HSO_time += DWELL;
 318b: b4,00,74            adcb  R74,R0           HSO_timeH += CY;
@@ -1811,7 +1813,7 @@
 31a9: 91,08,49            orb   R49,8            DWLELD = 1;
 31ac: 91,40,9e            orb   R9e,40           B6_Reg_9e = 1; } } } }
 31af: 71,ef,49            an2b  R49,ef           B4_R49 = 0;
-31b2: a0,7a,72            ldw   R72,R7a          HSO_time = Prev_PIP_time;
+31b2: a0,7a,72            ldw   R72,R7a          HSO_time = LAST_HI_PIP;
 31b5: b0,7c,74            ldb   R74,R7c          HSO_timeH = Prev_PIP_timeH;
 31b8: 67,e6,d6,72         ad2w  R72,[Re6+d6]     HSO_time += [256];
 31bc: b4,00,74            adcb  R74,R0           HSO_timeH += CY;
@@ -1836,7 +1838,7 @@
 31e9: 27,7e               sjmp  3169             goto Update_HTime_pend; }
 
 31eb: 3f,53,2e            jb    B7,R53,321c      if (B7_R53 = 0)  {
-31ee: a0,7a,72            ldw   R72,R7a          HSO_time = Prev_PIP_time;
+31ee: a0,7a,72            ldw   R72,R7a          HSO_time = LAST_HI_PIP;
 31f1: b0,7c,74            ldb   R74,R7c          HSO_timeH = Prev_PIP_timeH;
 31f4: 64,c8,72            ad2w  R72,Rc8          HSO_time += HFDLTA;
 31f7: b4,00,74            adcb  R74,R0           HSO_timeH += CY;
@@ -1857,7 +1859,7 @@
 3223: b3,e8,78,74         ldb   R74,[Re8+78]     HSO_timeH = [3f8];
 3227: 67,e8,70,72         ad2w  R72,[Re8+70]     HSO_time += SPOUT_LOW_DELTA;
 322b: b4,00,74            adcb  R74,R0           HSO_timeH += CY; }
-322e: c3,e8,72,72         stw   R72,[Re8+72]     [3f2] = HSO_time;
+322e: c3,e8,72,72         stw   R72,[Re8+72]     SPOUT_LOW_EDGE = HSO_time;
 3232: c7,e8,74,74         stb   R74,[Re8+74]     [3f4] = HSO_timeH;
 3236: f8                  clc                    CY = 0;
 3237: f0                  ret                    return;
@@ -1906,7 +1908,7 @@
 3290: 20,03               sjmp  3295             goto 3295; } }
 
 3292: bd,ff,56            ldsbw R56,ff           swR56 = ff;
-3295: 44,7a,56,72         ad3w  R72,R56,R7a      HSO_time = R56 + Prev_PIP_time;
+3295: 44,7a,56,72         ad3w  R72,R56,R7a      HSO_time = R56 + LAST_HI_PIP;
 3299: b0,7c,74            ldb   R74,R7c          HSO_timeH = Prev_PIP_timeH;
 329c: b4,00,74            adcb  R74,R0           HSO_timeH += CY;
 329f: f8                  clc                    CY = 0;
@@ -2223,27 +2225,28 @@ FUEL_REPEAT
 35c0: 3b,4a,11            jb    B3,R4a,35d4      if (B3_TLS_NV_FLG_4a = 0)  {
 35c3: 3a,4a,0e            jb    B2,R4a,35d4      if (B2_TLS_24_FLG_4a = 0)  {
 35c6: 39,4a,0b            jb    B1,R4a,35d4      if (B1_TLS_34_FLG_4a = 0)  {
-35c9: c9,f3,35            push  35f3             push(Sub_35f3);
+35c9: c9,f3,35            push  35f3             push(SET_UP_INJECTOR_OUTPUT_EDGE);
 35cc: b1,01,56            ldb   R56,1            R56 = 1;
 35cf: c7,e8,50,56         stb   R56,[Re8+50]     TLSCTR = R56;
 35d3: f0                  ret                    return; } } }
 
 35d4: a3,e8,4e,54         ldw   R54,[Re8+4e]     R54 = TLS_SHFTR;
-35d8: 09,01,54            shlw  R54,1            R54 <<= 1;
+35d8: 09,01,54            shlw  R54,1            R54 <<= 1;                        # Shift TLS_SHFTR 1 bit to the left
 35db: b3,e8,50,56         ldb   R56,[Re8+50]     R56 = TLSCTR;
 35df: e0,56,07            djnz  R56,35e9         R56--;
                                                  if (R56 != 0) goto 35e9;
 35e2: a3,e8,4c,54         ldw   R54,[Re8+4c]     R54 = TLSPAT;
-35e6: b1,10,56            ldb   R56,10           R56 = 10; }
-35e9: c3,e8,4e,54         stw   R54,[Re8+4e]     TLS_SHFTR = R54;
+35e6: b1,10,56            ldb   R56,10           R56 = 10; }                       # TLSCTR = 16
+35e9: c3,e8,4e,54         stw   R54,[Re8+4e]     TLS_SHFTR = R54;                  # TLS_SHFTR = TLSPAT
 35ed: c7,e8,50,56         stb   R56,[Re8+50]     TLSCTR = R56;
-35f1: d3,2b               jnc   361e             if (B15_R54 = 1)  {
-   Sub_35f3:
-35f3: 28,82               scall 3677             Sub_3677 ();
+35f1: d3,2b               jnc   361e             if (B15_R54 = 1)  {               # carry bit = 1
+                                                                                   # (OK to output fuel this PIP)
+   SET_UP_INJECTOR_OUTPUT_EDGE:
+35f3: 28,82               scall 3677             Injector_Edge ();
 35f5: 36,a5,06            jnb   B6,Ra5,35fe      if (UNDSP = 1)  {
 35f8: 01,54               clrw  R54              R54 = 0;
 35fa: 11,56               clrb  R56              R56 = 0;
-35fc: 28,85               scall 3683             Sub_3683 (); }
+35fc: 28,85               scall 3683             Injector_Edge_Immediate_Output_Request (); }
 35fe: a0,54,72            ldw   R72,R54          HSO_time = R54;
 3601: b0,56,74            ldb   R74,R56          HSO_timeH = R56;
 3604: 88,94,00            cmpw  R0,R94           
@@ -2257,7 +2260,7 @@ FUEL_REPEAT
 3618: a1,02,23,88         ldw   R88,2302         TablePTR = 2302;
 361c: 28,6c               scall 368a             Sub_368a (); } }
 361e: 36,a3,03            jnb   B6,Ra3,3624      if (B6_NUMOUT_a3 = 1)  {
-3621: 95,01,4d            xorb  R4d,1            B0_INJ_BANK_4d ^= 1; }
+3621: 95,01,4d            xorb  R4d,1            B0_INJ_BANK_4d ^= 1; }            # Toggle INJ_BANK (do next bank)
 3624: 36,a3,17            jnb   B6,Ra3,363e      if (B6_NUMOUT_a3 = 1)  {
 3627: 3e,50,14            jb    B6,R50,363e      if (B6_FUEL_FINISHED_50 = 0)  {
 362a: 3f,a5,09            jb    B7,Ra5,3636      if (CRKFLG = 0)  {
@@ -2292,13 +2295,13 @@ FUEL_REPEAT
 3673: c6,5c,5b            stb   R5b,[R5c]        [R5c] = R5b;
 3676: f0                  ret                    return;
 
-   Sub_3677:
+   Injector_Edge:
 3677: 11,54               clrb  R54              R54 = 0;
 3679: b3,e4,12,55         ldb   R55,[Re4+12]     R55 = IBETA;
 367d: 6c,c4,54            ml2w  R54,Rc4          lR54 *= DT12S;
 3680: 0c,0d,54            shrdw R54,d            lR54 >>= d;
-   Sub_3683:
-3683: 64,7a,54            ad2w  R54,R7a          R54 += Prev_PIP_time;
+   Injector_Edge_Immediate_Output_Request:
+3683: 64,7a,54            ad2w  R54,R7a          R54 += LAST_HI_PIP;
 3686: b4,7c,56            adcb  R56,R7c          R56 += Prev_PIP_timeH + CY;
 3689: f0                  ret                    return;
 
@@ -2409,7 +2412,7 @@ FUEL_REPEAT
 37a1: 52,5c,5b,00         an3b  R0,R5b,[R5c]     R0 = R5b & [R5c];
 37a5: df,25               je    37cc             if ((R5b & [R5c]) != 0)  {
 37a7: 91,10,4f            orb   R4f,10           B4_No_service = 1;
-37aa: 2e,cb               scall 3677             Sub_3677 ();
+37aa: 2e,cb               scall 3677             Injector_Edge ();
 37ac: b3,88,09,57         ldb   R57,[R88+9]      R57 = [TablePTR+9];
 37b0: 72,5c,57            an2b  R57,[R5c]        R57 &= [R5c];
 37b3: df,06               je    37bb             if (R57 != 0)  {
@@ -2537,25 +2540,25 @@ FUEL_REPEAT
 38ef: cc,00               pop   R0               R0 = pop();
 38f1: e7,3d,f1            jump  2a31             goto 2a31;
 
-   SYSEQ_MAP_COM1:
+   SCAP_Sensor_Edge:
 38f4: a3,e4,a8,5c         ldw   R5c,[Re4+a8]     R5c = MAPCNT;
 38f8: 3f,a5,03            jb    B7,Ra5,38fe      if (CRKFLG = 0)  {
 38fb: 34,a4,20            jnb   B4,Ra4,391e      if (MAPOFL = 0) goto 391e; }
 38fe: 89,00,08,5c         cmpw  R5c,800          
 3902: d3,5d               jnc   3961             if (R5c < 800) goto 3961;
-3904: 4b,e4,1e,6c,54      sb3w  R54,R6c,[Re4+1e] R54 = Event_time - [19e];
+3904: 4b,e4,1e,6c,54      sb3w  R54,R6c,[Re4+1e] R54 = DATA_TIME - LAST_MAP2;
 3909: a1,ab,9a,58         ldw   R58,9aab         R58 = 9aab;
 390d: a1,5b,06,5a         ldw   R5a,65b          R5a = 65b;
-3911: 8c,54,58            divw  R58,R54          wR58 /= R54;
+3911: 8c,54,58            divw  R58,R54          wR58 /= R54;                      # MAP_FREQ = 1/(DATA_TIME - LAST_MAP2)
 3914: d5,04               jnv   391a             if (OVF = 1)  {
 3916: a1,00,a5,58         ldw   R58,a500         R58 = a500; }
 391a: 29,4f               scall 3a6b             MAP_CALC ();
 391c: 20,54               sjmp  3972             goto 3972; }
 
-391e: 48,7a,6c,54         sb3w  R54,R6c,R7a      R54 = Event_time - Prev_PIP_time;
+391e: 48,7a,6c,54         sb3w  R54,R6c,R7a      R54 = DATA_TIME - LAST_HI_PIP;
 3922: 01,56               clrw  R56              R56 = 0;
 3924: 0d,0b,54            shldw R54,b            lR54 <<= b;
-3927: 4b,e4,20,6c,58      sb3w  R58,R6c,[Re4+20] R58 = Event_time - [1a0];
+3927: 4b,e4,20,6c,58      sb3w  R58,R6c,[Re4+20] R58 = DATA_TIME - LAST_MAP;
 392c: 8c,58,54            divw  R54,R58          wR54 /= R58;
 392f: d5,02               jnv   3933             if (OVF = 1)  {
 3931: 01,54               clrw  R54              R54 = 0; }
@@ -2563,10 +2566,10 @@ FUEL_REPEAT
 3936: 88,58,56            cmpw  R56,R58          
 3939: d1,02               jleu  393d             if (R56 > R58)  {
 393b: 07,54               incw  R54              R54++; }
-393d: 37,52,16            jnb   B7,R52,3956      if (B4_LONG_MAP_AVG_52 = 1)  {
+393d: 37,52,16            jnb   B7,R52,3956      if (B7_LONG_MAP_AVG_52 = 1)  {
 3940: 34,52,09            jnb   B4,R52,394c      if (B4_LONG_ISF_UP_FLG_52 = 1)  {
 3943: 71,ef,52            an2b  R52,ef           B4_LONG_ISF_UP_FLG_52 = 0;
-3946: c3,e8,54,54         stw   R54,[Re8+54]     [3d4] = R54;
+3946: c3,e8,54,54         stw   R54,[Re8+54]     ISF = R54;
 394a: 20,0a               sjmp  3956             goto 3956; }
 
 394c: b3,e8,56,56         ldb   R56,[Re8+56]     R56 = LONG_MAPCNT;
@@ -2579,26 +2582,26 @@ FUEL_REPEAT
 
 3961: 65,00,08,5c         ad2w  R5c,800          R5c += 800;
 3965: c3,e4,a8,5c         stw   R5c,[Re4+a8]     MAPCNT = R5c;
-3969: 89,00,e0,5c         cmpw  R5c,e000         
-396d: d3,03               jnc   3972             if (R5c >= e000)  {
-396f: 91,10,a4            orb   Ra4,10           MAPOFL = 1; }
-3972: a3,e4,20,54         ldw   R54,[Re4+20]     R54 = [1a0];
-3976: c3,e4,1e,54         stw   R54,[Re4+1e]     [19e] = R54;
-397a: c3,e4,20,6c         stw   R6c,[Re4+20]     [1a0] = Event_time;
-397e: 48,54,6c,54         sb3w  R54,R6c,R54      R54 = Event_time - R54;
-3982: c3,e6,80,54         stw   R54,[Re6+80]     MDELTA = R54;
-3986: 91,40,4e            orb   R4e,40           B6_NEW_BAP = 1;
+3969: 89,00,e0,5c         cmpw  R5c,e000                                           # After incrementing MAPCNT, check the following:
+396d: d3,03               jnc   3972             if (R5c >= e000)  {               # MAPCNT >= MAX_SCAP_EDGES
+396f: 91,10,a4            orb   Ra4,10           MAPOFL = 1; }                     # (too many SCAP edges)
+3972: a3,e4,20,54         ldw   R54,[Re4+20]     R54 = LAST_MAP;
+3976: c3,e4,1e,54         stw   R54,[Re4+1e]     LAST_MAP2 = R54;                  # (move time of previous SCAP edge)
+397a: c3,e4,20,6c         stw   R6c,[Re4+20]     LAST_MAP = DATA_TIME;             # (store time of current SCAP edge)
+397e: 48,54,6c,54         sb3w  R54,R6c,R54      R54 = DATA_TIME - R54;
+3982: c3,e6,80,54         stw   R54,[Re6+80]     MDELTA = R54;                     # (time between SCAP edges)
+3986: 91,40,4e            orb   R4e,40           B6_NEW_MAP_4e = 1;                # (notify self test of new edge)
 3989: f0                  ret                    return;
 
-   Sub_398a:
+   SYSEQ_MAP_COM1:
 398a: 71,ef,a4            an2b  Ra4,ef           MAPOFL = 0;                       # (clear MAP overflow flag)
 398d: 37,a5,01            jnb   B7,Ra5,3991      if (CRKFLG = 1)  {                # (in crank)
 3990: f0                  ret                    return; }
 
-3991: 4b,e4,20,7a,54      sb3w  R54,R7a,[Re4+20] R54 = Prev_PIP_time - [1a0];
+3991: 4b,e4,20,7a,54      sb3w  R54,R7a,[Re4+20] R54 = LAST_HI_PIP - LAST_MAP;
 3996: 01,56               clrw  R56              R56 = 0;
 3998: 0d,0b,54            shldw R54,b            lR54 <<= b;
-399b: 8f,e6,80,54         divw  R54,[Re6+80]     wR54 /= MDELTA;
+399b: 8f,e6,80,54         divw  R54,[Re6+80]     wR54 /= MDELTA;                   # LAST_MAP - LAST_MAP2
 399f: 09,01,56            shlw  R56,1            R56 <<= 1;
 39a2: 8b,e6,80,56         cmpw  R56,[Re6+80]     
 39a6: d3,02               jnc   39aa             if (R56 >= MDELTA)  {
@@ -2606,15 +2609,15 @@ FUEL_REPEAT
 39aa: 3d,52,09            jb    B5,R52,39b6      if (B5_ISF_UP_FLG_52 = 0)  {
 39ad: 47,e4,a0,c4,5c      ad3w  R5c,Rc4,[Re4+a0] R5c = DT12S + DT12SA;
 39b2: c3,e4,a0,5c         stw   R5c,[Re4+a0]     DT12SA = R5c; }                   # (PIP period accumulator)
-39b6: 37,52,30            jnb   B7,R52,39e9      if (B4_LONG_MAP_AVG_52 = 1)  {
+39b6: 37,52,30            jnb   B7,R52,39e9      if (B7_LONG_MAP_AVG_52 = 1)  {
 39b9: 3c,52,2d            jb    B4,R52,39e9      if (B4_LONG_ISF_UP_FLG_52 = 0)  {
 39bc: b3,e8,57,58         ldb   R58,[Re8+57]     R58 = MAP_PIPCNT;
 39c0: 17,58               incb  R58              R58++;                            # (increment PIP period counter)
 39c2: c7,e8,57,58         stb   R58,[Re8+57]     MAP_PIPCNT = R58;
 39c6: 47,e8,52,c4,58      ad3w  R58,Rc4,[Re8+52] R58 = DT12S + LONG_DT12SA;        # (PIP period accumulator)
 39cb: d3,07               jnc   39d4             if (R58 > ffff)  {
-39cd: 71,7f,52            an2b  R52,7f           B4_LONG_MAP_AVG_52 = 0;
-39d0: 28,89               scall 3a5b             Sub_3a5b ();
+39cd: 71,7f,52            an2b  R52,7f           B7_LONG_MAP_AVG_52 = 0;
+39d0: 28,89               scall 3a5b             MAP_Average_Complete ();
 39d2: 20,15               sjmp  39e9             goto 39e9; }
 
 39d4: c3,e8,52,58         stw   R58,[Re8+52]     LONG_DT12SA = R58;
@@ -2624,37 +2627,37 @@ FUEL_REPEAT
 39e3: 9b,e8,57,58         cmpb  R58,[Re8+57]     
 39e7: d1,30               jleu  3a19             if (R58 <= MAP_PIPCNT) goto 3a19; } }
 39e9: 3d,52,7e            jb    B5,R52,3a6a      if (B5_ISF_UP_FLG_52 = 1) return;
-39ec: a3,fe,0a,56         ldw   R56,[Rfe+a]      R56 = [cb64];
+39ec: a3,fe,0a,56         ldw   R56,[Rfe+a]      R56 = MAPEDG;
 39f0: 69,00,08,56         sb2w  R56,800          R56 -= 800;
 39f4: 8b,e4,a8,56         cmpw  R56,[Re4+a8]     
 39f8: d9,70               jgtu  3a6a             if (R56 > MAPCNT) return;
-39fa: 37,52,05            jnb   B7,R52,3a02      if (B4_LONG_MAP_AVG_52 = 1)  {
-39fd: 36,52,02            jnb   B6,R52,3a02      if (B6_Flags_52 = 1)  {
+39fa: 37,52,05            jnb   B7,R52,3a02      if (B7_LONG_MAP_AVG_52 = 1)  {
+39fd: 36,52,02            jnb   B6,R52,3a02      if (B6_LONG_MAP_FST_52 = 1)  {
 3a00: 21,0d               sjmp  3b0f             goto 3b0f; } }
 
-3a02: 71,bf,52            an2b  R52,bf           B6_Flags_52 = 0;
+3a02: 71,bf,52            an2b  R52,bf           B6_LONG_MAP_FST_52 = 0;
 3a05: 47,e4,a8,54,58      ad3w  R58,R54,[Re4+a8] R58 = R54 + MAPCNT;
 3a0a: d3,03               jnc   3a0f             if (R58 > ffff)  {
 3a0c: bd,ff,58            ldsbw R58,ff           swR58 = ff; }
 3a0f: 6d,00,40,58         ml2w  R58,4000         lR58 *= 4000;
-3a13: 28,2a               scall 3a3f             Sub_3a3f ();
-3a15: 37,52,43            jnb   B7,R52,3a5b      if (B4_LONG_MAP_AVG_52 = 0) goto Sub_3a5b;
+3a13: 28,2a               scall 3a3f             Calculate_MAP_FREQ ();
+3a15: 37,52,43            jnb   B7,R52,3a5b      if (B7_LONG_MAP_AVG_52 = 0) goto MAP_Average_Complete;
 3a18: f0                  ret                    return; }
 
-3a19: 91,40,52            orb   R52,40           B6_Flags_52 = 1;
+3a19: 91,40,52            orb   R52,40           B6_LONG_MAP_FST_52 = 1;
 3a1c: af,e8,56,58         ldzbw R58,[Re8+56]     wR58 = LONG_MAPCNT;
 3a20: 01,5a               clrw  R5a              R5a = 0;
 3a22: 0d,0b,58            shldw R58,b            lR58 <<= b;
-3a25: 67,e8,54,58         ad2w  R58,[Re8+54]     R58 += [3d4];
+3a25: 67,e8,54,58         ad2w  R58,[Re8+54]     R58 += ISF;
 3a29: a5,00,00,5a         adcw  R5a,0            R5a += CY;
 3a2d: 64,54,58            ad2w  R58,R54          R58 += R54;
 3a30: a5,00,00,5a         adcw  R5a,0            R5a += CY;
 3a34: 0d,0e,58            shldw R58,e            lR58 <<= e;
 3a37: a3,e8,52,5c         ldw   R5c,[Re8+52]     R5c = LONG_DT12SA;
-3a3b: 28,02               scall 3a3f             Sub_3a3f ();
-3a3d: 20,1c               sjmp  3a5b             goto Sub_3a5b;
+3a3b: 28,02               scall 3a3f             Calculate_MAP_FREQ ();
+3a3d: 20,1c               sjmp  3a5b             goto MAP_Average_Complete;
 
-   Sub_3a3f:
+   Calculate_MAP_FREQ:
 3a3f: 4d,10,a1,5c,54      ml3w  R54,R5c,a110     lR54 = wR5c * a110;
 3a44: 8c,56,58            divw  R58,R56          wR58 /= R56;
 3a47: dd,0c               jv    3a55             if (OVF = 0)  {
@@ -2667,7 +2670,7 @@ FUEL_REPEAT
 3a55: a1,00,a5,58         ldw   R58,a500         R58 = a500;
 3a59: 20,10               sjmp  3a6b             goto MAP_CALC; }
 
-   Sub_3a5b:
+   MAP_Average_Complete:
 3a5b: c3,e8,52,00         stw   R0,[Re8+52]      LONG_DT12SA = 0;
 3a5f: c7,e8,56,00         stb   R0,[Re8+56]      LONG_MAPCNT = 0;
 3a63: c7,e8,57,00         stb   R0,[Re8+57]      MAP_PIPCNT = 0;
@@ -2741,20 +2744,20 @@ FUEL_REPEAT
 3b1e: 27,ef               sjmp  3b0f             goto 3b0f;
 
    Sub_3b20:
-3b20: b3,e8,03,54         ldb   R54,[Re8+3]      R54 = [383];
+3b20: b3,e8,03,54         ldb   R54,[Re8+3]      R54 = MPHCNT;
 3b24: 35,83,20            jnb   B5,R83,3b47      if (B5_HSI_State = 1)  {
 3b27: 17,54               incb  R54              R54++;
-3b29: c7,e8,04,00         stb   R0,[Re8+4]       [384] = 0;
-3b2d: 3f,a0,0f            jb    B7,Ra0,3b3f      if (B7_Flags_a0 = 0)  {
-3b30: 91,80,a0            orb   Ra0,80           B7_Flags_a0 = 1;
+3b29: c7,e8,04,00         stb   R0,[Re8+4]       TSLMPH = 0;
+3b2d: 3f,a0,0f            jb    B7,Ra0,3b3f      if (B7_FIRST_MPH_a0 = 0)  {
+3b30: 91,80,a0            orb   Ra0,80           B7_FIRST_MPH_a0 = 1;
 3b33: 11,54               clrb  R54              R54 = 0;
-3b35: c3,e6,9c,6c         stw   R6c,[Re6+9c]     [21c] = Event_time;
-3b39: c7,e6,9e,6e         stb   R6e,[Re6+9e]     [21e] = Event_timeH;
+3b35: c3,e6,9c,6c         stw   R6c,[Re6+9c]     MPHTIM2 = DATA_TIME;
+3b39: c7,e6,9e,6e         stb   R6e,[Re6+9e]     MPHTIM2H = DATA_TIMEH;
 3b3d: 20,08               sjmp  3b47             goto 3b47; }
 
-3b3f: c3,e6,98,6c         stw   R6c,[Re6+98]     [218] = Event_time;
-3b43: c7,e6,9a,6e         stb   R6e,[Re6+9a]     [21a] = Event_timeH; }
-3b47: c7,e8,03,54         stb   R54,[Re8+3]      [383] = R54;
+3b3f: c3,e6,98,6c         stw   R6c,[Re6+98]     MPHTIM1 = DATA_TIME;
+3b43: c7,e6,9a,6e         stb   R6e,[Re6+9a]     MPHTIM1H = DATA_TIMEH; }
+3b47: c7,e8,03,54         stb   R54,[Re8+3]      MPHCNT = R54;
 3b4b: f0                  ret                    return;
 
    VIP_THROTTLE_MODE_SET:
@@ -3370,10 +3373,10 @@ FUEL_REPEAT
 410c: db,0d               jc    411b             if (R38 < VMPMAX)  {
 410e: fa                  di                     interrupts OFF;
 410f: ff                  nop                    
-4110: a3,e4,20,42         ldw   R42,[Re4+20]     R42 = [1a0];
+4110: a3,e4,20,42         ldw   R42,[Re4+20]     R42 = LAST_MAP;
 4114: 8b,e4,1e,42         cmpw  R42,[Re4+1e]     
 4118: fb                  ei                     interrupts ON;
-4119: d7,21               jne   413c             if (R42 != [19e]) goto 413c; } }
+4119: d7,21               jne   413c             if (R42 != LAST_MAP2) goto 413c; } }
 411b: 91,08,a6            orb   Ra6,8            B3_MFMFLG_a6 = 1;
 411e: af,f6,3f,38         ldzbw R38,[Rf6+3f]     wR38 = MAPFMM;
 4122: 3a,a6,07            jb    B2,Ra6,412c      if (B2_TFMFLG_a6 = 0)  {          # (throttle position sensor okay)
@@ -3389,10 +3392,10 @@ FUEL_REPEAT
 413f: 3e,a5,0b            jb    B6,Ra5,414d      if (UNDSP = 0)  {
 4142: 9b,fe,0c,00         cmpb  R0,[Rfe+c]       
 4146: df,05               je    414d             if (LONG_MAP_RQD != 0)  {
-4148: 91,80,52            orb   R52,80           B4_LONG_MAP_AVG_52 = 1;
+4148: 91,80,52            orb   R52,80           B7_LONG_MAP_AVG_52 = 1;
 414b: 20,03               sjmp  4150             goto 4150; } } }
 
-414d: 71,7f,52            an2b  R52,7f           B4_LONG_MAP_AVG_52 = 0;
+414d: 71,7f,52            an2b  R52,7f           B7_LONG_MAP_AVG_52 = 0;
 4150: ac,ba,3e            ldzbw R3e,Rba          wR3e = MAP;
 4153: 09,07,3e            shlw  R3e,7            R3e <<= 7;
 4156: 9c,bb,3e            divb  R3e,Rbb          yR3e /= BP;
@@ -3407,18 +3410,18 @@ FUEL_REPEAT
 416e: c3,e8,c6,38         stw   R38,[Re8+c6]     FN072A_MAPPA_y = R38;
 4172: fa                  di                     interrupts OFF;
 4173: ff                  nop                    
-4174: af,e8,03,42         ldzbw R42,[Re8+3]      wR42 = [383];
-4178: a3,e6,98,30         ldw   R30,[Re6+98]     R30 = [218];
-417c: b3,e6,9a,32         ldb   R32,[Re6+9a]     R32 = [21a];
-4180: c7,e8,03,00         stb   R0,[Re8+3]       [383] = 0;
+4174: af,e8,03,42         ldzbw R42,[Re8+3]      wR42 = MPHCNT;
+4178: a3,e6,98,30         ldw   R30,[Re6+98]     R30 = MPHTIM1;
+417c: b3,e6,9a,32         ldb   R32,[Re6+9a]     R32 = MPHTIM1H;
+4180: c7,e8,03,00         stb   R0,[Re8+3]       MPHCNT = 0;
 4184: fb                  ei                     interrupts ON;
 4185: 01,34               clrw  R34              R34 = 0;
 4187: 9b,fe,2f,00         cmpb  R0,[Rfe+2f]      
-418b: df,09               je    4196             if ([cb89] != 0)  {
-418d: b3,e8,04,36         ldb   R36,[Re8+4]      R36 = [384];
+418b: df,09               je    4196             if (VSTYPE != 0)  {
+418d: b3,e8,04,36         ldb   R36,[Re8+4]      R36 = TSLMPH;
 4191: 99,ff,36            cmpb  R36,ff           
 4194: d3,0b               jnc   41a1             if (R36 < ff) goto 41a1; }
-4196: 71,7f,a0            an2b  Ra0,7f           B7_Flags_a0 = 0;
+4196: 71,7f,a0            an2b  Ra0,7f           B7_FIRST_MPH_a0 = 0;
 4199: 8b,e6,84,00         cmpw  R0,[Re6+84]      
 419d: df,62               je    4201             if (VS = 0) goto 4201;
 419f: 20,35               sjmp  41d6             goto 41d6; }
@@ -3427,8 +3430,8 @@ FUEL_REPEAT
 41a5: 98,00,42            cmpb  R42,R0           
 41a8: df,5b               je    4205             if (R42 = 0) goto 4205;
 41aa: ac,32,16            ldzbw R16,R32          wR16 = yR32;
-41ad: 4b,e6,9c,30,14      sb3w  R14,R30,[Re6+9c] R14 = R30 - [21c];
-41b2: bb,e6,9e,16         sbbb  R16,[Re6+9e]     R16 -= [21e] - CY;
+41ad: 4b,e6,9c,30,14      sb3w  R14,R30,[Re6+9c] R14 = R30 - MPHTIM2;
+41b2: bb,e6,9e,16         sbbb  R16,[Re6+9e]     R16 -= MPHTIM2H - CY;
 41b6: 8c,42,14            divw  R14,R42          wR14 /= R42;
 41b9: d5,03               jnv   41be             if (OVF = 1)  {
 41bb: bd,ff,14            ldsbw R14,ff           swR14 = ff; }
@@ -3437,15 +3440,17 @@ FUEL_REPEAT
 41c6: 8c,14,34            divw  R34,R14          wR34 /= R14;
 41c9: d5,03               jnv   41ce             if (OVF = 1)  {
 41cb: bd,ff,34            ldsbw R34,ff           swR34 = ff; }
-41ce: c3,e6,9c,30         stw   R30,[Re6+9c]     [21c] = R30;
-41d2: c7,e6,9e,32         stb   R32,[Re6+9e]     [21e] = R32;
+41ce: c3,e6,9c,30         stw   R30,[Re6+9c]     MPHTIM2 = R30;
+41d2: c7,e6,9e,32         stb   R32,[Re6+9e]     MPHTIM2H = R32;
+
+VSCTR LOGIC
 41d6: 4b,e6,84,34,36      sb3w  R36,R34,[Re6+84] R36 = R34 - VS;
 41db: db,02               jc    41df             if (R36 < 0)  {
 41dd: 03,36               negw  R36              R36 = -R36; }
 41df: b3,e6,bb,38         ldb   R38,[Re6+bb]     R38 = VSCTR;
 41e3: 9b,fd,e7,00,37      cmpb  R37,[Rfc+e7]     
-41e8: d1,0c               jleu  41f6             if (R37 > [c18f])  {
-41ea: 77,fd,e6,00,38      ad2b  R38,[Rfc+e6]     R38 += [c18e];
+41e8: d1,0c               jleu  41f6             if (R37 > VSDELT)  {
+41ea: 77,fd,e6,00,38      ad2b  R38,[Rfc+e6]     R38 += VSCNT;
 41ef: d3,0c               jnc   41fd             if (R38 <= ff) goto 41fd;
 41f1: b1,ff,38            ldb   R38,ff           R38 = ff;
 41f4: 20,07               sjmp  41fd             goto 41fd; }
@@ -3456,7 +3461,7 @@ FUEL_REPEAT
 41fd: c7,e6,bb,38         stb   R38,[Re6+bb]     VSCTR = R38; } }
 4201: c3,e6,84,34         stw   R34,[Re6+84]     VS = R34; }
 4205: a0,8c,32            ldw   R32,R8c          R32 = R8c;
-4208: a3,f8,2a,36         ldw   R36,[Rf8+2a]     R36 = [bada];
+4208: a3,f8,2a,36         ldw   R36,[Rf8+2a]     R36 = TCVS;
 420c: ef,40,07            call  494f             UROLAV ();
 420f: c0,8c,3e            stw   R3e,R8c          R8c = R3e;
 
@@ -3473,7 +3478,7 @@ ENGINE SPEED CALCULATION (EQNCALC)
 4230: c3,e8,18,00         stw   R0,[Re8+18]      DNDT_ISC = 0;
 4234: c3,e8,42,00         stw   R0,[Re8+42]      DNDT_SPK = 0;
 4238: c3,e4,9e,00         stw   R0,[Re4+9e]      NBAR = 0;
-423c: b3,fe,30,42         ldb   R42,[Rfe+30]     R42 = IGN_TYPE;
+423c: b3,fe,30,42         ldb   R42,[Rfe+30]     R42 = IGN_TYPE;                   # Indicator of ignition type
 4240: 99,02,42            cmpb  R42,2            
 4243: d7,0d               jne   4252             if (R42 = 2)  {                   # 2 = Low Data Rate Distributorless dual plug (LDR_DIS)
 4245: fa                  di                     interrupts OFF;
@@ -3484,10 +3489,10 @@ ENGINE SPEED CALCULATION (EQNCALC)
 4251: fb                  ei                     interrupts ON; }
 4252: 20,e4               sjmp  4338             goto 4338; }
 
-4254: 3b,4e,02            jb    B3,R4e,4259      if (B3_NEW_RPM_4e = 0)  {
-4257: 21,04               sjmp  435d             goto 435d; }
+4254: 3b,4e,02            jb    B3,R4e,4259      if (B3_NEW_RPM_4e = 0)  {         # No action
+4257: 21,04               sjmp  435d             goto 435d; }                      # EXIT RPM LOGIC
 
-                                                                                   # (new PIP information is available for calculation of rpm)
+# (new PIP information is available for calculation of rpm)
 4259: 71,f7,4e            an2b  R4e,f7           B3_NEW_RPM_4e = 0;
 425c: af,f6,05,34         ldzbw R34,[Rf6+5]      wR34 = ENGCYL;
 4260: a3,35,5c,43,32      ldw   R32,[R34+435c]   R32 = [R34+435c];
@@ -3496,28 +3501,28 @@ ENGINE SPEED CALCULATION (EQNCALC)
 426d: fa                  di                     interrupts OFF;
 426e: a0,c4,34            ldw   R34,Rc4          R34 = DT12S;
 4271: ac,c6,36            ldzbw R36,Rc6          wR36 = yRc6;
-4274: a0,7a,18            ldw   R18,R7a          R18 = Prev_PIP_time;
+4274: a0,7a,18            ldw   R18,R7a          R18 = LAST_HI_PIP;
 4277: ac,7c,1a            ldzbw R1a,R7c          wR1a = Prev_PIP_timeH;
 427a: fb                  ei                     interrupts ON;
 427b: 0f,38,34            norm  R34,R38          R38 = normalize(lR34);
 427e: b1,10,39            ldb   R39,10           R39 = 10;
 4281: ef,4d,1a            call  5cd1             Sub_5cd1 ();
 4284: c3,e8,24,b4         stw   Rb4,[Re8+24]     N_PREV = N_RPM;
-4288: a0,30,b4            ldw   Rb4,R30          N_RPM = R30;
+4288: a0,30,b4            ldw   Rb4,R30          N_RPM = R30;                      # N = 60/(ENGCYL * PIP period)
 428b: fa                  di                     interrupts OFF;
-428c: a0,7a,30            ldw   R30,R7a          R30 = Prev_PIP_time;
+428c: a0,7a,30            ldw   R30,R7a          R30 = LAST_HI_PIP;
 428f: ac,7c,32            ldzbw R32,R7c          wR32 = Prev_PIP_timeH;
-4292: 6b,e8,38,30         sb2w  R30,[Re8+38]     R30 -= [3b8];
+4292: 6b,e8,38,30         sb2w  R30,[Re8+38]     R30 -= PREV_N_PIP;
 4296: bb,e8,3a,32         sbbb  R32,[Re8+3a]     R32 -= [3ba] - CY;
-429a: a0,7a,42            ldw   R42,R7a          R42 = Prev_PIP_time;
-429d: c3,e8,38,42         stw   R42,[Re8+38]     [3b8] = R42;
+429a: a0,7a,42            ldw   R42,R7a          R42 = LAST_HI_PIP;
+429d: c3,e8,38,42         stw   R42,[Re8+38]     PREV_N_PIP = R42;
 42a1: b0,7c,42            ldb   R42,R7c          R42 = Prev_PIP_timeH;
 42a4: c7,e8,3a,42         stb   R42,[Re8+3a]     [3ba] = R42;
 42a8: fb                  ei                     interrupts ON;
 42a9: 8d,97,01,30         divw  R30,197          wR30 /= 197;
 42ad: d5,03               jnv   42b2             if (OVF = 1)  {
 42af: bd,ff,30            ldsbw R30,ff           swR30 = ff; }
-42b2: c3,e8,2c,30         stw   R30,[Re8+2c]     [3ac] = R30;
+42b2: c3,e8,2c,30         stw   R30,[Re8+2c]     DT_DNDT = R30;
 42b6: 11,3e               clrb  R3e              R3e = 0;
 42b8: 01,34               clrw  R34              R34 = 0;
 42ba: 4b,e8,24,b4,36      sb3w  R36,Rb4,[Re8+24] R36 = N_RPM - N_PREV;
@@ -3533,15 +3538,15 @@ ENGINE SPEED CALCULATION (EQNCALC)
 42d7: 03,34               negw  R34              R34 = -R34; }
 42d9: c3,e8,1a,34         stw   R34,[Re8+1a]     DNDTI = R34;                      # DNDTI = (N - N_PREV)/DT_DNDT
 42dd: a3,e8,42,32         ldw   R32,[Re8+42]     R32 = DNDT_SPK;
-42e1: a3,fa,14,36         ldw   R36,[Rfa+14]     R36 = [bb8e];
+42e1: a3,fa,14,36         ldw   R36,[Rfa+14]     R36 = TCNDT_SPK;
 42e5: 91,02,a5            orb   Ra5,2            BG_TMR_DISABLE = 1;
-42e8: a3,e8,2c,3e         ldw   R3e,[Re8+2c]     R3e = [3ac];
+42e8: a3,e8,2c,3e         ldw   R3e,[Re8+2c]     R3e = DT_DNDT;
 42ec: ef,67,06            call  4956             ROLAV ();
 42ef: c3,e8,42,3e         stw   R3e,[Re8+42]     DNDT_SPK = R3e;                   # DNDT_SPK = ROLAV(DNDTI,TCNDT_SPK)
 42f3: a3,e8,18,32         ldw   R32,[Re8+18]     R32 = DNDT_ISC;
 42f7: a3,f8,1e,36         ldw   R36,[Rf8+1e]     R36 = TCNDT_ISC;
 42fb: 91,02,a5            orb   Ra5,2            BG_TMR_DISABLE = 1;
-42fe: a3,e8,2c,3e         ldw   R3e,[Re8+2c]     R3e = [3ac];
+42fe: a3,e8,2c,3e         ldw   R3e,[Re8+2c]     R3e = DT_DNDT;
 4302: ef,51,06            call  4956             ROLAV ();
 4305: c3,e8,18,3e         stw   R3e,[Re8+18]     DNDT_ISC = R3e;                   # DNDT_ISC = ROLAV(DNDTI,TCNDT_ISC)
 
@@ -3557,7 +3562,7 @@ Calculate NBAR
 431b: a3,e4,9e,32         ldw   R32,[Re4+9e]     R32 = NBAR;
 431f: a0,b4,34            ldw   R34,Rb4          R34 = N_RPM;
 4322: 35,2a,08            jnb   B5,R2a,432d      if (?RUNNING? = 1)  {
-4325: 47,ff,9e,00,00,36   ad3w  R36,R0,[Rfe+9e]  R36 = [cbf8];
+4325: 47,ff,9e,00,00,36   ad3w  R36,R0,[Rfe+9e]  R36 = TCN;
 432b: d7,04               jne   4331             if (R36 != 0) goto 4331; }
 432d: a3,f8,1c,36         ldw   R36,[Rf8+1c]     R36 = TC; }
 4331: ef,1b,06            call  494f             UROLAV ();
@@ -3884,9 +3889,9 @@ FIRST_RPM and REFLG LOGIC
 4670: d3,29               jnc   469b             if (R16 >= TKYON2)  {
 4672: 8b,f6,2e,16         cmpw  R16,[Rf6+2e]     
 4676: db,23               jc    469b             if (R16 < [b942])  {
-4678: a3,e4,1e,42         ldw   R42,[Re4+1e]     R42 = [19e];
+4678: a3,e4,1e,42         ldw   R42,[Re4+1e]     R42 = LAST_MAP2;
 467c: 8b,e4,20,42         cmpw  R42,[Re4+20]     
-4680: df,19               je    469b             if (R42 != [1a0])  {
+4680: df,19               je    469b             if (R42 != LAST_MAP)  {
 4682: b3,e4,b5,3e         ldb   R3e,[Re4+b5]     R3e = MAPBAR;
 4686: 3f,3e,03            jb    B7,R3e,468c      if (Lseconds = 0)  {
 4689: b1,ef,3e            ldb   R3e,ef           R3e = ef; }                       # 29.875 * 8 = 239 = 0xEF
@@ -6481,7 +6486,7 @@ KSPARK SELECT LOGIC                                                             
 614c: 30,42,66            jnb   B0,R42,61b5      if (B0_R42 = 1)  {
 614f: a3,e8,62,30         ldw   R30,[Re8+62]     R30 = DWLCOR;
 6153: 33,49,45            jnb   B3,R49,619b      if (DWLELD = 1)  {
-6156: 35,49,42            jnb   B5,R49,619b      if (B5_R49 = 1)  {
+6156: 35,49,42            jnb   B5,R49,619b      if (B5_NEW_DWLIDM_49 = 1)  {
 6159: a3,e8,5c,34         ldw   R34,[Re8+5c]     R34 = DWELL;
 615d: a3,f0,64,3c         ldw   R3c,[Rf0+64]     R3c = DWL_XS_MIN;
 6161: 6d,73,cb,3c         ml2w  R3c,cb73         lR3c *= cb73;
@@ -6511,7 +6516,7 @@ KSPARK SELECT LOGIC                                                             
 61a8: d9,04               jgtu  61ae             if (R36 > DWLMIN) goto 61ae; }
 61aa: a3,f0,60,36         ldw   R36,[Rf0+60]     R36 = DWLMIN; }
 61ae: c3,e8,5c,36         stw   R36,[Re8+5c]     DWELL = R36;
-61b2: 71,df,49            an2b  R49,df           B5_R49 = 0; }
+61b2: 71,df,49            an2b  R49,df           B5_NEW_DWLIDM_49 = 0; }
 61b5: af,f6,05,32         ldzbw R32,[Rf6+5]      wR32 = ENGCYL;
 61b9: 01,3a               clrw  R3a              R3a = 0;
 61bb: a3,f0,6e,38         ldw   R38,[Rf0+6e]     R38 = PACPER;
@@ -7993,7 +7998,7 @@ ERROR CODE DESCRIPTION
 7069: d3,03               jnc   706e             if (R42 >= 3)  {
 706b: 3e,9f,e8            jb    B6,R9f,7056      if (B6_NDSFLG_9f = 1) goto 7056; }
 706e: 9b,fe,2f,00         cmpb  R0,[Rfe+2f]      
-7072: df,09               je    707d             if ([cb89] != 0)  {
+7072: df,09               je    707d             if (VSTYPE != 0)  {
 7074: b0,8d,42            ldb   R42,R8d          R42 = VSBAR;
 7077: 9b,f0,37,42         cmpb  R42,[Rf0+37]     
 707b: d9,d9               jgtu  7056             if (R42 > MINMPH) goto 7056; }
@@ -8017,7 +8022,7 @@ ERROR CODE DESCRIPTION
 70a9: d3,03               jnc   70ae             if (R42 >= 3)  {
 70ab: 3e,9f,19            jb    B6,R9f,70c7      if (B6_NDSFLG_9f = 1) goto 70c7; }
 70ae: 9b,fe,2f,00         cmpb  R0,[Rfe+2f]      
-70b2: df,09               je    70bd             if ([cb89] != 0)  {
+70b2: df,09               je    70bd             if (VSTYPE != 0)  {
 70b4: b0,8d,42            ldb   R42,R8d          R42 = VSBAR;
 70b7: 9b,f0,37,42         cmpb  R42,[Rf0+37]     
 70bb: d9,0a               jgtu  70c7             if (R42 > MINMPH) goto 70c7; }    # (Vehicle moving)  
@@ -8852,7 +8857,7 @@ ERROR CODE DESCRIPTION
 7827: e0,42,06            djnz  R42,7830         R42--;
                                                  if (R42 != 0) goto 7830;
 782a: 9b,fe,2f,00         cmpb  R0,[Rfe+2f]      
-782e: d7,02               jne   7832             if ([cb89] != 0) goto 7832; }
+782e: d7,02               jne   7832             if (VSTYPE != 0) goto 7832; }
 7830: 20,55               sjmp  7887             goto 7887; }
 
 7832: b0,8d,42            ldb   R42,R8d          R42 = VSBAR;
@@ -10841,16 +10846,16 @@ ERROR CODE DESCRIPTION
 88b9: b5,02,74            adcb  R74,2            HSO_timeH += 2 + CY;
 88bc: e7,72,a1            jump  2a31             goto 2a31;
 
-   Sub_88bf:
-88bf: 3f,83,1b            jb    B7,R83,88dd      if (B7_HSI_State = 0)  {
+   VIP_EOS_IDM:
+88bf: 3f,83,1b            jb    B7,R83,88dd      if (B7_IDM_HIGH_83 = 0)  {
 88c2: 91,10,4e            orb   R4e,10           B4_NEW_IDM = 1;
 88c5: 33,49,15            jnb   B3,R49,88dd      if (DWLELD = 1)  {
 88c8: b1,01,54            ldb   R54,1            R54 = 1;
 88cb: 9b,fe,30,54         cmpb  R54,[Rfe+30]     
 88cf: d7,0c               jne   88dd             if (R54 = IGN_TYPE)  {            # 1 = Thick Film Ignition - Improved Computer Control Dwell (TFI_ICCD)
-88d1: 4b,e8,72,6c,54      sb3w  R54,R6c,[Re8+72] R54 = Event_time - [3f2];
+88d1: 4b,e8,72,6c,54      sb3w  R54,R6c,[Re8+72] R54 = DATA_TIME - SPOUT_LOW_EDGE;
 88d6: c3,e8,64,54         stw   R54,[Re8+64]     DWLIDM = R54;
-88da: 91,20,49            orb   R49,20           B5_R49 = 1; } } }
+88da: 91,20,49            orb   R49,20           B5_NEW_DWLIDM_49 = 1; } } }
 88dd: f0                  ret                    return;
 
    Sub_88de:
@@ -13682,7 +13687,7 @@ a5c6: db,05               jc    a5cd             if (R38 <= ff)  {
 a5c8: 98,38,8d            cmpb  R8d,R38          
 a5cb: db,0c               jc    a5d9             if (VSBAR >= R38) goto a5d9; }    # VSBAR >= VSMPG + VSMPGH
 a5cd: 9b,fe,2f,00         cmpb  R0,[Rfe+2f]      
-a5d1: df,06               je    a5d9             if ([cb89] != 0)  {
+a5d1: df,06               je    a5d9             if (VSTYPE != 0)  {
 a5d3: 9b,f4,2f,00         cmpb  R0,[Rf4+2f]      
 a5d7: df,05               je    a5de             if ([b471] = 0) goto a5de; } }
 a5d9: 91,01,45            orb   R45,1            Rvip_cyl_quit = 1;
@@ -13996,7 +14001,7 @@ a8e4: 81,4e,01,10,a1      timer 81,   14e, Flags_a1,
 a8e9: 85,4e,01,08,a1      timer 85,   14e, Flags_a1, 
 a8ee: 81,52,01,04,a5      timer 81, WOTTMR, B2_APT_a5,                             #AWOTMR         Time in wide open throttle (seconds)
 a8f3: 8d,52,01,04,a5      timer 8d, WOTTMR, B2_APT_a5,                             #AWOTMR         Time in wide open throttle (seconds)
-a8f8: 20,84,03            timer 20,   384, 
+a8f8: 20,84,03            timer 20, TSLMPH, 
 a8fb: 81,4b,01,01,28      timer 81, EGRTMR, B0_EGREN_28, 
 a900: 81,4a,01,04,a1      timer 81,   14a, Flags_a1, 
 a905: 85,4a,01,02,a1      timer 85,   14a, Flags_a1, 
@@ -14051,8 +14056,8 @@ a9a5: 3e,53,0a            jb    B6,R53,a9b2      if (B6_IDM_BYPASS_53 = 0)  {
 a9a8: 34,4e,07            jnb   B4,R4e,a9b2      if (B4_NEW_IDM = 1)  {
 a9ab: 71,ef,4e            an2b  R4e,ef           B4_NEW_IDM = 0;
 a9ae: c3,e6,bc,00         stw   R0,[Re6+bc]      TSLIDM = 0; } }
-a9b2: 36,4e,07            jnb   B6,R4e,a9bc      if (B6_NEW_BAP = 1)  {
-a9b5: 71,bf,4e            an2b  R4e,bf           B6_NEW_BAP = 0;
+a9b2: 36,4e,07            jnb   B6,R4e,a9bc      if (B6_NEW_MAP_4e = 1)  {
+a9b5: 71,bf,4e            an2b  R4e,bf           B6_NEW_MAP_4e = 0;
 a9b8: c7,e6,96,00         stb   R0,[Re6+96]      MAPTMR = 0; }
 a9bc: f0                  ret                    return;
 
@@ -15738,7 +15743,7 @@ bad6: cd                  byte     cd            TCTOT
 bad7: 04                  byte      4
 bad8: 85                  byte     85            TCVBAT
 bad9: 00                  byte      0
-bada: 29                  byte     29
+bada: 29                  byte     29            TCVS
 badb: 00                  byte      0
 badc: 48                  byte     48            SSFCTR
 badd: 01                  byte      1
@@ -15834,7 +15839,7 @@ bb87: ff                  fill
 bb88: 80,0c               word    c80            TPOBP2
 bb8a: 80,02               word    280            TPOH2
 bb8c: 40,06               word    640            TPDLMX
-bb8e: 00,02               word    200
+bb8e: 00,02               word    200            TCNDT_SPK
 bb90: 00,02               word    200            TCTPDL
 bb92: 00                  byte      0            VSOMAX
 bb93: 04                  byte      4            VSOMXH
@@ -16382,8 +16387,8 @@ c186: 50,fb               word   fb50            NE23A                          
 c188: 68,42               word   4268            NE23S                             #  NE23S = WOT RPM 2 - 3 shift point, sea level.
 c18a: e0,fc               word   fce0            NS34A                             #  NE34A = WOT RPM 3 - 4 shift point, altitude.
 c18c: 60,3b               word   3b60            NS34S                             #  NE34S = WOT RPM 3 - 4 shift point, sea level.
-c18e: 02                  byte      2
-c18f: 28                  byte     28
+c18e: 02                  byte      2            VSCNT
+c18f: 28                  byte     28            VSDELT
 c190: 00                  byte      0            CS_PDL_4
 c191: 04                  byte      4            TMCSE2
 c192: 04                  byte      4            TMCSE3
@@ -17417,7 +17422,7 @@ cb5e: c0,00               word     c0            VTC_UNDER
 cb60: 00,20               word   2000            FKMKAY
 cb62: 0a                  byte      a            SFT_FM_LVL
 cb63: 05                  byte      5
-cb64: 00,18               word   1800
+cb64: 00,18               word   1800            MAPEDG
 cb66: 00                  byte      0            LONG_MAP_RQD
 cb67: 02                  byte      2            MAP_CYCLE
 cb68: 5a,00               word     5a            AEM
@@ -17452,7 +17457,7 @@ cb85: 01                  byte      1            THRMHP
 cb86: 04                  byte      4            TSTRAT
 cb87: 06                  byte      6            TRLOAD
 cb88: 00                  byte      0
-cb89: 01                  byte      1
+cb89: 01                  byte      1            VSTYPE
 cb8a: 01                  byte      1            IGN_TYPE
 cb8b: ff                  byte     ff
 cb8c: a4                  byte     a4
@@ -17532,7 +17537,7 @@ cbf0: 10,27,c0            struct   10,  27,  c0
 cbf3: 12,01,01            struct   12,   1,   1
 
 cbf6: 9a,01               word    19a
-cbf8: 00,02               word    200
+cbf8: 00,02               word    200            TCN
 cbfa: 50                  byte     50
 cbfb: ff                  byte     ff
 cbfc: 58,02               word    258            ISLBND
@@ -17674,19 +17679,28 @@ ccb2: 60,04               word    460
 ccb4: ac,0d               word    dac
 ccb6: 28,01               word    128
 ccb8: 20,46               word   4620
+ccba: 08,01               word    108
+ccbc: 10,c8               word   c810
+ccbe: c8,c8               word   c8c8
+ccc0: c8,c8               word   c8c8
+ccc2: c8,c8               word   c8c8
+ccc4: c8,c8               word   c8c8
+ccc6: c8,c8               word   c8c8
+ccc8: c8,c8               word   c8c8
+ccca: c8,c8               word   c8c8
+cccc: c8,c8               word   c8c8
+ccce: c8,c8               word   c8c8
+ccd0: c8,c8               word   c8c8
+ccd2: c8,c8               word   c8c8
+ccd4: c8,c8               word   c8c8
+ccd6: c8,c8               word   c8c8
+ccd8: c8,c8               word   c8c8
+ccda: 08,08               word    808
+ccdc: 08,c8               word   c808
+ccde: 3c,fe               word   fe3c
+cce0: c8,c8               word   c8c8
 
-ccba: 08,01,10,c8         struct    8,   1,  10,  c8
-ccbe: c8,c8,c8,c8         struct   c8,  c8,  c8,  c8
-ccc2: c8,c8,c8,c8         struct   c8,  c8,  c8,  c8
-ccc6: c8,c8,c8,c8         struct   c8,  c8,  c8,  c8
-ccca: c8,c8,c8,c8         struct   c8,  c8,  c8,  c8
-ccce: c8,c8,c8,c8         struct   c8,  c8,  c8,  c8
-ccd2: c8,c8,c8,c8         struct   c8,  c8,  c8,  c8
-ccd6: c8,c8,c8,c8         struct   c8,  c8,  c8,  c8
-ccda: 08,08,08,c8         struct    8,   8,   8,  c8
-ccde: 3c,fe,c8,c8         struct   3c,  fe,  c8,  c8
 cce2: 28,fe,a0,32         struct   28,  fe,  a0,  32
-
 cce6: 32,32,32,32         struct   32,  32,  32,  32
 ccea: 32,64,04,32         struct   32,  64,   4,  32
 ccee: 32,32,32,32         struct   32,  32,  32,  32

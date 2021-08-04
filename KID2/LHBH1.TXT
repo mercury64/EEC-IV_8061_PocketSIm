@@ -2991,8 +2991,8 @@
 
       Using the first two terms of the series expansion:
 
-                                x                 x²
-                               e   =  1  +  x  +  --  +  · · ·
+                                x                 xï¿½
+                               e   =  1  +  x  +  --  +  ï¿½ ï¿½ ï¿½
                                                   2!
 
       Simplifying, the exponential "f" becomes:
@@ -54572,7 +54572,7 @@ s
       - V_ADPN_MIN     = Minimum N to perform adaptive clip test.
 
       - V_LAMAV_MAX = LAMAVEn above which a clipped adaptive cell may be
-                      failed.
+                      failed.VS
 
       - V_LAMAV_MIN = LAMAVEn below which a clipped adaptive cell may be
                       failed.

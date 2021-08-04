@@ -1362,7 +1362,7 @@ byte    cc98 cc9a
 
 byte  cc9b cca9
 word    cca0 ccb9
-
+word	ccba cce2
 
 
 #word    cca6 cca7
@@ -1477,18 +1477,18 @@ sub  832a7 "EOS_KAY_CALCULATIONS"
 sub  833b7 "TRANSIENT_SPARK-COMPENSATION"  
 sub  83430 "DWELL_CALCULATION"  
 sub  834c8 "FUEL_INJ_OUT_COM6"  
-sub  835f3 "Sub_35f3"  
+sub  835f3 "SET_UP_INJECTOR_OUTPUT_EDGE"  
 sub  83642 "Sub_3642"  
 sub  83659 "Sub_3659"  
-sub  83677 "Sub_3677"  
-sub  83683  "Sub_3683"  
+sub  83677 "Injector_Edge"  
+sub  83683 "Injector_Edge_Immediate_Output_Request"  
 sub  8368a "Sub_368a"  
 sub  837f9 "Sub_37f9"  
 sub  83829 "Sub_3829"  
-sub  838f4 "SYSEQ_MAP_COM1"  
-sub  8398a "Sub_398a"  
-sub  83a3f "Sub_3a3f"  
-sub  83a5b "Sub_3a5b"  
+sub  838f4 "SCAP_Sensor_Edge"  
+sub  8398a "SYSEQ_MAP_COM1"  
+sub  83a3f "Calculate_MAP_FREQ"  
+sub  83a5b "MAP_Average_Complete"  
 sub  83a6b "MAP_CALC"  
 sub  83b20 "Sub_3b20"  
 sub  83b4c "VIP_THROTTLE_MODE_SET"  
@@ -1723,7 +1723,7 @@ sub  887ea   "Sub_87ea"
 sub  88802   "Sub_8802"  
 
 sub  8882d   "Sub_882d"  
-sub  888bf   "Sub_88bf"  
+sub  888bf   "VIP_EOS_IDM"  
 sub  888de   "Sub_88de"  
 sub  8890c   "Sub_890c"  
 sub  88933 "INTRN_E4OD_SYS_EQU_COM1"  
@@ -1982,7 +1982,7 @@ sym 48 "?Sto_trigger?" : B 5
 #sym 48 "Egoste1" : B 7
 
 sym 49 "DWLELD" : B 3
-
+sym 49 "B5_NEW_DWLIDM_49" : B 5
 sym 4a "B1_TLS_34_FLG_4a" : B 1
 sym 4a "B2_TLS_24_FLG_4a" : B 2
 sym 4a "B3_TLS_NV_FLG_4a" : B 3
@@ -2005,7 +2005,7 @@ sym 4d "B7_INJ1_PIP_4d" : B 7
 
 sym 4e "B3_NEW_RPM_4e" : B 3
 sym 4e "B4_NEW_IDM" : B 4
-sym 4e "B6_NEW_BAP" : B 6
+sym 4e "B6_NEW_MAP_4e" : B 6
 sym 4e "B7_NEW_PIP" : B 7
 
  
@@ -2041,15 +2041,16 @@ sym 52 "Flags_52"
 sym 52 "B2_DCLST_START_52" : B 2
 sym 52 "B4_LONG_ISF_UP_FLG_52" : B 4
 sym 52 "B5_ISF_UP_FLG_52" : B 5
-sym 52 "B4_LONG_MAP_AVG_52" : B 7
+sym 52 "B6_LONG_MAP_FST_52" : B 6
+sym 52 "B7_LONG_MAP_AVG_52" : B 7
 
 sym 53 "B5_CART_MODE_53" : B 5
 sym 53 "B6_IDM_BYPASS_53" : B 6
 # sym 53 "Next_spout_beta" : B 77
 sym 58 "B7_TLOFLG_58" : B 7
 
-sym 6c "Event_time"
-sym 6e "Event_timeH"
+sym 6c "DATA_TIME"
+sym 6e "DATA_TIMEH"
 
 sym 70 "Rtab"
 sym 72 "HSO_time"
@@ -2061,12 +2062,13 @@ sym 79 "B1_MPGTFG_79" : B 1
 sym 79 "FLG_ECTSTABLQ" : B 5 
 sym 79 "ACCFLG" : B 7
 
-sym 7a "Prev_PIP_time"
+sym 7a "LAST_HI_PIP"
 sym 7c "Prev_PIP_timeH"
 sym 7d "EM"
 
 sym 82 "INJ_PIP_CNT"
 sym 83 "HSI_State"
+sym 83 "B7_IDM_HIGH_83" : B 7
 sym 84 "Reftime"
 sym 86 "ReftimeH"
 
@@ -2117,7 +2119,7 @@ sym a0 "Flags_a0"
 sym a0 "B1_V_LAMJMP_a0" : B 1
 sym a0 "B2_WRMEGO_a0" : B 2
 sym a0 "SIGNED_TBL_FLG" : B 4
-#sym a0 "Tblsflg"  : B 7
+sym a0 "B7_FIRST_MPH_a0"  : B 7
 
 sym a1 "Flags_a1" 
 sym a1 "B0_MAPUP_NORM_a1"  : B 0
@@ -2338,6 +2340,9 @@ sym 196 "A3CTMR"
 sym 198 "KTS_timing"
 sym 19a "KTS_pulsewidth"
 sym 19c "TBART"
+sym 19e "LAST_MAP2"
+
+sym 1a0 "LAST_MAP"
 
 sym 1ae "V_ETVOCM_SAV"
 sym 1ba "EGO_CNT_IDLE"
@@ -2373,7 +2378,11 @@ sym 214 "PRGTMR"
 sym 216 "MAPTMR"
 
 sym 217 "VACUUM"
+sym 218 "MPHTIM1"
+sym 21a "MPHTIM1H"
 sym 21b "AEFUEL"
+sym 21c "MPHTIM2"
+sym 21e "MPHTIM2H"
 sym 21f "NOVS"
 
 sym 220 "OLDTP"
@@ -2524,6 +2533,8 @@ sym 37a "TM_CS_DLY"
 sym 37b "TM_CS_ENG"
 sym 37e "TP_STRT_SFT"
 
+sym 383 "MPHCNT"
+sym 384 "TSLMPH"
 #sym 386 "CTTMR"
 sym 386 "ATMR3"
 sym 388 "FFULC"
@@ -2547,12 +2558,13 @@ sym 3a2 "KSPARK"
 sym 3a4 "N_PREV"
 sym 3a6 "SPK_IDLE"
 sym 3aa "SPK_NORM"
-
+sym 3ac "DT_DNDT"
 sym 3ae "RPMERR"
 
 sym 3b0 "RPMERR_A"
 sym 3b2 "RPMERR_S"
 sym 3b6 "OSCTMR"
+sym 3b8 "PREV_N_PIP"
 sym 3bb "RUNUPTMR"
 sym 3bc "SPKTMR"
 sym 3bd "SETTMR"
@@ -2568,7 +2580,7 @@ sym 3cc "TLSPAT"
 sym 3ce "TLS_SHFTR"
 sym 3d0 "TLSCTR"
 sym 3d2 "LONG_DT12SA"
-
+sym 3d4 "ISF"
 sym 3d6 "LONG_MAPCNT"
 sym 3d7 "MAP_PIPCNT"
 
@@ -2587,6 +2599,7 @@ sym 3ea "POFFENG"
 sym 3ec "PPERENG"
 sym 3ee "SPOUT_ICCD_DELTA"
 sym 3f0 "SPOUT_LOW_DELTA"
+sym 3f2 "SPOUT_LOW_EDGE"
 sym 3fa "LAMWIN"
 sym 3fc "UPRATE"
 sym 3fd "PTPAMP"
@@ -2982,19 +2995,14 @@ sym b966 "SW_MPD"
 sym b972 "SMTPDL"
 
 
-
+#sym bab0 "RF8"
 sym bab2 "TCBPA"
 sym bab4 "TCFBS"
 sym bab6 "TCAEMP"
 sym bab8 "TCAETP"
-sym bad2 "TCTP"
-sym bad4 "TCTPT"
-sym bad6 "TCTOT"
-sym bad8 "TCVBAT"
-
-#sym bab0 "RF8"
 sym babc "TCDASD"
 sym babe "TCDASU"
+
 sym bac0 "TCDESN"
 sym bac2 "TCDLOP"
 sym bac4 "TCECT"
@@ -3003,6 +3011,11 @@ sym bac8 "TCEGR"
 sym bacc "TC"
 sym bace "TCNDT_ISC"
 
+sym bad2 "TCTP"
+sym bad4 "TCTPT"
+sym bad6 "TCTOT"
+sym bad8 "TCVBAT"
+sym bada "TCVS"
 sym badc "SSFCTR"
 sym bade "SKSSLC"
 
@@ -3028,6 +3041,7 @@ sym bb86 "SPUCLP"
 sym bb88 "TPOBP2"
 sym bb8a "TPOH2"
 sym bb8c "TPDLMX"
+sym bb8e "TCNDT_SPK"
 
 sym bb90 "TCTPDL"
 sym bb92 "VSOMAX"
@@ -3116,6 +3130,8 @@ sym c186 "NE23A"
 sym c188 "NE23S"
 sym c18a "NS34A"
 sym c18c "NS34S"
+sym c18e "VSCNT"
+sym c18f "VSDELT"
 
 sym c190 "CS_PDL_4"
 sym c191 "TMCSE2"
@@ -3153,6 +3169,7 @@ sym cb5e "VTC_UNDER"
 
 sym cb60 "FKMKAY"
 sym cb62 "SFT_FM_LVL"
+sym cb64 "MAPEDG"
 sym cb6a "ALPHA"
 sym cb6e "FRCTAE"
 
@@ -3178,6 +3195,7 @@ sym cb84 "PSPSHP"
 sym cb85 "THRMHP"
 sym cb86 "TSTRAT"
 sym cb87 "TRLOAD"
+sym cb89 "VSTYPE"
 
 sym cb8a "IGN_TYPE"
 
@@ -3225,6 +3243,8 @@ sym cbda "ECTMAX"
 sym cbdc "V_HICKOKTM"
 sym cbde "V_LANSDTM"
 
+sym cbf8 "TCN"
+
 sym cbfc "ISLBND"
 sym cbfe "ISUBND"
 
@@ -3261,6 +3281,7 @@ sym cc96 "VATMR2"
 sym cca8 "V_ISCMOD_MAX"
 sym ccaa "V_ISCMOD_MIN"
 sym ccac "V_KDNDT"
+
 
 # ----- END of disassembly run -----
 
