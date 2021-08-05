@@ -216,7 +216,7 @@
 29c7 #PDL               38    byte      bin 1       N/A
 29ca #***NOT USED***    39    
 
-
+2aed \n\nEVR FOREGROUND REPEATER MODULE
 
 2d5c # reset int mask
 2d5c \w# a1 = 1010 0001
@@ -250,9 +250,12 @@
 2eb7 # SYNCTR = (2 * ENGCYL) - 1
 2eb9 # EXIT FUEL_INJ_TIM_COM2
 
+2ef0 \n\n# FALLING EDGE CALCULATIONS
+
 2fa0 # SPKAD(n-1) = SPKAD(n-1) - RETINC
 
 2fac # (Clip min. SPKAD(n-1) to RETLIM)
+2fbb \n\n# The following Tip-in logic is checked every rising edge of PIP:
 2fe8 # (Clip MAX TIPRET to 0)
 2ff5 # SPKAD(n+1)
 3001 # CALCULATED SPARK OUT (n+1) = SAF + SPKAD(n+1) + TIPRET
@@ -593,7 +596,11 @@
 
 45b0 # R3c is either FN305 or FN405
 
+463a \n\n KEY-ON BAROMETRIC PRESSURE UPDATE LOGIC
+463e \n\n MANIFOLD ABSOLUTE PRESSURE FILTER (MAPBAR)
+
 4689 # 29.875 * 8 = 239 = 0xEF
+46b0 \n\nBPPTWT - PART THROTTLE/WIDE OPEN THROTTLE BAROMETRIC PRESSURE UPDATE :
 
 473c # bit 4  Read A/D Values      Parity Error
 
@@ -611,6 +618,9 @@
 47e8 # Bit 5: 1 if output AM1 is on.
 47ee # Bit 6: 1 if output AM2 is on.
 47f4 # Bit 0: 1 if alternate shift mode/overdrive cancel is selected.
+
+4826 # stcf = Seconds to clock ticks conversion factor, ticks/second.
+
 
 495a # new value - old average 
 495e # if unsigned
@@ -978,7 +988,7 @@
 61d7 \nKNOCK THRESHOLD SENSE (KTS) LOGIC
 61e4 # (WOPEN + FN145(N)) * ("LAST PIP PERIOD")
 61f9 # WINLEN + FN144(N) * ("LAST PIP PERIOD")
-61f9 \n\nSPARK RETARD LOGIC
+61f9 \n\nRETINC = FN143(N)
 6204 \n\nSPARK ADVANCE LOGIC
 6208 # KNOCK STRATEGY ENABLED
 6216 # TSLADV >= FN146A/4
@@ -1054,17 +1064,17 @@
 6672 # (Kickdown time not up)
 667c # Add FN826A(TCSTRT) to DSDRPM
 
-667c \n\n# [+ (FN880 + FN821A)] Logic: 
+667c \n\n[+ (FN880 + FN821A)] Logic: 
 667c \n#  (Battery charge control and Inspection Maintenance)
 6685 # DSDRPM < CHGRPM
 
 668e # Add (FN880A) to DSDRPM
 6697 # Add (FN821A) to DSDRPM
 669e # Clip DSDRPM to CHGRPM as a maximum
-669e \n\n# HCAMFG Logic: (Enable/Disable Adaptive airflow updates)
+669e \n\nHCAMFG Logic: (Enable/Disable Adaptive airflow updates)
 66a1 # (In running VIP)
 
-66c1 # [+RPMINC] Logic: (Low ACT and A/C panel switch adder)
+66c1 \n\n[+RPMINC] Logic: (Low ACT and A/C panel switch adder)
 66c5 # (ACT above normal)
 66d0 # Add RPMINC to DSDRPM
 
@@ -1179,6 +1189,9 @@
 6ed7 # (not forced O.L.)
 6eda # (downstream air)
 6edf # (upstream air)
+
+6ee6 \w# CANISTER PURGE CONTROL LOGIC
+6f37 \n\n# PURGE DUTY CYCLE DECREMENT/INCREMENT LOGIC
 
 6fb5 # 210
 
