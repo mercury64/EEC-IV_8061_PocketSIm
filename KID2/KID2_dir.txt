@@ -1932,7 +1932,7 @@ sym 3c "Bit_8" : B 8
 
 sym 3e "Lmillis" : B 5
 sym 3e "Leighths" : B 6
-sym 3e "Lseconds" : B 7
+#sym 3e "Lseconds" : B 7
 
 #sym 42 "HSI_Mask"
 
@@ -2159,7 +2159,7 @@ sym a5 "Dmflg" : B 3
 sym a5 "B4_FLG_STALL_a5" : B 4
 sym a5 "B5_STALL_a5" : B 5
 sym a5 "UNDSP" : B 6
-sym a5 "CRKFLG" : B 7
+sym a5 "b7_CRKFLG_a5" : B 7
 
 sym a6 "FMEM_FLAGS"
 sym a6 "B0_ETV_ERROR_a6" : B 0
@@ -2974,6 +2974,7 @@ sym b934 "fuel_tp_pt"
 sym b936 "fuel_tp_wot"
 
 sym b940 "TKYON2"
+sym b942 "TKYON3"
 sym b946 "PRG_DEC"
 sym b94a "EVTDOT"
 sym b94c "PURGSW"
