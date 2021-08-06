@@ -1018,7 +1018,7 @@ sub  398a  "SYSEQ_MAP_COM1"   #cmd
 sub  3a3f  "Calculate_MAP_FREQ"   #cmd
 sub  3a5b  "MAP_Average_Complete"   #cmd
 sub  3a6b  "MAP_CALC"   #cmd
-sub  3b20  "Sub_3b20"   #cmd
+sub  3b20  "VEHICLE_SPEED_(VS)"   #cmd
 sub  3b4c  "VIP_THROTTLE_MODE_SET"   #cmd
 sub  3b52  "KAM_Qualification_Test_Logic"   #cmd
 sub  3be7  "ReInitialize_ISCKAM"   #cmd
@@ -1179,7 +1179,7 @@ sub  7e3d  "Sub_7e3d"   #cmd
 sub  7e40  "Sub_7e40"   #cmd
 sub  7e7c  "Sub_7e7c"   #cmd
 sub  7e86  "GET_ADDRESS"   #cmd
-sub  7ea1  "ThermactorAirTest"   #cmd
+sub  7ea1  "VO_FPM_COM2"   #cmd
 sub  7ec3  "Sub_7ec3"   #cmd
 sub  7ed7  "Sub_7ed7"   #cmd
 sub  7f51  "VO_OCC_COM12_Func1"   #cmd
@@ -1189,10 +1189,10 @@ sub  7f97  "Sub_7f97"   #cmd
 sub  7fb3  "Sub_7fb3"   #cmd
 sub  7fcc  "Sub_7fcc"   #cmd
 sub  7fe5  "Sub_7fe5"   #cmd
-sub  7ffe  "Sub_7ffe"   #cmd
-sub  8016  "Sub_8016"   #cmd
+sub  7ffe  "VO_EPC_SOLENOID_COM1"   #cmd
+sub  8016  "VO_EPC_SOLENOID_COM1_624"   #cmd
 sub  8032  "Sub_8032"   #cmd
-sub  8038  "Sub_8038"   #cmd
+sub  8038  "VO_EPC_SOLENOID_COM1_625"   #cmd
 sub  8057  "Sub_8057"   #cmd
 sub  8075  "Sub_8075"   #cmd
 sub  80c9  "SET_SERVICE_CODE"   #cmd
@@ -1217,19 +1217,19 @@ sub  82b5  "Sub_82b5"   #cmd
 sub  82ba  "Sub_82ba"   #cmd
 sub  82f6  "Sub_82f6"   #cmd
 sub  82fb  "DELAY_SEC"   #cmd
-sub  830c  "Sub_830c"   #cmd
-sub  8318  "Sub_8318"   #cmd
-sub  8326  "Sub_8326"   #cmd
-sub  835a  "Sub_835a"   #cmd
-sub  8369  "Sub_8369"   #cmd
-sub  8393  "Sub_8393"   #cmd
+sub  830c  "VR_SPARK_COM1_SAF"   #cmd
+sub  8318  "VR_SPARK_COM1_NBAR"   #cmd
+sub  8326  "VR_SPARK_COM1_213"   #cmd
+sub  835a  "DELAY_SEC(VSPTD)"   #cmd
+sub  8369  "VR_EGR_COM6"   #cmd
+sub  8393  "VR_EGR_COM6_332"   #cmd
 sub  83c2  "Sub_83c2"   #cmd
 sub  8404  "EXIT"   #cmd
-sub  840b  "Sub_840b"   #cmd
-sub  8418  "Sub_8418"   #cmd
-sub  8426  "Sub_8426"   #cmd
-sub  8453  "Sub_8453"   #cmd
-sub  846e  "Sub_846e"   #cmd
+sub  840b  "VR_LOW_ISC_COM4"   #cmd
+sub  8418  "VR_LOW_ISC_COM4_411"   #cmd
+sub  8426  "VR_GOOSE_SD_COM1"   #cmd
+sub  8453  "VR_GOOSE_SD_COM1_SET_CODE_xxx"   #cmd
+sub  846e  "VR_GOOSE_SD_COM1_G1"   #cmd
 sub  8538  "Sub_8538"   #cmd
 sub  853d  "Check_PS_PB"   #cmd
 sub  855f  "VR_EGOBAR_COM1"   #cmd
@@ -1248,7 +1248,7 @@ sub  87ea  "Sub_87ea"   #cmd
 sub  8802  "Sub_8802"   #cmd
 sub  882d  "Sub_882d"   #cmd
 sub  88bf  "VIP_EOS_IDM"   #cmd
-sub  88de  "Sub_88de"   #cmd
+sub  88de  "E4OD_TRANSMISSION_CALCULATIONS"   #cmd
 sub  890c  "INTRN_E4OD_INPUT_PROCESSING_COM1"   #cmd
 sub  8933  "INTRN_E4OD_SYS_EQU_COM1"   #cmd
 sub  8b19  "SPEED_RATIO_ACROSS_TORQUE_CONVERTER"   #cmd
@@ -1299,8 +1299,8 @@ sub  a097  "CCC_SCHLD_LCK_UNLCK_COM1"   #cmd
 sub  a163  "CCC_WOT_LCK_UP_COM1"   #cmd
 sub  a206  "INTRN_RT_NOVS_KAM_CALC_COM1"   #cmd
 sub  a356  "Sub_a356"   #cmd
-sub  a376  "Sub_a376"   #cmd
-sub  a3b8  "Sub_a3b8"   #cmd
+sub  a376  "CCC_VALID_COM2"   #cmd
+sub  a3b8  "INTRN_TCIL_REPEAT_COM1"   #cmd
 sub  a3e1  "EPC_OTEMP_TEST_COM2"   #cmd
 sub  a469  "Sub_a469"   #cmd
 sub  a767  "TIMER_LH"   #cmd
@@ -1394,16 +1394,18 @@ sym 2b  "STO_code" :B 5
 sym 2b  "STO_off" :B 6
 sym 2b  "STO_on" :B 7
 sym 2b  "STO_Flags"
-sym 2c  "?Onedigit_out?" :B 0
-sym 2c  "Goose" :B 1
-sym 2c  "VIP_FP_OVERRIDE" :B 2
-sym 2c  "Vip_knock" :B 3
-sym 2c  "Kam_codes" :B 4
-sym 2c  "Vegrbp" :B 6
-sym 2c  "Rmspru" :B 7
-sym 2c  "Vip_flags_2c"
+sym 2c  "B0_?CODE_?" :B 0
+sym 2c  "B1_CODE_" :B 1
+sym 2c  "B2_VIP_FP_OVERRIDE" :B 2
+sym 2c  "B3_CODE_" :B 3
+sym 2c  "B4_CODE_538" :B 4
+sym 2c  "B5_CODE_167" :B 5
+sym 2c  "B6_CODE_129" :B 6
+sym 2c  "B7_CODE_225" :B 7
+sym 2c  "CODE_"
+sym 2d  "B1_VF1_2d" :B 1
 sym 2d  "VIP_KAM" :B 6
-sym 2e  "Idm_bypass" :B 0
+sym 2e  "VIP_KNOCK" :B 0
 sym 2e  "Kflg_local" :B 1
 sym 2e  "Flags_bit2" :B 2
 sym 2e  "???_Re_" :B 3
@@ -1438,9 +1440,10 @@ sym 44  "V_SPDTOZ_FLG" :B 4
 sym 44  "B6_LIMIT_PURGE_44" :B 6
 sym 44  "B7_FLG_TIP_RATE_44" :B 7
 sym 45  "Rvip_cyl_quit" :B 0
-sym 45  "Rvip_cyl_bal" :B 1
+sym 45  "STO_STATE" :B 1
 sym 45  "B2_LOWVOLTAGE_Q_45" :B 2
-sym 45  "?B4_ATMR2_FLAG_45?" :B 4
+sym 45  "STIFLG" :B 3
+sym 45  "B4_RAMINIT_FLG_45" :B 4
 sym 45  "B5_FIRST_RPM_45" :B 5
 sym 45  "B6_ISC_LATCH_45" :B 6
 sym 45  "B7_REFLG_45" :B 7
@@ -1451,11 +1454,14 @@ sym 46  "PUMP" :B 7
 sym 47  "B0_Flags47" :B 0
 sym 47  "AM2" :B 6
 sym 47  "Flags_47"
-sym 48  "Rvip_cyl_quit" :B 0
-sym 48  "Rvip_cyl_bal" :B 1
-sym 48  "?Stiflg?" :B 2
-sym 48  "Disable_isc" :B 4
-sym 48  "?Sto_trigger?" :B 5
+sym 48  "V_WARM_FLG" :B 0
+sym 48  "V_THMOPN" :B 1
+sym 48  "VATMR2_FLG" :B 2
+sym 48  "PUTMR>TKYON1" :B 3
+sym 48  "AEPW_NOT_ZERO" :B 4
+sym 48  "STO_TRIGGER" :B 5
+sym 48  "V_STABLFLG" :B 6
+sym 48  "V_CST_PASS" :B 7
 sym 48  "Flags_48"
 sym 49  "DWLELD" :B 3
 sym 49  "B5_NEW_DWLIDM_49" :B 5
@@ -1464,6 +1470,7 @@ sym 4a  "B2_TLS_24_FLG_4a" :B 2
 sym 4a  "B3_TLS_NV_FLG_4a" :B 3
 sym 4a  "B4_ETV_TEST_4a" :B 4
 sym 4a  "B7_FLG_DEL_MDN_4a" :B 7
+sym 4b  "B3_CC_FM_FLG_4b" :B 3
 sym 4b  "B1_EPC_OPEN_FLG_4b" :B 4
 sym 4b  "B5_OTEMP_FM_FLG_4b" :B 5
 sym 4b  "B7_SFT_FM_FLG_4b" :B 7
@@ -1537,21 +1544,23 @@ sym 8e  "B4_A3C_8e" :B 4
 sym 8f  "B0_POWSFG_8f" :B 0
 sym 8f  "B3_ACD_8f" :B 3
 sym 90  "B2_I4X4L_90" :B 2
-sym 90  "B3_V_FPMFLG_90" :B 3
+sym 90  "B3_FPM_90" :B 3
 sym 90  "B4_BRAKE_INPUT_90" :B 4
 sym 90  "Flags_90"
 sym 91  "VBAT"
 sym 92  "ISCDTY"
 sym 94  "FUELPW1"
 sym 96  "LAMBSE1"
+sym 97  "LAMBSE1_H"
 sym 98  "EFTR"
 sym 9a  "AM"
 sym 9d  "TIPRET"
-sym 9e  "Reg_9e" :B 0
-sym 9e  "Reg_9e" :B 1
-sym 9e  "Reg_9e" :B 2
-sym 9e  "Reg_9e" :B 3
+sym 9e  "B0_Reg_9e" :B 0
+sym 9e  "B1_E4OD_9e" :B 1
+sym 9e  "B2_Reg_9e" :B 2
+sym 9e  "B3_Reg_9e" :B 3
 sym 9e  "B4_EGREN_9e" :B 4
+sym 9e  "B5_HAVE_ALT_AM_9e" :B 5
 sym 9e  "B7_KIHP_9e" :B 7
 sym 9e  "Reg_9e"
 sym 9f  "SWTFL" :B 0
@@ -1633,7 +1642,7 @@ sym bc  "TP_REL"
 sym bd  "TP_REL_H"
 sym be  "EVP"
 sym c0  "EGRDC"
-sym c1  "EGRDChi"
+sym c1  "EGRDC_H"
 sym c4  "DT12S"
 sym c7  "KAYCTR"
 sym c8  "HFDLTA"
@@ -1746,11 +1755,15 @@ sym 19a  "KTS_pulsewidth"
 sym 19c  "TBART"
 sym 19e  "LAST_MAP2"
 sym 1a0  "LAST_MAP"
+sym 1a9  "VIP_CNT_EX"
 sym 1ae  "V_ETVOCM_SAV"
+sym 1b9  "MAPSAV"
 sym 1ba  "EGO_CNT_IDLE"
 sym 1bc  "TSSTIL_TMR"
 sym 1be  "Miltmr"
 sym 1c1  "VIP_TIMER_EX"
+sym 1c4  "NSAV"
+sym 1c6  "TPSAV"
 sym 1cc  "V_LEGOTMR"
 sym 1d0  "SparkAdvance"
 sym 1e4  "DELOPT"
@@ -1827,6 +1840,7 @@ sym 2d6  "FN025_MAP_y"
 sym 2d8  "FN070L_N_x"
 sym 2da  "FN039_N_x"
 sym 2dc  "FN021_MAPOPE_y"
+sym 2de  "ALT_AM"
 sym 2e0  "A0COR"
 sym 2e2  "ACSTRT"
 sym 2e3  "ACSTRT"
@@ -1875,6 +1889,9 @@ sym 34f  "GR_OLD"
 sym 350  "GR_DS_TV"
 sym 351  "TV_COUNTS"
 sym 353  "VSV_STRT_SFT"
+sym 354  "NOV_ACT"
+sym 355  "NOV_ACT_LST"
+sym 356  "NOVCTR"
 sym 357  "VSBART_RT"
 sym 359  "PDL_LST"
 sym 35b  "TV_PRES"
@@ -1997,6 +2014,7 @@ sym 51e  "BYTE_10"
 sym 51f  "SBDS_CHKSUM_51f"
 sym 520  "BYTE_NUM"
 sym 521  "EEC_CHKSUM"
+sym 52e  "DIAGMODE"
 sym 532  "B0_ReadBytes_lowParity" :B 0
 sym 532  "B1_ReadBytes_highBadValue" :B 1
 sym 532  "B2_ReadBytes_DataChecksumParity" :B 2
@@ -2005,7 +2023,7 @@ sym 532  "B4_Read_AD_Values_ParityError" :B 4
 sym 532  "B5_Read_PID_Map_ParityError" :B 5
 sym 532  "B6_Read_DMR_Offset_ParityError" :B 6
 sym 532  "B7_NOT_USED" :B 7
-sym 532  "DCL_XDCL_ERROR_532"
+sym 532  "DCL_XDCL_ERROR_L"
 sym 533  "B8_NOT_USED" :B 0
 sym 533  "B9_NOT_USED" :B 1
 sym 533  "B10_ReadExecuteVector_ParityError" :B 2
@@ -2014,6 +2032,8 @@ sym 533  "B12_DCL_ModeSchedular_BadDiagnosticParameterSlot" :B 4
 sym 533  "B13_EEC_Reset_SetifEECResets" :B 5
 sym 533  "B14_SelfTest_SelfTestComplete" :B 6
 sym 533  "Background_SetDisableProgramExecution" :B 7
+sym 533  "DCL_XDCL_ERROR_H"
+sym 534  "DCL_EXEC_VECT"
 sym 538  "SBDS01"
 sym 53a  "SBDS02"
 sym 53c  "SBDS03"
@@ -2519,6 +2539,8 @@ sym c19e  "TP_SH_VALID"
 sym c1a0  "VS_SH_VAL2"
 sym c1a1  "VS_SH_VAL3"
 sym c1a2  "VS_SH_VAL4"
+sym c1a4  "NOV_ERR_BAND"
+sym c1a6  "CCE_TPMN"
 sym c1af  "?VECT3_wrong?"
 sym c1ce  "VS_NEU"
 sym c1cf  "GR_NEU"
@@ -2594,6 +2616,7 @@ sym cb5c  "VTC_OVER"
 sym cb5e  "VTC_UNDER"
 sym cb60  "FKMKAY"
 sym cb62  "SFT_FM_LVL"
+sym cb63  "CC_FM_LVL"
 sym cb64  "MAPEDG"
 sym cb66  "LONG_MAP_RQD"
 sym cb67  "MAP_CYCLE"
@@ -2651,7 +2674,7 @@ sym cbcf  "VECT5"
 sym cbd0  "TAPMAX"
 sym cbd2  "TAPMIN"
 sym cbd4  "WIGLVL"
-sym cbd5  "V_fpmflg"
+sym cbd5  "V_FPMFLG"
 sym cbd8  "ECTMIN"
 sym cbda  "ECTMAX"
 sym cbdc  "V_HICKOKTM"

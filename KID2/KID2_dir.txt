@@ -1490,7 +1490,7 @@ sub  8398a "SYSEQ_MAP_COM1"
 sub  83a3f "Calculate_MAP_FREQ"  
 sub  83a5b "MAP_Average_Complete"  
 sub  83a6b "MAP_CALC"  
-sub  83b20 "Sub_3b20"  
+sub  83b20 "VEHICLE_SPEED_(VS)"  
 sub  83b4c "VIP_THROTTLE_MODE_SET"  
 sub  83b52 "KAM_Qualification_Test_Logic"  
 sub  83be7 "ReInitialize_ISCKAM"  
@@ -1652,7 +1652,7 @@ sub  87e3d "Sub_7e3d"
 sub  87e40 "Sub_7e40"  
 sub  87e7c "Sub_7e7c"  
 sub  87e86 "GET_ADDRESS"  
-sub  87ea1 "ThermactorAirTest" 
+sub  87ea1 "VO_FPM_COM2" 
 sub  87ec3 "Sub_7ec3"  
 sub  87ed7 "Sub_7ed7"  
 sub  87f51 "VO_OCC_COM12_Func1"  
@@ -1662,15 +1662,15 @@ sub  87f97 "Sub_7f97"
 sub  87fb3 "Sub_7fb3"  
 sub  87fcc "Sub_7fcc"  
 sub  87fe5 "Sub_7fe5"  
-sub  87ffe "Sub_7ffe"  
+sub  87ffe "VO_EPC_SOLENOID_COM1"  
 
 sub 8873d "Disable_No_Start"
 sub 88755 "VO_KAMRAM_COM1"
 sub 88794 "RAM_ERROR"
 
-sub  88016  "Sub_8016"  
+sub  88016  "VO_EPC_SOLENOID_COM1_624"  
 sub  88032  "Sub_8032"  
-sub  88038  "Sub_8038"  
+sub  88038  "VO_EPC_SOLENOID_COM1_625"  
 sub  88057  "Sub_8057"  
 sub  88075  "Sub_8075"  
 sub  880c9 "SET_SERVICE_CODE"   
@@ -1695,19 +1695,19 @@ sub  882b5  "Sub_82b5"
 sub  882ba  "Sub_82ba"  
 sub  882f6 "Sub_82f6"  
 sub  882fb "DELAY_SEC"  
-sub  8830c   "Sub_830c"  
-sub  88318 "Sub_8318"  
-sub  88326  "Sub_8326"  
-sub  8835a  "Sub_835a"  
-sub  88369  "Sub_8369"  
-sub  88393  "Sub_8393"  
+sub  8830c   "VR_SPARK_COM1_SAF"  
+sub  88318 "VR_SPARK_COM1_NBAR"  
+sub  88326  "VR_SPARK_COM1_213"  
+sub  8835a  "DELAY_SEC(VSPTD)"  
+sub  88369  "VR_EGR_COM6"  
+sub  88393  "VR_EGR_COM6_332"  
 sub  883c2  "Sub_83c2"  
 sub  88404 "EXIT"
-sub  8840b "Sub_840b"  
-sub  88418 "Sub_8418"  
-sub  88426 "Sub_8426"  
-sub  88453 "Sub_8453"  
-sub  8846e  "Sub_846e"  
+sub  8840b "VR_LOW_ISC_COM4"  
+sub  88418 "VR_LOW_ISC_COM4_411"  
+sub  88426 "VR_GOOSE_SD_COM1"  
+sub  88453 "VR_GOOSE_SD_COM1_SET_CODE_xxx"  
+sub  8846e  "VR_GOOSE_SD_COM1_G1"  
 sub  88538  "Sub_8538"  
 sub  8853d "Check_PS_PB"
 sub  8855f "VR_EGOBAR_COM1" 
@@ -1724,7 +1724,7 @@ sub  88802   "Sub_8802"
 
 sub  8882d   "Sub_882d"  
 sub  888bf   "VIP_EOS_IDM"  
-sub  888de   "Sub_88de"  
+sub  888de   "E4OD_TRANSMISSION_CALCULATIONS"  
 sub  8890c   "INTRN_E4OD_INPUT_PROCESSING_COM1"  
 sub  88933 "INTRN_E4OD_SYS_EQU_COM1"  
 sub  88b19 "SPEED_RATIO_ACROSS_TORQUE_CONVERTER"  
@@ -1775,8 +1775,8 @@ sub  8a097   "CCC_SCHLD_LCK_UNLCK_COM1"
 sub  8a163   "CCC_WOT_LCK_UP_COM1"  
 sub  8a206   "INTRN_RT_NOVS_KAM_CALC_COM1"  
 sub  8a356   "Sub_a356"  
-sub  8a376   "Sub_a376"  
-sub  8a3b8   "Sub_a3b8"  
+sub  8a376   "CCC_VALID_COM2"  
+sub  8a3b8   "INTRN_TCIL_REPEAT_COM1"  
 sub  8a3e1   "EPC_OTEMP_TEST_COM2"  
 sub  8a469   "Sub_a469"  
 sub  8a767 "TIMER_LH"  
@@ -1819,6 +1819,8 @@ sym 12 "Tmr_OVF_cnt"
 
 # sym  14 "ConsoleMode" : B 6
 sym 14 "B7_BPKFLG_14" : B 7
+
+#sym 1c "NSAV"
 
 sym 22 "B5_LESFLG_22" : B 5
 
@@ -1887,20 +1889,21 @@ sym 2b "STO_code" :B 5
 sym 2b "STO_off" :B 6
 sym 2b "STO_on" :B 7
 
-sym 2c "Vip_flags_2c"
-sym 2c "?Onedigit_out?" : B 0
-sym 2c "Goose" : B 1
-sym 2c "VIP_FP_OVERRIDE" : B 2
-sym 2c "Vip_knock" : B 3
-sym 2c "Kam_codes" : B 4
-# sym 2c "Vvsfl1" : B 5
-sym 2c "Vegrbp" : B 6
-sym 2c "Rmspru" : B 7
+sym 2c "CODE_"
+sym 2c "B0_?CODE_?" : B 0
+sym 2c "B1_CODE_" : B 1
+sym 2c "B2_VIP_FP_OVERRIDE" : B 2
+sym 2c "B3_CODE_" : B 3
+sym 2c "B4_CODE_538" : B 4
+sym 2c "B5_CODE_167" : B 5
+sym 2c "B6_CODE_129" : B 6
+sym 2c "B7_CODE_225" : B 7
 
+sym 2d "B1_VF1_2d" : B 1
 sym 2d "VIP_KAM" : B 6
 
 sym 2e "Flags_2e"
-sym 2e "Idm_bypass" : B 0
+sym 2e "VIP_KNOCK" : B 0
 sym 2e "Kflg_local" : B 1
 sym 2e "Flags_bit2" : B 2
 sym 2e "???_Re_" : B 3
@@ -1946,11 +1949,10 @@ sym 44 "B7_FLG_TIP_RATE_44" : B 7
 
 sym 45 "Flags_45"
 sym 45 "Rvip_cyl_quit" : B 0
-sym 45 "Rvip_cyl_bal" : B 1
+sym 45 "STO_STATE" : B 1
 sym 45 "B2_LOWVOLTAGE_Q_45" : B 2
-#sym 45 "Error_detected" : B 3
-# sym 45 "Console_flag" : B 4
-sym 45 "?B4_ATMR2_FLAG_45?" : B 4
+sym 45 "STIFLG" : B 3
+sym 45 "B4_RAMINIT_FLG_45" : B 4
 sym 45 "B5_FIRST_RPM_45" : B 5
 sym 45 "B6_ISC_LATCH_45" : B 6
 sym 45 "B7_REFLG_45" : B 7
@@ -1959,11 +1961,6 @@ sym 45 "B7_REFLG_45" : B 7
 
 sym 46 "AM1" : B 0
 
-#sym 46 "Dol" : B 1
-#sym 46 "Evr" : B 2
-#sym 46 "Isc" : B 3
-#sym 46 "Scvnt" : B 4
-#sym 46 "Sto_state" : B 5
 sym 46 "WOT_AC" : B 6
 sym 46 "PUMP" : B 7
 
@@ -1973,14 +1970,14 @@ sym 47 "AM2" : B 6
 
 
 sym 48 "Flags_48"
-sym 48 "Rvip_cyl_quit" : B 0
-sym 48 "Rvip_cyl_bal" : B 1
-sym 48 "?Stiflg?" : B 2
-#sym 48 "Error_detected" : B 3
-sym 48 "Disable_isc" : B 4
-sym 48 "?Sto_trigger?" : B 5
-#sym 48 "Egoste2" : B 6
-#sym 48 "Egoste1" : B 7
+sym 48 "V_WARM_FLG" : B 0
+sym 48 "V_THMOPN" : B 1
+sym 48 "VATMR2_FLG" : B 2
+sym 48 "PUTMR>TKYON1" : B 3
+sym 48 "AEPW_NOT_ZERO" : B 4
+sym 48 "STO_TRIGGER" : B 5
+sym 48 "V_STABLFLG" : B 6
+sym 48 "V_CST_PASS" : B 7
 
 sym 49 "DWLELD" : B 3
 sym 49 "B5_NEW_DWLIDM_49" : B 5
@@ -1991,6 +1988,7 @@ sym 4a "B4_ETV_TEST_4a" : B 4
 sym 4a "B7_FLG_DEL_MDN_4a" : B7
 
 sym 4b "B1_EPC_OPEN_FLG_4b" : B4
+sym 4b "B3_CC_FM_FLG_4b" : B3
 sym 4b "B4_SFT_ERROR_4b" : B4
 sym 4b "B5_OTEMP_FM_FLG_4b" : B5
 sym 4b "B7_SFT_FM_FLG_4b" : B7
@@ -2086,13 +2084,14 @@ sym 8f "B3_ACD_8f" : B 3
 
 sym 90 "Flags_90"
 sym 90 "B2_I4X4L_90" : B 2
-sym 90 "B3_V_FPMFLG_90" : B 3
+sym 90 "B3_FPM_90" : B 3
 sym 90 "B4_BRAKE_INPUT_90" : B 4
 
 sym 91 "VBAT"
 sym 92 "ISCDTY"
 sym 94 "FUELPW1"
 sym 96 "LAMBSE1"
+sym 97 "LAMBSE1_H"
 sym 98 "EFTR"
 
 sym 9a "AM"
@@ -2100,11 +2099,12 @@ sym 9a "AM"
 sym 9d "TIPRET" 
 
 sym 9e "Reg_9e"
-sym 9e "Reg_9e" : B 0
-sym 9e "Reg_9e" : B 1
-sym 9e "Reg_9e" : B 2
-sym 9e "Reg_9e" : B 3
+sym 9e "B0_Reg_9e" : B 0
+sym 9e "B1_E4OD_9e" : B 1
+sym 9e "B2_Reg_9e" : B 2
+sym 9e "B3_Reg_9e" : B 3
 sym 9e "B4_EGREN_9e" : B 4
+sym 9e "B5_HAVE_ALT_AM_9e" : B 5
 sym 9e "B7_KIHP_9e" : B 7
 
 # sym 9e "Pfehp_flg" : B 1
@@ -2209,7 +2209,7 @@ sym bd "TP_REL_H"
 sym be "EVP"
 
 sym c0 "EGRDC"
-sym c1 "EGRDChi"
+sym c1 "EGRDC_H"
 sym c4 "DT12S"
 sym c7 "KAYCTR"
 sym c8 "HFDLTA"
@@ -2287,6 +2287,7 @@ sym 122 "MAP_FREQ"
 sym 124 "MAP_WORD"
 sym 126 "IMAP_WORD"
 sym 128 "MAPCNT"
+
 sym 12a "MAPWBAR"
 sym 12e "AETP"
 sym 134 "MAPBAR"
@@ -2352,13 +2353,18 @@ sym 19c "TBART"
 sym 19e "LAST_MAP2"
 
 sym 1a0 "LAST_MAP"
+sym 1a9 "VIP_CNT_EX"
 
 sym 1ae "V_ETVOCM_SAV"
+
+sym 1b9 "MAPSAV"
 sym 1ba "EGO_CNT_IDLE"
 sym 1bc "TSSTIL_TMR"
 sym 1be "Miltmr"
 
 sym 1c1 "VIP_TIMER_EX"
+sym 1c4 "NSAV"
+sym 1c6 "TPSAV"
 sym 1cc "V_LEGOTMR"
 
 sym 1d0 "SparkAdvance"
@@ -2464,6 +2470,7 @@ sym 2d6 "FN025_MAP_y"
 sym 2d8 "FN070L_N_x"
 sym 2da "FN039_N_x"
 sym 2dc "FN021_MAPOPE_y"
+sym 2de "ALT_AM"
 
 sym 2e0 "A0COR"
 sym 2e2 "ACSTRT"
@@ -2521,11 +2528,14 @@ sym 34c "GEAR_OLD"
 sym 34d "GR_CM_LST"
 sym 34e "GR_DS_LST
 sym 34f "GR_OLD"
+
 sym 350 "GR_DS_TV"
 
 sym 351 "TV_COUNTS"
 sym 353 "VSV_STRT_SFT"
-
+sym 354 "NOV_ACT"
+sym 355 "NOV_ACT_LST"
+sym 356 "NOVCTR"
 sym 357 "VSBART_RT"
 sym 359 "PDL_LST"
 sym 35b "TV_PRES"
@@ -2673,8 +2683,9 @@ sym 51e "BYTE_10"
 sym 51f "SBDS_CHKSUM_51f"
 sym 520 "BYTE_NUM"
 sym 521 "EEC_CHKSUM"
+sym 52e "DIAGMODE"
 
-sym 532 "DCL_XDCL_ERROR_532" # XDCL_ERROR
+sym 532 "DCL_XDCL_ERROR_L" # XDCL_ERROR
 sym 532 "B0_ReadBytes_lowParity" : B 0
 sym 532 "B1_ReadBytes_highBadValue" : B 1
 sym 532 "B2_ReadBytes_DataChecksumParity" : B 2
@@ -2683,14 +2694,17 @@ sym 532 "B4_Read_AD_Values_ParityError" : B 4
 sym 532 "B5_Read_PID_Map_ParityError" : B 5
 sym 532 "B6_Read_DMR_Offset_ParityError" : B 6
 sym 532 "B7_NOT_USED" : B 7
-sym 532 "B8_NOT_USED" : B 8
-sym 532 "B9_NOT_USED" : B 9
-sym 532 "B10_ReadExecuteVector_ParityError" : B 10
-sym 532 "B11_ReadExecuteVector_IncorrectChecksum" : B 11
-sym 532 "B12_DCL_ModeSchedular_BadDiagnosticParameterSlot" : B 12
-sym 532 "B13_EEC_Reset_SetifEECResets" : B 13
-sym 532 "B14_SelfTest_SelfTestComplete" : B 14
-sym 532 "Background_SetDisableProgramExecution" : B 15
+sym 533 "DCL_XDCL_ERROR_H"
+sym 533 "B8_NOT_USED" : B 0
+sym 533 "B9_NOT_USED" : B 1
+sym 533 "B10_ReadExecuteVector_ParityError" : B 2
+sym 533 "B11_ReadExecuteVector_IncorrectChecksum" : B 3
+sym 533 "B12_DCL_ModeSchedular_BadDiagnosticParameterSlot" : B 4
+sym 533 "B13_EEC_Reset_SetifEECResets" : B 5
+sym 533 "B14_SelfTest_SelfTestComplete" : B 6
+sym 533 "Background_SetDisableProgramExecution" : B 7
+
+sym 534 "DCL_EXEC_VECT"
 
 #0     Read Bytes           Load Address (low byte) Parity
 #1     Read Bytes           Load Address (high byte) Bad Value
@@ -3184,6 +3198,8 @@ sym c19e "TP_SH_VALID"
 sym c1a0 "VS_SH_VAL2"
 sym c1a1 "VS_SH_VAL3"
 sym c1a2 "VS_SH_VAL4"
+sym c1a4 "NOV_ERR_BAND"
+sym c1a6 "CCE_TPMN"
 
 sym c1af "?VECT3_wrong?"
 
@@ -3204,6 +3220,7 @@ sym cb5e "VTC_UNDER"
 
 sym cb60 "FKMKAY"
 sym cb62 "SFT_FM_LVL"
+sym cb63 "CC_FM_LVL"
 sym cb64 "MAPEDG"
 sym cb6a "ALPHA"
 sym cb6e "FRCTAE"
@@ -3273,7 +3290,7 @@ sym cbd0 "TAPMAX"
 sym cbd2 "TAPMIN"
 
 sym cbd4 "WIGLVL"
-sym cbd5 "V_fpmflg"
+sym cbd5 "V_FPMFLG"
 sym cbd8 "ECTMIN"
 sym cbda "ECTMAX"
 sym cbdc "V_HICKOKTM"

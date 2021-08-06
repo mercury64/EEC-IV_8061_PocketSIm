@@ -106,6 +106,14 @@
 
 2425 \n# CART Mode (Custom Asynchronous Receiver Transmitter)
 
+2449 # DCL_ModeSchedular_BadDiagnosticParameterSlot
+2457 # 522, 523 = 0
+245a # 524, 525 = 0
+245d # 526 = 0
+
+2464 # 527 = 1
+2467 # 528,529 = 0
+
 #2481 # <= 3 bit 0 and/or bit 1 set, meaning:
 ##2481 \w# 0     Read Bytes           Load Address (low byte) Parity
 2481 \w# 1     Read Bytes           Load Address (high byte) Bad Value
@@ -492,7 +500,9 @@
 3ecf # ECTCNT = ECTCNT + 1
 3ede # ACSTRT + ACT/8
 
-3f44 \n\n# STRATEGY MODULE: INPUT_TP_COM3 
+3f12 \n\n STRATEGY MODULE: INPUT_ETVOCM_COM1
+
+3f44 \n\n STRATEGY MODULE: INPUT_TP_COM3 
 3f5e # (TP sensor within acceptable range)
 3f77 # RATCH + FN090(MAP)
 3f7f # TP = RATCH (TP sensor out of limits)
@@ -1335,7 +1345,8 @@
 
 757b # Set PSW Flags
 
-78ab # BOO_SPD_TMR
+78ab \n\n BEGIN: BOO_SPD_TMR
+78b4 \n END: BOO_SPD_TMR\n
 
 7aac # KAM CODE(N)
 7aaf # WARM-UP COUNTER(N)
@@ -1445,6 +1456,8 @@
 840e # SET TV_COUNTS =0 
 84d5 # 538,Operator error-dyn response test.
 84df # 129,Insuff. MAP change-dyn resp. test.
+
+84f4 \n\n STRATEGY MODULE: VC_BOO_COM1
 
 856e # EGOBAR = EGOBAR UROLAV(IEGO1,R36)
 
