@@ -32,6 +32,7 @@
 20fe # 0x0Fh = 15, XFRAME Block?
 
 2101 # error register is initialized to BC1FH on EEC power-up/initialize
+2134 # 0x9c / 2 functions = 78
 21cd \n# "Task_List_1"
 220b \n# "Task_List_2"
 

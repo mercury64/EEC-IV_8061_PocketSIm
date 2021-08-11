@@ -1,0 +1,26 @@
+
+# ----------------------------
+# SAD Version 4.0.7.16 (16 Jun 2021)
+# ----------------------------
+
+# Input file is '300M.bin'
+
+# File is 56K (0xe000) bytes
+
+
+# Read comments from directive file at '300M_cmt.txt'
+
+20c3 # set RAM at 0x12 to 0x336 to zero
+
+20c5 # Initialize 4 lists, base pointer
+20cd # is it done yet?
+
+20cf # Base address
+20d2 # end of list, next address
+
+20e6 # loop, load bytes from aa68 to aa98
+
+20e8 # R14 = R16
+20ea # next list
+
+2203 # (0x82 / 2) # of functions = 65

@@ -143,7 +143,7 @@
 212f: 2f,01               scall 2032             Reset_All ();
    Background_Loop:
 2131: 99,9c,d7            cmpb  Rd7,9c           
-2134: db,2b               jc    2161             if (Rd7 < 9c)  {
+2134: db,2b               jc    2161             if (Rd7 < 9c)  {                  # 0x9c / 2 functions = 78
 2136: b1,ff,d5            ldb   Rd5,ff           Rd5 = ff;
 2139: ac,d7,30            ldzbw R30,Rd7          wR30 = yRd7;
 213c: 65,ce,21,30         ad2w  R30,21ce         R30 += 21ce;
