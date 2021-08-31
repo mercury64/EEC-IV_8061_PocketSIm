@@ -1119,7 +1119,7 @@ sub  6c18  "Manifold_VACUUM"   #cmd
 sub  6c27  "ISC_ISCKAM_COM1"   #cmd
 sub  6ca9  "Sub_6ca9"   #cmd
 sub  6cd7  "DOL_LH"   #cmd
-sub  6d5b  "Sub_6d5b"   #cmd
+sub  6d5b  "ACC_GOV_MAP_COM2"   #cmd
 sub  6de0  "THERMACTOR_AIR_STRATEGY"   #cmd
 sub  6ee6  "CANP_COM4"   #cmd
 sub  6fb2  "Update_Can_Purge"   #cmd
@@ -2641,6 +2641,7 @@ sym cb84  "PSPSHP"
 sym cb85  "THRMHP"
 sym cb86  "TSTRAT"
 sym cb87  "TRLOAD"
+sym cb88  "GOVHP"
 sym cb89  "VSTYPE"
 sym cb8a  "IGN_TYPE"
 sym cb8e  "AFECT1"

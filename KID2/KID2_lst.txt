@@ -281,9 +281,9 @@
 2270: 3c,8e,06            jb    B4,R8e,2279      if (B4_A3C_8e = 0)  {             #  A/C CLUTCH STATUS (ACCFLG)
 2273: 71,7f,79            an2b  R79,7f           ACCFLG = 0;
 2276: 71,fe,79            an2b  R79,fe           ACIFLG = 0; }
-2279: b3,fe,2e,42         ldb   R42,[Rfe+2e]     R42 = [cb88];
+2279: b3,fe,2e,42         ldb   R42,[Rfe+2e]     R42 = GOVHP;
 227d: 30,42,06            jnb   B0,R42,2286      if (B0_R42 = 1)  {
-2280: ef,d8,4a            call  6d5b             Sub_6d5b ();
+2280: ef,d8,4a            call  6d5b             ACC_GOV_MAP_COM2 ();
 2283: ef,51,4a            call  6cd7             DOL_LH (); }
 2286: 9b,fe,2b,00         cmpb  R0,[Rfe+2b]      
 228a: df,05               je    2291             if (THRMHP != 0)  {
@@ -1205,7 +1205,7 @@ EVR FOREGROUND REPEATER MODULE
 2b3d: 91,02,47            orb   R47,2            B1_Flags_47 = 1; } }
 2b40: 31,d6,35            jnb   B1,Rd6,2b78      if (B1_Rd6 = 1)  {
 2b43: 9b,fe,2e,00         cmpb  R0,[Rfe+2e]      
-2b47: d7,2b               jne   2b74             if ([cb88] = 0)  {
+2b47: d7,2b               jne   2b74             if (GOVHP = 0)  {
 2b49: a3,e4,7e,56         ldw   R56,[Re4+7e]     R56 = DOL_COUNT;
 2b4d: 69,02,00,56         sb2w  R56,2            R56 -= 2;
 2b51: d9,0a               jgtu  2b5d             if (R56 <= 0)  {
@@ -7642,7 +7642,7 @@ PSFLAG Logic: (Last state of POWSFG)
 
    DOL_LH:
 6cd7: 9b,fe,2e,00         cmpb  R0,[Rfe+2e]      
-6cdb: df,06               je    6ce3             if ([cb88] != 0)  {
+6cdb: df,06               je    6ce3             if (GOVHP != 0)  {
 6cdd: 32,a6,11            jnb   B2,Ra6,6cf1      if (B2_TFMFLG_a6 = 0) goto 6cf1;
 6ce0: 33,a6,0e            jnb   B3,Ra6,6cf1      if (B3_MFMFLG_a6 = 0) goto 6cf1; }
 6ce3: c3,e6,08,00         stw   R0,[Re6+8]       DOL_DUTY = 0;
@@ -7693,7 +7693,7 @@ PSFLAG Logic: (Last state of POWSFG)
 6d56: cc,00               pop   R0               R0 = pop();
 6d58: e7,d6,bc            jump  2a31             goto 2a31;
 
-   Sub_6d5b:
+   ACC_GOV_MAP_COM2:
 6d5b: 33,a6,12            jnb   B3,Ra6,6d70      if (B3_MFMFLG_a6 = 1)  {
 6d5e: 32,a6,0f            jnb   B2,Ra6,6d70      if (B2_TFMFLG_a6 = 1)  {
 6d61: c7,e6,05,00         stb   R0,[Re6+5]       GMAPDC = 0;
@@ -17152,7 +17152,7 @@ cb84: 00                  byte      0            PSPSHP
 cb85: 01                  byte      1            THRMHP
 cb86: 04                  byte      4            TSTRAT
 cb87: 06                  byte      6            TRLOAD
-cb88: 00                  byte      0
+cb88: 00                  byte      0            GOVHP
 cb89: 01                  byte      1            VSTYPE
 cb8a: 01                  byte      1            IGN_TYPE
 
