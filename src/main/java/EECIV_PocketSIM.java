@@ -33,11 +33,11 @@ public class EECIV_PocketSIM {
 	   // Calibration KID2 = new Calibration("KID2/KID2patchedNew.bin");
 	   Calibration KID2 = new Calibration("KID2/KID2.bin");
 	   // Calibration KID2 = new Calibration("KID2/0x100_v001.bin"); 
-	   //Calibration KID2 = new Calibration("KID2/JFA2.bin");	
+	   // Calibration KID2 = new Calibration("KID2/JFA2.bin");	
 	   // Calibration KID2 = new Calibration("KID2/KID2.bin");
-	   //Calibration KID2 = new Calibration("KID2/0x100_v001.bin"); 
-	   //Calibration KID2 = new Calibration("KID2/T4M0.bin"); 
-	   //Calibration KID2 = new Calibration("KID2/P3M.bin"); 
+	   // Calibration KID2 = new Calibration("KID2/0x100_v001.bin"); 
+	   // Calibration KID2 = new Calibration("KID2/T4M0.bin"); 
+	   // Calibration KID2 = new Calibration("KID2/P3M.bin"); 
 		int[] fileBytes = KID2.readFile();
    
 		state = new State(fileBytes);

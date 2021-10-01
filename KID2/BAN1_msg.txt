@@ -3,12 +3,15 @@
 # SAD Version 4.0.7.16 (16 Jun 2021)
 # ----------------------------
 
-# Input file is 'KID2.bin'
+# Input file is 'BAN1.bin'
 
 # File is 56K (0xe000) bytes
 
 
-# Read commands from directive file at 'KID2_dir.txt'
+# Read commands from directive file at 'BAN1_dir.txt'
+
+## func    c376 c389  "Func_c376"   : UW  : UW
+ Warning - Function Start value Invalid 
 
 ## word	ccba cce2
  Warning - End inconsistent with size, reduced to 9cce1
@@ -21,7 +24,7 @@
 
 # ----- End   Disassembly phase 2  -----
 
-# ----- Output Listing to file KID2_lst.txt
+# ----- Output Listing to file BAN1_lst.txt
 
 
 

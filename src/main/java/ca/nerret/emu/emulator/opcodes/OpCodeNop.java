@@ -22,4 +22,16 @@ public class OpCodeNop extends OpCode implements IOpCode {
         // NOP Just advance.
         state_.setPc(state_.getPc() + 1);
     }
+    
+	public  int execShortIndexed()
+    {
+    	// AssemblerFormat: ML2B offset(basereg),breg
+    	// InstructionOperation:(RB) <- (Rb)*([Ra]+Offset) 
+    	// ExecutionStates: 19/24
+    	// MachineFormat: [ ^7F ],[ Base Ra | 0 MB ],[+-| Offset ], [ Dest RB ]
+
+		System.err.println("NotImplemented");
+		System.exit(1);
+		return executionStates;
+    }
 }

@@ -1,0 +1,1976 @@
+200a # ROM_TO is the complement of CHECKSUM |
+200a # d417 -> one's:2be8, two's: 2be9
+
+2034 # stop interrupts
+2036 # save VIP mode
+
+2039 # 0x24h = 36
+203d # set RAM at 0x24 to 0x6ff to zero
+2040 # increment watchdog timer
+2042 # 0x6FFh = 1791
+
+2053 # restore VIP mode
+2058 # Initialize 4 lists, base pointer
+205c # is it done yet?
+
+2062 # Base address
+2065 # end of list, next address
+
+2079 # loop, load bytes from aa68 to aa98
+
+207b # R14 = R16
+207d # next list
+
+2098 # = 0xB6DBh / 0x8000h =  1.42857 for 35% duty cycle signature  PIP.
+209c # PIPsC; #= 8 (PIPs per cycle)
+20a3 # = 0xD555h / 0x8000h 1.66666 for  30%  duty cycle signature PIP 
+
+
+20d9 # HSI0, HSI1, HSI2?
+20dc # HSI line select
+
+20fe # 0x0Fh = 15, XFRAME Block?
+
+2101 # error register is initialized to BC1FH on EEC power-up/initialize
+2134 # 0x9c / 2 functions = 78
+21cd \n# "Task_List_1"
+220b \n# "Task_List_2"
+
+2231 \n# "Task_List_3"
+
+2270 #  A/C CLUTCH STATUS (ACCFLG)
+
+22a1 # EGR IS DISABLED, NO EGR CONTROL REQUIRED
+
+
+2381 \n# UART Mode
+2382 # R34 = 1818h (CART_Status = R34 later, may change to 4040 or 9393)
+2386 # R30 = current CART_Status
+
+238b # If the buffer is not full
+238e # message check logic is exited
+
+
+2395 # RECEIVE OVERRUN ERROR
+
+2398 # message check logic is exited
+
+23a1 # BYTE_NUM is 5 or less
+23a3 # BYTE_NUM is not 5
+23a3 \w# BYTE_NUM is 4 or less
+
+23a5 # Increment BYTE_NUM
+23ac # message check logic is exited
+
+23b1 # BYTE_NUM is 5 (5 zeros received)
+23b1 \w# IF new byte = 0 (zero received)   
+23b1 \w# (sync sequence complete)
+23b1 \w# goto 241b
+
+23b3 # (first non-zero received)
+23b8 # Increment BYTE_NUM
+23ba # Store new byte in uart_msg
+
+23be \n\n# SBDS COMMAND LOGIC
+23bf \w# EEC_CHKSUM = EEC_CHKSUM
+23c6 # BYTE_NUM < 11
+23c6 \w# CART_STATUS = 1818H
+23c8 \w#  (update the check sum)
+23c8 \w#  XOR new byte
+23cb \w# exit message check logic
+
+23d1 # EEC_CHKSUM <> SBDS_CHKSUM (bad data in buffer)  
+23da # MODULE_ID <> 01 (EEC not selected) 
+
+23e3 # CMD_CODE = 82 (echo MODULE_ID to SBDS)
+23e5 # uart transmit buffer = MODULE_ID
+
+23ef # CMD_CODE = 80 (go permanently off-line)
+23f1 # CART_Status =  4040h
+
+23fa # CMD_CODE = 4 (go to CART Mode)
+23fc # 0 -> UART mode;
+23fc \w# 1 -> CART mode.
+23ff # 19200 baud
+23ff \w# 00H                2400 baud
+23ff \w# 01H                4800 baud
+23ff \w# 02H                9600 baud
+23ff \w# 03H               19200 baud
+2409 # error register is initialized to BC1FH on EEC power-up/initialize
+240d # XDCL_ERRO = BC1Fh
+240d \w# CART_Status = 9393h
+2411 
+2415 # BYTE_NUM = 0
+2415 \w# EEC_CHKSUM = 0
+
+2424 # Exit message check logic
+
+2425 \n# CART Mode (Custom Asynchronous Receiver Transmitter)
+
+2449 # DCL_ModeSchedular_BadDiagnosticParameterSlot
+2457 # 522, 523 = 0
+245a # 524, 525 = 0
+245d # 526 = 0
+
+2464 # 527 = 1
+2467 # 528,529 = 0
+
+#2481 # <= 3 bit 0 and/or bit 1 set, meaning:
+##2481 \w# 0     Read Bytes           Load Address (low byte) Parity
+2481 \w# 1     Read Bytes           Load Address (high byte) Bad Value
+
+24da # clear request for self test
+
+254a # address of DEFINED EEC-IV DIAGNOSTIC MODES
+254e # 0x11h = 17 DiagModes
+
+25c8 # 13 Slots;
+
+
+
+266d # 28h / 8 = 40 / 8 = 5
+2673 # inc R30 if R31 set
+2677 # KAM reg base address
+267b # clear the four (or five) KAM bytes 
+267b \w# which hold the Continuous Self Test Codes
+
+2686 # clear all bits except bit 13
+2686 \w# 13     EEC Reset            Set if EEC Resets
+
+27a5 # initiate self test
+27a5 \w#The EEC will set a flag DCLST_START after receiving diagnostic mode code 25H.
+27a5 \w#This flag is continuously read by VIP to initiate self test.
+
+27d2 # all codes have been transmitted at least once, 
+27d2 \w# by setting bit 14 in the DCL Error/Flag register.
+28b3 \n# DEFINED EEC-IV DIAGNOSTIC MODES
+28b4 # clear DCL error/flag bits
+28b7 # clear Continuous Self Test codes
+28ba # display status information only
+28bd # transmit PID values
+28c0 # transmit DMR values
+28c3 # transmit PID map
+28c6 # transmit DMR map
+28c9 # run Self Test (K0E0 or K0ER)
+28cc # transmit Continuous Self Test codes
+28cf # transmit PID and DMR values
+28d2 # read Parameter Identification (PID) map
+28d5 # read Direct Memory Reference (DMR) map
+28d8 # read program/data bytes
+28db # read program execution vector
+28de # read A/D substitution values
+
+28e1 # go permanently offline, disable DCL function
+28e4 # Set DCL baud rate
+
+2921 \n\n# 9.0 Parameter Identification (PID) Code Tables:
+2921 #Parameter        PID    Data    Output    Output
+2921 \w#Name             Code   Type    Scaling   Resolution
+2921 \w#----------------------------------------------------
+2922 #N                 01    word      bin -2      4 RPM
+2925 #MAP               02    byte      bin 3       0.125 "Hg
+2928 #BP                03    byte      bin 3       0.125 "Hg   
+292b #SAFTOT            04    byte      bin 2       0.25 degrees S.A.
+292e #IACT              05    word      bin 0       1 A/D count             
+2931 #IECT              06    word      bin 0       1 A/D count             
+2934 #IEGR              07    word      bin 0       1 A/D count             
+2937 #IEGO1             08    word      bin 0       1 A/D count             
+293a #ITP               09    word      bin 0       1 A/D count               
+293d #***NOT USED***    0A    
+2940 #IVCAL             0B    word      bin 0       1 A/D count             
+2943 #FUELPW1           0C    word      bin -5      32 clock ticks          
+2946 #LAMBSE1           0D    word      bin 11      1/2048 unitless         
+2949 #APT               0E    byte      bin 0       -1,0,1 unitless         
+294c #ACT               0F    byte      bin -1      2 degrees F             
+294f #ECT               10    byte      bin -1      2 degrees F             
+2952 #VBAT              11    byte      bin 4       0.0625 volts            
+2955 #MAP_FREQ          12    word      bin 4       0.0625 Hz               
+2958 #EGRDC             13    word      bin 11      1 EEC-IV count            
+295b #***NOT USED***    14    
+295e #ISCDTY            15    word      bin 11      1 EEC-IV count            
+2961 #***NOT USED***    16    
+2964 #VSBAR             17    byte      bin 1       0.5 MPH                 
+2967 #VS                18    word      bin 5       0.03125 MPH               
+296a #***NOT USED***    19    
+296d #BITMAP_0          1A    word      N/A         N/A (see def. below)    
+2970 #BITMAP_1          1B    word      N/A         N/A (see def. below)      
+2973 #***NOT USED***    1C    
+2976 #***NOT USED***    1D    
+2979 #SBDS01            1E    byte      bin 0       N/A                     
+297c #SBDS02            1F    byte      bin 0       N/A                     
+297f #SBDS03            20    byte      bin 0       N/A                     
+2982 #SBDS04            21    byte      bin 0       N/A                     
+2985 #SBDS05            22    byte      bin 0       N/A                     
+2988 #SBDS06            23    byte      bin 0       N/A        
+298b #FMEM_FLAGS        24    byte      bin 0       N/A   
+298e #FMEM_FLAG2        25    byte      bin 0       N/A
+2991 #***NOT USED***    26    
+2994 #LOAD              27    word      bin 11      0.0488% of standard air charge
+2997 #KAMRF1            28    word      bin 4       0.0625 A/F
+299a #***NOT USED***    29    
+299d #DSDRPM            2A    byte      bin -4      16 r.p.m.
+29a0 #RATCH             2B    word      bin 2       0.25 count
+29a3 #***NOT USED***    2C    
+29a6 #ATMR1             2D    word      bin 0       1 second
+29a9 #IOCC              2E    word      bin 0       1 A/D count
+29ac #INDS              2F    word      bin 0       1 A/D count
+29af #BCSDC             30    word      bin 11      0.0488% duty cycle on time
+29b2 #***NOT USED***    31    
+29b5 #GR_CM             32    byte      bin 1       N/A
+29b8 #***NOT USED***    33    
+29bb #***NOT USED***    34    
+29be #ETVOCM            35    word      bin 2       0.25 volts
+29c1 #TV_PRES           36    byte      bin 1       0.5 p.s.i
+29c4 #ITOT              37    word      bin 0       1 A/D count
+29c7 #PDL               38    byte      bin 1       N/A
+29ca #***NOT USED***    39    
+
+2aed \n\nEVR FOREGROUND REPEATER MODULE
+
+2d5c # reset int mask
+2d5c \w# a1 = 1010 0001
+
+2d6e  # Console STATUS check
+2d76  # exit if no console
+2d78 # pop stack address into reg
+2d7a # load byte and zero extend to word
+2d7d # push (e009) to stack
+2d7d \w# 0x0004 + a9d0 = [a9d4] = 0xe009
+
+2da3 |## Initialise the RAM table() from InjTab table()
+
+2e40 \n\nRISING EDGE CALCULATIONS
+
+2e4a # Call DWELL_CALCULATION
+2e53 # Increment CRKPIP_CTR every rising edge of PIP
+2e5b # Clip CRKPIP_CTR at 255 as a maximum
+
+2e83 \n\n# FUEL_INJ_TIM_COM2
+
+2e87 # Previous PIP first half period.
+2e8b # Most recent PIP first half period.
+2e8e # SIGPIP = 0 (not signature PIP)
+2e91 # (PHFDLT - HFDLTA)
+2e99 # (PHFDLT - HFDLTA) / PHFDLT
+2ea0 # MHPFD = Signature PIP difference check value.
+2ea2 # SIGPIP = 1 (this is signature PIP)
+
+2eb0 # (not in synch)
+2eb7 # SYNCTR = (2 * ENGCYL) - 1
+2eb9 # EXIT FUEL_INJ_TIM_COM2
+
+2ef0 \n\n# FALLING EDGE CALCULATIONS
+
+2fa0 # SPKAD(n-1) = SPKAD(n-1) - RETINC
+
+2fac # (Clip min. SPKAD(n-1) to RETLIM)
+2fbb \n\n# The following Tip-in logic is checked every rising edge of PIP:
+2fe8 # (Clip MAX TIPRET to 0)
+2ff5 # SPKAD(n+1)
+3001 # CALCULATED SPARK OUT (n+1) = SAF + SPKAD(n+1) + TIPRET
+301f # SAFTOT = SAF + SPKAD(n) + TIPRET
+32ae \n# Do Signature Kay Calculation
+332b \n\n# MKAY CALC. ENTRY POINT
+
+3348 \n\n# Do MKAY Kay Calculation
+338d #  mkay' < 1.2
+
+
+33a5 # KLLIM Lowest value for MKAY multiplier - initial value = 0.9.
+33b0 # KULMT Highest value for MKAY multiplier - initial value = 1.1.
+33c7 # DIFF0 = | DT12S - 2 * HFDLTA * MKAY |
+33e5 # DIFF1 = | DT12S - HFDLTA - (HFDLTA * (DT23S - PHFDLT))/PHFDLT |
+33f6 # DIFF0 <= DIFF1
+
+3409 # No change to TLOFLG
+
+343a # 0 = Thick Film Ignition (TFI)
+
+3505 # IBETA = TOTAL_DELAY - INJCNT
+3508 # IBETA < 0
+350d # IBETA >= 1.0
+350f # IBETA = IBETA - 1
+3512 # INJCNT = INJCNT + 1
+3515 # INJ_PIP_CNT = INJ_PIP_CNT + 1
+3526 # SYNCH_VALUE = (2 * ENGCYL) - INJCNT
+352f # SYNCH_VALUE = 2 * ENGCYL
+3531 # SYNCH_VALUE = 0
+3531 \n\nDo: "FUEL FIRING PIP"
+3533 # (PIP in synch) 
+3539 # (proper PIP for fuel firing)
+353b # (signature PIP must contain bank A)
+3543 # (PIP is synched with fuel)
+3548 # (PIP is synched but fuel is on wrong bank)
+354b # Decrement INJ_PIP_CNT
+354d # EXIT "FUEL SERVICE" routine
+354f #  (no fuel to be output this PIP)
+
+354f \nFOREGROUND FUEL DETERMINATION
+
+357d \n\nMINIMUM PULSEWIDTH CLIP
+357f # (not in VIP)
+
+3582 # (not in DFSO)
+3589 # FUELPW < MINPW (less than minimum pulse)
+358f # R54 * FREQ18
+3593 # (convert to clock ticks)
+
+35a1 # (run mode) 
+35a4 # (fuel not synched)
+35a7 # Decrement INJ_PIP_CNT (walk injector bank B back 1 PIP at a time)
+35ac # INJ_PIP_CNT <= 0
+35b7 # (simultaneous injections)
+35ba # (always start with bank A)
+35bd # (request new IBETA)
+
+35bd \n\nFUEL_REPEAT
+35d8 # Shift TLS_SHFTR 1 bit to the left
+35e6 # TLSCTR = 16
+35e9 # TLS_SHFTR = TLSPAT
+35f1 # carry bit = 1
+35f1 \w# (OK to output fuel this PIP)
+
+360c # (injection A occurred)
+3615 # (injection B occurred)
+3621 # Toggle INJ_BANK (do next bank)
+
+3641 # EXIT "FUEL SERVICE" routine
+
+3911 # MAP_FREQ = 1/(DATA_TIME - LAST_MAP2)
+3969 # After incrementing MAPCNT, check the following:
+396d # MAPCNT >= MAX_SCAP_EDGES
+396f # (too many SCAP edges)
+
+3976 # (move time of previous SCAP edge)
+397a # (store time of current SCAP edge)
+3982 # (time between SCAP edges)
+3986 # (notify self test of new edge)
+
+398a # (clear MAP overflow flag)
+398d # (in crank)
+399b # LAST_MAP - LAST_MAP2
+39b2 # (PIP period accumulator)
+
+39c0 # (increment PIP period counter)
+39c6 # (PIP period accumulator)
+
+3a6b # MAP  CALC
+
+3b55 # KAMQA = 10101010 BINARY
+3b58 # KAMQB = 11000110 BINARY
+3b5b # KAMQC = 01110101 BINARY
+3b5b \n#                      KAM          KAM
+3b5b \n#                      Register     Address
+3b5b \n#                      ---------    -------
+3b5b \n#                      KAMQA        LOWEST ADDRESS OF KAM
+3b5b \n#                      KAMQB        MIDDLE ADDRESS OF KAM
+3b5b \n#                      KAMQC        HIGHEST ADDRESS OF KAM
+3b5b \n
+
+3b8e # Minimum valid RT_NOVS_KAM.
+3b95 # Maximum valid RT_NOVS_KAM.
+
+3bac # Default 80h value.
+3baf # 0x6a all 106 KAM locations.
+
+3bb2 # ADAPTIVE FUEL TABLE
+
+3bb7 # Loop, all KAM memory locations (106) set to 80h.
+
+3bba # KAM checksum, 0x3500 = 0x80 x 0x6a = (128 * (10*10+6))
+
+3bc2 # 29.875 * 8 = 239 = 0xEF
+
+3bd1 # ?BP?
+
+3bdc # LTMTBLrc = 0.5
+
+3be7 # ISCKAMn = 0.0 (n=0-5)
+
+3bef # clear Idle Speed KAM IPSIBR cells
+
+3c05 # Crank Mode
+
+3cfc \n######
+3cfc \n# A/D Definition. 3 byte entries
+3cfc \n# byte 1   = A/D channel no (0-12)
+3cfc \n# byte 2&3 = destination address
+3cfc \n# NB AD Ch 6 (MAF) is read and saved elsewhere, to 0x124?
+3cfc \n# no Speed control system?
+3cfc \n######
+3cfd # Throttle position sensor rate
+3d00 # A to D conversion of the calibration input voltage, counts.
+3d03 # Ignition voltage, A/D counts.
+3d06 # Output Circuit Check (OCC) A/D input level.
+3d09 # A to D conversion  of  the  ETV  over current  monitor  voltage, counts
+3d0c # Throttle position value from A/D conversion, counts.
+3d0f # A/D conversion of ECT sensor, counts.
+3d12 # A/D conversion of ACT sensor input, counts.
+3d15 # Input Neutral/drive switch, counts.
+3d18 # Exhaust Gas Oxygen sensor 1
+3d1b # A/D conversion of EGR sensor input, EVP or EPT sensor, counts. 
+3d1e # end of table
+
+3d22 # No change to RATCH
+3d22 \n# THROTTLE POSITION FILTER (TPBAR)
+3d22 \n#   The  TPBAR  calculation  is  a  time  dependent  rolling  average  filter  of
+3d22 \n#   instantaneous  throttle  position  (TP).   It is updated each background pass
+3d22 \n#   while in RUN or UNDERSPEED  mode.   The  TPBAR  time  constant,  TCTP,  is  a
+3d22 \n#   calibration parameter and should be set to 2.0 seconds.
+
+3d32 # TPBAR = UROLAV(TP,TCTP)
+3d3a # N > 450 RPM
+3d48 # (clip RATCH to RACHIV as maximum)
+3d53 # RATCH = TPBAR
+
+3d53 \n\n#ACCEL ENRICHMENT TP FILTER (AETP)
+3d53 \n# It is used to sense stable TP for purposes of resetting TARFLG to enable  AE.
+3d53 \n# The  AETP  time  constant  TCAETP is a calibratable parameter which should be
+3d53 \n# large enough to prevent TARFLG reset before the TP stops moving.
+3d64 # AETP = UROLAV(TP,TCAETP)
+
+3d67 \n
+3d67 \n# THROTTLE POSITION FILTER (TAPBAR)
+3d67 \n#   The TAPBAR calculation is a time and MAP dependent rolling average filter  of
+3d67 \n#    instantaneous  throttle  position  (TP).   It is updated each background pass
+3d67 \n#    while in RUN or UNDERSPEED mode.  The TAPBAR time constant is FN093(MAP).
+
+3d72 # TCxxxx = FN093
+3d75 # old average
+3d79 # new value
+3d7f # TAPBAR = UROLAV(TP,FN093(MAP))
+
+3d7f \n\n# ACCEL ENRICHMENT MAP FILTER (AEMAP)
+3d86 # (store current MAP for AEMAP filter and TAR calculation)
+3d96 # AEMTMR is the sample rate (filter AE MAP)
+3da0 # AEMAP = UROLAV(MAPAEF,TCAEMP)
+3da4 # (wait for MAP update)
+3da7 # (reset AEMAP timer for next update)
+
+3db1 \n# EVP SENSOR FMEM (PFEHP = 0)
+
+3dd1 \n
+3dd1 \n# EGR POSITION FILTER (EGRBAR)
+3dd1 \n#   The EGRBAR  calculation  is  a  time  dependent  rolling  average  filter  of
+3dd1 \n#    instantaneous  EGR  valve  position  EVP.  It is updated each background pass
+3dd1 \n#    while in  RUN  or  UNDERSPEED  mode.   The  EGRBAR  time  constant  TCEGR  is
+3dd1 \n#    calibratable, but should be set to 2.0 seconds.
+
+3dd2 # old average
+3dd6 # new value
+3dd9 # TCxxxx
+3de0 # EGRBAR = UROLAV(EVP,TCEGR)
+
+3e09 # (sensor OK)
+3e16 # ACT = FN703(IACT)
+
+3e18 # (start up Open Loop)
+
+3e1e # (sensor bad, use ECT if OK)
+3e25 # ACT = FN703(IECT)
+3e27 # ACT = ACTFMM
+
+3e2a # Do not update ACT
+3e2a \n\n# STRATEGY MODULE: INPUT_ECT_COM2
+
+3e48 #  (sensor bad, start rolling average at ACT)
+
+3e4d # (crank mode)
+3e50 # ECT = ROLAV(ACT),TCECT)
+3e53 # (sensor bad, infer ECT from ACT)
+3e55 # (every background loop)
+3e5e # (clip at 255 as a max)
+
+3e60 \n\n# Perform ECT RAMP LOGIC
+3e6b # (ECT is already ECTFMM)
+3e6d # - 2 deg. F
+
+3e77 # ECT = ECT +/- 2 deg. F (ramp up/down to ECTFMM)
+
+3e8a \n\n# STRATEGY MODULE: INPUT_TOT_COM1
+3e98 # (sensor OK, start rolling average at actual value)
+3e9e # TOT
+3ea2 # FN703D(ITOT)
+3ea9 # ROLAV(FN703D(ITOT),TCTOT)
+3eac # (sensor OK)
+3eae # (sensor bad, use ECT)
+
+
+3ec2 # PUTMR > TKYON2
+3ecb # ECTCNT < 8
+3ecf # ECTCNT = ECTCNT + 1
+3ede # ACSTRT + ACT/8
+
+3f12 \n\n STRATEGY MODULE: INPUT_ETVOCM_COM1
+
+3f44 \n\n STRATEGY MODULE: INPUT_TP_COM3 
+3f5e # (TP sensor within acceptable range)
+3f77 # RATCH + FN090(MAP)
+3f7f # TP = RATCH (TP sensor out of limits)
+
+3f88 # TP_REL = TP - RATCH
+3f89 \n# CHANGE OF THROTTLE POSITION FILTER (TPDLBR)
+3f89 \n# 
+3f89 \n# TPDLBR is a time dependent rolling average filter of the change (or delta) in
+3f89 \n# TP  on successive background loops.  It is updated each background pass while
+3f89 \n# in Run or Underspeed mode.  TPDLBR is used in the light load RPM  oscillation
+3f89 \n# spark  multiplier  logic.   The  time  constant,  TCTPDL,  is  a  calibration
+3f89 \n# parameter.
+
+3f8e # (clip to 0 as a minimum)
+3f90 # TP_REL = TP - RATCH
+3f97 # Previous value of TP_REL
+3fa1 # TP_REL - TP_REL_LST
+3faf # ROLAV(TP_REL - TP_REL_LST, TCTPDL)
+
+3fe7 # (neutral indication)
+3ff9 # (drive indication)
+
+400d # (transmission engaged)
+401d # (transmission disengaged)
+
+4089 \n# BATTERY VOLTAGE (VBAT)
+
+4089 \n# 
+4089 \n#       The  VBAT  calculation  is  a  time  dependent  rolling  average  filter   of
+4089 \n#       instantaneous  battery  voltage.  It is updated each background pass while in
+4089 \n#       RUN or UNDERSPEED mode.  The VBAT  time  constant  TCVBAT  is  a  calibration
+4089 \n#       parameter and should be set to 0.1 seconds.
+
+4089 \n# 
+
+4089 \n# Instantaneous battery voltage is calculated from;
+4089 \n# VBAT' = IIVPWR * (VCAL/IVCAL) * KSF/IVCAL
+4089 \n# 
+408d # old average
+4090 # new value
+4093 # TCxxxx
+409a # VBAT = UROLAV(VBAT',TCVBAT)
+
+40b8 # Calculates (engine coolant temperature)
+40db # Calculates  (transmission oil temperature)
+
+40f7 # (MAP sensor failure)
+40fd # 29.875
+4101 # (crank mode and SCAP sensor have failed)
+4122 # (throttle position sensor okay)
+
+41d2 \n\nVSCTR LOGIC
+
+420f \n\nENGINE SPEED CALCULATION (EQNCALC)
+421a # (engine is stopped)
+
+423c # Indicator of ignition type
+
+4243 # 2 = Low Data Rate Distributorless dual plug (LDR_DIS)
+4254 # No action
+4257 # EXIT RPM LOGIC
+
+4257 \n# (new PIP information is available for calculation of rpm)
+4288 # N = 60/(ENGCYL * PIP period)
+
+42d9 # DNDTI = (N - N_PREV)/DT_DNDT
+42ef # DNDT_SPK = ROLAV(DNDTI,TCNDT_SPK)
+4305 # DNDT_ISC = ROLAV(DNDTI,TCNDT_ISC)
+
+4305 \n\nN_BYTE = byte value of N
+4317 # (resolution = 16, max value = 4080)
+
+4317 \n\nCalculate NBAR
+
+4334 # NBAR = UROLAV(N,TCN)
+4334 \n\nLook up normalized N
+
+434a \n\nFIRST_RPM and REFLG LOGIC
+435a # (this is a re-init)
+435d # EXIT RPM LOGIC
+
+4373 # BPCOR = BP corrected = FN004(BP).
+
+437a # (vehicle speed low)  
+437e # TSTRAT = 4 (C6E4)
+438b # (auto trans, clutch unlocked)
+
+4397 # NOVS = N/VSBAR
+43a4 # NOVS = 255
+
+455c # AM is used to calculate fuel flow in the FUELPW calculation
+456f # Previous value of REFFLG = 0
+4571 # FUEL STRATEGY, IDLE FUEL MODULATION
+4574 # Current value of REFFLG = 1
+
+4585 # FN074A(AM) * (29.875 ... # 29.875 * 2048 = 61184 = 0xEF00
+458f # FN074A(AM) * (29.875/BPCOR)
+4595 # ABSOLUTE EXHAUST PRESSURE(PEXH)= FN074A(AM) * (29.875/BPCOR) + BP
+45a1 # MAP/PEXH
+45a4 # NOTE:  MAPOPE = MAP/PEXH
+
+45b0 # R3c is either FN305 or FN405
+
+463a \n\n KEY-ON BAROMETRIC PRESSURE UPDATE LOGIC
+463e \n\n MANIFOLD ABSOLUTE PRESSURE FILTER (MAPBAR)
+
+4689 # 29.875 * 8 = 239 = 0xEF
+46b0 \n\nBPPTWT - PART THROTTLE/WIDE OPEN THROTTLE BAROMETRIC PRESSURE UPDATE :
+
+473c # bit 4  Read A/D Values      Parity Error
+
+# BITMAP_0
+47b2 # Bit 6: 1 if not in neutral or park.
+47b8 # Bit 7: 1 if fuel pump is on.
+47be # Bit 2: 1 if canister purge has non-zero duty cycle.
+47c4 # Bit 3: 1 if A/C clutch is disengaged.
+
+# BITMAP_1
+47d0 # Bit 0: 1 if in closed loop fuel control.
+47d6 # Bit 1: 1 if power steering pressure switch is closed.
+47dc # Bit 2: 1 if driver has selected A/C.
+47e2 # Bit 4: 1 if Ignition Diagnostic Monitor EEC module input is high.
+47e8 # Bit 5: 1 if output AM1 is on.
+47ee # Bit 6: 1 if output AM2 is on.
+47f4 # Bit 0: 1 if alternate shift mode/overdrive cancel is selected.
+
+4826 # stcf = Seconds to clock ticks conversion factor, ticks/second.
+
+
+495a # new value - old average 
+495e # if unsigned
+
+4967 # new value < old average
+496f # new value - old average <= 1 BIT
+4971 # new average = new value
+4975 # FK * (new value - old average)
+497c # old average - 1 BIT
+
+
+49ed \n#############################################################
+49ed \n# 1 dimension interpolate - signed or unsigned
+49ed \n# Inputs:
+49ed \n#  R30 (byte) - Fraction
+49ed \n#  R31 (byte) - Lower table value
+49ed \n#  R33 (byte) - Upper table value
+49ed \n# Outputs:
+49ed \n#  R3B - Interpolated result (byte?)
+49ed \n#############################################################
+
+49ee \n# SIGNED interpolate calc
+4a0a \n# UNSIGNED interpolate calc
+
+4a49 # TEISF or TEFTC?
+4a5b # Clear -> Normalized value has been calculated.
+
+4aa2 # MAPBAR = ROLAV(MAP_WORD,TCMAPW)
+
+4aaa \n\n#CRKPIP_CTR - PIP COUNTER FOR CRANKING FUEL
+4aaa \n#CRKPIP_CTR is used as a Crank Fuel Multiplier to do a lean-out or fuel  shut-off
+4aaa \n# during sub-zero cold operation.  Some calibrators are using the logic to improve
+4aaa \n# restarts following a stall during -20 deg F testing  by  turning  off  the  fuel
+4aaa \n# during  the  first  seconds  of crank.  This allows the engine to restart on the
+4aaa \n# residual fuel remaining in the manifold after the stall.
+
+4abf # (in run or underspeed less than CRKTM1 seconds)
+4ac1 # CRKPIP_CTR = CRKPIPCNT2
+4ac5 # CRKPIP_CTR_BG = CRKPIPCNT2
+
+4ad4 # Increment CRKPIP_CTR every rising edge of PIP
+4ad8 # CRKPIP_CTR_BG = CRKPIP_CTR
+4ade # Freeze CRKPIP_CTR
+4ae2 # CRKPIP_CTR = CRKPIP_CTR_BG
+
+4afe # FN348(ECT)
+4b0c # X = FN023(CRKPIP_CTR)
+4b19 # Y = FN024(ACT)
+4b1c # Cranking  fuel  pulsewidth  multiplier 
+4b1c \w# as a function of number of PIPs in crank and air charge temperature.
+4b27 # FN1350(CRKPIP_CTR_BG,ACT)
+4b2a # FN348(ECT) * FN1350(CRKPIP_CTR_BG,ACT)
+
+4b56 # Exit FUELPW Routine
+
+4b5b # (EGO switch)
+4b5e # Increment EGOSSS 
+4b62 # Clip at 255
+
+4b3f # 29.875 * 8 = 239 = 0xEF
+4b6c # Increment EGO_CNT_IDLE 
+4bcd # (N/D fuel enrichment)  
+4bd7 # (LAMMUL reset)
+4bdb # (free running timer)  
+4be3 #  MULTMR >= MULTM
+4bed # LAMMUL + .0039
+4bef # Clip at .996 maximum
+4bfe # |S FN1360 <= LAMRICH
+4c00 # |Q Set flip flop
+4c03 #  (enrichment required)
+4c0e # |C FN1360 > LAMRICH + LAMRHYS 
+4c10 # |Q Clear flip flop
+
+4c21 # |S TP_REL > FN311(N)
+4c23 # |Q Set flip flop
+4c28 # FN311(N) - TP_HYS_OL 
+4c31 # |C TP_REL <= FN311(N) - TP_HYS_OL
+4c33 # |Q Clear flip flop
+ 
+4c44 # |S MAP < LMAP - LOMAPH (decel load)
+4c46 # |Q Set flip flop
+4c4e # |C MAP >= LMAP
+4c50 # |Q Clear flip flop
+
+4c94 # (thermactor forced open loop)
+
+4cc4 # |1.0 + BIAS - LAMAVE|
+
+4ce3 \n\nSTRATEGY MODULE: FUEL_OL_LAMBSE_COM3
+4ce3 \n# FINAL FUEL MODE DETERMINATION (OLFLG/CLFLG)
+4ce3 \n#  AND OPEN LOOP LAMBSE CALCULATION
+
+4d20 # MPGTFG RESET LOGIC
+4d44 # (decel fuel shut-off)
+4d7b # (not enough EGO switches)
+4d7d # Do: CLOSED LOOP LAMBSE CALCULATION
+
+
+4d98 # FN1361(TEMP,ATMR1)
+4db0 # fn1362(TEMP,MAPPA)
+
+4db8 # [fn1362(TEMP,MAPPA) - FN1361(TEMP,ATMR1)]
+4dc2 # C * [fn1362(TEMP,MAPPA) - FN1361(TEMP,ATMR1)]
+4dca # LAMMUL * OLMCL
+4df7 # C * FN325(ECT)
+4e01 # LAMMUL * OLMCL
+
+4e43 # (lean cruise mode exit into closed loop fuel (ramp fuel))
+
+4e56 # OPEN LOOP/CLOSED LOOP
+4e68 # LOAD STATE CHANGE
+
+4e93 # FAM ENTRY/EXIT
+
+4f71 # (closed throttle decel/idle, FN1360 not available)
+4f76 # (neutral idle)
+4f7d # (drive idle)
+4fa5 # FN303(N) * FN310(WOTTMR) //(wide open throttle)
+
+4fc3 # Clip LAMBSE to 1.0 as a maximum
+
+5002 # FN1360(N,MAPPA)
+
+5031 # PTPAMP = FN1354(N,MAP)
+
+5048 # |BIAS/PTPAMP|
+
+
+5174 # ISCFLG = 1 CLOSED LOOP RPM CONTROL
+
+5185 # kamcol = ISFLAG
+5188 # OLTBU = ISFLAG
+5191 # kamrow = 10
+5194 # ROWTBU = 10
+5194 \w# (special idle cells)
+
+51a1 # kamcol = FN070L(N)
+51a4 # rancol = RANNUM
+51a7 # 0.5
+51ae # COLTBU = kamcol + 0.5 + rancol
+51bd # kamrow = FN031(MAPOPE)
+51c0 # ranrow = RANNUM
+51c3 # 0.5
+51c7 #
+51ca # ROWTBU = kamrow + 0.5 + ranrow
+51ce # (EGO switch)
+51d5 # Increment EGOCNT
+51db # OPEN LOOP FUEL CONTROL
+
+523a # ISCFLG = 1 CLOSED LOOP RPM CONTROL
+5247 # LSTCOL = kamcol
+524b # LSTCOL = kamrow
+524f # Do: NEW_UPRATE_CALC
+
+5251 # Exit FUEL_ADAPT_COM4
+5252 \n# Continue with FUEL_ADAPT_COM4:
+5252 \n\n# Calculate the LAMBSE window, LAMWIN:
+526a # LAMWIN = DELAMB + (PTPAMP * AMPMUL)
+526a \n\n# Calculate the EGO based learning rate:
+528d # Clip KWUCTR to 255
+529d # egolearn_rat = ADEGCT (use normal learning rate)
+52a3 # egolearn_rat = FAEGCT (use fast learning rate)
+52a3 \n\n# Calculate loop counters:
+
+52ae # EGOCNT >= egolearn_rat
+52d6 # (max 255)
+52d8 # Increment LOPCT1
+52f0 # (max 255)
+52f2 # Increment LOPCT2
+
+52f4 \n\n# Determine if adaptive cells should be incremented/decremented:
+52f4 \n#  LTMTBL cells are updated when the following conditions are satisfied:
+52f4 \n#   Note that r = ROWTBU and c = COLTBU in the following charts.
+
+
+
+5314 # FN1325Lrc >= 0
+531f # LTMTBLrc
+
+532a # 2 * UPRATE 
+5331 # LOPCT1 > 2 * UPRATE
+5340 # Decrement CHKSUM
+5342 # LTMTBLrc = LTMBLrc - 0.0039
+
+5357 # LTMTBLrc < MAXADP
+5359 # Increment CHKSUM
+535b # LTMTBLrc = LTMTBLrc + 0.0039
+
+
+537b # kamrow = kamrow_spec
+537d # Read the value in FN1325L specified by kamcol.
+5380 # Load this value in UPRATE.
+5380 \n# Continue with subroutine NEW_UPRATE_CALC
+
+5391 # Column
+5396 # Row
+
+53b6 # (use FN1325L 4 times so not to wrap around table or use special idle cells)
+53c7 # uprat_cnt
+53c9 # (adapt1_uprat + adapt2_uprat + adapt3_uprat + adapt4_uprat) 
+53cf # UPRATE = 127 (maximum value)
+53d5 # uprat_cnt != 0
+53d7 # uprat_avg = R20 / uprat_cnt
+53e4 # If, however, one or more  of  the  cells  in  the  four  points  is  a reference  cell,
+53e6 # then the average of the values in the positive cells is used in place of the negative values.
+
+5401 # Exit the subroutine NEW_UPRATE_CALC
+
+5402 # (crank mode)   
+
+540a \n\nSTRATEGY MODULE: FUEL_HOT_INJ_COMP_COM2
+
+5433 # Fuel enrichment factor.  X = FN005(TEMP) Y = FN005(ACSTRT)
+546a # Hot Injector compensation has therefore been applied  to  the  fuel delivery  slope  A0.
+
+547d \n\nDETERMINE BASE FUEL FLOW (BASEFF)
+547d \n# BASEFF is used in the foreground fuel  calculation  and  contains  base  fuel
+547d \n#   flow, unadjusted for transient fuel, AE fuel, or injector hardware.
+5485 # 0x8be5 = 35813; 2^19 = 524288; 524288/35813 = 14.64
+
+54a4 \n\nDETERMINE BASE EM (BASE_EM)
+54a4 \n# BASE_EM is used in the foreground fuel calculation to adjust  the  base  fuel
+54a4 \n#   for EGR mass that may be present at the time.
+
+54b1 \n\n
+
+5607 # (determine the value of D)
+560d # D * ISCMOD
+561f # FUEL_A = D * ISCMOD
+5632 # FUEL_A = D * ISCMOD * fn387(ECT)
+
+56b6 # (BASEFF + BASE_EM)
+
+5793 # (freeze ISCDTY for VIP) 
+5798 # (throttle adjust mode) 
+57ac # (initial runup complete)
+
+5846 # c = ISFLAG
+
+ 
+5852 # KAMREF = 0.5 + LTMTBLrc
+5857 # (use no interpolation)
+
+58b3 # 60.000
+
+58fe # (do not run transient fuel compensation)
+
+5929 # (EFTC * FN307(N_BYTE))
+
+59be \n\nTRANSIENT FUEL FLOW MULTIPLIER
+
+5a09 \n\nEQUILIBRIUM FUEL TRANSFER CALCULATIONS
+5109 \n# These calculations are performed during each program pass  (background  loop)
+5109 \n#   while  Transient  Fuel Compensation is enabled.  The general form of the rate
+5109 \n#   calculation is:
+
+5a0b # A = KFT
+5a0f # (in MPG mode)
+5a12 # A = KFTMPG
+5a16 # A * [(EISF * MTEISF - AISF) 
+5a1c # EFTR = A * [(EISF * MTEISF - AISF) / (EFTC * FN307(N_BYTE))]
+
+5a62 # (ECT high enough)       
+5a64 # (TP sensor OK)   
+5a6b # (initialize once)
+5a72 # (tipping out)
+5a7b # DFSO_F_TMR = FN222F(N)
+5a83 # (initialize once) 
+5a8f # D_TP_DT < FND_TP_DT_A(N) (tipping out)
+
+5aae # VSBAR >= DFSVS
+5ab0 # | SET
+5ab8 # VSBAR < DFSVS - DFSVSH
+5aba # | CLEAR
+
+5acf # (rpm high enough)   
+
+5b06 # (long tip-in)
+
+
+5b20 # (in higher gear) 
+5b30 # NOVS > DFNOVS + DFNOVH 
+5b32 # | CLEAR
+5b49 # (engine warm enough) 
+
+5b96 # (RUN/UNDERSPEED)
+
+5bb5 # Disable AE
+5bb5 \n# AE ENABLE LOGIC
+5bbd # FN019A(TAR) = x-axis input to FN1303.
+5bce # FN020(FRCTAE * ACT + (1-FRCTAE) * ECT) = y-axis input to FN1303.
+5bdc # FN1303(TAR,TEMP) = Desired AE fuel flow, lbm/hr.
+5be6 # FN331A(TP-RATCH) = Accel enrichment fuel flow multiplier, unitless.
+5bf0 # FN378(BP) = Accel enrichment fuel flow multiplier, unitless.
+5c00 # FN379(NBAR) = Accel enrichment fuel flow multiplier, unitless.
+5c06 # AEM = ECT/ACT weighting factor, unitless.
+5c19 # FN324(MAP) = Accel enrichment fuel flow multiplier, unitless.
+5c25 # AEFUEL = AEM * FN1303 * FN331A * FN378 * FN379 * FN324
+5c30 # FN332(AEFUEL) = Accel enrichment pulse period, seconds.
+5c40 # AEFUEL * FN332
+5c43 # AEFUEL * FN332 * 3600 
+5c47 # (AEFUEL * FN332 * 3600) / A0COR
+
+
+5c86 # 1024 = 1 second
+
+5d13 # N_BYTE < DFTRPM
+5d15 # APT = 1
+5d18 # |SET
+
+5d25 # |CLEAR
+5d46 # SAF = 10 deg BTDC
+5d49 # EXIT Base Spark Angle Logic
+5d4a # (previous value not used yet)  
+5d4d # Do NOT update SAF EXIT Base Spark Angle Logic
+5d4e # Set -> MAP update is complete and ready for  calculation  of normalized value;
+
+5d79 # TEMP_FRAC = FRCCTM * ACT + (1 - FRCCTM) * ECT.
+5d83 # FN091(TEMP_FRAC) =  TEMP_FRAC  normalizing  function  for  FN1128,
+5d96 # FN092(TP - TAPBAR) = TP - TAPBAR normalizing function for FN1128.
+
+5de7 # UROLAV(EM * 100/AMPEM, TCEACT).
+
+5e40 \n\nLIGHT LOAD RPM OSCILLATION ADDER
+5e49 # (Near closed throttle) 
+5e59 # TP_REL > TPOBP2 + TPOH2
+5e65 # (Not at high speed)
+5e75 # VSBAR > VSOMAX + VSOMXH
+5e88 # (Not a quick tip in) 
+5e92 # (Gear change delay)
+5e98 # (Dashpot or preposition)
+5eab # FN182(DNDT_SPK) * FN183(VSBAR)
+
+5eb9 # Include OSCMOD = FN182(DNDT_SPK) * FN183(VSBAR) in SPK_NORM
+5ec0 # ISCFLG = -1 DASHPOT CONTROL
+
+5ed0 # Include FN839(DASPOT) in SPK_NORM
+
+5ed0 \n\n# COLD START SPARK FLAG AND MULTIPLIER
+5ef3 # Y = Calibration development spark multiplier, unitless.
+5ef9 # KS1 = Spark Adder, deg BTDC.
+
+5f26 # (Cold Start spark not in use)
+5f2d # (RPM control or lockout)  
+5f4e # ENTRY CONDITIONS NOT TRUE
+
+608b \n\nTRANS_T CALCULATION
+60a0 # Clip TRANS_T to 1.0 as a maximum
+60a3 # TRANS_T = SPKTMR / STTIM
+60a3 \n\nSPK_IDLE SELECT LOGIC
+60ae \n\nKSPARK SELECT LOGIC
+
+60ab # Delayed neutral/drive flag; 1 -> in drive, loaded.
+60b3 # (Drive, speed high)
+60bb # (Drive, speed low)
+60d1 # (Neutral, speed high)
+60d9 # (Neutral, speed low)
+
+6116 # 
+6134 #  [1 / (DWELLM * (VBAT - DWELLA))] * FREQ18 (ticks/sec)
+
+61bf # PPERENG = PACPER / ENGCYL
+61cc # POFFENG = PACOFF / ENGCYL
+
+61d7 \nKNOCK THRESHOLD SENSE (KTS) LOGIC
+61e4 # (WOPEN + FN145(N)) * ("LAST PIP PERIOD")
+61f9 # WINLEN + FN144(N) * ("LAST PIP PERIOD")
+61f9 \n\nRETINC = FN143(N)
+6204 \n\nSPARK ADVANCE LOGIC
+6208 # KNOCK STRATEGY ENABLED
+6216 # TSLADV >= FN146A/4
+621f # TSLADV = TSLADV - FN146A/4
+622c #  0.25 deg.
+6232 # SPKAD(ALL) = SPKAD(ALL) + 0.25 deg. 
+623f # (Clip SPKAD(ALL) to FN190(N_BYTE) as a maximum)
+6242 # SPKAD(ALL) = SPKAD(ALL) + 0.25 deg. 
+
+6266 \n\nCTFLG LOGIC
+6284 # TIPMAP + TIPHYS is clipped to 31.875 in. Hg.
+628c \n\nTIPFLG LOGIC
+
+62aa \n\nKNOCK STRATEGY ENABLE LOGIC
+
+62e0 # SPKAD(ALL) = 0
+
+635e # DO SONIC EGR CONTROL
+
+6364 # (EOFF - EGRDED)
+
+63a1 # (Base EGR table)
+63a9 # (MPG mode table)
+
+63b8 # A * FN211(ECT)
+63c3 # A * FN211(ECT) * FN212A(BP)
+63d0 # * FN220(ACT)
+6437 # EGR IS OFF
+
+644a # EVP-EOFF
+645c # FN218(MAPOPE) * FN219(EVP-EOFF)
+6462 #  * (BP/29.875
+6466 # / 29.875 * 8 = 239 = 0xEF
+646e # Clip EM to 1.99 ppm as a maximum
+
+64de # DELOPT' = FN221 + EOFF
+64e5 # DELOPT = UROLAV(DELOPT',TCDLOP) (counts)
+64ec # Clip DELOPT from 0 to 1023.99 counts.
+
+6524 # EGR valve position error = EGRERR = DELOPT - EVP
+
+658b # (Not a reinit)   
+65d2 # ISCFLG = 0 DASHPOT PRE-POSITION
+65d6 # EXIT ISC LOGIC
+
+65ed \nFLG_DASMNQ and N_RATCH LOGIC
+65ed \n# FLG_DASMNQ
+65fe # Set (Prepare to add dashpot to prevent declutch stall)
+6606 # Clear FLG_DASMNQ = 0
+
+6606 \n# N_RATCH
+
+
+
+6632 \n# 1)  DSDRPM_CALC - calculation of DSDRPM & DESMAF_PRE
+6632 \n# 2)  RPMERR_CALC - calculation of RPMERR_A & RPMERR_S
+6632 \n# 3)  DASPOT_CALC - calculation of DASPOT
+6632 \n# 4)  MODE_SELECT - selection of mode & setting of ISCFLG
+6632 \n# 5)  IPSIBR_CALC - IPSIBR update & calculation of DESMAF
+6632 \n# 6)  ISCDTY_CALC - calculation of DEBYMA & ISCDTY
+6632 \n# 7)  ISCKAM_UPDATE - adaptive update of ISCKAM
+6632 \n#
+
+6655 \n\n# [+RPMINC] Logic: (Low ACT and A/C panel switch adder)
+665b # LOACT = ACT (lowest ACT since startup)
+
+665f \n\n# [+pre_bzzrpm] Logic: (Buzz up adder)
+6663 # (Buzz time not expired) 
+6665 # Add pre_bzzrpm to Hicam
+
+6669 \n# [+FN826A] Logic: (Engine Cleanout adder)
+666b # (Not PT since Crank)
+6672 # (Kickdown time not up)
+667c # Add FN826A(TCSTRT) to DSDRPM
+
+667c \n\n[+ (FN880 + FN821A)] Logic: 
+667c \n#  (Battery charge control and Inspection Maintenance)
+6685 # DSDRPM < CHGRPM
+
+668e # Add (FN880A) to DSDRPM
+6697 # Add (FN821A) to DSDRPM
+669e # Clip DSDRPM to CHGRPM as a maximum
+669e \n\nHCAMFG Logic: (Enable/Disable Adaptive airflow updates)
+66a1 # (In running VIP)
+
+66c1 \n\n[+RPMINC] Logic: (Low ACT and A/C panel switch adder)
+66c5 # (ACT above normal)
+66d0 # Add RPMINC to DSDRPM
+
+66e2 # (NUBASE or DRBASE) Logic:
+66e5 # (Auto transmission)   
+66e7 # (In drive) 
+
+66ea # Use pre_nubase in DSDRPM calculation
+66f3 # Use pre_drbase in DSDRPM calculation
+
+66f3 \n\n#[+AC_PPM] Logic:
+6705 \n\n#[+DNAC] Logic: (Air Conditioning adder)
+6709 # A3CTMR < DACTM (Delay to turn off A/C adder)
+670b # Do NOT add DNAC
+
+6712 # A/C DESMAF adder based on N.
+671c # A/C air flow correction based on ACT.
+6722 # AC_PPM = FN885 * FN887A
+
+673e # DESMAF_PRE add R18 to R20 [+AC_PPM]
+
+6740 # Add DNAC to DSDRPM
+6744 \n\n[+DNPOWS] Logic: (Power Steering adder)
+6744 \n[+PSPPM] Logic:
+6744 \nPSFLAG Logic: (Last state of POWSFG)
+
+674d # Add DNPOWS to DSDRPM
+6755 # Add PSPPM to DESMAF_PRE
+
+67bd # DSDRPM > ISCLPD
+67bf # Clip DSDRPM to pre_isclpd as a maximum
+
+67f6 # DESMAF_PRE = FN1861(ECT,ATMR3)
+6813 # DESMAF_PRE = ((FN875N or FN875D) * FN1861
+
+6819 \n\n#[*CSSMAF] Logic:
+681b # (Cold Start spark in use)
+6822 # Multiply DESMAF_PRE by CSSMAF
+
+6853 # RPMERR = DSDRPM - N
+685f # (RPM control or lockout)
+6869 # RPMERR_A = ROLAV(RPMERR,TCBPA)
+686c # (calculate RPM error for airflow control)
+6878 # RPMERR_S = ROLAV(RPMERR,TCFBS)
+687b # (calculate RPM error for spark control)
+6890 # (TCSTRT OK to use)  
+6892 # (first time this start) 
+
+68bb #  if (TP <= DSTPBR)
+68c8 # DASHPOT MODE  ( APT = -1 )
+68d5 # (FN879(DASPOT) * V_879_MULT)
+68e1 # DASPOT = DASPOT - FN879(DASPOT)
+68e6 # DASPOT is clipped to either 0
+68ea # DASHPOT-PREPOSITION MODE ( APT >= 0 )
+
+6907 # (N - DSDRPM)
+690d # (N - DSDRPM) is clipped to 0 as a minimum.
+6920 # FN882 * FN891
+692c # Clip daspot to 2.99 as a maximum
+
+6956 # N_RATCH - DSDRPM
+
+6986 # APT 0 -> part throttle
+698d # ISCFLG = 0 DASHPOT PRE-POSITION
+
+699b # ISCFLG = 1 CLOSED LOOP RPM CONTROL
+69d1 # N <= (DSDRPM + RPMCTL)
+
+6a08 # ISCFLG = -1 DASHPOT CONTROL
+6a2d # ISCFLG = -1 DASHPOT CONTROL
+6a32 # ISCFLG = 2 CLOSED LOOP RPM CONTROL (Lock-out entry to RPM control)
+6b26 # ISCKAM(ISFLAG)
+
+6b8f # DESMAF - ITHBMA
+6b95 # clip minimum to zero
+6b9e # Do not use 29.92/BP
+6ba3 # Use 29.92/BP in DEBYMA calculation
+
+6ba3 # 29.875 * = ( DESMAF - ITHBMA ) 
+6baa # ( DESMAF - ITHBMA ) * [29.92/BP]
+6bbc # - FN890(BP)
+6bc8 # DEBYMA is clipped to DEBYCP as a minimum.
+
+6bdc # ISC duty cycle multiplier, used for VIP only.
+
+6c10 # ISCDTY is clipped to 1.0 as a maximum.
+6c2d # Clip to Maximum
+
+6c64 # if(IBGPSI < UPDATM) Exit ISCKAM_UPDATE logic;
+6c66 # IBGPSI = 0
+
+
+6c83 # Decrement ISCKAMn
+6c85 # Decrement ISKSUM
+6c87 # Increment IPSIBR
+
+6c91 # Increment ISCKAMn
+6c93 # Increment ISKSUM
+6c95 # Decrement IPSIBR
+
+
+6de0 # Minimum coolant temperature to bypass thermactor air, deg F.
+6dee # CTBYS - CTBYSH = Hysteresis term for CTBYS, deg F.
+
+6e16 # (allow air)
+6e20 # (dump air)
+
+6e23 # (force O.L.)
+6e98 # (not forced O.L.)
+6ea1 # (bypass air)
+
+6ed7 # (not forced O.L.)
+6eda # (downstream air)
+6edf # (upstream air)
+
+6ee6 \w# CANISTER PURGE CONTROL LOGIC
+6f37 \n\n# PURGE DUTY CYCLE DECREMENT/INCREMENT LOGIC
+
+6fb5 # 210
+
+6fc5 \nERROR CODE DESCRIPTION
+ # 111,"PASS  	"
+6fc6 # 112,254 deg. ind. ACT-ckt. grounded.
+6fc8 # 113,-40 deg. ind. ACT-sensor ckt. open.
+ # 114,ACT out of S-T range.
+ # 116,ECT out of S-T range.
+6fca # 117,254 deg. ind. ECT-ckt. grounded.
+6fcc # 118,-40 deg. ind. ECT-sensor ckt. open.
+ # 121,TP out of S-T range.
+6fce # 122,TPS ckt. below minimum voltage.
+6fd0 # 123,TPS ckt. above max. voltage.
+6fd2 # 126,MAP/BP out of S-T range.
+6fd4 # 128,MAP vacuum circuit failure
+ # 129,Insuff. MAP change-dyn resp. test.
+ # 167,Insuff. TP change-dyn resp. test.
+6fd6 # 171,Heated oxygen sensor fault/not switching bank #1 or fuel system at adaptive limits
+6fd8 # 172,EGO sensor ckt. ind. system lean.
+6fda # 173,EGO sensor ckt. ind. system rich.
+6fdc # 179,Adaptive Fuel Limit Lean
+6fde # 181,Adaptive Fuel Limit Rich
+6fe0 # 182,Adaptive Fuel Limit Lean @idle
+6fe2 # 183,Adaptive Fuel Limit Rich @idle
+ # 194,Hego switch rate too fast
+6fe4 # 211,PIP ckt. fault.
+6fe6 # 212,Loss of tach input to processor.
+ # 213,Spark control fault present
+ # 225,Knock not sensed-dyn response test.
+ # 311,Themactor air system inop.
+ # 312,Thermactor air upstream during S-T.
+ # 313,Therm. air not bypassed during S-T.
+6fe8 # 327,EPT/EVP below min. voltage.
+6fea # 328,EVP volt below closed lim (SONIC)
+6fec # 332,EGR valve not opening (SONIC).
+6fee # 334,EVP volt. above closed limit.
+6ff0 # 337,EVP ckt. above max volt.
+6ff2 # 338,Cooling System not Heating
+6ff4 # 339,Cooling System not Cooling
+ # 411,RPM not within S-T lower band limit
+ # 412,RPM not within S-T upper band limit
+6ff6 # 452,Insufficient input from VSS.
+ # 511,ROM test failed
+ # 512,KAM Test Failed
+ # 513,Failure in EEC ref. voltage.
+ # 519,PSPS ckt. open.
+ # 521,PSPS did not change states.
+6ff8 # 536,BOO Sw. Ckt failed open/closed -ECA input open or brake not actuated during test
+ # 538,Operator error-dyn response test.
+ # 539,A/C Swith error
+6ffa # 542,FP Ckt Open -ECA to Motor Ground
+6ffc # 543,FP Ckt Open Bat. to Relay
+ # 552,Air Management 1 (AM1) ckt. failure
+ # 553,Air Management 2 (AM2) ckt. failure
+6ffe # 556,Fuel pump ckt. failure.
+ # 558,Elect. vac. reg. (EVR) ckt. failure
+ # 565,Canister Purge (CANP) ckt. failure.
+7000 # 617,1-2 Shift Error
+7002 # 618,2-3 Shift Error
+7004 # 619,3-4 Shift Error
+ # 621,SS1 Sol Ckt Failure
+ # 622,SS2 Sol. Ckt. Failure
+7006 # 624,EPC Solenoid Circuit Failure/Shor-Output Driver
+ # 626,CCS Sol Ckt Failure
+7008 # 628,Converter Clutch Failure
+ # 629,CCC Sol. Ckt. Failure
+ # 631,OCIL Ckt. Failure
+ # 632,OCS Not Changing State
+ # 633,4X4 Switch closed
+700a # 634,MLPS Out of Range
+ # 636,TOT Out of S-T range
+700c # 637,-40 deg. ind. TOT sensor ckt open
+700e # 638,315 Deg ind. TOT sensor ckt grounded    X
+ # 654,MLPS not in park
+ # 655,MLPS not in neutral
+7010 # ,
+7012 # ,
+7014 # ,
+ # 998,FMEM failure/Failed (open)EPC Output Driver
+
+7016 # (make sure base strategy can control pump)
+
+703a # PUTMR >= 4 SEC
+70bb # (Vehicle moving)  
+70c7 # EXIT CONDITIONS TRUE
+
+70dd \n######################################
+70dd \n# gets jump function index into R3A
+70dd \n#######################################
+
+70de # load diagnostic testing registers
+70e0 # function address index
+70e3 # X 2 - make into word index
+70e6 # original return address
+70e8 # push extra address (save diag vals)
+70eb # Zero 1st time only, This is return address of call x7026
+70ee # jump if first time thru here
+70f0 # return to 1st or 3rd caller
+70f2 # restore return address
+70f4 \n# Diagnostic Proc Table A
+70f5 # Diagnostic Proc Table A proc no 2
+
+7112 \n####################################################################
+7112 \n# Diagnostic proc Table A
+7112 \n# sensor error stack processing - dump out errors?
+7112 \n####################################################################
+
+711e # E11 - System PASS
+7123 # E 00 (end of errors? )
+712a # Hard Trouble Code Error Table
+712e  # load next trouble code byte into word R32
+
+7176 \n#######################################################
+7176 \n# ? DUMPS OUT HARD ERROR CODES?
+7176 \n# R32 byte has trouble code - called for every trouble code in 342 stack
+7176 \n#######################################################
+
+7182  # error code x 16 (left one hex digit)
+718c  # execute this loop error code X 16 + 1? times
+
+71a9 \n#######################################################
+71a9 \n# entry point 1
+71a9 \n# shift D4 right 16 times or until R19 == 0
+71a9 \n######################################################
+
+71c0 \n#######################################################
+71c0 \n# this proc can shortcut returns from stack - to grandcaller
+71c0 \n#######################################################
+
+7297 # 512, KAM Test Failed
+729e # 111, PASS 
+
+74c1 # (reinitialize due to LAMBSE jump)
+74c8 # V_LEGOTMR
+74cf # LAMBSE
+74e0 # V_LESTMR
+
+7560 #  (max AEFUEL to perform test)   
+7576 # (past decel fuel shutoff)
+
+757b # Set PSW Flags
+
+78ab \n\n BEGIN: BOO_SPD_TMR
+78b4 \n END: BOO_SPD_TMR\n
+
+7aac # KAM CODE(N)
+7aaf # WARM-UP COUNTER(N)
+7ab4 # INCREMENT ALL CODE WARM-UP COUNTERS
+7ab8 # Set all non-zero upcounts to 255 except as noted in test descriptions
+                                              
+7abd # WARM-UP COUNTER(N) >= 80
+
+7bb7 #  R16 = [718 + {2f or 2e}]
+7bbc #  clear Table from 747 or 746 down to 719
+
+7bd1 \n################################################################
+7bd1 \n# copy specified bytes to R1A onwards (77c2)
+1 \n# or where specified in R16 (77be) from GRANDCALLER subroutine.
+1 \n# gets one byte from return address of caller function.
+1 \n# gets reqd bytes from 'Grandcaller' function, and mods return addresses.
+1 \n# IN  - 1 byte (caller subroutine), NumBytes (grandcaller subroutine)
+1 \n# OUT - [R1a] or [x] onwards asigned bytes 
+7bd1 \n################################################################
+
+7bd2 # default destination is R1a onwards
+7bd6 # Caller's (normal) return address
+7bd8 # Get count of bytes, Inc return address
+7bdb # Get GrandCaller's return address
+7be3 # Get no of bytes into dest. addr
+7be8 # and push modded returns back.
+
+7c65 # (VBAT - 10.0)
+7c6A # (Clip to zero)
+7c71 # ((VBAT - 10.0) * ETV_GAIN_BAT)
+7c7d # (ETV_GAIN * TV_COUNTS)
+7c85 # (ETV_BIAS - (ETV_GAIN * TV_COUNTS))
+7c8a #  (Clip to zero)
+
+
+7d0b \n############################################################
+7d0b \n# ROM Checksum
+7d0b \n############################################################
+
+7d2d #511   | ROM test failed                    |    X    |      |       |
+7d34 # Start address (0x2000)
+7d36 # End address  (0xdffe)
+
+7d86 #126   | MAP/BP out of S-T range.           |    X    |  XX  |   X   |
+7def # STRATEGY MODULE: VO_ACCS_COM2
+7df2 #539   | A/C Swith error                    |    X    |      |       |
+7e1c #519   | PSPS ckt. open.                    |    X    |      |       |
+7e21 #VO_IVPWR_COM1
+7e27 #513   | Failure in EEC ref. voltage.       |    X    |      |       |
+7e2f #633   | 4X4 Switch closed                  |    X    |      |       |
+
+7e85 \n#######################################################
+7e85 \n# Decode complex addresses into their TRUE addresses (plain ones OK too)
+7e85 \n# address decoded back to input register (via R16, R42 )
+7e85 \n# Address is encoded as 1 bit=flag, 3 bits=base reg/2, 12 bits offset from reg
+7e85 \n# NOTE encoding is HALF reg value (because of divide by 8)
+7e85 \n# return value is then a POINTER (as a plain address) 
+7e85 \n#######################################################
+
+7e86 # get data from address
+7e89 # 7_R43 = 1 address encoded, else return unchanged
+7e8c # Hi byte of value
+7e8f # Clear bottom nibble and flag
+7e92 #[ R3a /= 8]  ? # Rbase register (0-14 times 2 effectively)?
+7e95 # Clear top nibble.  R42 = Offset address
+7e98 # R42 += Rbase register (as pointer)
+7e9d # update input pointer to new address
+
+
+7ebd #543   | FP Ckt Open Bat. to Relay          |    X    |      |   X   |
+
+7f50 \n#################################################################
+7f50 \n# Five data bytes follow calls to this function (R1A,1B,1C,1D,1E)
+7f50 \n# R1A, R1B - is Trouble Code if there is an error
+7f50 \n# R1C - MASK
+7f50 \n# R1D - parameter flag to select device?
+7f50 \n# R1E - TIME???????
+7f50 \n# The OCC AD channel must be a supply voltage to the actuators
+7f50 \n# This performs 'circuit' tests
+7f50 \n# Measure any variation in voltage when the selected output line is switched
+7f50 \n#################################################################
+
+7fd3 # loop until 5161 IO times have passed(12.4ms)
+
+803c # (V_ETVOCM_SAV - ETVOCM)
+8042 # ABS(V_ETVOCM_SAV - ETVOCM)
+8048 # VETVDT
+
+8112 # 998,FMEM failure/Failed (open)EPC Output Driver
+811c # 128,MAP vacuum circuit failure
+8122 # 126,MAP/BP out of S-T range.
+812d # 112,254 deg. ind. ACT-ckt. grounded.
+8134 # 113,-40 deg. ind. ACT-sensor ckt. open.
+813b # 117,254 deg. ind. ECT-ckt. grounded.
+8142 # 118,-40 deg. ind. ECT-sensor ckt. open.
+8149 # 122,TPS ckt. below minimum voltage.
+8150 # 123,TPS ckt. above max. voltage.
+
+81b3 # |DSDRPM - NBAR|
+
+81d8 # 126,MAP/BP out of S-T range.
+
+822f # (RICH) ? 
+
+824b # 172,EGO sensor ckt. ind. system lean.
+
+840e # SET TV_COUNTS =0 
+84d5 # 538,Operator error-dyn response test.
+84df # 129,Insuff. MAP change-dyn resp. test.
+
+84f4 \n\n STRATEGY MODULE: VC_BOO_COM1
+
+856e # EGOBAR = EGOBAR UROLAV(IEGO1,R36)
+
+8754 \n#############################################################
+8754 \n# memory RAM test from 100 to 8FF
+8754 \n# uses odd and even bit patterns (aaaa and 5555)
+8754 \n# and restores stack at end of test
+8754 \n############################################################|
+
+8801 \n################################################################
+8801 \n# Diagnostic proc Table A
+8801 \n# jump Table entry 0xXXXX
+8801 \n# reset lots of stuff and jump back to cycling thru procs
+8801 \n# switch out of self test to run mode ?
+8801 \n## function/maps/scalars
+8801 \n################################################################
+
+88cf # 1 = Thick Film Ignition - Improved Computer Control Dwell (TFI_ICCD)
+
+8938 # BP INTERPOLATION FACTOR
+893f # BP_INTR = FN615(BP)
+
+8947 # FILTERED ENGINE SPEED FOR TRANSMISSIONS USE
+
+8951 # NEBART = UROLAV(N,TCNE)
+
+8959 # FILTERED THROTTLE POSITION FOR TRANSMISSION USE
+8963 # TPBART = UROLAV(TP,TCTPTE)
+
+
+
+896e # THROTTLE POSITION RATE
+8974 # TP - TBART
+8978 # TP_RATE = TP - TPBART (TP_RATE is clipped to +/- 512 counts)
+
+8980 # FILTERED VEHICLE SPEED FOR TRANSMISSION USE
+898b # VSBART = UROLAV(VS,TCVST)
+
+8b97 # AMT is used to calculate ARCHG in the torque calculation
+8ba5 # (ENGCYL * N)
+
+8bc9 # R18 = AMT/(ENGCYL * N)
+8bc9 \n# INTRN_EQ_TQ_CALC_COM2
+
+8bd3 # R18 = UROLAV(AMT/[ENGCYL*N], TCTTA) (Filter ARCHG in torque truncation)
+8bec # LOAD = ARCHG / SARCHG
+
+8c09 # FN1617(N,LOAD)
+8c14 # MBTEGR * EGRACT 
+8c1b # FN1617(N,LOAD) + MBTEGR * EGRACT 
+8c1e # SPK_LAMBSE = 1 (air/fuel mixture is close to stoichiometry)
+8c24 # SPK_LAMBSE = LAMBSE1
+8c34 # FN1617(N,LOAD) + MBTEGR * EGRACT  + FN730(SPK_LAMBSE)
+8c37 # FN1617(N,LOAD) + MBTEGR * EGRACT  + FN730(SPK_LAMBSE) - SAFTOT
+
+8c47 # (clip SPK_DELTA to ZERO minimum)
+8c52 # FN1615A(N,LOAD)
+8c5f # FN1615A(N,LOAD)*FN621(SPK_DELTA)
+8c6c # [FN1615A(N,LOAD)*FN621(SPK_DELTA)*FN623(LAMBSE)]
+8c82 # - FN618(N_BYTE)
+8c8c # FN1616(N,LOAD)
+8c8f # - FN1616(N,LOAD)
+
+8c94 # Include FN619 in TQ_NET
+8c9e # [- FN619(N_BYTE)]
+8cb1 # TQ_NET * FN617(SPD_RATIO)
+8cc4 # (clip TQ_NET to ZERO minimum)
+8d04 # Do "GR_DS, PRNDL = 3 OR 4" Logic
+8d66 # (Start fresh every time)
+
+8d6c # (VS sensor OK)
+8d73 # (stable VS values)    
+
+8eab # (Do not allow an upshift
+8ead #  if a previous shift is
+8eb1 #  still in progress)
+
+8f2f # (desired gear has changed)
+8f8b # (driver did manual 4-3)
+
+8f98 # (new desired gear)  
+8fa2 # (time to delay downshift to unlock converter)
+
+8fad # (Manual shift selection) 
+8faf # GR_CM = GRMSFT
+
+8fb8 # DO "GR_CM, PRNDL = 1" LOGIC
+8fc2 # DO "GR_CM, PRNDL = 2" LOGIC
+8fc4 # GR_CM, PRNDL = 2 LOGIC
+8fd3 # DO "GR_CM, PRNDL = 3 OR 4 DOWNSHIFT"
+8fd5 # GR_CM, PRNDL = 3 OR 4, DOWNSHIFT LOGIC
+8fda # GR_DS > GR_CM 
+
+8ffa # (No shift this program pass)
+
+9001 # (A shift has been commanded)  
+9003 # (New commanded gear for this program pass only)
+900e # GR_OLD = GR_CM_LST (Update old gear)
+9065 # (current gear is first)  
+90a6 # (command downshift)
+
+90aa # (shift has been commanded)
+
+
+9138 # CYCCTR >= CLDCTM
+916a # CYCCTR > CLDCTM/2
+916a \w# (cycle shift solenoids)  
+
+91af # (new commanded gear this pass)
+91b2 # (shift may be checked for validity)
+
+91c2 # (automatic shift) 
+91c9 # (upshift)
+91d0 # (off idle) 
+
+920e # (record CC state at start of shift)
+9214 # (record TP at start of shift)
+9218 # (record filtered engine
+921c #  speed at start of shift)
+9220 # (record filtered vehicle
+9224 #  speed at start of shift)
+9228 # (shift may be checked for validity)
+922b # (shift complete, may be verified)
+922e # (shift can be verified)
+9231 # (reset valid shift flag)
+
+9244 # (unsteady conditions)
+9246 # (steady vehicle speed)  
+9251 # (unsteady conditions)
+9253 # (steady vehicle speed)  
+9262 # (unsteady conditions)
+9264 # (steady TP)
+926e # (unsteady conditions)
+
+9276 #  EXIT "SHIFT VALIDATION" MODULE
+
+92d9 # (1-2 shift error detected)
+92ea # (2-3 shift error detected) 
+92f7 # (3-4 shift error detected) 
+
+9308 \n# TM_CS_DLY TIMER CONTROL
+930b # (shift commanded) 
+931d # TM_CS_DLY = TMCSOD
+931d \w# (delay coast clutch engagement
+931d \w# in third gear to prevent two
+931d \w# elements being on at once)
+
+9321 \n# TM_CS_ENG TIMER CONTROL
+9324 # (PRNDL = 3)
+9326 # (coast clutch commanded on)
+9329 # (1st pass thru)
+
+9330 # (coast clutch will be engaged when timer expires)
+9334 # (set first pass flag)
+9347 # (4-2 or 4-1)
+9349 # (first pass thru)
+9350 # coast clutch will be engaged when timer expires)
+9354 # (set first pass flag)
+
+9357 \n\n# COAST CLUTCH OUTPUT CONTROL
+935d # (verifing a 3-4 upshift, de-energize Coast clutch)
+
+937a # GR_CM <> 4
+937c # (energize coast clutch output)
+
+9381 # (de-energize coast clutch output. 
+9381 \w# Coast clutch is off hydraulically
+9381 \w# in 4th. Coast clutch is on       
+9381 \w# hydraulically when PDL = 2 or 1)
+ 
+9389 \n\nINFER COAST CLUTCH ENGAGEMENT
+
+938f # (coast clutch is hydraulically off)
+939a # (timer expired)
+93a2 # (power on)
+
+952a \n\nDetermine Transmission Overtemperature FMEM action:
+
+9550 \n\nClip TV_PRES as necessary:
+9556 # TV_PRES = 127.5 (Maximum)
+
+9584 # Clip TV_PRES to TVFMMN as a minimum
+
+96ae # Do "ETV Current Monitor Test"
+
+98b5 \nSTRATEGY MODULE: EPC_NORM_COM7
+98bf # (start of shift)
+98c6 # NE_STRT_SFT = NEBART
+98ca # TR_STRT_SFT = FN617(SPD_RATIO)
+98ce # TP_STRT_SFT = TP_REL
+
+98d2 \n\n Now calculate the minimum static capacity.
+98db # (shift in progress, use IALPHA term)
+98de # (TQ_NET + TQ_IALPHA)
+
+98f9 # (shift done, use steady torque requirement)    
+
+9903 \n\n Calculate steady state pressure for current gear.
+
+990a \n DO "NON-SHIFTING STATIC TV CALCULATION"
+
+99bd \n\n Select larger of TV_STAT and EPC_TQ_CONV.
+
+99cb \n\n Calculate pressure for shift using shifting slopes and Dynamic TV.
+
+9a2b \n\n Select proper value for TV_PRES.
+
+9add # [1 - (RT_GR_CUR/RT_GR_OLD)]
+
+9c92 # SW_MLK = 1
+9c96 # (Development unconditional lock-up)
+9c99 # (Unconditional unlock) 
+9c9c # (Shift control unlock)
+9c9f # (WOT lockup)
+9ca2 # (Scheduled curve lock-up)
+9ca5 # (FMEM lock-up)
+9ca8 # (Lock converter clutch)
+9cb4 # (Unlock converter clutch)
+
+9cbe # (Failure Mode Lock Requested)  
+9cc1 # (Unconditional Unlock Requested)
+9cc4 # (Reset FMEM lock-up flag)
+9ccf # (Speed Ratio above failure mode minimum)
+9cd1 # (TP Sensor failure)
+9cd4 # (FMEM lock-up activated this power-up)
+
+9ceb # (Engine Speed above failure  mode minimum)
+9e9e # (Shift desired this pass)
+9ea4 # (Downshift)  
+9eaa # (Shift commanded this pass)
+9eb1 # (Upshift) 
+
+9fb6 # (enable high speed unlock check)
+9fbc # (upshift commanded on an unlocked converter)
+
+a220 # (3rd or 4th)
+a470 # (CRANK mode)
+a473 # PRGTMR = 0
+a478#  PURGING = 1
+a483 # (clip to FULPRGTM as a maximum
+
+a492 # (run OR underspeed)  
+
+a549 \n\n#TSLEGO - TIME SINCE LAST EGO SWITCH
+
+a54b # SWTFL = EGO switch flag; 
+a54b \w# 0 ->  no  EGO  switch,  
+a54b \w# 1  ->  EGO  switch  this background loop.
+
+a55b # TSLEGO > LESTM
+
+a57f # N_BYTE >= MPGRPM + MPGRPH
+a58e # MAP >= MAPLO + MAPLOH
+a59d # MAPPA <= MAPAHI - MPAHIH
+a5ac # BP >= MPMNBP + MPNBPH
+a5bc # NOVS <= MPGNOV - MPNOVH
+a5cb # VSBAR >= VSMPG + VSMPGH
+
+a678 \n\nIDLTMR - TIME AT IDLE
+a6aa \n\nEGRTMR - EGR ENABLED TIMER
+a6b9 # Clip at EGRTD7
+a6c5 # (prepare for next ramp)
+a6c5 \n\nLMBTMR - LOW MAP BYPASS TIMER
+
+a6de \n\nHMUTMR - HIGH MAPPA UPSTREAM AIR TIMER
+
+a6f0 # MAPPA >= HMUMAP + HMUMPH
+a6fa # MAPPA < HMUMAP
+
+a706 \n\n#VOLTMR - LOW VOLTAGE TIMER
+a710 # VBAT < LOWVOL
+a717 # LOWVOL + VOLHYS
+a720 # VBAT >= LOWVOL + VOLHYS
+
+a746 \n\nOSCTMR - OSCMOD DELAY TIMER (0.125 SEC)
+a746 \n #This timer is used to prevent OSCMOD spark feedback during  manual  transmission shifts.
+
+a777 # IOTimer delta time since last mSec
+a783 # *128/52083 = 1 mSec
+a7d4 # set "New second" (when R3e = 0)
+a7d7 # OK. start process
+a7dd # All zero - return (exit)
+a836 # Save word timer
+a83b # Save byte timer
+
+a840 \n###################################### 
+a840 \n# TIMERS Table 
+a840 \n# 3 or 5 byte entries
+a840 \n# byte  0    = flags word
+a840 \n# byte  2&3 WORD = timer address
+a840 \n# if 5 byte entry - timer controlled by flag(s)
+a840 \n# byte  4    = flag mask - selects control bit(s) in address
+a840 \n# byte  5    = flags address (start/stop) timer|#
+a840 \n# 2X = timer in 1/1024 seconds (~msec)
+
+
+a840 \n# 4X = timer in 1/8 seconds
+a840 \n# 8X = timer in seconds
+a840 \n# So
+a840 \n# bit 0 = 0 if short entry (3 or 5 bytes)
+a840 \n# bit 1 = 1 if 16 bit timer else 0 = 8 bit timer
+a840 \n# bit 2 = 0 timer count up vs down
+a840 \n# bit 3 = 0 if flag bit must be set to update timer loc
+a840 \n# bit 4 not used
+a840 \n# bit 5 = 1 update in 1/1024 seconds (~msec)
+a840 \n# bit 6 = update in 1/8 seconds
+a840 \n# bit 7 = update in seconds
+a840 \n# else entry size = 5
+a840 \n# entry size = 2 if bit 0 of first byte = 0
+a840 \n# in follow Table the 15 bit address field is byte flipped for correct word order
+a840 \n######################################
+
+#a841 # A3CTMR         Time between A3C state changes.
+
+#a844 # ADPTMR         Adaptive fuel timer (seconds)
+
+a84f #ATMR1          Time since start (time since exiting CRANK mode) (seconds)
+a859 #CTTMR          Time at closed throttle timer (0.125 seconds)
+
+a8a8 #PUTMR          Time since CPU power-up (0.001 seconds)
+
+a8ee #AWOTMR         Time in wide open throttle (seconds)
+a8f3 #AWOTMR         Time in wide open throttle (seconds)
+
+
+#a84a # ATMR2          Time since engine coolant temperature became greater than 
+                     TEMPFB (seconds)
+
+# ATMR3          Time since entering run mode (seconds)
+
+
+#BYPTMR         Thermactor air bypass-enable timer (seconds)
+
+#CRKPIP_CTR     PIP Counter for Cranking fuel
+
+
+#EGRTMR         EGR enabled timer (seconds)
+
+#HLTMR          High load timer (0.125 seconds)
+
+#HMUTMR         High MAPPA upstream air timer.
+
+#HTPTMR         Heat protection timer (seconds)
+
+#IDLTMR         Idle time (seconds)
+
+#ISCTMR         RPM Sample/KAM Update Delay Timer (seconds)
+
+#LMBTMR         Low MAP bypass timer (seconds)
+
+#LUTIMR         Transmission lock-up control timer (0.125 seconds)
+
+#MPGTMR         MPG mode control timer (seconds)
+
+#MULTMR         Time since incrementing LAMMUL (0.001 seconds)
+
+#NACTMR         Time not at closed throttle (seconds)
+
+#NDDTIM         Time since neutral/drive switch state change (0.125 seconds)
+
+#OSCTMR         OSCMOD delay timer (0.125 seconds)
+
+
+
+#SETTMR         RPM Control Entry Delay Timer (0.125 seconds)
+
+#SHFTMR         Shift in progress timer (0.125 seconds)
+
+#TARTMR         Time since OLDTP was updated (0.001 seconds)
+
+#TSLEGO         Time since last EGO switch (0.001 seconds)
+
+#TSLPIP         Time since last PIP (0.001 seconds)
+
+#V_NACTMR_CUM   Accumulative time at part WOT
+
+#VOLTMR         Time of low battery voltage
+
+#WOTTMR         Time at wide open throttle
+
+
+
+
+
+a9d7 # Console status
+a9dc # [RD00]=0x2A=Engineering Console Present
+a9df # Console Not Present goto aa1c
+a9e1 # Bit4 of R54 Set 1 at ????. ???? Calls a9d7
+a9e4 # HSO PORT CAM or OUTPUT HOLD BUFFER FULL goto aa02
+
+a9e7 # add 5D to current IOTime
+
+a9f4 # request interrupt (in 5D IOtimes)
+
+a9fd # R30=4, a9ca+4 = a9ce, [a9ce]=e006
+
+aa02 # Console Routine, Datalogging patch inserted at 0x
+
+aa0a # R30=4, a9be+4 = a9d2, [a9c2]=1000
+aa12 # Bit 6 of register c80, "ConsoleMode" : B 6
+aa15 # R30=4, a9c4+4 = a9c8, [a9c8]=1200
+
+
+aa1c # [2022] = 0xb000
+
+aa28 # R1a = 8
+
+aa30 \n# R1a = 8, R1c = b000, R18 = f0, Rf0 = b000
+aa30 \n# R1a = 7, R1c = b43e, R18 = f2, Rf2 = b43e
+aa30 \n# R1a = 6, R1c = b442, R18 = f4, Rf4 = b442
+aa30 \n# R1a = 5, R1c = b914, R18 = f6, Rf6 = b914
+aa30 \n# R1a = 4, R1c = bab0, R18 = f8, Rf8 = bab0
+aa30 \n# R1a = 3, R1c = bb7a, R18 = fa, Rfa = bb7a
+aa30 \n# R1a = 2, R1c = c0a8, R18 = fc, Rfc = c0a8
+aa30 \n# R1a = 1, R1c = cb5a, R18 = fe, Rfe = cb5a
+
+aa64 # Original: 71,ef,45     an2b  R45,ef    Disable_isc = 0;
+
+aa6a # initialise data lists
+aa98 # next data list
+aa9a # Addresses + 0x100 for this list
+
+aa9c # next data list
+aade # next data list
+aae0 # Addresses + 0x200 for this list
+aae2 # next data list
+
+aae8 # next data list
+aaea # Addresses + 0x300 for this list
+aaec # next data list
+
+ab20 # next data list
+ab22 # Addresses + 0x400 for this list
+ab24 # next data list
+
+ab28 # End of all lists
+
+ab2c # ISCKAMn = 0.0 (n=0-5)
+ab33 # Sum all ISCKAMn
+ab36 # loop for all 6
+ab4a # if ISCKAMs are invalid
+ab4f # 106 entries
+ab5b # ADAPTIVE FUEL TABLE
+ab60 # SUM OF ADAPTIVE FUEL CELLS
+ab63 # loop all KAM entries
+ab6a # (SUM OF ALL KAM CELLS) - CHKSUM
+ab75 # DATA IN KAM IS VALID.
+ab77 # Default 80h value for initial KAM
+ab7a # 0x6Ah = 106  LTMTBLrc CELLS
+ab7d # ADAPTIVE FUEL TABLE
+
+ab85 # KAM checksum, 0x3500 = 0x80 x 0x6a = (128 * (10*10+6))
+ab85 \w# SET CHKSUM = 13568
+
+ac31 \n## Payloads - Datalogging Lists!
+
+b000 # Register Rf0 
+b033 # 2 " Hg (engine specific parameter).
+
+b098 # FN800(DEBYMA) = Transfer function for the ISC actuator.
+b098 # isc_duty_cycle
+b0c0 # ISC duty cycle multiplier versus VACUUM.
+b142 # A background driven decrement to the dashpot preposition  airflow register  (DASPOT)  as  a function of DASPOT.
+b43e # Register Rf2 
+b442 # Register Rf4 
+
+b914 # Register Rf6 
+b91e # If 8-cyl & Signature PIP duty cycle <= 35%, then set MHPFD = .20
+bab0 # Register Rf8 
+bb7a # Register Rfa
+
+bbd2 \n######################################
+bbd2 \n# FN004(BP) = Empirical correction  to  PEXH  for  altitude  with  input  a
+bbd2 \n#  function of barometric pressure.
+
+bbd2 \n# FN074A should be calibrated at sea level since  the  altitude  correction  is
+bbd2 \n# made  by  the (29.875/BPCOR) term.  Note that the altitude correction used to
+bbd2 \n# be (29.875/BP)  however  actual  data  obtained  from  the  altitude  chamber
+bbd2 \n# disagreed  with  the calculated correction.  Therefore FN004(BP) was added to
+bbd2 \n# allow an empirical correction.  If no correction is desired, calibrate  FN004
+bbd2 \n# on  a  diagonal, that is, (0,0), (31.875,31.875).  Actual data indicates that
+bbd2 \n# back pressure does not increase linearly with BP, but at about half that rate,
+bbd2 \n# roughly (0,8), (31.875,31.875).  This will generate a corrected BP to be used
+bbd2 \n# in calculating a more accurate PEXH and PE (PFE EGR only).  Over prediction of
+bbd2 \n# PEXH  results in a smaller MAPOPE and PE which in turn results in leaner open
+bbd2 \n# loop fuel values and under prediction of actual EM at altitude.
+
+bbd3 # EGR Exhaust BP Correction
+
+
+beaa # Used as an adder to calculate MAPOPE based on calculated airmass
+
+
+c0a8 # Register Rfc 
+
+c182 #  NE12A = WOT RPM 1 - 2 shift point, altitude.
+c184 #  NE12S = WOT RPM 1 - 2 shift point, sea level.
+c186 #  NE23A = WOT RPM 2 - 3 shift point, altitude.
+c188 #  NE23S = WOT RPM 2 - 3 shift point, sea level.
+c18a #  NE34A = WOT RPM 3 - 4 shift point, altitude.
+c18c #  NE34S = WOT RPM 3 - 4 shift point, sea level.
+       
+       
+       
+c1af # coolant temp.  limit to trigger warm up counters (150 deg.  F).
+
+c1d6 # 11469
+
+cb83 # EGR Type 0 = Sonic
+
+# cb5a # Register Rfe 
+
+cc4a # VECT3 = Minimum coolant temperature, engine on.
+
+ce5c # FN348(ECT) = Crank fuel pulsewidth as a function of ECT.

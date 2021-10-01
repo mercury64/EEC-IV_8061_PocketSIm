@@ -4,7 +4,7 @@ import ca.nerret.emu.emulator.AddressMode;
 import ca.nerret.emu.emulator.State;
 
 
-public interface IOpCode {
+public interface IOpCode<T> {
 
     /**
      * Increment the pc counter by 1.
@@ -31,13 +31,19 @@ public interface IOpCode {
      * @param state_ The State machine.
      */
     void exec(final State state_);
+	int exec();
+	
+    
 	void setAddressMode(AddressMode addressMode);
+	AddressMode getAddressMode();
 	int getAddressModeInt();
 	
-	void execDirect();
-	void execImmediate();
-	void execIndirect();
-	void execIndirectAutoInc();
-	void execShortIndexed();
-	void execLongIndexed();
+	int execDirect();
+	int execImmediate();
+	int execIndirect();
+	int execIndirectAutoInc();
+	int execShortIndexed();
+	int execLongIndexed();
+
+
 }

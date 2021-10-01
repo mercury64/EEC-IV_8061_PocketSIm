@@ -8,6 +8,8 @@ public class Calibration {
 
     private static final int SIZE_OF_EECIV = 0xdfff;
     private static final int SIZE_OF_MEM_SPACE = 0xFFFF;
+    
+    private static final int MASK_0xF = 0xF;
     private static final int MASK_0xFF = 0xFF;
     
 	private String fileName;
@@ -27,6 +29,32 @@ public class Calibration {
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+	
+	public byte[] read()
+	{
+        byte[] program = new byte[SIZE_OF_EECIV];
+        byte[] convertedProgram = new byte[SIZE_OF_MEM_SPACE];
+        
+		File file = new File(this.getFileName());
+		
+	    try (DataInputStream data = new DataInputStream(new FileInputStream(file)))
+	    {
+
+	        data.read(program);
+	        
+	        for (int i = 0; i < program.length; i++)//program.length
+	        {
+	            convertedProgram[i + 0x2000] =  program[i];
+	        }
+
+	    } catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return convertedProgram;
 	}
 	
 	public int[] readFile()

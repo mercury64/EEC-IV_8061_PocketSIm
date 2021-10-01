@@ -1,8 +1,8 @@
 
 ####################################################################################################
 #
-# Disassembly listing of binary 'KID2'    8061  1 bank     SAD Version 4.0.7.16 (16 Jun 2021)
-# See 'KID2_msg.txt' for warnings, results and other information
+# Disassembly listing of binary 'BAN1'    8061  1 bank     SAD Version 4.0.7.16 (16 Jun 2021)
+# See 'BAN1_msg.txt' for warnings, results and other information
 
 # Explanation of extra flags and formats - 
 #   R general register. Extra prefix letters shown for mixed size opcodes (e.g DIVW)
@@ -24,7 +24,7 @@
    FIXSUM:
 2004: 01,00,ff,df,00,ff   ???   
 
-200a: 17,d4               word   d417                                              # ROM_TO is the complement of CHECKSUM |  # d417 -> one's:2be8, two's: 2be9
+200a: 30,63               word   6330                                              # ROM_TO is the complement of CHECKSUM |  # d417 -> one's:2be8, two's: 2be9
 200c: 00,e0               word   e000
 200e: 5d,00               word     5d
 
@@ -14611,46 +14611,46 @@ ae28 -> afff = 0xff  ## fill ##
 
 b000: 3e,b4               word   b43e                                              # Register Rf0 
 b002: 03                  byte      3
-b003: 07                  byte      7            LINK_SW
+b003: 06                  byte      6            LINK_SW
 b004: 01                  byte      1
 b005: b0                  byte     b0            LOWVOL
 b006: 18                  byte     18            VOLHYS
 b007: ff                  byte     ff            VOLTCLP
-b008: 96                  byte     96            CHGRPM
+b008: 13                  byte     13            CHGRPM
 
 b009: ff                  ???   
 
-b00a: 00,00               word      0
+b00a: a0,00               word     a0
 b00c: 00,00               word      0            ?ISCMOD_TPREL?
 b00e: cd,04               word    4cd            ISCMOD_MAX
-b010: 9a,03               word    39a            ISCMOD_MIN
+b010: 00,04               word    400            ISCMOD_MIN
 b012: 0a,00               word      a            KDNDT
-b014: 80,01               word    180            TC_OVER
-b016: b3,00               word     b3            TC_UNDER
+b014: 80,02               word    280            TC_OVER
+b016: 80,01               word    180            TC_UNDER
 b018: 06                  byte      6            ISCMOD_RPM
 
 b019: ff                  ???   
 
 b01a: 9a,09               word    99a            PSIBRM
-b01c: 0d,00               word      d            RPMINC
+b01c: 00,00               word      0            RPMINC
 b01e: 66,f6               word   f666            PSIBRN
-b020: 8f,0a               word    a8f            ITHBMA
+b020: b8,0a               word    ab8            ITHBMA
 b022: 29,00               word     29            DEBYCP
 b024: 00,00               word      0            DASCTL
-b026: 71,3d               word   3d71            DASPTK
-b028: 00,02               word    200            DELHYS
-b02a: 58,02               word    258            RPMCTL
-b02c: 80,00               word     80            NDIF
-b02e: 50,00               word     50            RPMDED
+b026: ec,51               word   51ec            DASPTK
+b028: 00,03               word    300            DELHYS
+b02a: c8,00               word     c8            RPMCTL
+b02c: 90,01               word    190            NDIF
+b02e: 3c,00               word     3c            RPMDED
 b030: 40,03               word    340            DELRAT
-b032: 01                  byte      1            ISCTM
-b033: 08                  byte      8            ACMAP                             # 2 " Hg (engine specific parameter).
+b032: 00                  byte      0            ISCTM
+b033: 00                  byte      0            ACMAP                             # 2 " Hg (engine specific parameter).
 
 b034: 02                  ???   
 
-b035: 01                  byte      1            UPDISC
+b035: 02                  byte      2            UPDISC
 b036: 05                  byte      5            UPDATM
-b037: 0e                  byte      e            MINMPH
+b037: 08                  byte      8            MINMPH
 b038: 00,80               word   8000            IDCMUL
 b03a: 00,00               word      0            IDCOFS
 b03c: 20,03               word    320            STALLN
@@ -14659,24 +14659,24 @@ b03f: 01                  byte      1            BPCOR_SW
 
 b040: 00                  ???   
 
-b041: 93                  byte     93            CSSMAF
-b042: 58,00               word     58            NUBASE
-b044: 4e,00               word     4e            DRBASE
+b041: 97                  byte     97            CSSMAF
+b042: 5e,00               word     5e            NUBASE
+b044: 51,00               word     51            DRBASE
 
    idle_rpm_adder_startup:
 b046: 00,00               ???   
 
-b048: 00,00               word      0            idle_rpm_adder_max_time_on_startup
+b048: 1c,00               word     1c            idle_rpm_adder_max_time_on_startup
 b04a: 00,00               word      0            DNAC
-b04c: 00,08               word    800            DACTM
+b04c: 00,00               word      0            DACTM
 b04e: 00,00               word      0            DNPOWS
 b050: 35,00               word     35            ISCLPD_idle_max_rpm
-b052: ff                  byte     ff            ACHPTM
-b053: 7f                  byte     7f            ECT_HP
+b052: 78                  byte     78            ACHPTM
+b053: 4b                  byte     4b            ECT_HP
 b054: a4,00               word     a4            PSPPM
-b056: 2d                  byte     2d            TKDTM
-b057: 02                  byte      2            pre_bzztm
-b058: 03                  byte      3            NDDELT
+b056: 14                  byte     14            TKDTM
+b057: 03                  byte      3            pre_bzztm
+b058: 01                  byte      1            NDDELT
 b059: ec                  byte     ec            MINACT
 b05a: 32                  byte     32            FMMDSD
 b05b: 5d                  byte     5d            DWELLA
@@ -14714,15 +14714,15 @@ b094: 80,10               func  -128,  16
 b096: 80,10               func  -128,  16
 
    FN800:
-b098: ff,ff,00,80         func  65535, 32768                                       # FN800(DEBYMA) = Transfer function for the ISC actuator.  # isc_duty_cycle
-b09c: 33,26,00,80         func   9779, 32768
-b0a0: b4,1e,66,66         func   7860, 26214
-b0a4: 15,19,9a,59         func   6421, 22938
-b0a8: eb,12,cd,4c         func   4843, 19661
-b0ac: d5,0b,00,40         func   3029, 16384
-b0b0: ce,06,33,33         func   1742, 13107
-b0b4: 4f,03,66,26         func    847,  9830
-b0b8: 00,01,9a,19         func    256,  6554
+b098: ff,ff,b8,7e         func  65535, 32440                                       # FN800(DEBYMA) = Transfer function for the ISC actuator.  # isc_duty_cycle
+b09c: 00,28,b8,7e         func  10240, 32440
+b0a0: b4,20,66,66         func   8372, 26214
+b0a4: 0a,1b,9a,59         func   6922, 22938
+b0a8: 00,14,cd,4c         func   5120, 19661
+b0ac: ec,0b,00,40         func   3052, 16384
+b0b0: 83,06,33,33         func   1667, 13107
+b0b4: 08,03,66,26         func    776,  9830
+b0b8: be,00,9a,19         func    190,  6554
 b0bc: 00,00,00,00         func      0,     0
 
    FN820A:
@@ -14734,15 +14734,15 @@ b0c8: 00,b3               func    0, 179
 b0ca: 00,b3               func    0, 179
 
    FN825A:
-b0cc: 7f,19               func   127,  25
-b0ce: 76,19               func   118,  25
+b0cc: 7f,26               func   127,  38
+b0ce: 7b,26               func   123,  38
 b0d0: 6c,00               func   108,   0
-b0d2: 50,00               func    80,   0
-b0d4: 00,19               func     0,  25
-b0d6: f6,32               func   -10,  50
-b0d8: 80,32               func  -128,  50
-b0da: 80,32               func  -128,  50
-b0dc: 80,32               func  -128,  50
+b0d2: 4b,00               func    75,   0
+b0d4: 32,16               func    50,  22
+b0d6: 19,19               func    25,  25
+b0d8: 0a,26               func    10,  38
+b0da: 00,26               func     0,  38
+b0dc: f6,32               func   -10,  50
 b0de: 80,32               func  -128,  50
 
    FN825B:
@@ -14755,13 +14755,13 @@ b0ea: 80,00               func  -128,   0
 b0ec: 80,00               func  -128,   0
 
    FN826A:
-b0ee: 7f,14               func   127,  20
-b0f0: 76,0d               func   118,  13
-b0f2: 53,0d               func    83,  13
-b0f4: 00,26               func     0,  38
-b0f6: 80,26               func  -128,  38
-b0f8: 80,26               func  -128,  38
-b0fa: 80,26               func  -128,  38
+b0ee: 7f,0d               func   127,  13
+b0f0: 6c,00               func   108,   0
+b0f2: 4b,00               func    75,   0
+b0f4: 46,0d               func    70,  13
+b0f6: 80,0d               func  -128,  13
+b0f8: 80,0d               func  -128,  13
+b0fa: 80,0d               func  -128,  13
 
    FN839:
 b0fc: ff,6d               func  255, 109
@@ -14773,40 +14773,40 @@ b106: 00,80               func    0, 128
 b108: 00,80               func    0, 128
 
    FN862:
-b10a: ff,44               func  255,  68
-b10c: 9c,34               func  156,  52
-b10e: 00,34               func    0,  52
-b110: 00,34               func    0,  52
+b10a: ff,00               func  255,   0
+b10c: 00,00               func    0,   0
+b10e: 00,00               func    0,   0
+b110: 00,00               func    0,   0
 
    FN875D:
-b112: ff,ff,9a,11         func  65535,  4506
-b116: 45,00,9a,11         func     69,  4506
-b11a: 32,00,91,09         func     50,  2449
-b11e: 28,00,e7,06         func     40,  1767
-b122: 22,00,d3,05         func     34,  1491
+b112: ff,ff,00,0a         func  65535,  2560
+b116: 35,00,00,0a         func     53,  2560
+b11a: 29,00,9a,07         func     41,  1946
+b11e: 26,00,33,07         func     38,  1843
+b122: 00,00,00,00         func      0,     0
 b126: 00,00,00,00         func      0,     0
 
    FN875N:
-b12a: ff,ff,1f,0d         func  65535,  3359
-b12e: 57,00,1f,0d         func     87,  3359
-b132: 3e,00,81,09         func     62,  2433
-b136: 2f,00,3b,07         func     47,  1851
-b13a: 25,00,db,05         func     37,  1499
+b12a: ff,ff,cd,0c         func  65535,  3277
+b12e: 5e,00,cd,0c         func     94,  3277
+b132: 3f,00,33,09         func     63,  2355
+b136: 2f,00,9a,07         func     47,  1946
+b13a: 2c,00,33,07         func     44,  1843
 b13e: 00,00,00,00         func      0,     0
 
    FN879:
-b142: ff,ff,b8,02         func  65535,   696                                       # A background driven decrement to the dashpot preposition  airflow register  (DASPOT)  as  a 
+b142: ff,ff,33,03         func  65535,   819                                       # A background driven decrement to the dashpot preposition  airflow register  (DASPOT)  as  a 
                                                                                    function of DASPOT.
-b146: 00,20,b8,02         func   8192,   696
-b14a: 9a,19,66,02         func   6554,   614
-b14e: 66,16,ae,01         func   5734,   430
-b152: 00,10,f6,00         func   4096,   246
-b156: 00,08,8f,00         func   2048,   143
-b15a: 00,00,66,00         func      0,   102
+b146: 00,20,33,03         func   8192,   819
+b14a: cd,1c,00,02         func   7373,   512
+b14e: 9a,19,33,01         func   6554,   307
+b152: 00,10,cd,00         func   4096,   205
+b156: 00,08,52,00         func   2048,    82
+b15a: 00,00,02,00         func      0,     2
 
    FN880:
 b15e: ff,0d               func  255,  13
-b160: 32,00               func   50,   0
+b160: eb,00               func  235,   0
 b162: 00,00               func    0,   0
 b164: 00,00               func    0,   0
 b166: 00,00               func    0,   0
@@ -14823,20 +14823,20 @@ b180: 00,00,00,14         func      0,  5120
 b184: 00,00,00,14         func      0,  5120
 
    FN885:
-b188: ff,ff,48,01         func  65535,   328
-b18c: 00,00,48,01         func      0,   328
-b190: 00,00,48,01         func      0,   328
-b194: 00,00,48,01         func      0,   328
-b198: 00,00,48,01         func      0,   328
-b19c: 00,00,48,01         func      0,   328
+b188: ff,ff,f6,00         func  65535,   246
+b18c: 00,00,f6,00         func      0,   246
+b190: 00,00,f6,00         func      0,   246
+b194: 00,00,f6,00         func      0,   246
+b198: 00,00,f6,00         func      0,   246
+b19c: 00,00,f6,00         func      0,   246
 
    FN887A:
 b1a0: 7f,80               func   127, 128
-b1a2: 80,80               func  -128, 128
-b1a4: 80,80               func  -128, 128
-b1a6: 80,80               func  -128, 128
-b1a8: 80,80               func  -128, 128
-b1aa: 80,80               func  -128, 128
+b1a2: 55,80               func    85, 128
+b1a4: 4b,40               func    75,  64
+b1a6: 37,40               func    55,  64
+b1a8: ec,00               func   -20,   0
+b1aa: 80,00               func  -128,   0
 
    FN890:
 b1ac: ff,00               func  255,   0
@@ -14853,12 +14853,12 @@ b1bc: 00,80               func    0, 128
 b1be: 00,80               func    0, 128
 
    FN1861:
-b1c0: c0,66,66,63,50,50,50  table  192, 102, 102,  99,  80,  80,  80
-b1c7: b0,73,73,6d,56,50,50  table  176, 115, 115, 109,  86,  80,  80
-b1ce: a0,6d,6a,66,50,4d,4d  table  160, 109, 106, 102,  80,  77,  77
-b1d5: 60,5a,5a,53,4d,46,46  table   96,  90,  90,  83,  77,  70,  70
-b1dc: 40,40,40,40,40,40,40  table   64,  64,  64,  64,  64,  64,  64
-b1e3: 40,40,40,40,40,40,40  table   64,  64,  64,  64,  64,  64,  64
+b1c0: c0,9a,6a,66,53,53,53  table  192, 154, 106, 102,  83,  83,  83
+b1c7: b0,8d,60,60,50,50,50  table  176, 141,  96,  96,  80,  80,  80
+b1ce: a0,86,5a,5a,4d,4d,4d  table  160, 134,  90,  90,  77,  77,  77
+b1d5: 80,5e,53,53,46,46,45  table  128,  94,  83,  83,  70,  70,  69
+b1dc: 80,4f,4d,4d,46,43,40  table  128,  79,  77,  77,  70,  67,  64
+b1e3: 80,4d,43,43,43,40,40  table  128,  77,  67,  67,  67,  64,  64
 
    FN703:
 b1ea: ff,ff,00,ec         func  65535,  -5120
@@ -14887,11 +14887,11 @@ b23a: 00,00,70,09         func      0,   2416
 
    FN018A:
 b23e: ff,ff,00,07         func  65535,  1792
-b242: 56,00,00,07         func     86,  1792
-b246: 06,00,00,02         func      6,   512
-b24a: 02,00,00,00         func      2,     0
-b24e: 00,00,00,00         func      0,     0
-b252: 00,00,00,00         func      0,     0
+b242: b4,00,00,07         func    180,  1792
+b246: 3c,00,00,05         func     60,  1280
+b24a: 28,00,00,04         func     40,  1024
+b24e: 0f,00,00,03         func     15,   768
+b252: 03,00,00,00         func      3,     0
 b256: 00,00,00,00         func      0,     0
 
    FN019A:
@@ -14913,12 +14913,12 @@ b28a: 00,80,00,00         func  -32768,     0
 
    FN021_MAPOPE_y_load:
 b28e: ff,ff,00,09         func  65535,  2304
-b292: 7a,00,00,09         func    122,  2304
-b296: 73,00,00,08         func    115,  2048
-b29a: 26,00,00,02         func     38,   512
-b29e: 1a,00,00,00         func     26,     0
-b2a2: 00,00,00,00         func      0,     0
-b2a6: 00,00,00,00         func      0,     0
+b292: 73,00,00,09         func    115,  2304
+b296: 60,00,80,08         func     96,  2176
+b29a: 53,00,80,06         func     83,  1664
+b29e: 33,00,80,02         func     51,   640
+b2a2: 26,00,00,01         func     38,   256
+b2a6: 1a,00,00,00         func     26,     0
 b2aa: 00,00,00,00         func      0,     0
 b2ae: 00,00,00,00         func      0,     0
 b2b2: 00,00,00,00         func      0,     0
@@ -14940,17 +14940,17 @@ b2e2: 00,80,00,00         func  -32768,     0
    FN070B:
 b2e6: ff,ff,00,09         func  65535,  2304
 b2ea: 50,46,00,09         func  18000,  2304
-b2ee: b0,36,00,08         func  14000,  2048
-b2f2: 40,1f,00,05         func   8000,  1280
-b2f6: a0,0f,00,01         func   4000,   256
+b2ee: 60,3b,00,07         func  15200,  1792
+b2f2: 50,14,00,02         func   5200,   512
+b2f6: 80,0c,00,00         func   3200,     0
 b2fa: 00,00,00,00         func      0,     0
 
    FN070L:
 b2fe: ff,ff,00,09         func  65535,  2304
 b302: 50,46,00,09         func  18000,  2304
-b306: b0,36,00,08         func  14000,  2048
-b30a: 40,1f,00,05         func   8000,  1280
-b30e: a0,0f,00,01         func   4000,   256
+b306: 80,3e,00,08         func  16000,  2048
+b30a: 60,3b,00,07         func  15200,  1792
+b30e: 50,14,00,02         func   5200,   512
 b312: 80,0c,00,00         func   3200,     0
 b316: 00,00,00,00         func      0,     0
 
@@ -14965,11 +14965,11 @@ b332: 00,00,00,00         func      0,     0
 
    FN072C:
 b336: ff,ff,00,07         func  65535,  1792
-b33a: 7a,00,00,07         func    122,  1792
-b33e: 5f,00,00,00         func     95,     0
-b342: 00,00,00,00         func      0,     0
-b346: 00,00,00,00         func      0,     0
-b34a: 00,00,00,00         func      0,     0
+b33a: 73,00,00,07         func    115,  1792
+b33e: 6a,00,00,06         func    106,  1536
+b342: 66,00,00,05         func    102,  1280
+b346: 4d,00,00,04         func     77,  1024
+b34a: 1a,00,00,00         func     26,     0
 b34e: 00,00,00,00         func      0,     0
 
    FN046A:
@@ -14989,9 +14989,9 @@ b376: 00,00,00,00         func      0,     0
    FN071:
 b37a: ff,ff,00,07         func  65535,  1792
 b37e: e8,00,00,07         func    232,  1792
-b382: 84,00,00,03         func    132,   768
-b386: 6c,00,00,02         func    108,   512
-b38a: 50,00,00,01         func     80,   256
+b382: c8,00,00,05         func    200,  1280
+b386: a8,00,00,04         func    168,  1024
+b38a: 60,00,00,01         func     96,   256
 b38e: 40,00,00,00         func     64,     0
 b392: 00,00,00,00         func      0,     0
 
@@ -15038,82 +15038,82 @@ b40e: 00,00,00,00         func      0,     0
 
    FN023:
 b412: ff,ff,00,04         func  65535,  1024
-b416: ff,00,00,04         func    255,  1024
-b41a: 78,00,00,03         func    120,   768
-b41e: 00,00,00,00         func      0,     0
+b416: 78,00,00,04         func    120,  1024
+b41a: 28,00,00,02         func     40,   512
+b41e: 07,00,00,01         func      7,   256
 b422: 00,00,00,00         func      0,     0
 
    FN024:
 b426: ff,7f,00,04         func   32767,  1024
-b42a: 6e,00,00,04         func     110,  1024
-b42e: f6,ff,00,00         func     -10,     0
-b432: 00,80,00,00         func  -32768,     0
-b436: 00,80,00,00         func  -32768,     0
+b42a: 69,00,00,04         func     105,  1024
+b42e: 64,00,00,03         func     100,   768
+b432: 32,00,00,02         func      50,   512
+b436: f6,ff,00,00         func     -10,     0
 b43a: 00,80,00,00         func  -32768,     0
 
 b43e: 42,b4               word   b442                                              # Register Rf2 
 b440: ff                  byte     ff            DASMPH
-b441: c8                  byte     c8            DASMHYST
+b441: 00                  byte      0            DASMHYST
 b442: 14,b9               word   b914                                              # Register Rf4 
-b444: 08                  byte      8            IPSIDLY
+b444: 0b                  byte      b            IPSIDLY
 
 b445: ff                  ???   
 
-b446: 38,ff               word   ff38            RUNUP_DIFF
+b446: 70,fe               word   fe70            RUNUP_DIFF
 b448: 30,f8               word   f830            V_RUNUP_DIFF
 b44a: 02                  byte      2            SETLNG_TM
 
 b44b: ff                  ???   
 
-b44c: 00,00               word      0            DPNEU_MUL
+b44c: ff,00               word     ff            DPNEU_MUL
 b44e: 64,2c               word   2c64            A0
 b450: 00,28               word   2800
 
-b452: 14,2d,5a            ???   
+b452: 78,b4,78            ???   
 
 b455: 00                  byte      0            EGOCL1
 b456: 00,00               word      0            TP_HYS_OL
 b458: 00,00               word      0            DFSLAM
-b45a: 01                  byte      1            PIPNUM
+b45a: 04                  byte      4            PIPNUM
 b45b: 28                  byte     28            LMAP
 b45c: 04                  byte      4            LOMAPH
-b45d: 5a                  byte     5a            ECTSTABL
-b45e: 05                  byte      5            ECTSTHYS
+b45d: 49                  byte     49            ECTSTABL
+b45e: 00                  byte      0            ECTSTHYS
 b45f: 02                  byte      2            MFARMP
-b460: 08                  byte      8
-b461: 73                  byte     73            LAMRICH
+b460: 04                  byte      4
+b461: 7a                  byte     7a            LAMRICH
 b462: 03                  byte      3            LAMRHYS
-b463: 80                  byte     80            OLIDRV
+b463: 7d                  byte     7d            OLIDRV
 b464: 00,01               word    100            OLMCL
-b466: 80                  byte     80            OLINEUT
-b467: 00                  byte      0
-b468: 00,80               word   8000            LAMDLT_OL
-b46a: ff                  byte     ff
+b466: 7d                  byte     7d            OLINEUT
+b467: 0a                  byte      a
+b468: 66,06               word    666            LAMDLT_OL
+b46a: 23                  byte     23
 b46b: 80                  byte     80            JMPMUL
-b46c: 6d                  byte     6d            MAPAHI
+b46c: 7f                  byte     7f            MAPAHI
 b46d: 06                  byte      6            MPAHIH
-b46e: 60                  byte     60            MAPLO
-b46f: 20                  byte     20            MAPLOH
-b470: 06                  byte      6
+b46e: 30                  byte     30            MAPLO
+b46f: 10                  byte     10            MAPLOH
+b470: 08                  byte      8
 b471: 00                  byte      0
 b472: 00                  byte      0            MPGLSW
 b473: 3c                  byte     3c            MPGNOV
 b474: 0a                  byte      a            MPNOVH
-b475: 45                  byte     45            MPGRPM
+b475: 51                  byte     51            MPGRPM
 b476: 0d                  byte      d            MPGRPH
-b477: 73                  byte     73            MPGCTH
-b478: 53                  byte     53            MPGCTL
+b477: 6c                  byte     6c            MPGCTH
+b478: 7f                  byte     7f            MPGCTL
 
 b479: ff                  ???   
 
-b47a: 02,00               word      2
+b47a: 03,00               word      3
 b47c: f2,02               word    2f2            MPGDEC
-b47e: 98                  byte     98            MPMNBP
-b47f: 08                  byte      8            MPNBPH
-b480: 56                  byte     56            VSMPG
-b481: 06                  byte      6            VSMPGH
+b47e: c0                  byte     c0            MPMNBP
+b47f: 10                  byte     10            MPNBPH
+b480: 50                  byte     50            VSMPG
+b481: 0a                  byte      a            VSMPGH
 b482: 01                  byte      1            MPG_CL_SW
-b483: ff                  byte     ff            EGO_IDLE
+b483: 00                  byte      0            EGO_IDLE
 b484: 00,a0               word   a000            LAMMAX
 b486: 00,60               word   6000            LAMMIN
 b488: 83,00               word     83            MINPW
@@ -15127,53 +15127,53 @@ b48f: ff,55,55,0f,0f,ff,5a,55,55,5f,5f  ???
 
 b49a: f0,55               word   55f0            NLMT
 b49c: 90,01               word    190            NLMTH
-b49e: c0                  byte     c0            speed_limiter1
+b49e: c4                  byte     c4            speed_limiter1
 b49f: 06                  byte      6            speed_limiter1_hysteresis
 b4a0: 00                  byte      0
 b4a1: 00                  byte      0            T75LSW
 b4a2: 00                  byte      0
 b4a3: 0d                  byte      d
-b4a4: ff                  byte     ff            OLITD1
+b4a4: eb                  byte     eb            OLITD1
 b4a5: ff                  byte     ff            OLITD3
 b4a6: a0,0f               word    fa0            IDLRPM
 b4a8: c8,00               word     c8            IDRPMH
-b4aa: 00,b4               word   b400            LESTM
-b4ac: 40,9c               word   9c40            WOTRPL
+b4aa: 00,f0               word   f000            LESTM
+b4ac: a0,0f               word    fa0            WOTRPL
 b4ae: fc,ff               word   fffc            WOTRPH
-b4b0: 00,00               word      0            LAMDLT
+b4b0: 1f,05               word    51f            LAMDLT
 b4b2: 80                  byte     80            KFT
-b4b3: 00                  byte      0            TFCTM
+b4b3: 01                  byte      1            TFCTM
 b4b4: 08                  byte      8
 b4b5: 1a                  byte     1a            KFTMPG
 b4b6: 01                  byte      1
-b4b7: 3c                  byte     3c
-b4b8: 5d                  byte     5d
+b4b7: 40                  byte     40
+b4b8: 60                  byte     60
 b4b9: 00                  byte      0
 b4ba: 03,00               word      3
 b4bc: 0d,00               word      d
 b4be: 01                  byte      1
-b4bf: 00                  byte      0
-b4c0: 3c                  byte     3c            DFNOVS
+b4bf: 80                  byte     80
+b4c0: 64                  byte     64            DFNOVS
 b4c1: 00                  byte      0            DFNOVH
-b4c2: 4b                  byte     4b            DFSECT
-b4c3: 44                  byte     44            DFSO_ECT
+b4c2: 41                  byte     41            DFSECT
+b4c3: 19                  byte     19            DFSO_ECT
 b4c4: 00                  byte      0            DFSO_OUT
-b4c5: 2c                  byte     2c            DFSRPM
+b4c5: 29                  byte     29            DFSRPM
 b4c6: 16                  byte     16            DFSRPH
-b4c7: 4c                  byte     4c            DFSMAP
-b4c8: 20                  byte     20            DFSMPH
-b4c9: 02                  byte      2            CTEDSO
+b4c7: 40                  byte     40            DFSMAP
+b4c8: 30                  byte     30            DFSMPH
+b4c9: 18                  byte     18            CTEDSO
 b4ca: 02                  byte      2
 b4cb: 28                  byte     28
-b4cc: 02                  byte      2            CTDSFO
-b4cd: 26                  byte     26            DFSVS
+b4cc: 18                  byte     18            CTDSFO
+b4cd: 14                  byte     14            DFSVS
 b4ce: 18,00               word     18            DFSTM
-b4d0: 06                  byte      6            DFSVSH
+b4d0: 0a                  byte      a            DFSVSH
 
 b4d1: ff                  ???   
 
 b4d2: 00,00               word      0            TP_AIR_OFF_H
-b4d4: 0c,fe               word   fe0c            D_TP_DT_F
+b4d4: 42,f5               word   f542            D_TP_DT_F
 b4d6: 00                  byte      0            FRCHIC
 
 b4d7: ff                  ???   
@@ -15184,7 +15184,7 @@ b4dc: 66                  byte     66
 
 b4dd: ff                  ???   
 
-b4de: 20,00               word     20
+b4de: 50,00               word     50
 b4e0: 33,f3               word   f333            FKEXIT_MAX
 b4e2: 00,80               word   8000            FKEXIT_MIN
 b4e4: 8f,02               word    28f            KSPKDO
@@ -15192,9 +15192,9 @@ b4e6: 8f,02               word    28f            KSPKDU
 b4e8: 48,01               word    148            KSPKNO
 b4ea: 48,01               word    148            KSPKNU
 b4ec: 3f,00               word     3f            SPKCTL
-b4ee: 50,00               word     50            SPKIDR
-b4f0: 50,00               word     50            SPKINU
-b4f2: 60,00               word     60            SPK_RUNUP
+b4ee: 58,00               word     58            SPKIDR
+b4f0: 58,00               word     58            SPKINU
+b4f2: 8c,00               word     8c            SPK_RUNUP
 b4f4: 10                  byte     10            STTIM
 
 b4f5: ff                  ???   
@@ -15203,61 +15203,61 @@ b4f6: 64,00               word     64            TARMAX
 b4f8: 9a,15               word   159a
 
    ?FN839?:
-b4fa: ff,ff,9a,01         func  65535,   410
-b4fe: 00,00,9a,01         func      0,   410
-b502: 00,00,9a,01         func      0,   410
-b506: 00,00,9a,01         func      0,   410
-b50a: 00,00,9a,01         func      0,   410
-b50e: 00,00,9a,01         func      0,   410
+b4fa: ff,ff,66,02         func  65535,   614
+b4fe: 00,00,66,02         func      0,   614
+b502: 00,00,66,02         func      0,   614
+b506: 00,00,66,02         func      0,   614
+b50a: 00,00,66,02         func      0,   614
+b50e: 00,00,66,02         func      0,   614
 
    FN852:
-b512: ff,7f,00,00         func   32767,      0
-b516: 00,80,00,00         func  -32768,      0
-b51a: 00,80,00,00         func  -32768,      0
+b512: ff,7f,9a,01         func   32767,    410
+b516: 20,03,9a,01         func     800,    410
+b51a: 2c,01,00,00         func     300,      0
 b51e: 00,80,00,00         func  -32768,      0
 b522: 00,80,00,00         func  -32768,      0
 b526: 00,80,00,00         func  -32768,      0
 
    FN884:
-b52a: 7f,5a               func   127,  90
-b52c: 5a,53               func    90,  83
-b52e: 23,5a               func    35,  90
-b530: 0f,7f               func    15, 127
-b532: 00,80               func     0, 128
+b52a: 7f,80               func   127, 128
+b52c: 69,53               func   105,  83
+b52e: 5a,53               func    90,  83
+b530: 32,80               func    50, 128
+b532: 80,80               func  -128, 128
 b534: 80,80               func  -128, 128
 
    FN894:
-b536: ff,ff,00,00         func  65535,     0
-b53a: 00,00,00,00         func      0,     0
-b53e: 00,00,00,00         func      0,     0
-b542: 00,00,00,00         func      0,     0
-b546: 00,00,00,00         func      0,     0
+b536: ff,ff,33,03         func  65535,   819
+b53a: 40,1f,33,03         func   8000,   819
+b53e: f0,0a,9a,01         func   2800,   410
+b542: 00,00,9a,01         func      0,   410
+b546: 00,00,9a,01         func      0,   410
 
    FN900:
-b54a: ff,ff,0a,00         func  65535,    10
-b54e: 00,00,0a,00         func      0,    10
-b552: 00,00,0a,00         func      0,    10
-b556: 00,00,0a,00         func      0,    10
-b55a: 00,00,0a,00         func      0,    10
-b55e: 00,00,0a,00         func      0,    10
-b562: 00,00,0a,00         func      0,    10
+b54a: ff,ff,23,00         func  65535,    35
+b54e: 00,00,23,00         func      0,    35
+b552: 00,00,23,00         func      0,    35
+b556: 00,00,23,00         func      0,    35
+b55a: 00,00,23,00         func      0,    35
+b55e: 00,00,23,00         func      0,    35
+b562: 00,00,23,00         func      0,    35
 
    FN1354:
-b566: 0f,12,14,17,1a,1c   table  15,  18,  20,  23,  26,  28
-b56c: 0f,12,14,17,1a,1c   table  15,  18,  20,  23,  26,  28
-b572: 12,12,14,17,1a,1c   table  18,  18,  20,  23,  26,  28
-b578: 14,14,14,17,1a,1c   table  20,  20,  20,  23,  26,  28
-b57e: 17,17,17,17,1a,1c   table  23,  23,  23,  23,  26,  28
-b584: 1a,1a,1a,1a,1a,1c   table  26,  26,  26,  26,  26,  28
-b58a: 1c,1c,1c,1c,1c,1c   table  28,  28,  28,  28,  28,  28
-b590: 1f,1f,1f,1f,1f,1f   table  31,  31,  31,  31,  31,  31
+b566: 0a,0a,0d,0d,0d,08   table  10,  10,  13,  13,  13,   8
+b56c: 0a,0a,0d,0d,0d,08   table  10,  10,  13,  13,  13,   8
+b572: 12,0f,0d,0d,0d,08   table  18,  15,  13,  13,  13,   8
+b578: 12,0f,0d,0d,0d,08   table  18,  15,  13,  13,  13,   8
+b57e: 12,0f,0d,0d,0d,08   table  18,  15,  13,  13,  13,   8
+b584: 12,0f,0d,0d,0d,08   table  18,  15,  13,  13,  13,   8
+b58a: 12,0f,0d,0d,0d,08   table  18,  15,  13,  13,  13,   8
+b590: 12,0f,0d,0d,0d,08   table  18,  15,  13,  13,  13,   8
 
    FN1355:
 b596: 00,00,00,00,00,00   table    0,    0,    0,    0,    0,    0
-b59c: 00,00,f6,f6,f6,00   table    0,    0,  -10,  -10,  -10,    0
-b5a2: 00,f6,f6,f6,f6,00   table    0,  -10,  -10,  -10,  -10,    0
-b5a8: 00,f6,f6,f6,f6,00   table    0,  -10,  -10,  -10,  -10,    0
-b5ae: 00,f6,f6,f6,f6,00   table    0,  -10,  -10,  -10,  -10,    0
+b59c: 00,00,00,00,00,00   table    0,    0,    0,    0,    0,    0
+b5a2: 00,00,00,00,00,00   table    0,    0,    0,    0,    0,    0
+b5a8: 00,00,00,00,00,00   table    0,    0,    0,    0,    0,    0
+b5ae: 00,00,00,00,00,00   table    0,    0,    0,    0,    0,    0
 b5b4: 00,00,00,00,00,00   table    0,    0,    0,    0,    0,    0
 b5ba: 00,00,00,00,00,00   table    0,    0,    0,    0,    0,    0
 b5c0: 00,00,00,00,00,00   table    0,    0,    0,    0,    0,    0
@@ -15271,33 +15271,33 @@ b5d6: 00,00,7d,00         func      0,   125
 b5da: 00,00,7d,00         func      0,   125
 
    FN303:
-b5de: ff,ff,77,00         func  65535,   119
-b5e2: 10,27,77,00         func  10000,   119
-b5e6: 40,1f,7b,00         func   8000,   123
-b5ea: 70,17,7c,00         func   6000,   124
-b5ee: a0,0f,80,00         func   4000,   128
-b5f2: 00,00,80,00         func      0,   128
-b5f6: 00,00,80,00         func      0,   128
-b5fa: 00,00,80,00         func      0,   128
-b5fe: 00,00,80,00         func      0,   128
+b5de: ff,ff,73,00         func  65535,   115
+b5e2: 60,6d,73,00         func  28000,   115
+b5e6: 80,3e,78,00         func  16000,   120
+b5ea: 60,3b,7d,00         func  15200,   125
+b5ee: 70,30,7c,00         func  12400,   124
+b5f2: f0,23,7c,00         func   9200,   124
+b5f6: 40,1f,7d,00         func   8000,   125
+b5fa: c0,12,7d,00         func   4800,   125
+b5fe: 00,00,7c,00         func      0,   124
 
    FN310:
-b602: ff,80               func  255, 128
-b604: 00,80               func    0, 128
-b606: 00,80               func    0, 128
-b608: 00,80               func    0, 128
-b60a: 00,80               func    0, 128
-b60c: 00,80               func    0, 128
+b602: ff,76               func  255, 118
+b604: 78,76               func  120, 118
+b606: 3c,79               func   60, 121
+b608: 32,85               func   50, 133
+b60a: 0b,83               func   11, 131
+b60c: 0a,80               func   10, 128
 b60e: 00,80               func    0, 128
 
    FN311:
-b610: ff,ff,00,7d         func  65535, 32000
-b614: 10,27,00,7d         func  10000, 32000
-b618: 80,25,00,96         func   9600, 38400
-b61c: 00,00,00,96         func      0, 38400
-b620: 00,00,00,96         func      0, 38400
-b624: 00,00,00,96         func      0, 38400
-b628: 00,00,00,96         func      0, 38400
+b610: ff,ff,fa,ff         func  65535, 65530
+b614: 60,6d,fa,ff         func  28000, 65530
+b618: 00,00,c0,ff         func      0, 65472
+b61c: 00,00,c0,ff         func      0, 65472
+b620: 00,00,c0,ff         func      0, 65472
+b624: 00,00,c0,ff         func      0, 65472
+b628: 00,00,c0,ff         func      0, 65472
 
    FN325:
 b62c: 7f,80               func   127, 128
@@ -15309,13 +15309,13 @@ b636: 80,80               func  -128, 128
 b638: 80,80               func  -128, 128
 
    FND_TP_DT_A:
-b63a: ff,ff,0c,fe         func  65535,   -500
-b63e: 00,00,0c,fe         func      0,   -500
-b642: 00,00,0c,fe         func      0,   -500
-b646: 00,00,0c,fe         func      0,   -500
-b64a: 00,00,0c,fe         func      0,   -500
-b64e: 00,00,0c,fe         func      0,   -500
-b652: 00,00,0c,fe         func      0,   -500
+b63a: ff,ff,42,f5         func  65535,  -2750
+b63e: 00,00,42,f5         func      0,  -2750
+b642: 00,00,42,f5         func      0,  -2750
+b646: 00,00,42,f5         func      0,  -2750
+b64a: 00,00,42,f5         func      0,  -2750
+b64e: 00,00,42,f5         func      0,  -2750
+b652: 00,00,42,f5         func      0,  -2750
 
    FNTP_AIR_OFF:
 b656: ff,ff,00,00         func  65535,     0
@@ -15329,24 +15329,24 @@ b672: 00,00,00,00         func      0,     0
 b676: 00,00,00,00         func      0,     0
 
    FN1362:
-b67a: 76,76,7b,80,80,80,80,80,80,80  table  118, 118, 123, 128, 128, 128, 128, 128, 128, 128    
-b684: 76,76,7b,80,80,80,80,80,80,80  table  118, 118, 123, 128, 128, 128, 128, 128, 128, 128    
-b68e: 76,76,7b,80,80,80,80,80,80,80  table  118, 118, 123, 128, 128, 128, 128, 128, 128, 128    
-b698: 76,76,7b,7f,7f,7f,80,80,80,80  table  118, 118, 123, 127, 127, 127, 128, 128, 128, 128    
-b6a2: 71,71,78,7d,7d,7d,7d,7d,7d,7d  table  113, 113, 120, 125, 125, 125, 125, 125, 125, 125    
-b6ac: 6e,6e,73,78,78,78,78,78,78,78  table  110, 110, 115, 120, 120, 120, 120, 120, 120, 120    
-b6b6: 6c,6c,6c,6c,6c,6c,6c,6c,6c,6c  table  108, 108, 108, 108, 108, 108, 108, 108, 108, 108    
-b6c0: 6c,6c,6c,6c,6c,6c,6c,6c,6c,6c  table  108, 108, 108, 108, 108, 108, 108, 108, 108, 108    
+b67a: 80,80,80,80,80,80,80,80,80,80  table  128, 128, 128, 128, 128, 128, 128, 128, 128, 128    
+b684: 71,73,76,7b,7f,7f,7f,7f,7f,80  table  113, 115, 118, 123, 127, 127, 127, 127, 127, 128    
+b68e: 72,72,74,78,7b,7c,7d,7d,7d,7d  table  114, 114, 116, 120, 123, 124, 125, 125, 125, 125    
+b698: 6e,71,73,77,78,7b,7c,7c,7c,7b  table  110, 113, 115, 119, 120, 123, 124, 124, 124, 123    
+b6a2: 69,71,71,77,77,78,7a,7a,7b,7d  table  105, 113, 113, 119, 119, 120, 122, 122, 123, 125    
+b6ac: 69,71,6e,76,76,76,78,7a,78,78  table  105, 113, 110, 118, 118, 118, 120, 122, 120, 120    
+b6b6: 69,71,6c,73,73,76,77,77,76,6f  table  105, 113, 108, 115, 115, 118, 119, 119, 118, 111    
+b6c0: 69,71,6c,73,73,73,75,76,76,71  table  105, 113, 108, 115, 115, 115, 117, 118, 118, 113    
 
    FN1361:
-b6ca: 3a,33,33,2c,24,20,1a,13,0d,0d  table   58,  51,  51,  44,  36,  32,  26,  19,  13,  13    
-b6d4: 36,30,30,29,21,1d,16,10,0a,0a  table   54,  48,  48,  41,  33,  29,  22,  16,  10,  10    
-b6de: 33,2d,2d,26,1f,1a,13,0d,07,07  table   51,  45,  45,  38,  31,  26,  19,  13,   7,   7    
-b6e8: 2c,25,25,1f,18,12,0c,05,04,04  table   44,  37,  37,  31,  24,  18,  12,   5,   4,   4    
-b6f2: 24,1d,1d,17,11,0a,04,02,02,02  table   36,  29,  29,  23,  17,  10,   4,   2,   2,   2    
-b6fc: 1c,16,12,0d,09,04,00,00,00,00  table   28,  22,  18,  13,   9,   4,   0,   0,   0,   0    
-b706: 14,0d,0a,06,04,00,00,00,00,00  table   20,  13,  10,   6,   4,   0,   0,   0,   0,   0    
-b710: 0d,0a,05,01,00,00,00,00,00,00  table   13,  10,   5,   1,   0,   0,   0,   0,   0,   0    
+b6ca: 3c,2a,26,1a,18,13,11,11,0f,0d  table   60,  42,  38,  26,  24,  19,  17,  17,  15,  13    
+b6d4: 34,23,23,18,17,0d,0d,0d,0c,08  table   52,  35,  35,  24,  23,  13,  13,  13,  12,   8    
+b6de: 2f,23,1d,13,12,0d,0a,0a,09,04  table   47,  35,  29,  19,  18,  13,  10,  10,   9,   4    
+b6e8: 29,1a,19,12,0f,09,08,08,05,00  table   41,  26,  25,  18,  15,   9,   8,   8,   5,   0    
+b6f2: 1d,18,15,0f,0e,02,00,00,00,00  table   29,  24,  21,  15,  14,   2,   0,   0,   0,   0    
+b6fc: 15,11,0f,0e,0e,00,00,00,00,00  table   21,  17,  15,  14,  14,   0,   0,   0,   0,   0    
+b706: 0d,0b,08,0a,0a,00,00,00,00,00  table   13,  11,   8,  10,  10,   0,   0,   0,   0,   0    
+b710: 0a,08,06,06,06,00,00,00,00,00  table   10,   8,   6,   6,   6,   0,   0,   0,   0,   0    
 
    FN307:
 b71a: ff,20               func  255,  32
@@ -15358,44 +15358,44 @@ b724: 00,20               func    0,  32
 b726: 00,20               func    0,  32
 
    FN1321:
-b728: 2f,2f,17,06,04,03,02,02,02,01  table   47,  47,  23,   6,   4,   3,   2,   2,   2,   1    
-b732: 37,37,1b,0d,08,05,04,04,02,02  table   55,  55,  27,  13,   8,   5,   4,   4,   2,   2    
-b73c: 47,47,23,19,13,0b,0a,05,04,04  table   71,  71,  35,  25,  19,  11,  10,   5,   4,   4    
-b746: 56,56,2b,1e,18,0d,0a,06,05,05  table   86,  86,  43,  30,  24,  13,  10,   6,   5,   5    
-b750: 6f,6f,38,26,1c,10,0c,07,06,06  table  111, 111,  56,  38,  28,  16,  12,   7,   6,   6    
-b75a: 8c,8c,46,2f,23,13,0e,09,08,08  table  140, 140,  70,  47,  35,  19,  14,   9,   8,   8    
-b764: 8c,8c,46,2f,23,18,12,0b,0b,0b  table  140, 140,  70,  47,  35,  24,  18,  11,  11,  11    
-b76e: 8c,8c,46,2f,23,23,1a,10,10,10  table  140, 140,  70,  47,  35,  35,  26,  16,  16,  16    
+b728: 2f,2f,17,10,0b,06,05,04,03,03  table   47,  47,  23,  16,  11,   6,   5,   4,   3,   3    
+b732: 3f,3f,1f,15,10,08,07,04,03,03  table   63,  63,  31,  21,  16,   8,   7,   4,   3,   3    
+b73c: 4f,4f,27,1b,14,0a,08,04,04,04  table   79,  79,  39,  27,  20,  10,   8,   4,   4,   4    
+b746: 5e,5e,2f,20,17,0b,0c,04,04,04  table   94,  94,  47,  32,  23,  11,  12,   4,   4,   4    
+b750: 7e,7e,3f,2a,1f,10,10,08,08,06  table  126, 126,  63,  42,  31,  16,  16,   8,   8,   6    
+b75a: 9d,9d,4f,35,27,14,14,0c,09,09  table  157, 157,  79,  53,  39,  20,  20,  12,   9,   9    
+b764: cc,cc,66,43,33,19,19,0c,0c,09  table  204, 204, 102,  67,  51,  25,  25,  12,  12,   9    
+b76e: ff,ff,86,58,43,21,1d,0c,0c,0c  table  255, 255, 134,  88,  67,  33,  29,  12,  12,  12    
 
    FN1322:
-b778: 02,02,02,02,04,06,06,05,06,06  table    2,   2,   2,   2,   4,   6,   6,   5,   6,   6    
-b782: 02,02,02,02,04,06,06,06,06,06  table    2,   2,   2,   2,   4,   6,   6,   6,   6,   6    
-b78c: 02,02,02,02,04,05,06,06,06,06  table    2,   2,   2,   2,   4,   5,   6,   6,   6,   6    
-b796: 02,02,02,02,04,05,06,06,06,06  table    2,   2,   2,   2,   4,   5,   6,   6,   6,   6    
-b7a0: 02,02,02,02,04,05,06,06,06,06  table    2,   2,   2,   2,   4,   5,   6,   6,   6,   6    
-b7aa: 02,02,02,02,04,05,06,06,06,06  table    2,   2,   2,   2,   4,   5,   6,   6,   6,   6    
-b7b4: 02,02,02,02,04,05,06,06,06,06  table    2,   2,   2,   2,   4,   5,   6,   6,   6,   6    
-b7be: 02,02,02,02,04,05,06,06,06,06  table    2,   2,   2,   2,   4,   5,   6,   6,   6,   6    
+b778: 02,02,03,04,04,05,06,06,06,06  table    2,   2,   3,   4,   4,   5,   6,   6,   6,   6    
+b782: 02,02,03,04,04,05,06,06,06,06  table    2,   2,   3,   4,   4,   5,   6,   6,   6,   6    
+b78c: 02,02,03,04,04,05,06,06,06,06  table    2,   2,   3,   4,   4,   5,   6,   6,   6,   6    
+b796: 02,02,03,04,04,05,06,06,06,06  table    2,   2,   3,   4,   4,   5,   6,   6,   6,   6    
+b7a0: 02,02,03,04,04,05,06,06,06,06  table    2,   2,   3,   4,   4,   5,   6,   6,   6,   6    
+b7aa: 02,02,03,04,04,05,06,06,06,06  table    2,   2,   3,   4,   4,   5,   6,   6,   6,   6    
+b7b4: 02,02,03,04,04,05,06,06,06,06  table    2,   2,   3,   4,   4,   5,   6,   6,   6,   6    
+b7be: 02,02,03,04,04,05,06,06,06,06  table    2,   2,   3,   4,   4,   5,   6,   6,   6,   6    
 
    FN1328:
-b7c8: 05,05,04,04,04,03,03,01,01,01  table     5,    5,    4,    4,    4,    3,    3,    1,    1,    1    
-b7d2: 05,05,04,04,04,03,03,01,01,01  table     5,    5,    4,    4,    4,    3,    3,    1,    1,    1    
-b7dc: 05,05,04,04,03,03,03,01,01,01  table     5,    5,    4,    4,    3,    3,    3,    1,    1,    1    
-b7e6: 05,05,04,04,03,03,03,01,01,00  table     5,    5,    4,    4,    3,    3,    3,    1,    1,    0    
-b7f0: 04,04,03,03,03,03,01,01,00,00  table     4,    4,    3,    3,    3,    3,    1,    1,    0,    0    
-b7fa: 04,03,03,03,03,03,01,00,00,00  table     4,    3,    3,    3,    3,    3,    1,    0,    0,    0    
-b804: 03,03,03,03,03,01,00,00,00,00  table     3,    3,    3,    3,    3,    1,    0,    0,    0,    0    
-b80e: 01,01,01,01,01,00,00,00,00,00  table     1,    1,    1,    1,    1,    0,    0,    0,    0,    0    
+b7c8: 0e,0d,0d,0c,0b,08,06,05,04,03  table    14,   13,   13,   12,   11,    8,    6,    5,    4,    3    
+b7d2: 0e,0d,0d,0c,0b,08,06,05,04,03  table    14,   13,   13,   12,   11,    8,    6,    5,    4,    3    
+b7dc: 0e,0d,0d,0c,0b,08,06,05,04,03  table    14,   13,   13,   12,   11,    8,    6,    5,    4,    3    
+b7e6: 0e,0d,0d,0c,0b,08,06,05,04,03  table    14,   13,   13,   12,   11,    8,    6,    5,    4,    3    
+b7f0: 0d,0c,0b,0a,0a,07,05,04,03,01  table    13,   12,   11,   10,   10,    7,    5,    4,    3,    1    
+b7fa: 0c,0a,0a,09,09,06,04,03,01,00  table    12,   10,   10,    9,    9,    6,    4,    3,    1,    0    
+b804: 0a,09,09,08,07,05,03,01,00,00  table    10,    9,    9,    8,    7,    5,    3,    1,    0,    0    
+b80e: 09,08,07,06,06,03,01,00,00,00  table     9,    8,    7,    6,    6,    3,    1,    0,    0,    0    
 
    FN1343:
-b818: 27,20,20,18,14,14   table  39,  32,  32,  24,  20,  20
-b81e: 27,20,20,18,14,14   table  39,  32,  32,  24,  20,  20
-b824: 20,20,20,18,14,14   table  32,  32,  32,  24,  20,  20
-b82a: 20,20,20,18,14,14   table  32,  32,  32,  24,  20,  20
-b830: 20,20,18,14,14,14   table  32,  32,  24,  20,  20,  20
-b836: 20,20,18,14,14,14   table  32,  32,  24,  20,  20,  20
-b83c: 18,18,18,14,14,14   table  24,  24,  24,  20,  20,  20
-b842: 18,18,18,14,14,14   table  24,  24,  24,  20,  20,  20
+b818: 28,28,28,28,28,28   table  40,  40,  40,  40,  40,  40
+b81e: 28,28,28,28,20,20   table  40,  40,  40,  40,  32,  32
+b824: 28,28,28,28,20,20   table  40,  40,  40,  40,  32,  32
+b82a: 28,24,20,20,1c,1c   table  40,  36,  32,  32,  28,  28
+b830: 28,20,1c,18,14,14   table  40,  32,  28,  24,  20,  20
+b836: 14,14,14,14,14,14   table  20,  20,  20,  20,  20,  20
+b83c: 14,14,14,14,14,14   table  20,  20,  20,  20,  20,  20
+b842: 14,14,14,14,14,14   table  20,  20,  20,  20,  20,  20
 
    FN222A:
 b848: ff,ff,33,00         func  65535,    51
@@ -15424,32 +15424,32 @@ b88c: 00,00,00,00,00      table   0,   0,   0,   0,   0
 b891: 00,00,04,07,0a      table   0,   0,   4,   7,  10
 b896: 00,00,04,07,0a      table   0,   0,   4,   7,  10
 b89b: 04,04,04,07,0a      table   4,   4,   4,   7,  10
-b8a0: 07,07,07,07,0a      table   7,   7,   7,   7,  10
-b8a5: 0a,0a,0a,0a,0a      table  10,  10,  10,  10,  10
+b8a0: 06,06,06,06,06      table   6,   6,   6,   6,   6
+b8a5: 06,06,06,06,06      table   6,   6,   6,   6,   6
 
    FN1350:
-b8aa: 40,40,30,20,20      table  64,  64,  48,  32,  32
-b8af: 40,40,30,26,26      table  64,  64,  48,  38,  38
-b8b4: 40,40,30,20,20      table  64,  64,  48,  32,  32
-b8b9: 40,40,26,20,1a      table  64,  64,  38,  32,  26
-b8be: 40,40,26,20,1a      table  64,  64,  38,  32,  26
+b8aa: 40,40,40,30,20      table  64,  64,  64,  48,  32
+b8af: 40,40,40,30,26      table  64,  64,  64,  48,  38
+b8b4: 40,40,40,30,20      table  64,  64,  64,  48,  32
+b8b9: 40,40,40,26,20      table  64,  64,  64,  38,  32
+b8be: 80,40,30,1a,1a      table 128,  64,  48,  26,  26
 
    FN1360:
-b8c3: 80,80,80,80,80,80,80,80,80,80  table  128, 128, 128, 128, 128, 128, 128, 128, 128, 128    
-b8cd: 80,80,80,80,80,80,76,72,72,72  table  128, 128, 128, 128, 128, 128, 118, 114, 114, 114    
-b8d7: 80,80,80,80,80,7b,76,72,72,72  table  128, 128, 128, 128, 128, 123, 118, 114, 114, 114    
-b8e1: 80,80,80,80,80,7b,76,6e,6e,6e  table  128, 128, 128, 128, 128, 123, 118, 110, 110, 110    
-b8eb: 80,80,80,80,80,76,6e,6e,6e,6e  table  128, 128, 128, 128, 128, 118, 110, 110, 110, 110    
-b8f5: 76,76,76,76,76,6e,6e,6e,6e,6e  table  118, 118, 118, 118, 118, 110, 110, 110, 110, 110    
-b8ff: 6e,6e,6e,6e,6e,6e,6e,6e,6e,6e  table  110, 110, 110, 110, 110, 110, 110, 110, 110, 110    
-b909: 6e,6e,6e,6e,6e,6e,6e,6e,6e,6e  table  110, 110, 110, 110, 110, 110, 110, 110, 110, 110    
+b8c3: 80,80,80,80,7a,7a,7a,7a,7a,7a  table  128, 128, 128, 128, 122, 122, 122, 122, 122, 122    
+b8cd: 80,80,80,80,7a,7a,7a,7a,7a,7a  table  128, 128, 128, 128, 122, 122, 122, 122, 122, 122    
+b8d7: 80,80,80,80,80,80,80,80,80,80  table  128, 128, 128, 128, 128, 128, 128, 128, 128, 128    
+b8e1: 80,80,80,80,80,80,80,7d,7c,7c  table  128, 128, 128, 128, 128, 128, 128, 125, 124, 124    
+b8eb: 78,80,80,80,80,80,7f,7c,7b,7b  table  120, 128, 128, 128, 128, 128, 127, 124, 123, 123    
+b8f5: 78,7d,7d,7d,7d,7f,7d,7c,7b,77  table  120, 125, 125, 125, 125, 127, 125, 124, 123, 119    
+b8ff: 76,77,77,77,77,78,7a,7a,78,77  table  118, 119, 119, 119, 119, 120, 122, 122, 120, 119    
+b909: 6e,72,75,74,73,77,78,78,76,77  table  110, 114, 117, 116, 115, 119, 120, 120, 118, 119    
 
 b913: ff                  ???   
 
 b914: b0,ba               word   bab0                                              # Register Rf6 
-b916: 4b                  byte     4b            CTHIGH
-b917: 1e                  byte     1e            CTLOW
-b918: 07                  byte      7
+b916: 55                  byte     55            CTHIGH
+b917: 19                  byte     19            CTLOW
+b918: 42                  byte     42
 b919: 08                  byte      8            ENGCYL
 b91a: 16,04               word    416
 b91c: 16,04               word    416
@@ -15463,10 +15463,10 @@ b928: c0,e9               word   e9c0            TOTMAX
 b92a: 39,8b               word   8b39            BASEMD
 b92c: 00,80               word   8000            KVEFF
 b92e: 2c,b3               word   b32c            KSF
-b930: 00,02               word    200            DELTA
+b930: 80,02               word    280            DELTA
 b932: 40,01               word    140            HYST2
-b934: 00,01               word    100            HYSTS
-b936: 00,96               word   9600            THBP2
+b934: 80,00               word     80            HYSTS
+b936: 80,70               word   7080            THBP2
 b938: 5a                  byte     5a            ECTBP
 b939: 02                  byte      2            SSMAP
 
@@ -15479,44 +15479,44 @@ b93d: ff                  ???
 b93e: 33,00               word     33            TKYON1
 b940: 71,00               word     71            TKYON2
 b942: 0a,02               word    20a            TKYON3
-b944: 76                  byte     76
+b944: 50                  byte     50
 
 b945: ff                  ???   
 
-b946: 27,00               word     27            PRG_DEC
-b948: 04                  byte      4            PURG_ADP_SF
-b949: 58                  byte     58
+b946: 42,00               word     42            PRG_DEC
+b948: 00                  byte      0            PURG_ADP_SF
+b949: 19                  byte     19
 b94a: 08,00               word      8            EVTDOT
 b94c: 01                  byte      1            PURGSW
-b94d: 3c                  byte     3c            FULPRGTM
+b94d: 0f                  byte      f            FULPRGTM
 b94e: 66,46               word   4666            FMMISC
 b950: 3c                  byte     3c            ACTFMM
 b951: 5f                  byte     5f            ECTFMM
 b952: b9                  byte     b9            FMECNT
 b953: 98                  byte     98            MAPFMM
-b954: 01                  byte      1
-b955: 00                  byte      0            BYPWOT
+b954: 78                  byte     78
+b955: 32                  byte     32            BYPWOT
 b956: 0d                  byte      d
 b957: 02                  byte      2
 b958: 00                  byte      0
 b959: 00                  byte      0
-b95a: 00                  byte      0
-b95b: b3                  byte     b3
-b95c: 88                  byte     88
+b95a: 01                  byte      1
+b95b: 3c                  byte     3c
+b95c: 08                  byte      8
 b95d: 01                  byte      1
-b95e: 6a                  byte     6a            CTBYS
+b95e: 6c                  byte     6c            CTBYS
 b95f: 03                  byte      3            CTBYSH
 b960: 01                  byte      1
 b961: 8d                  byte     8d
-b962: 80                  byte     80            HMUMAP
-b963: 06                  byte      6            HMUMPH
-b964: 50                  byte     50            LMBMAP
-b965: 5a                  byte     5a
+b962: 67                  byte     67            HMUMAP
+b963: 02                  byte      2            HMUMPH
+b964: 34                  byte     34            LMBMAP
+b965: 66                  byte     66
 b966: 01                  byte      1            SW_MPD
-b967: 00                  byte      0
+b967: 01                  byte      1
 b968: 00                  byte      0
 
-b969: 14,2d,5a,14,2d,5a   ???   
+b969: 00,00,00,00,00,00   ???   
 
 b96f: 00                  byte      0
 b970: 10                  byte     10
@@ -15555,16 +15555,16 @@ b99d: cd,7b               func  205, 123
 b99f: 00,44               func    0,  68
 
    FN1320:
-b9a1: 80,85,85,88,8d,92,97,9c,a6,a1  table  128, 133, 133, 136, 141, 146, 151, 156, 166, 161    
-b9ab: 88,8f,92,9a,9f,a1,a9,b3,bd,a6  table  136, 143, 146, 154, 159, 161, 169, 179, 189, 166    
-b9b5: 97,9f,a6,a1,b1,b3,bd,c5,c5,ac  table  151, 159, 166, 161, 177, 179, 189, 197, 197, 172    
-b9bf: a6,b3,b1,b1,b8,bd,ca,d7,d2,bb  table  166, 179, 177, 177, 184, 189, 202, 215, 210, 187    
-b9c9: a1,b3,bb,bd,c3,ca,d2,dc,da,c8  table  161, 179, 187, 189, 195, 202, 210, 220, 218, 200    
-b9d3: a6,bb,c3,c3,c8,d2,e4,e1,e1,c8  table  166, 187, 195, 195, 200, 210, 228, 225, 225, 200    
-b9dd: ae,bb,c5,ca,cf,df,ec,ec,e4,cd  table  174, 187, 197, 202, 207, 223, 236, 236, 228, 205    
-b9e7: bb,c5,cf,d2,dc,e6,e4,e6,e6,d7  table  187, 197, 207, 210, 220, 230, 228, 230, 230, 215    
-b9f1: c0,ca,cf,d2,d4,da,e6,e6,e6,da  table  192, 202, 207, 210, 212, 218, 230, 230, 230, 218    
-b9fb: c5,cd,cd,d2,d7,dc,e6,ec,e6,dc  table  197, 205, 205, 210, 215, 220, 230, 236, 230, 220    
+b9a1: 8d,8f,8f,92,92,92,92,92,9a,a1  table  141, 143, 143, 146, 146, 146, 146, 146, 154, 161    
+b9ab: 91,92,94,9a,9a,9a,9a,9a,a1,a6  table  145, 146, 148, 154, 154, 154, 154, 154, 161, 166    
+b9b5: a1,b6,b8,bd,c8,cd,d3,cd,c4,b3  table  161, 182, 184, 189, 200, 205, 211, 205, 196, 179    
+b9bf: a1,bc,bd,bd,c8,d2,d2,cf,cc,ba  table  161, 188, 189, 189, 200, 210, 210, 207, 204, 186    
+b9c9: a6,c0,c5,c8,ca,d2,d8,d2,d3,bf  table  166, 192, 197, 200, 202, 210, 216, 210, 211, 191    
+b9d3: af,c3,c9,cd,cd,d2,df,e0,d4,c4  table  175, 195, 201, 205, 205, 210, 223, 224, 212, 196    
+b9dd: b7,c5,cc,d7,d3,da,e9,e4,d8,c9  table  183, 197, 204, 215, 211, 218, 233, 228, 216, 201    
+b9e7: ba,ca,ce,d6,d4,e6,f4,ec,e3,cf  table  186, 202, 206, 214, 212, 230, 244, 236, 227, 207    
+b9f1: c3,cd,d1,da,dc,ef,f2,e6,e6,d2  table  195, 205, 209, 218, 220, 239, 242, 230, 230, 210    
+b9fb: cd,d2,d6,e1,ef,ee,f1,ec,e9,d2  table  205, 210, 214, 225, 239, 238, 241, 236, 233, 210    
 
 ba05: ff                  ???   
 
@@ -15589,10 +15589,10 @@ ba46: 43,1a,11,0b,0b      table  67,  26,  17,  11,  11
 
    FN600:
 ba4b: ff,80               func  255, 128
-ba4d: 3c,80               func   60, 128
-ba4f: 2d,3a               func   45,  58
-ba51: 1e,13               func   30,  19
-ba53: 0f,06               func   15,   6
+ba4d: 0f,80               func   15, 128
+ba4f: 00,00               func    0,   0
+ba51: 00,00               func    0,   0
+ba53: 00,00               func    0,   0
 ba55: 00,00               func    0,   0
 
 ba57: ff                  ???   
@@ -15632,18 +15632,18 @@ bab4: 00,02               word    200            TCFBS
 bab6: 11,00               word     11            TCAEMP
 bab8: 71,01               word    171            TCAETP
 baba: 48,02               word    248            TCBP
-babc: ae,04               word    4ae            TCDASD
-babe: d7,07               word    7d7            TCDASU
-bac0: 00,08               word    800            TCDESN
-bac2: cd,00               word     cd            TCDLOP
+babc: 7c,03               word    37c            TCDASD
+babe: e1,05               word    5e1            TCDASU
+bac0: 00,0c               word    c00            TCDESN
+bac2: 80,00               word     80            TCDLOP
 bac4: cd,04               word    4cd            TCECT
-bac6: cd,00               word     cd            TCEACT
+bac6: 71,01               word    171            TCEACT
 bac8: 00,08               word    800            TCEGR
 baca: 71,01               word    171            TCMBAR
 bacc: b8,06               word    6b8            TC
 bace: 9a,00               word     9a            TCNDT_ISC
 bad0: 71,01               word    171
-bad2: 00,08               word    800            TCTP
+bad2: 71,18               word   1871            TCTP
 bad4: 48,02               word    248            TCTPT
 bad6: cd,04               word    4cd            TCTOT
 bad8: 85,00               word     85            TCVBAT
@@ -15661,19 +15661,19 @@ baee: 00,00,00,10         func      0,  4096
 baf2: 00,00,00,10         func      0,  4096
 
    FN501:
-baf6: ff,70               func  255, 112
-baf8: 80,70               func  128, 112
-bafa: 00,10               func    0,  16
-bafc: 00,10               func    0,  16
+baf6: ff,73               func  255, 115
+baf8: 71,73               func  113, 115
+bafa: 0f,0d               func   15,  13
+bafc: 00,0d               func    0,  13
 
    FN051:
 bafe: 7f,50               func   127,  80
-bb00: 6a,50               func   106,  80
-bb02: 67,40               func   103,  64
-bb04: 60,30               func    96,  48
-bb06: 32,20               func    50,  32
-bb08: 19,20               func    25,  32
-bb0a: 00,00               func     0,   0
+bb00: 69,50               func   105,  80
+bb02: 5f,30               func    95,  48
+bb04: 55,20               func    85,  32
+bb06: 0a,10               func    10,  16
+bb08: ec,00               func   -20,   0
+bb0a: 80,00               func  -128,   0
 bb0c: 80,00               func  -128,   0
 
    FN052:
@@ -15704,32 +15704,32 @@ bb44: 00,80               func    0, 128
 bb46: 00,80               func    0, 128
 
    FN1150:
-bb48: 20,26,30,40,40,40   table   32,   38,   48,   64,   64,   64
-bb4e: 23,2a,33,40,40,40   table   35,   42,   51,   64,   64,   64
-bb54: 2a,30,3a,40,46,53   table   42,   48,   58,   64,   70,   83
-bb5a: 3a,3d,40,43,60,6a   table   58,   61,   64,   67,   96,  106
-bb60: 40,40,40,5d,6a,6a   table   64,   64,   64,   93,  106,  106
-bb66: 40,40,40,70,73,76   table   64,   64,   64,  112,  115,  118
+bb48: 13,19,39,40,40,40   table   19,   25,   57,   64,   64,   64
+bb4e: 1a,20,39,40,40,40   table   26,   32,   57,   64,   64,   64
+bb54: 20,26,39,40,4d,53   table   32,   38,   57,   64,   77,   83
+bb5a: 26,2c,39,40,6a,70   table   38,   44,   57,   64,  106,  112
+bb60: 2d,33,4d,5a,7a,7a   table   45,   51,   77,   90,  122,  122
+bb66: 33,39,4d,60,7a,7f   table   51,   57,   77,   96,  122,  127
 
    FN730:
 bb6c: ff,7f               func  255,  127
-bb6e: 8d,0a               func  141,   10
-bb70: 80,00               func  128,    0
-bb72: 73,fc               func  115,   -4
-bb74: 69,fd               func  105,   -3
-bb76: 61,00               func   97,    0
-bb78: 00,00               func    0,    0
+bb6e: 9a,20               func  154,   32
+bb70: 8d,0c               func  141,   12
+bb72: 80,00               func  128,    0
+bb74: 73,f8               func  115,   -8
+bb76: 69,f0               func  105,  -16
+bb78: 00,97               func    0, -105
 
 bb7a: a8,c0               word   c0a8                                              # Register Rfa
-bb7c: 35                  byte     35            CSHIGH
+bb7c: 41                  byte     41            CSHIGH
 bb7d: 1e                  byte     1e            CSLOW
-bb7e: 37                  byte     37            CSSPRK
-bb7f: 3a                  byte     3a            CSSTIM
+bb7e: 40                  byte     40            CSSPRK
+bb7f: 00                  byte      0            CSSTIM
 bb80: 00                  byte      0            DFTRPM
 bb81: 00                  byte      0            DFTRPH
 bb82: 00,00               word      0            KS1
 bb84: 20                  byte     20            FRCCTM
-bb85: 00                  byte      0            SPLCLP
+bb85: 14                  byte     14            SPLCLP
 bb86: bc                  byte     bc            SPUCLP
 
 bb87: ff                  ???   
@@ -15748,7 +15748,7 @@ bb95: ff                  ???
 bb96: 80,da               word   da80            SHFDLT
 bb98: 00                  byte      0            OSCDLY
 
-bb99: 0f,3c,b4,0f,3c,b4   ???   
+bb99: 0f,3c,78,0f,3c,78   ???   
 
 bb9f: 00                  byte      0            KPEI
 bba0: ff                  byte     ff            MAP_WOT_EGRC
@@ -15757,8 +15757,8 @@ bba2: 80                  byte     80            X
 
 bba3: ff                  ???   
 
-bba4: ec,31               word   31ec            DCOFF
-bba6: 00,64               word   6400            EGRTB1
+bba4: 1f,25               word   251f            DCOFF
+bba6: 00,7d               word   7d00            EGRTB1
 bba8: 40,06               word    640            EGTB1H
 bbaa: 00,00               word      0            EGRTD8
 bbac: 01                  byte      1            EGRTD7
@@ -15766,7 +15766,7 @@ bbad: 01                  byte      1            RAMPSW
 bbae: 00,04               word    400            EGRDED
 bbb0: 80,02               word    280            KACRAT
 bbb2: 00                  byte      0            RETLIM
-bbb3: ec                  byte     ec            TIPMAX
+bbb3: e8                  byte     e8            TIPMAX
 bbb4: 01                  byte      1            TIPINC
 bbb5: 60                  byte     60            TIPMAP
 bbb6: 18                  byte     18            TIPHYS
@@ -15781,7 +15781,7 @@ bbbe: 00,00               word      0            WOPEN
 bbc0: 00,00               word      0            WINLEN
 bbc2: 80,3e               word   3e80            RPMCNL
 bbc4: ae,07               word    7ae            SPKLIM
-bbc6: 58                  byte     58            ECTIP
+bbc6: 46                  byte     46            ECTIP
 bbc7: 01                  byte      1            KNKCYL
 bbc8: 04                  byte      4            WINCLD
 
@@ -15816,12 +15816,12 @@ bbdb: 00,00               func    0,   0
 bbdd: ff                  ???   
 
    FN603:
-bbde: ff,7f,9a,99         func   32767, 39322
-bbe2: 00,80,9a,99         func  -32768, 39322
-bbe6: 00,80,9a,99         func  -32768, 39322
-bbea: 00,80,9a,99         func  -32768, 39322
-bbee: 00,80,9a,99         func  -32768, 39322
-bbf2: 00,80,9a,99         func  -32768, 39322
+bbde: ff,7f,00,a0         func   32767, 40960
+bbe2: 00,80,00,a0         func  -32768, 40960
+bbe6: 00,80,00,a0         func  -32768, 40960
+bbea: 00,80,00,a0         func  -32768, 40960
+bbee: 00,80,00,a0         func  -32768, 40960
+bbf2: 00,80,00,a0         func  -32768, 40960
 
    FN091:
 bbf6: ff,7f,00,09         func   32767,  2304
@@ -15853,11 +15853,11 @@ bc4a: 00,00,fc,03         func      0,  1020
 bc4e: 00,00,fc,03         func      0,  1020
 
    FN153:
-bc52: ff,ff,10,00         func  65535,     16
-bc56: 80,3e,10,00         func  16000,     16
-bc5a: e0,2e,0c,00         func  12000,     12
-bc5e: 10,27,08,00         func  10000,      8
-bc62: 40,1f,08,00         func   8000,      8
+bc52: ff,ff,08,00         func  65535,      8
+bc56: 40,1f,08,00         func   8000,      8
+bc5a: 00,00,00,00         func      0,      0
+bc5e: 00,00,00,00         func      0,      0
+bc62: 00,00,00,00         func      0,      0
 bc66: 00,00,00,00         func      0,      0
 bc6a: 00,00,00,00         func      0,      0
 
@@ -15870,39 +15870,39 @@ bc76: 00,00               func    0,   0
 bc78: 00,00               func    0,   0
 
    FN1120:
-bc7a: 54,54,54,54,54,94,94,94,94,94  table   84,  84,  84,  84,  84, 148, 148, 148, 148, 148    
-bc84: 68,78,80,88,8c,94,94,94,94,94  table  104, 120, 128, 136, 140, 148, 148, 148, 148, 148    
-bc8e: 68,78,80,88,8c,78,94,94,98,98  table  104, 120, 128, 136, 140, 120, 148, 148, 152, 152    
-bc98: 78,78,7a,84,86,80,80,84,88,90  table  120, 120, 122, 132, 134, 128, 128, 132, 136, 144    
-bca2: 4c,60,66,6c,70,70,70,70,74,7c  table   76,  96, 102, 108, 112, 112, 112, 112, 116, 124    
-bcac: 38,50,56,5c,5e,60,60,60,64,6c  table   56,  80,  86,  92,  94,  96,  96,  96, 100, 108    
-bcb6: 2c,44,4c,54,58,5c,60,60,64,68  table   44,  68,  76,  84,  88,  92,  96,  96, 100, 104    
-bcc0: 2c,38,44,50,52,54,5c,64,64,68  table   44,  56,  68,  80,  82,  84,  92, 100, 100, 104    
+bc7a: 68,28,28,28,8c,8c,8c,8c,8c,8c  table  104,  40,  40,  40, 140, 140, 140, 140, 140, 140    
+bc84: 68,78,80,88,8c,8c,90,94,94,98  table  104, 120, 128, 136, 140, 140, 144, 148, 148, 152    
+bc8e: 78,84,8c,94,98,9c,a0,a4,a8,ac  table  120, 132, 140, 148, 152, 156, 160, 164, 168, 172    
+bc98: 68,70,78,80,84,88,90,94,94,98  table  104, 112, 120, 128, 132, 136, 144, 148, 148, 152    
+bca2: 48,58,60,68,6c,6c,70,74,78,7c  table   72,  88,  96, 104, 108, 108, 112, 116, 120, 124    
+bcac: 3c,40,50,60,64,64,64,68,68,70  table   60,  64,  80,  96, 100, 100, 100, 104, 104, 112    
+bcb6: 24,2c,3c,48,50,58,5c,64,64,68  table   36,  44,  60,  72,  80,  88,  92, 100, 100, 104    
+bcc0: 14,20,2c,38,44,50,58,64,60,60  table   20,  32,  44,  56,  68,  80,  88, 100,  96,  96    
 
    FN1121:
-bcca: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
-bcd4: 00,1c,1c,1c,1c,1c,1c,00,00,00  table    0,  28,  28,  28,  28,  28,  28,   0,   0,   0    
-bcde: 00,1c,1c,1c,1c,1c,1c,00,00,00  table    0,  28,  28,  28,  28,  28,  28,   0,   0,   0    
-bce8: 00,1c,1c,1c,1c,1c,1c,00,00,00  table    0,  28,  28,  28,  28,  28,  28,   0,   0,   0    
-bcf2: 00,1c,1c,1c,1c,1c,1c,00,00,00  table    0,  28,  28,  28,  28,  28,  28,   0,   0,   0    
-bcfc: 00,00,00,1c,1c,1c,1c,00,00,00  table    0,   0,   0,  28,  28,  28,  28,   0,   0,   0    
-bd06: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
-bd10: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
+bcca: 00,3a,3a,3a,3a,3a,3a,33,33,33  table    0,  58,  58,  58,  58,  58,  58,  51,  51,  51    
+bcd4: 00,3a,3a,3a,3a,3a,3a,33,33,33  table    0,  58,  58,  58,  58,  58,  58,  51,  51,  51    
+bcde: 00,3a,33,3a,3a,3a,33,26,26,26  table    0,  58,  51,  58,  58,  58,  51,  38,  38,  38    
+bce8: 00,33,33,3a,33,33,33,20,20,20  table    0,  51,  51,  58,  51,  51,  51,  32,  32,  32    
+bcf2: 00,33,33,33,33,2a,20,13,13,0d  table    0,  51,  51,  51,  51,  42,  32,  19,  19,  13    
+bcfc: 00,33,26,20,20,20,20,00,00,00  table    0,  51,  38,  32,  32,  32,  32,   0,   0,   0    
+bd06: 00,33,26,1a,13,13,13,13,13,00  table    0,  51,  38,  26,  19,  19,  19,  19,  19,   0    
+bd10: 00,33,26,1a,13,13,13,13,13,00  table    0,  51,  38,  26,  19,  19,  19,  19,  19,   0    
 
    FN1122:
-bd1a: 0a,0f,0b,08,02,00,00,00,00,00  table   10,  15,  11,   8,   2,   0,   0,   0,   0,   0    
-bd24: 0f,12,11,12,11,00,00,00,00,00  table   15,  18,  17,  18,  17,   0,   0,   0,   0,   0    
-bd2e: 05,0d,10,14,17,03,06,06,06,04  table    5,  13,  16,  20,  23,   3,   6,   6,   6,   4    
-bd38: 12,07,07,10,14,13,18,1a,14,10  table   18,   7,   7,  16,  20,  19,  24,  26,  20,  16    
-bd42: 00,0e,00,04,0d,1a,1c,1e,1c,18  table    0,  14,   0,   4,  13,  26,  28,  30,  28,  24    
-bd4c: 00,0c,0f,0e,1b,0f,1e,1e,1e,18  table    0,  12,  15,  14,  27,  15,  30,  30,  30,  24    
-bd56: 0d,14,24,20,1c,1c,1e,20,20,20  table   13,  20,  36,  32,  28,  28,  30,  32,  32,  32    
-bd60: 0c,20,26,26,26,26,28,28,28,20  table   12,  32,  38,  38,  38,  38,  40,  40,  40,  32    
+bd1a: 02,02,00,00,00,00,00,00,00,00  table    2,   2,   0,   0,   0,   0,   0,   0,   0,   0    
+bd24: 02,02,00,00,00,00,00,00,00,00  table    2,   2,   0,   0,   0,   0,   0,   0,   0,   0    
+bd2e: 02,02,00,05,06,06,06,06,06,00  table    2,   2,   0,   5,   6,   6,   6,   6,   6,   0    
+bd38: 02,04,0c,0c,10,18,1a,1a,14,10  table    2,   4,  12,  12,  16,  24,  26,  26,  20,  16    
+bd42: 04,0a,14,18,1c,1c,1e,1e,1c,18  table    4,  10,  20,  24,  28,  28,  30,  30,  28,  24    
+bd4c: 08,0c,18,1c,1c,1e,1e,1e,1e,18  table    8,  12,  24,  28,  28,  30,  30,  30,  30,  24    
+bd56: 04,08,0c,14,1c,22,22,1c,18,14  table    4,   8,  12,  20,  28,  34,  34,  28,  24,  20    
+bd60: 04,08,0c,10,1a,1c,1c,18,18,10  table    4,   8,  12,  16,  26,  28,  28,  24,  24,  16    
 
    FN1126:
-bd6a: 68,3c,3c,3c,3c,94,94,94,94,94  table  104,  60,  60,  60,  60, 148, 148, 148, 148, 148    
+bd6a: 68,78,80,88,8e,94,94,94,94,94  table  104, 120, 128, 136, 142, 148, 148, 148, 148, 148    
 bd74: 68,78,80,88,8e,94,94,94,94,94  table  104, 120, 128, 136, 142, 148, 148, 148, 148, 148    
-bd7e: 68,78,80,88,8e,78,94,94,98,98  table  104, 120, 128, 136, 142, 120, 148, 148, 152, 152    
+bd7e: 68,78,80,88,8e,94,94,94,98,98  table  104, 120, 128, 136, 142, 148, 148, 148, 152, 152    
 bd88: 78,78,7a,84,86,80,80,84,88,90  table  120, 120, 122, 132, 134, 128, 128, 132, 136, 144    
 bd92: 4c,60,66,6c,70,70,70,70,74,7c  table   76,  96, 102, 108, 112, 112, 112, 112, 116, 124    
 bd9c: 38,50,56,5c,5e,60,60,60,64,6c  table   56,  80,  86,  92,  94,  96,  96,  96, 100, 108    
@@ -15910,33 +15910,33 @@ bda6: 2c,44,4c,54,58,5c,60,60,64,68  table   44,  68,  76,  84,  88,  92,  96,  
 bdb0: 2c,38,44,50,52,54,5c,64,64,68  table   44,  56,  68,  80,  82,  84,  92, 100, 100, 104    
 
    FN1127:
-bdba: 00,00,00,00,00,34,34,34,24,00  table    0,   0,   0,   0,   0,  52,  52,  52,  36,   0    
-bdc4: 00,00,00,00,0c,3c,3c,3c,24,00  table    0,   0,   0,   0,  12,  60,  60,  60,  36,   0    
-bdce: 00,00,00,00,0c,20,38,38,24,00  table    0,   0,   0,   0,  12,  32,  56,  56,  36,   0    
-bdd8: 00,00,00,00,0c,18,18,1c,1c,00  table    0,   0,   0,   0,  12,  24,  24,  28,  28,   0    
+bdba: 00,00,00,18,28,30,30,18,00,00  table    0,   0,   0,  24,  40,  48,  48,  24,   0,   0    
+bdc4: 00,00,00,1c,30,38,30,18,00,00  table    0,   0,   0,  28,  48,  56,  48,  24,   0,   0    
+bdce: 00,00,00,1c,38,3c,3c,1c,00,00  table    0,   0,   0,  28,  56,  60,  60,  28,   0,   0    
+bdd8: 00,00,00,18,28,38,30,18,00,00  table    0,   0,   0,  24,  40,  56,  48,  24,   0,   0    
 bde2: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
 bdec: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
 bdf6: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
 be00: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
 
    FN1128:
-be0a: 00,e0,c0,c0,c0,c0,c0,e0,00,00  table     0,  -32,  -64,  -64,  -64,  -64,  -64,  -32,    0,    0    
-be14: 00,e0,c0,c0,c0,c0,c0,e0,00,00  table     0,  -32,  -64,  -64,  -64,  -64,  -64,  -32,    0,    0    
-be1e: 00,e0,c0,c0,c0,c0,c0,e0,00,00  table     0,  -32,  -64,  -64,  -64,  -64,  -64,  -32,    0,    0    
-be28: 00,e0,c0,c0,c0,c0,c0,e0,00,00  table     0,  -32,  -64,  -64,  -64,  -64,  -64,  -32,    0,    0    
-be32: 00,e0,c0,c0,c0,c0,c0,e0,00,00  table     0,  -32,  -64,  -64,  -64,  -64,  -64,  -32,    0,    0    
-be3c: 00,e0,c0,c0,c0,c0,c0,e0,00,00  table     0,  -32,  -64,  -64,  -64,  -64,  -64,  -32,    0,    0    
-be46: 00,e0,c0,c0,c0,c0,c0,e0,00,00  table     0,  -32,  -64,  -64,  -64,  -64,  -64,  -32,    0,    0    
-be50: 00,e0,c0,c0,c0,c0,c0,e0,00,00  table     0,  -32,  -64,  -64,  -64,  -64,  -64,  -32,    0,    0    
+be0a: 00,e0,c0,c0,c0,c0,c0,d0,00,00  table     0,  -32,  -64,  -64,  -64,  -64,  -64,  -48,    0,    0    
+be14: 00,e0,c0,c0,c0,c0,c0,d0,00,00  table     0,  -32,  -64,  -64,  -64,  -64,  -64,  -48,    0,    0    
+be1e: 00,e0,c0,c0,c0,c0,c0,d0,00,00  table     0,  -32,  -64,  -64,  -64,  -64,  -64,  -48,    0,    0    
+be28: 40,40,40,40,40,20,00,00,00,00  table    64,   64,   64,   64,   64,   32,    0,    0,    0,    0    
+be32: 40,40,40,40,40,20,00,00,00,00  table    64,   64,   64,   64,   64,   32,    0,    0,    0,    0    
+be3c: 40,40,40,40,40,20,00,00,00,00  table    64,   64,   64,   64,   64,   32,    0,    0,    0,    0    
+be46: 40,40,40,40,40,20,00,00,00,00  table    64,   64,   64,   64,   64,   32,    0,    0,    0,    0    
+be50: 40,40,40,40,40,20,00,00,00,00  table    64,   64,   64,   64,   64,   32,    0,    0,    0,    0    
 
    FN1129:
-be5a: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
-be64: 00,2d,2d,2d,2d,2d,00,00,00,00  table    0,  45,  45,  45,  45,  45,   0,   0,   0,   0    
-be6e: 00,2d,2d,2d,2d,2d,00,00,00,00  table    0,  45,  45,  45,  45,  45,   0,   0,   0,   0    
-be78: 00,2d,2d,2d,2d,2d,00,00,00,00  table    0,  45,  45,  45,  45,  45,   0,   0,   0,   0    
-be82: 00,2d,2d,2d,2d,2d,00,00,00,00  table    0,  45,  45,  45,  45,  45,   0,   0,   0,   0    
-be8c: 00,26,2d,2d,2d,2d,00,00,00,00  table    0,  38,  45,  45,  45,  45,   0,   0,   0,   0    
-be96: 00,20,26,2d,2d,2d,00,00,00,00  table    0,  32,  38,  45,  45,  45,   0,   0,   0,   0    
+be5a: 00,3a,3a,3a,3a,3a,3a,3a,3a,00  table    0,  58,  58,  58,  58,  58,  58,  58,  58,   0    
+be64: 00,3a,3a,3a,3a,3a,3a,3a,3a,00  table    0,  58,  58,  58,  58,  58,  58,  58,  58,   0    
+be6e: 00,33,33,3a,3a,3a,3a,3a,3a,00  table    0,  51,  51,  58,  58,  58,  58,  58,  58,   0    
+be78: 00,33,33,3a,33,33,33,20,20,00  table    0,  51,  51,  58,  51,  51,  51,  32,  32,   0    
+be82: 00,33,33,3a,33,33,33,20,20,00  table    0,  51,  51,  58,  51,  51,  51,  32,  32,   0    
+be8c: 00,20,20,26,20,20,20,20,20,00  table    0,  32,  32,  38,  32,  32,  32,  32,  32,   0    
+be96: 00,20,20,20,20,20,20,20,20,00  table    0,  32,  32,  32,  32,  32,  32,  32,  32,   0    
 bea0: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
 
    FN074A:
@@ -15955,17 +15955,17 @@ bed2: 00,00,00,00         func      0,     0
    FN211:
 bed6: 7f,4d               func   127,  77
 bed8: 73,7f               func   115, 127
-beda: 3c,7f               func    60, 127
-bedc: 10,00               func    16,   0
-bede: 80,00               func  -128,   0
+beda: 50,7f               func    80, 127
+bedc: 3c,60               func    60,  96
+bede: 2d,00               func    45,   0
 bee0: 80,00               func  -128,   0
 bee2: 80,00               func  -128,   0
 
    FN212A:
 bee4: ff,80               func  255, 128
-bee6: d8,80               func  216, 128
-bee8: c8,a0               func  200, 160
-beea: a0,33               func  160,  51
+bee6: c0,80               func  192, 128
+bee8: 00,00               func    0,   0
+beea: 00,00               func    0,   0
 beec: 00,00               func    0,   0
 
    FN219:
@@ -16003,37 +16003,37 @@ bf48: 00,00,00,00         func      0,     0
 
    FN239:
 bf4c: ff,7f,33,03         func   32767,    819
-bf50: 00,7d,33,03         func   32000,    819
-bf54: 00,32,52,00         func   12800,     82
-bf58: 00,ce,ae,ff         func  -12800,    -82
-bf5c: 00,83,cd,fc         func  -32000,   -819
-bf60: 00,80,cd,fc         func  -32768,   -819
+bf50: 40,6a,33,03         func   27200,    819
+bf54: 00,32,7b,00         func   12800,    123
+bf58: 00,00,00,00         func       0,      0
+bf5c: 80,da,0a,ff         func   -9600,   -246
+bf60: c0,95,cd,fc         func  -27200,   -819
 bf64: 00,80,cd,fc         func  -32768,   -819
 
    FN240:
-bf68: ff,00               func  255,   0
-bf6a: 64,00               func  100,   0
+bf68: ff,80               func  255, 128
+bf6a: 00,80               func    0, 128
 bf6c: 00,80               func    0, 128
 bf6e: 00,80               func    0, 128
 
    FN1220:
 bf70: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
-bf7a: 00,00,00,14,16,16,00,00,00,00  table    0,   0,   0,  20,  22,  22,   0,   0,   0,   0    
-bf84: 00,08,10,28,24,16,00,00,00,00  table    0,   8,  16,  40,  36,  22,   0,   0,   0,   0    
-bf8e: 00,17,20,2c,2c,24,16,00,00,00  table    0,  23,  32,  44,  44,  36,  22,   0,   0,   0    
-bf98: 00,16,20,2c,2c,24,14,00,00,00  table    0,  22,  32,  44,  44,  36,  20,   0,   0,   0    
-bfa2: 00,00,10,14,14,10,00,00,00,00  table    0,   0,  16,  20,  20,  16,   0,   0,   0,   0    
-bfac: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
-bfb6: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
+bf7a: 00,00,00,04,08,08,08,04,00,00  table    0,   0,   0,   4,   8,   8,   8,   4,   0,   0    
+bf84: 00,00,00,0c,1c,20,20,18,00,00  table    0,   0,   0,  12,  28,  32,  32,  24,   0,   0    
+bf8e: 00,00,00,14,30,34,28,20,00,00  table    0,   0,   0,  20,  48,  52,  40,  32,   0,   0    
+bf98: 00,00,00,14,34,38,30,20,00,00  table    0,   0,   0,  20,  52,  56,  48,  32,   0,   0    
+bfa2: 00,00,00,0c,30,38,30,28,00,00  table    0,   0,   0,  12,  48,  56,  48,  40,   0,   0    
+bfac: 00,00,00,04,18,20,20,18,00,00  table    0,   0,   0,   4,  24,  32,  32,  24,   0,   0    
+bfb6: 00,00,00,00,0c,0c,10,0c,00,00  table    0,   0,   0,   0,  12,  12,  16,  12,   0,   0    
 
    FN1222:
 bfc0: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
-bfca: 00,10,18,20,20,18,00,00,00,00  table    0,  16,  24,  32,  32,  24,   0,   0,   0,   0    
-bfd4: 00,20,28,2c,2c,18,00,00,00,00  table    0,  32,  40,  44,  44,  24,   0,   0,   0,   0    
-bfde: 00,24,28,2c,2c,18,00,00,00,00  table    0,  36,  40,  44,  44,  24,   0,   0,   0,   0    
-bfe8: 00,20,24,28,2c,18,00,00,00,00  table    0,  32,  36,  40,  44,  24,   0,   0,   0,   0    
-bff2: 00,14,18,1c,1c,0c,00,00,00,00  table    0,  20,  24,  28,  28,  12,   0,   0,   0,   0    
-bffc: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
+bfca: 00,0c,14,14,18,14,0c,04,00,00  table    0,  12,  20,  20,  24,  20,  12,   4,   0,   0    
+bfd4: 00,0c,1c,1c,20,1c,14,0c,08,00  table    0,  12,  28,  28,  32,  28,  20,  12,   8,   0    
+bfde: 00,10,1c,1c,20,1c,14,0c,08,00  table    0,  16,  28,  28,  32,  28,  20,  12,   8,   0    
+bfe8: 00,10,1c,1c,20,1c,14,0c,08,00  table    0,  16,  28,  28,  32,  28,  20,  12,   8,   0    
+bff2: 00,0c,18,14,14,10,0c,08,08,00  table    0,  12,  24,  20,  20,  16,  12,   8,   8,   0    
+bffc: 00,04,04,04,04,04,04,04,00,00  table    0,   4,   4,   4,   4,   4,   4,   4,   0,   0    
 c006: 00,00,00,00,00,00,00,00,00,00  table    0,   0,   0,   0,   0,   0,   0,   0,   0,   0    
 
    FN218:
@@ -16124,7 +16124,7 @@ c0cc: 1a,00,00,04         ???
 
 c0d0: 00,01               word    100
 
-c0d2: 00,08,9a,09         ???   
+c0d2: 00,08,00,0a         ???   
 
 c0d6: 9a,01               word    19a
 c0d8: 9a,05               word    59a
@@ -16140,26 +16140,26 @@ c0e1: 00                  byte      0
 
 c0e2: 5e,00               ???   
 
-c0e4: 50                  byte     50
+c0e4: 3c                  byte     3c
 c0e5: a0                  byte     a0            trans_tv_engagement_high
-c0e6: 3c                  byte     3c            trans_tv_engagement_moderate
+c0e6: 50                  byte     50            trans_tv_engagement_moderate
 
 c0e7: ff                  ???   
 
-c0e8: 00,07               word    700
+c0e8: 00,04               word    400
 
-c0ea: 00,07               ???   
+c0ea: 00,08               ???   
 
-c0ec: 00,07               word    700
-c0ee: 00,07               word    700
+c0ec: 00,06               word    600
+c0ee: 00,08               word    800
 
-c0f0: cd,00,cd,00         ???   
+c0f0: cd,02,00,00         ???   
 
-c0f4: cd,00               word     cd
-c0f6: cd,00               word     cd
+c0f4: 14,02               word    214
+c0f6: 00,00               word      0
 c0f8: 00,e2               word   e200
 c0fa: 1f,05               word    51f
-c0fc: 00                  byte      0
+c0fc: c8                  byte     c8
 
 c0fd: ff                  ???   
 
@@ -16170,34 +16170,34 @@ c103: 28                  byte     28
 c104: 14                  byte     14
 c105: 46                  byte     46
 
-c106: 00,00,f8,00,fe,00   ???   
+c106: 00,00,fc,00,ff,00   ???   
 
-c10c: 7c                  byte     7c
+c10c: 7a                  byte     7a
 
-c10d: 80                  ???   
+c10d: 7b                  ???   
 
-c10e: 7d                  byte     7d
+c10e: 80                  byte     80
 
 c10f: 2a,f8               ???   
 
 c111: 2a                  byte     2a
 c112: f8                  byte     f8
 
-c113: 2a,f8,2a,f8,21,21,16,48  ???  
+c113: 2a,f8,2a,f8,2a,2a,2a,4d  ???  
 
-c11b: 3b                  byte     3b
+c11b: 36                  byte     36
 
-c11c: 37,ff               ???   
+c11c: 43,ff               ???   
 
-c11e: 50,00               word     50
-c120: a0,ff               word   ffa0
-c122: a0,ff               word   ffa0
+c11e: 78,00               word     78
+c120: 00,00               word      0
+c122: 50,00               word     50
 c124: a0,00               word     a0
-c126: a0,00               word     a0
+c126: c8,00               word     c8
 
-c128: 00,00,00,ff,00,00,00,ff  ???  
+c128: 00,04,00,ff,00,04,00,ff  ???  
 
-c130: 00,00               word      0
+c130: 00,04               word    400
 c132: 00                  byte      0
 
 c133: ff,56,05,1b,04      ???   
@@ -16209,14 +16209,14 @@ c13a: 72,04,56,05,d0,03   ???
 c140: ae,00               word     ae
 c142: aa,7f               word   7faa            SARCHG
 c144: 9a,19               word   199a
-c146: 00,3f               word   3f00
-c148: 00,3e               word   3e00
+c146: 00,32               word   3200
+c148: 00,19               word   1900
 
-c14a: e0                  ???   
+c14a: 10                  ???   
 
-c14b: 2e                  byte     2e
-c14c: 18                  byte     18
-c14d: 2e                  byte     2e
+c14b: 27                  byte     27
+c14c: 40                  byte     40
+c14d: 1f                  byte     1f
 c14e: 80,0c               word    c80
 c150: 80,0c               word    c80
 c152: 00                  byte      0
@@ -16233,7 +16233,7 @@ c15b: ff                  byte     ff            VTCEGO
 c15c: cd,00               word     cd            TV_SLT_TM
 c15e: 8c                  byte     8c            TVFMMN
 c15f: ff                  byte     ff
-c160: 10,00               word     10            TCMAPW
+c160: 33,00               word     33            TCMAPW
 c162: 1f,00               word     1f            TCNE
 c164: 1f,00               word     1f            TCTPTE
 c166: 1f,00               word     1f            TCVST
@@ -16249,11 +16249,11 @@ c172: 8f                  byte     8f
 c173: 02                  ???   
 
 c174: 8f,42               word   428f
-c176: b0,04               word    4b0
-c178: 69                  byte     69
-c179: 9a                  byte     9a
+c176: 58,02               word    258
+c178: 7a                  byte     7a
+c179: 8d                  byte     8d
 c17a: 08                  byte      8
-c17b: 24                  byte     24            MBTEGR
+c17b: 1d                  byte     1d            MBTEGR
 c17c: 2c,01               word    12c
 c17e: 00                  byte      0
 c17f: 10                  byte     10
@@ -16261,10 +16261,10 @@ c180: 03                  byte      3
 
 c181: ff                  ???   
 
-c182: e0,fc               word   fce0            NE12A                             #  NE12A = WOT RPM 1 - 2 shift point, altitude.
-c184: a0,41               word   41a0            NE12S                             #  NE12S = WOT RPM 1 - 2 shift point, sea level.
-c186: 50,fb               word   fb50            NE23A                             #  NE23A = WOT RPM 2 - 3 shift point, altitude.
-c188: 68,42               word   4268            NE23S                             #  NE23S = WOT RPM 2 - 3 shift point, sea level.
+c182: 38,ff               word   ff38            NE12A                             #  NE12A = WOT RPM 1 - 2 shift point, altitude.
+c184: ac,3f               word   3fac            NE12S                             #  NE12S = WOT RPM 1 - 2 shift point, sea level.
+c186: a8,fd               word   fda8            NE23A                             #  NE23A = WOT RPM 2 - 3 shift point, altitude.
+c188: ac,3f               word   3fac            NE23S                             #  NE23S = WOT RPM 2 - 3 shift point, sea level.
 c18a: e0,fc               word   fce0            NS34A                             #  NE34A = WOT RPM 3 - 4 shift point, altitude.
 c18c: 60,3b               word   3b60            NS34S                             #  NE34S = WOT RPM 3 - 4 shift point, sea level.
 c18e: 02                  byte      2            VSCNT
@@ -16278,13 +16278,13 @@ c195: ff                  byte     ff
 c196: 90,01               word    190            S_VAL_NESUB
 c198: 40,01               word    140            S_VAL_TPADD
 c19a: 00,02               word    200            S_VAL_TPSUB
-c19c: 12                  byte     12            S_VAL_VSADD
+c19c: 14                  byte     14            S_VAL_VSADD
 c19d: 02                  byte      2            S_VAL_VSSUB
-c19e: 80,2a               word   2a80            TP_SH_VALID
-c1a0: 22                  byte     22            VS_SH_VAL2
+c19e: 80,2f               word   2f80            TP_SH_VALID
+c1a0: 27                  byte     27            VS_SH_VAL2
 
    VS_SH_VAL3:
-c1a1: 3b,5a               ???   
+c1a1: 47,64               ???   
 
 c1a3: ff                  byte     ff
 c1a4: 1f,05               word    51f            NOV_ERR_BAND
@@ -16308,16 +16308,16 @@ c1be: 80,f2               word   f280
 c1c0: 04                  byte      4
 c1c1: 08                  byte      8
 c1c2: 9a,00               word     9a
-c1c4: 00,28               word   2800
+c1c4: 00,ff               word   ff00
 c1c6: 00,01               word    100
 c1c8: 66,00               word     66
 c1ca: 00,00               word      0
 c1cc: c0,f9               word   f9c0
-c1ce: b4                  byte     b4            VS_NEU
+c1ce: 3c                  byte     3c            VS_NEU
 c1cf: 04                  byte      4            GR_NEU
 c1d0: 08                  byte      8            GRMSFT
 c1d1: 00                  byte      0            SW_MSF
-c1d2: 4c                  byte     4c
+c1d2: 42                  byte     42
 c1d3: 07                  byte      7
 c1d4: 04                  byte      4
 c1d5: 01                  byte      1
@@ -16334,21 +16334,21 @@ c1e3: 70                  byte     70
 c1e4: 80,0c               word    c80
 c1e6: 01                  byte      1
 
-c1e7: 08,0c,03,10,08      ???   
+c1e7: 06,0c,03,10,08      ???   
 
 c1ec: 00                  byte      0
 c1ed: 06                  byte      6
-c1ee: 08                  byte      8
-c1ef: 01                  byte      1
+c1ee: 04                  byte      4
+c1ef: 00                  byte      0
 
 c1f0: 3f,ff               ???   
 
-c1f2: 80,0c               word    c80
-c1f4: c0,2b               word   2bc0
+c1f2: 60,09               word    960
+c1f4: a0,28               word   28a0
 c1f6: 33,03               word    333
 c1f8: 48,31               word   3148
 c1fa: 33,33               word   3333
-c1fc: ec                  byte     ec
+c1fc: 48                  byte     48
 c1fd: 31                  byte     31
 c1fe: b8                  byte     b8
 
@@ -16356,36 +16356,36 @@ c1ff: 2e                  ???
 
 c200: 00                  byte      0
 c201: 01                  byte      1
-c202: 00                  byte      0            UP_TIP_RATE
+c202: e0                  byte     e0            UP_TIP_RATE
 
-c203: 05                  ???   
+c203: 7f                  ???   
 
-c204: 00,0e               word    e00
+c204: 00,28               word   2800
 c206: ff                  byte     ff
 
 c207: ff                  ???   
 
-c208: 00,a1               word   a100
+c208: 80,a2               word   a280
 c20a: 80,3e               word   3e80
 c20c: 00,00               word      0
 c20e: 66,00               word     66
-c210: c0,01               word    1c0
+c210: 80,02               word    280
 c212: c0,ff               word   ffc0
 c214: 80,3e               word   3e80
-c216: c0,04               word    4c0
+c216: 80,02               word    280
 c218: 40,38               word   3840
-c21a: c0,08               word    8c0
+c21a: 80,0c               word    c80
 c21c: 80,e9               word   e980
 c21e: 40                  byte     40
 c21f: 06                  byte      6
-c220: 00                  byte      0
-c221: f9                  byte     f9
-c222: 06                  byte      6
-c223: 08                  byte      8
-c224: 05                  byte      5
+c220: 40                  byte     40
+c221: fc                  byte     fc
+c222: 05                  byte      5
+c223: 04                  byte      4
+c224: 01                  byte      1
 c225: ff                  byte     ff
 
-c226: 33,03,33,03,33,03,33,03,33,04,00,03,33,04,d7  ???  
+c226: 33,03,33,03,33,03,33,03,33,04,00,03,33,04,b8  ???  
 
 c235: 01                  byte      1
 c236: 33                  byte     33
@@ -16394,7 +16394,7 @@ c237: 03,66,01            ???
 
 c23a: 33                  byte     33
 
-c23b: 02,d2,00            ???   
+c23b: 03,cd,00            ???   
 
 c23e: 33,03               word    333
 
@@ -16402,69 +16402,69 @@ c240: 33,03,33,03,33,03,9a,04,33,02,9a,04,d7,01  ???
 
 c24e: 00,04               word    400
 
-c250: 00,04,66,02,cd,00,00,00,00,00,00,00,00  ???  
+c250: 00,04,00,04,cd,00,00,00,01,01,01,00,01  ???  
 
-c25d: 00                  byte      0
+c25d: 01                  byte      1
 
    Func_c25e:
 c25e: ff,ff,18,2e         func  65535, 11800
-c262: 00,7d,50,2d         func  32000, 11600
-c266: 00,4b,c0,2b         func  19200, 11200
-c26a: 80,25,80,25         func   9600,  9600
+c262: 00,7d,18,2e         func  32000, 11800
+c266: 00,4b,88,2c         func  19200, 11400
+c26a: 80,25,10,27         func   9600, 10000
 c26e: 80,11,40,1f         func   4480,  8000
-c272: 00,0a,c8,19         func   2560,  6600
-c276: 00,00,c8,19         func      0,  6600
+c272: 00,0a,58,1b         func   2560,  7000
+c276: 00,00,58,1b         func      0,  7000
 
    FN615:
 c27a: ff,00               func  255,   0
 c27c: dc,00               func  220,   0
 c27e: c4,80               func  196, 128
 c280: 98,a6               func  152, 166
-c282: 00,ad               func    0, 173
-c284: 00,ad               func    0, 173
+c282: 00,a6               func    0, 166
+c284: 00,a6               func    0, 166
 
    FN690:
 c286: ff,7f,60,04         func   32767,   1120
 c28a: b0,04,60,04         func    1200,   1120
 c28e: 20,03,30,03         func     800,    816
-c292: f0,00,40,01         func     240,    320
+c292: f0,00,68,01         func     240,    360
 c296: 00,00,f0,00         func       0,    240
 c29a: 00,80,f0,00         func  -32768,    240
 
-c29e: ff,00,a1,00,a1,fd,26,fc,19,ff,0f,00,00,00,00,00  ???  
+c29e: ff,ff,a1,ff,a1,fe,64,ff,4b,fe,32,fb,26,ff,19,00  ???  
 c2ae: 00,00,00,00         ???   
 
    trans_shift_12:
-c2b2: ff,44               func  255,  68
-c2b4: a1,44               func  161,  68
+c2b2: ff,40               func  255,  64
+c2b4: a1,40               func  161,  64
 c2b6: a1,38               func  161,  56
-c2b8: 4b,2c               func   75,  44
-c2ba: 32,24               func   50,  36
-c2bc: 26,1e               func   38,  30
-c2be: 19,16               func   25,  22
-c2c0: 0a,0e               func   10,  14
-c2c2: 00,0e               func    0,  14
-c2c4: 00,0e               func    0,  14
+c2b8: 71,34               func  113,  52
+c2ba: 4b,2c               func   75,  44
+c2bc: 32,24               func   50,  36
+c2be: 19,14               func   25,  20
+c2c0: 0f,12               func   15,  18
+c2c2: 00,12               func    0,  18
+c2c4: 00,12               func    0,  18
 
    Func_c2c6:
 c2c6: ff,fc               func  255, 252
 c2c8: a1,fc               func  161, 252
-c2ca: a1,fa               func  161, 250
-c2cc: 7d,f7               func  125, 247
-c2ce: 64,f8               func  100, 248
-c2d0: 4b,f6               func   75, 246
-c2d2: 32,f9               func   50, 249
-c2d4: 0f,00               func   15,   0
+c2ca: 4b,f6               func   75, 246
+c2cc: 32,f6               func   50, 246
+c2ce: 19,fe               func   25, 254
+c2d0: 0f,00               func   15,   0
+c2d2: 00,00               func    0,   0
+c2d4: 00,00               func    0,   0
 c2d6: 00,00               func    0,   0
 c2d8: 00,00               func    0,   0
 
    Func_c2da:
-c2da: ff,ff,00,d8         func  65535, 55296
-c2de: 00,00,00,d8         func      0, 55296
-c2e2: 00,00,00,d8         func      0, 55296
-c2e6: 00,00,00,d8         func      0, 55296
-c2ea: 00,00,00,d8         func      0, 55296
-c2ee: 00,00,00,d8         func      0, 55296
+c2da: ff,ff,66,00         func  65535,   102
+c2de: 00,64,4d,00         func  25600,    77
+c2e2: 00,4b,4d,00         func  19200,    77
+c2e6: 00,32,33,00         func  12800,    51
+c2ea: c0,21,29,00         func   8640,    41
+c2ee: c0,21,00,d8         func   8640, 55296
 c2f2: 00,00,00,d8         func      0, 55296
 c2f6: 00,00,00,d8         func      0, 55296
 c2fa: 00,00,00,d8         func      0, 55296
@@ -16473,36 +16473,36 @@ c302: 00,00,00,d8         func      0, 55296
 c306: 00,00,00,d8         func      0, 55296
 
    trans_shift_23:
-c30a: ff,7c               func  255, 124
-c30c: a1,7c               func  161, 124
+c30a: ff,72               func  255, 114
+c30c: a1,72               func  161, 114
 c30e: a1,69               func  161, 105
-c310: 7d,65               func  125, 101
-c312: 7c,5f               func  124,  95
-c314: 4b,53               func   75,  83
-c316: 26,3c               func   38,  60
-c318: 19,2a               func   25,  42
-c31a: 0d,1e               func   13,  30
-c31c: 00,1e               func    0,  30
+c310: 4b,54               func   75,  84
+c312: 4b,50               func   75,  80
+c314: 32,42               func   50,  66
+c316: 26,36               func   38,  54
+c318: 19,2c               func   25,  44
+c31a: 0f,22               func   15,  34
+c31c: 00,22               func    0,  34
 
    Func_c31e:
 c31e: ff,fb               func  255, 251
 c320: a1,fb               func  161, 251
-c322: a1,f5               func  161, 245
-c324: 4b,f3               func   75, 243
-c326: 26,f7               func   38, 247
-c328: 19,fb               func   25, 251
-c32a: 0e,00               func   14,   0
+c322: a1,f8               func  161, 248
+c324: 71,f3               func  113, 243
+c326: 4b,f4               func   75, 244
+c328: 19,fc               func   25, 252
+c32a: 0f,00               func   15,   0
 c32c: 00,00               func    0,   0
 c32e: 00,00               func    0,   0
 c330: 00,00               func    0,   0
 
    Func_c332:
-c332: ff,ff,b3,00         func  65535,   179
-c336: 00,64,b3,00         func  25600,   179
-c33a: 80,3e,8a,00         func  16000,   138
-c33e: 00,32,48,00         func  12800,    72
-c342: 00,2d,38,00         func  11520,    56
-c346: 00,2d,00,d8         func  11520, 55296
+c332: ff,ff,66,00         func  65535,   102
+c336: 00,64,33,00         func  25600,    51
+c33a: 00,4b,24,00         func  19200,    36
+c33e: 00,32,1a,00         func  12800,    26
+c342: c0,21,14,00         func   8640,    20
+c346: c0,21,00,d8         func   8640, 55296
 c34a: 00,00,00,d8         func      0, 55296
 c34e: 00,00,00,d8         func      0, 55296
 c352: 00,00,00,d8         func      0, 55296
@@ -16511,65 +16511,65 @@ c35a: 00,00,00,d8         func      0, 55296
 c35e: 00,00,00,d8         func      0, 55296
 
    trans_shift_34:
-c362: ff,aa               func  255, 170
-c364: a1,aa               func  161, 170
-c366: a1,9a               func  161, 154
-c368: 90,93               func  144, 147
-c36a: 4b,7b               func   75, 123
-c36c: 32,67               func   50, 103
-c36e: 26,5a               func   38,  90
-c370: 19,4f               func   25,  79
-c372: 0e,44               func   14,  68
-c374: 00,44               func    0,  68
+c362: ff,a4               func  255, 164
+c364: a1,a4               func  161, 164
+c366: a1,98               func  161, 152
+c368: 71,8c               func  113, 140
+c36a: 4b,7a               func   75, 122
+c36c: 32,62               func   50,  98
+c36e: 26,58               func   38,  88
+c370: 19,49               func   25,  73
+c372: 00,49               func    0,  73
+c374: 00,49               func    0,  73
 
    Func_c376:
-c376: ff,ff,a8,ff         func  65535, 65448
+c376: ff,fe,a8,fe         func  65279, 65192
 c37a: a8,fc,9e,fc         func  64680, 64670
 c37e: 64,00,00,00         func    100,     0
 c382: 00,00,00,00         func      0,     0
 c386: 00,00,00,00         func      0,     0
 
    trans_shift_21:
-c38a: ff,36               func  255,  54
-c38c: a8,36               func  168,  54
+c38a: ff,38               func  255,  56
+c38c: a8,38               func  168,  56
 c38e: a8,29               func  168,  41
-c390: 9e,29               func  158,  41
-c392: 64,0d               func  100,  13
-c394: 00,0d               func    0,  13
-c396: 00,0d               func    0,  13
-c398: 00,0d               func    0,  13
-c39a: 00,0d               func    0,  13
-c39c: 00,0d               func    0,  13
+c390: a0,29               func  160,  41
+c392: 64,1c               func  100,  28
+c394: 64,0f               func  100,  15
+c396: 00,0f               func    0,  15
+c398: 00,0f               func    0,  15
+c39a: 00,0f               func    0,  15
+c39c: 00,0f               func    0,  15
 
-c39e: ff,fd,a8,fd,a8,00,64,fc,3f,fb,19,fe,0f,00,00,00  ???  
+c39e: ff,fc,a8,fc,a8,f6,3f,fa,26,f8,19,00,00,00,00,00  ???  
 c3ae: 00,00,00,00         ???   
 
    trans_shift_32:
-c3b2: ff,6a               func  255, 106
-c3b4: a8,6a               func  168, 106
-c3b6: a8,54               func  168,  84
-c3b8: 64,46               func  100,  70
-c3ba: 3f,36               func   63,  54
-c3bc: 26,2a               func   38,  42
-c3be: 0f,1d               func   15,  29
-c3c0: 00,1d               func    0,  29
-c3c2: 00,1d               func    0,  29
-c3c4: 00,1d               func    0,  29
+c3b2: ff,68               func  255, 104
+c3b4: a8,68               func  168, 104
+c3b6: a8,5a               func  168,  90
+c3b8: 77,50               func  119,  80
+c3ba: 64,46               func  100,  70
+c3bc: 3f,37               func   63,  55
+c3be: 26,2c               func   38,  44
+c3c0: 19,20               func   25,  32
+c3c2: 00,20               func    0,  32
+c3c4: 00,20               func    0,  32
 
-c3c6: ff,fc,a8,fc,a8,f5,76,f5,76,fa,6a,fa,19,ff,13,00  ???  
-c3d6: 00,00,00,00         ???   
+c3c6: ff,fa,64,fa,4b,fc,00,fc,00,fc,00,fc,00,fc,00,fc  ???  
+c3d6: 00,fc,00,fc         ???   
 
    trans_shift_43:
-c3da: ff,96               func  255, 150
-c3dc: a8,96               func  168, 150
-c3de: a8,8f               func  168, 143
-c3e0: 76,80               func  118, 128
-c3e2: 76,72               func  118, 114
-c3e4: 2d,49               func   45,  73
-c3e6: 19,45               func   25,  69
-c3e8: 13,42               func   19,  66
-c3ea: 00,42               func    0,  66
-c3ec: 00,42               func    0,  66
+c3da: ff,98               func  255, 152
+c3dc: a8,98               func  168, 152
+c3de: a8,8e               func  168, 142
+c3e0: 64,74               func  100, 116
+c3e2: 4b,64               func   75, 100
+c3e4: 19,47               func   25,  71
+c3e6: 00,47               func    0,  71
+c3e8: 00,47               func    0,  71
+c3ea: 00,47               func    0,  71
+c3ec: 00,47               func    0,  71
 
    FN689D:
 c3ee: ff,ff,f0,23         func  65535,  9200
@@ -16588,156 +16588,156 @@ c416: 00,00,e0,15         func      0,  5600
 c41a: 00,00,e0,15         func      0,  5600
 
    trans_converter_lock_2nd:
-c41e: ff,22               func  255,  34
-c420: a1,22               func  161,  34
-c422: a1,37               func  161,  55
-c424: 7d,32               func  125,  50
-c426: 7d,82               func  125, 130
-c428: 00,82               func    0, 130
-c42a: 00,82               func    0, 130
-c42c: 00,82               func    0, 130
-c42e: 00,82               func    0, 130
-c430: 00,82               func    0, 130
+c41e: ff,1d               func  255,  29
+c420: a8,1d               func  168,  29
+c422: a8,34               func  168,  52
+c424: 71,29               func  113,  41
+c426: 71,66               func  113, 102
+c428: 00,66               func    0, 102
+c42a: 00,66               func    0, 102
+c42c: 00,66               func    0, 102
+c42e: 00,66               func    0, 102
+c430: 00,66               func    0, 102
 
    trans_converter_lock_3rd:
-c432: ff,33               func  255,  51
-c434: 2e,33               func   46,  51
-c436: 2e,48               func   46,  72
-c438: 19,36               func   25,  54
-c43a: 00,36               func    0,  54
-c43c: 00,36               func    0,  54
-c43e: 00,36               func    0,  54
-c440: 00,36               func    0,  54
-c442: 00,36               func    0,  54
-c444: 00,36               func    0,  54
+c432: ff,2d               func  255,  45
+c434: 38,2d               func   56,  45
+c436: 38,56               func   56,  86
+c438: 26,48               func   38,  72
+c43a: 0f,32               func   15,  50
+c43c: 00,32               func    0,  50
+c43e: 00,32               func    0,  50
+c440: 00,32               func    0,  50
+c442: 00,32               func    0,  50
+c444: 00,32               func    0,  50
 
    trans_converter_lock_4th:
-c446: ff,40               func  255,  64
-c448: 00,40               func    0,  64
-c44a: 00,40               func    0,  64
-c44c: 00,40               func    0,  64
+c446: ff,48               func  255,  72
+c448: 00,48               func    0,  72
+c44a: 00,48               func    0,  72
+c44c: 00,48               func    0,  72
 
    Func_c44e:
 c44e: ff,00               func  255,   0
-c450: a1,00               func  161,   0
-c452: a1,fd               func  161, 253
-c454: 7d,fc               func  125, 252
-c456: 7d,00               func  125,   0
-c458: 00,00               func    0,   0
+c450: a8,00               func  168,   0
+c452: a8,fc               func  168, 252
+c454: 64,ff               func  100, 255
+c456: 4b,fe               func   75, 254
+c458: 4b,00               func   75,   0
 c45a: 00,00               func    0,   0
 c45c: 00,00               func    0,   0
 c45e: 00,00               func    0,   0
 c460: 00,00               func    0,   0
 
-c462: ff,00,2e,00,2e,fa,19,00,00,00,00,00,00,00,00,00  ???  
-c472: 00,00,00,00,ff,00,00,00,00,00,00,00  ???  
+c462: ff,fa,00,fa,00,fa,00,fa,00,fa,00,fa,00,fa,00,fa  ???  
+c472: 00,fa,00,fa,ff,00,00,00,00,00,00,00  ???  
 
    trans_converter_unlock_2nd:
-c47e: ff,21               func  255,  33
-c480: a1,21               func  161,  33
-c482: a1,36               func  161,  54
-c484: 7d,31               func  125,  49
-c486: 7d,1c               func  125,  28
-c488: 00,1c               func    0,  28
-c48a: 00,1c               func    0,  28
-c48c: 00,1c               func    0,  28
-c48e: 00,1c               func    0,  28
-c490: 00,1c               func    0,  28
+c47e: ff,1b               func  255,  27
+c480: a8,1b               func  168,  27
+c482: a8,32               func  168,  50
+c484: 7d,27               func  125,  39
+c486: 7d,1b               func  125,  27
+c488: 00,1b               func    0,  27
+c48a: 00,1b               func    0,  27
+c48c: 00,1b               func    0,  27
+c48e: 00,1b               func    0,  27
+c490: 00,1b               func    0,  27
 
    trans_converter_unlock_3rd:
-c492: ff,32               func  255,  50
-c494: 00,32               func    0,  50
-c496: 00,32               func    0,  50
-c498: 00,32               func    0,  50
-c49a: 00,32               func    0,  50
-c49c: 00,32               func    0,  50
-c49e: 00,32               func    0,  50
-c4a0: 00,32               func    0,  50
-c4a2: 00,32               func    0,  50
-c4a4: 00,32               func    0,  50
+c492: ff,28               func  255,  40
+c494: 37,28               func   55,  40
+c496: 37,4c               func   55,  76
+c498: 14,30               func   20,  48
+c49a: 00,30               func    0,  48
+c49c: 00,30               func    0,  48
+c49e: 00,30               func    0,  48
+c4a0: 00,30               func    0,  48
+c4a2: 00,30               func    0,  48
+c4a4: 00,30               func    0,  48
 
    trans_converter_unlock_4th:
-c4a6: ff,3f               func  255,  63
-c4a8: 00,3f               func    0,  63
-c4aa: 00,3f               func    0,  63
-c4ac: 00,3f               func    0,  63
+c4a6: ff,42               func  255,  66
+c4a8: 00,42               func    0,  66
+c4aa: 00,42               func    0,  66
+c4ac: 00,42               func    0,  66
 
    Func_c4ae:
 c4ae: ff,00               func  255,   0
-c4b0: a1,00               func  161,   0
-c4b2: a1,fd               func  161, 253
-c4b4: 7d,fc               func  125, 252
-c4b6: 7d,00               func  125,   0
+c4b0: 00,00               func    0,   0
+c4b2: 00,00               func    0,   0
+c4b4: 00,00               func    0,   0
+c4b6: 00,00               func    0,   0
 c4b8: 00,00               func    0,   0
 c4ba: 00,00               func    0,   0
 c4bc: 00,00               func    0,   0
 c4be: 00,00               func    0,   0
 c4c0: 00,00               func    0,   0
 
-c4c2: ff,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00  ???  
-c4d2: 00,00,00,00,ff,00,00,00,00,00,00,00  ???  
+c4c2: ff,fa,00,fa,00,fa,00,fa,00,fa,00,fa,00,fa,00,fa  ???  
+c4d2: 00,fa,00,fa,ff,00,00,00,00,00,00,00  ???  
 
    FN2ULK:
-c4de: ff,ff,93,00         func  65535,   147
-c4e2: 00,00,93,00         func      0,   147
-c4e6: 00,00,93,00         func      0,   147
-c4ea: 00,00,93,00         func      0,   147
-c4ee: 00,00,93,00         func      0,   147
-c4f2: 00,00,93,00         func      0,   147
-c4f6: 00,00,93,00         func      0,   147
+c4de: ff,ff,8b,00         func  65535,   139
+c4e2: 00,00,8b,00         func      0,   139
+c4e6: 00,00,8b,00         func      0,   139
+c4ea: 00,00,8b,00         func      0,   139
+c4ee: 00,00,8b,00         func      0,   139
+c4f2: 00,00,8b,00         func      0,   139
+c4f6: 00,00,8b,00         func      0,   139
 
    FN2LK:
-c4fa: ff,ff,ae,0f         func  65535,  4014
-c4fe: 00,a1,ae,0f         func  41216,  4014
-c502: 00,7d,b8,0e         func  32000,  3768
-c506: 00,64,b8,0e         func  25600,  3768
-c50a: 00,32,29,0c         func  12800,  3113
-c50e: 00,00,29,0c         func      0,  3113
-c512: 00,00,29,0c         func      0,  3113
+c4fa: ff,ff,14,0e         func  65535,  3604
+c4fe: 00,a1,14,0e         func  41216,  3604
+c502: 00,a1,b8,0e         func  41216,  3768
+c506: 00,64,14,0e         func  25600,  3604
+c50a: 00,4b,cd,0c         func  19200,  3277
+c50e: 00,00,cd,0c         func      0,  3277
+c512: 00,00,cd,0c         func      0,  3277
 
    FN3ULK:
-c516: ff,ff,93,00         func  65535,   147
-c51a: 00,a1,93,00         func  41216,   147
-c51e: 00,a1,9c,00         func  41216,   156
-c522: 00,4b,9c,00         func  19200,   156
-c526: 00,32,a4,00         func  12800,   164
-c52a: 00,00,a4,00         func      0,   164
-c52e: 00,00,a4,00         func      0,   164
+c516: ff,ff,ec,01         func  65535,   492
+c51a: c0,ff,ec,01         func  65472,   492
+c51e: 00,96,d7,03         func  38400,   983
+c522: 00,64,33,03         func  25600,   819
+c526: 00,4b,00,c0         func  19200, 49152
+c52a: 00,00,00,c0         func      0, 49152
+c52e: 00,00,00,c0         func      0, 49152
 
    FN3LK:
-c532: ff,ff,e1,0a         func  65535,  2785
-c536: 00,a1,e1,0a         func  41216,  2785
-c53a: 00,a1,3d,0a         func  41216,  2621
-c53e: 00,7d,ec,09         func  32000,  2540
+c532: ff,ff,c3,05         func  65535,  1475
+c536: c0,ff,c3,05         func  65472,  1475
+c53a: 00,7d,ae,07         func  32000,  1966
+c53e: 00,64,ae,07         func  25600,  1966
 c542: 00,4b,a4,08         func  19200,  2212
-c546: 00,32,ae,07         func  12800,  1966
-c54a: 00,00,ae,07         func      0,  1966
+c546: 00,00,a4,08         func      0,  2212
+c54a: 00,00,a4,08         func      0,  2212
 
    FN4ULK:
-c54e: ff,ff,9c,00         func  65535,   156
-c552: 00,4b,9c,00         func  19200,   156
-c556: 80,25,f6,00         func   9600,   246
-c55a: 00,00,f6,00         func      0,   246
-c55e: 00,00,f6,00         func      0,   246
+c54e: ff,ff,00,c0         func  65535, 49152
+c552: 00,32,00,c0         func  12800, 49152
+c556: 00,32,bc,00         func  12800,   188
+c55a: 80,25,d5,00         func   9600,   213
+c55e: 00,19,f6,00         func   6400,   246
 c562: 00,00,f6,00         func      0,   246
 c566: 00,00,f6,00         func      0,   246
 
    FN4LK:
-c56a: ff,ff,66,06         func  65535,  1638
-c56e: 00,a1,66,06         func  41216,  1638
-c572: 00,a1,00,20         func  41216,  8192
-c576: 00,00,00,20         func      0,  8192
-c57a: 00,00,00,20         func      0,  8192
-c57e: 00,00,00,20         func      0,  8192
-c582: 00,00,00,20         func      0,  8192
+c56a: ff,ff,00,00         func  65535,     0
+c56e: 00,4b,00,00         func  19200,     0
+c572: 00,4b,ae,07         func  19200,  1966
+c576: 00,32,9a,09         func  12800,  2458
+c57a: 00,00,9a,09         func      0,  2458
+c57e: 00,00,9a,09         func      0,  2458
+c582: 00,00,9a,09         func      0,  2458
 
    FN624:
-c586: ff,ff,b8,00         func  65535,   184
-c58a: 00,00,b8,00         func      0,   184
-c58e: 00,00,b8,00         func      0,   184
-c592: 00,00,b8,00         func      0,   184
-c596: 00,00,b8,00         func      0,   184
-c59a: 00,00,b8,00         func      0,   184
+c586: ff,ff,b3,00         func  65535,   179
+c58a: 00,00,b3,00         func      0,   179
+c58e: 00,00,b3,00         func      0,   179
+c592: 00,00,b3,00         func      0,   179
+c596: 00,00,b3,00         func      0,   179
+c59a: 00,00,b3,00         func      0,   179
 
    FN689L:
 c59e: ff,ff,70,30         func  65535, 12400
@@ -16753,16 +16753,16 @@ c5b6: 00,00               func    0,   0
 c5b8: 00,00               func    0,   0
 
    trans_tv_pressure_12:
-c5ba: ff,f5               func  255, 245
-c5bc: a1,f5               func  161, 245
-c5be: a1,f8               func  161, 248
-c5c0: 4b,f6               func   75, 246
-c5c2: 32,f3               func   50, 243
-c5c4: 19,eb               func   25, 235
-c5c6: 00,e9               func    0, 233
-c5c8: 00,e9               func    0, 233
-c5ca: 00,e9               func    0, 233
-c5cc: 00,e9               func    0, 233
+c5ba: ff,03               func  255,   3
+c5bc: a1,03               func  161,   3
+c5be: a1,02               func  161,   2
+c5c0: 4b,01               func   75,   1
+c5c2: 19,f6               func   25, 246
+c5c4: 0d,e7               func   13, 231
+c5c6: 00,e2               func    0, 226
+c5c8: 00,e2               func    0, 226
+c5ca: 00,e2               func    0, 226
+c5cc: 00,e2               func    0, 226
 
    trans_tv_pressure_32:
 c5ce: ff,00               func  255,   0
@@ -16771,16 +16771,16 @@ c5d2: 00,00               func    0,   0
 c5d4: 00,00               func    0,   0
 
    trans_tv_pressure_23:
-c5d6: ff,fa               func  255, 250
-c5d8: a1,fa               func  161, 250
-c5da: a1,f9               func  161, 249
-c5dc: 7d,f7               func  125, 247
-c5de: 64,f8               func  100, 248
-c5e0: 4b,f7               func   75, 247
-c5e2: 32,fa               func   50, 250
-c5e4: 19,f9               func   25, 249
-c5e6: 00,fa               func    0, 250
-c5e8: 00,fa               func    0, 250
+c5d6: ff,02               func  255,   2
+c5d8: 96,02               func  150,   2
+c5da: 32,00               func   50,   0
+c5dc: 00,00               func    0,   0
+c5de: 00,00               func    0,   0
+c5e0: 00,00               func    0,   0
+c5e2: 00,00               func    0,   0
+c5e4: 00,00               func    0,   0
+c5e6: 00,00               func    0,   0
+c5e8: 00,00               func    0,   0
 
    trans_tv_pressure_43:
 c5ea: ff,00               func  255,   0
@@ -16790,19 +16790,19 @@ c5f0: 00,00               func    0,   0
 
    trans_tv_pressure_34:
 c5f2: ff,14               func  255,  20
-c5f4: 64,14               func  100,  20
-c5f6: 4b,08               func   75,   8
-c5f8: 32,ff               func   50, 255
-c5fa: 26,fc               func   38, 252
-c5fc: 19,fc               func   25, 252
-c5fe: 00,f9               func    0, 249
-c600: 00,f9               func    0, 249
-c602: 00,f9               func    0, 249
-c604: 00,f9               func    0, 249
+c5f4: 7d,14               func  125,  20
+c5f6: 32,0c               func   50,  12
+c5f8: 19,07               func   25,   7
+c5fa: 00,07               func    0,   7
+c5fc: 00,07               func    0,   7
+c5fe: 00,07               func    0,   7
+c600: 00,07               func    0,   7
+c602: 00,07               func    0,   7
+c604: 00,07               func    0,   7
 
    Func_c606:
-c606: ff,ff,41,00         func  65535,    65
-c60a: 66,06,41,00         func   1638,    65
+c606: ff,ff,50,00         func  65535,    80
+c60a: 66,06,50,00         func   1638,    80
 c60e: 9a,03,32,00         func    922,    50
 c612: cd,02,14,00         func    717,    20
 c616: 00,02,00,00         func    512,     0
@@ -16832,33 +16832,33 @@ c65a: ff,7f               func  255, 127
 c65c: 8f,00               func  143,   0
 c65e: a8,07               func  168,   7
 c660: 8f,00               func  143,   0
-c662: e0,06               func  224,   6
-c664: 84,00               func  132,   0
-c666: 68,06               func  104,   6
+c662: 40,06               func   64,   6
+c664: 80,00               func  128,   0
+c666: f0,05               func  240,   5
 c668: 80,00               func  128,   0
-c66a: f0,05               func  240,   5
-c66c: 80,00               func  128,   0
-c66e: a0,05               func  160,   5
-c670: 7b,00               func  123,   0
+c66a: a0,05               func  160,   5
+c66c: 7b,00               func  123,   0
+c66e: 28,05               func   40,   5
+c670: 77,00               func  119,   0
 c672: 88,04               func  136,   4
-c674: 77,00               func  119,   0
+c674: 70,00               func  112,   0
 c676: 70,03               func  112,   3
-c678: 6c,00               func  108,   0
-c67a: c0,fe               func  192, 254
-c67c: 68,00               func  104,   0
-c67e: 00,80               func    0, 128
-c680: 68,00               func  104,   0
+c678: 66,00               func  102,   0
+c67a: 58,02               func   88,   2
+c67c: 60,00               func   96,   0
+c67e: f0,00               func  240,   0
+c680: 5c,00               func   92,   0
 c682: 00,80               func    0, 128
-c684: 68,00               func  104,   0
+c684: 5c,00               func   92,   0
 c686: 00,80               func    0, 128
-c688: 68,00               func  104,   0
+c688: 5c,00               func   92,   0
 
-c68a: ff,7f,8a,00,f0,07,8a,00,a8,07,88,00,08,07,80,00  ???  
-c69a: 10,04,80,00,18,01,7b,00,50,00,77,00,00,80,77,00  ???  
-c6aa: 00,80,77,00,00,80,77,00,00,80,77,00,00,80,77,00  ???  
-c6ba: ff,7f,9a,00,a8,07,9a,00,30,07,8d,00,b8,06,86,00  ???  
-c6ca: 90,06,80,00,f0,05,80,00,a0,05,7d,00,d8,04,7a,00  ???  
-c6da: f0,00,6d,00,00,80,6d,00,00,80,6d,00,00,80,6d,00  ???  
+c68a: ff,7f,8f,00,a8,07,8f,00,08,07,80,00,a0,05,80,00  ???  
+c69a: 10,04,7c,00,20,03,7b,00,50,00,7b,00,c0,fe,78,00  ???  
+c6aa: 00,80,78,00,00,80,78,00,00,80,78,00,00,80,78,00  ???  
+c6ba: ff,7f,9a,00,a8,07,9a,00,b8,06,88,00,d8,04,76,00  ???  
+c6ca: e8,03,73,00,20,03,6a,00,f0,00,69,00,00,80,69,00  ???  
+c6da: 00,80,69,00,00,80,69,00,00,80,69,00,00,80,69,00  ???  
 c6ea: ff,7f,80,00,00,80,80,00,00,80,80,00,00,80,80,00  ???  
 c6fa: 00,80,80,00,00,80,80,00,00,80,80,00,00,80,80,00  ???  
 c70a: 00,80,80,00,00,80,80,00,00,80,80,00,00,80,80,00  ???  
@@ -16896,26 +16896,26 @@ c79c: 00,00               func    0,   0
    Func_c79e:
 c79e: ff,aa               func  255, 170
 c7a0: 8a,a0               func  138, 160
-c7a2: 3f,a0               func   63, 160
+c7a2: 4b,a0               func   75, 160
 c7a4: 19,64               func   25, 100
-c7a6: 02,00               func    2,   0
-c7a8: 00,00               func    0,   0
+c7a6: 03,3c               func    3,  60
+c7a8: 02,00               func    2,   0
 c7aa: 00,00               func    0,   0
 c7ac: 00,00               func    0,   0
 
    FN617:
 c7ae: ff,ff,00,40         func  65535, 16384
-c7b2: 1b,37,00,40         func  14107, 16384
-c7b6: d1,32,f4,45         func  13009, 17908
-c7ba: fa,2e,64,4b         func  12026, 19300
-c7be: 7f,2a,89,51         func  10879, 20873
-c7c2: 71,25,e5,58         func   9585, 22757
-c7c6: cf,1f,68,61         func   8143, 24936
-c7ca: cb,19,7f,6a         func   6603, 27263
-c7ce: 85,13,a0,72         func   4997, 29344
-c7d2: 1f,0d,c1,7a         func   3359, 31425
-c7d6: 98,06,c1,82         func   1688, 33473
-c7da: 00,00,71,8d         func      0, 36209
+c7b2: 56,36,00,40         func  13910, 16384
+c7b6: 12,33,52,48         func  13074, 18514
+c7ba: 3b,2f,b8,4e         func  12091, 20152
+c7be: c1,2a,7b,54         func  10945, 21627
+c7c2: a2,25,29,5c         func   9634, 23593
+c7c6: 10,20,1f,65         func   8208, 25887
+c7ca: ec,19,14,6e         func   6636, 28180
+c7ce: 96,13,0a,77         func   5014, 30474
+c7d2: 2f,0d,14,7e         func   3375, 32276
+c7d6: 98,06,66,86         func   1688, 34406
+c7da: 00,00,a4,90         func      0, 37028
 
    FN620:
 c7de: ff,00               func  255,   0
@@ -16934,7 +16934,7 @@ c7f4: 00,ff               ???
 
    FN622:
 c7f6: ff,7f,fd,ff         func   32767,     -3
-c7fa: d0,07,fd,ff         func    2000,     -3
+c7fa: f0,07,fd,ff         func    2032,     -3
 c7fe: b0,04,01,00         func    1200,      1
 c802: c8,00,08,00         func     200,      8
 c806: 00,80,08,00         func  -32768,      8
@@ -16972,30 +16972,30 @@ c858: 00,00               func    0,   0
 c85a: 00,00               func    0,   0
 
    FN619:
-c85c: ff,09               func  255,   9
-c85e: bc,07               func  188,   7
-c860: 00,06               func    0,   6
+c85c: ff,0a               func  255,  10
+c85e: bc,08               func  188,   8
+c860: 3f,06               func   63,   6
 c862: 00,06               func    0,   6
 c864: 00,06               func    0,   6
 
    FN621:
-c866: ff,6d               func  255, 109
-c868: a0,6d               func  160, 109
-c86a: 8c,87               func  140, 135
-c86c: 64,b9               func  100, 185
-c86e: 50,cf               func   80, 207
-c870: 3c,e3               func   60, 227
-c872: 14,fc               func   20, 252
+c866: ff,73               func  255, 115
+c868: a0,73               func  160, 115
+c86a: 8c,92               func  140, 146
+c86c: 50,d7               func   80, 215
+c86e: 3c,e6               func   60, 230
+c870: 28,f3               func   40, 243
+c872: 14,fb               func   20, 251
 c874: 00,ff               func    0, 255
 
    FN623:
-c876: ff,ff,29,6c         func  65535, 27689
-c87a: b8,fe,29,6c         func  65208, 27689
-c87e: cd,8c,79,79         func  36045, 31097
+c876: ff,ff,8f,22         func  65535,  8847
+c87a: b8,fe,8f,22         func  65208,  8847
+c87e: cd,8c,e1,7a         func  36045, 31457
 c882: 00,80,00,80         func  32768, 32768
-c886: 33,73,f2,82         func  29491, 33522
-c88a: f6,68,33,83         func  26870, 33587
-c88e: 00,00,b0,82         func      0, 33456
+c886: 33,73,8f,82         func  29491, 33423
+c88a: f6,68,48,81         func  26870, 33096
+c88e: 00,00,4c,5e         func      0, 24140
 
    FN034A:
 c892: ff,ff,00,05         func  65535,  1280
@@ -17017,80 +17017,80 @@ c8c6: 00,00,00,00         func      0,     0
 
    FN1420:
 c8ca: 80,80,85,88,8f,94,a6,ac,a9,92  table  128, 128, 133, 136, 143, 148, 166, 172, 169, 146    
-c8d4: 8f,92,94,9a,9f,a6,b6,bb,b8,a1  table  143, 146, 148, 154, 159, 166, 182, 187, 184, 161    
-c8de: 9c,9f,a1,a4,ac,b1,c0,c5,c3,ac  table  156, 159, 161, 164, 172, 177, 192, 197, 195, 172    
-c8e8: ac,ae,b1,b3,b8,c0,cd,d2,cf,b8  table  172, 174, 177, 179, 184, 192, 205, 210, 207, 184    
-c8f2: b6,b6,b8,bd,c3,c8,d4,da,d7,c0  table  182, 182, 184, 189, 195, 200, 212, 218, 215, 192    
-c8fc: bd,bd,c0,c3,c8,cf,da,df,df,c8  table  189, 189, 192, 195, 200, 207, 218, 223, 223, 200    
-c906: c3,c3,c3,c8,cd,d4,e1,e6,e4,cd  table  195, 195, 195, 200, 205, 212, 225, 230, 228, 205    
-c910: c8,c8,c8,cd,d2,d7,e4,e6,e6,cf  table  200, 200, 200, 205, 210, 215, 228, 230, 230, 207    
-c91a: ca,ca,cd,cf,d4,da,e6,e9,e9,d2  table  202, 202, 205, 207, 212, 218, 230, 233, 233, 210    
-c924: ca,cd,cd,d2,d7,dc,e6,ec,e9,d2  table  202, 205, 205, 210, 215, 220, 230, 236, 233, 210    
+c8d4: 8f,92,97,a1,b1,b8,bb,b3,b1,a1  table  143, 146, 151, 161, 177, 184, 187, 179, 177, 161    
+c8de: 9c,9f,a1,ac,bb,c3,c5,bd,bb,ac  table  156, 159, 161, 172, 187, 195, 197, 189, 187, 172    
+c8e8: ac,ae,b1,bb,c8,cf,d2,ca,c8,b8  table  172, 174, 177, 187, 200, 207, 210, 202, 200, 184    
+c8f2: b6,b6,bb,c3,d2,da,da,d2,cf,c0  table  182, 182, 187, 195, 210, 218, 218, 210, 207, 192    
+c8fc: bd,bd,c0,c8,d7,df,df,da,d4,c8  table  189, 189, 192, 200, 215, 223, 223, 218, 212, 200    
+c906: c3,c3,c5,cd,da,e1,e4,df,da,cd  table  195, 195, 197, 205, 218, 225, 228, 223, 218, 205    
+c910: c8,c8,c8,d2,df,e6,e9,e1,dc,cf  table  200, 200, 200, 210, 223, 230, 233, 225, 220, 207    
+c91a: ca,ca,cd,d4,e1,e9,ec,e4,df,d2  table  202, 202, 205, 212, 225, 233, 236, 228, 223, 210    
+c924: ca,ca,cd,d7,e1,ec,ec,e4,e1,d2  table  202, 202, 205, 215, 225, 236, 236, 228, 225, 210    
 
    FN1615A:
-c92e: 02,13,16,15,13,15   table   2,  19,  22,  21,  19,  21
-c934: 32,3a,3d,3c,3b,3b   table  50,  58,  61,  60,  59,  59
-c93a: 55,5d,60,60,5f,5e   table  85,  93,  96,  96,  95,  94
-c940: 74,80,83,83,82,82   table 116, 128, 131, 131, 130, 130
-c946: 91,a3,a6,a5,a4,a4   table 145, 163, 166, 165, 164, 164
-c94c: ad,c7,cb,c9,c7,c5   table 173, 199, 203, 201, 199, 197
+c92e: 0a,0f,17,18,17,15   table  10,  15,  23,  24,  23,  21
+c934: 2d,35,3a,3c,3b,3b   table  45,  53,  58,  60,  59,  59
+c93a: 4c,58,5c,5d,5e,5f   table  76,  88,  92,  93,  94,  95
+c940: 6c,79,7e,7f,80,83   table 108, 121, 126, 127, 128, 131
+c946: 8c,9a,9f,a1,a2,a6   table 140, 154, 159, 161, 162, 166
+c94c: ae,b8,c1,c2,c4,c7   table 174, 184, 193, 194, 196, 199
 
    FN1616:
-c952: 12,16,19,1d,21,25   table  18,  22,  25,  29,  33,  37
-c958: 0f,13,18,1c,21,26   table  15,  19,  24,  28,  33,  38
-c95e: 0d,11,16,1c,21,27   table  13,  17,  22,  28,  33,  39
-c964: 0b,10,15,1b,21,29   table  11,  16,  21,  27,  33,  41
-c96a: 08,0e,14,1a,21,2a   table   8,  14,  20,  26,  33,  42
-c970: 06,0c,13,1a,21,2b   table   6,  12,  19,  26,  33,  43
+c952: 15,19,1d,22,26,2c   table  21,  25,  29,  34,  38,  44
+c958: 13,18,1c,22,27,2d   table  19,  24,  28,  34,  39,  45
+c95e: 11,16,1b,21,27,2f   table  17,  22,  27,  33,  39,  47
+c964: 0f,14,1a,21,28,31   table  15,  20,  26,  33,  40,  49
+c96a: 0d,12,19,20,29,33   table  13,  18,  25,  32,  41,  51
+c970: 09,10,18,20,29,34   table   9,  16,  24,  32,  41,  52
 
    FN1617:
-c976: 83,8d,99,9e,ac,de   table 131, 141, 153, 158, 172, 222
-c97c: 73,84,90,96,a1,c9   table 115, 132, 144, 150, 161, 201
-c982: 59,74,80,85,8a,97   table  89, 116, 128, 133, 138, 151
-c988: 54,66,73,78,7c,85   table  84, 102, 115, 120, 124, 133
-c98e: 49,55,64,6c,72,77   table  73,  85, 100, 108, 114, 119
-c994: 42,4b,58,61,65,68   table  66,  75,  88,  97, 101, 104
+c976: 7f,94,9e,9e,9f,ab   table 127, 148, 158, 158, 159, 171
+c97c: 7b,90,9d,a2,a4,ad   table 123, 144, 157, 162, 164, 173
+c982: 64,81,8f,97,9b,9f   table 100, 129, 143, 151, 155, 159
+c988: 4c,77,81,86,8a,93   table  76, 119, 129, 134, 138, 147
+c98e: 3a,6d,76,7d,83,89   table  58, 109, 118, 125, 131, 137
+c994: 2e,66,6d,73,79,80   table  46, 102, 109, 115, 121, 128
 
    Func_c99a:
 c99a: ff,7f               func  255, 127
 c99c: 0a,00               func   10,   0
-c99e: 78,05               func  120,   5
+c99e: 40,06               func   64,   6
 c9a0: 0a,00               func   10,   0
-c9a2: b0,04               func  176,   4
-c9a4: 1e,00               func   30,   0
-c9a6: 20,03               func   32,   3
-c9a8: 32,00               func   50,   0
-c9aa: 58,02               func   88,   2
-c9ac: 50,00               func   80,   0
-c9ae: 00,80               func    0, 128
-c9b0: 50,00               func   80,   0
+c9a2: 20,03               func   32,   3
+c9a4: 14,00               func   20,   0
+c9a6: 90,01               func  144,   1
+c9a8: 14,00               func   20,   0
+c9aa: a0,00               func  160,   0
+c9ac: 46,00               func   70,   0
+c9ae: c0,fe               func  192, 254
+c9b0: 6e,00               func  110,   0
 c9b2: 00,80               func    0, 128
-c9b4: 50,00               func   80,   0
+c9b4: 6e,00               func  110,   0
 
-c9b6: ff,7f,0a,00,58,02,0a,00,90,01,28,00,00,80,28,00  ???  
-c9c6: 00,80,28,00,00,80,28,00,00,80,28,00,ff,7f,0a,00  ???  
-c9d6: 20,03,0a,00,58,02,28,00,00,80,28,00,00,80,28,00  ???  
-c9e6: 00,80,28,00,00,80,28,00,ff,7f,0a,00,20,03,0a,00  ???  
-c9f6: 58,02,28,00,00,80,28,00,00,80,28,00,00,80,28,00  ???  
-ca06: 00,80,28,00,ff,7f,0a,00,b0,04,0a,00,20,03,14,00  ???  
-ca16: 90,01,28,00,c0,fe,50,00,00,80,50,00,00,80,50,00  ???  
-ca26: ff,7f,0a,00,00,80,0a,00,00,80,0a,00,00,80,0a,00  ???  
-ca36: 00,80,0a,00,00,80,0a,00,00,80,0a,00,ff,7f,1e,00  ???  
-ca46: b0,04,1e,00,20,03,28,00,58,02,28,00,90,01,32,00  ???  
-ca56: c0,fe,46,00,00,80,46,00,ff,7f,0a,00,20,03,0a,00  ???  
-ca66: 90,01,1e,00,00,80,1e,00,00,80,1e,00,00,80,1e,00  ???  
-ca76: 00,80,1e,00,ff,7f,0a,00,58,02,0a,00,90,01,14,00  ???  
-ca86: 00,80,14,00,00,80,14,00,00,80,14,00,00,80,14,00  ???  
-ca96: ff,7f,0a,00,00,80,0a,00,00,80,0a,00,00,80,0a,00  ???  
-caa6: 00,80,0a,00,00,80,0a,00,00,80,0a,00,ff,7f,0a,00  ???  
-cab6: 00,80,0a,00,00,80,0a,00,00,80,0a,00,00,80,0a,00  ???  
-cac6: 00,80,0a,00,00,80,0a,00,ff,7f,0a,00,00,80,0a,00  ???  
-cad6: 00,80,0a,00,00,80,0a,00,00,80,0a,00,00,80,0a,00  ???  
-cae6: 00,80,0a,00,ff,ff,c0,00,c0,12,c0,00,a0,0f,80,00  ???  
+c9b6: ff,7f,00,00,00,80,00,00,00,80,00,00,00,80,00,00  ???  
+c9c6: 00,80,00,00,00,80,00,00,00,80,00,00,ff,7f,1e,00  ???  
+c9d6: b0,04,1e,00,b0,04,54,00,80,02,64,00,40,01,6e,00  ???  
+c9e6: a0,00,8c,00,00,80,8c,00,ff,7f,00,00,00,80,00,00  ???  
+c9f6: 00,80,00,00,00,80,00,00,00,80,00,00,00,80,00,00  ???  
+ca06: 00,80,00,00,ff,7f,14,00,40,06,14,00,20,03,1e,00  ???  
+ca16: 90,01,32,00,c0,fe,46,00,00,80,46,00,00,80,46,00  ???  
+ca26: ff,7f,00,00,00,80,00,00,00,80,00,00,00,80,00,00  ???  
+ca36: 00,80,00,00,00,80,00,00,00,80,00,00,ff,7f,28,00  ???  
+ca46: a0,05,28,00,c0,03,4c,00,08,02,54,00,18,01,5a,00  ???  
+ca56: 50,00,82,00,00,80,82,00,ff,7f,00,00,00,80,00,00  ???  
+ca66: 00,80,00,00,00,80,00,00,00,80,00,00,00,80,00,00  ???  
+ca76: 00,80,00,00,ff,7f,0a,00,18,01,0a,00,a0,00,32,00  ???  
+ca86: 00,80,32,00,00,80,32,00,00,80,32,00,00,80,32,00  ???  
+ca96: ff,7f,00,00,00,80,00,00,00,80,00,00,00,80,00,00  ???  
+caa6: 00,80,00,00,00,80,00,00,00,80,00,00,ff,7f,28,00  ???  
+cab6: e0,01,28,00,f0,00,1e,00,00,80,1e,00,00,80,1e,00  ???  
+cac6: 00,80,1e,00,00,80,1e,00,ff,7f,00,00,00,80,00,00  ???  
+cad6: 00,80,00,00,00,80,00,00,00,80,00,00,00,80,00,00  ???  
+cae6: 00,80,00,00,ff,ff,80,00,00,00,80,00,00,00,80,00  ???  
 caf6: 00,00,80,00,00,00,80,00,00,00,80,00,00,00,80,00  ???  
-cb06: ff,ff,f3,00,10,27,f3,00,40,1f,80,00,00,00,80,00  ???  
-cb16: 00,00,80,00,00,00,80,00,00,00,80,00,ff,ff,f3,00  ???  
-cb26: 40,1f,f3,00,70,17,b0,00,a0,0f,80,00,00,00,80,00  ???  
+cb06: ff,ff,80,00,00,00,80,00,00,00,80,00,00,00,80,00  ???  
+cb16: 00,00,80,00,00,00,80,00,00,00,80,00,ff,ff,da,00  ???  
+cb26: 90,1a,da,00,e0,15,a6,00,80,0c,80,00,00,00,80,00  ???  
 cb36: 00,00,80,00,00,00,80,00,ff,ff,80,00,00,00,80,00  ???  
 cb46: 00,00,80,00,00,00,80,00,00,00,80,00,00,00,80,00  ???  
 cb56: 00,00,80,00         ???   
@@ -17104,17 +17104,17 @@ cb63: 05                  byte      5            CC_FM_LVL
 cb64: 00,18               word   1800            MAPEDG
 cb66: 00                  byte      0            LONG_MAP_RQD
 cb67: 02                  byte      2            MAP_CYCLE
-cb68: 5a,00               word     5a            AEM
+cb68: 80,00               word     80            AEM
 cb6a: 00                  byte      0            ALPHA
 
 cb6b: ff                  ???   
 
-cb6c: 00,02               word    200            TPDLTA
+cb6c: c0,03               word    3c0            TPDLTA
 cb6e: 00                  byte      0            FRCTAE
 
 cb6f: ff                  ???   
 
-cb70: 14,00               word     14            AETAR
+cb70: 18,00               word     18            AETAR
 cb72: 08                  byte      8            NCNT
 
 cb73: ff                  ???   
@@ -17124,7 +17124,7 @@ cb76: c8,00               word     c8            UNRPMH
 cb78: b0,04               word    4b0            NRUN
 cb7a: 90,01               word    190            NSTALL
 cb7c: 05                  byte      5            CRKTM1
-cb7d: 00                  byte      0            CRKPIPCNT2
+cb7d: 64                  byte     64            CRKPIPCNT2
 cb7e: 00                  byte      0            CRKTMR_INC
 cb7f: 00                  byte      0            ACDHP
 cb80: 01                  byte      1            BIHP
@@ -17139,43 +17139,43 @@ cb88: 00                  byte      0            GOVHP
 cb89: 01                  byte      1            VSTYPE
 cb8a: 01                  byte      1            IGN_TYPE
 
-cb8b: ff,a4,10            ???   
+cb8b: ff,00,00            ???   
 
-cb8e: 53                  byte     53            AFECT1
-cb8f: 69                  byte     69            AFECT2
-cb90: 19                  byte     19            AFACT1
-cb91: 64                  byte     64            AFACT2
+cb8e: 46                  byte     46            AFECT1
+cb8f: 7f                  byte     7f            AFECT2
+cb90: 0a                  byte      a            AFACT1
+cb91: 7d                  byte     7d            AFACT2
 cb92: 19,00               word     19            ADAPTM
-cb94: b3                  byte     b3            AMPMUL
+cb94: 00                  byte      0            AMPMUL
 
 cb95: 00                  ???   
 
 cb96: 8f,02               word    28f            DELAMB
-cb98: 33,00               word     33            DELROW
-cb9a: 33,00               word     33            DELCOL
+cb98: 00,05               word    500            DELROW
+cb9a: 00,05               word    500            DELCOL
 cb9c: 00                  byte      0
 cb9d: 40                  byte     40            MINADP
 cb9e: c0                  byte     c0            MAXADP
 cb9f: 00                  byte      0            AELIM
 cba0: 42,00               word     42            ADEFTR
-cba2: 02                  byte      2            ADEGCT
+cba2: 01                  byte      1            ADEGCT
 cba3: 00                  byte      0            FAEGCT
 cba4: 00                  byte      0            KWUCNT
 cba5: 01                  byte      1            HCAMSW
 cba6: 66                  byte     66            MULTM
-cba7: 00                  byte      0            XAPT
-cba8: 8d                  byte     8d            XMAPPA
+cba7: 08                  byte      8            XAPT
+cba8: 66                  byte     66            XMAPPA
 
 cba9: ff                  ???   
 
 cbaa: 00,32               word   3200            VKYPWR
 cbac: 78,00               word     78            VIPSPK
-cbae: 00,60               word   6000
+cbae: 9a,59               word   599a
 cbb0: 00,a0               word   a000
 cbb2: 9a,09               word    99a
 cbb4: 33,03               word    333
 cbb6: a0,0f               word    fa0            VNMIN
-cbb8: 18,ff               word   ff18
+cbb8: 20,ff               word   ff20
 cbba: 33,73               word   7333            VRLAM
 cbbc: a0,28               word   28a0
 cbbe: c0,21               word   21c0
@@ -17206,18 +17206,18 @@ cbe4: d0,07               word    7d0
 
 cbe6: 96,00               ???   
 
-cbe8: 01                  byte      1
+cbe8: 00                  byte      0
 
 cbe9: ff                  ???   
 
 cbea: 33,93               word   9333
 cbec: cd,6c               word   6ccd
-cbee: 66                  byte     66
-cbef: 46                  byte     46
-cbf0: 10,27               word   2710
+cbee: 6d                  byte     6d
+cbef: 40                  byte     40
+cbf0: 80,3e               word   3e80
 cbf2: c0,12               word   12c0
-cbf4: 01                  byte      1
-cbf5: 01                  byte      1
+cbf4: 00                  byte      0
+cbf5: 00                  byte      0
 cbf6: 9a,01               word    19a
 cbf8: 00,02               word    200            TCN
 cbfa: 50                  byte     50
@@ -17228,8 +17228,8 @@ cbfc: 58,02               word    258            ISLBND
 cbfe: 20,03               word    320            ISUBND
 cc00: 71,00               word     71
 cc02: bc,00               word     bc
-cc04: a0,60               word   60a0
-cc06: 00,0c               word    c00            VTCDSN
+cc04: a0,68               word   68a0
+cc06: 00,0e               word    e00            VTCDSN
 cc08: 01                  byte      1
 cc09: 3c                  byte     3c            V_BOO_SPD
 cc0a: 0a                  byte      a
@@ -17240,23 +17240,23 @@ cc0e: 80                  byte     80
 
 cc0f: 02                  ???   
 
-cc10: 3c                  byte     3c
+cc10: 0f                  byte      f
 cc11: 00                  byte      0
-cc12: 08                  byte      8
-cc13: 18                  byte     18
+cc12: 06                  byte      6
+cc13: a0                  byte     a0
 cc14: 03                  byte      3
-cc15: e6                  byte     e6            V_EGORNTM
-cc16: 32                  byte     32
+cc15: ff                  byte     ff            V_EGORNTM
+cc16: ff                  byte     ff
 cc17: 01                  byte      1
-cc18: 50                  byte     50            V_LESTM
+cc18: ff                  byte     ff            V_LESTM
 cc19: 06                  byte      6
 cc1a: 6d                  byte     6d            V_EGOMAP_MAX
-cc1b: 3b                  byte     3b            V_EGOMAP_MIN
-cc1c: 80,07               word    780            V_EGOTP_MIN
+cc1b: 46                  byte     46            V_EGOMAP_MIN
+cc1c: c0,0d               word    dc0            V_EGOTP_MIN
 cc1e: 00                  byte      0            V_EGOAEMAX
 cc1f: 10                  byte     10
 cc20: 5a                  byte     5a
-cc21: 08                  byte      8
+cc21: 06                  byte      6
 cc22: 20                  byte     20
 cc23: 60                  byte     60
 cc24: 40                  byte     40
@@ -17295,12 +17295,12 @@ cc48: c0,0f               word    fc0
 cc4a: 4b                  byte     4b            VECT3                             # VECT3 = Minimum coolant temperature, engine on.
 cc4b: 05                  byte      5
 cc4c: 73,00               word     73            V_879_MULT
-cc4e: 14                  byte     14            SETLNG_TM
+cc4e: 0a                  byte      a            SETLNG_TM
 
 cc4f: ff                  ???   
 
-cc50: 00,10               word   1000            VSIBRM
-cc52: 00,f0               word   f000            VSIBRN
+cc50: cd,0c               word    ccd            VSIBRM
+cc52: 33,f3               word   f333            VSIBRN
 cc54: 80                  byte     80            V820A
 
 cc55: ff                  ???   
@@ -17340,8 +17340,8 @@ cc7f: ff                  ???
 
 cc80: c0,de               word   dec0
 cc82: 00,e4               word   e400
-cc84: 40,22               word   2240
-cc86: 40,39               word   3940
+cc84: c0,8c               word   8cc0
+cc86: c0,95               word   95c0
 cc88: 01                  byte      1
 cc89: 00                  byte      0
 cc8a: 58,02               word    258
@@ -17349,7 +17349,7 @@ cc8c: 18,00               word     18
 cc8e: a0,00               word     a0
 cc90: 01                  byte      1
 cc91: 0e                  byte      e
-cc92: 18,08               word    818
+cc92: 18,06               word    618
 cc94: 28,40               word   4028            VDLY2
 cc96: 40,00               word     40            VATMR2
 cc98: 73                  byte     73
@@ -17367,9 +17367,9 @@ cca8: 66,04               word    466            V_ISCMOD_MAX
 ccaa: 9a,03               word    39a            V_ISCMOD_MIN
 ccac: 0a,00               word      a            V_KDNDT
 ccae: 58,02               word    258
-ccb0: 90,01               word    190
-ccb2: 60,04               word    460
-ccb4: ac,0d               word    dac
+ccb0: 34,03               word    334
+ccb2: 84,03               word    384
+ccb4: 80,0c               word    c80
 ccb6: 28,01               word    128
 ccb8: 20,46               word   4620
 ccba: 08,01               word    108
@@ -17390,12 +17390,12 @@ ccd6: c8,c8               word   c8c8
 ccd8: c8,c8               word   c8c8
 ccda: 08,08               word    808
 ccdc: 08,c8               word   c808
-ccde: 3c,fe               word   fe3c
+ccde: 14,fa               word   fa14
 cce0: c8,c8               word   c8c8
 
-cce2: 28,fe,a0,32,32,32,32,32,32,64,04  ???  
+cce2: c8,c8,0a,32,32,32,32,32,32,64,04  ???  
 
-cced: 32                  byte     32
+cced: 00                  byte      0
 
 ccee: 32,32,32,32,00,00,64,32  ???  
 
@@ -17405,11 +17405,11 @@ ccf7: 00,0a,0a,0a,32,32,0a,fe,05,05,ff  ???
 
 cd02: 02                  byte      2
 
-cd03: 02,02,0a,02,03,0a,0a,02  ???  
+cd03: 02,02,02,02,02,02,02,02  ???  
 
-cd0b: 03                  byte      3
+cd0b: 00                  byte      0
 
-cd0c: 28,ff,00,09,00,09,00,05,00,09,00,09,00,09,00  ???  
+cd0c: 01,ff,00,09,00,00,00,05,00,09,00,09,00,09,00  ???  
 
 cd1b: 09                  byte      9
 
@@ -17433,9 +17433,9 @@ cd3e: 00,00               ???
    FN378:
 cd40: ff,80               func  255, 128
 cd42: e0,80               func  224, 128
-cd44: c8,53               func  200,  83
-cd46: a0,4d               func  160,  77
-cd48: 00,46               func    0,  70
+cd44: c8,66               func  200, 102
+cd46: 00,66               func    0, 102
+cd48: 00,66               func    0, 102
 
    FN379:
 cd4a: ff,ff,40,00         func  65535,    64
@@ -17455,72 +17455,72 @@ cd6c: 00,80               func    0, 128
 
    FN1303:
 cd6e: 1c,24,30,54,5c,68,70,84  table   28,  36,  48,  84,  92, 104, 112, 132
-cd76: 1a,1e,26,40,49,50,56,64  table   26,  30,  38,  64,  73,  80,  86, 100
+cd76: 1a,1e,26,40,49,50,56,67  table   26,  30,  38,  64,  73,  80,  86, 103
 cd7e: 16,1a,20,36,3e,45,48,58  table   22,  26,  32,  54,  62,  69,  72,  88
-cd86: 0f,14,1a,20,22,26,2c,34  table   15,  20,  26,  32,  34,  38,  44,  52
-cd8e: 06,0a,0e,12,17,19,1b,1d  table    6,  10,  14,  18,  23,  25,  27,  29
-cd96: 05,09,0d,11,15,17,19,1b  table    5,   9,  13,  17,  21,  23,  25,  27
-cd9e: 03,04,06,0a,12,18,1e,24  table    3,   4,   6,  10,  18,  24,  30,  36
+cd86: 0f,15,1b,1c,30,36,40,40  table   15,  21,  27,  28,  48,  54,  64,  64
+cd8e: 0e,10,15,18,28,30,38,3c  table   14,  16,  21,  24,  40,  48,  56,  60
+cd96: 0c,0d,0f,15,27,30,38,3c  table   12,  13,  15,  21,  39,  48,  56,  60
+cd9e: 05,08,09,0c,18,20,28,30  table    5,   8,   9,  12,  24,  32,  40,  48
 
    FN031:
 cda6: ff,ff,00,09         func  65535,  2304
-cdaa: 7a,00,00,09         func    122,  2304
-cdae: 73,00,00,08         func    115,  2048
-cdb2: 26,00,00,02         func     38,   512
-cdb6: 1a,00,00,00         func     26,     0
-cdba: 00,00,00,00         func      0,     0
-cdbe: 00,00,00,00         func      0,     0
+cdaa: 73,00,00,09         func    115,  2304
+cdae: 60,00,80,08         func     96,  2176
+cdb2: 53,00,80,06         func     83,  1664
+cdb6: 33,00,80,02         func     51,   640
+cdba: 26,00,00,01         func     38,   256
+cdbe: 1a,00,00,00         func     26,     0
 cdc2: 00,00,00,00         func      0,     0
 
    FN070L:
 cdc6: ff,ff,00,09         func  65535,  2304
 cdca: 50,46,00,09         func  18000,  2304
-cdce: b0,36,00,08         func  14000,  2048
-cdd2: 40,1f,00,05         func   8000,  1280
-cdd6: a0,0f,00,01         func   4000,   256
+cdce: 80,3e,00,08         func  16000,  2048
+cdd2: 60,3b,00,07         func  15200,  1792
+cdd6: 50,14,00,02         func   5200,   512
 cdda: 80,0c,00,00         func   3200,     0
 cdde: 00,00,00,00         func      0,     0
 
    FN371:
 cde2: 7f,ff               func   127, 255
 cde4: 5a,ff               func    90, 255
-cde6: 26,cd               func    38, 205
-cde8: 00,c0               func     0, 192
-cdea: f6,a6               func   -10, 166
-cdec: 80,a6               func  -128, 166
+cde6: 1e,c0               func    30, 192
+cde8: 00,a6               func     0, 166
+cdea: f6,8d               func   -10, 141
+cdec: 80,8d               func  -128, 141
 
    FN1325L:
-cdee: 03,03,03,03,03,03,03,03,03,03  table    3,   3,   3,   3,   3,   3,   3,   3,   3,   3    
-cdf8: 03,03,03,03,03,03,03,03,03,03  table    3,   3,   3,   3,   3,   3,   3,   3,   3,   3    
+cdee: 03,03,03,fd,fc,fb,fa,f9,03,03  table    3,   3,   3, 253, 252, 251, 250, 249,   3,   3    
+cdf8: 03,03,03,f3,f2,f1,f0,ef,03,03  table    3,   3,   3, 243, 242, 241, 240, 239,   3,   3    
 ce02: 03,03,03,03,03,03,03,03,03,03  table    3,   3,   3,   3,   3,   3,   3,   3,   3,   3    
-ce0c: 03,03,03,03,03,03,03,03,03,03  table    3,   3,   3,   3,   3,   3,   3,   3,   3,   3    
-ce16: 03,03,03,03,03,03,03,03,03,03  table    3,   3,   3,   3,   3,   3,   3,   3,   3,   3    
-ce20: 03,03,03,03,03,03,03,03,03,03  table    3,   3,   3,   3,   3,   3,   3,   3,   3,   3    
-ce2a: 03,03,03,03,02,02,02,c7,c6,c5  table    3,   3,   3,   3,   2,   2,   2, 199, 198, 197    
-ce34: 03,03,03,03,02,02,be,c7,c6,c5  table    3,   3,   3,   3,   2,   2, 190, 199, 198, 197    
-ce3e: ba,b9,b8,b7,b6,b5,be,c7,c6,c5  table  186, 185, 184, 183, 182, 181, 190, 199, 198, 197    
-ce48: ba,b9,b8,b7,b6,b5,be,c7,c6,c5  table  186, 185, 184, 183, 182, 181, 190, 199, 198, 197    
-ce52: 03,03,03,03,03,03,03,03,03,03  table    3,   3,   3,   3,   3,   3,   3,   3,   3,   3    
+ce0c: 02,02,02,02,02,02,02,02,02,02  table    2,   2,   2,   2,   2,   2,   2,   2,   2,   2    
+ce16: 02,02,02,02,02,02,02,02,02,02  table    2,   2,   2,   2,   2,   2,   2,   2,   2,   2    
+ce20: 02,02,02,02,02,02,02,02,02,02  table    2,   2,   2,   2,   2,   2,   2,   2,   2,   2    
+ce2a: 01,01,01,01,02,02,02,02,02,01  table    1,   1,   1,   1,   2,   2,   2,   2,   2,   1    
+ce34: 01,01,01,01,b6,02,02,02,02,01  table    1,   1,   1,   1, 182,   2,   2,   2,   2,   1    
+ce3e: b0,01,01,01,01,01,01,01,01,01  table  176,   1,   1,   1,   1,   1,   1,   1,   1,   1    
+ce48: a6,00,00,00,00,00,00,00,00,00  table  166,   0,   0,   0,   0,   0,   0,   0,   0,   0    
+ce52: 01,01,01,01,01,01,01,01,01,01  table    1,   1,   1,   1,   1,   1,   1,   1,   1,   1    
 
    FN348:
-ce5c: ff,7f,3d,0a         func   32767,  2621                                      # FN348(ECT) = Crank fuel pulsewidth as a function of ECT.
-ce60: 7f,00,3d,0a         func     127,  2621
-ce64: 76,00,d5,09         func     118,  2517
-ce68: 70,00,d5,09         func     112,  2517
-ce6c: 6c,00,37,09         func     108,  2359
-ce70: 64,00,2b,07         func     100,  1835
-ce74: 5a,00,2b,07         func      90,  1835
-ce78: 3c,00,d9,0e         func      60,  3801
-ce7c: 23,00,87,16         func      35,  5767
-ce80: 14,00,9c,44         func      20, 17564
-ce84: 05,00,cd,4c         func       5, 19661
-ce88: f6,ff,48,61         func     -10, 24904
+ce5c: ff,7f,31,08         func   32767,  2097                                      # FN348(ECT) = Crank fuel pulsewidth as a function of ECT.
+ce60: 7f,00,31,08         func     127,  2097
+ce64: 76,00,3d,0a         func     118,  2621
+ce68: 5a,00,3d,0a         func      90,  2621
+ce6c: 2b,00,b8,1e         func      43,  7864
+ce70: 19,00,85,2b         func      25, 11141
+ce74: 14,00,71,3d         func      20, 15729
+ce78: 0f,00,ae,47         func      15, 18350
+ce7c: 08,00,29,5c         func       8, 23593
+ce80: 00,00,48,61         func       0, 24904
+ce84: 00,80,48,61         func  -32768, 24904
+ce88: 00,80,48,61         func  -32768, 24904
 ce8c: 00,80,48,61         func  -32768, 24904
 
    FN387:
-ce90: 7f,43               func   127,  67
-ce92: 00,43               func     0,  67
-ce94: fb,46               func    -5,  70
+ce90: 7f,40               func   127,  64
+ce92: 0a,40               func    10,  64
+ce94: 00,43               func     0,  67
 ce96: f6,60               func   -10,  96
 ce98: 80,60               func  -128,  96
 ce9a: 80,60               func  -128,  96

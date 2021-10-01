@@ -38,6 +38,11 @@ public class OpCodeDIVW  extends OpCode implements IOpCode {
 
     }
     
+    public final int exec()
+    {
+    	return super.exec();
+    }
+    
     /* SIGNED
      * Instruction: Divide Word(DIVW)
 	 * Operation:   RBB/RA: where RBB = 32-Bit Operand, and 
@@ -46,7 +51,7 @@ public class OpCodeDIVW  extends OpCode implements IOpCode {
      * 			Rb+3, Rb+2 <- 16-Bit Remainder
      */
     
-	public void execDirect()
+	public int execDirect()
 	{
 		/* UNSIGNED
 		 * AssemblerFormat: DIVW areg,breg
@@ -79,10 +84,12 @@ public class OpCodeDIVW  extends OpCode implements IOpCode {
     	
     	this.setOperandLocation(destRBB);
     	this.setResult((short) wordReturned);
+    	
+    	return executionStates;
 	
 	}
 
-	public  void execShortIndexed()
+	public  int execShortIndexed()
     {
     	// AssemblerFormat: ML2B offset(basereg),breg
     	// InstructionOperation:(RB) <- (Rb)*([Ra]+Offset) 
@@ -91,6 +98,7 @@ public class OpCodeDIVW  extends OpCode implements IOpCode {
 
 		System.err.println("NotImplemented");
 		System.exit(1);
+		return executionStates;
     }
 
 	public short setSubResult(short valueRB, short valueRA) {
