@@ -45,9 +45,9 @@ public class OpCodeSB3W  extends OpCode implements IOpCode {
     	// ExecutionStates: 7/12
     	// MachineFormat: [ ^4B ],[ Base RA | 0 MB ],[+-| Offset ],[ Source RB ], [ Dest RD ]
     	numberOfBytes = 5;
-    	executionStates = 7;//12
+    	setExecutionStates(7);//12
 
-    	byte[] operands = this.getOperands(numberOfBytes, executionStates);
+    	byte[] operands = this.getOperands(numberOfBytes, getExecutionStates());
     	
     	byte baseRA = (byte) (operands[1] & 0xfe); // mask out mode bit
     	byte offset = operands[2];

@@ -20,7 +20,6 @@ import ca.nerret.emu.emulator.opcodes.OpCodeAD2B;
 import ca.nerret.emu.emulator.opcodes.OpCodeAD2W;
 import ca.nerret.emu.emulator.opcodes.OpCodeAD3W;
 import ca.nerret.emu.emulator.opcodes.OpCodeAN2B;
-import ca.nerret.emu.emulator.opcodes.OpCodeAN3B;
 import ca.nerret.emu.emulator.opcodes.OpCodeC3;
 import ca.nerret.emu.emulator.opcodes.OpCodeCALL;
 import ca.nerret.emu.emulator.opcodes.OpCodeCD;
@@ -28,7 +27,7 @@ import ca.nerret.emu.emulator.opcodes.OpCodeDI;
 import ca.nerret.emu.emulator.opcodes.OpCodeDIVW;
 import ca.nerret.emu.emulator.opcodes.OpCodeDJNZ;
 import ca.nerret.emu.emulator.opcodes.OpCodeEI;
-import ca.nerret.emu.emulator.opcodes.OpCodeFF;
+import ca.nerret.emu.emulator.opcodes.OpCodeSKP;
 import ca.nerret.emu.emulator.opcodes.OpCodeINCB;
 import ca.nerret.emu.emulator.opcodes.OpCodeINCW;
 import ca.nerret.emu.emulator.opcodes.OpCodeJB;
@@ -46,7 +45,7 @@ import ca.nerret.emu.emulator.opcodes.OpCodeLDZBW;
 import ca.nerret.emu.emulator.opcodes.OpCodeML2B;
 import ca.nerret.emu.emulator.opcodes.OpCodeML2W;
 import ca.nerret.emu.emulator.opcodes.OpCodeNEGW;
-import ca.nerret.emu.emulator.opcodes.OpCodeNop;
+import ca.nerret.emu.emulator.opcodes.OpCodeNOP;
 import ca.nerret.emu.emulator.opcodes.OpCodeORRB;
 import ca.nerret.emu.emulator.opcodes.OpCodePOPW;
 import ca.nerret.emu.emulator.opcodes.OpCodePUSHP;
@@ -63,7 +62,7 @@ public final class OpcodeCache {
     
     static {
         
-        _OPCODES.put((byte) 0x00, new OpCodeNop(0x00, "SKP"));
+        _OPCODES.put((byte) 0x00, new OpCodeSKP(0x00, "SKP"));
 
         _OPCODES.put((byte) 0x03, new OpCodeNEGW(0x03, "NEGW"));
 
@@ -103,7 +102,7 @@ public final class OpcodeCache {
         
         _OPCODES.put((byte) 0xFA, new OpCodeDI(0xfa, "DI"));
         _OPCODES.put((byte) 0xFB, new OpCodeEI(0xfb, "EI"));
-        _OPCODES.put((byte) 0xFF, new OpCodeFF(0xff, "NOP"));
+        _OPCODES.put((byte) 0xFF, new OpCodeNOP(0xff, "NOP"));
  
         _OPCODES.put((byte) 0x98, new OpCodeCMPB(0x98, "CMPB"));
         _OPCODES.put((byte) 0x99, new OpCodeCMPB(0x99, "CMPB"));
@@ -233,6 +232,10 @@ public final class OpcodeCache {
     	// 
     }
 
+    public static OpCode get(int instruction_)
+		{
+    		return get(instruction_, (byte)0x00);
+		}
     /**
      * Get the IOPcode for the current instruction.
      * @param instruction_ Where the state machine pc is at.
@@ -247,7 +250,14 @@ public final class OpcodeCache {
     	
         try 
         {
-            opc.setAddressMode(new AddressMode((byte)instruction_, firstByte));
+        	if( opc.getNumberOfBytes() > 1)
+        	{
+        		opc.setAddressMode(new AddressMode((byte)instruction_, firstByte));
+        	}
+        	else
+        	{
+        		opc.setAddressMode(new AddressMode((byte)instruction_));
+        	}
     	}
         catch(Exception e)
         {

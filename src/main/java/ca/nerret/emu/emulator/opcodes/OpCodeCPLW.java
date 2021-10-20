@@ -55,9 +55,9 @@ public class OpCodeCPLW extends OpCode<OpCodeCPLW> implements IOpCode {
 		// Execution States: 4
 		// MachineFormat: [ ^02 ], [ Source RB ]
     	numberOfBytes = 2;
-    	executionStates = 4;
+    	setExecutionStates(4);
 
-    	byte[] operands = this.getOperands(numberOfBytes, executionStates);
+    	byte[] operands = this.getOperands(numberOfBytes, getExecutionStates());
     	
     	byte sourceRB = operands[1];
     	

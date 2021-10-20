@@ -4,6 +4,7 @@ import java.util.logging.Handler;
 import java.util.logging.Logger;
 
 import ca.nerret.emu.LogFormatter8061;
+import ca.nerret.emu.emulator.Calibration;
 import ca.nerret.emu.emulator.OpcodeCache;
 import ca.nerret.emu.emulator.State;
 import ca.nerret.emu.emulator.opcodes.IOpCode;

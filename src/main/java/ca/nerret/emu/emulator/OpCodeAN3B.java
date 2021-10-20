@@ -1,9 +1,6 @@
-package ca.nerret.emu.emulator.opcodes;
+package ca.nerret.emu.emulator;
 
-import ca.nerret.emu.emulator.AddressMode;
-import ca.nerret.emu.emulator.OpCode;
-import ca.nerret.emu.emulator.ProgramStatusWord;
-import ca.nerret.emu.emulator.State;
+import ca.nerret.emu.emulator.opcodes.IOpCode;
 
 /**
  * AN3B - LOGICAL-AND BYTES,THREE OPERANDS

@@ -43,9 +43,9 @@ public class OpCodeML2W  extends OpCode implements IOpCode {
     	System.err.println("Direct Not Implemented yet."+ this.getClass().getSimpleName());
     	System.exit(1);
     	numberOfBytes = 3;
-    	executionStates = 17;
+    	setExecutionStates(17);
 
-    	byte[] operands = this.getOperands(numberOfBytes, executionStates);
+    	byte[] operands = this.getOperands(numberOfBytes, getExecutionStates());
     	
     	byte sourceRa = (byte) (operands[1]);
     	byte destRb = (byte) (operands[2]);
@@ -63,9 +63,9 @@ public class OpCodeML2W  extends OpCode implements IOpCode {
 	public void execImmediate()
 	{
     	numberOfBytes = 4;
-    	executionStates = 27;
+    	setExecutionStates(27);
 
-    	byte[] operands = this.getOperands(numberOfBytes, executionStates);
+    	byte[] operands = this.getOperands(numberOfBytes, getExecutionStates());
     	
     	byte dataByteLow = (byte) (operands[1]);
     	byte dataByteHi  = (byte) (operands[2]);
@@ -99,9 +99,9 @@ public class OpCodeML2W  extends OpCode implements IOpCode {
     	// ExecutionStates: 19/24
     	// MachineFormat: [ ^7F ],[ Base Ra | 0 MB ],[+-| Offset ], [ Dest RB ]
     	numberOfBytes = 4;
-    	executionStates = 19;//24
+    	setExecutionStates(19);//24
 
-    	byte[] operands = this.getOperands(numberOfBytes, executionStates);
+    	byte[] operands = this.getOperands(numberOfBytes, getExecutionStates());
     	
     	byte baseRa = (byte) (operands[1] & 0xfe); // mask out mode bit
     	byte offset = operands[2];

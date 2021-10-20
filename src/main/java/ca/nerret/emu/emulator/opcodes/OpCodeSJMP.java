@@ -1,5 +1,6 @@
 package ca.nerret.emu.emulator.opcodes;
 
+import ca.nerret.emu.emulator.AddressMode;
 import ca.nerret.emu.emulator.OpCode;
 import ca.nerret.emu.emulator.State;
 
@@ -9,6 +10,9 @@ import ca.nerret.emu.emulator.State;
 public class OpCodeSJMP extends OpCode implements IOpCode {
 
 	private int offset;
+	
+	public int numberOfBytes = 2;
+	public int executionStates = 8;
 	
     public int getOffset() {
 		return this.offset;
@@ -98,6 +102,31 @@ public class OpCodeSJMP extends OpCode implements IOpCode {
     	
         
     }
+    
+	public int execDirect()
+	{
+    	// AssemblerFormat: SJMP
+    	// InstructionOperation: (PC) <- (PC) + Displacement
+    	// ExecutionStates: 8
+    	// MachineFormat: [ * OPCODE | MSB ] [ Displacement LSB]
+		//				  [ 7 6 5 4 3|2 1 0] [ 7 6 5 4 3 2 1 0 ]
+		// * Opcode in the binary format [0 0 1 0 0 D10 D9 D8 ]; where D8 thru D10 are the
+		//	three MSBs of the displacement value. D10 (MSB) is the sign bit of the value. The
+		//  eight LSBs of the displacement value are contained in the 2nd instruction byte.
+		//  Thus, the opcode range for SJMP is from ^20 to ^27.
+		
+		setExecutionStates(this.executionStates);
+		setNumberOfBytes(this.numberOfBytes);
+
+		return getExecutionStates();
+	}
+	
+	public void setAddressMode(AddressMode mode) {
+		// TODO Auto-generated method stub
+	    mode.setType(AddressMode.DIRECT);
+	    
+	    this.addressMode = mode;
+	}
     
     public String toString()
     {

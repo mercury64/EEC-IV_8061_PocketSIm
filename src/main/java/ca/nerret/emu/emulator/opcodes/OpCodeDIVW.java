@@ -60,9 +60,9 @@ public class OpCodeDIVW  extends OpCode implements IOpCode {
 		 * Machine Format: [ ^8C ], [ Source RA], [ Dest RBB ]
 		 */
     	numberOfBytes = 3;
-    	executionStates = 26;
+    	setExecutionStates(26);
 
-    	byte[] operands = this.getOperands(numberOfBytes, executionStates);
+    	byte[] operands = this.getOperands(numberOfBytes, getExecutionStates());
     	
     	byte sourceRA = (byte) (operands[1]);
     	byte destRBB = (byte) (operands[2]);
@@ -85,7 +85,7 @@ public class OpCodeDIVW  extends OpCode implements IOpCode {
     	this.setOperandLocation(destRBB);
     	this.setResult((short) wordReturned);
     	
-    	return executionStates;
+    	return getExecutionStates();
 	
 	}
 
@@ -98,7 +98,7 @@ public class OpCodeDIVW  extends OpCode implements IOpCode {
 
 		System.err.println("NotImplemented");
 		System.exit(1);
-		return executionStates;
+		return getExecutionStates();
     }
 
 	public short setSubResult(short valueRB, short valueRA) {
