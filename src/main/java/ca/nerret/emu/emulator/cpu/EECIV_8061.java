@@ -2,9 +2,7 @@ package ca.nerret.emu.emulator.cpu;
 import ca.nerret.emu.emulator.CPU;
 
 public class EECIV_8061 extends CPU {
-	
-	RALU ralu;
-	
+
 	@Override
 	public void reset() {
 		super.reset();
@@ -25,19 +23,21 @@ public class EECIV_8061 extends CPU {
 		
 	}
 
-	@Override
-	public byte fetch() {
+	
+	public void interrogate() {
 		// TODO Auto-generated method stub
-		return this.read(this.ralu.getPc());
+		
+		// check !RESET input, !PAUSE input, and INTERUPT controller.
+		
+		/** Depending upon the interrogation at the beginning of the opcode fetch, the 8061 will: 
+		 * - reset if the RESET input is active, 
+		 * - enter the pause mode if the PAUSE input is active,
+		 * - vector to an interrupt routine if an unmasked interrupt is active and interrupt service is enabled,
+		 * - or fetch the next opcode if all previous conditions are inactive or disabled.
+		 */
+		
 		
 	}
 
-	@Override
-	public void clearSP() {
-		// TODO Auto-generated method stub
-		
-		System.out.println("Must set stack pointer when loaded from software.");
-		
-	}
 
 }

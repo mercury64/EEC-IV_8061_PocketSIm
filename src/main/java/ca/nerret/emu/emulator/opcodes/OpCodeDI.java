@@ -17,7 +17,7 @@ public class OpCodeDI extends OpCode implements IOpCode {
 	public void exec(State state_) {
 		
 		// Disable Interupts
-        state_.setPc(state_.getPc() + 1);
+        //state_.setPc(state_.getPc() + 1);
         
         System.out.println("Disable Interupt...not implemented.");
 

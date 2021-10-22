@@ -52,7 +52,8 @@ public class RALU extends State {
 	
 	public RALU()
 	{
-		
+		// RAM access via MBUS??
+
 	}
 	
 	public RALU(int[] memory_) {
@@ -75,5 +76,6 @@ public class RALU extends State {
 		this.dataBus = bus;
 		
 	}
+	
 	
 }

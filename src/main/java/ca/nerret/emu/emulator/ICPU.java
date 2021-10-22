@@ -6,8 +6,9 @@ public interface ICPU {
 	
 	abstract void execute();
 	
-	abstract byte fetch();
+	abstract byte opCodeFetch();
 	
 	abstract void clearSP();
 	
+	abstract void interrogate();
 }

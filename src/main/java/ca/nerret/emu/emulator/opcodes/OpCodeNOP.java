@@ -21,7 +21,7 @@ public class OpCodeNOP extends OpCode implements IOpCode {
     @Override
     public final void exec(State state_) {
         // NOP Just advance.
-        state_.setPc(state_.getPc() + 1);
+      //  state_.setPc(state_.getPc() + 1);
     }
     
 	public  int execDirect()

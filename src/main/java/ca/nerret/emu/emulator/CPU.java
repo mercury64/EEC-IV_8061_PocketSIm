@@ -5,11 +5,15 @@ import ca.nerret.emu.emulator.opcodes.IOpCode;
 public abstract class CPU implements ICPU {
 
 	private BUS bus;
-	private RALU ralu;
+	protected RALU ralu;
 	
 	// Program Status Word
 	public int PSW_FLAGS;
 	public byte instructionRegister;
+	
+	public String instructionDecoderPLA;
+	public String timingDecoderPLA;
+	
 	
 	protected short sp;
 	
@@ -71,21 +75,25 @@ public abstract class CPU implements ICPU {
 	
 	public RALU getRalu()
 	{
-		return ralu;
+		return this.ralu;
 	}
 	
 	public void clock()
 	{
 		byte _opcode = 0;
 		byte _nextByte = 0;
-		
+
 		// Interrogate |PAUSE input then |RESET input, and interrupt controller, in that order.
 		// CPUE then takes appropriate action based on results.
 		
+		//System.out.println(String.format("Machine State: %s",machineState));
+		
 		if (machineState == STATE_0) // First machine state
 		{
+			System.out.print(String.format("0x%x ",this.ralu.getPc()));
+
 			// fetch
-			this.instructionRegister = this.fetch();
+			this.instructionRegister = this.opCodeFetch();
 
 			// Update SPC of all external program memory devices.
 			machineState++;
@@ -98,8 +106,10 @@ public abstract class CPU implements ICPU {
 			// decode
 			this.opcode = this.decode(instructionRegister);
 			
-			// Debug, logger, whatever:
-			System.out.print(String.format("%s", this.opcode));
+
+			
+			System.out.println(String.format("%s", this.opcode));
+			
 			
 			// exec
 			this.cycles = this.opcode.getExecutionStates();
@@ -118,7 +128,7 @@ public abstract class CPU implements ICPU {
 			// fetch second instruction byte(address of first operand byte)
 			// fetch from external memory
 			
-			System.out.println(String.format(" 0x%02X", this.fetch()));
+			
 
 		}
 		else if(machineState == STATE_3) // Fourth machine state
@@ -130,6 +140,8 @@ public abstract class CPU implements ICPU {
 		{
 			machineState = STATE_0;
 		}
+
+		// Debug, logger, whatever:
 	}
 	
 	private OpCode decode(byte _opcode) {
@@ -140,4 +152,30 @@ public abstract class CPU implements ICPU {
 		boolean complete = (cycles == 0);
 		return complete;
 	}
+	
+	@Override
+	public byte opCodeFetch() {
+
+		interrogate();
+		
+		byte fetched = 0x0;
+		int pc = this.ralu.getPc();
+		
+		fetched = this.read(pc++);
+		
+		this.ralu.setPc(pc);
+		
+		return fetched;
+		
+	}
+
+	@Override
+	public void clearSP() {
+		// TODO Auto-generated method stub
+		
+		System.out.println("Must set stack pointer when loaded from software.");
+		
+	}
+	
+
 }

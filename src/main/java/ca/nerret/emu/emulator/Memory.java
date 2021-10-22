@@ -2,6 +2,8 @@ package ca.nerret.emu.emulator;
 
 public interface Memory {
 
+	public static final short slaveProgramCounter = 0;
+	
 	String getName();
 
     int getSize();
