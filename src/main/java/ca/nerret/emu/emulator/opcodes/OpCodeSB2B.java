@@ -41,9 +41,9 @@ public class OpCodeSB2B  extends OpCode implements IOpCode {
 	public void execDirect()
 	{
     	numberOfBytes = 3;
-    	executionStates = 4;
+    	setExecutionStates(4);
 
-    	byte[] operands = this.getOperands(numberOfBytes, executionStates);
+    	byte[] operands = this.getOperands(numberOfBytes, getExecutionStates());
     	
     	byte sourceRa = (byte) (operands[1]);
     	byte destRb = (byte) (operands[2]);
@@ -64,9 +64,9 @@ public class OpCodeSB2B  extends OpCode implements IOpCode {
     	// ExecutionStates: 6/11
     	// MachineFormat: [ ^6B ],[ Base RA | 0 MB ],[+-| Offset ], [ Dest RB ]
     	numberOfBytes = 4;
-    	executionStates = 6;//11
+    	setExecutionStates(6);//11
 
-    	byte[] operands = this.getOperands(numberOfBytes, executionStates);
+    	byte[] operands = this.getOperands(numberOfBytes, getExecutionStates());
     	
     	byte baseRA = (byte) (operands[1] & 0xfe); // mask out mode bit
     	byte offset = operands[2];

@@ -7,10 +7,11 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 	private String mnemonic;
 	private int opcode;
 	private int stateTimes;
-	private AddressMode addressMode;
+	protected AddressMode addressMode;
 
     protected int numberOfBytes = 0;
     protected int executionStates = 0;
+	
 	private int pc;
 	private int[] memory;
 	private State state;
@@ -62,34 +63,33 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 	@Override
 	public int exec() {
 
-		int executionStates = 0;
+		int opcodePC = 0;
         if (this.getAddressModeType() == AddressMode.DIRECT)
 		{
-        	executionStates = this.execDirect();
+        	opcodePC = this.execDirect();
 		}
         if (this.getAddressModeType() == AddressMode.IMMEDIATE)
 		{
-        	executionStates = this.execImmediate();
+        	opcodePC = this.execImmediate();
 		}
         if (this.getAddressModeType() == AddressMode.INDIRECT)
 		{
-        	executionStates = this.execIndirect();
+        	opcodePC = this.execIndirect();
 		}
         if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
 		{
-        	executionStates = this.execIndirectAutoInc();
+        	opcodePC = this.execIndirectAutoInc();
 		}
         if (this.getAddressModeType() == AddressMode.SHORT_INDEXED)
 		{
-        	executionStates = this.execShortIndexed();
-
+        	opcodePC = this.execShortIndexed();
 		}
         if (this.getAddressModeType() == AddressMode.LONG_INDEXED)
 		{
-        	executionStates = this.execLongIndexed();
+        	opcodePC = this.execLongIndexed();
 		}
         
-        return executionStates;
+        return opcodePC;
 	}
 
 	public byte[] getOperands(int count, int executionStates2) {
@@ -101,7 +101,7 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 		}
         
         this.state.setPc(pc + numberOfBytes);
-        this.state.updateStateTime(executionStates);
+        this.state.updateStateTime(getExecutionStates());
         
         return operands;
 		
@@ -109,27 +109,27 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 
 	public int execDirect()
 	{
-    	System.err.println("Direct Not Implemented yet."+ this.getClass().getSimpleName());
+    	System.err.println("Direct Not Implemented yet. "+ this.getClass().getSimpleName());
     	System.exit(1);
-		return executionStates;
+		return getExecutionStates();
 	}
 	public int execImmediate()
 	{
-    	System.err.println("Immediate Not Implemented yet."+ this.getClass().getSimpleName());
+    	System.err.println("Immediate Not Implemented yet. "+ this.getClass().getSimpleName());
     	System.exit(1);
-		return executionStates;
+		return getExecutionStates();
 	}
 	public int execIndirect()
 	{
-    	System.err.println("Indirect Not Implemented yet."+ this.getClass().getSimpleName());
+    	System.err.println("Indirect Not Implemented yet. "+ this.getClass().getSimpleName());
     	System.exit(1);
-		return executionStates;
+		return getExecutionStates();
 	}
 	public int execIndirectAutoInc()
 	{
-    	System.err.println("Indirect Auto Increment Not Implemented yet."+ this.getClass().getSimpleName());
+    	System.err.println("Indirect Auto Increment Not Implemented yet. "+ this.getClass().getSimpleName());
     	System.exit(1);
-		return executionStates;
+		return getExecutionStates();
 	}
 
 	public int execShortIndexed()
@@ -137,14 +137,14 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
     	System.err.println("Short Indexed Not Implemented yet in: " + this.getClass().getSimpleName());
 
     	System.exit(1);
-		return executionStates;
+		return getExecutionStates();
 	}
 
 	public int execLongIndexed()
 	{
-    	System.err.println("Long Indexed Not Implemented yet."+ this.getClass().getSimpleName());
+    	System.err.println("Long Indexed Not Implemented yet. "+ this.getClass().getSimpleName());
     	System.exit(1);
-		return executionStates;
+		return getExecutionStates();
 	}
 	
 
@@ -296,4 +296,19 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 		return result;
 	}
 
+	public int getExecutionStates() {
+		return executionStates;
+	}
+
+	public void setExecutionStates(int executionStates) {
+		this.executionStates = executionStates;
+	}
+	
+    public int getNumberOfBytes() {
+		return numberOfBytes;
+	}
+
+	public void setNumberOfBytes(int numberOfBytes) {
+		this.numberOfBytes = numberOfBytes;
+	}
 }

@@ -52,9 +52,9 @@ public class OpCodeSHLDW extends OpCode implements IOpCode {
         // Execution States: 8 + 1/each shift
         // Machine Format: [ ^0D ], [ Source RSC ], [ Source RBB ]
         numberOfBytes = 3;
-        executionStates = 8;//12
+        setExecutionStates(8);//12
         // 8 6138: 0d,01,34             shldw R34,1              R34L = R34L * 2;     
-        byte[] operands = this.getOperands(numberOfBytes, executionStates);
+        byte[] operands = this.getOperands(numberOfBytes, getExecutionStates());
 
         byte screg = operands[1];
         byte basereg = operands[2];
@@ -90,9 +90,9 @@ public class OpCodeSHLDW extends OpCode implements IOpCode {
     	// ExecutionStates: 7/12
     	// MachineFormat: [ ^4B ],[ Base RA | 0 MB ],[+-| Offset ],[ Source RB ], [ Dest RD ]
     	numberOfBytes = 5;
-    	executionStates = 7;//12
+    	setExecutionStates(7);//12
 
-    	byte[] operands = this.getOperands(numberOfBytes, executionStates);
+    	byte[] operands = this.getOperands(numberOfBytes, getExecutionStates());
     	
     	byte baseRA = (byte) (operands[1] & 0xfe); // mask out mode bit
     	byte offset = operands[2];

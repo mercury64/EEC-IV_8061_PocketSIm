@@ -43,10 +43,23 @@ public class OpCodeCLRW extends OpCode implements IOpCode {
         state_.setPswBit(ProgramStatusWord.CARRY, false);        
     }
     
-	public void setAddressMode(AddressMode addressMode) {
+	public void setAddressMode(AddressMode mode) {
 		// TODO Auto-generated method stub
+	    mode.setType(AddressMode.DIRECT);
 	    
-	   super.setAddressMode(new AddressMode((byte)AddressMode.DIRECT));
-		
+	    this.addressMode = mode;
+	}
+	
+	public int execDirect()
+	{
+    	// AssemblerFormat: CLRW
+    	// InstructionOperation: (RB)<-^0000
+    	// ExecutionStates: 4
+    	// MachineFormat: [ ^01 ][ Dest RB ]
+
+		setExecutionStates(4);
+		setNumberOfBytes(2);
+
+		return getExecutionStates();
 	}
 }

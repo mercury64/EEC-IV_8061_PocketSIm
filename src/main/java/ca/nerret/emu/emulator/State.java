@@ -21,6 +21,10 @@ public class State {
    
     private int _state_time = 0;
 
+    public State()
+    {
+    
+    }
     /**
      * Constructor.
      * @param memory_ int[]

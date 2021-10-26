@@ -1,24 +1,75 @@
 package ca.nerret.emu.emulator;
 
-public class Bus {
+public class BUS {
+	
+	public CPU cpu;
 
-    EECIV_8061 cpu;
+	//public Memory ram;
+	private byte[] ram;
+	
+	private Calibration cal;
+	
+	public BUS(CPU cpu)
+	{
+		this.cpu = cpu;
+		ram = new byte[64 * 1024]; // 0xFFFF = 64k
+		cpu.connectBus(this);
 
-    public Bus()
-    {
-        // CPU
-        cpu.ConnectBus(this);
+	}
+	
+	public BUS() {
+		// TODO Auto-generated constructor stub
+	}
 
-        //Ram
-        // Fake RAM
-        byte ram[] = new byte[64 * 1024];
+	public CPU getCpu() {
+		return cpu;
+	}
 
-    }
+	public void setCpu(CPU cpu) {
+		this.cpu = cpu;
+	}
 
-    public byte read(short address, boolean readonly)
-    {
+	public void write(short address, byte data)
+	{
+		// write address space 0-2000 only
+		if (address >= 0x0000 && address <= 0x1fff)
+		{
+			ram[address] = data;
+		}
+		
+	}
+	
+	public byte read(short address)
+	{
+		return this.read(address, true);
+	}
+	
+	public byte read(int address, boolean readOnly)
+	{
+		byte data = 0x00;
+		
+		if (address >= 0x0000 && address <= 0x1fff)
+		{
+			data = ram[address];
+		}
+		
+		if (address >= 0x2000 && address <= 0xffff)
+		{
+			data = ram[address];
+		}
+		
+		return data;
+		
+	}
 
-        return 0x0;
-    }
+	public Calibration getCalibration() {
+		return cal;
+	}
+
+	public void setCalibration(Calibration cal) {
+		this.cal = cal;
+		this.ram = cal.read();
+		
+	}
+
 }
- 
