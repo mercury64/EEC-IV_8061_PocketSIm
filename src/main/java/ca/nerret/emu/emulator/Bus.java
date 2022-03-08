@@ -18,7 +18,7 @@ public class BUS {
 	}
 	
 	public BUS() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public CPU getCpu() {
