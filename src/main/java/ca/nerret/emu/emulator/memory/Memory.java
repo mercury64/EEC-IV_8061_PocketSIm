@@ -1,4 +1,7 @@
-package ca.nerret.emu.emulator;
+package ca.nerret.emu.emulator.memory;
+
+import ca.nerret.emu.env.RoxByte;
+import ca.nerret.emu.env.RoxWord;
 
 public interface Memory {
 
@@ -25,4 +28,14 @@ public interface Memory {
     void getBytes(short address, byte[] destination, int length);
 
     void setBytes(short address, byte[] source, int length);
+    
+    /**
+     * Return a block of bytes
+     *
+     * @param from the required blocks starting memory address
+     * @param to the required blocks ending memory address
+     * @return the entire block [<code>from</code> ... <code>to</code>] as an array
+     */
+    RoxByte[] getBlock(RoxWord from, RoxWord to);
+
 }

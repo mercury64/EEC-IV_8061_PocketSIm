@@ -1,4 +1,4 @@
-package ca.nerret.emu.emulator;
+package ca.nerret.emu.emulator.memory;
 
 public abstract class AbstractMemory implements Memory {
 

@@ -1,7 +1,13 @@
 package ca.nerret.emu.emulator.opcodes;
 
+import com.rox.emu.env.RoxByte;
+import com.rox.emu.processor.mos6502.Mos6502Alu;
+import com.rox.emu.processor.mos6502.Registers;
+
 import ca.nerret.emu.emulator.AddressMode;
 import ca.nerret.emu.emulator.State;
+import ca.nerret.emu.emulator.cpu.RALU;
+import ca.nerret.emu.mem.Memory;
 
 
 public interface IOpCode<T> {
@@ -32,6 +38,11 @@ public interface IOpCode<T> {
      */
     void exec(final State state_);
 	int exec();
+	
+	byte exec(final RALU alu,
+            final Registers registers,
+            final Memory memory,
+            final byte value);
 	
     
 	void setAddressMode(AddressMode addressMode);

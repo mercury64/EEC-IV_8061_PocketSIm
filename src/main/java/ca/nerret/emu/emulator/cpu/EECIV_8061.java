@@ -1,8 +1,20 @@
 package ca.nerret.emu.emulator.cpu;
+
 import ca.nerret.emu.emulator.CPU;
+import ca.nerret.emu.emulator.memory.Memory;
 
 public class EECIV_8061 extends CPU {
 
+	 private final Registers registers;
+	 private final Memory memory;
+	 private final RALU alu;
+
+	 
+    public EECIV_8061(final Memory memory, final Registers registers) {
+        this.memory = memory;
+        this.registers = registers;
+        this.alu = new RALU(registers);
+    }
 	@Override
 	public void reset() {
 		super.reset();
@@ -38,6 +50,14 @@ public class EECIV_8061 extends CPU {
 		
 		
 	}
+
+	@Override
+	/**
+     * @return the {@link Registers} being used
+     */
+    public Registers getRegisters(){
+        return registers;
+    }
 
 
 }

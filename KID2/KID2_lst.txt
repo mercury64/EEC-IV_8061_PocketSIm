@@ -4478,7 +4478,7 @@ BPPTWT - PART THROTTLE/WIDE OPEN THROTTLE BAROMETRIC PRESSURE UPDATE :
 4c0b: 98,38,3b            cmpb  R3b,R38          
 4c0e: d1,07               jleu  4c17             if (R3b > R38)  {                 # |C FN1360 > LAMRICH + LAMRHYS 
 4c10: 71,df,24            an2b  R24,df           B5_FLG_LAMRICH_Q_24 = 0;          # |Q Clear flip flop
-4c13: c7,e4,ff,00         stb   R0,[Re4+ff]      [17f] = 0; } }
+4c13: c7,e4,ff,00         stb   R0,[Re4+ff]      HLTMR = 0; } }
 4c17: ef,cc,fc            call  48e6             UUWFuncLU_48e6 (
 4c1a: ce,41                     #arg 1              FN311,
 4c1c: b4,00                     #arg 2              N_RPM );
@@ -4515,19 +4515,19 @@ BPPTWT - PART THROTTLE/WIDE OPEN THROTTLE BAROMETRIC PRESSURE UPDATE :
 4c6b: 39,27,72            jb    B1,R27,4ce0      if (B1_DFSFLG_R27 = 0)  {
 4c6e: 38,a6,6f            jb    B0,Ra6,4ce0      if (B0_ETV_ERROR_a6 = 0)  {
 4c71: 35,24,14            jnb   B5,R24,4c88      if (B5_FLG_LAMRICH_Q_24 = 1)  {
-4c74: b3,e4,ff,30         ldb   R30,[Re4+ff]     R30 = [17f];
+4c74: b3,e4,ff,30         ldb   R30,[Re4+ff]     R30 = HLTMR;
 4c78: 9b,f4,1e,30         cmpb  R30,[Rf4+1e]     
-4c7c: d3,0a               jnc   4c88             if (R30 >= [b460])  {
-4c7e: b3,ea,c3,30         ldb   R30,[Rea+c3]     R30 = [443];
+4c7c: d3,0a               jnc   4c88             if (R30 >= HLDTIM)  {
+4c7e: b3,ea,c3,30         ldb   R30,[Rea+c3]     R30 = OPEN_TMR;
 4c82: 9b,f4,28,30         cmpb  R30,[Rf4+28]     
-4c86: d1,58               jleu  4ce0             if (R30 <= [b46a]) goto 4ce0; } }
+4c86: d1,58               jleu  4ce0             if (R30 <= TIME_OL) goto 4ce0; } }
 4c88: 36,25,06            jnb   B6,R25,4c91      if (B6_MPGFLG_25 = 1)  {
 4c8b: 9b,f4,40,00         cmpb  R0,[Rf4+40]      
 4c8f: df,4f               je    4ce0             if (MPG_CL_SW = 0) goto 4ce0; }
 4c91: 3b,4a,4c            jb    B3,R4a,4ce0      if (B3_TLS_NV_FLG_4a = 0)  {
 4c94: 3a,25,06            jb    B2,R25,4c9d      if (CHKAIR = 0)  {                # (thermactor forced open loop)
 4c97: 9b,f6,53,00         cmpb  R0,[Rf6+53]      
-4c9b: df,43               je    4ce0             if ([b967] = 0) goto 4ce0; }
+4c9b: df,43               je    4ce0             if (T70LSW = 0) goto 4ce0; }
 4c9d: a3,e6,5a,30         ldw   R30,[Re6+5a]     R30 = FN039_N_x;
 4ca1: a3,e6,56,32         ldw   R32,[Re6+56]     R32 = FN025_MAP_y;
 4ca5: ad,06,34            ldzbw R34,6            wR34 = 6;
@@ -4746,7 +4746,7 @@ STRATEGY MODULE: FUEL_OL_LAMBSE_COM3
 4eff: b3,ea,c2,34         ldb   R34,[Rea+c2]     R34 = [442];
 4f03: 9b,f4,25,34         cmpb  R34,[Rf4+25]     
 4f07: d3,06               jnc   4f0f             if (R34 < [b467]) goto 4f0f; } } } }
-4f09: c7,ea,c3,00         stb   R0,[Rea+c3]      [443] = 0;
+4f09: c7,ea,c3,00         stb   R0,[Rea+c3]      OPEN_TMR = 0;
 4f0d: 20,0c               sjmp  4f1b             goto 4f1b; } } } }
 
 4f0f: 71,f7,53            an2b  R53,f7           B3_R53 = 0;
@@ -7834,7 +7834,7 @@ PSFLAG Logic: (Last state of POWSFG)
 6ec8: 9b,f6,54,30         cmpb  R30,[Rf6+54]     
 6ecc: d3,11               jnc   6edf             if (R30 < [b968]) goto 6edf; }
 6ece: 9b,f6,53,00         cmpb  R0,[Rf6+53]      
-6ed2: df,03               je    6ed7             if ([b967] != 0)  {
+6ed2: df,03               je    6ed7             if (T70LSW != 0)  {
 6ed4: 3a,9f,08            jb    B2,R9f,6edf      if (B2_OLFLG = 1) goto 6edf; }
 6ed7: 91,04,25            orb   R25,4            CHKAIR = 1;                       # (not forced O.L.)
 6eda: 71,bf,47            an2b  R47,bf           AM2 = 0;                          # (downstream air)
@@ -13978,7 +13978,7 @@ a872: 23,40,01,40,27      timer 23, TSLEGO, B6_R27_OpenLoop?,
 a877: 23,2c,02,40,4f      timer 23, TSLADV, B6_KNOCK_STRATEGY_4f, 
 a87c: 22,fc,02            timer 22,   2fc, 
 a87f: 83,2c,04,10,24      timer 83,   42c,  B4_24
-a884: 41,7f,01,20,24      timer 41,   17f, B5_FLG_LAMRICH_Q_24, 
+a884: 41,7f,01,20,24      timer 41, HLTMR, B5_FLG_LAMRICH_Q_24, 
 a889: 87,2c,04,08,24      timer 87,   42c,  B3_24
 a88e: 41,36,04,80,a8      timer 41, CTTMR, APT_Closed_Throttle, 
 a893: 81,14,02,10,79      timer 81, PRGTMR,  B4_79
@@ -14016,7 +14016,7 @@ a90a: 23,bc,01,08,45      timer 23, TSSTIL_TMR, STIFLG,
 a90f: 40,c2,01            timer 40,   1c2, 
 a912: 81,4c,01,80,24      timer 81, HMUTMR, B7_HUMTMR_FLG_24, 
 a917: 22,3c,01            timer 22,   13c, 
-a91a: 81,43,04,08,53      timer 81,   443,  B3_53
+a91a: 81,43,04,08,53      timer 81, OPEN_TMR,  B3_53
 a91f: 44,7a,03            timer 44, TM_CS_DLY, 
 a922: 44,7b,03            timer 44, TM_CS_ENG, 
 a925: 26,6c,03            timer 26, TM_SFT_IN, 
@@ -15080,7 +15080,7 @@ b45c: 04                  byte      4            LOMAPH
 b45d: 5a                  byte     5a            ECTSTABL
 b45e: 05                  byte      5            ECTSTHYS
 b45f: 02                  byte      2            MFARMP
-b460: 08                  byte      8
+b460: 08                  byte      8            HLDTIM
 b461: 73                  byte     73            LAMRICH
 b462: 03                  byte      3            LAMRHYS
 b463: 80                  byte     80            OLIDRV
@@ -15088,7 +15088,7 @@ b464: 00,01               word    100            OLMCL
 b466: 80                  byte     80            OLINEUT
 b467: 00                  byte      0
 b468: 00,80               word   8000            LAMDLT_OL
-b46a: ff                  byte     ff
+b46a: ff                  byte     ff            TIME_OL
 b46b: 80                  byte     80            JMPMUL
 b46c: 6d                  byte     6d            MAPAHI
 b46d: 06                  byte      6            MPAHIH
@@ -15513,7 +15513,7 @@ b963: 06                  byte      6            HMUMPH
 b964: 50                  byte     50            LMBMAP
 b965: 5a                  byte     5a
 b966: 01                  byte      1            SW_MPD
-b967: 00                  byte      0
+b967: 00                  byte      0            T70LSW
 b968: 00                  byte      0
 
 b969: 14,2d,5a,14,2d,5a   ???   

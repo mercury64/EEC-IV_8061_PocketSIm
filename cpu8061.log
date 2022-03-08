@@ -1,9 +1,3 @@
  NOP 0xFF
  AddressMode [Direct]
 
- DI 0xFA
- AddressMode [Direct]
-
- SJMP 0x21
- AddressMode [Direct]
-
