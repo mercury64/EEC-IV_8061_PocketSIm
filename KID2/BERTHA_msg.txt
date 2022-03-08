@@ -1,0 +1,16 @@
+
+# ----------------------------
+# SAD Version 4.0.7.16 (16 Jun 2021)
+# ----------------------------
+
+# Input file is 'BERTHA.bin'
+
+# File is 56K (0xe000) bytes
+
+
+Cannot find a Start/Code bank [bank 8]
+Is this file an 8061 or 8065 Binary ??
+0 or > 4 banks found. File corrupt?
+# ----- No directive file. Use default options
+
+Abandoned !!
