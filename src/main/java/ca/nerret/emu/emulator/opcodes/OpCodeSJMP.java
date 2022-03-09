@@ -24,6 +24,7 @@ public class OpCodeSJMP extends OpCode implements IOpCode {
 
 	public OpCodeSJMP(int opcode, String mnemonic) {
 		super(opcode, mnemonic);
+		setNumberOfBytes(2);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -36,8 +37,7 @@ public class OpCodeSJMP extends OpCode implements IOpCode {
 
         final int pc = state_.getPc();
 
-        final int ret = pc + 2; // We need to return to the instruction 2 ahead.
-
+        final int ret = pc + 1; 
         int stateTime = 0;
         
         byte byte1 = (byte)memory[pc];
@@ -120,13 +120,7 @@ public class OpCodeSJMP extends OpCode implements IOpCode {
 
 		return getExecutionStates();
 	}
-	
-	public void setAddressMode(AddressMode mode) {
-		// TODO Auto-generated method stub
-	    mode.setType(AddressMode.DIRECT);
-	    
-	    this.addressMode = mode;
-	}
+
     
     public String toString()
     {

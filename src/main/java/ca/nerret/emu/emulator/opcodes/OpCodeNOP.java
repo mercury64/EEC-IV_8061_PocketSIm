@@ -1,5 +1,8 @@
 package ca.nerret.emu.emulator.opcodes;
 
+import ca.nerret.emu.mem.Memory;
+import ca.nerret.emu.processor.Registers;
+
 import ca.nerret.emu.emulator.AddressMode;
 import ca.nerret.emu.emulator.OpCode;
 import ca.nerret.emu.emulator.State;
@@ -45,7 +48,7 @@ public class OpCodeNOP extends OpCode implements IOpCode {
 	    this.addressMode = mode;
 	}
 
-	@Override
+	//@Override
 	public byte exec(RALU alu, Registers registers, Memory memory, byte value) {
 		// TODO Auto-generated method stub
 		return 0;

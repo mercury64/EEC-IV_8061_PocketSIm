@@ -251,13 +251,13 @@ public final class OpcodeCache {
     	
         try 
         {
-        	if( opc.getNumberOfBytes() > 1)
+        	//if( opc.getNumberOfBytes() > 1)
         	{
         		opc.setAddressMode(new AddressMode((byte)instruction_, firstByte));
         	}
-        	else
+        	//else
         	{
-        		opc.setAddressMode(new AddressMode((byte)instruction_));
+        	//	opc.setAddressMode(new AddressMode((byte)instruction_));
         	}
     	}
         catch(Exception e)

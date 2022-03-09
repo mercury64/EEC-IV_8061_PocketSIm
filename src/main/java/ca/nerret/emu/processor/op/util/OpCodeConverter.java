@@ -83,7 +83,7 @@ public class OpCodeConverter {
 			if (EnumSet.of(JSR, BPL, BMI, BVC, BVS, BCC, BCS, BNE, BEQ).contains(getOperation(internalOpCodeName)))
 				return EEC8061AddressingMode.RELATIVE;
 
-			return EEC8061AddressingMode.IMPLIED;
+			return EEC8061AddressingMode.DIRECT;
 		}
 
 		final String addressingModeDescriptor = tokens[ADDR_I];
