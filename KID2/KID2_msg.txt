@@ -68,11 +68,10 @@ code    226a 22c7
 vect    22c8 22c9
 struct  22ca 22e9: R N : O 3 UY : D 240 UY N : R N 
 struct  22ea 2319: R N : O 3 UY : D 240 UY N : O 2 UY : UW : UW N 
-vect    231a 231b
-word    231c 231d
-vect    231e 231f
+struct  231a 231f: R N : O 3 UY : D 240 UY N 
 struct  2320 234f: R N : O 3 UY : D 240 UY N : R N 
-word    2350 2357
+word    2350 2351
+struct  2352 2357: R N : O 3 UY : D 240 UY N 
 code    2358 235d
 word    235e 236f
 code    2370 28b3
@@ -1745,6 +1744,9 @@ sym 17f  "HLTMR"
 sym 180  "CRKPIP_CTR"
 sym 181  "CRKPIP_CTR_BG"
 sym 184  "OCCSAV"
+sym 18a  "VIP_NRM_EX"
+sym 18c  "VIP_NRM2_EX"
+sym 18e  "CODE_OUT_L_EX"
 sym 192  "IBETA"
 sym 193  "INJCNT"
 sym 194  "TOTAL_DELAY"
@@ -1757,10 +1759,12 @@ sym 19e  "LAST_MAP2"
 sym 1a0  "LAST_MAP"
 sym 1a9  "VIP_CNT_EX"
 sym 1ae  "V_ETVOCM_SAV"
+sym 1b2  "CODE_CNT_EX"
+sym 1b6  "RVIPRPM"
 sym 1b9  "MAPSAV"
 sym 1ba  "EGO_CNT_IDLE"
 sym 1bc  "TSSTIL_TMR"
-sym 1be  "Miltmr"
+sym 1be  "MILTMR"
 sym 1c1  "VIP_TIMER_EX"
 sym 1c4  "NSAV"
 sym 1c6  "TPSAV"
@@ -2074,7 +2078,6 @@ sym 928  "CART_Status_928"
 sym c80  "ConsoleMode" :B 6
 sym 2004  "FIXSUM"
 sym 22c8  "HSO_Table"
-sym 3405  "Sub_3405"                  # auto
 sym 3775  "Sub_3775"                  # auto
 sym 3796  "Sub_3796"                  # auto
 sym 3870  "Sub_3870"                  # auto
@@ -2087,6 +2090,7 @@ sym 6dad  "Sub_6dad"                  # auto
 sym 6dc6  "Sub_6dc6"                  # auto
 sym 7d34  "CheckSumBase"
 sym 7d36  "CheckSumEnd"
+sym 885f  "Sub_885f"                  # auto
 sym b003  "bit0HSI_Line_Select" :B 0
 sym b003  "bit1HSI_Line_Select" :B 1
 sym b003  "bit2HSI_Line_Select" :B 2
@@ -2100,7 +2104,8 @@ sym b005  "LOWVOL"
 sym b006  "VOLHYS"
 sym b007  "VOLTCLP"
 sym b008  "CHGRPM"
-sym b00c  "?ISCMOD_TPREL?"
+sym b00a  "CHGTM"
+sym b00c  "DLHYST"
 sym b00e  "ISCMOD_MAX"
 sym b010  "ISCMOD_MIN"
 sym b012  "KDNDT"
@@ -2133,7 +2138,7 @@ sym b041  "CSSMAF"
 sym b042  "NUBASE"
 sym b044  "DRBASE"
 sym b046  "idle_rpm_adder_startup"
-sym b048  "idle_rpm_adder_max_time_on_startup"
+sym b048  "BZZRPM"
 sym b04a  "DNAC"
 sym b04c  "DACTM"
 sym b04e  "DNPOWS"
@@ -2142,7 +2147,7 @@ sym b052  "ACHPTM"
 sym b053  "ECT_HP"
 sym b054  "PSPPM"
 sym b056  "TKDTM"
-sym b057  "pre_bzztm"
+sym b057  "BZZTM"
 sym b058  "NDDELT"
 sym b059  "MINACT"
 sym b05a  "FMMDSD"

@@ -325,11 +325,7 @@
 2302: 75,37,00,17,0a,1c,10,4d,04,ff,94,00  struct  Sub_3775,   0,  17,   a, 25c,  10,  4d, ff04, FUELPW1  
 230e: 96,37,00,07,0c,1c,10,4d,04,44,94,00  struct  Sub_3796,   0,   7,   c, 25c,  10,  4d, 4404, FUELPW1  
 
-231a: 70,38               vect  3870             Sub_3870
-
-231c: 00,ff               word   ff00
-
-231e: 05,34               vect  3405             Sub_3405
+231a: 70,38,00,ff,05,34   struct  Sub_3870,   0,  ff,   5, 274
 
 2320: 4c,2a,00,92,08,3a,41,6d  struct  Do_Cmd_N,   0,  92,   8, 27a, Sub_6d41
 2328: 5e,2a,00,82,08,3a,28,6d  struct  Do_Cmd_P,   0,  82,   8, 27a, Sub_6d28
@@ -339,9 +335,8 @@
 2348: 5e,2a,00,88,08,2e,c1,38  struct  Do_Cmd_P,   0,  88,   8, 26e, Sub_38c1
 
 2350: 07,00               word      7
-2352: 5f,88               word   885f
-2354: 00,99               word   9900
-2356: 08,28               word   2808
+
+2352: 5f,88,00,99,08,28   struct  Sub_885f,   0,  99,   8, 268
 
    Clear_Cell:
 2358: c7,70,01,00         stb   R0,[R70+1]       [Rtab+1] = 0;
@@ -2049,7 +2044,6 @@ RISING EDGE CALCULATIONS
 33ff: 17,5a               incb  R5a              R5a++;
 3401: d3,02               jnc   3405             if (R5a > ff)  {
 3403: 15,5a               decb  R5a              R5a--; } }
-   Sub_3405:
 3405: 9b,f6,10,5a         cmpb  R5a,[Rf6+10]     
 3409: d3,20               jnc   342b             if (R5a < DFMIN0) goto 342b;      # No change to TLOFLG
 340b: 11,58               clrb  R58              R58 = 0;
@@ -5575,7 +5569,7 @@ DETERMINE BASE EM (BASE_EM)
 
 57ac: 34,26,10            jnb   B4,R26,57bf      if (RUNUP_FLG = 1)  {             # (initial runup complete)
 57af: a3,f0,30,32         ldw   R32,[Rf0+30]     R32 = DELRAT;
-57b3: 47,f0,0c,32,38      ad3w  R38,R32,[Rf0+c]  R38 = R32 + ?ISCMOD_TPREL?;
+57b3: 47,f0,0c,32,38      ad3w  R38,R32,[Rf0+c]  R38 = R32 + DLHYST;
 57b8: db,0a               jc    57c4             if (R38 > ffff) goto 57c4;
 57ba: 88,bc,38            cmpw  R38,Rbc          
 57bd: db,05               jc    57c4             if (R38 >= TP_REL) goto 57c4; }
@@ -7022,8 +7016,8 @@ FLG_DASMNQ and N_RATCH LOGIC
 665f: 9b,f0,57,d4         cmpb  Rd4,[Rf0+57]     
 
 # [+pre_bzzrpm] Logic: (Buzz up adder)
-6663: db,06               jc    666b             if (ATMR1 < pre_bzztm)  {         # (Buzz time not expired) 
-6665: 67,f0,48,40         ad2w  R40,[Rf0+48]     R40 += idle_rpm_adder_max_time_on_startup;  # Add pre_bzzrpm to Hicam
+6663: db,06               jc    666b             if (ATMR1 < BZZTM)  {             # (Buzz time not expired) 
+6665: 67,f0,48,40         ad2w  R40,[Rf0+48]     R40 += BZZRPM;                    # Add pre_bzzrpm to Hicam
 6669: 20,03               sjmp  666e             goto 666e; }
 
 # [+FN826A] Logic: (Engine Cleanout adder)
@@ -7053,7 +7047,7 @@ FLG_DASMNQ and N_RATCH LOGIC
 
 HCAMFG Logic: (Enable/Disable Adaptive airflow updates)
 66a1: 34,2f,08            jnb   B4,R2f,66ac      if (B4_VRUN_ISCFLG_2f = 1)  {     # (In running VIP)
-66a4: a3,e4,36,40         ldw   R40,[Re4+36]     R40 = [1b6];
+66a4: a3,e4,36,40         ldw   R40,[Re4+36]     R40 = RVIPRPM;
 66a8: 6b,f0,42,40         sb2w  R40,[Rf0+42]     R40 -= NUBASE; }
 66ac: 91,40,79            orb   R79,40           B6_R79 = 1;
 66af: 88,00,40            cmpw  R40,R0           
@@ -8074,7 +8068,7 @@ ERROR CODE DESCRIPTION
    Sub_70f5:
 70f5: a1,10,55,ac         ldw   Rac,5510         VIP_code = 5510;                  # Diagnostic Proc Table A proc no 2
 70f9: 7b,f6,05,ac         sb2b  Rac,[Rf6+5]      VIP_code -= ENGCYL;
-70fd: 08,ac,ac            shrw  Rac,Rac          VIP_code >>= Rac;
+70fd: 08,ac,ac            shrw  Rac,Rac          VIP_code >>= VIP_code;
 7100: 28,08               scall 710a             Sub_710a ();
 7102: 20,70               sjmp  7174             goto 7174;
 
@@ -8211,10 +8205,10 @@ ERROR CODE DESCRIPTION
 71ea: f0                  ret                    return;
 
    Get_DiagCodes:
-71eb: a3,e4,32,30         ldw   R30,[Re4+32]     R30 = [1b2];
-71ef: a3,e4,0e,32         ldw   R32,[Re4+e]      R32 = [18e];
-71f3: a3,e4,0a,34         ldw   R34,[Re4+a]      R34 = [18a];
-71f7: a3,e4,0c,36         ldw   R36,[Re4+c]      R36 = [18c];
+71eb: a3,e4,32,30         ldw   R30,[Re4+32]     R30 = CODE_CNT_EX;
+71ef: a3,e4,0e,32         ldw   R32,[Re4+e]      R32 = CODE_OUT_L_EX;
+71f3: a3,e4,0a,34         ldw   R34,[Re4+a]      R34 = VIP_NRM_EX;
+71f7: a3,e4,0c,36         ldw   R36,[Re4+c]      R36 = VIP_NRM2_EX;
 71fb: b3,e4,29,38         ldb   R38,[Re4+29]     R38 = VIP_CNT_EX;
 71ff: a3,e4,2a,40         ldw   R40,[Re4+2a]     R40 = [1aa];
 7203: a3,e4,2c,14         ldw   R14,[Re4+2c]     R14 = [1ac];
@@ -8223,10 +8217,10 @@ ERROR CODE DESCRIPTION
 720f: f0                  ret                    return;
 
    Set_DiagCodes:
-7210: c3,e4,32,30         stw   R30,[Re4+32]     [1b2] = R30;
-7214: c3,e4,0e,32         stw   R32,[Re4+e]      [18e] = R32;
-7218: c3,e4,0a,34         stw   R34,[Re4+a]      [18a] = R34;
-721c: c3,e4,0c,36         stw   R36,[Re4+c]      [18c] = R36;
+7210: c3,e4,32,30         stw   R30,[Re4+32]     CODE_CNT_EX = R30;
+7214: c3,e4,0e,32         stw   R32,[Re4+e]      CODE_OUT_L_EX = R32;
+7218: c3,e4,0a,34         stw   R34,[Re4+a]      VIP_NRM_EX = R34;
+721c: c3,e4,0c,36         stw   R36,[Re4+c]      VIP_NRM2_EX = R36;
 7220: c7,e4,29,38         stb   R38,[Re4+29]     VIP_CNT_EX = R38;
 7224: c3,e4,2a,40         stw   R40,[Re4+2a]     [1aa] = R40;
 7228: c3,e4,2c,14         stw   R14,[Re4+2c]     [1ac] = R14;
@@ -9979,7 +9973,7 @@ ERROR CODE DESCRIPTION
 8159: 91,04,9f            orb   R9f,4            B2_OLFLG = 1;
 815c: a3,fe,60,96         ldw   R96,[Rfe+60]     LAMBSE1 = VRLAM;
 8160: a3,e2,a9,3e         ldw   R3e,[Re2+a9]     R3e = [Re2-57];
-8164: c3,e4,36,3e         stw   R3e,[Re4+36]     [1b6] = R3e;
+8164: c3,e4,36,3e         stw   R3e,[Re4+36]     RVIPRPM = R3e;
 8168: 71,bf,4f            an2b  R4f,bf           B6_KNOCK_STRATEGY_4f = 0;
 816b: c0,98,00            stw   R0,R98           EFTR = 0;
 816e: a1,00,01,42         ldw   R42,100          R42 = TPBAR;
@@ -10319,7 +10313,7 @@ ERROR CODE DESCRIPTION
 
    VR_LOW_ISC_COM4:
 840b: a3,e2,a7,3e         ldw   R3e,[Re2+a7]     R3e = [Re2-59];                   # SET TV_COUNTS =0 
-840f: c3,e4,36,3e         stw   R3e,[Re4+36]     [1b6] = R3e;
+840f: c3,e4,36,3e         stw   R3e,[Re4+36]     RVIPRPM = R3e;
 8413: 71,df,2f            an2b  R2f,df           B5_DISABLE_ISC_2f = 0;
 8416: 27,ec               sjmp  8404             goto EXIT;
 
@@ -10512,7 +10506,7 @@ ERROR CODE DESCRIPTION
 85c0: 91,04,9f            orb   R9f,4            B2_OLFLG = 1;
 85c3: a3,e2,5b,42         ldw   R42,[Re2+5b]     R42 = [Re2+5b];
 85c7: 08,05,42            shrw  R42,5            R42 >>= 5;
-85ca: c3,e4,36,42         stw   R42,[Re4+36]     [1b6] = R42;
+85ca: c3,e4,36,42         stw   R42,[Re4+36]     RVIPRPM = R42;
 85ce: e7,33,fe            jump  8404             goto EXIT;
 
    Sub_85d1:
@@ -10727,7 +10721,7 @@ ERROR CODE DESCRIPTION
    Sub_8797:
 8797: 33,45,05            jnb   B3,R45,879f      if (STIFLG = 1)  {
    Sub_879a:
-879a: c3,e4,3e,00         stw   R0,[Re4+3e]      Miltmr = 0;
+879a: c3,e4,3e,00         stw   R0,[Re4+3e]      MILTMR = 0;
 879e: f0                  ret                    return; }
 
 879f: 3f,a5,4b            jb    B7,Ra5,87ed      if (b7_CRKFLG_a5 = 0)  {
@@ -10754,12 +10748,12 @@ ERROR CODE DESCRIPTION
 
 87ce: a3,e2,1f,40         ldw   R40,[Re2+1f]     R40 = [Re2+1f];
 87d2: 8b,e4,3e,40         cmpw  R40,[Re4+3e]     
-87d6: d9,23               jgtu  87fb             if (R40 > Miltmr) goto 87fb;
+87d6: d9,23               jgtu  87fb             if (R40 > MILTMR) goto 87fb;
 87d8: 91,20,2d            orb   R2d,20           B5_R2d = 1;
 87db: 67,e2,23,40         ad2w  R40,[Re2+23]     R40 += [Re2+23];
 87df: db,09               jc    87ea             if (R40 <= ffff)  {
 87e1: 8b,e4,3e,40         cmpw  R40,[Re4+3e]     
-87e5: d9,03               jgtu  87ea             if (R40 <= Miltmr)  {
+87e5: d9,03               jgtu  87ea             if (R40 <= MILTMR)  {
 87e7: 71,df,2d            an2b  R2d,df           B5_R2d = 0; } }
    Sub_87ea:
 87ea: e7,d3,f3            jump  7bc0             goto Set_STO; }
@@ -10822,9 +10816,10 @@ ERROR CODE DESCRIPTION
 885b: 71,df,48            an2b  R48,df           STO_TRIGGER = 0; }
 885e: f0                  ret                    return;
 
+   Sub_885f:
 885f: b1,19,6f            ldb   R6f,19           R6f = 19;
-8862: 38,ae,03            jb    B0,Rae,8868      if (B0_Rae = 1) goto 8868;
-8865: b1,09,6f            ldb   R6f,9            R6f = 9;
+8862: 38,ae,03            jb    B0,Rae,8868      if (B0_Rae = 0)  {
+8865: b1,09,6f            ldb   R6f,9            R6f = 9; }
 8868: ef,66,a1            call  29d1             Sub_29d1 ();
 886b: 08,01,ae            shrw  Rae,1            Rae >>= 1;
 886e: e0,ab,38            djnz  Rab,88a9         Rab--;
@@ -10846,11 +10841,11 @@ ERROR CODE DESCRIPTION
 8896: 34,2b,03            jnb   B4,R2b,889c      if (STO_fast = 1)  {
 8899: 91,02,4f            orb   R4f,2            B1_Bypass_time = 1; }
 889c: 71,df,48            an2b  R48,df           STO_TRIGGER = 0;
-889f: 20,08               sjmp  88a9             goto 88a9;
+889f: 20,08               sjmp  88a9             goto 88a9; } }
 
 88a1: c7,70,01,00         stb   R0,[R70+1]       [Rtab+1] = 0;
 88a5: 71,f7,2b            an2b  R2b,f7           STO_WORKING = 0;
-88a8: f0                  ret                    return;
+88a8: f0                  ret                    return; }
 
 88a9: 31,4f,09            jnb   B1,R4f,88b5      if (B1_Bypass_time = 1)  {
 88ac: 65,23,08,72         ad2w  R72,823          HSO_time += 823;
@@ -13829,7 +13824,7 @@ a71d: 98,32,91            cmpb  R91,R32
 a720: d3,0e               jnc   a730             if (VBAT >= R32)  {               # VBAT >= LOWVOL + VOLHYS
 a722: 71,fb,45            an2b  R45,fb           B2_LOWVOLTAGE_Q_45 = 0;
 a725: 8b,f0,0a,d2         cmpw  Rd2,[Rf0+a]      
-a729: d3,1f               jnc   a74a             if (NACTMR < [b00a]) goto a74a;
+a729: d3,1f               jnc   a74a             if (NACTMR < CHGTM) goto a74a;
 a72b: 91,01,24            orb   R24,1            B0_R24 = 1;
 a72e: 20,1a               sjmp  a74a             goto a74a; }
 
@@ -13990,7 +13985,7 @@ a8a8: 22,36,01            timer 22, PUTMR,                                      
 a8ab: 80,cc,01            timer 80, V_LEGOTMR, 
 a8ae: 81,d0,01,04,48      timer 81, SparkAdvance, VATMR2_FLG, 
 a8b3: 89,37,04,80,a8      timer 89,   437, APT_Closed_Throttle, 
-a8b8: 42,be,01            timer 42, Miltmr, 
+a8b8: 42,be,01            timer 42, MILTMR, 
 a8bb: 40,c0,01            timer 40,   1c0, 
 a8be: 82,82,01            timer 82,   182, 
 a8c1: 22,42,01            timer 22, TSLPIP, 
@@ -14620,8 +14615,8 @@ b008: 96                  byte     96            CHGRPM
 
 b009: ff                  ???   
 
-b00a: 00,00               word      0
-b00c: 00,00               word      0            ?ISCMOD_TPREL?
+b00a: 00,00               word      0            CHGTM
+b00c: 00,00               word      0            DLHYST
 b00e: cd,04               word    4cd            ISCMOD_MAX
 b010: 9a,03               word    39a            ISCMOD_MIN
 b012: 0a,00               word      a            KDNDT
@@ -14666,7 +14661,7 @@ b044: 4e,00               word     4e            DRBASE
    idle_rpm_adder_startup:
 b046: 00,00               ???   
 
-b048: 00,00               word      0            idle_rpm_adder_max_time_on_startup
+b048: 00,00               word      0            BZZRPM
 b04a: 00,00               word      0            DNAC
 b04c: 00,08               word    800            DACTM
 b04e: 00,00               word      0            DNPOWS
@@ -14675,7 +14670,7 @@ b052: ff                  byte     ff            ACHPTM
 b053: 7f                  byte     7f            ECT_HP
 b054: a4,00               word     a4            PSPPM
 b056: 2d                  byte     2d            TKDTM
-b057: 02                  byte      2            pre_bzztm
+b057: 02                  byte      2            BZZTM
 b058: 03                  byte      3            NDDELT
 b059: ec                  byte     ec            MINACT
 b05a: 32                  byte     32            FMMDSD
