@@ -24,6 +24,14 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
 
 	@Override
     public final void exec(State state_) {
+		
+    	super.exec(state_);
+        
+        state_.setWordRegister(this.getOperandLocation(),this.getResult());
+        
+        return;
+        
+        /**
         int[] memory = state_.getMemory();
         final int pc = state_.getPc();
 
@@ -185,13 +193,63 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
        
-
+	**/
     }
 
-	@Override
-	public void setAddressMode(AddressMode direct) {
-		// TODO Auto-generated method stub
-		super.setAddressMode(direct);
+	public int execDirect()
+	{
+    	System.err.println("Direct Not Implemented yet. "+ this.getClass().getSimpleName());
+    	System.exit(1);
+		return getExecutionStates();
+	}
+	public int execImmediate()
+	{
+    	this.setNumberOfBytes(4);
+    	setExecutionStates(5);
+    	
+    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+    	
+	   // Assembler Format: LDW =data, breg
+	   // Instruction Operation: (RB) <- Data
+	   // Execution States: 5
+	   // Machine Format: [ ^A1 ], [ Data Lo Byte ], [ Data Hi Byte ], [ Dest RB]
+	   
+		byte destRB = operands[3];
+		short value  = (short) ((operands[2] << 8) | operands[1]  & 0xff);
+
+		//state_.setWordRegister((short) (destRB & 0xff), value);
+		
+		 this.setResult(value);
+	     this.setOperandLocation(destRB);
+
+		return getExecutionStates();
+	}
+	public int execIndirect()
+	{
+    	System.err.println("Indirect Not Implemented yet. "+ this.getClass().getSimpleName());
+    	System.exit(1);
+		return getExecutionStates();
+	}
+	public int execIndirectAutoInc()
+	{
+    	System.err.println("Indirect Auto Increment Not Implemented yet. "+ this.getClass().getSimpleName());
+    	System.exit(1);
+		return getExecutionStates();
+	}
+
+	public int execShortIndexed()
+	{
+    	System.err.println("Short Indexed Not Implemented yet in: " + this.getClass().getSimpleName());
+
+    	System.exit(1);
+		return getExecutionStates();
+	}
+
+	public int execLongIndexed()
+	{
+    	System.err.println("Long Indexed Not Implemented yet. "+ this.getClass().getSimpleName());
+    	System.exit(1);
+		return getExecutionStates();
 	}
 	
 	

@@ -15,6 +15,18 @@ public class BUS {
 		cpu.connectBus(this);
 	}
 	
+	public BUS() {
+		
+	}
+
+	public CPU getCpu() {
+		return cpu;
+	}
+
+	public void setCpu(CPU cpu) {
+		this.cpu = cpu;
+	}
+
 	public void write(short address, byte data)
 	{
 		// write address space 0-2000 only

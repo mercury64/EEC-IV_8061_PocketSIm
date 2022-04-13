@@ -60,6 +60,10 @@ public class RALU extends State {
 		super(memory_);
 		// TODO Auto-generated constructor stub
 	}
+
+	public RALU(Registers registers) {
+		// TODO Auto-generated constructor stub
+	}
 	public RALU(byte[] ram) {
 		// TODO Auto-generated constructor stub
 		int[] memory = new int[ram.length];

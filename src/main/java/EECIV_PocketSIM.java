@@ -89,6 +89,8 @@ public class EECIV_PocketSIM {
 			System.out.print(String.format("0x%04X: %s", state.getPc(), opcode));
 			opcode.exec(state);
 			
+			state.setPc(state.getPc() + 1);
+			
 			logger.info( String.format("%s", opcode) );
 			    
 			//System.out.println("CONSOLE STATUS " + String.format("0x%04X",state.getWordRegister((short) 0xd00)));

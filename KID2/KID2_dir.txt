@@ -49,13 +49,13 @@ vect    22c8 22c9
 struct  22ca 22e9: W R N : Y O 3 : Y D 240 N : W R N          # cmd
 struct  22ea 2319 :W R N : Y O 3 : Y D 240 N : Y O 2 : W P 1 : W N
 
-vect    231a 231b
-word    231c 231d
-vect    231e 231f
+struct  231a 231f :W R N :Y O 3: Y D 240 N
 
 struct  2320 234f :W R N :Y O 3: Y D 240 N : W R N
 
-word 2350 2357
+
+word 2350 2351
+struct  2352 2357 :W R N :Y O 3: Y D 240 N
 
 code    2358 235d
 
@@ -2339,11 +2339,16 @@ sym 17b "AEPP"
 sym 17c "PPCTR"
 sym 17d "CLFLG"
 sym 17e "MFAMUL"
+sym 17f "HLTMR"
 
 sym 180 "CRKPIP_CTR"
 sym 181 "CRKPIP_CTR_BG"
-
 sym 184 "OCCSAV"
+
+sym 18a "VIP_NRM_EX"
+sym 18c "VIP_NRM2_EX"
+sym 18e "CODE_OUT_L_EX"
+
 
 sym 192 "IBETA"
 sym 193 "INJCNT"
@@ -2360,6 +2365,8 @@ sym 1a9 "VIP_CNT_EX"
 
 sym 1ae "V_ETVOCM_SAV"
 
+sym 1b2 "CODE_CNT_EX"
+sym 1b6 "RVIPRPM"
 sym 1b9 "MAPSAV"
 sym 1ba "EGO_CNT_IDLE"
 sym 1bc "TSSTIL_TMR"
@@ -2654,6 +2661,7 @@ sym 434 "OLD_TP_DFSO"
 sym 436 "CTTMR"
 sym 43e "AC_PPM"
 
+sym 443 "OPEN_TMR"
 sym 444 "KAMREF"
 sym 447 "V_PRG_DLYTMR"
 sym 448 "V_LESTMR"
@@ -2811,17 +2819,15 @@ sym b005 "LOWVOL"
 sym b006 "VOLHYS"
 sym b007 "VOLTCLP"
 sym b008 "CHGRPM"
-
-sym b00c "?ISCMOD_TPREL?"
+sym b00a "CHGTM"
+sym b00c "DLHYST"
 sym b00e "ISCMOD_MAX"
+
 sym b010 "ISCMOD_MIN"
 sym b012 "KDNDT"
 sym b014 "TC_OVER"
 sym b016 "TC_UNDER"
-# sym b016 "PSIBRM"
 sym b018 "ISCMOD_RPM"
-
-
 sym b01a "PSIBRM"
 sym b01c "RPMINC"
 sym b01e "PSIBRN"
@@ -2831,61 +2837,54 @@ sym b022 "DEBYCP"
 sym b024 "DASCTL"
 sym b026 "DASPTK"
 sym b028 "DELHYS"
-
 sym b02a "RPMCTL"
 sym b02c "NDIF"
 sym b02e "RPMDED"
+
 sym b030 "DELRAT"
 sym b032 "ISCTM"
 sym b033 "ACMAP"
-
 sym b035 "UPDISC"
 sym b036 "UPDATM"
 sym b037 "MINMPH"
 sym b038 "IDCMUL"
 sym b03a "IDCOFS"
-
 sym b03c "STALLN"
 sym b03e "CRKTIM"
-
 sym b03f "BPCOR_SW"
 
 sym b041 "CSSMAF"
-
 sym b042 "NUBASE"
 sym b044 "DRBASE"
 sym b046 "idle_rpm_adder_startup"
-sym b048 "idle_rpm_adder_max_time_on_startup"
+sym b048 "BZZRPM"
 sym b04a "DNAC"
 sym b04c "DACTM"
 sym b04e "DNPOWS"
 
 sym b050 "ISCLPD_idle_max_rpm"
-
 sym b052 "ACHPTM"
 sym b053 "ECT_HP"
 sym b054 "PSPPM"
-
 sym b056 "TKDTM"
-sym b057 "pre_bzztm"
+sym b057 "BZZTM"
 sym b058 "NDDELT"
 sym b059 "MINACT"
 sym b05a "FMMDSD"
 sym b05b "DWELLA"
 sym b05c "DWELLM"
 sym b05e "DWLMAX"
+
 sym b060 "DWLMIN"
 sym b062 "DWLTSW"
 sym b064 "DWL_XS_MIN"
 sym b066 "MINDLA"
 sym b068 "MINDLB"
-
 sym b06a "PACLIM"
 sym b06c "PACOFF"
 sym b06e "PACPER"
 
 sym b070 "PACSLO"
-
 sym b072 "VBAT_DWELL"
 sym b073 "VBAT_DWL_HYS"
 
@@ -2912,13 +2911,16 @@ sym b45d "ECTSTABL"
 sym b45e "ECTSTHYS"
 sym b45f "MFARMP"
 
+sym b460 "HLDTIM"
 sym b461 "LAMRICH"
 sym b462 "LAMRHYS"
-
-sym b464 "OLMCL"
 sym b463 "OLIDRV"
+sym b464 "OLMCL"
+
 sym b466 "OLINEUT"
 sym b468 "LAMDLT_OL"
+
+sym b46a "TIME_OL"
 sym b46b "JMPMUL"
 
 sym b46c "MAPAHI"
@@ -3052,6 +3054,7 @@ sym b962 "HMUMAP"
 sym b963 "HMUMPH"
 sym b964 "LMBMAP"
 sym b966 "SW_MPD"
+sym b967 "T70LSW"
 sym b972 "SMTPDL"
 
 

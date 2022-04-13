@@ -1,0 +1,25 @@
+HI,
+I was in the Electronics division engine engine control development group and wrote the "skunk works news" among other things between 1978 and 1988. The EEC-IV hardware and software manuals, programmers reference card were done by my instigation and I over saw an external supplier doing the work over several years. The reference card was developed from my experience in IBM 360 and 6502 assembly language and their respective reference cards.
+
+EEC was essentially a sequence of different early microprocessor architectures.
+
+EEC-I and EEC-2 were supplied by Toshiba who also supplied an 8 Bit micro. EEC-I did Spark and EGR control, EEC-II added FBC (Feedback Carburetor control) they were in production from 78 to 79 all for lincoln.
+
+In 1980, EEC introduced EEC-III. EEC had 2 versions FBC and CFI (CFI sold on 5.0L Lincoln only (I believe) EEC-II used a Motorola 67002 12 Bit nano computer and used 10 Bit data words (no low byte, hi byte organization) it ran thru 1983 in limited use.
+
+EEC-IV started initially as a Vane Air Port injected engine controller for 1983 Escort/Lynx, EXP and LN7 family) it ran great I owned a brown LN7 2 door fastback and you had to barely hit crank and it would start.
+Ford contracted with INtel to design and build the 8061 microprocessor for EEC-IV. it was the first Microprocessor to have a process that allowed both digital controller and A/D converter on chip. to keep infrastructure down there was a bi-directional BUS and 3 bit control lines that allowed the architecture a 16 Bit address space. Page 0 (addresses 0000 thru 00FF were internal I/O and data registers)
+external ROM was the 8361 with 8k ROM and 256 byte RAM. initial production used 2 ROMs so there was 16K ROM and 512 bytes RAM in addition to the 240 Bytes of internal RAM registers (all Pg 0 RAM was accessible as registers, i.e. AD3B Ra,Rb,Rc added contents of Reg A to Reg B and put it in Reg C. Math was byte, word and shifts, divide used a 32 bit value.
+The 8061 had 10 10B A/D, 10 bits input and 10 bits output and 2 bidirectional I/O for flexability.
+A second gen Memory program netted 16 and 32K MROMs and EEPROMs, a 2K RAM-I/O and a version with a Time Triggered message controller that if patented would have made problems for later TIme Triggered Protocol patents.
+The 8063/65 was due to the 8061 NMOS process to not yield 15MHZ speeds and we needed the faster processing, and Intel advising that the 8061 NMOS process was going to be abandoned and they did not want to re-design in CMOS. Ford had started a joint facility with Ford Aerospace to design GAAS chips and support IC testing for Ford Automotive so they added the 8013/65 to their list and a team from Dearborn worked with FMI to architect improvements. We had many great improvements: 1Meg address space (16 pages of 654k), 64 inputs and outputs, 32 interrupts, 16 A/D's
+on decision to add 2 layer metal was a significant change as first silicon yielded at 45MHz and later systems got to 200MHZ with shrinks.
+I later found the 8065 lasted in production to 2007 so one IC software family stayed in production from 83 to 07 - 24 years, that's forever.
+Both the 8061 and 8065 had and early I/O processor, we called it the High Speed I/O processor essentially a mechanism to capture an input transition and the time it occurred into a 12 deep carousel, and 16 deep on the 8065. this made accurate spark more controllable and with transition interrupts jumping to interrupt service events and timer interrupts made spark and fuel control stand alone processes that reduced real time processor loading.
+Great days I got to use both my Digital circuit design skills and software coding skills to make a great processor.
+
+Two more notes: 1) Intel derived the 8096 from the 8061 by hanging an Intel bus off it for commercial use, and later re-scaled the instruction set 2 and 3 operand math, added look ahead score boarding to create the 80196 processor that never got off the ground. too bad. 2) I called the family a CRISP family of processors not a RISC or CISC chip, as the 8061 had a plethora of internal registers that made it an excellent RR to RR instruction set but also had with the 3 Byte, 3 word operands and Index+Displacement register, register indirect, register indirect auto increment a great and fast math machine for tables which was important with FOX and FOXY lookup table driven software.
+
+One final note: during the 8061's gestation in 1981, I was at SC4 early in the evening with Dick Umstedet the ALU designer, testing chips to fly home with the next day and in walked the new manager who went to dinner with us at Taco Bell, the manager's name: Craig Barrett later Intel CEO (1998-2005)
+
+I moved on to better things as in the 90's Ford switched over to the POWER PC family.

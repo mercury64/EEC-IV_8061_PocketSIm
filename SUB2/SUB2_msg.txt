@@ -1,0 +1,1674 @@
+
+# ----------------------------
+# SAD Version 4.0.7.6 (13 Sep 2020)
+# ----------------------------
+
+# Input file is 'SUB2.bin'
+
+# File is 56K (0xe000) bytes
+
+
+# Read commands from directive file at 'SUB2_dir.txt'
+
+## Invalid opcode at 88df4 [5]
+ Error -   Invalid  Command
+## struct 3cb5 3cd7 :Y P 3: W N P 4 
+ Warning - End inconsistent with size, reduced to 83cd5
+
+## byte    3cb5 3cb5
+ Error - Commands Overlap
+
+## byte    3cb6 3cb6
+ Error - Commands Overlap
+
+## byte    3cb7 3cb7
+ Error - Commands Overlap
+
+## byte    3cb8 3cb8
+ Error - Commands Overlap
+
+## byte    3cb9 3cb9
+ Error - Commands Overlap
+
+## byte    3cba 3cba
+ Error - Commands Overlap
+
+## fill    cce0 ffff     # auto
+ Error - Invalid Address
+
+# ----- Start Disassembly phase 1 -----
+
+# ----- End   Disassembly phase 1 -----
+
+# ----- Start Disassembly phase 2 -----
+
+# ----- End   Disassembly phase 2  -----
+
+# ----- Output Listing to file SUB2_lst.txt
+
+Invalid opcode at 88df4 [5]
+
+
+# ---------------------------------------------------------------------------------------------
+# The disassembler has scanned the binary and arrived at the following final command list.
+# This list is not guaranteed to be perfect, but should be a good base.
+# Extra gap and data scans (Phase 2) are shown above as they may be incorrect
+# This following list can be copied and pasted into a directives file from here.
+# ---------------------------------------------------------------------------------------------
+
+
+setopts  : default 
+
+# Banks Found.  For information, can uncomment to modify
+
+# bank  8     0  2000  ffff
+
+rbase 80 2356       # cmd
+rbase e4 180       # cmd
+rbase e6 280       # cmd
+rbase ea 480       # cmd
+rbase ec 580       # cmd
+rbase ee 780       # cmd
+rbase f0 b000       # cmd
+rbase f2 b41a       # cmd
+rbase f4 b41e       # cmd
+rbase f6 b858       # cmd
+rbase f8 b9f4       # cmd
+rbase fa babe       # cmd
+rbase fc bfe2       # cmd
+rbase fe c9e8       # cmd
+
+
+
+code    2000 2003
+code    2032 21cd
+code    2262 22bf
+code    2368 279c
+code    29c5 2d4b
+code    2d52 2f3d
+code    2f44 3cb4
+code    3cd7 430d
+code    431a 4359
+code    4361 622a
+code    6231 79a6
+code    79b4 7e46
+code    7e5a 8992
+code    8b28 8e09
+code    8e46 90ec
+code    90f1 9196
+code    91ac 9231
+code    9243 97e0
+code    97e8 a39f
+code    a3b8 a449
+code    a50a a571
+xcode   b000 ffff
+
+
+word    2002 2003
+word    200a 200f
+vect    2010 201f
+byte    2020 2021
+word    2022 2031
+vect    21ce 2261
+byte    22e5 22e5
+byte    22e7 22e7
+word    22ec 22ed
+word    2356 2357
+word    2358 2359
+word    235a 235b
+word    235c 235d
+word    235e 235f
+word    2360 2361
+word    2362 2363
+word    2364 2365
+word    253e 253f
+byte    28ad 28ad
+byte    28ae 28ae
+word    28fe 28ff
+word    2900 2901
+struct  291a 29c4: UW N : UY 
+byte    2c17 2c17
+byte    2c18 2c18
+byte    2c19 2c19
+word    2d4c 2d51
+word    2f3e 2f43
+struct  3cb5 3cd5: UY : UW N 
+args    3d26 3d29: E 2 f0 N : UW N 
+args    3dc6 3dc9: E 2 f0 N : UW N 
+args    3f2b 3f2e: E 2 f0 N : UW N 
+args    3fbc 3fbf: E 2 f0 N : O 2 UY 
+args    4058 405b: E 2 f0 N : O 2 UY 
+args    4089 408c: E 2 f0 N : UW N 
+args    40a9 40ac: E 2 f0 N : UW N 
+args    40df 40e2: E 2 f0 N : UW N 
+args    4121 4124: E 2 f0 N : UW N 
+args    42e9 42ec: E 2 f0 N : UW N 
+args    42f4 42f7: E 2 f0 N : UW N 
+word    4312 4319
+word    430e 430f
+word    4310 4311
+args    431d 4320: E 2 f0 N : O 2 UY 
+byte    435a 435a
+args    44e7 44ea: E 2 f0 N : O 2 UY 
+args    4524 4527: E 2 f0 N : UW N 
+args    454f 4552: E 2 f0 N : O 2 UY 
+args    4561 4564: E 2 f0 N : UW N 
+args    466f 4672: E 2 f0 N : UW N 
+args    468e 4691: E 2 f0 N : UW N 
+args    469b 469e: E 2 f0 N : UW N 
+args    497f 4982: E 2 f0 N : UW N 
+args    498d 4990: E 2 f0 N : UW N 
+args    4a34 4a37: E 2 f0 N : UW N 
+args    4a42 4a45: E 2 f0 N : UW N 
+args    4a4f 4a52: E 2 f0 N : UW N 
+args    4b0d 4b10: E 2 f0 N : O 2 UY 
+args    4b54 4b57: E 2 f0 N : UW N 
+args    4cae 4cb1: E 2 f0 N : UW N 
+args    4d13 4d16: E 2 f0 N : O 2 UY 
+args    4de3 4de6: E 2 f0 N : UW N 
+args    4e01 4e04: E 2 f0 N : UW N 
+args    4e19 4e1c: E 2 f0 N : O 2 UY 
+args    4e66 4e69: E 2 f0 N : UW N 
+args    4e73 4e76: E 2 f0 N : UW N 
+args    4e8c 4e8f: E 2 f0 N : UW N 
+args    4ecb 4ece: E 2 f0 N : O 2 UY 
+args    51a5 51a8: E 2 f0 N : UW N 
+args    51b3 51b6: E 2 f0 N : UW N 
+args    51cf 51d2: E 2 f0 N : UW N 
+args    51d9 51dc: E 2 f0 N : UW N 
+args    53af 53b2: E 2 f0 N : O 2 UY 
+args    566b 566e: E 2 f0 N : UW N 
+args    5687 568a: E 2 f0 N : O 2 UY 
+args    5895 5898: E 2 f0 N : UW N 
+args    58a6 58a9: E 2 f0 N : UW N 
+args    58be 58c1: E 2 f0 N : UW N 
+args    58c8 58cb: E 2 f0 N : O 2 UY 
+args    58d8 58db: E 2 f0 N : UW N 
+args    58f1 58f4: E 2 f0 N : O 2 UY 
+args    5908 590b: E 2 f0 N : O 2 UY 
+args    5a5b 5a5e: E 2 f0 N : UW N 
+args    5a6e 5a71: E 2 f0 N : UW N 
+args    5ade 5ae1: E 2 f0 N : O 2 UY 
+args    5ae8 5aeb: E 2 f0 N : O 2 UY 
+args    5b15 5b18: E 2 f0 N : UW N 
+args    5b79 5b7c: E 2 f0 N : UW N 
+args    5b83 5b86: E 2 f0 N : O 2 UY 
+args    5ba8 5bab: E 2 f0 N : O 2 UY 
+args    5da6 5da9: E 2 f0 N : O 2 UY 
+args    5eb8 5ebb: E 2 f0 N : UW N 
+args    5ec7 5eca: E 2 f0 N : UW N 
+args    5edc 5edf: E 2 f0 N : UW N 
+args    5eea 5eed: E 2 f0 N : UW N 
+args    5f02 5f05: E 2 f0 N : O 2 UY 
+args    606e 6071: E 2 f0 N : O 2 UY 
+args    6079 607c: E 2 f0 N : O 2 UY 
+args    6086 6089: E 2 f0 N : O 2 UY 
+args    60eb 60ee: E 2 f0 N : O 2 UY 
+args    6102 6105: E 2 f0 N : UW N 
+args    6173 6176: E 2 f0 N : UW N 
+args    61d8 61db: E 2 f0 N : UW N 
+byte    622b 6230
+args    628c 628f: E 2 f0 N : O 2 UY 
+args    6337 633a: E 2 f0 N : O 2 UY 
+args    6340 6343: E 2 f0 N : O 2 UY 
+args    6454 6457: E 2 f0 N : UW N 
+args    6462 6465: E 2 f0 N : UW N 
+args    6540 6543: E 2 f0 N : UW N 
+args    6584 6587: E 2 f0 N : UW N 
+args    658e 6591: E 2 f0 N : O 2 UY 
+args    65b1 65b4: E 2 f0 N : UW N 
+args    65d3 65d6: E 2 f0 N : UW N 
+args    668a 668d: E 2 f0 N : O 2 UY 
+args    6802 6805: E 2 f0 N : O 2 UY 
+args    6822 6825: E 2 f0 N : UW N 
+args    6836 6839: E 2 f0 N : O 2 UY 
+args    6941 6944: E 2 f0 N : UW N 
+args    69c0 69c3: E 2 f0 N : O 2 UY 
+args    6b19 6b1c: E 2 f0 N : UW N 
+args    6b36 6b39: E 2 f0 N : O 2 UY 
+args    6b50 6b53: E 2 f0 N : UW N 
+args    6c28 6c2b: E 2 f0 N : O 2 UY 
+args    6d7b 6d7e: E 2 f0 N : UW N 
+args    6e6a 6e6d: E 2 f0 N : O 2 UY 
+args    6ee0 6ee3: E 2 f0 N : UW N 
+args    6eea 6eed: E 2 f0 N : UW N 
+args    6f1b 6f1e: E 2 f0 N : O 2 UY 
+args    6f48 6f4b: E 2 f0 N : O 2 UY 
+args    6f55 6f58: E 2 f0 N : UW N 
+args    6f6b 6f6e: E 2 f0 N : O 2 UY 
+args    6f87 6f8a: E 2 f0 N : O 2 UY 
+args    6f97 6f9a: E 2 f0 N : UW N 
+args    704f 7052: UW N : O 2 UY 
+args    7157 715a: E 2 f0 N : O 2 UY 
+args    716d 7170: E 2 f0 N : UW N 
+args    7285 7288: E 2 f0 N : UW N 
+args    7676 7679: UW N : O 2 UY 
+args    767d 7680: UW N : O 2 UY 
+args    7688 768b: UW N : O 2 UY 
+args    768f 7692: UW N : O 2 UY 
+args    7847 784a: UW N : O 2 UY 
+args    78d3 78d6: E 2 f0 N : UW N 
+args    78e8 78eb: E 2 f0 N : O 2 UY 
+args    78f2 78f5: E 2 f0 N : UW N 
+word    79a8 79a9
+args    79b7 79ba: E 2 f0 N : O 2 UY 
+args    79e9 79ec: E 2 f0 N : O 2 UY 
+args    7b49 7b4c: E 2 f0 N : UW N 
+args    7d17 7d1a: UW N : O 2 UY 
+word    7e48 7e49
+word    7e50 7e51
+word    7e54 7e55
+byte    7f05 7f05
+byte    801b 801b
+args    80da 80dd: E 2 f0 N : O 2 UY 
+args    80e5 80e8: E 2 f0 N : O 2 UY 
+args    80fb 80fe: E 2 f0 N : UW N 
+args    8106 8109: E 2 f0 N : UW N 
+args    8115 8118: E 2 f0 N : UW N 
+args    8120 8123: E 2 f0 N : UW N 
+word    8476 8477
+args    86b5 86b8: E 2 f0 N : UW N 
+# timer   8993 8adc: UW 
+word    8ade 8adf
+args    8c30 8c31: UW N 
+args    8c35 8c36: UW N 
+vect    8df0 8e45
+args    8e8b 8e8c: UW N 
+args    8ea1 8ea5: O 2 UY : O 2 UY : UY 
+args    8ebe 8ebf: UW N 
+args    8ec3 8ec4: UW N 
+args    8ef3 8ef8: UW N : O 2 UY : O 2 UY 
+args    8efc 8f01: UW N : O 2 UY : O 2 UY 
+args    8f05 8f0a: UW N : O 2 UY : O 2 UY 
+args    8f0e 8f13: UW N : O 2 UY : O 2 UY 
+args    8f17 8f1c: UW N : O 2 UY : O 2 UY 
+args    8f20 8f25: UW N : O 2 UY : O 2 UY 
+args    8f38 8f3b: UW N : O 2 UY 
+args    8f42 8f45: E 3 f0 N : E 3 f0 N 
+args    8f49 8f4a: UW N 
+args    8f97 8f98: UW N 
+args    8f9c 8fa1: UW N : O 2 UY : O 2 UY 
+args    8fa5 8faa: UW N : O 2 UY : O 2 UY 
+byte    90ee 90ee
+word    9198 9199
+byte    919a 919a
+byte    919b 919b
+byte    919c 919c
+args    91af 91b2: UW N : O 2 UY 
+args    922c 922f: UW N : O 2 UY 
+word    9232 9233
+byte    923d 923d
+byte    923e 923e
+args    92fc 92fd: UW N 
+args    9311 9312: UW N 
+args    9316 9317: UW N 
+args    9341 9344: E 2 f0 N : O 2 UY 
+args    938a 938b: UW N 
+args    940a 940b: UW N 
+args    9423 942c: UW N : E 3 f0 N : E 3 f0 N : O 2 UY : O 2 UY 
+args    9433 9436: UW N : O 2 UY 
+args    943a 943d: UW N : O 2 UY 
+args    944c 944f: UW N : O 2 UY 
+args    9478 947b: UW N : O 2 UY 
+args    948e 948f: UW N 
+args    94de 94e1: UW N : O 2 UY 
+args    94ea 94eb: UW N 
+args    94fa 94fd: UW N : UW N 
+args    950e 950f: UW N 
+args    9516 951b: UW N : UW N : O 2 UY 
+args    9534 9536: UW N : UY 
+args    9539 953b: UW N : UY 
+args    9541 9543: UW N : UY 
+args    9546 9548: UW N : UY 
+args    954b 954d: UW N : UY 
+args    9550 9552: UW N : UY 
+args    9555 9558: UW N : UY : UY 
+args    955b 955e: UW N : UY : UY 
+args    9561 9564: UW N : UY : UY 
+args    9567 956a: UW N : UY : UY 
+args    956d 9570: UW N : UY : UY 
+args    97dd 97de: UW N 
+word    97e2 97e3
+word    97e4 97e5
+args    97ea 97ef: E 3 f0 N : E 3 f0 N : O 2 UY 
+args    97f5 97fa: E 3 f0 N : E 3 f0 N : O 2 UY 
+args    9801 9808: UW N : E 3 f0 N : E 3 f0 N : O 2 UY 
+args    980b 9810: E 3 f0 N : E 3 f0 N : O 2 UY 
+args    9816 981b: E 3 f0 N : E 3 f0 N : O 2 UY 
+args    9822 9829: UW N : E 3 f0 N : E 3 f0 N : O 2 UY 
+args    9836 9837: UW N 
+args    983d 9844: UW N : O 2 UY : E 3 f0 N : O 2 UY 
+args    984e 9853: E 3 f0 N : E 3 f0 N : O 2 UY 
+args    9859 985e: E 3 f0 N : E 3 f0 N : O 2 UY 
+args    9865 986c: UW N : E 3 f0 N : E 3 f0 N : O 2 UY 
+args    986f 9874: E 3 f0 N : E 3 f0 N : O 2 UY 
+args    987a 987f: E 3 f0 N : E 3 f0 N : O 2 UY 
+args    9885 988c: UW N : E 3 f0 N : E 3 f0 N : O 2 UY 
+args    9893 989c: UW N : E 3 f0 N : E 3 f0 N : O 2 UY : O 2 UY 
+args    98a2 98a3: O 2 UY 
+args    98ac 98b3: UW N : E 3 f0 N : E 3 f0 N : O 2 UY 
+args    98b8 98bf: UW N : E 3 f0 N : E 3 f0 N : O 2 UY 
+args    98cd 98ce: O 2 UY 
+args    98d1 98d6: E 3 f0 N : E 3 f0 N : O 2 UY 
+args    98df 98e0: O 2 UY 
+args    98e5 98e5: UY 
+args    9966 9967: E 3 f0 N 
+args    996d 996e: UW N 
+args    9974 9975: E 3 f0 N 
+args    997b 997c: UW N 
+args    9993 9997: UW N : O 2 UY : UY 
+args    999a 999e: UW N : UW N : UY 
+args    99ae 99b2: UW N : UW N : UY 
+args    99b5 99b9: UW N : UW N : UY 
+args    99d2 99d6: UW N : UW N : UY 
+args    99dc 99e0: UW N : UW N : UY 
+args    99e3 99e7: UW N : UW N : UY 
+args    99ea 99ee: UW N : UW N : UY 
+args    99f1 99f5: UW N : UW N : UY 
+args    99f8 99fc: UW N : UW N : UY 
+args    9a4c 9a4c: UY 
+args    9ac0 9ac1: E 3 f0 N 
+args    9adc 9add: UW N 
+args    9afa 9afb: UW N 
+args    9b7a 9b7a: UY 
+args    9b8e 9b8e: UY 
+args    9b91 9b92: UW N 
+args    9b95 9b96: UW N 
+args    9bc0 9bc1: UW N 
+args    9bca 9bcb: UW N 
+args    9bd0 9bd1: UW N 
+args    9bdb 9bdc: UW N 
+args    9be2 9be3: UW N 
+args    9be9 9bea: UW N 
+args    9bf0 9bf1: UW N 
+args    9bf7 9bf8: UW N 
+args    9bfe 9bff: UW N 
+args    9c45 9c46: E 3 f0 N 
+args    9c49 9c4e: E 3 f0 N : E 3 f0 N : O 2 UY 
+args    9c68 9c6f: UW N : E 3 f0 N : E 3 f0 N : O 2 UY 
+args    9c72 9c79: UW N : O 2 UY : E 3 f0 N : O 2 UY 
+args    9c86 9c87: O 2 UY 
+args    9c8d 9c94: UW N : E 3 f0 N : E 3 f0 N : O 2 UY 
+args    9c97 9c9e: UW N : O 2 UY : E 3 f0 N : O 2 UY 
+args    9ca1 9ca8: UW N : E 3 f0 N : E 3 f0 N : O 2 UY 
+args    9cc6 9cc7: E 3 f0 N 
+args    9cca 9ccb: E 3 f0 N 
+args    9cce 9ccf: UW N 
+args    9cd9 9cda: E 3 f0 N 
+args    9cea 9ceb: E 3 f0 N 
+args    9cee 9cef: UW N 
+args    9d01 9d02: E 3 f0 N 
+args    9d05 9d06: E 3 f0 N 
+args    9d12 9d13: E 3 f0 N 
+args    9d16 9d17: UW N 
+args    9d24 9d25: E 3 f0 N 
+args    9d28 9d29: UW N 
+args    9d3a 9d3b: E 3 f0 N 
+args    9d41 9d42: UW N 
+args    9d63 9d63: UY 
+args    9d67 9d68: E 3 f0 N 
+args    9da1 9da1: UY 
+args    9da5 9da6: E 3 f0 N 
+args    9dbd 9dbe: E 3 f0 N 
+args    9df5 9df6: UW N 
+args    9dff 9e00: E 3 f0 N 
+args    9e08 9e09: E 3 f0 N 
+args    9e15 9e1e: UW N : E 3 f0 N : E 3 f0 N : O 2 UY : O 2 UY 
+args    9e5a 9e5b: UW N 
+args    9e67 9e67: UY 
+args    9e6b 9e6c: O 2 UY 
+args    9e70 9e71: O 2 UY 
+args    9ebc 9ebd: E 3 f0 N 
+args    9ec0 9ec5: E 3 f0 N : E 3 f0 N : O 2 UY 
+args    9eee 9eef: E 3 f0 N 
+args    9f65 9f66: E 3 f0 N 
+args    9f74 9f75: UW N 
+args    9f7e 9f7f: UW N 
+args    9f86 9f87: UW N 
+args    9f91 9f92: UW N 
+args    9fae 9faf: UW N 
+args    9fc7 9fc8: UW N 
+args    9fd5 9fd6: UW N 
+args    a07a a07b: E 3 f0 N 
+args    a085 a086: E 3 f0 N 
+word    a3a0 a3a1
+word    a3a6 a3a7
+word    a44a a44b
+word    a44c a44d
+byte    a44e a44e
+byte    a44f a44f
+byte    a450 a450
+byte    a451 a451
+word    a47a a47b
+word    a47c a47d
+word    a47e a47f
+byte    a480 a480
+byte    a481 a481
+word    a580 a581
+word    b000 b001
+byte    b003 b003
+byte    b004 b004
+byte    b005 b005
+byte    b006 b006
+byte    b007 b007
+byte    b008 b008
+word    b00a b00b
+word    b00c b00d
+word    b00e b00f
+word    b010 b011
+word    b012 b013
+word    b014 b015
+word    b016 b017
+byte    b018 b018
+word    b01a b01b
+word    b01c b01d
+word    b01e b01f
+word    b020 b021
+word    b022 b023
+word    b024 b025
+word    b026 b027
+word    b028 b029
+word    b02a b02b
+word    b02c b02d
+word    b02e b02f
+word    b030 b031
+byte    b032 b032
+byte    b033 b033
+byte    b035 b035
+byte    b036 b036
+byte    b037 b037
+word    b038 b039
+word    b03a b03b
+word    b03c b03d
+byte    b03e b03e
+byte    b03f b03f
+byte    b041 b041
+word    b042 b043
+word    b044 b045
+word    b048 b049
+word    b04a b04b
+word    b04c b04d
+word    b04e b04f
+word    b050 b051
+word    b052 b053
+word    b054 b055
+byte    b056 b056
+byte    b057 b057
+byte    b058 b058
+byte    b059 b059
+byte    b05a b05a
+byte    b05b b05b
+byte    b05c b05c
+word    b05e b05f
+word    b060 b061
+word    b062 b063
+word    b064 b065
+word    b066 b067
+word    b068 b069
+word    b06a b06b
+word    b06c b06d
+word    b06e b06f
+word    b070 b071
+byte    b072 b072
+byte    b073 b073
+func    b074 b08b: UW X 16 : UW X 16 
+func    b08c b097: SY X 16 : UY X 16 
+func    b098 b0bf: UW X 16 : UW X 16 
+func    b0c0 b0cb: UY X 16 : UY X 16 
+func    b0cc b0df: SY X 16 : UY X 16 
+func    b0e0 b0ed: SY X 16 : UY X 16 
+func    b0ee b0fb: SY X 16 : UY X 16 
+func    b0fc b109: UY X 16 : UY X 16 
+func    b10a b111: UY X 16 : UY X 16 
+func    b112 b129: UW X 16 : UW X 16 
+func    b12a b141: UW X 16 : UW X 16 
+func    b142 b15d: UW X 16 : UW X 16 
+func    b15e b16b: UY X 16 : UY X 16 
+func    b16c b187: UW X 16 : UW X 16 
+func    b188 b18f: UY X 16 : UY X 16 
+func    b190 b19b: UY X 16 : UY X 16 
+table   b19c b1c5: O 7 UY X 16 
+func    b1c6 b1ed: UW X 16 : SW X 16 
+func    b1ee b219: UW X 16 : SW X 16 
+func    b21a b235: UW X 16 : UW X 16 
+func    b236 b249: UW X 16 : UW X 16 
+func    b24a b269: SW X 16 : UW X 16 
+func    b26a b299: UW X 16 : UW X 16 
+func    b29a b2c1: SW X 16 : UW X 16 
+func    b2c2 b2d9: UW X 16 : UW X 16 
+func    b2da b2f5: UW X 16 : UW X 16 
+func    b2f6 b311: UW X 16 : UW X 16 
+func    b312 b32d: UW X 16 : UW X 16 
+func    b32e b341: UW X 16 : UW X 16 
+func    b342 b355: UW X 16 : UW X 16 
+func    b356 b371: UW X 16 : UW X 16 
+func    b372 b391: UW X 16 : UW X 16 
+func    b392 b3ad: UW X 16 : UW X 16 
+func    b3ae b3c5: SW X 16 : UW X 16 
+func    b3c6 b3d9: UW X 16 : UW X 16 
+func    b3da b3ed: UW X 16 : UW X 16 
+func    b3ee b401: UW X 16 : UW X 16 
+func    b402 b419: SW X 16 : UW X 16 
+word    b41a b41b
+byte    b41c b41c
+byte    b41d b41d
+word    b41e b41f
+byte    b420 b420
+word    b422 b423
+byte    b424 b424
+word    b426 b427
+word    b428 b429
+word    b42a b42b
+byte    b42f b42f
+word    b430 b431
+word    b432 b433
+byte    b434 b434
+byte    b435 b435
+byte    b436 b436
+byte    b437 b437
+byte    b438 b438
+byte    b439 b439
+byte    b43a b43a
+byte    b43b b43b
+byte    b43c b43c
+byte    b43d b43d
+word    b43e b43f
+byte    b440 b440
+byte    b441 b441
+byte    b442 b442
+byte    b443 b443
+byte    b444 b444
+byte    b445 b445
+byte    b446 b446
+byte    b447 b447
+byte    b448 b448
+byte    b449 b449
+byte    b44a b44a
+byte    b44b b44b
+byte    b44c b44c
+byte    b44d b44d
+byte    b44e b44e
+word    b450 b451
+word    b452 b453
+byte    b454 b454
+byte    b455 b455
+byte    b456 b456
+byte    b457 b457
+byte    b458 b458
+byte    b459 b459
+word    b45a b45b
+word    b45c b45d
+word    b45e b45f
+byte    b460 b460
+byte    b461 b461
+byte    b462 b462
+byte    b463 b463
+byte    b464 b464
+word    b470 b471
+word    b472 b473
+byte    b474 b474
+byte    b475 b475
+byte    b476 b476
+byte    b477 b477
+byte    b478 b478
+byte    b479 b479
+byte    b47a b47a
+word    b47c b47d
+word    b47e b47f
+word    b480 b481
+word    b482 b483
+word    b484 b485
+word    b486 b487
+byte    b488 b488
+byte    b489 b489
+byte    b48a b48a
+byte    b48b b48b
+byte    b48c b48c
+byte    b48d b48d
+byte    b48e b48e
+byte    b48f b48f
+word    b490 b491
+word    b492 b493
+byte    b494 b494
+byte    b495 b495
+byte    b496 b496
+byte    b497 b497
+byte    b498 b498
+byte    b499 b499
+byte    b49a b49a
+byte    b49b b49b
+byte    b49c b49c
+byte    b49d b49d
+byte    b49e b49e
+byte    b49f b49f
+byte    b4a0 b4a0
+byte    b4a1 b4a1
+word    b4a2 b4a3
+byte    b4a4 b4a4
+byte    b4a5 b4a5
+word    b4a6 b4a7
+byte    b4a8 b4a8
+word    b4aa b4ab
+word    b4ac b4ad
+word    b4ae b4af
+word    b4b0 b4b1
+word    b4b2 b4b3
+word    b4b4 b4b5
+word    b4b6 b4b7
+word    b4b8 b4b9
+word    b4ba b4bb
+word    b4bc b4bd
+word    b4be b4bf
+byte    b4c0 b4c0
+word    b4c2 b4c3
+word    b4c4 b4c5
+func    b4c6 b4dd: UW X 16 : UW X 16 
+func    b4de b4e9: SY X 16 : UY X 16 
+func    b4ea b4fd: UW X 16 : UW X 16 
+func    b4fe b519: UW X 16 : UW X 16 
+table   b51a b549: O 6 UY X 16 
+table   b54a b579: O 6 SY X 16 
+func    b57a b591: UW X 16 : UW X 16 
+func    b592 b5b5: UW X 16 : UW X 16 
+func    b5b6 b5c3: UY X 16 : UY X 16 
+func    b5c4 b5df: UW X 16 : UW X 16 
+func    b5e0 b5ed: SY X 16 : UY X 16 
+table   b5ee b63d: O 10 UY X 16 
+table   b63e b68d: O 10 UY X 16 
+func    b68e b69b: UY X 16 : UY X 16 
+table   b69c b6eb: O 10 UY X 16 
+table   b6ec b73b: O 10 UY X 16 
+table   b73c b78b: O 10 SY X 16 
+table   b78c b7bb: O 6 UY X 16 
+table   b7bc b7d4: O 5 UY X 16 
+table   b7d5 b7ed: O 5 UY X 16 
+table   b7ee b806: O 5 UY X 16 
+table   b807 b856: O 10 UY X 16 
+word    b858 b859
+byte    b85a b85a
+byte    b85b b85b
+byte    b85c b85c
+byte    b85d b85d
+word    b85e b85f
+word    b860 b861
+word    b862 b863
+word    b864 b865
+word    b866 b867
+byte    b868 b868
+byte    b869 b869
+word    b86a b86b
+word    b86c b86d
+word    b86e b86f
+word    b870 b871
+word    b872 b873
+word    b874 b875
+word    b876 b877
+word    b878 b879
+word    b87a b87b
+byte    b87c b87c
+byte    b87d b87d
+byte    b880 b880
+word    b882 b883
+word    b884 b885
+word    b886 b887
+word    b888 b889
+word    b88a b88b
+byte    b88c b88c
+byte    b88d b88d
+word    b88e b88f
+byte    b890 b890
+byte    b891 b891
+word    b892 b893
+byte    b894 b894
+byte    b895 b895
+byte    b896 b896
+byte    b897 b897
+byte    b898 b898
+byte    b899 b899
+byte    b89a b89a
+byte    b89b b89b
+byte    b89f b89f
+byte    b8a0 b8a0
+byte    b8a1 b8a1
+byte    b8a2 b8a2
+byte    b8a3 b8a3
+byte    b8a4 b8a4
+byte    b8a5 b8a5
+byte    b8a6 b8a6
+byte    b8a7 b8a7
+byte    b8a8 b8a8
+byte    b8a9 b8a9
+byte    b8aa b8aa
+byte    b8ab b8ab
+byte    b8ac b8ac
+byte    b8b3 b8b3
+byte    b8b4 b8b4
+byte    b8b5 b8b5
+word    b8b6 b8b7
+byte    b8b8 b8b8
+func    b8b9 b8c2: SY X 16 : UY X 16 
+func    b8c3 b8cc: SY X 16 : UY X 16 
+func    b8cd b8de: UY X 16 : UY X 16 
+func    b8df b8e4: UY X 16 : UY X 16 
+table   b8e5 b948: O 10 UY X 16 
+func    b94a b961: UW X 16 : UW X 16 
+table   b962 b98e: O 5 UY X 16 
+func    b98f b99a: UY X 16 : UY X 16 
+func    b99c b9b3: UW X 16 : UW X 16 
+func    b9b4 b9cf: UW X 16 : UW X 16 
+func    b9d0 b9f3: UW X 16 : UW X 16 
+word    b9f4 b9f5
+word    b9f6 b9f7
+word    b9f8 b9f9
+word    b9fa b9fb
+word    b9fc b9fd
+word    b9fe b9ff
+word    ba00 ba01
+word    ba02 ba03
+word    ba04 ba05
+word    ba06 ba07
+word    ba08 ba09
+word    ba0a ba0b
+word    ba0c ba0d
+word    ba0e ba0f
+word    ba10 ba11
+word    ba12 ba13
+word    ba14 ba15
+word    ba16 ba17
+word    ba18 ba19
+word    ba1a ba1b
+word    ba1c ba1d
+word    ba1e ba1f
+word    ba20 ba21
+word    ba22 ba23
+word    ba24 ba25
+word    ba26 ba27
+word    ba28 ba29
+func    ba2a ba39: UW X 16 : UW X 16 
+func    ba3a ba41: UY X 16 : UY X 16 
+func    ba42 ba51: SY X 16 : UY X 16 
+func    ba52 ba61: SY X 16 : UY X 16 
+func    ba62 ba81: SW X 16 : SW X 16 
+func    ba82 ba8b: UY X 16 : UY X 16 
+table   ba8c baaf: O 6 SY X 16 
+func    bab0 babd: UY X 16 : SY X 16 
+word    babe babf
+byte    bac0 bac0
+byte    bac1 bac1
+byte    bac2 bac2
+byte    bac3 bac3
+byte    bac4 bac4
+byte    bac5 bac5
+word    bac6 bac7
+byte    bac8 bac8
+byte    bac9 bac9
+byte    baca baca
+word    bacc bacd
+word    bace bacf
+word    bad0 bad1
+word    bad2 bad3
+word    bad4 bad5
+byte    bad6 bad6
+byte    bad7 bad7
+byte    bad8 bad8
+word    bada badb
+byte    badc badc
+byte    bae3 bae3
+byte    bae4 bae4
+word    bae6 bae7
+word    bae8 bae9
+word    baea baeb
+word    baec baed
+byte    baee baee
+byte    baef baef
+word    baf0 baf1
+word    baf2 baf3
+byte    baf4 baf4
+byte    baf5 baf5
+byte    baf6 baf6
+byte    baf7 baf7
+byte    baf8 baf8
+word    bafa bafb
+byte    bafc bafc
+byte    bafd bafd
+word    bafe baff
+word    bb00 bb01
+word    bb02 bb03
+word    bb04 bb05
+word    bb06 bb07
+byte    bb08 bb08
+byte    bb09 bb09
+byte    bb0a bb0a
+func    bb0b bb14: UY X 16 : UY X 16 
+func    bb15 bb1e: UY X 16 : UY X 16 
+func    bb20 bb37: SW X 16 : UW X 16 
+func    bb38 bb5b: SW X 16 : UW X 16 
+func    bb5c bb77: UW X 16 : UW X 16 
+func    bb78 bb93: UW X 16 : UW X 16 
+func    bb94 bbaf: UW X 16 : SW X 16 
+func    bbb0 bbbb: UY X 16 : UY X 16 
+table   bbbc bc0b: O 10 UY X 16 
+table   bc0c bc5b: O 10 UY X 16 
+table   bc5c bcab: O 10 UY X 16 
+table   bcac bcfb: O 10 UY X 16 
+table   bcfc bd4b: O 10 UY X 16 
+table   bd4c bd9b: O 10 SY X 16 
+table   bd9c bdeb: O 10 UY X 16 
+func    bdec be17: UW X 16 : UW X 16 
+func    be18 be25: SY X 16 : UY X 16 
+func    be26 be2f: UY X 16 : UY X 16 
+func    be30 be57: UW X 16 : UW X 16 
+func    be58 be65: SY X 16 : UY X 16 
+func    be66 be8d: UW X 16 : UW X 16 
+func    be8e bea9: SW X 16 : SW X 16 
+table   beaa bef9: O 10 UY X 16 
+table   befa bf49: O 10 UY X 16 
+func    bf4a bf5d: UY X 16 : UY X 16 
+func    bf5e bf75: UW X 16 : UW X 16 
+func    bf76 bfad: UW X 16 : UW X 16 
+func    bfae bfc1: UW X 16 : UW X 16 
+func    bfc2 bfd9: UW X 16 : UW X 16 
+func    bfda bfe1: UY X 16 : UY X 16 
+word    bfe2 bfe3
+word    bfe4 bfe5
+word    bfe6 bfe7
+word    bfe8 bfe9
+byte    bfea bfea
+byte    bfeb bfeb
+byte    bfec bfec
+word    bfee bfef
+byte    bff6 bff6
+byte    bff7 bff7
+word    bffc bffd
+word    c002 c003
+word    c004 c005
+byte    c006 c006
+byte    c007 c007
+byte    c00d c00d
+byte    c010 c010
+byte    c012 c012
+byte    c031 c031
+byte    c032 c032
+byte    c03d c03d
+word    c040 c041
+word    c042 c043
+word    c044 c045
+word    c046 c047
+word    c052 c053
+byte    c054 c054
+word    c058 c059
+word    c062 c063
+word    c064 c065
+byte    c075 c075
+byte    c076 c076
+word    c078 c079
+byte    c07a c07a
+byte    c07b c07b
+byte    c07c c07c
+word    c07e c07f
+byte    c080 c080
+word    c082 c083
+word    c084 c085
+word    c086 c087
+word    c088 c089
+word    c08a c08b
+word    c08c c08d
+word    c08e c08f
+word    c090 c091
+word    c096 c097
+word    c098 c099
+byte    c09a c09a
+byte    c09b c09b
+byte    c09c c09c
+byte    c09d c09d
+word    c09e c09f
+word    c0a0 c0a1
+byte    c0a2 c0a2
+byte    c0b0 c0b0
+byte    c0b1 c0b1
+byte    c0b2 c0b2
+byte    c0b3 c0b3
+byte    c0b4 c0b4
+byte    c0b5 c0b5
+byte    c0b6 c0b6
+word    c0b8 c0b9
+word    c0ba c0bb
+word    c0bc c0bd
+byte    c0be c0be
+byte    c0bf c0bf
+word    c0c0 c0c1
+word    c0c6 c0c7
+byte    c0c8 c0c8
+byte    c0c9 c0c9
+byte    c0ca c0ca
+word    c0cc c0cd
+word    c0e4 c0e5
+word    c0e6 c0e7
+byte    c0ec c0ec
+byte    c0ed c0ed
+byte    c0ee c0ee
+byte    c0f0 c0f0
+byte    c0f1 c0f1
+word    c0f2 c0f3
+word    c0f4 c0f5
+word    c0f6 c0f7
+byte    c0f8 c0f8
+byte    c0f9 c0f9
+byte    c0fa c0fa
+byte    c0fc c0fc
+byte    c0fd c0fd
+word    c0fe c0ff
+byte    c100 c100
+byte    c106 c106
+byte    c107 c107
+byte    c108 c108
+byte    c109 c109
+word    c10c c10d
+word    c10e c10f
+word    c110 c111
+word    c112 c113
+byte    c11a c11a
+byte    c11b c11b
+word    c11c c11d
+word    c11e c11f
+byte    c120 c120
+word    c122 c123
+word    c124 c125
+word    c126 c127
+word    c128 c129
+word    c12c c12d
+word    c12e c12f
+word    c130 c131
+word    c132 c133
+word    c134 c135
+word    c136 c137
+byte    c13c c13c
+byte    c13d c13d
+byte    c13e c13e
+byte    c13f c13f
+word    c158 c159
+word    c168 c169
+func    c170 c18b: UW X 16 : UW X 16 
+func    c18c c197: UY X 16 : UY X 16 
+func    c198 c1af: SW X 16 : SW X 16 
+func    c1c4 c1d7: UY X 16 : UY X 16 
+func    c1ec c21b: UW X 16 : UW X 16 
+func    c244 c273: UW X 16 : UW X 16 
+func    c29c c2af: UY X 16 : UY X 16 
+func    c2c4 c2d7: UY X 16 : UY X 16 
+func    c2ec c2ff: UY X 16 : UY X 16 
+func    c300 c313: UW X 16 : UW X 16 
+func    c314 c32f: UW X 16 : UW X 16 
+func    c360 c373: UY X 16 : UY X 16 
+func    c3c0 c3d3: UY X 16 : UY X 16 
+func    c3f0 c40b: UW X 16 : UW X 16 
+func    c40c c427: UW X 16 : UW X 16 
+func    c428 c443: UW X 16 : UW X 16 
+func    c444 c45f: UW X 16 : UW X 16 
+func    c460 c47b: UW X 16 : UW X 16 
+func    c47c c497: UW X 16 : UW X 16 
+func    c498 c4af: UW X 16 : UW X 16 
+func    c678 c683: UY X 16 : UY X 16 
+func    c69c c6ab: UY X 16 : UY X 16 
+func    c6ac c6db: UW X 16 : UW X 16 
+func    c6dc c6f3: UY X 16 : UY X 16 
+func    c6f4 c723: SW X 16 : SW X 16 
+func    c724 c743: SW X 16 : UW X 16 
+func    c744 c74f: SY X 16 : UY X 16 
+func    c750 c759: UY X 16 : UY X 16 
+func    c75a c763: UY X 16 : UY X 16 
+func    c764 c773: UY X 16 : UY X 16 
+func    c774 c78f: UW X 16 : UW X 16 
+func    c790 c7ab: UW X 16 : UW X 16 
+func    c7ac c7c7: UW X 16 : UW X 16 
+table   c7c8 c82b: O 10 UY X 16 
+table   c82c c84f: O 6 UY X 16 
+table   c850 c873: O 6 UY X 16 
+table   c874 c9e7: O 6 UY X 16 
+word    c9e8 c9e9
+word    c9ea c9eb
+word    c9ec c9ed
+word    c9ee c9ef
+word    c9f0 c9f1
+byte    c9f2 c9f2
+byte    c9f3 c9f3
+word    c9f4 c9f5
+byte    c9f6 c9f6
+word    c9f8 c9f9
+byte    c9fa c9fa
+word    c9fc c9fd
+byte    c9fe c9fe
+word    ca00 ca01
+word    ca02 ca03
+word    ca04 ca05
+word    ca06 ca07
+byte    ca08 ca08
+byte    ca09 ca09
+byte    ca0a ca0a
+byte    ca0b ca0b
+byte    ca0c ca0c
+byte    ca0d ca0d
+byte    ca0e ca0e
+byte    ca0f ca0f
+byte    ca10 ca10
+byte    ca11 ca11
+byte    ca12 ca12
+byte    ca13 ca13
+byte    ca14 ca14
+byte    ca15 ca15
+byte    ca16 ca16
+byte    ca17 ca17
+byte    ca18 ca18
+byte    ca19 ca19
+byte    ca1a ca1a
+byte    ca1b ca1b
+word    ca1c ca1d
+word    ca1e ca1f
+word    ca20 ca21
+word    ca22 ca23
+byte    ca24 ca24
+byte    ca25 ca25
+byte    ca26 ca26
+byte    ca27 ca27
+word    ca28 ca29
+byte    ca2a ca2a
+byte    ca2b ca2b
+byte    ca2c ca2c
+byte    ca2d ca2d
+byte    ca2e ca2e
+word    ca30 ca31
+word    ca32 ca33
+word    ca34 ca35
+word    ca36 ca37
+word    ca38 ca39
+word    ca3a ca3b
+word    ca3c ca3d
+word    ca3e ca3f
+word    ca40 ca41
+word    ca42 ca43
+word    ca44 ca45
+word    ca46 ca47
+word    ca48 ca49
+word    ca4a ca4b
+word    ca4c ca4d
+word    ca4e ca4f
+word    ca50 ca51
+word    ca52 ca53
+byte    ca54 ca54
+word    ca56 ca57
+word    ca58 ca59
+byte    ca5a ca5a
+byte    ca5b ca5b
+word    ca5c ca5d
+word    ca5e ca5f
+word    ca60 ca61
+word    ca62 ca63
+word    ca64 ca65
+byte    ca66 ca66
+word    ca7e ca7f
+word    ca82 ca83
+word    ca84 ca85
+word    ca8a ca8b
+word    ca8c ca8d
+byte    ca9a ca9a
+byte    ca9e ca9e
+byte    ca9f ca9f
+word    cab2 cab3
+word    cab4 cab5
+word    cab6 cab7
+word    cac0 cac1
+word    cac2 cac3
+word    cac4 cac5
+word    cac6 cac7
+word    cac8 cac9
+word    caca cacb
+word    cacc cacd
+word    cace cacf
+word    cad2 cad3
+byte    cad4 cad4
+word    cad6 cad7
+word    cad8 cad9
+byte    cada cada
+word    caec caed
+word    caee caef
+word    caf0 caf1
+word    caf2 caf3
+byte    cafc cafc
+word    cb06 cb07
+word    cb08 cb09
+word    cb0a cb0b
+word    cb0c cb0d
+word    cb18 cb19
+word    cb1a cb1b
+word    cb1c cb1d
+byte    cb20 cb20
+word    cb26 cb27
+word    cb28 cb29
+word    cb2a cb2b
+word    cb2e cb2f
+word    cb30 cb31
+word    cb32 cb33
+word    cb3c cb3d
+word    cb3e cb3f
+func    cba2 cbb5: UW X 16 : UW X 16 
+func    cbb6 cbbf: UY X 16 : UY X 16 
+func    cbc0 cbc9: UY X 16 : UY X 16 
+func    cbca cbe1: UW X 16 : UW X 16 
+func    cbe2 cbed: UY X 16 : UY X 16 
+table   cbee cc89: O 12 UY X 16 
+byte    cc8a cc8a
+func    cc94 cc9f: SY X 16 : UY X 16 
+func    cca0 ccd3: SW X 16 : UW X 16 
+func    ccd4 ccdf: SY X 16 : UY X 16 
+fill    cce0 ffff     # auto
+
+
+# ------------ Subroutine list----------
+sub  479f "SUYFuncLU_479f"   $ F suyflu 32 #cmd
+sub  47a7 "USYFuncLU_47a7"   $ F usyflu 32 #cmd
+sub  47aa "UUYFuncLU_47aa"   $ F uuyflu 32 #cmd
+sub  47cb "UUYFuncLU_47cb"   $ F uuyflu 32 #cmd
+sub  4815 "SUWFuncLU_4815"   $ F suwflu 32 #cmd
+sub  481a "SSWFuncLU_481a"   $ F sswflu 32 #cmd
+sub  481d "USWFuncLU_481d"   $ F uswflu 32 #cmd
+sub  4820 "UUWFuncLU_4820"   $ F uuwflu 32 #cmd
+sub  4841 "UUWFuncLU_4841"   $ F uuwflu 32 #cmd
+sub  48e1 "SYTabLU_48e1"   $ F sytlu 38 34 #cmd
+sub  48f0 "SYTabLU_48f0"   $ F sytlu 38 34 #cmd
+sub  48f3 "UYTabLU_48f3"   $ F uytlu 38 34 #cmd
+sub  4fa5 "UYTabLU_4fa5"   $ F uytlu 38 34 #cmd
+sub  5bee "UYTabLU_5bee"   $ F uytlu 38 34 #cmd
+sub  7b3f "UUWFuncLU_7b3f"   $ F uuwflu 32 #cmd
+
+
+# ------------ Symbol list ----
+sym 2  "LSO_Port"
+sym 2  "CPU_OK" :B 6
+sym 3  "LIO_Port"
+sym 4  "AD_Low"
+sym 4  "AD_Cmd" : W
+sym 5  "AD_High"
+sym 5  "WDG_Timer" : W
+sym 6  "IO_Timer"
+sym 7  "IO_Timer_Hi"
+sym 8  "INT_Mask"
+sym 9  "INT_Pend"
+sym a  "IO_Status"
+sym a  "HSO_OVF" :B 0
+sym a  "HSI_OVF" :B 1
+sym a  "HSI_Ready" :B 2
+sym a  "AD_Ready" :B 3
+sym a  "INT_Handling" :B 4
+sym a  "INT_Priority" :B 5
+sym b  "HSI_Sample"
+sym c  "HSI_Mask"
+sym d  "HSI_Data"
+sym d  "HSO_Cmd" : W
+sym e  "HSI_Time"
+sym 10  "StackPtr"
+sym 2032  "Sub_2032"
+sym 2131  "Sub_2131"
+sym 2148  "Sub_2148"
+sym 2164  "Sub_2164"                  # auto
+sym 2262  "Sub_2262"                  # auto
+sym 22aa  "Sub_22aa"                  # auto
+sym 2368  "Sub_2368"                  # auto
+sym 253b  "Sub_253b"
+sym 25b5  "Sub_25b5"
+sym 25bd  "Sub_25bd"
+sym 2628  "Sub_2628"
+sym 2643  "Sub_2643"
+sym 2687  "Sub_2687"
+sym 277f  "Sub_277f"
+sym 29c5  "Sub_29c5"
+sym 29c9  "Sub_29c9"
+sym 2a42  "Sub_2a42"
+sym 2a44  "Sub_2a44"
+sym 2a54  "Sub_2a54"
+sym 2a56  "Sub_2a56"
+sym 2a6e  "Sub_2a6e"                  # auto
+sym 2a7d  "Sub_2a7d"
+sym 2add  "Sub_2add"                  # auto
+sym 2bd0  "Sub_2bd0"
+sym 2be0  "Sub_2be0"
+sym 2c0d  "Sub_2c0d"
+sym 2d0d  "Sub_2d0d"
+sym 2d14  "Sub_2d14"                  # auto
+sym 2d31  "Sub_2d31"                  # auto
+sym 2d32  "Sub_2d32"                  # auto
+sym 2d52  "Sub_2d52"
+sym 2f44  "Sub_2f44"
+sym 2f52  "Sub_2f52"
+sym 313f  "Sub_313f"
+sym 3198  "Sub_3198"
+sym 31fe  "Sub_31fe"
+sym 323d  "Sub_323d"
+sym 326d  "Sub_326d"
+sym 337d  "Sub_337d"
+sym 33f6  "Sub_33f6"
+sym 348e  "Sub_348e"
+sym 35b9  "Sub_35b9"
+sym 3608  "Sub_3608"
+sym 361f  "Sub_361f"
+sym 363d  "Sub_363d"
+sym 3649  "Sub_3649"
+sym 3650  "Sub_3650"
+sym 37bf  "Sub_37bf"
+sym 37e1  "Sub_37e1"
+sym 38ac  "Sub_38ac"
+sym 3942  "Sub_3942"
+sym 39f7  "Sub_39f7"
+sym 3a13  "Sub_3a13"
+sym 3a23  "Sub_3a23"
+sym 3ad8  "Sub_3ad8"
+sym 3b04  "Sub_3b04"                  # auto
+sym 3b0a  "Sub_3b0a"                  # auto
+sym 3b9f  "Sub_3b9f"
+sym 3bba  "Sub_3bba"                  # auto
+sym 3c24  "Sub_3c24"                  # auto
+sym 3c87  "Sub_3c87"                  # auto
+sym 3cd7  "Sub_3cd7"                  # auto
+sym 3daa  "Sub_3daa"                  # auto
+sym 4070  "Sub_4070"
+sym 4092  "Sub_4092"
+sym 40ae  "Sub_40ae"
+sym 431a  "Sub_431a"
+sym 4361  "Sub_4361"
+sym 43de  "Sub_43de"
+sym 44d6  "Sub_44d6"                  # auto
+sym 454c  "Sub_454c"
+sym 45c6  "Sub_45c6"
+sym 45d5  "Sub_45d5"                  # auto
+sym 46d8  "Sub_46d8"                  # auto
+sym 4706  "Sub_4706"                  # auto
+sym 474b  "Sub_474b"
+sym 4889  "Sub_4889"
+sym 4890  "Sub_4890"
+sym 4892  "Sub_4892"
+sym 48c1  "Sub_48c1"
+sym 4928  "Sub_4928"
+sym 4958  "Sub_4958"
+sym 4979  "Sub_4979"
+sym 4998  "Sub_4998"
+sym 49e4  "Sub_49e4"                  # auto
+sym 4d65  "Sub_4d65"                  # auto
+sym 4dc8  "Sub_4dc8"
+sym 4e2c  "Sub_4e2c"
+sym 4e35  "Sub_4e35"
+sym 4e4b  "Sub_4e4b"
+sym 4e63  "Sub_4e63"
+sym 4e86  "Sub_4e86"
+sym 4e94  "Sub_4e94"
+sym 4fb3  "Sub_4fb3"                  # auto
+sym 518c  "Sub_518c"                  # auto
+sym 5502  "Sub_5502"
+sym 5516  "Sub_5516"
+sym 55b7  "Sub_55b7"
+sym 5637  "Sub_5637"
+sym 564e  "Sub_564e"
+sym 5793  "Sub_5793"
+sym 5872  "Sub_5872"
+sym 5957  "Sub_5957"                  # auto
+sym 596c  "Sub_596c"
+sym 59aa  "Sub_59aa"
+sym 59db  "Sub_59db"                  # auto
+sym 59df  "Sub_59df"                  # auto
+sym 5be6  "Sub_5be6"
+sym 5bfc  "Sub_5bfc"
+sym 5d67  "Sub_5d67"
+sym 5dcd  "Sub_5dcd"                  # auto
+sym 5eb0  "Sub_5eb0"                  # auto
+sym 5fc9  "Sub_5fc9"
+sym 5fd8  "Sub_5fd8"                  # auto
+sym 5fe7  "Sub_5fe7"
+sym 604a  "Sub_604a"
+sym 60cf  "Sub_60cf"
+sym 61a4  "Sub_61a4"
+sym 61ff  "Sub_61ff"                  # auto
+sym 6231  "Sub_6231"                  # auto
+sym 62e2  "Sub_62e2"
+sym 64be  "Sub_64be"
+sym 64c4  "Sub_64c4"
+sym 64c8  "Sub_64c8"
+sym 64d1  "Sub_64d1"
+sym 651f  "Sub_651f"
+sym 65f8  "Sub_65f8"
+sym 66ac  "Sub_66ac"
+sym 67d9  "Sub_67d9"
+sym 6865  "Sub_6865"
+sym 68f6  "Sub_68f6"                  # auto
+sym 6924  "Sub_6924"
+sym 69a8  "Sub_69a8"
+sym 6a2d  "Sub_6a2d"
+sym 6af8  "Sub_6af8"
+sym 6bb8  "Sub_6bb8"                  # auto
+sym 6bcb  "Sub_6bcb"
+sym 6bf9  "Sub_6bf9"
+sym 6c20  "Sub_6c20"
+sym 6e06  "Sub_6e06"
+sym 6e19  "Sub_6e19"
+sym 6e5e  "Sub_6e5e"
+sym 6f45  "Sub_6f45"                  # auto
+sym 6fb6  "Sub_6fb6"
+sym 6fc3  "Sub_6fc3"
+sym 704c  "Sub_704c"
+sym 719c  "Sub_719c"
+sym 71cd  "Sub_71cd"
+sym 71e5  "Sub_71e5"
+sym 720f  "Sub_720f"
+sym 726a  "Sub_726a"
+sym 727b  "Sub_727b"
+sym 72f2  "Sub_72f2"
+sym 7331  "Sub_7331"
+sym 736c  "Sub_736c"
+sym 737d  "Sub_737d"
+sym 73fd  "Sub_73fd"
+sym 7482  "Sub_7482"
+sym 75ce  "Sub_75ce"
+sym 7673  "Sub_7673"
+sym 7964  "Sub_7964"
+sym 799b  "Sub_799b"
+sym 799f  "Sub_799f"
+sym 7aa3  "Sub_7aa3"
+sym 7ad5  "Sub_7ad5"
+sym 7ca5  "Sub_7ca5"
+sym 7d14  "Sub_7d14"
+sym 7e25  "Sub_7e25"
+sym 7e5a  "Sub_7e5a"
+sym 7e89  "Sub_7e89"
+sym 7ebb  "Sub_7ebb"
+sym 8055  "Sub_8055"
+sym 805e  "Sub_805e"
+sym 808e  "Sub_808e"
+sym 8099  "Sub_8099"
+sym 80c4  "Sub_80c4"
+sym 8183  "Sub_8183"
+sym 81b1  "Sub_81b1"
+sym 8257  "Sub_8257"
+sym 8323  "Sub_8323"
+sym 83c6  "Sub_83c6"
+sym 84b4  "Sub_84b4"
+sym 84d4  "Sub_84d4"
+sym 8523  "Sub_8523"
+sym 8544  "Sub_8544"
+sym 85b4  "Sub_85b4"                  # auto
+sym 88b9  "Sub_88b9"                  # auto
+sym 8b28  "Sub_8b28"                  # auto
+sym 8bea  "Sub_8bea"
+sym 8bf0  "Sub_8bf0"
+sym 8c07  "Sub_8c07"                  # auto
+sym 8c16  "Sub_8c16"
+sym 8c1c  "Sub_8c1c"
+sym 8c25  "Sub_8c25"                  # auto
+sym 8c89  "Sub_8c89"
+sym 8c9a  "Sub_8c9a"
+sym 8cb6  "Sub_8cb6"
+sym 8cbc  "Sub_8cbc"
+sym 8cbf  "Sub_8cbf"
+sym 8cc8  "Sub_8cc8"
+sym 8cd3  "Sub_8cd3"
+sym 8cfd  "Sub_8cfd"
+sym 8d22  "Sub_8d22"
+sym 8d43  "Sub_8d43"
+sym 8d57  "Sub_8d57"
+sym 8d9c  "Sub_8d9c"
+sym 8e46  "Sub_8e46"
+sym 8e52  "Sub_8e52"                  # auto
+sym 8ea6  "Sub_8ea6"
+sym 916a  "Sub_916a"
+sym 9173  "Sub_9173"
+sym 9497  "Sub_9497"
+sym 95d8  "Sub_95d8"
+sym 95ea  "Sub_95ea"
+sym 95ec  "Sub_95ec"
+sym 95f4  "Sub_95f4"
+sym 969b  "Sub_969b"
+sym 96a0  "Sub_96a0"
+sym 96ac  "Sub_96ac"
+sym 96b4  "Sub_96b4"
+sym 96be  "Sub_96be"
+sym 96d7  "Sub_96d7"
+sym 96fc  "Sub_96fc"
+sym 970e  "Sub_970e"
+sym 972c  "Sub_972c"
+sym 974e  "Sub_974e"                  # auto
+sym 979a  "Sub_979a"                  # auto
+sym 97a6  "Sub_97a6"
+sym 97b1  "Sub_97b1"
+sym 97b5  "Sub_97b5"
+sym 97b9  "Sub_97b9"
+sym 97e8  "Sub_97e8"                  # auto
+sym 984c  "Sub_984c"                  # auto
+sym 98e3  "Sub_98e3"
+sym 98eb  "Sub_98eb"
+sym 98ee  "Sub_98ee"
+sym 992a  "Sub_992a"
+sym 9934  "Sub_9934"
+sym 994f  "Sub_994f"                  # auto
+sym 9971  "Sub_9971"                  # auto
+sym 9985  "Sub_9985"                  # auto
+sym 99ff  "Sub_99ff"
+sym 9a17  "Sub_9a17"
+sym 9a26  "Sub_9a26"
+sym 9a45  "Sub_9a45"
+sym 9a61  "Sub_9a61"
+sym 9a7a  "Sub_9a7a"
+sym 9a93  "Sub_9a93"
+sym 9aac  "Sub_9aac"                  # auto
+sym 9ac4  "Sub_9ac4"                  # auto
+sym 9ae0  "Sub_9ae0"                  # auto
+sym 9ae6  "Sub_9ae6"                  # auto
+sym 9b05  "Sub_9b05"                  # auto
+sym 9b23  "Sub_9b23"                  # auto
+sym 9b77  "Sub_9b77"
+sym 9b7b  "Sub_9b7b"
+sym 9b8b  "Sub_9b8b"
+sym 9baa  "Sub_9baa"                  # auto
+sym 9bb0  "Sub_9bb0"                  # auto
+sym 9c43  "Sub_9c43"                  # auto
+sym 9c54  "Sub_9c54"
+sym 9c66  "Sub_9c66"                  # auto
+sym 9cab  "Sub_9cab"                  # auto
+sym 9cbd  "Sub_9cbd"                  # auto
+sym 9cd2  "Sub_9cd2"                  # auto
+sym 9cf2  "Sub_9cf2"                  # auto
+sym 9d0d  "Sub_9d0d"                  # auto
+sym 9d1f  "Sub_9d1f"                  # auto
+sym 9d32  "Sub_9d32"                  # auto
+sym 9d58  "Sub_9d58"
+sym 9d5d  "Sub_9d5d"
+sym 9d99  "Sub_9d99"
+sym 9d9e  "Sub_9d9e"
+sym 9daf  "Sub_9daf"                  # auto
+sym 9dbb  "Sub_9dbb"                  # auto
+sym 9dc9  "Sub_9dc9"                  # auto
+sym 9dfd  "Sub_9dfd"                  # auto
+sym 9e0c  "Sub_9e0c"                  # auto
+sym 9e36  "Sub_9e36"                  # auto
+sym 9e64  "Sub_9e64"
+sym 9ead  "Sub_9ead"                  # auto
+sym 9eba  "Sub_9eba"                  # auto
+sym 9ec8  "Sub_9ec8"                  # auto
+sym 9ef2  "Sub_9ef2"                  # auto
+sym 9f0d  "Sub_9f0d"                  # auto
+sym 9fd7  "Sub_9fd7"
+sym 9fdc  "Sub_9fdc"                  # auto
+sym 9ffe  "Sub_9ffe"                  # auto
+sym a021  "Sub_a021"                  # auto
+sym a048  "Sub_a048"                  # auto
+sym a070  "Sub_a070"
+sym a082  "Sub_a082"
+sym a0df  "Sub_a0df"
+sym a1e2  "Sub_a1e2"
+sym a237  "Sub_a237"
+sym a23a  "Sub_a23a"
+sym a28a  "Sub_a28a"
+sym a2a2  "Sub_a2a2"
+sym a2cd  "Sub_a2cd"
+sym a35f  "Sub_a35f"
+sym a37e  "Sub_a37e"                  # auto
+sym a3b8  "Sub_a3b8"                  # auto
+sym a3b9  "Sub_a3b9"
+sym a3e4  "Sub_a3e4"
+sym a50a  "Sub_a50a"
+sym b074  "Func_b074"
+sym b08c  "Func_b08c"
+sym b098  "Func_b098"
+sym b0c0  "Func_b0c0"
+sym b0cc  "Func_b0cc"
+sym b0e0  "Func_b0e0"
+sym b0ee  "Func_b0ee"
+sym b0fc  "Func_b0fc"
+sym b10a  "Func_b10a"
+sym b112  "Func_b112"
+sym b12a  "Func_b12a"
+sym b142  "Func_b142"
+sym b15e  "Func_b15e"
+sym b16c  "Func_b16c"
+sym b188  "Func_b188"
+sym b190  "Func_b190"
+sym b19c  "Table_b19c"
+sym b1c6  "Func_b1c6"
+sym b1ee  "Func_b1ee"
+sym b21a  "Func_b21a"
+sym b236  "Func_b236"
+sym b24a  "Func_b24a"
+sym b26a  "Func_b26a"
+sym b29a  "Func_b29a"
+sym b2c2  "Func_b2c2"
+sym b2da  "Func_b2da"
+sym b2f6  "Func_b2f6"
+sym b312  "Func_b312"
+sym b32e  "Func_b32e"
+sym b342  "Func_b342"
+sym b356  "Func_b356"
+sym b372  "Func_b372"
+sym b392  "Func_b392"
+sym b3ae  "Func_b3ae"
+sym b3c6  "Func_b3c6"
+sym b3da  "Func_b3da"
+sym b3ee  "Func_b3ee"
+sym b402  "Func_b402"
+sym b4c6  "Func_b4c6"
+sym b4de  "Func_b4de"
+sym b4ea  "Func_b4ea"
+sym b4fe  "Func_b4fe"
+sym b51a  "Table_b51a"
+sym b54a  "Table_b54a"
+sym b57a  "Func_b57a"
+sym b592  "Func_b592"
+sym b5b6  "Func_b5b6"
+sym b5c4  "Func_b5c4"
+sym b5e0  "Func_b5e0"
+sym b5ee  "Table_b5ee"
+sym b63e  "Table_b63e"
+sym b68e  "Func_b68e"
+sym b69c  "Table_b69c"
+sym b6ec  "Table_b6ec"
+sym b73c  "Table_b73c"
+sym b78c  "Table_b78c"
+sym b7bc  "Table_b7bc"
+sym b7d5  "Table_b7d5"
+sym b7ee  "Table_b7ee"
+sym b807  "Table_b807"
+sym b8b9  "Func_b8b9"
+sym b8c3  "Func_b8c3"
+sym b8cd  "Func_b8cd"
+sym b8df  "Func_b8df"
+sym b8e5  "Table_b8e5"
+sym b94a  "Func_b94a"
+sym b962  "Table_b962"
+sym b98f  "Func_b98f"
+sym b99c  "Func_b99c"
+sym b9b4  "Func_b9b4"
+sym b9d0  "Func_b9d0"
+sym ba2a  "Func_ba2a"
+sym ba3a  "Func_ba3a"
+sym ba42  "Func_ba42"
+sym ba52  "Func_ba52"
+sym ba62  "Func_ba62"
+sym ba82  "Func_ba82"
+sym ba8c  "Table_ba8c"
+sym bab0  "Func_bab0"
+sym bb0b  "Func_bb0b"
+sym bb15  "Func_bb15"
+sym bb20  "Func_bb20"
+sym bb38  "Func_bb38"
+sym bb5c  "Func_bb5c"
+sym bb78  "Func_bb78"
+sym bb94  "Func_bb94"
+sym bbb0  "Func_bbb0"
+sym bbbc  "Table_bbbc"
+sym bc0c  "Table_bc0c"
+sym bc5c  "Table_bc5c"
+sym bcac  "Table_bcac"
+sym bcfc  "Table_bcfc"
+sym bd4c  "Table_bd4c"
+sym bd9c  "Table_bd9c"
+sym bdec  "Func_bdec"
+sym be18  "Func_be18"
+sym be26  "Func_be26"
+sym be30  "Func_be30"
+sym be58  "Func_be58"
+sym be66  "Func_be66"
+sym be8e  "Func_be8e"
+sym beaa  "Table_beaa"
+sym befa  "Table_befa"
+sym bf4a  "Func_bf4a"
+sym bf5e  "Func_bf5e"
+sym bf76  "Func_bf76"
+sym bfae  "Func_bfae"
+sym bfc2  "Func_bfc2"
+sym bfda  "Func_bfda"
+sym c170  "Func_c170"
+sym c18c  "Func_c18c"
+sym c198  "Func_c198"
+sym c1c4  "Func_c1c4"
+sym c1ec  "Func_c1ec"
+sym c244  "Func_c244"
+sym c29c  "Func_c29c"
+sym c2c4  "Func_c2c4"
+sym c2ec  "Func_c2ec"
+sym c300  "Func_c300"
+sym c314  "Func_c314"
+sym c360  "Func_c360"
+sym c3c0  "Func_c3c0"
+sym c3f0  "Func_c3f0"
+sym c40c  "Func_c40c"
+sym c428  "Func_c428"
+sym c444  "Func_c444"
+sym c460  "Func_c460"
+sym c47c  "Func_c47c"
+sym c498  "Func_c498"
+sym c678  "Func_c678"
+sym c69c  "Func_c69c"
+sym c6ac  "Func_c6ac"
+sym c6dc  "Func_c6dc"
+sym c6f4  "Func_c6f4"
+sym c724  "Func_c724"
+sym c744  "Func_c744"
+sym c750  "Func_c750"
+sym c75a  "Func_c75a"
+sym c764  "Func_c764"
+sym c774  "Func_c774"
+sym c790  "Func_c790"
+sym c7ac  "Func_c7ac"
+sym c7c8  "Table_c7c8"
+sym c82c  "Table_c82c"
+sym c850  "Table_c850"
+sym c874  "Table_c874"
+sym ca0e  "KIHP"
+sym cba2  "Func_cba2"
+sym cbb6  "Func_cbb6"
+sym cbc0  "Func_cbc0"
+sym cbca  "Func_cbca"
+sym cbe2  "Func_cbe2"
+sym cbee  "Table_cbee"
+sym cc94  "Func_cc94"
+sym cca0  "Func_cca0"
+sym ccd4  "Func_ccd4"
+
+
+
+# ----- END of disassembly run -----
+

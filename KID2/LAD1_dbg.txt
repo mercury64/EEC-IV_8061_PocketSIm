@@ -1,0 +1,144 @@
+Read input file (0xe000 bytes)
+scan for all banks
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+Check rbase return NULL
+bank found at     0, PC 2000
+
+-----------Signatures---------[2]--
+d ofst  end    k    name      pars
+0 32001 32005  2    INIT      0,32140,    0,    1,    8,    0,    8,    0,    0,    0, 2001,    0,    0,    0,    0,    0,
+0 32100 32104  2    INIT      0,3213f,    3,    1,    8,    8,    8,    8,    0,    0, 2000,    0,    0,    0,    0,    0,
+
+1 Banks, start in 3
+Set temp bank 3 to 8
+add cmd 9cf70 9ffff fill 
+Add aux 9cf70 9ffff xcode 
+
+-------DEBUG BANKS---------
+bank filstart, minpc, maxbk, maxpc, filend. bok,cmd,bkmask, cbnk, P65 dbank
+ 9     0 92000 9ffff 9cf70 ( dfff)  1 0 0 1 0 9
+
+ Non bok ---
+ 3     0 32000 3ffff 32fff ( dfff)  0 0 0 1 0 9
+
+
+Add rbase Rf0 = 9b000
+Add rbase Rf2 = 9b452
+Add rbase Rf4 = 9b456
+Add rbase Rf6 = 9b9a8
+Add rbase Rf8 = 9bb50
+Add rbase Rfa = 9bc3e
+Add rbase Rfc = 9c16c
+Add rbase Rfe = 9cc24
+Add rbase Re4 = 90180
+Add rbase Re6 = 90280
+Add rbase Re8 = 90380
+Add rbase Rea = 90480
+Add rbase Rec = 90580
+Add rbase Ree = 90780
+add sym 92000 "Bnk8Start"   CMD
+add sym 92032 "Sub0002"   CMD
+add sym 9214f "Sub0003"   CMD
+add sym 92166 "CalInit"   CMD
+add sym 92182 "Sub0005"   CMD
+add sym 921ec "VecLst8_001"   CMD
+add sym 9228a "Sub0006"   CMD
+add sym 922d6 "Sub0007"   CMD
+add sym 922ec "VecLst8_002"   CMD
+add cmd 9230e 9230e struct 
+      with addnl params: UY [R0, csz 1] 
+add sym 9230e "OSt8_003"   CMD
+add sym 92326 "OSt8_004"   CMD
+add sym 9237c "Sub0008"   CMD
+add sym 92382 "OSt8_005"   CMD
+add sym 92394 "IPT_HSI_0"   CMD
+add sym 92582 "Sub0010"   CMD
+add sym 9266f "Sub0011"   CMD
+add sym 9268a "Sub0012"   CMD
+add sym 926ce "Sub0013"   CMD
+add sym 927c6 "Sub0014"   CMD
+add cmd 928f3 928f3 struct 
+      with addnl params: UY [R0, csz 1] 
+add sym 928f3 "OSt8_006"   CMD
+add cmd 92926 92927 struct 
+      with addnl params: O 2 UY [R0, csz 2] 
+add sym 92926 "OSt8_007"   CMD
+add cmd 92946 92947 struct 
+      with addnl params: O 2 UY [R0, csz 2] 
+add sym 92946 "OSt8_008"   CMD
+add sym 92a0b "Sub0015"   CMD
+add sym 92a0f "Sub0016"   CMD
+add sym 92a6f "Sub0017"   CMD
+add sym 92a88 "Sub0018"   CMD
+add sym 92a8a "Sub0019"   CMD
+add sym 92a9a "Sub0020"   CMD
+add sym 92a9c "Sub0021"   CMD
+add sym 92ab4 "IPT_HSI_0"   CMD
+add sym 92ac3 "Sub0023"   CMD
+add sym 92b23 "IPT_HSO_1"   CMD
+add sym 92c47 "Sub0025"   CMD
+add sym 92c57 "Sub0026"   CMD
+add sym 92c84 "Sub0027"   CMD
+add sym 92d84 "Sub0028"   CMD
+add sym 92d8b "IPT_Timer_OVF"   CMD
+add sym 92da8 "IPT_HSI_0"   CMD
+add sym 92da9 "IPT_HSO_2"   CMD
+add cmd 92dc8 92dcd struct 
+      with addnl params: O 6 UY [R0, csz 6] 
+add sym 92dc8 "OSt8_009"   CMD
+add sym 92dca "Sub0032"   CMD
+add sym 92f2b "Sub0033"   CMD
+add cmd 92fba 92fbf struct 
+      with addnl params: O 6 UY [R0, csz 6] 
+add sym 92fba "OSt8_010"   CMD
+add sym 92fbc "Sub0034"   CMD
+add sym 92fca "Sub0035"   CMD
+add sym 931b7 "Sub0036"   CMD
+add sym 93210 "Sub0037"   CMD
+add sym 93276 "Sub0038"   CMD
+add sym 932a8 "Sub0039"   CMD
+add sym 932b5 "Sub0040"   CMD
+add sym 932df "Sub0041"   CMD
+add sym 932e5 "Sub0042"   CMD
+add sym 93405 "Sub0043"   CMD
+add sym 9347e "Sub0044"   CMD
+add sym 93516 "Sub0045"   CMD
+add s

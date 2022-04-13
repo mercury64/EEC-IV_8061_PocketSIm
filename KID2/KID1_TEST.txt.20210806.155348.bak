@@ -1,0 +1,5746 @@
+----- Commands ------
+opts   :C P N S
+bank 8 00000 0dfff
+
+rbase f0 b000
+rbase f2 b43e
+rbase f4 b442
+rbase f6 b914
+rbase f8 bab0
+rbase fa bb7a
+rbase fc c0a8
+rbase fe cb5a
+
+rbase e4  180
+rbase e6  280
+rbase e8  380
+rbase ea  480
+rbase ec  580
+rbase ee  780
+
+sym 2000 "OpSadDir002"
+
+sym 2004 "FIXSUM"
+
+sym 2032 "Reset_All"
+
+sym 2121 "Initialize"
+
+sym 2131 "Background_Loop"
+
+sym 2148 "Reset_RAM_ptr"
+
+sym 2161 "Infinite_Loop_DEAD"
+
+sym 2164 "Set_TaskList"
+
+vect 21ce 21ce D: 8
+sym 21ce "StVlSadDir003"
+
+sym 226a "SYSTEM_EQUATIONS_1"
+
+sym 22b2 "BRAKE_INPUT"
+
+vect 22c8 22c8 D: 8
+sym 22c8 "HSO_Table"
+
+struct 22ca 22ca :Y X
+sym 22ca "OSt8_001"
+
+struct 22da 22da :Y X
+sym 22da "OSt8_002"
+
+struct 22ea 22ea :Y X
+sym 22ea "OSt8_003"
+
+struct 2302 2302 :Y X
+sym 2302 "OSt8_004"
+
+vect 231a 231a D: 8
+sym 231a "StVlSadDir005"
+
+word 231c 231d :P 5
+sym 231c "ScScSadDir015"
+
+vect 231e 231e D: 8
+sym 231e "StVlSadDir006"
+
+word 2350 2351 :P 5
+sym 2350 "ScScSadDir016"
+
+word 2352 2353 :P 5
+sym 2352 "ScScSadDir017"
+
+word 2354 2355 :P 5
+sym 2354 "ScScSadDir018"
+
+word 2356 2357 :P 5
+sym 2356 "ScScSadDir019"
+
+sym 2358 "Clear_Cell"
+
+word 235e 235f :P 5
+sym 235e "ScScSadDir020"
+
+word 2360 2361 :P 5
+sym 2360 "ScScSadDir021"
+
+word 2362 2363 :P 5
+sym 2362 "ScScSadDir022"
+
+word 2364 2365 :P 5
+sym 2364 "ScScSadDir023"
+
+word 2366 2367 :P 5
+sym 2366 "ScScSadDir024"
+
+word 2368 2369 :P 5
+sym 2368 "ScScSadDir025"
+
+word 236a 236b :P 5
+sym 236a "ScScSadDir026"
+
+word 236c 236d :P 5
+sym 236c "ScScSadDir027"
+
+word 236e 236f :P 5
+sym 236e "ScScSadDir028"
+
+sym 2370 "I_External_Vector"
+
+sym 2543 "DCL_Mode_Scheduler"
+
+sym 256c "DCL_DM_PermanentDeviceDisconnect"
+
+sym 257b "DCL_DM_TransmitPID"
+
+sym 25bd "Sub_25bd"
+
+sym 25c5 "Sub_25c5"
+
+sym 25d9 "DCL_DM_ParameterRefByAddressOffset"
+
+sym 25e2 "DCL_DM_ParameterRefByName"
+
+sym 2601 "DCL_DM_A-D_SensorValueSubstitution"
+
+sym 2630 "Sub_2630"
+
+sym 264b "Sub_264b"
+
+sym 266a "DCL_DM_ClearContinuousVIPCodes"
+
+sym 2682 "DCL_DM_ClearDCLErrorFlags"
+
+sym 268f "Sub_268f"
+
+sym 269e "DCL_DM_TransmitDMRMap"
+
+sym 26a4 "DCL_DM_TransmitPIDMap"
+
+sym 26ba "DCL_DM_TransmitDMR"
+
+sym 26f1 "DCL_DM_ProgramDataDownload"
+
+sym 2747 "DCL_DM_ProgramExecution"
+
+sym 2787 "Sub_2787"
+
+sym 27a4 "DCL_DM_DisplayDCLStatusInformation"
+
+sym 27a5 "DCL_DM_RunningOnDemand_SelfTest"
+
+sym 282d "DCL_DM_TransmitContinuous_SelfTestCodes"
+
+sym 28a2 "DCL_DM_SetCommLinkBAUDRate"
+
+sym 28ad "DCL_DM_TransmitBoth_PID-DMR"
+
+sym 28b4 "StStSadDir007"
+
+sym 28e7 "OpSadDir009"
+
+word 28e8 28e9 :P 5
+sym 28e8 "ScScSadDir029"
+
+word 28ea 28eb :P 5
+sym 28ea "ScScSadDir030"
+
+word 28ec 28ed :P 5
+sym 28ec "ScScSadDir031"
+
+word 28ee 28ef :P 5
+sym 28ee "ScScSadDir032"
+
+word 28f0 28f1 :P 5
+sym 28f0 "ScScSadDir033"
+
+word 28f2 28f3 :P 5
+sym 28f2 "ScScSadDir034"
+
+word 28f4 28f5 :P 5
+sym 28f4 "ScScSadDir035"
+
+word 28f6 28f7 :P 5
+sym 28f6 "ScScSadDir036"
+
+word 28f8 28f9 :P 5
+sym 28f8 "ScScSadDir037"
+
+word 28fa 28fb :P 5
+sym 28fa "ScScSadDir038"
+
+word 28fc 28fd :P 5
+sym 28fc "ScScSadDir039"
+
+word 28fe 28ff :P 5
+sym 28fe "ScScSadDir040"
+
+word 2900 2901 :P 5
+sym 2900 "ScScSadDir041"
+
+word 2902 2903 :P 5
+sym 2902 "ScScSadDir042"
+
+word 2904 2905 :P 5
+sym 2904 "ScScSadDir043"
+
+word 2908 2909 :P 5
+sym 2908 "ScScSadDir044"
+
+word 290a 290b :P 5
+sym 290a "ScScSadDir045"
+
+word 290c 290d :P 5
+sym 290c "ScScSadDir046"
+
+word 290e 290f :P 5
+sym 290e "ScScSadDir047"
+
+word 2910 2911 :P 5
+sym 2910 "ScScSadDir048"
+
+word 2912 2913 :P 5
+sym 2912 "ScScSadDir049"
+
+word 2914 2915 :P 5
+sym 2914 "ScScSadDir050"
+
+word 2916 2917 :P 5
+sym 2916 "ScScSadDir051"
+
+word 2918 2919 :P 5
+sym 2918 "ScScSadDir052"
+
+word 291a 291b :P 5
+sym 291a "ScScSadDir053"
+
+word 291c 291d :P 5
+sym 291c "ScScSadDir054"
+
+word 291e 291f :P 5
+sym 291e "ScScSadDir055"
+
+word 2920 2921 :P 5
+sym 2920 "ScScSadDir056"
+
+struct 2922 2922 :Y X
+sym 2922 "StStSadDir008"
+
+sym 29cd "Send_HSO_Cmd"
+
+sym 29d1 "Sub_29d1"
+
+sym 2a31 "Sub0039"
+
+sym 2a4a "Sub_2a4a"
+
+sym 2a4c "Do_Cmd_N"
+
+sym 2a5c "Reschedule_Event_DoCmdP"
+
+sym 2a5e "Do_Cmd_P"
+
+sym 2a76 "I_HSI_0"
+
+sym 2a85 "Read_HSI"
+
+sym 2ae5 "I_HSO_1"
+
+sym 2c09 "Sub_2c09"
+
+sym 2c19 "Sub_2c19"
+
+sym 2c46 "Sub_2c46"
+
+sym 2d46 "Sub_2d46"
+
+sym 2d4d "I_Timer_OVF"
+
+sym 2d6a "I_Ignore"
+
+sym 2d6b "I_HSO_2"
+
+struct 2d82 2d87 :Y X
+sym 2d82 "OSt8_005"
+
+word 2d8a 2d8b :P 5
+sym 2d8a "ScScSadDir057"
+
+sym 2d8c "PIP_DATA"
+
+sym 2eed "Sub0055"
+
+word 2f78 2f79 :P 5
+sym 2f78 "ScScSadDir058"
+
+struct 2f7c 2f81 :Y X
+sym 2f7c "OSt8_006"
+
+sym 2f7e "SPARK_RETARD_LOGIC"
+
+sym 2f8c "SPOUT_CALCULATION"
+
+sym 3169 "Update_HTime_pend"
+
+sym 3179 "Update_HTime_prev"
+
+sym 31d2 "Sub_31d2"
+
+sym 3238 "KNOCK_THRESHOLD_SENSE_(KTS)_LOGIC"
+
+sym 326a "Add_H_Beta"
+
+sym 3277 "Sub_3277"
+
+sym 32a1 "Add_H_Delta"
+
+sym 32a7 "EOS_KAY_CALCULATIONS"
+
+sym 33b7 "TRANSIENT_SPARK-COMPENSATION"
+
+sym 3405 "Sub0067"
+
+sym 3430 "DWELL_CALCULATION"
+
+sym 34c8 "FUEL_INJ_OUT_COM6"
+
+sym 35f3 "SET_UP_INJECTOR_OUTPUT_EDGE"
+
+sym 3642 "Sub_3642"
+
+sym 3659 "Sub_3659"
+
+sym 3677 "Injector_Edge"
+
+sym 3683 "Injector_Edge_Immediate_Output_Request"
+
+sym 368a "Sub_368a"
+
+sym 37f9 "Sub_37f9"
+
+sym 3829 "Sub_3829"
+
+sym 3870 "Sub0078"
+
+sym 38f4 "SCAP_Sensor_Edge"
+
+sym 398a "SYSEQ_MAP_COM1"
+
+sym 3a3f "Calculate_MAP_FREQ"
+
+sym 3a5b "MAP_Average_Complete"
+
+sym 3a6b "MAP_CALC"
+
+sym 3b20 "Sub_3b20"
+
+sym 3b4c "VIP_THROTTLE_MODE_SET"
+
+sym 3b52 "KAM_Qualification_Test_Logic"
+
+sym 3be7 "ReInitialize_ISCKAM"
+
+sym 3c02 "RUN_MODE_SELECTION"
+
+sym 3c6c "THROTTLE_MODE_SELECTION"
+
+sym 3ccf "Read_AD"
+
+sym 3cd3 "Enable_Int"
+
+struct 3cfd 3cfd :Y X
+sym 3cfd "StStSadDir009"
+
+sym 3d1e "OpSadDir013"
+
+sym 3d1f "SYSTEM_EQUATIONS_EQUA_LH"
+
+sym 3df2 "INPUT_ACT_COM2"
+
+sym 40b8 "Compute_TCSTRT"
+
+sym 40db "INPUT_TOT_COM1"
+
+sym 40f7 "CNVRT"
+
+word 4360 4361 :P 5
+sym 4360 "ScScSadDir059"
+
+word 4362 4363 :P 5
+sym 4362 "ScScSadDir060"
+
+struct 4364 4369 :Y X
+sym 4364 "OSt8_007"
+
+sym 436c "ENGINE_SPEED_OVER_VEHICLE_SPEED_NOVS_&_BPCOR"
+
+struct 43ab 43ab :Y X
+sym 43ab "OSt8_008"
+
+byte 43ac 43ac :P 3
+sym 43ac "ScScSadDir061"
+
+sym 43b2 "INTRN_MLPS_CONV_COM1"
+
+sym 443b "INFERRED_BAROMETRIC_PRESSURE_STRATEGY"
+
+sym 4533 "SPEED_DENSITY_AIR_MASS_CALCULATION"
+
+sym 45a9 "Compute_AMPEM_AMPEMT"
+
+sym 4623 "Subtract_EM"
+
+sym 4632 "INFERRED_BAROMETRIC_PRESSURE_STRATEGY"
+
+sym 4735 "AD_Substitutions"
+
+sym 4763 "DCL_Handler_Dispatch"
+
+sym 47a8 "BIMAP_DEFINITIONS"
+
+sym 47fc "DOL_PULSE_CALC_COM3"
+
+sym 4865 "SUYFuncLU_4865"
+
+sym 486d "USYFuncLU_486d"
+
+sym 4870 "UUYFuncLU_4870"
+
+sym 4891 "UUYFuncLU_4891"
+
+sym 48db "SUWFuncLU_48db"
+
+sym 48e0 "SSWFuncLU_48e0"
+
+sym 48e3 "USWFuncLU_48e3"
+
+sym 48e6 "UUWFuncLU_48e6"
+
+sym 4907 "UUWFuncLU_4907"
+
+sym 494f "UROLAV"
+
+sym 4956 "ROLAV"
+
+sym 4958 "ROLLING_AVERAGE_ROUTINE"
+
+sym 4987 "ROLLING_AVERAGE_FILTER_ROUTINE"
+
+sym 49a7 "SYTabLU_49a7"
+
+sym 49b6 "SYTabLU_49b6"
+
+sym 49b9 "Four_Point_Interpolation"
+
+sym 49ee "TableInterpolation"
+
+sym 4a1e "Sub_4a1e"
+
+sym 4a3f "Calculation_Normalized_MAP"
+
+sym 4a5e "Calculation_MAPWBAR"
+
+sym 4aaa "TIMERS"
+
+sym 4bf5 "FUEL_OLFLG_COM7"
+
+sym 4e45 "FUEL_CL_LAMBSE_COM3"
+
+sym 4f50 "C_MULTIPLIER_LOGIC"
+
+sym 4fb4 "Sub_4fb4"
+
+sym 4fbd "LAMBSE_RESET"
+
+sym 4fd3 "ACT_to_ECT_proportioning_factor(R36)"
+
+sym 4feb "FN1360(N,MAPPA)"
+
+sym 500e "TEMP_normalization_factor_x"
+
+sym 501c "CALCULATE_PTPAMP_RF_and_RS"
+
+sym 5131 "UYTabLU_5131"
+
+sym 513f "FUEL_ADAPT_COM4"
+
+sym 51ce "EGO_Switch_Logic"
+
+sym 5369 "NEW_UPRATE_CALC"
+
+sym 5402 "Sub_5402"
+
+sym 577b "Sub_577b"
+
+sym 578f "FUEL_IDLE_MOD_COM3"
+
+sym 5830 "FUEL_KAM_ADAPT_COM3"
+
+sym 58d5 "Sub_58d5"
+
+sym 58ec "FUEL_TRANS_COM5"
+
+sym 5a31 "FUEL_DFSO_COM2"
+
+sym 5b96 "FUEL_AE_COM5"
+
+sym 5c7b "FUEL_PUMP_COM1"
+
+sym 5c90 "Sub_5c90"
+
+sym 5ca7 "Sub_5ca7"
+
+sym 5ca9 "Sub_5ca9"
+
+sym 5cce "Sub_5cce"
+
+sym 5cd1 "Sub_5cd1"
+
+sym 5cff "Sub_5cff"
+
+sym 5d03 "SPARK_BASE_COM2"
+
+sym 5f0a "Include_in_SPK_NORM"
+
+sym 5f12 "UYTabLU_5f12"
+
+sym 5f20 "ENTRY_INTO_IDLE_SPARK"
+
+sym 608b "MISCELLANEOUS_SPARK_CALCULATIONS"
+
+sym 60f1 "DWLBSE-DWLCOR_CALCULATION"
+
+sym 61d4 "SPKKNOCK_LL"
+
+sym 62ed "KNOCK_HARDWARE_PRESENT"
+
+sym 62fc "Sub_62fc"
+
+sym 630b "EGR_ENABLE_LH"
+
+sym 6390 "EGR_SONIC_COM2"
+
+sym 6422 "DESEM_DELOPT_CALC"
+
+sym 64f7 "EGRDC_CALC"
+
+sym 6552 "EGR_EVR_CONTROL_COM1"
+
+struct 657d 657d :Y X
+sym 657d "OSt8_009"
+
+byte 657e 657e :P 3
+sym 657e "ScScSadDir062"
+
+byte 657f 657f :P 3
+sym 657f "ScScSadDir063"
+
+byte 6580 6580 :P 3
+sym 6580 "ScScSadDir064"
+
+byte 6581 6581 :P 3
+sym 6581 "ScScSadDir065"
+
+byte 6582 6582 :P 3
+sym 6582 "ScScSadDir066"
+
+byte 6583 6583 :P 3
+sym 6583 "ScScSadDir067"
+
+sym 6584 "ISC_OVERVIEW_COM3"
+
+sym 6635 "DSDRPM_CALC"
+
+sym 6840 "Sub_6840"
+
+sym 6846 "Sub_6846"
+
+sym 684a "Sub_684a"
+
+sym 6853 "RPMERR_CALC"
+
+sym 68ad "ISC_DASPOT_COM1"
+
+sym 6955 "UPSWOT"
+
+sym 6986 "ISC_MODE_SELECT_COM1"
+
+sym 6a3a "ISC_IPSIBR_COM1"
+
+sym 6b8c "ISC_ISCDTY_COM1"
+
+sym 6c18 "Manifold_VACUUM"
+
+sym 6c27 "ISC_ISCKAM_COM1"
+
+sym 6ca9 "Sub_6ca9"
+
+sym 6cd7 "DOL_LH"
+
+sym 6d5b "Sub_6d5b"
+
+sym 6de0 "THERMACTOR_AIR_STRATEGY"
+
+sym 6ee6 "CANP_COM4"
+
+sym 6fb2 "Update_Can_Purge"
+
+word 6fc6 6fc7 :P 5
+sym 6fc6 "ScScSadDir068"
+
+word 6fc8 6fc9 :P 5
+sym 6fc8 "ScScSadDir069"
+
+word 6fca 6fcb :P 5
+sym 6fca "ScScSadDir070"
+
+word 6fcc 6fcd :P 5
+sym 6fcc "ScScSadDir071"
+
+word 6fce 6fcf :P 5
+sym 6fce "ScScSadDir072"
+
+word 6fd0 6fd1 :P 5
+sym 6fd0 "ScScSadDir073"
+
+word 6fd2 6fd3 :P 5
+sym 6fd2 "ScScSadDir074"
+
+word 6fd4 6fd5 :P 5
+sym 6fd4 "ScScSadDir075"
+
+word 6fd6 6fd7 :P 5
+sym 6fd6 "ScScSadDir076"
+
+word 6fd8 6fd9 :P 5
+sym 6fd8 "ScScSadDir077"
+
+word 6fda 6fdb :P 5
+sym 6fda "ScScSadDir078"
+
+word 6fdc 6fdd :P 5
+sym 6fdc "ScScSadDir079"
+
+word 6fde 6fdf :P 5
+sym 6fde "ScScSadDir080"
+
+word 6fe0 6fe1 :P 5
+sym 6fe0 "ScScSadDir081"
+
+word 6fe2 6fe3 :P 5
+sym 6fe2 "ScScSadDir082"
+
+word 6fe4 6fe5 :P 5
+sym 6fe4 "ScScSadDir083"
+
+word 6fe6 6fe7 :P 5
+sym 6fe6 "ScScSadDir084"
+
+word 6fe8 6fe9 :P 5
+sym 6fe8 "ScScSadDir085"
+
+word 6fea 6feb :P 5
+sym 6fea "ScScSadDir086"
+
+word 6fec 6fed :P 5
+sym 6fec "ScScSadDir087"
+
+word 6fee 6fef :P 5
+sym 6fee "ScScSadDir088"
+
+word 6ff0 6ff1 :P 5
+sym 6ff0 "ScScSadDir089"
+
+word 6ff2 6ff3 :P 5
+sym 6ff2 "ScScSadDir090"
+
+word 6ff4 6ff5 :P 5
+sym 6ff4 "ScScSadDir091"
+
+word 6ff6 6ff7 :P 5
+sym 6ff6 "ScScSadDir092"
+
+word 6ff8 6ff9 :P 5
+sym 6ff8 "ScScSadDir093"
+
+word 6ffa 6ffb :P 5
+sym 6ffa "ScScSadDir094"
+
+word 6ffc 6ffd :P 5
+sym 6ffc "ScScSadDir095"
+
+word 6ffe 6fff :P 5
+sym 6ffe "ScScSadDir096"
+
+word 7000 7001 :P 5
+sym 7000 "ScScSadDir097"
+
+word 7002 7003 :P 5
+sym 7002 "ScScSadDir098"
+
+word 7004 7005 :P 5
+sym 7004 "ScScSadDir099"
+
+word 7006 7007 :P 5
+sym 7006 "ScScSadDir100"
+
+word 7008 7009 :P 5
+sym 7008 "ScScSadDir101"
+
+word 700a 700b :P 5
+sym 700a "ScScSadDir102"
+
+word 700c 700d :P 5
+sym 700c "ScScSadDir103"
+
+word 700e 700f :P 5
+sym 700e "ScScSadDir104"
+
+word 7010 7011 :P 5
+sym 7010 "ScScSadDir105"
+
+word 7012 7013 :P 5
+sym 7012 "ScScSadDir106"
+
+word 7014 7015 :P 5
+sym 7014 "ScScSadDir107"
+
+sym 7016 "Do_Self_Test"
+
+sym 70d8 "Sub_70d8"
+
+sym 70de "Sub_70de"
+
+sym 70f5 "Sub_70f5"
+
+sym 7104 "Sub_7104"
+
+sym 710a "Sub_710a"
+
+sym 7113 "StackErrorCodes"
+
+sym 7177 "Sub_7177"
+
+sym 7188 "Sub_7188"
+
+sym 71a4 "Sub_71a4"
+
+sym 71aa "Sub_71aa"
+
+sym 71ad "Sub_71ad"
+
+sym 71b6 "Sub_71b6"
+
+sym 71c1 "Sub_71c1"
+
+sym 71eb "Get_DiagCodes"
+
+sym 7210 "Set_DiagCodes"
+
+sym 7231 "EGR_SELECT_LOGIC"
+
+sym 7245 "TRANS_SELECT_LOGIC"
+
+sym 728a "Sub_728a"
+
+vect 72de 72de D: 8
+sym 72de "StVlSadDir010"
+
+sym 7340 "Check_Sensors"
+
+sym 7394 "Sub_7394"
+
+byte 7427 7427 :P 3
+sym 7427 "ScScSadDir108"
+
+sym 7434 "OpSadDir019"
+
+sym 7558 "EGOTST_TMR_CONTROL"
+
+byte 75ed 75ed :P 3
+sym 75ed "ScScSadDir109"
+
+byte 75ee 75ee :P 3
+sym 75ee "ScScSadDir110"
+
+byte 75ef 75ef :P 3
+sym 75ef "ScScSadDir111"
+
+sym 75f1 "OpSadDir020"
+
+sym 766a "Sub_766a"
+
+sym 7673 "Sub_7673"
+
+word 7698 7699 :P 5
+sym 7698 "ScScSadDir112"
+
+byte 769a 769a :P 3
+sym 769a "ScScSadDir113"
+
+byte 769b 769b :P 3
+sym 769b "ScScSadDir114"
+
+byte 769c 769c :P 3
+sym 769c "ScScSadDir115"
+
+byte 769d 769d :P 3
+sym 769d "ScScSadDir116"
+
+byte 769e 769e :P 3
+sym 769e "ScScSadDir117"
+
+byte 769f 769f :P 3
+sym 769f "ScScSadDir118"
+
+byte 76a0 76a0 :P 3
+sym 76a0 "ScScSadDir119"
+
+byte 76a1 76a1 :P 3
+sym 76a1 "ScScSadDir120"
+
+byte 76a2 76a2 :P 3
+sym 76a2 "ScScSadDir121"
+
+byte 76a3 76a3 :P 3
+sym 76a3 "ScScSadDir122"
+
+byte 76a4 76a4 :P 3
+sym 76a4 "ScScSadDir123"
+
+byte 76a5 76a5 :P 3
+sym 76a5 "ScScSadDir124"
+
+byte 76a6 76a6 :P 3
+sym 76a6 "ScScSadDir125"
+
+byte 76a7 76a7 :P 3
+sym 76a7 "ScScSadDir126"
+
+byte 76a8 76a8 :P 3
+sym 76a8 "ScScSadDir127"
+
+byte 76a9 76a9 :P 3
+sym 76a9 "ScScSadDir128"
+
+byte 76aa 76aa :P 3
+sym 76aa "ScScSadDir129"
+
+byte 76ab 76ab :P 3
+sym 76ab "ScScSadDir130"
+
+sym 76ac "OpSadDir021"
+
+word 7732 7733 :P 5
+sym 7732 "ScScSadDir131"
+
+struct 773d 773d :Y X
+sym 773d "OSt8_010"
+
+struct 7740 7740 :Y X
+sym 7740 "OSt8_011"
+
+sym 7743 "OpSadDir022"
+
+sym 79a3 "Sub_79a3"
+
+sym 7a91 "WARM_UP_COUNTER_LOGIC"
+
+sym 7aaf "KAM_CODE_ERASE_LOGIC"
+
+sym 7aec "Sub_7aec"
+
+sym 7afe "?Fault_Filter_Routine?"
+
+sym 7b00 "Sub_7b00"
+
+sym 7b08 "Sub_7b08"
+
+sym 7baf "Clear_KAM"
+
+sym 7bb4 "Clear_Kam_SelfTest"
+
+sym 7bc0 "Set_STO"
+
+sym 7bc8 "Reset_STO"
+
+sym 7bd2 "GetBytes_R1a"
+
+sym 7beb "Sub_7beb"
+
+sym 7c10 "Sub_7c10"
+
+sym 7c22 "Sub_7c22"
+
+sym 7c40 "EGO_TEST_TMR_CLEAR"
+
+sym 7c62 "Calculate_ETV_OCM_MIN"
+
+sym 7ca1 "VO_EOTS_COM1"
+
+sym 7cb0 "FAIL_Loop"
+
+sym 7ced "Sub_7ced"
+
+sym 7cf9 "Sub_7cf9"
+
+sym 7d04 "Sub_7d04"
+
+sym 7d08 "Sub_7d08"
+
+sym 7d0c "VO_ROM_COM1"
+
+word 7d34 7d35 :P 5
+sym 7d34 "CheckSumBase"
+
+word 7d36 7d37 :P 5
+sym 7d36 "CheckSumEnd"
+
+word 7d38 7d39 :P 5
+sym 7d38 "ScScSadDir134"
+
+sym 7d3a "TEST_AD_SWITCHES_1"
+
+sym 7d97 "EXIT_THIS_TEST"
+
+sym 7d9e "TEST_AD_SWITCHES_2"
+
+sym 7e35 "Sub_7e35"
+
+sym 7e3d "Sub_7e3d"
+
+sym 7e40 "Sub_7e40"
+
+sym 7e7c "Sub_7e7c"
+
+sym 7e86 "GET_ADDRESS"
+
+sym 7ea1 "ThermactorAirTest"
+
+sym 7ec3 "Sub_7ec3"
+
+sym 7ed7 "Sub_7ed7"
+
+sym 7f51 "VO_OCC_COM12_Func1"
+
+sym 7f69 "VO_OCC_COM12_Func2"
+
+sym 7f78 "VO_OCC_COM12_Func4"
+
+sym 7f97 "Sub_7f97"
+
+sym 7fb3 "Sub_7fb3"
+
+sym 7fcc "Sub_7fcc"
+
+sym 7fe5 "Sub_7fe5"
+
+sym 7ffe "Sub_7ffe"
+
+struct 7fff 7fff :Y X
+sym 7fff "OSt8_012"
+
+sym 8016 "Sub_8016"
+
+sym 8032 "Sub_8032"
+
+sym 8038 "Sub_8038"
+
+sym 8057 "Sub_8057"
+
+sym 8075 "Sub_8075"
+
+sym 80c9 "SET_SERVICE_CODE"
+
+sym 80cd "Sub_80cd"
+
+sym 80dd "Sub_80dd"
+
+sym 80fc "Sub_80fc"
+
+sym 8102 "VR_RUN_INIT_COM8"
+
+sym 810e "FMEM_FAULT_PRESENT_and_INITIALATION_LOGIC"
+
+sym 8195 "Sub_8195"
+
+sym 81a6 "Sub_81a6"
+
+sym 81b8 "Sub_81b8"
+
+sym 81fd "VR_EGO_COM1"
+
+sym 821a "Sub_821a"
+
+sym 822f "Sub_822f"
+
+sym 824f "VR_THERMAIR_COM2"
+
+sym 826a "AIR_UPSTREAM"
+
+sym 827c "AIR_DOWNSTREAM"
+
+sym 828f "BLOCK_F2_VR_THERMAIR_COM2"
+
+sym 82a0 "AM1_AM2_OFF"
+
+sym 82a9 "BLOCK_AA"
+
+sym 82b5 "Sub_82b5"
+
+sym 82ba "Sub_82ba"
+
+sym 82f6 "Sub_82f6"
+
+sym 82fb "DELAY_SEC"
+
+sym 830c "Sub_830c"
+
+sym 8318 "Sub_8318"
+
+sym 8326 "Sub_8326"
+
+sym 835a "Sub_835a"
+
+sym 8369 "Sub_8369"
+
+sym 8393 "Sub_8393"
+
+sym 83c2 "Sub_83c2"
+
+sym 83fa "Sub0290"
+
+sym 8404 "EXIT"
+
+sym 840b "Sub_840b"
+
+sym 8418 "Sub_8418"
+
+sym 8426 "Sub_8426"
+
+sym 8453 "Sub_8453"
+
+sym 846e "Sub_846e"
+
+sym 8538 "Sub_8538"
+
+sym 853d "Check_PS_PB"
+
+sym 855f "VR_EGOBAR_COM1"
+
+sym 8582 "Sub_8582"
+
+sym 85a9 "Sub_85a9"
+
+sym 85d1 "Sub_85d1"
+
+sym 85e3 "Sub_85e3"
+
+sym 8640 "HW_Check"
+
+sym 873d "Disable_No_Start"
+
+sym 8742 "POP_test"
+
+sym 8755 "VO_KAMRAM_COM1"
+
+sym 8794 "RAM_ERROR"
+
+sym 8797 "Sub_8797"
+
+sym 879a "Sub_879a"
+
+sym 87ea "Sub_87ea"
+
+sym 8802 "Sub_8802"
+
+sym 8808 "Sub0313"
+
+sym 882d "Sub_882d"
+
+sym 88bf "VIP_EOS_IDM"
+
+sym 88de "Sub_88de"
+
+sym 890c "INTRN_E4OD_INPUT_PROCESSING_COM1"
+
+sym 8933 "INTRN_E4OD_SYS_EQU_COM1"
+
+sym 8b19 "SPEED_RATIO_ACROSS_TORQUE_CONVERTER"
+
+sym 8b2c "Sub_8b2c"
+
+sym 8b71 "E4OD_INPUT_PROCESSING_COM1"
+
+sym 8cc9 "FN161x(N,LOAD)"
+
+sym 8cd6 "SC_DESRD_GR_DETR_COM1"
+
+sym 8d5f "SC_GR_DS_AUTO_COM1"
+
+sym 8d77 "VEHICLE_SPEED_SENSOR_OK_SHIFT_LOGIC"
+
+sym 8e6a "VEHICLE_SPEED_SENSOR_FAILURE_SHIFT_LOGIC"
+
+sym 8eb5 "Sub_8eb5"
+
+sym 8ee6 "Sub_8ee6"
+
+sym 8efe "Sub_8efe"
+
+sym 8f28 "Delay_Shift_Logic"
+
+sym 8f83 "MANUAL_DOWNSHIFT_DETERMINATION"
+
+sym 8f94 "SC_CM_GR_DETR_COM1"
+
+sym 901f "SC_CM_GR_MAN1_COM1"
+
+sym 905e "SC_CM_GR_MAN2_COM1"
+
+sym 9099 "SC_CM_GR_AUTO_DWN_COM1"
+
+sym 90aa "SC_TIMER_COM1"
+
+sym 912a "SC_SOL_CTL_COM1"
+
+sym 91af "SC_VALID_COM1"
+
+sym 9231 "SHIFT_VERIFICATION_LOGIC_(Part_1)"
+
+sym 9278 "SHIFT_VERIFICATION_LOGIC_(Part_2)"
+
+sym 9308 "CCC_CST_CLTCH_CTL_COM1"
+
+sym 93b2 "EPC_GUIDE_COM1"
+
+sym 9526 "Sub0342"
+
+sym 96e1 "Sub_96e1"
+
+sym 96e5 "Sub_96e5"
+
+word 96ee 96ef :P 5
+sym 96ee "ScScSadDir135"
+
+word 96f0 96f1 :P 5
+sym 96f0 "ScScSadDir136"
+
+word 96f2 96f3 :P 5
+sym 96f2 "ScScSadDir137"
+
+word 96f4 96f5 :P 5
+sym 96f4 "ScScSadDir138"
+
+word 96f6 96f7 :P 5
+sym 96f6 "ScScSadDir139"
+
+word 96f8 96f9 :P 5
+sym 96f8 "ScScSadDir140"
+
+sym 96fa "OpSadDir024"
+
+sym 97e9 "Sub_97e9"
+
+sym 9820 "Sub_9820"
+
+sym 98a7 "UUWFuncLU_98a7"
+
+sym 98ae "SUWFuncLU_98ae"
+
+sym 9aa1 "EPC_TQ_IALPHA_COM4"
+
+sym 9b10 "EPC_DYNAMIC_COM1"
+
+sym 9c21 "Sub_9c21"
+
+word 9c44 9c45 :P 5
+sym 9c44 "ScScSadDir141"
+
+word 9c4c 9c4d :P 5
+sym 9c4c "ScScSadDir142"
+
+word 9c50 9c51 :P 5
+sym 9c50 "ScScSadDir143"
+
+sym 9c56 "Sub_9c56"
+
+sym 9c85 "CCC_COM1"
+
+sym 9cbe "CCC_FMEM_COM2"
+
+sym 9cfb "CCC_UNCOND_UNLCK_COM1"
+
+sym 9e95 "Sub_9e95"
+
+sym 9e9e "CCC_SHFT_UNLCK_COM1"
+
+sym 9ece "CCC_INI_DWN_COM1"
+
+sym 9ed9 "CCC_DWN_CNVR_CLCH_COM1"
+
+sym 9f04 "CCC_INI_UP_COM1"
+
+sym 9fc3 "Calc_SR_PP_LIM"
+
+sym 9ff1 "CCC_UP_CNVR_CLCH_COM2"
+
+sym a097 "CCC_SCHLD_LCK_UNLCK_COM1"
+
+sym a163 "CCC_WOT_LCK_UP_COM1"
+
+sym a206 "INTRN_RT_NOVS_KAM_CALC_COM1"
+
+sym a356 "Sub_a356"
+
+sym a376 "Sub_a376"
+
+sym a3b8 "Sub_a3b8"
+
+byte a3e0 a3e0 :P 3
+sym a3e0 "ScScSadDir144"
+
+sym a3e1 "EPC_OTEMP_TEST_COM2"
+
+sym a469 "Sub_a469"
+
+sym a767 "TIMER_LH"
+
+byte a99a a99a :P 3
+sym a99a "ScScSadDir145"
+
+sym a99b "Sub_a99b"
+
+word a9be a9bf :P 5
+sym a9be "ScScSadDir146"
+
+word a9c0 a9c1 :P 5
+sym a9c0 "ScScSadDir147"
+
+word a9c2 a9c3 :P 5
+sym a9c2 "ScScSadDir148"
+
+word a9c4 a9c5 :P 5
+sym a9c4 "ScScSadDir149"
+
+word a9c6 a9c7 :P 5
+sym a9c6 "ScScSadDir150"
+
+word a9c8 a9c9 :P 5
+sym a9c8 "ScScSadDir151"
+
+word a9ca a9cb :P 5
+sym a9ca "ScScSadDir152"
+
+word a9cc a9cd :P 5
+sym a9cc "ScScSadDir153"
+
+word a9ce a9cf :P 5
+sym a9ce "ScScSadDir154"
+
+word a9d0 a9d1 :P 5
+sym a9d0 "ScScSadDir155"
+
+word a9d2 a9d3 :P 5
+sym a9d2 "ScScSadDir156"
+
+word a9d4 a9d5 :P 5
+sym a9d4 "ScScSadDir157"
+
+sym a9d6 "Check_ConsoleDI"
+
+sym a9d7 "Check_Console"
+
+sym aa02 "Console_Routine"
+
+word aa68 aa69 :P 5
+sym aa68 "ScScSadDir158"
+
+word aa6a aa6b :P 5
+sym aa6a "ScScSadDir159"
+
+byte aa6c aa6c :P 3
+sym aa6c "ScScSadDir160"
+
+byte aa6d aa6d :P 3
+sym aa6d "ScScSadDir161"
+
+byte aa6e aa6e :P 3
+sym aa6e "ScScSadDir162"
+
+byte aa6f aa6f :P 3
+sym aa6f "ScScSadDir163"
+
+byte aa70 aa70 :P 3
+sym aa70 "ScScSadDir164"
+
+byte aa71 aa71 :P 3
+sym aa71 "ScScSadDir165"
+
+byte aa72 aa72 :P 3
+sym aa72 "ScScSadDir166"
+
+byte aa73 aa73 :P 3
+sym aa73 "ScScSadDir167"
+
+byte aa74 aa74 :P 3
+sym aa74 "ScScSadDir168"
+
+byte aa75 aa75 :P 3
+sym aa75 "ScScSadDir169"
+
+byte aa76 aa76 :P 3
+sym aa76 "ScScSadDir170"
+
+byte aa77 aa77 :P 3
+sym aa77 "ScScSadDir171"
+
+byte aa78 aa78 :P 3
+sym aa78 "ScScSadDir172"
+
+byte aa79 aa79 :P 3
+sym aa79 "ScScSadDir173"
+
+byte aa7a aa7a :P 3
+sym aa7a "ScScSadDir174"
+
+byte aa7b aa7b :P 3
+sym aa7b "ScScSadDir175"
+
+byte aa7c aa7c :P 3
+sym aa7c "ScScSadDir176"
+
+byte aa7d aa7d :P 3
+sym aa7d "ScScSadDir177"
+
+byte aa7e aa7e :P 3
+sym aa7e "ScScSadDir178"
+
+byte aa7f aa7f :P 3
+sym aa7f "ScScSadDir179"
+
+byte aa80 aa80 :P 3
+sym aa80 "ScScSadDir180"
+
+byte aa81 aa81 :P 3
+sym aa81 "ScScSadDir181"
+
+byte aa82 aa82 :P 3
+sym aa82 "ScScSadDir182"
+
+byte aa83 aa83 :P 3
+sym aa83 "ScScSadDir183"
+
+byte aa84 aa84 :P 3
+sym aa84 "ScScSadDir184"
+
+byte aa85 aa85 :P 3
+sym aa85 "ScScSadDir185"
+
+byte aa86 aa86 :P 3
+sym aa86 "ScScSadDir186"
+
+byte aa87 aa87 :P 3
+sym aa87 "ScScSadDir187"
+
+byte aa88 aa88 :P 3
+sym aa88 "ScScSadDir188"
+
+byte aa89 aa89 :P 3
+sym aa89 "ScScSadDir189"
+
+byte aa8a aa8a :P 3
+sym aa8a "ScScSadDir190"
+
+byte aa8b aa8b :P 3
+sym aa8b "ScScSadDir191"
+
+byte aa8c aa8c :P 3
+sym aa8c "ScScSadDir192"
+
+byte aa8d aa8d :P 3
+sym aa8d "ScScSadDir193"
+
+byte aa8e aa8e :P 3
+sym aa8e "ScScSadDir194"
+
+byte aa8f aa8f :P 3
+sym aa8f "ScScSadDir195"
+
+byte aa90 aa90 :P 3
+sym aa90 "ScScSadDir196"
+
+byte aa91 aa91 :P 3
+sym aa91 "ScScSadDir197"
+
+byte aa92 aa92 :P 3
+sym aa92 "ScScSadDir198"
+
+byte aa93 aa93 :P 3
+sym aa93 "ScScSadDir199"
+
+byte aa94 aa94 :P 3
+sym aa94 "ScScSadDir200"
+
+byte aa95 aa95 :P 3
+sym aa95 "ScScSadDir201"
+
+byte aa96 aa96 :P 3
+sym aa96 "ScScSadDir202"
+
+byte aa97 aa97 :P 3
+sym aa97 "ScScSadDir203"
+
+word aa98 aa99 :P 5
+sym aa98 "ScScSadDir204"
+
+word aa9a aa9b :P 5
+sym aa9a "ScScSadDir205"
+
+word aa9c aa9d :P 5
+sym aa9c "ScScSadDir206"
+
+byte aa9e aa9e :P 3
+sym aa9e "ScScSadDir207"
+
+byte aa9f aa9f :P 3
+sym aa9f "ScScSadDir208"
+
+byte aaa0 aaa0 :P 3
+sym aaa0 "ScScSadDir209"
+
+byte aaa1 aaa1 :P 3
+sym aaa1 "ScScSadDir210"
+
+byte aaa2 aaa2 :P 3
+sym aaa2 "ScScSadDir211"
+
+byte aaa3 aaa3 :P 3
+sym aaa3 "ScScSadDir212"
+
+byte aaa4 aaa4 :P 3
+sym aaa4 "ScScSadDir213"
+
+byte aaa5 aaa5 :P 3
+sym aaa5 "ScScSadDir214"
+
+byte aaa6 aaa6 :P 3
+sym aaa6 "ScScSadDir215"
+
+byte aaa7 aaa7 :P 3
+sym aaa7 "ScScSadDir216"
+
+byte aaa8 aaa8 :P 3
+sym aaa8 "ScScSadDir217"
+
+byte aaa9 aaa9 :P 3
+sym aaa9 "ScScSadDir218"
+
+byte aaaa aaaa :P 3
+sym aaaa "ScScSadDir219"
+
+byte aaab aaab :P 3
+sym aaab "ScScSadDir220"
+
+byte aaac aaac :P 3
+sym aaac "ScScSadDir221"
+
+byte aaad aaad :P 3
+sym aaad "ScScSadDir222"
+
+byte aaae aaae :P 3
+sym aaae "ScScSadDir223"
+
+byte aaaf aaaf :P 3
+sym aaaf "ScScSadDir224"
+
+byte aab0 aab0 :P 3
+sym aab0 "ScScSadDir225"
+
+byte aab1 aab1 :P 3
+sym aab1 "ScScSadDir226"
+
+byte aab2 aab2 :P 3
+sym aab2 "ScScSadDir227"
+
+byte aab3 aab3 :P 3
+sym aab3 "ScScSadDir228"
+
+byte aab4 aab4 :P 3
+sym aab4 "ScScSadDir229"
+
+byte aab5 aab5 :P 3
+sym aab5 "ScScSadDir230"
+
+byte aab6 aab6 :P 3
+sym aab6 "ScScSadDir231"
+
+byte aab7 aab7 :P 3
+sym aab7 "ScScSadDir232"
+
+byte aab8 aab8 :P 3
+sym aab8 "ScScSadDir233"
+
+byte aab9 aab9 :P 3
+sym aab9 "ScScSadDir234"
+
+byte aaba aaba :P 3
+sym aaba "ScScSadDir235"
+
+byte aabb aabb :P 3
+sym aabb "ScScSadDir236"
+
+byte aabc aabc :P 3
+sym aabc "ScScSadDir237"
+
+byte aabd aabd :P 3
+sym aabd "ScScSadDir238"
+
+byte aabe aabe :P 3
+sym aabe "ScScSadDir239"
+
+byte aabf aabf :P 3
+sym aabf "ScScSadDir240"
+
+byte aac0 aac0 :P 3
+sym aac0 "ScScSadDir241"
+
+byte aac1 aac1 :P 3
+sym aac1 "ScScSadDir242"
+
+byte aac2 aac2 :P 3
+sym aac2 "ScScSadDir243"
+
+byte aac3 aac3 :P 3
+sym aac3 "ScScSadDir244"
+
+byte aac4 aac4 :P 3
+sym aac4 "ScScSadDir245"
+
+byte aac5 aac5 :P 3
+sym aac5 "ScScSadDir246"
+
+byte aac6 aac6 :P 3
+sym aac6 "ScScSadDir247"
+
+byte aac7 aac7 :P 3
+sym aac7 "ScScSadDir248"
+
+byte aac8 aac8 :P 3
+sym aac8 "ScScSadDir249"
+
+byte aac9 aac9 :P 3
+sym aac9 "ScScSadDir250"
+
+byte aaca aaca :P 3
+sym aaca "ScScSadDir251"
+
+byte aacb aacb :P 3
+sym aacb "ScScSadDir252"
+
+byte aacc aacc :P 3
+sym aacc "ScScSadDir253"
+
+byte aacd aacd :P 3
+sym aacd "ScScSadDir254"
+
+byte aace aace :P 3
+sym aace "ScScSadDir255"
+
+byte aacf aacf :P 3
+sym aacf "ScScSadDir256"
+
+byte aad0 aad0 :P 3
+sym aad0 "ScScSadDir257"
+
+byte aad1 aad1 :P 3
+sym aad1 "ScScSadDir258"
+
+byte aad2 aad2 :P 3
+sym aad2 "ScScSadDir259"
+
+byte aad3 aad3 :P 3
+sym aad3 "ScScSadDir260"
+
+byte aad4 aad4 :P 3
+sym aad4 "ScScSadDir261"
+
+byte aad5 aad5 :P 3
+sym aad5 "ScScSadDir262"
+
+byte aad6 aad6 :P 3
+sym aad6 "ScScSadDir263"
+
+byte aad7 aad7 :P 3
+sym aad7 "ScScSadDir264"
+
+byte aad8 aad8 :P 3
+sym aad8 "ScScSadDir265"
+
+byte aad9 aad9 :P 3
+sym aad9 "ScScSadDir266"
+
+byte aada aada :P 3
+sym aada "ScScSadDir267"
+
+byte aadb aadb :P 3
+sym aadb "ScScSadDir268"
+
+byte aadc aadc :P 3
+sym aadc "ScScSadDir269"
+
+byte aadd aadd :P 3
+sym aadd "ScScSadDir270"
+
+word aade aadf :P 5
+sym aade "ScScSadDir271"
+
+word aae0 aae1 :P 5
+sym aae0 "ScScSadDir272"
+
+word aae2 aae3 :P 5
+sym aae2 "ScScSadDir273"
+
+byte aae4 aae4 :P 3
+sym aae4 "ScScSadDir274"
+
+byte aae5 aae5 :P 3
+sym aae5 "ScScSadDir275"
+
+byte aae6 aae6 :P 3
+sym aae6 "ScScSadDir276"
+
+byte aae7 aae7 :P 3
+sym aae7 "ScScSadDir277"
+
+word aae8 aae9 :P 5
+sym aae8 "ScScSadDir278"
+
+word aaea aaeb :P 5
+sym aaea "ScScSadDir279"
+
+word aaec aaed :P 5
+sym aaec "ScScSadDir280"
+
+byte aaee aaee :P 3
+sym aaee "ScScSadDir281"
+
+byte aaef aaef :P 3
+sym aaef "ScScSadDir282"
+
+byte aaf0 aaf0 :P 3
+sym aaf0 "ScScSadDir283"
+
+byte aaf1 aaf1 :P 3
+sym aaf1 "ScScSadDir284"
+
+byte aaf2 aaf2 :P 3
+sym aaf2 "ScScSadDir285"
+
+byte aaf3 aaf3 :P 3
+sym aaf3 "ScScSadDir286"
+
+byte aaf4 aaf4 :P 3
+sym aaf4 "ScScSadDir287"
+
+byte aaf5 aaf5 :P 3
+sym aaf5 "ScScSadDir288"
+
+byte aaf6 aaf6 :P 3
+sym aaf6 "ScScSadDir289"
+
+byte aaf7 aaf7 :P 3
+sym aaf7 "ScScSadDir290"
+
+byte aaf8 aaf8 :P 3
+sym aaf8 "ScScSadDir291"
+
+byte aaf9 aaf9 :P 3
+sym aaf9 "ScScSadDir292"
+
+byte aafa aafa :P 3
+sym aafa "ScScSadDir293"
+
+byte aafb aafb :P 3
+sym aafb "ScScSadDir294"
+
+byte aafc aafc :P 3
+sym aafc "ScScSadDir295"
+
+byte aafd aafd :P 3
+sym aafd "ScScSadDir296"
+
+byte aafe aafe :P 3
+sym aafe "ScScSadDir297"
+
+byte aaff aaff :P 3
+sym aaff "ScScSadDir298"
+
+byte ab00 ab00 :P 3
+sym ab00 "ScScSadDir299"
+
+byte ab01 ab01 :P 3
+sym ab01 "ScScSadDir300"
+
+byte ab02 ab02 :P 3
+sym ab02 "ScScSadDir301"
+
+byte ab03 ab03 :P 3
+sym ab03 "ScScSadDir302"
+
+byte ab04 ab04 :P 3
+sym ab04 "ScScSadDir303"
+
+byte ab05 ab05 :P 3
+sym ab05 "ScScSadDir304"
+
+byte ab06 ab06 :P 3
+sym ab06 "ScScSadDir305"
+
+byte ab07 ab07 :P 3
+sym ab07 "ScScSadDir306"
+
+byte ab08 ab08 :P 3
+sym ab08 "ScScSadDir307"
+
+byte ab09 ab09 :P 3
+sym ab09 "ScScSadDir308"
+
+byte ab0a ab0a :P 3
+sym ab0a "ScScSadDir309"
+
+byte ab0b ab0b :P 3
+sym ab0b "ScScSadDir310"
+
+byte ab0c ab0c :P 3
+sym ab0c "ScScSadDir311"
+
+byte ab0d ab0d :P 3
+sym ab0d "ScScSadDir312"
+
+byte ab0e ab0e :P 3
+sym ab0e "ScScSadDir313"
+
+byte ab0f ab0f :P 3
+sym ab0f "ScScSadDir314"
+
+byte ab10 ab10 :P 3
+sym ab10 "ScScSadDir315"
+
+byte ab11 ab11 :P 3
+sym ab11 "ScScSadDir316"
+
+byte ab12 ab12 :P 3
+sym ab12 "ScScSadDir317"
+
+byte ab13 ab13 :P 3
+sym ab13 "ScScSadDir318"
+
+byte ab14 ab14 :P 3
+sym ab14 "ScScSadDir319"
+
+byte ab15 ab15 :P 3
+sym ab15 "ScScSadDir320"
+
+byte ab16 ab16 :P 3
+sym ab16 "ScScSadDir321"
+
+byte ab17 ab17 :P 3
+sym ab17 "ScScSadDir322"
+
+byte ab18 ab18 :P 3
+sym ab18 "ScScSadDir323"
+
+byte ab19 ab19 :P 3
+sym ab19 "ScScSadDir324"
+
+byte ab1a ab1a :P 3
+sym ab1a "ScScSadDir325"
+
+byte ab1b ab1b :P 3
+sym ab1b "ScScSadDir326"
+
+byte ab1c ab1c :P 3
+sym ab1c "ScScSadDir327"
+
+byte ab1d ab1d :P 3
+sym ab1d "ScScSadDir328"
+
+byte ab1e ab1e :P 3
+sym ab1e "ScScSadDir329"
+
+byte ab1f ab1f :P 3
+sym ab1f "ScScSadDir330"
+
+word ab20 ab21 :P 5
+sym ab20 "ScScSadDir331"
+
+word ab22 ab23 :P 5
+sym ab22 "ScScSadDir332"
+
+word ab24 ab25 :P 5
+sym ab24 "ScScSadDir333"
+
+byte ab26 ab26 :P 3
+sym ab26 "ScScSadDir334"
+
+byte ab27 ab27 :P 3
+sym ab27 "ScScSadDir335"
+
+byte ab28 ab28 :P 3
+sym ab28 "ScScSadDir336"
+
+byte ab29 ab29 :P 3
+sym ab29 "ScScSadDir337"
+
+sym ab2a "KAM_VALIDATION_PROCEDURE"
+
+sym ab92 "DataLoggingPatch"
+
+word ac32 ac33 :P 5
+sym ac32 "ScScSadDir338"
+
+word ac34 ac35 :P 5
+sym ac34 "ScScSadDir339"
+
+word ac36 ac37 :P 5
+sym ac36 "ScScSadDir340"
+
+word ac38 ac39 :P 5
+sym ac38 "ScScSadDir341"
+
+word ac3a ac3b :P 5
+sym ac3a "ScScSadDir342"
+
+word ac3c ac3d :P 5
+sym ac3c "ScScSadDir343"
+
+word ac3e ac3f :P 5
+sym ac3e "ScScSadDir344"
+
+word ac40 ac41 :P 5
+sym ac40 "ScScSadDir345"
+
+word ac42 ac43 :P 5
+sym ac42 "ScScSadDir346"
+
+word ac44 ac45 :P 5
+sym ac44 "ScScSadDir347"
+
+word ac46 ac47 :P 5
+sym ac46 "ScScSadDir348"
+
+word ac48 ac49 :P 5
+sym ac48 "ScScSadDir349"
+
+word ac4a ac4b :P 5
+sym ac4a "ScScSadDir350"
+
+word ac4c ac4d :P 5
+sym ac4c "ScScSadDir351"
+
+word ac4e ac4f :P 5
+sym ac4e "ScScSadDir352"
+
+word ac50 ac51 :P 5
+sym ac50 "ScScSadDir353"
+
+word ac52 ac53 :P 5
+sym ac52 "ScScSadDir354"
+
+word ac54 ac55 :P 5
+sym ac54 "ScScSadDir355"
+
+word ac56 ac57 :P 5
+sym ac56 "ScScSadDir356"
+
+word ac58 ac59 :P 5
+sym ac58 "ScScSadDir357"
+
+word ac5a ac5b :P 5
+sym ac5a "ScScSadDir358"
+
+word ac5c ac5d :P 5
+sym ac5c "ScScSadDir359"
+
+word ac5e ac5f :P 5
+sym ac5e "ScScSadDir360"
+
+word ac60 ac61 :P 5
+sym ac60 "ScScSadDir361"
+
+word ac62 ac63 :P 5
+sym ac62 "ScScSadDir362"
+
+word ac64 ac65 :P 5
+sym ac64 "ScScSadDir363"
+
+word ac66 ac67 :P 5
+sym ac66 "ScScSadDir364"
+
+word ac68 ac69 :P 5
+sym ac68 "ScScSadDir365"
+
+word ac6a ac6b :P 5
+sym ac6a "ScScSadDir366"
+
+word ac6c ac6d :P 5
+sym ac6c "ScScSadDir367"
+
+word ac6e ac6f :P 5
+sym ac6e "ScScSadDir368"
+
+word ac70 ac71 :P 5
+sym ac70 "ScScSadDir369"
+
+word ac72 ac73 :P 5
+sym ac72 "ScScSadDir370"
+
+word ac74 ac75 :P 5
+sym ac74 "ScScSadDir371"
+
+word ac76 ac77 :P 5
+sym ac76 "ScScSadDir372"
+
+word ac78 ac79 :P 5
+sym ac78 "ScScSadDir373"
+
+word ac7a ac7b :P 5
+sym ac7a "ScScSadDir374"
+
+word ac7c ac7d :P 5
+sym ac7c "ScScSadDir375"
+
+word ac7e ac7f :P 5
+sym ac7e "ScScSadDir376"
+
+word ac80 ac81 :P 5
+sym ac80 "ScScSadDir377"
+
+word ac82 ac83 :P 5
+sym ac82 "ScScSadDir378"
+
+word ac84 ac85 :P 5
+sym ac84 "ScScSadDir379"
+
+word ac86 ac87 :P 5
+sym ac86 "ScScSadDir380"
+
+word ac88 ac89 :P 5
+sym ac88 "ScScSadDir381"
+
+word ac8a ac8b :P 5
+sym ac8a "ScScSadDir382"
+
+word ac8c ac8d :P 5
+sym ac8c "ScScSadDir383"
+
+word ac8e ac8f :P 5
+sym ac8e "ScScSadDir384"
+
+word ac90 ac91 :P 5
+sym ac90 "ScScSadDir385"
+
+word ac92 ac93 :P 5
+sym ac92 "ScScSadDir386"
+
+word ac94 ac95 :P 5
+sym ac94 "ScScSadDir387"
+
+word ac96 ac97 :P 5
+sym ac96 "ScScSadDir388"
+
+word ac98 ac99 :P 5
+sym ac98 "ScScSadDir389"
+
+word ac9a ac9b :P 5
+sym ac9a "ScScSadDir390"
+
+word ac9c ac9d :P 5
+sym ac9c "ScScSadDir391"
+
+word ac9e ac9f :P 5
+sym ac9e "ScScSadDir392"
+
+word aca0 aca1 :P 5
+sym aca0 "ScScSadDir393"
+
+word aca2 aca3 :P 5
+sym aca2 "ScScSadDir394"
+
+word aca4 aca5 :P 5
+sym aca4 "ScScSadDir395"
+
+word aca6 aca7 :P 5
+sym aca6 "ScScSadDir396"
+
+word aca8 aca9 :P 5
+sym aca8 "ScScSadDir397"
+
+word acaa acab :P 5
+sym acaa "ScScSadDir398"
+
+word acac acad :P 5
+sym acac "ScScSadDir399"
+
+word acae acaf :P 5
+sym acae "ScScSadDir400"
+
+word acb0 acb1 :P 5
+sym acb0 "ScScSadDir401"
+
+word acb2 acb3 :P 5
+sym acb2 "ScScSadDir402"
+
+word acb4 acb5 :P 5
+sym acb4 "ScScSadDir403"
+
+word acb6 acb7 :P 5
+sym acb6 "ScScSadDir404"
+
+word acb8 acb9 :P 5
+sym acb8 "ScScSadDir405"
+
+word acba acbb :P 5
+sym acba "ScScSadDir406"
+
+word acbc acbd :P 5
+sym acbc "ScScSadDir407"
+
+word acbe acbf :P 5
+sym acbe "ScScSadDir408"
+
+byte ae27 ae27 :P 3
+sym ae27 "ScScSadDir409"
+
+word b000 b001 :P 5
+sym b000 "Rf0_EndAddr"
+
+byte b002 b002 :P 3
+sym b002 "ScScSadDir411"
+
+byte b003 b003 :P 3
+sym b003 "LINK_SW"
+
+byte b004 b004 :P 3
+sym b004 "ScScSadDir413"
+
+byte b005 b005 :P 3
+sym b005 "LOWVOL"
+
+byte b006 b006 :P 3
+sym b006 "VOLHYS"
+
+byte b007 b007 :P 3
+sym b007 "VOLTCLP"
+
+byte b008 b008 :P 3
+sym b008 "CHGRPM"
+
+word b00a b00b :P 5
+sym b00a "ScScSadDir418"
+
+word b00c b00d :P 5
+sym b00c "?ISCMOD_TPREL?"
+
+word b00e b00f :P 5
+sym b00e "ISCMOD_MAX"
+
+word b010 b011 :P 5
+sym b010 "ISCMOD_MIN"
+
+word b012 b013 :P 5
+sym b012 "KDNDT"
+
+word b014 b015 :P 5
+sym b014 "TC_OVER"
+
+word b016 b017 :P 5
+sym b016 "TC_UNDER"
+
+byte b018 b018 :P 3
+sym b018 "ISCMOD_RPM"
+
+word b01a b01b :P 5
+sym b01a "PSIBRM"
+
+word b01c b01d :P 5
+sym b01c "RPMINC"
+
+word b01e b01f :P 5
+sym b01e "PSIBRN"
+
+word b020 b021 :P 5
+sym b020 "ITHBMA"
+
+word b022 b023 :P 5
+sym b022 "DEBYCP"
+
+word b024 b025 :P 5
+sym b024 "DASCTL"
+
+word b026 b027 :P 5
+sym b026 "DASPTK"
+
+word b028 b029 :P 5
+sym b028 "DELHYS"
+
+word b02a b02b :P 5
+sym b02a "RPMCTL"
+
+word b02c b02d :P 5
+sym b02c "NDIF"
+
+word b02e b02f :P 5
+sym b02e "RPMDED"
+
+word b030 b031 :P 5
+sym b030 "DELRAT"
+
+byte b032 b032 :P 3
+sym b032 "ISCTM"
+
+byte b033 b033 :P 3
+sym b033 "ACMAP"
+
+byte b035 b035 :P 3
+sym b035 "UPDISC"
+
+byte b036 b036 :P 3
+sym b036 "UPDATM"
+
+byte b037 b037 :P 3
+sym b037 "MINMPH"
+
+word b038 b039 :P 5
+sym b038 "IDCMUL"
+
+word b03a b03b :P 5
+sym b03a "IDCOFS"
+
+word b03c b03d :P 5
+sym b03c "STALLN"
+
+byte b03e b03e :P 3
+sym b03e "CRKTIM"
+
+byte b03f b03f :P 3
+sym b03f "BPCOR_SW"
+
+byte b041 b041 :P 3
+sym b041 "CSSMAF"
+
+word b042 b043 :P 5
+sym b042 "NUBASE"
+
+word b044 b045 :P 5
+sym b044 "DRBASE"
+
+sym b046 "idle_rpm_adder_startup"
+
+word b048 b049 :P 5
+sym b048 "idle_rpm_adder_max_time_on_startup"
+
+word b04a b04b :P 5
+sym b04a "DNAC"
+
+word b04c b04d :P 5
+sym b04c "DACTM"
+
+word b04e b04f :P 5
+sym b04e "DNPOWS"
+
+word b050 b051 :P 5
+sym b050 "ISCLPD_idle_max_rpm"
+
+byte b052 b052 :P 3
+sym b052 "ACHPTM"
+
+byte b053 b053 :P 3
+sym b053 "ECT_HP"
+
+word b054 b055 :P 5
+sym b054 "PSPPM"
+
+byte b056 b056 :P 3
+sym b056 "TKDTM"
+
+byte b057 b057 :P 3
+sym b057 "pre_bzztm"
+
+byte b058 b058 :P 3
+sym b058 "NDDELT"
+
+byte b059 b059 :P 3
+sym b059 "MINACT"
+
+byte b05a b05a :P 3
+sym b05a "FMMDSD"
+
+byte b05b b05b :P 3
+sym b05b "DWELLA"
+
+byte b05c b05c :P 3
+sym b05c "DWELLM"
+
+word b05e b05f :P 5
+sym b05e "DWLMAX"
+
+word b060 b061 :P 5
+sym b060 "DWLMIN"
+
+word b062 b063 :P 5
+sym b062 "DWLTSW"
+
+word b064 b065 :P 5
+sym b064 "DWL_XS_MIN"
+
+word b066 b067 :P 5
+sym b066 "MINDLA"
+
+word b068 b069 :P 5
+sym b068 "MINDLB"
+
+word b06a b06b :P 5
+sym b06a "PACLIM"
+
+word b06c b06d :P 5
+sym b06c "PACOFF"
+
+word b06e b06f :P 5
+sym b06e "PACPER"
+
+word b070 b071 :P 5
+sym b070 "PACSLO"
+
+byte b072 b072 :P 3
+sym b072 "VBAT_DWELL"
+
+byte b073 b073 :P 3
+sym b073 "VBAT_DWL_HYS"
+
+function b074 b08b :Y P 3 :Y P 3
+sym b074 "FN018B"
+
+function b08c b097 :Y P 3 :Y P 3
+sym b08c "FN394F"
+
+function b098 b0bf :Y P 3 :Y P 3
+sym b098 "FN800"
+
+function b0c0 b0cb :Y P 3 :Y P 3
+sym b0c0 "FN820A"
+
+function b0cc b0df :Y P 3 :Y P 3
+sym b0cc "FN825A"
+
+function b0e0 b0ed :Y P 3 :Y P 3
+sym b0e0 "FN825B"
+
+function b0ee b0fb :Y P 3 :Y P 3
+sym b0ee "FN826A"
+
+function b0fc b109 :Y P 3 :Y P 3
+sym b0fc "FN839"
+
+function b10a b111 :Y P 3 :Y P 3
+sym b10a "FN862"
+
+function b112 b129 :Y P 3 :Y P 3
+sym b112 "FN875D"
+
+function b12a b141 :Y P 3 :Y P 3
+sym b12a "FN875N"
+
+function b142 b15d :Y P 3 :Y P 3
+sym b142 "FN879"
+
+function b15e b16b :Y P 3 :Y P 3
+sym b15e "FN880"
+
+function b16c b187 :Y P 3 :Y P 3
+sym b16c "FN882A"
+
+function b188 b19f :Y P 3 :Y P 3
+sym b188 "FN885"
+
+function b1a0 b1ab :Y P 3 :Y P 3
+sym b1a0 "FN887A"
+
+function b1ac b1b3 :Y P 3 :Y P 3
+sym b1ac "FN890"
+
+function b1b4 b1bf :Y P 3 :Y P 3
+sym b1b4 "FN891"
+
+table b1c0 b1e9 :O 7 Y P 3
+sym b1c0 "Tb001"
+
+function b1ea b211 :Y P 3 :Y P 3
+sym b1ea "FN703"
+
+function b212 b23d :Y P 3 :Y P 3
+sym b212 "FN703D"
+
+function b23e b259 :Y P 3 :Y P 3
+sym b23e "FN018A"
+
+function b25a b26d :Y P 3 :Y P 3
+sym b25a "FN019A"
+
+function b26e b28d :Y P 3 :Y P 3
+sym b26e "FN020C"
+
+function b28e b2bd :Y P 3 :Y P 3
+sym b28e "FN021_MAPOPE_y_load"
+
+function b2be b2e5 :Y P 3 :Y P 3
+sym b2be "FN022A"
+
+function b2e6 b2fd :Y P 3 :Y P 3
+sym b2e6 "FN070B"
+
+function b2fe b319 :Y P 3 :Y P 3
+sym b2fe "FN070L"
+
+function b31a b335 :Y P 3 :Y P 3
+sym b31a "FN072A"
+
+function b336 b351 :Y P 3 :Y P 3
+sym b336 "FN072C"
+
+function b352 b365 :Y P 3 :Y P 3
+sym b352 "FN046A"
+
+function b366 b379 :Y P 3 :Y P 3
+sym b366 "FN047A"
+
+function b37a b395 :Y P 3 :Y P 3
+sym b37a "FN071"
+
+function b396 b3b5 :Y P 3 :Y P 3
+sym b396 "FN039"
+
+function b3b6 b3d1 :Y P 3 :Y P 3
+sym b3b6 "FN025"
+
+function b3d2 b3e9 :Y P 3 :Y P 3
+sym b3d2 "FN005"
+
+function b3ea b3fd :Y P 3 :Y P 3
+sym b3ea "FN007"
+
+function b3fe b411 :Y P 3 :Y P 3
+sym b3fe "FN008"
+
+function b412 b425 :Y P 3 :Y P 3
+sym b412 "FN023"
+
+function b426 b43d :Y P 3 :Y P 3
+sym b426 "FN024"
+
+word b43e b43f :P 5
+sym b43e "Rf2_EndAddr"
+
+byte b440 b440 :P 3
+sym b440 "DASMPH"
+
+byte b441 b441 :P 3
+sym b441 "DASMHYST"
+
+word b442 b443 :P 5
+sym b442 "Rf4_EndAddr"
+
+byte b444 b444 :P 3
+sym b444 "IPSIDLY"
+
+word b446 b447 :P 5
+sym b446 "RUNUP_DIFF"
+
+word b448 b449 :P 5
+sym b448 "V_RUNUP_DIFF"
+
+byte b44a b44a :P 3
+sym b44a "SETLNG_TM"
+
+word b44c b44d :P 5
+sym b44c "DPNEU_MUL"
+
+word b44e b44f :P 5
+sym b44e "A0"
+
+word b450 b451 :P 5
+sym b450 "ScScSadDir488"
+
+struct b452 b452 :Y X
+sym b452 "St0001"
+
+byte b455 b455 :P 3
+sym b455 "EGOCL1"
+
+word b456 b457 :P 5
+sym b456 "TP_HYS_OL"
+
+word b458 b459 :P 5
+sym b458 "DFSLAM"
+
+byte b45a b45a :P 3
+sym b45a "PIPNUM"
+
+byte b45b b45b :P 3
+sym b45b "LMAP"
+
+byte b45c b45c :P 3
+sym b45c "LOMAPH"
+
+byte b45d b45d :P 3
+sym b45d "ECTSTABL"
+
+byte b45e b45e :P 3
+sym b45e "ECTSTHYS"
+
+byte b45f b45f :P 3
+sym b45f "MFARMP"
+
+byte b460 b460 :P 3
+sym b460 "ScScSadDir498"
+
+byte b461 b461 :P 3
+sym b461 "LAMRICH"
+
+byte b462 b462 :P 3
+sym b462 "LAMRHYS"
+
+byte b463 b463 :P 3
+sym b463 "OLIDRV"
+
+word b464 b465 :P 5
+sym b464 "OLMCL"
+
+byte b466 b466 :P 3
+sym b466 "OLINEUT"
+
+byte b467 b467 :P 3
+sym b467 "ScScSadDir504"
+
+word b468 b469 :P 5
+sym b468 "LAMDLT_OL"
+
+byte b46a b46a :P 3
+sym b46a "ScScSadDir506"
+
+byte b46b b46b :P 3
+sym b46b "JMPMUL"
+
+byte b46c b46c :P 3
+sym b46c "MAPAHI"
+
+byte b46d b46d :P 3
+sym b46d "MPAHIH"
+
+byte b46e b46e :P 3
+sym b46e "MAPLO"
+
+byte b46f b46f :P 3
+sym b46f "MAPLOH"
+
+byte b470 b470 :P 3
+sym b470 "ScScSadDir512"
+
+byte b471 b471 :P 3
+sym b471 "ScScSadDir513"
+
+byte b472 b472 :P 3
+sym b472 "MPGLSW"
+
+byte b473 b473 :P 3
+sym b473 "MPGNOV"
+
+byte b474 b474 :P 3
+sym b474 "MPNOVH"
+
+byte b475 b475 :P 3
+sym b475 "MPGRPM"
+
+byte b476 b476 :P 3
+sym b476 "MPGRPH"
+
+byte b477 b477 :P 3
+sym b477 "MPGCTH"
+
+byte b478 b478 :P 3
+sym b478 "MPGCTL"
+
+word b47a b47b :P 5
+sym b47a "ScScSadDir521"
+
+word b47c b47d :P 5
+sym b47c "MPGDEC"
+
+byte b47e b47e :P 3
+sym b47e "MPMNBP"
+
+byte b47f b47f :P 3
+sym b47f "MPNBPH"
+
+byte b480 b480 :P 3
+sym b480 "VSMPG"
+
+byte b481 b481 :P 3
+sym b481 "VSMPGH"
+
+byte b482 b482 :P 3
+sym b482 "MPG_CL_SW"
+
+byte b483 b483 :P 3
+sym b483 "EGO_IDLE"
+
+word b484 b485 :P 5
+sym b484 "LAMMAX"
+
+word b486 b487 :P 5
+sym b486 "LAMMIN"
+
+word b488 b489 :P 5
+sym b488 "MINPW"
+
+byte b48a b48a :P 3
+sym b48a "ScScSadDir532"
+
+byte b48b b48b :P 3
+sym b48b "CRKPIP"
+
+byte b48c b48c :P 3
+sym b48c "CRKCTR_RESET"
+
+byte b48d b48d :P 3
+sym b48d "INJOUT"
+
+byte b48e b48e :P 3
+sym b48e "ScScSadDir536"
+
+struct b490 b490 :Y X
+sym b490 "St0002"
+
+word b49a b49b :P 5
+sym b49a "NLMT"
+
+word b49c b49d :P 5
+sym b49c "NLMTH"
+
+byte b49e b49e :P 3
+sym b49e "speed_limiter1"
+
+byte b49f b49f :P 3
+sym b49f "speed_limiter1_hysteresis"
+
+byte b4a0 b4a0 :P 3
+sym b4a0 "ScScSadDir541"
+
+byte b4a1 b4a1 :P 3
+sym b4a1 "T75LSW"
+
+byte b4a2 b4a2 :P 3
+sym b4a2 "ScScSadDir543"
+
+byte b4a3 b4a3 :P 3
+sym b4a3 "ScScSadDir544"
+
+byte b4a4 b4a4 :P 3
+sym b4a4 "OLITD1"
+
+byte b4a5 b4a5 :P 3
+sym b4a5 "OLITD3"
+
+word b4a6 b4a7 :P 5
+sym b4a6 "IDLRPM"
+
+word b4a8 b4a9 :P 5
+sym b4a8 "IDRPMH"
+
+word b4aa b4ab :P 5
+sym b4aa "LESTM"
+
+word b4ac b4ad :P 5
+sym b4ac "WOTRPL"
+
+word b4ae b4af :P 5
+sym b4ae "WOTRPH"
+
+word b4b0 b4b1 :P 5
+sym b4b0 "LAMDLT"
+
+byte b4b2 b4b2 :P 3
+sym b4b2 "KFT"
+
+byte b4b3 b4b3 :P 3
+sym b4b3 "TFCTM"
+
+byte b4b4 b4b4 :P 3
+sym b4b4 "ScScSadDir555"
+
+byte b4b5 b4b5 :P 3
+sym b4b5 "KFTMPG"
+
+byte b4b6 b4b6 :P 3
+sym b4b6 "ScScSadDir557"
+
+byte b4b7 b4b7 :P 3
+sym b4b7 "ScScSadDir558"
+
+byte b4b8 b4b8 :P 3
+sym b4b8 "ScScSadDir559"
+
+byte b4b9 b4b9 :P 3
+sym b4b9 "ScScSadDir560"
+
+word b4ba b4bb :P 5
+sym b4ba "ScScSadDir561"
+
+word b4bc b4bd :P 5
+sym b4bc "ScScSadDir562"
+
+byte b4be b4be :P 3
+sym b4be "ScScSadDir563"
+
+byte b4bf b4bf :P 3
+sym b4bf "ScScSadDir564"
+
+byte b4c0 b4c0 :P 3
+sym b4c0 "DFNOVS"
+
+byte b4c1 b4c1 :P 3
+sym b4c1 "DFNOVH"
+
+byte b4c2 b4c2 :P 3
+sym b4c2 "DFSECT"
+
+byte b4c3 b4c3 :P 3
+sym b4c3 "DFSO_ECT"
+
+byte b4c4 b4c4 :P 3
+sym b4c4 "DFSO_OUT"
+
+byte b4c5 b4c5 :P 3
+sym b4c5 "DFSRPM"
+
+byte b4c6 b4c6 :P 3
+sym b4c6 "DFSRPH"
+
+byte b4c7 b4c7 :P 3
+sym b4c7 "DFSMAP"
+
+byte b4c8 b4c8 :P 3
+sym b4c8 "DFSMPH"
+
+byte b4c9 b4c9 :P 3
+sym b4c9 "CTEDSO"
+
+byte b4ca b4ca :P 3
+sym b4ca "ScScSadDir575"
+
+byte b4cb b4cb :P 3
+sym b4cb "ScScSadDir576"
+
+byte b4cc b4cc :P 3
+sym b4cc "CTDSFO"
+
+byte b4cd b4cd :P 3
+sym b4cd "DFSVS"
+
+word b4ce b4cf :P 5
+sym b4ce "DFSTM"
+
+byte b4d0 b4d0 :P 3
+sym b4d0 "DFSVSH"
+
+word b4d2 b4d3 :P 5
+sym b4d2 "TP_AIR_OFF_H"
+
+word b4d4 b4d5 :P 5
+sym b4d4 "D_TP_DT_F"
+
+byte b4d6 b4d6 :P 3
+sym b4d6 "FRCHIC"
+
+word b4d8 b4d9 :P 5
+sym b4d8 "PUL_PER_GAL"
+
+word b4da b4db :P 5
+sym b4da "ScScSadDir585"
+
+byte b4dc b4dc :P 3
+sym b4dc "ScScSadDir586"
+
+word b4de b4df :P 5
+sym b4de "ScScSadDir587"
+
+word b4e0 b4e1 :P 5
+sym b4e0 "FKEXIT_MAX"
+
+word b4e2 b4e3 :P 5
+sym b4e2 "FKEXIT_MIN"
+
+word b4e4 b4e5 :P 5
+sym b4e4 "KSPKDO"
+
+word b4e6 b4e7 :P 5
+sym b4e6 "KSPKDU"
+
+word b4e8 b4e9 :P 5
+sym b4e8 "KSPKNO"
+
+word b4ea b4eb :P 5
+sym b4ea "KSPKNU"
+
+word b4ec b4ed :P 5
+sym b4ec "SPKCTL"
+
+word b4ee b4ef :P 5
+sym b4ee "SPKIDR"
+
+word b4f0 b4f1 :P 5
+sym b4f0 "SPKINU"
+
+word b4f2 b4f3 :P 5
+sym b4f2 "SPK_RUNUP"
+
+byte b4f4 b4f4 :P 3
+sym b4f4 "STTIM"
+
+word b4f6 b4f7 :P 5
+sym b4f6 "TARMAX"
+
+word b4f8 b4f9 :P 5
+sym b4f8 "ScScSadDir600"
+
+function b4fa b511 :Y P 3 :Y P 3
+sym b4fa "?FN839?"
+
+function b512 b529 :Y P 3 :Y P 3
+sym b512 "FN852"
+
+function b52a b535 :Y P 3 :Y P 3
+sym b52a "FN884"
+
+function b536 b549 :Y P 3 :Y P 3
+sym b536 "FN894"
+
+function b54a b565 :Y P 3 :Y P 3
+sym b54a "FN900"
+
+table b566 b595 :O 6 Y P 3
+sym b566 "Tb002"
+
+table b596 b5c5 :O 6 Y S P 3
+sym b596 "Tb003"
+
+function b5c6 b5dd :Y P 3 :Y P 3
+sym b5c6 "FN301"
+
+function b5de b601 :Y P 3 :Y P 3
+sym b5de "FN303"
+
+function b602 b60f :Y P 3 :Y P 3
+sym b602 "FN310"
+
+function b610 b62b :Y P 3 :Y P 3
+sym b610 "FN311"
+
+function b62c b639 :Y P 3 :Y P 3
+sym b62c "FN325"
+
+function b63a b655 :Y P 3 :Y P 3
+sym b63a "FND_TP_DT_A"
+
+function b656 b679 :Y P 3 :Y P 3
+sym b656 "FNTP_AIR_OFF"
+
+table b67a b6c9 :O 10 Y P 3
+sym b67a "Tb004"
+
+table b6ca b719 :O 10 Y P 3
+sym b6ca "Tb005"
+
+function b71a b727 :Y P 3 :Y P 3
+sym b71a "FN307"
+
+table b728 b777 :O 10 Y P 3
+sym b728 "Tb006"
+
+table b778 b7c7 :O 10 Y P 3
+sym b778 "Tb007"
+
+table b7c8 b817 :O 10 Y S P 3
+sym b7c8 "Tb008"
+
+table b818 b847 :O 1 Y P 3
+sym b818 "Tb009"
+
+function b848 b85f :Y P 3 :Y P 3
+sym b848 "FN222A"
+
+function b860 b877 :Y P 3 :Y P 3
+sym b860 "FN222F"
+
+table b878 b890 :O 5 Y P 3
+sym b878 "Tb010"
+
+table b891 b8a9 :O 5 Y P 3
+sym b891 "Tb011"
+
+table b8aa b8c2 :O 5 Y P 3
+sym b8aa "Tb012"
+
+table b8c3 b912 :O 10 Y P 3
+sym b8c3 "Tb013"
+
+word b914 b915 :P 5
+sym b914 "Rf6_EndAddr"
+
+byte b916 b916 :P 3
+sym b916 "CTHIGH"
+
+byte b917 b917 :P 3
+sym b917 "CTLOW"
+
+byte b918 b918 :P 3
+sym b918 "ScScSadDir604"
+
+byte b919 b919 :P 3
+sym b919 "ENGCYL"
+
+word b91a b91b :P 5
+sym b91a "ScScSadDir606"
+
+word b91c b91d :P 5
+sym b91c "ScScSadDir607"
+
+word b91e b91f :P 5
+sym b91e "MHPFD"
+
+word b920 b921 :P 5
+sym b920 "ScScSadDir609"
+
+word b922 b923 :P 5
+sym b922 "ScScSadDir610"
+
+byte b924 b924 :P 3
+sym b924 "DFMIN0"
+
+byte b925 b925 :P 3
+sym b925 "DFMIN1"
+
+word b926 b927 :P 5
+sym b926 "TOTMIN"
+
+word b928 b929 :P 5
+sym b928 "TOTMAX"
+
+word b92a b92b :P 5
+sym b92a "BASEMD"
+
+word b92c b92d :P 5
+sym b92c "KVEFF"
+
+word b92e b92f :P 5
+sym b92e "KSF"
+
+word b930 b931 :P 5
+sym b930 "DELTA"
+
+word b932 b933 :P 5
+sym b932 "HYST2"
+
+word b934 b935 :P 5
+sym b934 "HYSTS"
+
+word b936 b937 :P 5
+sym b936 "THBP2"
+
+byte b938 b938 :P 3
+sym b938 "ECTBP"
+
+byte b939 b939 :P 3
+sym b939 "SSMAP"
+
+byte b93c b93c :P 3
+sym b93c "TKYON4"
+
+word b93e b93f :P 5
+sym b93e "TKYON1"
+
+word b940 b941 :P 5
+sym b940 "TKYON2"
+
+word b942 b943 :P 5
+sym b942 "TKYON3"
+
+byte b944 b944 :P 3
+sym b944 "ScScSadDir628"
+
+word b946 b947 :P 5
+sym b946 "PRG_DEC"
+
+byte b948 b948 :P 3
+sym b948 "PURG_ADP_SF"
+
+byte b949 b949 :P 3
+sym b949 "ScScSadDir631"
+
+word b94a b94b :P 5
+sym b94a "EVTDOT"
+
+byte b94c b94c :P 3
+sym b94c "PURGSW"
+
+byte b94d b94d :P 3
+sym b94d "FULPRGTM"
+
+word b94e b94f :P 5
+sym b94e "FMMISC"
+
+byte b950 b950 :P 3
+sym b950 "ACTFMM"
+
+byte b951 b951 :P 3
+sym b951 "ECTFMM"
+
+byte b952 b952 :P 3
+sym b952 "FMECNT"
+
+byte b953 b953 :P 3
+sym b953 "MAPFMM"
+
+byte b954 b954 :P 3
+sym b954 "ScScSadDir640"
+
+byte b955 b955 :P 3
+sym b955 "BYPWOT"
+
+byte b956 b956 :P 3
+sym b956 "ScScSadDir642"
+
+byte b957 b957 :P 3
+sym b957 "ScScSadDir643"
+
+byte b958 b958 :P 3
+sym b958 "ScScSadDir644"
+
+byte b95b b95b :P 3
+sym b95b "ScScSadDir645"
+
+byte b95c b95c :P 3
+sym b95c "ScScSadDir646"
+
+byte b95d b95d :P 3
+sym b95d "ScScSadDir647"
+
+byte b95e b95e :P 3
+sym b95e "CTBYS"
+
+byte b95f b95f :P 3
+sym b95f "CTBYSH"
+
+byte b960 b960 :P 3
+sym b960 "ScScSadDir650"
+
+byte b961 b961 :P 3
+sym b961 "ScScSadDir651"
+
+byte b962 b962 :P 3
+sym b962 "HMUMAP"
+
+byte b963 b963 :P 3
+sym b963 "HMUMPH"
+
+byte b964 b964 :P 3
+sym b964 "LMBMAP"
+
+byte b965 b965 :P 3
+sym b965 "ScScSadDir655"
+
+byte b966 b966 :P 3
+sym b966 "SW_MPD"
+
+byte b967 b967 :P 3
+sym b967 "ScScSadDir657"
+
+byte b968 b968 :P 3
+sym b968 "ScScSadDir658"
+
+struct b969 b969 :Y X
+sym b969 "St0003"
+
+struct b96c b96c :Y X
+sym b96c "St0004"
+
+byte b96f b96f :P 3
+sym b96f "ScScSadDir659"
+
+byte b970 b970 :P 3
+sym b970 "ScScSadDir660"
+
+byte b971 b971 :P 3
+sym b971 "ScScSadDir661"
+
+word b972 b973 :P 5
+sym b972 "SMTPDL"
+
+byte b974 b974 :P 3
+sym b974 "ScScSadDir663"
+
+function b975 b97e :Y P 3 :Y P 3
+sym b975 "FN305"
+
+function b97f b988 :Y P 3 :Y P 3
+sym b97f "FN326"
+
+function b989 b99a :Y P 3 :Y P 3
+sym b989 "FN367"
+
+function b99b b9a0 :Y P 3 :Y P 3
+sym b99b "FN372"
+
+struct b9a1 b9a1 :Y X
+sym b9a1 "St0005"
+
+function ba06 ba1d :Y P 3 :Y P 3
+sym ba06 "FN069A"
+
+table ba1e ba4a :O 5 Y P 3
+sym ba1e "Tb014"
+
+function ba4b ba56 :Y P 3 :Y P 3
+sym ba4b "FN600"
+
+function ba58 ba6f :Y P 3 :Y P 3
+sym ba58 "FN605A"
+
+function ba70 ba8b :Y P 3 :Y P 3
+sym ba70 "FN090"
+
+function ba8c baaf :Y P 3 :Y P 3
+sym ba8c "FN095"
+
+word bab0 bab1 :P 5
+sym bab0 "Rf8_EndAddr"
+
+word bab2 bab3 :P 5
+sym bab2 "TCBPA"
+
+word bab4 bab5 :P 5
+sym bab4 "TCFBS"
+
+word bab6 bab7 :P 5
+sym bab6 "TCAEMP"
+
+word bab8 bab9 :P 5
+sym bab8 "TCAETP"
+
+word baba babb :P 5
+sym baba "TCBP"
+
+word babc babd :P 5
+sym babc "TCDASD"
+
+word babe babf :P 5
+sym babe "TCDASU"
+
+word bac0 bac1 :P 5
+sym bac0 "TCDESN"
+
+byte bac2 bac2 :P 3
+sym bac2 "TCDLOP"
+
+byte bac3 bac3 :P 3
+sym bac3 "ScScSadDir674"
+
+byte bac4 bac4 :P 3
+sym bac4 "TCECT"
+
+byte bac5 bac5 :P 3
+sym bac5 "ScScSadDir676"
+
+byte bac6 bac6 :P 3
+sym bac6 "TCEACT"
+
+byte bac7 bac7 :P 3
+sym bac7 "ScScSadDir678"
+
+byte bac8 bac8 :P 3
+sym bac8 "TCEGR"
+
+byte bac9 bac9 :P 3
+sym bac9 "ScScSadDir680"
+
+byte baca baca :P 3
+sym baca "TCMBAR"
+
+byte bacb bacb :P 3
+sym bacb "ScScSadDir682"
+
+byte bacc bacc :P 3
+sym bacc "TC"
+
+byte bacd bacd :P 3
+sym bacd "ScScSadDir684"
+
+byte bace bace :P 3
+sym bace "TCNDT_ISC"
+
+byte bacf bacf :P 3
+sym bacf "ScScSadDir686"
+
+byte bad0 bad0 :P 3
+sym bad0 "ScScSadDir687"
+
+byte bad1 bad1 :P 3
+sym bad1 "ScScSadDir688"
+
+byte bad2 bad2 :P 3
+sym bad2 "TCTP"
+
+byte bad3 bad3 :P 3
+sym bad3 "ScScSadDir690"
+
+byte bad4 bad4 :P 3
+sym bad4 "TCTPT"
+
+byte bad5 bad5 :P 3
+sym bad5 "ScScSadDir692"
+
+byte bad6 bad6 :P 3
+sym bad6 "TCTOT"
+
+byte bad7 bad7 :P 3
+sym bad7 "ScScSadDir694"
+
+byte bad8 bad8 :P 3
+sym bad8 "TCVBAT"
+
+byte bad9 bad9 :P 3
+sym bad9 "ScScSadDir696"
+
+byte bada bada :P 3
+sym bada "TCVS"
+
+byte badb badb :P 3
+sym badb "ScScSadDir698"
+
+byte badc badc :P 3
+sym badc "SSFCTR"
+
+byte badd badd :P 3
+sym badd "ScScSadDir700"
+
+byte bade bade :P 3
+sym bade "SKSSLC"
+
+byte badf badf :P 3
+sym badf "ScScSadDir702"
+
+byte bae0 bae0 :P 3
+sym bae0 "FKSKAY"
+
+byte bae1 bae1 :P 3
+sym bae1 "ScScSadDir704"
+
+byte bae2 bae2 :P 3
+sym bae2 "SIGKLL"
+
+byte bae3 bae3 :P 3
+sym bae3 "ScScSadDir706"
+
+byte bae4 bae4 :P 3
+sym bae4 "SIGKLU"
+
+byte bae5 bae5 :P 3
+sym bae5 "ScScSadDir708"
+
+function bae6 baf5 :Y P 3 :Y P 3
+sym bae6 "FN500"
+
+function baf6 bafd :Y P 3 :Y P 3
+sym baf6 "FN501"
+
+function bafe bb0d :Y P 3 :Y P 3
+sym bafe "FN051"
+
+function bb0e bb1d :Y P 3 :Y P 3
+sym bb0e "FN052"
+
+function bb1e bb3d :Y P 3 :Y P 3
+sym bb1e "FN182"
+
+function bb3e bb47 :Y P 3 :Y P 3
+sym bb3e "FN183"
+
+table bb48 bb6b :O 6 Y S P 3
+sym bb48 "Tb015"
+
+function bb6c bb79 :Y P 3 :Y P 3
+sym bb6c "FN730"
+
+word bb7a bb7b :P 5
+sym bb7a "Rfa_EndAddr"
+
+byte bb7c bb7c :P 3
+sym bb7c "CSHIGH"
+
+byte bb7d bb7d :P 3
+sym bb7d "CSLOW"
+
+byte bb7e bb7e :P 3
+sym bb7e "CSSPRK"
+
+byte bb7f bb7f :P 3
+sym bb7f "CSSTIM"
+
+byte bb80 bb80 :P 3
+sym bb80 "DFTRPM"
+
+byte bb81 bb81 :P 3
+sym bb81 "DFTRPH"
+
+word bb82 bb83 :P 5
+sym bb82 "KS1"
+
+byte bb84 bb84 :P 3
+sym bb84 "FRCCTM"
+
+byte bb85 bb85 :P 3
+sym bb85 "SPLCLP"
+
+byte bb86 bb86 :P 3
+sym bb86 "SPUCLP"
+
+word bb88 bb89 :P 5
+sym bb88 "TPOBP2"
+
+word bb8a bb8b :P 5
+sym bb8a "TPOH2"
+
+word bb8c bb8d :P 5
+sym bb8c "TPDLMX"
+
+word bb8e bb8f :P 5
+sym bb8e "TCNDT_SPK"
+
+word bb90 bb91 :P 5
+sym bb90 "TCTPDL"
+
+byte bb92 bb92 :P 3
+sym bb92 "VSOMAX"
+
+byte bb93 bb93 :P 3
+sym bb93 "VSOMXH"
+
+byte bb94 bb94 :P 3
+sym bb94 "Y"
+
+word bb96 bb97 :P 5
+sym bb96 "SHFDLT"
+
+byte bb98 bb98 :P 3
+sym bb98 "OSCDLY"
+
+struct bb99 bb99 :Y X
+sym bb99 "St0006"
+
+struct bb9c bb9c :Y X
+sym bb9c "St0007"
+
+byte bb9f bb9f :P 3
+sym bb9f "KPEI"
+
+byte bba0 bba0 :P 3
+sym bba0 "MAP_WOT_EGRC"
+
+byte bba1 bba1 :P 3
+sym bba1 "MAP_WOT_EGRS"
+
+byte bba2 bba2 :P 3
+sym bba2 "X"
+
+word bba4 bba5 :P 5
+sym bba4 "DCOFF"
+
+word bba6 bba7 :P 5
+sym bba6 "EGRTB1"
+
+word bba8 bba9 :P 5
+sym bba8 "EGTB1H"
+
+word bbaa bbab :P 5
+sym bbaa "EGRTD8"
+
+byte bbac bbac :P 3
+sym bbac "EGRTD7"
+
+byte bbad bbad :P 3
+sym bbad "RAMPSW"
+
+word bbae bbaf :P 5
+sym bbae "EGRDED"
+
+word bbb0 bbb1 :P 5
+sym bbb0 "KACRAT"
+
+byte bbb2 bbb2 :P 3
+sym bbb2 "RETLIM"
+
+byte bbb3 bbb3 :P 3
+sym bbb3 "TIPMAX"
+
+byte bbb4 bbb4 :P 3
+sym bbb4 "TIPINC"
+
+byte bbb5 bbb5 :P 3
+sym bbb5 "TIPMAP"
+
+byte bbb6 bbb6 :P 3
+sym bbb6 "TIPHYS"
+
+word bbb8 bbb9 :P 5
+sym bbb8 "RPMMIN"
+
+byte bbba bbba :P 3
+sym bbba "LODNOK"
+
+byte bbbb bbbb :P 3
+sym bbbb "ECTNOK"
+
+word bbbc bbbd :P 5
+sym bbbc "NTIP"
+
+word bbbe bbbf :P 5
+sym bbbe "WOPEN"
+
+word bbc0 bbc1 :P 5
+sym bbc0 "WINLEN"
+
+word bbc2 bbc3 :P 5
+sym bbc2 "RPMCNL"
+
+word bbc4 bbc5 :P 5
+sym bbc4 "SPKLIM"
+
+byte bbc6 bbc6 :P 3
+sym bbc6 "ECTIP"
+
+byte bbc7 bbc7 :P 3
+sym bbc7 "KNKCYL"
+
+byte bbc8 bbc8 :P 3
+sym bbc8 "WINCLD"
+
+function bbc9 bbd2 :Y P 3 :Y P 3
+sym bbc9 "FN821A"
+
+function bbd3 bbdc :Y P 3 :Y P 3
+sym bbd3 "FN004"
+
+function bbde bbf5 :Y P 3 :Y P 3
+sym bbde "FN603"
+
+function bbf6 bc19 :Y P 3 :Y P 3
+sym bbf6 "FN091"
+
+function bc1a bc35 :Y P 3 :Y P 3
+sym bc1a "FN092"
+
+function bc36 bc51 :Y P 3 :Y P 3
+sym bc36 "FN093"
+
+function bc52 bc6d :Y P 3 :Y P 3
+sym bc52 "FN153"
+
+function bc6e bc79 :Y P 3 :Y P 3
+sym bc6e "FN180"
+
+table bc7a bcc9 :O 10 Y P 3
+sym bc7a "Tb016"
+
+table bcca bd19 :O 10 Y P 3
+sym bcca "Tb017"
+
+table bd1a bd69 :O 10 Y P 3
+sym bd1a "Tb018"
+
+table bd6a bdb9 :O 10 Y P 3
+sym bd6a "Tb019"
+
+table bdba be09 :O 10 Y P 3
+sym bdba "Tb020"
+
+table be0a be59 :O 10 Y S P 3
+sym be0a "Tb021"
+
+table be5a bea9 :O 10 Y P 3
+sym be5a "Tb022"
+
+function beaa bed5 :Y P 3 :Y P 3
+sym beaa "FN074A"
+
+function bed6 bee3 :Y P 3 :Y P 3
+sym bed6 "FN211"
+
+function bee4 beed :Y P 3 :Y P 3
+sym bee4 "FN212A"
+
+function beee bf15 :Y P 3 :Y P 3
+sym beee "FN219"
+
+function bf16 bf23 :Y P 3 :Y P 3
+sym bf16 "FN220"
+
+function bf24 bf4b :Y P 3 :Y P 3
+sym bf24 "FN221"
+
+function bf4c bf67 :Y P 3 :Y P 3
+sym bf4c "FN239"
+
+function bf68 bf6f :Y P 3 :Y P 3
+sym bf68 "FN240"
+
+table bf70 bfbf :O 10 Y P 3
+sym bf70 "Tb023"
+
+table bfc0 c00f :O 10 Y P 3
+sym bfc0 "Tb024"
+
+function c010 c023 :Y P 3 :Y P 3
+sym c010 "FN218"
+
+function c024 c03b :Y P 3 :Y P 3
+sym c024 "FN143"
+
+function c03c c073 :Y P 3 :Y P 3
+sym c03c "FN144"
+
+function c074 c087 :Y P 3 :Y P 3
+sym c074 "FN145"
+
+function c088 c09f :Y P 3 :Y P 3
+sym c088 "FN146A"
+
+function c0a0 c0a7 :Y P 3 :Y P 3
+sym c0a0 "FN190"
+
+word c0a8 c0a9 :P 5
+sym c0a8 "Rfc_EndAddr"
+
+word c0aa c0ab :P 5
+sym c0aa "trans_max_torque_limit1"
+
+word c0ac c0ad :P 5
+sym c0ac "trans_max_torque_limit2"
+
+word c0ae c0af :P 5
+sym c0ae "trans_max_tq_hysterisis"
+
+byte c0b0 c0b0 :P 3
+sym c0b0 "ScScSadDir762"
+
+word c0b2 c0b3 :P 5
+sym c0b2 "TOT_OTEMP"
+
+word c0b4 c0b5 :P 5
+sym c0b4 "HYS_OTEMP"
+
+byte c0b6 c0b6 :P 3
+sym c0b6 "EPC_OTEMP"
+
+word c0b8 c0b9 :P 5
+sym c0b8 "NE_OTEMP_MIN"
+
+word c0ba c0bb :P 5
+sym c0ba "NE_OTEMP_MAX"
+
+word c0bc c0bd :P 5
+sym c0bc "SRLK_FM"
+
+word c0be c0bf :P 5
+sym c0be "NELK_FM"
+
+byte c0c0 c0c0 :P 3
+sym c0c0 "ScScSadDir770"
+
+byte c0c1 c0c1 :P 3
+sym c0c1 "ScScSadDir771"
+
+word c0c2 c0c3 :P 5
+sym c0c2 "trans_ratio_1"
+
+word c0c4 c0c5 :P 5
+sym c0c4 "trans_ratio_2"
+
+word c0c6 c0c7 :P 5
+sym c0c6 "trans_ratio_3"
+
+word c0c8 c0c9 :P 5
+sym c0c8 "trans_ratio_4"
+
+byte c0ca c0ca :P 3
+sym c0ca "trans_ratio_5"
+
+byte c0cb c0cb :P 3
+sym c0cb "ScScSadDir777"
+
+struct c0cc c0cc :Y X
+sym c0cc "St0008"
+
+word c0d0 c0d1 :P 5
+sym c0d0 "ScScSadDir778"
+
+word c0d6 c0d7 :P 5
+sym c0d6 "ScScSadDir779"
+
+word c0d8 c0d9 :P 5
+sym c0d8 "ScScSadDir780"
+
+byte c0da c0da :P 3
+sym c0da "ScScSadDir781"
+
+byte c0db c0db :P 3
+sym c0db "ScScSadDir782"
+
+byte c0dc c0dc :P 3
+sym c0dc "ScScSadDir783"
+
+byte c0dd c0dd :P 3
+sym c0dd "ScScSadDir784"
+
+struct c0de c0de :Y X
+sym c0de "St0009"
+
+byte c0e0 c0e0 :P 3
+sym c0e0 "ScScSadDir785"
+
+byte c0e1 c0e1 :P 3
+sym c0e1 "ScScSadDir786"
+
+byte c0e4 c0e4 :P 3
+sym c0e4 "ScScSadDir787"
+
+byte c0e5 c0e5 :P 3
+sym c0e5 "trans_tv_engagement_high"
+
+byte c0e6 c0e6 :P 3
+sym c0e6 "trans_tv_engagement_moderate"
+
+word c0f8 c0f9 :P 5
+sym c0f8 "ScScSadDir790"
+
+word c0fa c0fb :P 5
+sym c0fa "ScScSadDir791"
+
+byte c0fc c0fc :P 3
+sym c0fc "ScScSadDir792"
+
+word c0fe c0ff :P 5
+sym c0fe "ScScSadDir793"
+
+word c100 c101 :P 5
+sym c100 "ScScSadDir794"
+
+byte c102 c102 :P 3
+sym c102 "ScScSadDir795"
+
+byte c103 c103 :P 3
+sym c103 "ScScSadDir796"
+
+byte c104 c104 :P 3
+sym c104 "ScScSadDir797"
+
+byte c105 c105 :P 3
+sym c105 "ScScSadDir798"
+
+struct c10f c10f :Y X
+sym c10f "St0010"
+
+byte c111 c111 :P 3
+sym c111 "ScScSadDir799"
+
+byte c112 c112 :P 3
+sym c112 "ScScSadDir800"
+
+struct c116 c116 :Y X
+sym c116 "St0011"
+
+byte c11b c11b :P 3
+sym c11b "ScScSadDir801"
+
+word c11e c11f :P 5
+sym c11e "ScScSadDir802"
+
+word c120 c121 :P 5
+sym c120 "ScScSadDir803"
+
+word c122 c123 :P 5
+sym c122 "ScScSadDir804"
+
+word c124 c125 :P 5
+sym c124 "ScScSadDir805"
+
+word c126 c127 :P 5
+sym c126 "ScScSadDir806"
+
+struct c128 c128 :Y X
+sym c128 "St0012"
+
+word c130 c131 :P 5
+sym c130 "ScScSadDir807"
+
+byte c132 c132 :P 3
+sym c132 "ScScSadDir808"
+
+struct c134 c134 :Y X
+sym c134 "St0013"
+
+word c138 c139 :P 5
+sym c138 "ScScSadDir809"
+
+word c140 c141 :P 5
+sym c140 "ScScSadDir810"
+
+word c142 c143 :P 5
+sym c142 "SARCHG"
+
+word c144 c145 :P 5
+sym c144 "ScScSadDir812"
+
+word c146 c147 :P 5
+sym c146 "ScScSadDir813"
+
+word c148 c149 :P 5
+sym c148 "ScScSadDir814"
+
+byte c14d c14d :P 3
+sym c14d "ScScSadDir815"
+
+word c14e c14f :P 5
+sym c14e "ScScSadDir816"
+
+word c150 c151 :P 5
+sym c150 "ScScSadDir817"
+
+byte c152 c152 :P 3
+sym c152 "ScScSadDir818"
+
+byte c153 c153 :P 3
+sym c153 "ScScSadDir819"
+
+byte c154 c154 :P 3
+sym c154 "trans_min_tv_pressure"
+
+word c156 c157 :P 5
+sym c156 "ScScSadDir821"
+
+byte c158 c158 :P 3
+sym c158 "ETV_GAIN"
+
+byte c159 c159 :P 3
+sym c159 "ETV_GAIN_BAT"
+
+byte c15a c15a :P 3
+sym c15a "VTABFL"
+
+byte c15b c15b :P 3
+sym c15b "VTCEGO"
+
+word c15c c15d :P 5
+sym c15c "TV_SLT_TM"
+
+byte c15e c15e :P 3
+sym c15e "TVFMMN"
+
+byte c15f c15f :P 3
+sym c15f "ScScSadDir828"
+
+word c160 c161 :P 5
+sym c160 "TCMAPW"
+
+word c162 c163 :P 5
+sym c162 "TCNE"
+
+word c164 c165 :P 5
+sym c164 "TCTPTE"
+
+word c166 c167 :P 5
+sym c166 "TCVST"
+
+word c168 c169 :P 5
+sym c168 "ScScSadDir833"
+
+word c16a c16b :P 5
+sym c16a "TCTTA"
+
+byte c16c c16c :P 3
+sym c16c "TM4X4L"
+
+byte c16d c16d :P 3
+sym c16d "ScScSadDir836"
+
+word c16e c16f :P 5
+sym c16e "V_BOO_SPD"
+
+sym c16f "V_BOOSPD_TM"
+
+byte c170 c170 :P 3
+sym c170 "ScScSadDir838"
+
+byte c171 c171 :P 3
+sym c171 "ScScSadDir839"
+
+byte c172 c172 :P 3
+sym c172 "ScScSadDir840"
+
+word c174 c175 :P 5
+sym c174 "ScScSadDir841"
+
+word c176 c177 :P 5
+sym c176 "ScScSadDir842"
+
+byte c178 c178 :P 3
+sym c178 "ScScSadDir843"
+
+byte c179 c179 :P 3
+sym c179 "ScScSadDir844"
+
+byte c17a c17a :P 3
+sym c17a "ScScSadDir845"
+
+byte c17b c17b :P 3
+sym c17b "MBTEGR"
+
+word c17c c17d :P 5
+sym c17c "ScScSadDir847"
+
+byte c17e c17e :P 3
+sym c17e "ScScSadDir848"
+
+byte c17f c17f :P 3
+sym c17f "ScScSadDir849"
+
+byte c180 c180 :P 3
+sym c180 "ScScSadDir850"
+
+sym c182 "NE12A"
+
+byte c183 c183 :P 3
+sym c183 "ScScSadDir851"
+
+word c184 c185 :P 5
+sym c184 "NE12S"
+
+word c186 c187 :P 5
+sym c186 "NE23A"
+
+word c188 c189 :P 5
+sym c188 "NE23S"
+
+word c18a c18b :P 5
+sym c18a "NS34A"
+
+word c18c c18d :P 5
+sym c18c "NS34S"
+
+byte c18e c18e :P 3
+sym c18e "VSCNT"
+
+byte c18f c18f :P 3
+sym c18f "VSDELT"
+
+byte c190 c190 :P 3
+sym c190 "CS_PDL_4"
+
+byte c191 c191 :P 3
+sym c191 "TMCSE2"
+
+byte c192 c192 :P 3
+sym c192 "TMCSE3"
+
+byte c193 c193 :P 3
+sym c193 "TMCSOD"
+
+byte c194 c194 :P 3
+sym c194 "NVBASE"
+
+byte c195 c195 :P 3
+sym c195 "ScScSadDir864"
+
+word c196 c197 :P 5
+sym c196 "S_VAL_NESUB"
+
+word c198 c199 :P 5
+sym c198 "S_VAL_TPADD"
+
+word c19a c19b :P 5
+sym c19a "S_VAL_TPSUB"
+
+byte c19c c19c :P 3
+sym c19c "S_VAL_VSADD"
+
+byte c19d c19d :P 3
+sym c19d "S_VAL_VSSUB"
+
+word c19e c19f :P 5
+sym c19e "TP_SH_VALID"
+
+byte c1a0 c1a0 :P 3
+sym c1a0 "VS_SH_VAL2"
+
+sym c1a1 "VS_SH_VAL3"
+
+sym c1a2 "VS_SH_VAL4"
+
+byte c1a3 c1a3 :P 3
+sym c1a3 "ScScSadDir872"
+
+word c1a4 c1a5 :P 5
+sym c1a4 "ScScSadDir873"
+
+word c1a6 c1a7 :P 5
+sym c1a6 "ScScSadDir874"
+
+word c1a8 c1a9 :P 5
+sym c1a8 "ScScSadDir875"
+
+word c1aa c1ab :P 5
+sym c1aa "ScScSadDir876"
+
+byte c1af c1af :P 3
+sym c1af "?VECT3_wrong?"
+
+byte c1b0 c1b0 :P 3
+sym c1b0 "ScScSadDir878"
+
+byte c1ba c1ba :P 3
+sym c1ba "ScScSadDir879"
+
+word c1bc c1bd :P 5
+sym c1bc "ScScSadDir880"
+
+word c1be c1bf :P 5
+sym c1be "ScScSadDir881"
+
+byte c1c1 c1c1 :P 3
+sym c1c1 "ScScSadDir882"
+
+byte c1c3 c1c3 :P 3
+sym c1c3 "ScScSadDir883"
+
+word c1c4 c1c5 :P 5
+sym c1c4 "ScScSadDir884"
+
+word c1c6 c1c7 :P 5
+sym c1c6 "ScScSadDir885"
+
+word c1c8 c1c9 :P 5
+sym c1c8 "ScScSadDir886"
+
+word c1ca c1cb :P 5
+sym c1ca "ScScSadDir887"
+
+word c1cc c1cd :P 5
+sym c1cc "ScScSadDir888"
+
+byte c1ce c1ce :P 3
+sym c1ce "VS_NEU"
+
+byte c1cf c1cf :P 3
+sym c1cf "GR_NEU"
+
+byte c1d0 c1d0 :P 3
+sym c1d0 "GRMSFT"
+
+byte c1d1 c1d1 :P 3
+sym c1d1 "SW_MSF"
+
+byte c1d2 c1d2 :P 3
+sym c1d2 "ScScSadDir893"
+
+byte c1d3 c1d3 :P 3
+sym c1d3 "ScScSadDir894"
+
+byte c1d4 c1d4 :P 3
+sym c1d4 "ScScSadDir895"
+
+byte c1d5 c1d5 :P 3
+sym c1d5 "ScScSadDir896"
+
+word c1d6 c1d7 :P 5
+sym c1d6 "RTNVMN"
+
+word c1d8 c1d9 :P 5
+sym c1d8 "RTNVMX"
+
+word c1da c1db :P 5
+sym c1da "ScScSadDir899"
+
+sym c1db "VMPMAX"
+
+byte c1dc c1dc :P 3
+sym c1dc "ScScSadDir900"
+
+byte c1dd c1dd :P 3
+sym c1dd "ScScSadDir901"
+
+word c1de c1df :P 5
+sym c1de "ScScSadDir902"
+
+byte c1e0 c1e0 :P 3
+sym c1e0 "ScScSadDir903"
+
+byte c1e1 c1e1 :P 3
+sym c1e1 "ScScSadDir904"
+
+byte c1e2 c1e2 :P 3
+sym c1e2 "ScScSadDir905"
+
+byte c1e3 c1e3 :P 3
+sym c1e3 "ScScSadDir906"
+
+word c1e4 c1e5 :P 5
+sym c1e4 "ScScSadDir907"
+
+byte c1e6 c1e6 :P 3
+sym c1e6 "ScScSadDir908"
+
+byte c1ec c1ec :P 3
+sym c1ec "ScScSadDir909"
+
+byte c1ed c1ed :P 3
+sym c1ed "ScScSadDir910"
+
+byte c1ee c1ee :P 3
+sym c1ee "ScScSadDir911"
+
+byte c1ef c1ef :P 3
+sym c1ef "ScScSadDir912"
+
+word c1f2 c1f3 :P 5
+sym c1f2 "ScScSadDir913"
+
+word c1f4 c1f5 :P 5
+sym c1f4 "ScScSadDir914"
+
+word c1f6 c1f7 :P 5
+sym c1f6 "ScScSadDir915"
+
+word c1f8 c1f9 :P 5
+sym c1f8 "ScScSadDir916"
+
+word c1fa c1fb :P 5
+sym c1fa "ScScSadDir917"
+
+byte c1fc c1fc :P 3
+sym c1fc "ScScSadDir918"
+
+byte c1fd c1fd :P 3
+sym c1fd "ScScSadDir919"
+
+byte c1fe c1fe :P 3
+sym c1fe "ScScSadDir920"
+
+byte c200 c200 :P 3
+sym c200 "ScScSadDir921"
+
+byte c201 c201 :P 3
+sym c201 "ScScSadDir922"
+
+byte c202 c202 :P 3
+sym c202 "UP_TIP_RATE"
+
+word c204 c205 :P 5
+sym c204 "ScScSadDir924"
+
+byte c206 c206 :P 3
+sym c206 "ScScSadDir925"
+
+word c208 c209 :P 5
+sym c208 "ScScSadDir926"
+
+word c20a c20b :P 5
+sym c20a "ScScSadDir927"
+
+word c20c c20d :P 5
+sym c20c "ScScSadDir928"
+
+word c20e c20f :P 5
+sym c20e "ScScSadDir929"
+
+word c210 c211 :P 5
+sym c210 "ScScSadDir930"
+
+word c212 c213 :P 5
+sym c212 "ScScSadDir931"
+
+word c214 c215 :P 5
+sym c214 "ScScSadDir932"
+
+word c216 c217 :P 5
+sym c216 "ScScSadDir933"
+
+word c218 c219 :P 5
+sym c218 "ScScSadDir934"
+
+word c21a c21b :P 5
+sym c21a "ScScSadDir935"
+
+word c21c c21d :P 5
+sym c21c "ScScSadDir936"
+
+byte c21e c21e :P 3
+sym c21e "ScScSadDir937"
+
+byte c21f c21f :P 3
+sym c21f "ScScSadDir938"
+
+byte c220 c220 :P 3
+sym c220 "ScScSadDir939"
+
+byte c221 c221 :P 3
+sym c221 "ScScSadDir940"
+
+byte c222 c222 :P 3
+sym c222 "ScScSadDir941"
+
+byte c223 c223 :P 3
+sym c223 "ScScSadDir942"
+
+byte c224 c224 :P 3
+sym c224 "ScScSadDir943"
+
+byte c225 c225 :P 3
+sym c225 "ScScSadDir944"
+
+struct c226 c226 :Y X
+sym c226 "St0014"
+
+byte c235 c235 :P 3
+sym c235 "ScScSadDir945"
+
+byte c236 c236 :P 3
+sym c236 "ScScSadDir946"
+
+byte c23a c23a :P 3
+sym c23a "ScScSadDir947"
+
+word c23e c23f :P 5
+sym c23e "ScScSadDir948"
+
+word c24e c24f :P 5
+sym c24e "ScScSadDir949"
+
+function c25e c279 :Y P 3 :Y P 3
+sym c25e "Func_c25e"
+
+function c27a c285 :Y P 3 :Y P 3
+sym c27a "FN615"
+
+function c286 c29d :Y P 3 :Y P 3
+sym c286 "FN690"
+
+struct c29e c29e :Y X
+sym c29e "St0015"
+
+function c2b2 c2c5 :Y P 3 :Y P 3
+sym c2b2 "trans_shift_12"
+
+function c2c6 c2d9 :Y P 3 :Y P 3
+sym c2c6 "Func_c2c6"
+
+function c2da c309 :Y P 3 :Y P 3
+sym c2da "Func_c2da"
+
+function c30a c31d :Y P 3 :Y P 3
+sym c30a "trans_shift_23"
+
+struct c31e c31e :Y X
+sym c31e "St0016"
+
+function c332 c361 :Y P 3 :Y P 3
+sym c332 "Func_c332"
+
+function c362 c375 :Y P 3 :Y P 3
+sym c362 "trans_shift_34"
+
+function c376 c389 :Y P 3 :Y P 3
+sym c376 "Func_c376"
+
+function c38a c39d :Y P 3 :Y P 3
+sym c38a "trans_shift_21"
+
+struct c39e c39e :Y X
+sym c39e "St0017"
+
+function c3b2 c3c5 :Y P 3 :Y P 3
+sym c3b2 "trans_shift_32"
+
+struct c3c6 c3c6 :Y X
+sym c3c6 "St0018"
+
+function c3da c3ed :Y P 3 :Y P 3
+sym c3da "trans_shift_43"
+
+function c3ee c401 :Y P 3 :Y P 3
+sym c3ee "FN689D"
+
+function c402 c41d :Y P 3 :Y P 3
+sym c402 "FN689U"
+
+function c41e c431 :Y P 3 :Y P 3
+sym c41e "trans_converter_lock_2nd"
+
+function c432 c445 :Y P 3 :Y P 3
+sym c432 "trans_converter_lock_3rd"
+
+function c446 c44d :Y P 3 :Y P 3
+sym c446 "trans_converter_lock_4th"
+
+function c44e c461 :Y P 3 :Y P 3
+sym c44e "Func_c44e"
+
+struct c47e c47e :Y X
+sym c47e "St0019"
+
+function c492 c4a5 :Y P 3 :Y P 3
+sym c492 "trans_converter_unlock_3rd"
+
+function c4a6 c4ad :Y P 3 :Y P 3
+sym c4a6 "trans_converter_unlock_4th"
+
+function c4ae c4c1 :Y P 3 :Y P 3
+sym c4ae "Func_c4ae"
+
+function c4de c4f9 :Y P 3 :Y P 3
+sym c4de "FN2ULK"
+
+function c4fa c515 :Y P 3 :Y P 3
+sym c4fa "FN2LK"
+
+function c516 c531 :Y P 3 :Y P 3
+sym c516 "FN3ULK"
+
+function c532 c54d :Y P 3 :Y P 3
+sym c532 "FN3LK"
+
+function c54e c569 :Y P 3 :Y P 3
+sym c54e "FN4ULK"
+
+function c56a c585 :Y P 3 :Y P 3
+sym c56a "FN4LK"
+
+function c586 c59d :Y P 3 :Y P 3
+sym c586 "FN624"
+
+function c59e c5b1 :Y P 3 :Y P 3
+sym c59e "FN689L"
+
+function c5b2 c5b9 :Y P 3 :Y P 3
+sym c5b2 "trans_tv_pressure_21"
+
+function c5ba c5cd :Y P 3 :Y P 3
+sym c5ba "trans_tv_pressure_12"
+
+function c5ce c5d5 :Y P 3 :Y P 3
+sym c5ce "trans_tv_pressure_32"
+
+function c5d6 c5e9 :Y P 3 :Y P 3
+sym c5d6 "trans_tv_pressure_23"
+
+function c5ea c5f1 :Y P 3 :Y P 3
+sym c5ea "trans_tv_pressure_43"
+
+function c5f2 c605 :Y P 3 :Y P 3
+sym c5f2 "trans_tv_pressure_34"
+
+function c606 c621 :Y P 3 :Y P 3
+sym c606 "Func_c606"
+
+function c622 c63d :Y P 3 :Y P 3
+sym c622 "Func_c622"
+
+function c63e c659 :Y P 3 :Y P 3
+sym c63e "Func_c63e"
+
+function c65a c689 :Y P 3 :Y P 3
+sym c65a "Func_c65a"
+
+function c77a c785 :Y P 3 :Y P 3
+sym c77a "Func_c77a"
+
+function c786 c791 :Y P 3 :Y P 3
+sym c786 "Func_c786"
+
+function c792 c79d :Y P 3 :Y P 3
+sym c792 "Func_c792"
+
+function c79e c7ad :Y P 3 :Y P 3
+sym c79e "Func_c79e"
+
+function c7ae c7dd :Y P 3 :Y P 3
+sym c7ae "FN617"
+
+function c7de c7f3 :Y P 3 :Y P 3
+sym c7de "FN620"
+
+function c7f6 c825 :Y P 3 :Y P 3
+sym c7f6 "FN622"
+
+function c826 c845 :Y P 3 :Y P 3
+sym c826 "FN622A"
+
+function c846 c851 :Y P 3 :Y P 3
+sym c846 "FN405"
+
+function c852 c85b :Y P 3 :Y P 3
+sym c852 "FN618"
+
+function c85c c865 :Y P 3 :Y P 3
+sym c85c "FN619"
+
+function c866 c875 :Y P 3 :Y P 3
+sym c866 "FN621"
+
+function c876 c891 :Y P 3 :Y P 3
+sym c876 "FN623"
+
+function c892 c8ad :Y P 3 :Y P 3
+sym c892 "FN034A"
+
+function c8ae c8c9 :Y P 3 :Y P 3
+sym c8ae "FN070C"
+
+struct c8ca c8ca :Y X
+sym c8ca "St0020"
+
+table c92e c951 :O 6 Y P 3
+sym c92e "Tb025"
+
+table c952 c975 :O 6 Y P 3
+sym c952 "Tb026"
+
+table c976 c999 :O 6 Y P 3
+sym c976 "Tb027"
+
+function c99a c9b5 :Y P 3 :Y P 3
+sym c99a "Func_c99a"
+
+struct ca0a ca0a :Y X
+sym ca0a "St0021"
+
+struct ca7a ca7a :Y X
+sym ca7a "St0022"
+
+struct caea caea :Y X
+sym caea "St0023"
+
+word cb5a cb5b :P 5
+sym cb5a "Rfe_EndAddr"
+
+word cb5c cb5d :P 5
+sym cb5c "VTC_OVER"
+
+word cb5e cb5f :P 5
+sym cb5e "VTC_UNDER"
+
+word cb60 cb61 :P 5
+sym cb60 "FKMKAY"
+
+byte cb62 cb62 :P 3
+sym cb62 "SFT_FM_LVL"
+
+byte cb63 cb63 :P 3
+sym cb63 "ScScSadDir955"
+
+word cb64 cb65 :P 5
+sym cb64 "MAPEDG"
+
+byte cb66 cb66 :P 3
+sym cb66 "LONG_MAP_RQD"
+
+byte cb67 cb67 :P 3
+sym cb67 "MAP_CYCLE"
+
+word cb68 cb69 :P 5
+sym cb68 "AEM"
+
+byte cb6a cb6a :P 3
+sym cb6a "ALPHA"
+
+word cb6c cb6d :P 5
+sym cb6c "TPDLTA"
+
+byte cb6e cb6e :P 3
+sym cb6e "FRCTAE"
+
+word cb70 cb71 :P 5
+sym cb70 "AETAR"
+
+byte cb72 cb72 :P 3
+sym cb72 "NCNT"
+
+word cb74 cb75 :P 5
+sym cb74 "UNRPM"
+
+word cb76 cb77 :P 5
+sym cb76 "UNRPMH"
+
+word cb78 cb79 :P 5
+sym cb78 "NRUN"
+
+word cb7a cb7b :P 5
+sym cb7a "NSTALL"
+
+byte cb7c cb7c :P 3
+sym cb7c "CRKTM1"
+
+byte cb7d cb7d :P 3
+sym cb7d "CRKPIPCNT2"
+
+byte cb7e cb7e :P 3
+sym cb7e "CRKTMR_INC"
+
+byte cb7f cb7f :P 3
+sym cb7f "ACDHP"
+
+byte cb80 cb80 :P 3
+sym cb80 "BIHP"
+
+byte cb81 cb81 :P 3
+sym cb81 "ScScSadDir974"
+
+byte cb82 cb82 :P 3
+sym cb82 "KIHP"
+
+byte cb83 cb83 :P 3
+sym cb83 "PFEHP"
+
+byte cb84 cb84 :P 3
+sym cb84 "PSPSHP"
+
+byte cb85 cb85 :P 3
+sym cb85 "THRMHP"
+
+byte cb86 cb86 :P 3
+sym cb86 "TSTRAT"
+
+byte cb87 cb87 :P 3
+sym cb87 "TRLOAD"
+
+byte cb88 cb88 :P 3
+sym cb88 "ScScSadDir981"
+
+byte cb89 cb89 :P 3
+sym cb89 "VSTYPE"
+
+byte cb8a cb8a :P 3
+sym cb8a "IGN_TYPE"
+
+byte cb8e cb8e :P 3
+sym cb8e "AFECT1"
+
+byte cb8f cb8f :P 3
+sym cb8f "AFECT2"
+
+byte cb90 cb90 :P 3
+sym cb90 "AFACT1"
+
+byte cb91 cb91 :P 3
+sym cb91 "AFACT2"
+
+word cb92 cb93 :P 5
+sym cb92 "ADAPTM"
+
+byte cb94 cb94 :P 3
+sym cb94 "AMPMUL"
+
+word cb96 cb97 :P 5
+sym cb96 "DELAMB"
+
+word cb98 cb99 :P 5
+sym cb98 "DELROW"
+
+word cb9a cb9b :P 5
+sym cb9a "DELCOL"
+
+byte cb9c cb9c :P 3
+sym cb9c "ScScSadDir993"
+
+byte cb9d cb9d :P 3
+sym cb9d "MINADP"
+
+byte cb9e cb9e :P 3
+sym cb9e "MAXADP"
+
+byte cb9f cb9f :P 3
+sym cb9f "AELIM"
+
+word cba0 cba1 :P 5
+sym cba0 "ADEFTR"
+
+byte cba2 cba2 :P 3
+sym cba2 "ADEGCT"
+
+byte cba3 cba3 :P 3
+sym cba3 "FAEGCT"
+
+byte cba4 cba4 :P 3
+sym cba4 "KWUCNT"
+
+byte cba5 cba5 :P 3
+sym cba5 "HCAMSW"
+
+byte cba6 cba6 :P 3
+sym cba6 "MULTM"
+
+byte cba7 cba7 :P 3
+sym cba7 "XAPT"
+
+byte cba8 cba8 :P 3
+sym cba8 "XMAPPA"
+
+struct cbaa cbaa :Y X
+sym cbaa "VKYPWR"
+
+word cbac cbad :P 5
+sym cbac "VIPSPK"
+
+word cbae cbaf :P 5
+sym cbae "ScScSadDir1006"
+
+word cbb0 cbb1 :P 5
+sym cbb0 "ScScSadDir1007"
+
+struct cbb2 cbb2 :Y X
+sym cbb2 "St0024"
+
+struct cbb4 cbb4 :Y X
+sym cbb4 "St0025"
+
+word cbb6 cbb7 :P 5
+sym cbb6 "VNMIN"
+
+struct cbb8 cbb8 :Y X
+sym cbb8 "St0026"
+
+word cbba cbbb :P 5
+sym cbba "VRLAM"
+
+struct cbbc cbbc :Y X
+sym cbbc "St0027"
+
+struct cbbd cbbd :Y X
+sym cbbd "St0028"
+
+struct cbbe cbbe :Y X
+sym cbbe "St0029"
+
+struct cbc0 cbc0 :Y X
+sym cbc0 "St0030"
+
+word cbc2 cbc3 :P 5
+sym cbc2 "ScScSadDir1010"
+
+word cbc4 cbc5 :P 5
+sym cbc4 "ScScSadDir1011"
+
+word cbc6 cbc7 :P 5
+sym cbc6 "ScScSadDir1012"
+
+word cbc8 cbc9 :P 5
+sym cbc8 "ScScSadDir1013"
+
+word cbca cbcb :P 5
+sym cbca "ACTMIN"
+
+word cbcc cbcd :P 5
+sym cbcc "ACTMAX"
+
+byte cbce cbce :P 3
+sym cbce "V_EGOHP"
+
+byte cbcf cbcf :P 3
+sym cbcf "VECT5"
+
+word cbd0 cbd1 :P 5
+sym cbd0 "TAPMAX"
+
+word cbd2 cbd3 :P 5
+sym cbd2 "TAPMIN"
+
+byte cbd4 cbd4 :P 3
+sym cbd4 "WIGLVL"
+
+byte cbd5 cbd5 :P 3
+sym cbd5 "V_fpmflg"
+
+struct cbd6 cbd6 :Y X
+sym cbd6 "St0031"
+
+byte cbd7 cbd7 :P 3
+sym cbd7 "ScScSadDir1022"
+
+word cbd8 cbd9 :P 5
+sym cbd8 "ECTMIN"
+
+word cbda cbdb :P 5
+sym cbda "ECTMAX"
+
+sym cbdc "V_HICKOKTM"
+
+sym cbde "V_LANSDTM"
+
+struct cbe2 cbe2 :Y X
+sym cbe2 "St0032"
+
+struct cbe6 cbe6 :Y X
+sym cbe6 "St0033"
+
+word cbf8 cbf9 :P 5
+sym cbf8 "TCN"
+
+struct cbfc cbfc :Y X
+sym cbfc "ISLBND"
+
+struct cbfe cbfe :Y X
+sym cbfe "ISUBND"
+
+struct cc04 cc04 :Y X
+sym cc04 "St0034"
+
+struct cc05 cc05 :Y X
+sym cc05 "St0035"
+
+word cc06 cc07 :P 5
+sym cc06 "VTCDSN"
+
+sym cc09 "V_BOO_SPD"
+
+byte cc14 cc14 :P 3
+sym cc14 "ScScSadDir1027"
+
+sym cc15 "V_EGORNTM"
+
+byte cc18 cc18 :P 3
+sym cc18 "V_LESTM"
+
+byte cc19 cc19 :P 3
+sym cc19 "ScScSadDir1029"
+
+sym cc1a "V_EGOMAP_MAX"
+
+sym cc1b "V_EGOMAP_MIN"
+
+sym cc1c "V_EGOTP_MIN"
+
+sym cc1e "V_EGOAEMAX"
+
+struct cc25 cc25 :Y X
+sym cc25 "St0036"
+
+word cc2c cc2d :P 5
+sym cc2c "EVPMIN"
+
+word cc2e cc2f :P 5
+sym cc2e "EVPMAX"
+
+struct cc30 cc30 :Y X
+sym cc30 "St0037"
+
+struct cc32 cc32 :Y X
+sym cc32 "St0038"
+
+struct cc36 cc36 :Y X
+sym cc36 "St0039"
+
+struct cc3a cc3a :Y X
+sym cc3a "St0040"
+
+struct cc3c cc3c :Y X
+sym cc3c "St0041"
+
+struct cc3e cc3e :Y X
+sym cc3e "St0042"
+
+struct cc40 cc40 :Y X
+sym cc40 "St0043"
+
+struct cc42 cc42 :Y X
+sym cc42 "St0044"
+
+struct cc44 cc44 :Y X
+sym cc44 "St0045"
+
+struct cc46 cc46 :Y X
+sym cc46 "St0046"
+
+struct cc48 cc48 :Y X
+sym cc48 "St0047"
+
+byte cc4a cc4a :P 3
+sym cc4a "VECT3"
+
+word cc4c cc4d :P 5
+sym cc4c "V_879_MULT"
+
+byte cc4e cc4e :P 3
+sym cc4e "SETLNG_TM"
+
+word cc50 cc51 :P 5
+sym cc50 "VSIBRM"
+
+word cc52 cc53 :P 5
+sym cc52 "VSIBRN"
+
+byte cc54 cc54 :P 3
+sym cc54 "V820A"
+
+struct cc59 cc59 :Y X
+sym cc59 "St0048"
+
+struct cc5f cc5f :Y X
+sym cc5f "St0049"
+
+struct cc61 cc61 :Y X
+sym cc61 "St0050"
+
+struct cc64 cc64 :Y X
+sym cc64 "St0051"
+
+struct cc66 cc66 :Y X
+sym cc66 "St0052"
+
+struct cc68 cc68 :Y X
+sym cc68 "St0053"
+
+struct cc6a cc6a :Y X
+sym cc6a "St0054"
+
+sym cc6c "VMDEL1"
+
+sym cc6e "VMDEL2"
+
+byte cc76 cc76 :P 3
+sym cc76 "VMPMAX"
+
+struct cc80 cc80 :Y X
+sym cc80 "St0055"
+
+struct cc82 cc82 :Y X
+sym cc82 "St0056"
+
+struct cc84 cc84 :Y X
+sym cc84 "St0057"
+
+struct cc86 cc86 :Y X
+sym cc86 "St0058"
+
+word cc92 cc93 :P 5
+sym cc92 "ScScSadDir1039"
+
+struct cc93 cc93 :Y X
+sym cc93 "St0059"
+
+word cc94 cc95 :P 5
+sym cc94 "VDLY2"
+
+struct cc95 cc95 :Y X
+sym cc95 "VIPTM2"
+
+word cc96 cc97 :P 5
+sym cc96 "VATMR2"
+
+byte cc98 cc98 :P 3
+sym cc98 "ScScSadDir1042"
+
+byte cc99 cc99 :P 3
+sym cc99 "ScScSadDir1043"
+
+byte cc9a cc9a :P 3
+sym cc9a "ScScSadDir1044"
+
+byte cc9b cc9b :P 3
+sym cc9b "ScScSadDir1045"
+
+byte cc9c cc9c :P 3
+sym cc9c "ScScSadDir1046"
+
+byte cc9d cc9d :P 3
+sym cc9d "ScScSadDir1047"
+
+byte cc9e cc9e :P 3
+sym cc9e "ScScSadDir1048"
+
+byte cc9f cc9f :P 3
+sym cc9f "ScScSadDir1049"
+
+byte cca0 cca0 :P 3
+sym cca0 "ScScSadDir1050"
+
+byte cca1 cca1 :P 3
+sym cca1 "ScScSadDir1051"
+
+byte cca2 cca2 :P 3
+sym cca2 "ScScSadDir1052"
+
+byte cca3 cca3 :P 3
+sym cca3 "ScScSadDir1053"
+
+byte cca4 cca4 :P 3
+sym cca4 "ScScSadDir1054"
+
+byte cca5 cca5 :P 3
+sym cca5 "ScScSadDir1055"
+
+byte cca6 cca6 :P 3
+sym cca6 "ScScSadDir1056"
+
+byte cca7 cca7 :P 3
+sym cca7 "ScScSadDir1057"
+
+byte cca8 cca8 :P 3
+sym cca8 "V_ISCMOD_MAX"
+
+byte cca9 cca9 :P 3
+sym cca9 "ScScSadDir1059"
+
+word ccaa ccab :P 5
+sym ccaa "V_ISCMOD_MIN"
+
+word ccac ccad :P 5
+sym ccac "V_KDNDT"
+
+word ccae ccaf :P 5
+sym ccae "ScScSadDir1062"
+
+word ccb0 ccb1 :P 5
+sym ccb0 "ScScSadDir1063"
+
+word ccb2 ccb3 :P 5
+sym ccb2 "ScScSadDir1064"
+
+word ccb4 ccb5 :P 5
+sym ccb4 "ScScSadDir1065"
+
+word ccb6 ccb7 :P 5
+sym ccb6 "ScScSadDir1066"
+
+word ccb8 ccb9 :P 5
+sym ccb8 "ScScSadDir1067"
+
+function cd22 cd35 :Y P 3 :Y P 3
+sym cd22 "FN331A"
+
+function cd36 cd3d :Y P 3 :Y P 3
+sym cd36 "FN332"
+
+function cd40 cd49 :Y P 3 :Y P 3
+sym cd40 "FN378"
+
+function cd4a cd61 :Y P 3 :Y P 3
+sym cd4a "FN379"
+
+function cd62 cd6d :Y P 3 :Y P 3
+sym cd62 "FN324"
+
+table cd6e cda5 :O 8 Y P 3
+sym cd6e "Tb028"
+
+function cda6 cdc5 :Y P 3 :Y P 3
+sym cda6 "FN031"
+
+function cdc6 cde1 :Y P 3 :Y P 3
+sym cdc6 "FN070L"
+
+function cde2 cded :Y P 3 :Y P 3
+sym cde2 "FN371"
+
+struct cdee cdee :Y X
+sym cdee "St0060"
+
+function ce5c ce8f :Y P 3 :Y P 3
+sym ce5c "FN348"
+
+function ce90 ce9b :Y P 3 :Y P 3
+sym ce90 "FN387"
+
+sym 2 "LSO_Port"
+
+sym 3 "LIO_Port"
+
+sym 4 "AD_Low"
+
+sym 5 "AD_High"
+
+sym 6 "IO_Timer"
+
+sym 7 "IO_Timer_Hi"
+
+sym 8 "INT_Mask"
+
+sym 9 "INT_Pend"
+
+sym a "IO_Status"
+
+sym b "HSI_Sample"
+
+sym c "HSI_Mask"
+
+sym d "HSI_Data"
+
+sym e "HSI_Time"
+
+sym 10 "StackPtr"
+
+sym 12 "Tmr_OVF_cnt"
+
+sym 14 "B7_BPKFLG_14"
+
+sym 22 "B5_LESFLG_22"
+
+sym 24 "B2_EGRTPQ_Q_24"
+
+sym 25 "CHKAIR"
+
+sym 26 "B1_NEUFLG_26"
+
+sym 27 "Flags_27"
+
+sym 28 "B0_EGREN_28"
+
+sym 29 "B2_FLG_DFSO_NOVS_Q_29"
+
+sym 2a "Vscdt"
+
+sym 2b "STO_Flags"
+
+sym 2c "Vip_flags_2c"
+
+sym 2d "VIP_KAM"
+
+sym 2e "Flags_2e"
+
+sym 2f "VIP_flags4"
+
+sym 32 "R32"
+
+sym 3c "Free_run"
+
+sym 3e "Lmillis"
+
+sym 44 "B0_FLG_DASMNQ_44"
+
+sym 45 "Flags_45"
+
+sym 46 "AM1"
+
+sym 47 "Flags_47"
+
+sym 48 "Flags_48"
+
+sym 49 "DWLELD"
+
+sym 4a "B1_TLS_34_FLG_4a"
+
+sym 4b "B1_EPC_OPEN_FLG_4b"
+
+sym 4c "B3_Immediate"
+
+sym 4d "B0_INJ_BANK_4d"
+
+sym 4e "B3_NEW_RPM_4e"
+
+sym 4f "Flags_4f"
+
+sym 50 "Flags_50"
+
+sym 51 "B1_FLG_UN_UPSFT_51"
+
+sym 52 "Flags_52"
+
+sym 53 "B5_CART_MODE_53"
+
+sym 58 "B7_TLOFLG_58"
+
+sym 6c "DATA_TIME"
+
+sym 6e "DATA_TIMEH"
+
+sym 70 "Rtab"
+
+sym 72 "HSO_time"
+
+sym 74 "HSO_timeH"
+
+sym 75 "NEW_IRQs"
+
+sym 79 "ACIFLG"
+
+sym 7a "LAST_HI_PIP"
+
+sym 7c "Prev_PIP_timeH"
+
+sym 7d "EM"
+
+sym 82 "INJ_PIP_CNT"
+
+sym 83 "HSI_State"
+
+sym 84 "Reftime"
+
+sym 86 "ReftimeH"
+
+sym 88 "TablePTR"
+
+sym 8a "RATCH"
+
+sym 8d "VSBAR"
+
+sym 8e "B4_A3C_8e"
+
+sym 8f "B0_POWSFG_8f"
+
+sym 90 "Flags_90"
+
+sym 91 "VBAT"
+
+sym 92 "ISCDTY"
+
+sym 94 "FUELPW1"
+
+sym 96 "LAMBSE1"
+
+sym 98 "EFTR"
+
+sym 9a "AM"
+
+sym 9d "TIPRET"
+
+sym 9e "Reg_9e"
+
+sym 9f "Flags_9f"
+
+sym a0 "Flags_a0"
+
+sym a1 "Flags_a1"
+
+sym a2 "B2_FLG_FRST_DS_a2"
+
+sym a3 "Flags_a3"
+
+sym a4 "BRK_NEVER_OFF"
+
+sym a5 "Flags_a5"
+
+sym a6 "FMEM_FLAGS"
+
+sym a7 "FMEM_FLAG2"
+
+sym a8 "?APT?_a8"
+
+sym a9 "MAPPA"
+
+sym aa "XFRAME"
+
+sym ac "VIP_code"
+
+sym b0 "TAR"
+
+sym b2 "TP"
+
+sym b4 "N_RPM"
+
+sym b6 "ECT"
+
+sym b7 "ACT"
+
+sym b9 "TCSTRT"
+
+sym ba "MAP"
+
+sym bb "BP"
+
+sym bc "TP_REL"
+
+sym bd "TP_REL_H"
+
+sym be "EVP"
+
+sym c0 "EGRDC"
+
+sym c1 "EGRDChi"
+
+sym c4 "DT12S"
+
+sym c7 "KAYCTR"
+
+sym c8 "HFDLTA"
+
+sym ca "MKAY"
+
+sym cc "SAF"
+
+sym cf "SYNCTR"
+
+sym d0 "B6_FLG_ENG_IN_d0"
+
+sym d1 "IDLTMR"
+
+sym d2 "NACTMR"
+
+sym d4 "ATMR1"
+
+sym d6 "TP_AIR_OFF_F"
+
+sym d8 "GR_DS"
+
+sym d9 "GR_CM"
+
+sym da "GEAR_CUR"
+
+sym db "PDL"
+
+sym dd "FLG_dd"
+
+sym de "B0_FLG_RLK_WOT_de"
+
+sym df "B3_FLG_UP_NE_df"
+
+sym e0 "B2_FLG_FRST_TV_e0"
+
+sym e1 "CCD?"
+
+sym e4 "Re4"
+
+sym e6 "Re6"
+
+sym e8 "Re8"
+
+sym ea "Rea"
+
+sym ec "Rec"
+
+sym ee "Ree"
+
+sym f0 "Rf0"
+
+sym f2 "Rf2"
+
+sym f4 "Rf4"
+
+sym f6 "Rf6"
+
+sym f8 "Rf8"
+
+sym fa "Rfa"
+
+sym fc "Rfc"
+
+sym fe "Rfe"
+
+sym 100 "TPBAR"
+
+sym 104 "EGRBAR"
+
+sym 106 "EGOBAR"
+
+sym 108 "ITOT"
+
+sym 10a "IIVPWR"
+
+sym 10c "IOCC"
+
+sym 10e "IVCAL"
+
+sym 110 "IECT"
+
+sym 112 "IACT"
+
+sym 114 "IEGR"
+
+sym 116 "EOFF"
+
+sym 118 "INDS"
+
+sym 11a "IEGO1"
+
+sym 11c "ITP"
+
+sym 11e "NBAR"
+
+sym 120 "DT12SA"
+
+sym 122 "MAP_FREQ"
+
+sym 124 "MAP_WORD"
+
+sym 126 "IMAP_WORD"
+
+sym 128 "MAPCNT"
+
+sym 12a "MAPWBAR"
+
+sym 12e "AETP"
+
+sym 134 "MAPBAR"
+
+sym 135 "MAPBARhi"
+
+sym 136 "PUTMR"
+
+sym 138 "ADPTMR"
+
+sym 13a "BG_TMR"
+
+sym 140 "TSLEGO"
+
+sym 142 "TSLPIP"
+
+sym 144 "Loop_time"
+
+sym 14b "EGRTMR"
+
+sym 14c "HMUTMR"
+
+sym 14f "LMBTMR"
+
+sym 150 "NDDTIM"
+
+sym 152 "WOTTMR"
+
+sym 153 "APTMR"
+
+sym 154 "DESMAF"
+
+sym 156 "DSTPBR"
+
+sym 158 "DASPOT"
+
+sym 15a "IBGPSI"
+
+sym 15c "NLAST"
+
+sym 15e "N_RATCH"
+
+sym 160 "DESNLO"
+
+sym 162 "ISCFLG"
+
+sym 163 "DSDRPM"
+
+sym 164 "ISCTMR"
+
+sym 165 "ISFLAG"
+
+sym 166 "ISLAST"
+
+sym 167 "LOACT"
+
+sym 168 "BPCOR"
+
+sym 16a "ACCUM"
+
+sym 16c "AEPW"
+
+sym 16e "AMPEM"
+
+sym 170 "BGFUEL"
+
+sym 176 "KAMRF1"
+
+sym 17b "AEPP"
+
+sym 17c "PPCTR"
+
+sym 17d "CLFLG"
+
+sym 17e "MFAMUL"
+
+sym 180 "CRKPIP_CTR"
+
+sym 181 "CRKPIP_CTR_BG"
+
+sym 184 "OCCSAV"
+
+sym 192 "IBETA"
+
+sym 193 "INJCNT"
+
+sym 194 "TOTAL_DELAY"
+
+sym 195 "FMECTR"
+
+sym 196 "A3CTMR"
+
+sym 198 "KTS_timing"
+
+sym 19a "KTS_pulsewidth"
+
+sym 19c "TBART"
+
+sym 19e "LAST_MAP2"
+
+sym 1a0 "LAST_MAP"
+
+sym 1ae "V_ETVOCM_SAV"
+
+sym 1ba "EGO_CNT_IDLE"
+
+sym 1bc "TSSTIL_TMR"
+
+sym 1be "Miltmr"
+
+sym 1c1 "VIP_TIMER_EX"
+
+sym 1cc "V_LEGOTMR"
+
+sym 1d0 "SparkAdvance"
+
+sym 1e4 "DELOPT"
+
+sym 1e6 "EGRERR"
+
+sym 1e8 "MULTMR"
+
+sym 1e9 "LAMMUL"
+
+sym 1ea "N_BYTE"
+
+sym 1eb "MAPOPE"
+
+sym 1f2 "AMT"
+
+sym 1f4 "AMPEMT"
+
+sym 1f6 "PURGDC"
+
+sym 1f8 "BCSDC"
+
+sym 1fa "SPK_LAMBSE"
+
+sym 1fc "FUEL_SUM_TKS"
+
+sym 1fe "DOL_COUNT"
+
+sym 200 "MDELTA"
+
+sym 204 "VS"
+
+sym 206 "TCF"
+
+sym 208 "TAPBAR"
+
+sym 20a "EGRCNT"
+
+sym 20b "EGRPER"
+
+sym 20e "LOPCT1"
+
+sym 20f "LOPCT2"
+
+sym 213 "ECTCNT"
+
+sym 214 "PRGTMR"
+
+sym 216 "MAPTMR"
+
+sym 217 "VACUUM"
+
+sym 218 "MPHTIM1"
+
+sym 21a "MPHTIM1H"
+
+sym 21b "AEFUEL"
+
+sym 21c "MPHTIM2"
+
+sym 21e "MPHTIM2H"
+
+sym 21f "NOVS"
+
+sym 220 "OLDTP"
+
+sym 222 "LSTROW"
+
+sym 224 "LSTCOL"
+
+sym 228 "[228]"
+
+sym 22c "TSLADV"
+
+sym 22e "AEMAP"
+
+sym 22f "MAPAEF"
+
+sym 230 "RETINC"
+
+sym 231 "DESEM"
+
+sym 232 "EGOSSS"
+
+sym 233 "AEMTMR"
+
+sym 234 "HICOMP"
+
+sym 239 "Pip_counter"
+
+sym 23a "ATMR1_LST"
+
+sym 23b "VSCTR"
+
+sym 23c "TSLIDM"
+
+sym 240 "HSOQ"
+
+sym 285 "GMAPDC"
+
+sym 288 "DOL_DUTY"
+
+sym 28c "DT23S"
+
+sym 28e "PHFDLT"
+
+sym 2b8 "Xram1L"
+
+sym 2b9 "Xram1H"
+
+sym 2ba "Xram2L"
+
+sym 2bb "Xram1H"
+
+sym 2bc "Xram3L"
+
+sym 2bd "Xram1H"
+
+sym 2be "Xram4L"
+
+sym 2bf "Xram4H"
+
+sym 2c4 "EGRACT"
+
+sym 2c5 "EGRATE"
+
+sym 2c6 "COLTBU"
+
+sym 2c7 "ROWTBU"
+
+sym 2c8 "TLOFLG"
+
+sym 2c9 "DIFCTR"
+
+sym 2cc "SIGKAL"
+
+sym 2ce "SIGDLT"
+
+sym 2d0 "PSGDLT"
+
+sym 2d2 "DTSIG"
+
+sym 2d4 "[2d4]"
+
+sym 2d6 "FN025_MAP_y"
+
+sym 2d8 "FN070L_N_x"
+
+sym 2da "FN039_N_x"
+
+sym 2dc "FN021_MAPOPE_y"
+
+sym 2e0 "A0COR"
+
+sym 2e2 "ACSTRT"
+
+sym 2e3 "ACSTRT"
+
+sym 2e4 "MAPWBG"
+
+sym 2e6 "PWCF"
+
+sym 2e8 "BASEFF"
+
+sym 2ea "BASE_EM"
+
+sym 2ec "FUEL_A"
+
+sym 2ee "DTPCYC"
+
+sym 2f0 "HFPCYC"
+
+sym 2f3 "VOLTMR"
+
+sym 2ff "EPC_TQ_CONV"
+
+sym 308 "RT_ULK_PWR"
+
+sym 30a "RT_LK_PWR"
+
+sym 30c "NEBART"
+
+sym 30e "NOBART"
+
+sym 310 "SFT_TOTAL"
+
+sym 314 "TOT"
+
+sym 316 "TPV_STRT_SFT"
+
+sym 318 "NEV_STRT_SFT"
+
+sym 31a "INIT_TOT"
+
+sym 31c "RT_GR_CUR"
+
+sym 31e "RT_GR_OLD"
+
+sym 322 "SPD_RATIO"
+
+sym 326 "SPD_RT_STRT"
+
+sym 328 "SR_PP_LIM"
+
+sym 32c "TPBART"
+
+sym 32e "TP_RATE"
+
+sym 330 "TQ_OFM"
+
+sym 334 "NE_STRT_SFT"
+
+sym 336 "TR_STRT_SFT"
+
+sym 338 "TQ_IALPHA"
+
+sym 33a "TQ_STAT_CAP"
+
+sym 33c "ARCHG"
+
+sym 33e "LOAD"
+
+sym 340 "ETV_OCM_MIN"
+
+sym 342 "ETVOCM"
+
+sym 344 "IETVOCM"
+
+sym 346 "FN072A_MAPPA_y"
+
+sym 348 "VSBART"
+
+sym 34a "BP_INTR"
+
+sym 34c "GEAR_OLD"
+
+sym 34d "GR_CM_LST"
+
+sym 34f "GR_OLD"
+
+sym 350 "GR_DS_TV"
+
+sym 351 "TV_COUNTS"
+
+sym 353 "VSV_STRT_SFT"
+
+sym 357 "VSBART_RT"
+
+sym 359 "PDL_LST"
+
+sym 35b "TV_PRES"
+
+sym 35c "TV_STAT"
+
+sym 35e "TQ_NET"
+
+sym 35f "SPK_DELTA"
+
+sym 362 "DNUN_TM"
+
+sym 364 "TM_TV_SS"
+
+sym 368 "TM_SFT_CCO"
+
+sym 36c "TM_SFT_IN"
+
+sym 36e "TM_DEL_SFT"
+
+sym 372 "TM_4X4L_RES"
+
+sym 374 "TSFETMR"
+
+sym 376 "CYCCTR"
+
+sym 37a "TM_CS_DLY"
+
+sym 37b "TM_CS_ENG"
+
+sym 37e "TP_STRT_SFT"
+
+sym 383 "MPHCNT"
+
+sym 384 "TSLMPH"
+
+sym 386 "ATMR3"
+
+sym 388 "FFULC"
+
+sym 38a "FFULM"
+
+sym 38c "RANNUM"
+
+sym 38e "SAFTOT"
+
+sym 390 "DEBYMA"
+
+sym 392 "ISCPSI"
+
+sym 394 "IPSIBR"
+
+sym 396 "SPK_STATE"
+
+sym 397 "TRANS_T"
+
+sym 398 "DNDT_ISC"
+
+sym 39a "DNDTI"
+
+sym 39c "FKEXIT"
+
+sym 39e "ISCMOD"
+
+sym 3a2 "KSPARK"
+
+sym 3a4 "N_PREV"
+
+sym 3a6 "SPK_IDLE"
+
+sym 3aa "SPK_NORM"
+
+sym 3ac "DT_DNDT"
+
+sym 3ae "RPMERR"
+
+sym 3b0 "RPMERR_A"
+
+sym 3b2 "RPMERR_S"
+
+sym 3b6 "OSCTMR"
+
+sym 3b8 "PREV_N_PIP"
+
+sym 3bb "RUNUPTMR"
+
+sym 3bc "SPKTMR"
+
+sym 3bd "SETTMR"
+
+sym 3be "TP_REL_LST"
+
+sym 3c0 "TPDLBR"
+
+sym 3c2 "DNDT_SPK"
+
+sym 3c4 "OSCMOD"
+
+sym 3c6 "BIAS"
+
+sym 3c8 "LAMAVE"
+
+sym 3ca "LAMBSE(O)"
+
+sym 3cc "TLSPAT"
+
+sym 3ce "TLS_SHFTR"
+
+sym 3d0 "TLSCTR"
+
+sym 3d2 "LONG_DT12SA"
+
+sym 3d4 "ISF"
+
+sym 3d6 "LONG_MAPCNT"
+
+sym 3d7 "MAP_PIPCNT"
+
+sym 3da "TCSTRT"
+
+sym 3dc "DWELL"
+
+sym 3de "dwell_extra"
+
+sym 3e0 "DWLBSE"
+
+sym 3e2 "DWLCOR"
+
+sym 3e4 "DWLIDM"
+
+sym 3e6 "NEXT_SPOUT_ADVANCED"
+
+sym 3e8 "PIPACL"
+
+sym 3ea "POFFENG"
+
+sym 3ec "PPERENG"
+
+sym 3ee "SPOUT_ICCD_DELTA"
+
+sym 3f0 "SPOUT_LOW_DELTA"
+
+sym 3f2 "SPOUT_LOW_EDGE"
+
+sym 3f4 "SPOUT_LOW_EDGE_H"
+
+sym 3f6 "SPOUT_HIGH_EDGE"
+
+sym 3f8 "SPOUT_HIGH_EDGE_H"
+
+sym 3fa "LAMWIN"
+
+sym 3fc "UPRATE"
+
+sym 3fd "PTPAMP"
+
+sym 413 "C41FIL_TroubleCode"
+
+sym 41d "C617FIL"
+
+sym 41e "C618FIL"
+
+sym 41f "C619FIL"
+
+sym 428 "V_BOOSPD_TMR"
+
+sym 42a "EGOCNT"
+
+sym 42e "DFSO_A_TMR"
+
+sym 430 "DFSO_F_TMR"
+
+sym 432 "D_TP_DT"
+
+sym 434 "OLD_TP_DFSO"
+
+sym 436 "CTTMR"
+
+sym 43e "AC_PPM"
+
+sym 444 "KAMREF"
+
+sym 447 "V_PRG_DLYTMR"
+
+sym 448 "V_LESTMR"
+
+sym 449 "V_EGR_DLYTMR"
+
+sym 509 "XDCL_BAUD"
+
+sym 50e "BITMAP_0"
+
+sym 510 "BITMAP_1"
+
+sym 51a "UART_MSG_51a"
+
+sym 51b "CMD_CODE_51b"
+
+sym 51c "BYTE_8"
+
+sym 51d "BYTE_9"
+
+sym 51e "BYTE_10"
+
+sym 51f "SBDS_CHKSUM_51f"
+
+sym 520 "BYTE_NUM"
+
+sym 521 "EEC_CHKSUM"
+
+sym 532 "DCL_XDCL_ERROR_532"
+
+sym 538 "SBDS01"
+
+sym 53a "SBDS02"
+
+sym 53c "SBDS03"
+
+sym 53e "SBDS04"
+
+sym 540 "SBDS05"
+
+sym 542 "SBDS06"
+
+sym 700 "KAMQA"
+
+sym 702 "ISKSUM"
+
+sym 704 "KAM_BIT_FLAGS"
+
+sym 705 "BPKAM?"
+
+sym 706 "BPKYON?"
+
+sym 708 "BPPTWT"
+
+sym 709 "BPPTWThi"
+
+sym 70a "ISCKAM0"
+
+sym 70c "ISCKAM1"
+
+sym 70e "ISCKAM2"
+
+sym 710 "ISCKAM3"
+
+sym 712 "ISCKAM4"
+
+sym 714 "ISCKAM5"
+
+sym 718 "KAMQB"
+
+sym 71c "CXXX_KAM_BIT"
+
+sym 73c "C617CNT"
+
+sym 73d "C618CNT"
+
+sym 73e "C619CNT"
+
+sym 747 "KWUCTR"
+
+sym 748 "KAMQC"
+
+sym 74a "LTMTBLrc"
+
+sym 74c "KAM_CHKSUM"
+
+sym 901 "UART_tx_buff_901"
+
+sym 903 "UART_rx_buff_903"
+
+sym 928 "CART_Status_928"
+
+sym c80 "ConsoleMode"
+

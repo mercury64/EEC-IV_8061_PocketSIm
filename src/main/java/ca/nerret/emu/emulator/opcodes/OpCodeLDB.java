@@ -23,6 +23,14 @@ public class OpCodeLDB extends OpCode implements IOpCode {
 
 	@Override
     public final void exec(State state_) {
+		
+    	super.exec(state_);
+        
+        state_.setWordRegister(this.getOperandLocation(),this.getResult());
+        
+        return;
+        
+        /**
         int[] memory = state_.getMemory();
         final int pc = state_.getPc();
 
@@ -172,7 +180,25 @@ public class OpCodeLDB extends OpCode implements IOpCode {
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
         state_.setByteRegister(breg, areg);
+        
+        */
 
     }
+	
+	public int execImmediate()
+	{
+    	this.setNumberOfBytes(3);
+    	setExecutionStates(4);
+    	
+    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+    	
+    	byte data = (byte)operands[1];
+    	byte dest_dwreg = (byte)operands[2];
+
+        this.setResult(data);
+     	this.setOperandLocation(dest_dwreg);
+  	
+		return getExecutionStates();
+	}
 
 }

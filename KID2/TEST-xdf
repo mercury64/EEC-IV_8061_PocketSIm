@@ -1,0 +1,858 @@
+XDF
+1.110000
+%%HEADER%%
+001000 FileVers         ="1.0"
+001005 DefTitle         ="XDF creator by Midas"
+001007 DescSize         =0x2F
+001006 Desc             ="www.ecuconnections.com"
+001010 Author           ="Midas"
+001030 BinSize          ="0xE000"
+001035 BaseOffset       =0
+001200 ADSAssoc         =""
+001225 ADSCheck         =0x0
+001300 GenFlags         =0x0
+001325 ModeFlags        =0x0
+%%END%%
+
+
+%%TABLE%%
+000002 UniqueID         =0x16948
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x4237
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x01
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =1
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x16964
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x4247
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x01
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =1
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x17122
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x42E5
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x01
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =1
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x19257
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x4B3C
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x01
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =1
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x29839
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x7496
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x05
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2,3,4,5
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x29847
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x74A8
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x0F
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x29850
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x74A8
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x0C
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2,3,4,5,6,7,8,9,10,11,12
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x29853
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x74A2
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x03
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2,3
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x29859
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x74B3
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x0E
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2,3,4,5,6,7,8,9,10,11,12,13,14
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x29890
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x74CF
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x0B
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2,3,4,5,6,7,8,9,10,11
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x30188
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x75FA
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x0C
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2,3,4,5,6,7,8,9,10,11,12
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x30523
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x773F
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x02
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x30650
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x77C4
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x08
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2,3,4,5,6,7,8
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x30720
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x7804
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x02
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x30729
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x780D
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x02
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x30738
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x7816
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x02
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x30747
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x781F
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x02
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x31211
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x79F1
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x04
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2,3,4
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x31561
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x7B55
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x0A
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2,3,4,5,6,7,8,9,10
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x31642
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x7B9E
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x02
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x31660
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x7BB9
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x0B
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2,3,4,5,6,7,8,9,10,11
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x34991
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x88B2
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x01
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =1
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x35275
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x89D3
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x06
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2,3,4,5,6
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x35281
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x89DC
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x09
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2,3,4,5,6,7,8,9
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x35600
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x8B13
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x01
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =1
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x37470
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0x9267
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x07
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2,3,4,5,6,7
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x41278
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0xA143
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x03
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2,3
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x43002
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0xA803
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x07
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2,3,4,5,6,7
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+
+%%TABLE%%
+000002 UniqueID         =0x44004
+040005 Title            ="XDF-creator 2D map"
+040011 DescSize         =0x25
+040010 Desc             =
+040100 Address          =0xABED
+040200 ZEq              =X,TH|0|0|0|0|
+040203 XOutType         =0x04
+040304 YOutType         =0x04
+040205 OutType          =0x02
+040230 RangeLow         =0.0000
+040240 RangeHigh        =255.0000
+040300 Rows             =0x07
+040305 Cols             =0x01
+040320 XUnits           ="RPM"
+040325 YUnits           =""
+040330 ZUnits           =""
+040350 XLabels          =
+040352 XLabelType       =0x4
+040354 XEq              =X,TH|0|0|0|0|
+040360 YLabels          =,1,2,3,4,5,6,7
+040362 YLabelType       =0x4
+040364 YEq              =X,TH|0|0|0|0|
+040660 XAxisMin         =1000.000000
+040670 XAxisMax         =1000.000000
+040760 YAxisMin         =1000.000000
+040770 YAxisMax         =1000.000000
+%%END%%
+

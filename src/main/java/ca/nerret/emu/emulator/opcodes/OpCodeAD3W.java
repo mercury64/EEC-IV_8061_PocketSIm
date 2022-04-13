@@ -10,6 +10,9 @@ import ca.nerret.emu.emulator.State;
  */
 public class OpCodeAD3W  extends OpCode implements IOpCode {
 
+    
+    byte[] operands;
+    
     public OpCodeAD3W(int opcode, String mnemonic) {
 		super(opcode, mnemonic);
 		// TODO Auto-generated constructor stub
@@ -21,6 +24,13 @@ public class OpCodeAD3W  extends OpCode implements IOpCode {
     @Override
     public final void exec(State state_)
     {
+    	
+    	super.exec(state_);
+        
+        state_.setWordRegister(this.getOperandLocation(),this.getResult());
+        
+        return;
+        /*
         int[] memory = state_.getMemory();
         final int pc = state_.getPc();
 
@@ -28,9 +38,8 @@ public class OpCodeAD3W  extends OpCode implements IOpCode {
         // 7 6 5 4 3 2 1 0 (2,7) = 0x11
         // 0 1 0 0 0 1 0 1 = 0x45
         // 0 0 0 1 0 0 0 1 = 
+
         
-        byte[] operands;
-        int numberOfBytes = 0;
         int stateTime = 0;
 
         // Mode Mask
@@ -68,18 +77,13 @@ public class OpCodeAD3W  extends OpCode implements IOpCode {
 	        	stateTime = 8;
 	        	break;	
         }
-        state_.setPc(pc + numberOfBytes);
-        state_.updateStateTime(stateTime);
+       this.setNumberOfBytes(numberOfBytes);
+       this.setStateTimes(stateTime);
         
         operands = new byte[numberOfBytes];
         for (int i = 0; i < numberOfBytes; i++) {
 			operands[i] = (byte)memory[pc + i];
 		}
-
-        byte dest_dwreg = 0;
-
-        short sum = 0;
-        
 
         if (this.getAddressModeType() == AddressMode.DIRECT)
 		{
@@ -88,16 +92,7 @@ public class OpCodeAD3W  extends OpCode implements IOpCode {
 		}
         if (this.getAddressModeType() == AddressMode.IMMEDIATE)
 		{
-        	// Rfc = c0a8
-        	//state_.setWordRegister((short)0xfc, (short)0xc0a8);
-        	//state_.setWordRegister((short)0xfd, (short)0xc0);
-            dest_dwreg = operands[4];
-            byte src1_Swreg = operands[3];
-            short src2_waop  = (short) ((operands[2] << 8) | operands[1]);;
-            
-            short src1_value =  state_.getWordRegister(src1_Swreg);
-         
-            sum =  (short) (src1_value + src2_waop) ;
+   
             
 		}
         if (this.getAddressModeType() == AddressMode.INDIRECT)
@@ -121,7 +116,39 @@ public class OpCodeAD3W  extends OpCode implements IOpCode {
         	System.exit(1);
 		}
 
-        state_.setWordRegister(dest_dwreg, sum);
+*/
+       
         
     }
+    
+	public int execImmediate()
+	{
+		
+    	this.setNumberOfBytes(5);
+    	setExecutionStates(6);
+    	
+    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+    	
+
+        byte dest_dwreg = 0;
+
+        short sum = 0;
+        
+
+     	// Rfc = c0a8
+    	//state_.setWordRegister((short)0xfc, (short)0xc0a8);
+    	//state_.setWordRegister((short)0xfd, (short)0xc0);
+        dest_dwreg = operands[4];
+        byte src1_Swreg = operands[3];
+        short src2_waop  = (short) ((operands[2] << 8) | operands[1]);;
+        
+        short src1_value =  this.getWordRegister(src1_Swreg);
+     
+        sum =  (short) (src1_value + src2_waop) ;
+        
+       // this.setWordRegister(dest_dwreg, sum);
+        this.setResult(sum);
+    	this.setOperandLocation(dest_dwreg);
+		return getExecutionStates();
+	}
 }

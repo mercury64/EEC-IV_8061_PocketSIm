@@ -5,5 +5,28 @@
  AddressMode [Direct]
 
  SJMP 0x21
+ AddressMode [Immediate]
+
+ AD3W 0x45
+ AddressMode [Immediate]
+
+ LDB 0xB1
+ AddressMode [Immediate]
+
+ CLRB 0x11
+ AddressMode [Immediate]
+
+ LDW 0xA1
+ AddressMode [Immediate]
+
+ SCALL 0x2F
+ AddressMode [Long Indexed]
+
+ SCall to: 0x32
+
+ NOP 0xFF
  AddressMode [Direct]
+
+ CLRB 0x11
+ AddressMode [Immediate]
 

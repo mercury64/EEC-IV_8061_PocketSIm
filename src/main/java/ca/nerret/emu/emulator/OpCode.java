@@ -97,10 +97,11 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 
         operands = new byte[count];
         for (int i = 0; i < count; i++) {
-			operands[i] = (byte)memory[pc + i];
+			operands[i] = (byte)state.getMemory()[pc + i];
+			 this.state.setPc(pc + i);
 		}
+       
         
-        this.state.setPc(pc + numberOfBytes);
         this.state.updateStateTime(getExecutionStates());
         
         return operands;
@@ -305,7 +306,7 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 	}
 	
     public int getNumberOfBytes() {
-		return numberOfBytes;
+		return this.numberOfBytes;
 	}
 
 	public void setNumberOfBytes(int numberOfBytes) {

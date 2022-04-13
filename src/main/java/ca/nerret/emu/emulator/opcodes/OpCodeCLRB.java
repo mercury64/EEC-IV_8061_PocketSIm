@@ -20,6 +20,15 @@ public class OpCodeCLRB extends OpCode implements IOpCode {
      */
     @Override
     public final void exec(State state_) {
+    	
+		
+    	super.exec(state_);
+        
+        state_.setWordRegister(this.getOperandLocation(),this.getResult());
+        
+        return;
+        
+        /**
         int[] memory = state_.getMemory();
         int pc = state_.getPc();
         
@@ -28,7 +37,7 @@ public class OpCodeCLRB extends OpCode implements IOpCode {
         state_.setByteRegister(register,value );
         
         // increment program counter
-        state_.setPc(pc + _PC_INCR_2);
+       state_.setPc(pc + 1);
         
         // update statetime
         state_.updateStateTime(4);
@@ -38,12 +47,21 @@ public class OpCodeCLRB extends OpCode implements IOpCode {
         state_.setPswBit(ProgramStatusWord.NEGATIVE, false);
         state_.setPswBit(ProgramStatusWord.OVERFLOW, false);
         state_.setPswBit(ProgramStatusWord.CARRY, false);        
+        */
     }
     
-	public void setAddressMode(AddressMode addressMode) {
-		// TODO Auto-generated method stub
-	    
-	   super.setAddressMode(new AddressMode((byte)AddressMode.DIRECT));
-		
+	public int execImmediate()
+	{
+    	this.setNumberOfBytes(2);
+    	setExecutionStates(4);
+    	
+    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+    	
+    	byte value = 0;
+    	this.setResult(value);
+    	
+    	this.setOperandLocation(operands[1]);
+		return getExecutionStates();
 	}
+
 }

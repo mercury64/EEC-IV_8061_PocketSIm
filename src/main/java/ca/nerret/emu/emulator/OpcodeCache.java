@@ -20,6 +20,7 @@ import ca.nerret.emu.emulator.opcodes.OpCodeAD2B;
 import ca.nerret.emu.emulator.opcodes.OpCodeAD2W;
 import ca.nerret.emu.emulator.opcodes.OpCodeAD3W;
 import ca.nerret.emu.emulator.opcodes.OpCodeAN2B;
+import ca.nerret.emu.emulator.opcodes.OpCodeAN3B;
 import ca.nerret.emu.emulator.opcodes.OpCodeC3;
 import ca.nerret.emu.emulator.opcodes.OpCodeCALL;
 import ca.nerret.emu.emulator.opcodes.OpCodeCD;
@@ -250,13 +251,13 @@ public final class OpcodeCache {
     	
         try 
         {
-        	if( opc.getNumberOfBytes() > 1)
+        	//if( opc.getNumberOfBytes() > 1)
         	{
         		opc.setAddressMode(new AddressMode((byte)instruction_, firstByte));
         	}
-        	else
+        	//else
         	{
-        		opc.setAddressMode(new AddressMode((byte)instruction_));
+        	//	opc.setAddressMode(new AddressMode((byte)instruction_));
         	}
     	}
         catch(Exception e)

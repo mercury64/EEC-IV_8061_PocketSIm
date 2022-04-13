@@ -1,5 +1,10 @@
 package ca.nerret.emu.emulator;
 
+import ca.nerret.emu.emulator.memory.AbstractMemory;
+import ca.nerret.emu.emulator.memory.Memory;
+import ca.nerret.emu.env.RoxByte;
+import ca.nerret.emu.env.RoxWord;
+
 public class SpecialFunctionRegisters extends AbstractMemory implements Memory {
 
 	
@@ -42,5 +47,11 @@ public class SpecialFunctionRegisters extends AbstractMemory implements Memory {
 	public void setWord(short address, short value) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public RoxByte[] getBlock(RoxWord from, RoxWord to) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

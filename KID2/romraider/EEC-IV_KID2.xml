@@ -1,0 +1,110 @@
+<roms>
+   <rom>
+      <romid>
+	<xmlid>SD48x</xmlid>
+	<internalidaddress>2010</internalidaddress>
+	<internalidstring>k-M-j-j-p</internalidstring>
+        <filesize>64kb</filesize>
+
+	<year>1994</year>
+	<market>Canada</market>
+	<make>Ford</make>
+	<model>F150-Flareside</model>
+	<submodel>5.8l</submodel>
+	<transmission>E40D</transmission>
+
+      </romid>
+
+      <table type="2D" name="FN070_rpm" userlevel="4" category="Functions" storagetype="uint16" endian="little" sizex="1" sizey="12">
+          <scaling  expression="x/4" to_byte="x*4" format="#" />
+               <description>""</description>
+               <table type="X Axis" name="RPM" storagetype="uint16"  endian="little">
+ 					<scaling expression="x" to_byte="x" format="#"/>
+               </table>
+
+            </table>
+      <table type="3D" name="FN070L" userlevel="4" category="Functions" storagetype="uint16" endian="little" sizex="2" sizey="7">
+          <scaling  expression="x" to_byte="x" format="#" />
+               <description>""</description>
+               <table type="Static X Axis" name="Condition" units="" sizex="2">
+                   <scaling  expression="x" to_byte="x" format="#" />
+                           <data>RPM</data>
+                           <data>Column</data>
+                        </table>
+               <table type="Static Y Axis" name="Condition" units="" sizey="7">
+                   <scaling  expression="x" to_byte="x" format="#" />
+                           <data>on</data>
+                           <data>off</data>
+                        </table>
+            </table>
+      <table type="3D" name="FN021" userlevel="4" category="Functions" storagetype="uint16" endian="little" sizex="2" sizey="12">
+               <description>""</description>
+               <scaling  expression="x" to_byte="x" format="#" />
+               <table type="Static X Axis" name="Table (x,y)"  sizex="2">
+                   <scaling  expression="x" to_byte="x" format="#" />
+                           <data>MAPOPE</data>
+                           <data>Column</data>
+                        </table>
+               <table type="Y Axis" name="FN021" storagetype="uint16" sizey="12">
+                   <scaling  expression="x/128" to_byte="x*128" format="#" />
+                        </table>
+            </table>
+
+	<table type="FoxFunction" name="FN021_FoxFunction" userlevel="4"
+		category="Functions" storagetype="uint16" endian="little" sizex="1"
+		sizey="12">
+		<scaling name="ff_128_scale" expression="x/256" to_byte="x*256" format="#" />
+		<description>"FN021 Fox Function description."</description>
+		<table type="Y Axis" name="RPMY" storagetype="uint16"
+			endian="little">
+			<description>"FN021 RPM Y"</description>
+			
+		</table>
+				<table type="X Axis" name="RPMX" storagetype="uint16"
+			endian="little">
+			<description>"FN021 RPM X"</description>
+		</table>
+	</table>
+
+    
+    <table type="3D" name="FN1320" category="Tables" endian="little" storagetype="uint8" sizex="10" sizey="10" userlevel="1">
+        <scaling expression="x/1" to_byte="x*1" format="#"/>
+     <table type="X Axis" name="Normalized FN070(RPM)" storagetype="uint16" endian="little" >
+         <scaling   expression="x/4" to_byte="x*4" format="#"/>
+         </table>
+     <table type="Y Axis" name="Normalized FN021(MAPOPE)" storagetype="uint16" endian="little">
+         <scaling  expression="x/256" to_byte="x*256" format="#"/>
+         </table>
+     <description>FN1320(NORM_N070,NORM_MAPOPE21) = TABLVF is a 10 x 10 table of volumetric efficiency   multipliers  for  air  mass  as  a  function  of  NORM_N070, normalized engine speed, and NORM_MAPOPE21, normalized MAPOPE.</description>
+    </table>
+    
+    <table name="FN1320" storageaddress="0xb9a1">
+        <table type="X Axis" storageaddress="0xb2fe" />
+        <table type="Y Axis" storageaddress="0xb28e" />
+    </table>
+    
+      <table name="FN070_rpm" storageaddress="0xb2fe">
+        <table type="X Axis" storageaddress="0xb2fe" />
+       </table>
+       
+
+      <table name="FN070L" storageaddress="0xb2fe" />
+      
+      <table name="FN021" storageaddress="0xb28e">
+       
+      </table>
+      
+      <table name="FN021_FoxFunction" storageaddress="0xb28e">
+     		
+            <table type="Y Axis" storageaddress="0xb28e">
+            	<scaling  expression="x/128" to_byte="x*128" format="#.##"/>
+            </table>
+       
+      </table>
+        
+    
+
+   </rom>
+
+
+</roms>
