@@ -1,7 +1,7 @@
 
 ####################################################################################################
 #
-# Disassembly listing of binary 'KID2'    8061  1 bank     SAD Version 4.0.7.16 (16 Jun 2021)
+# Disassembly listing of binary 'KID2'    8061  1 bank     SAD Version 4.0.7.16b (11 Apr 2022)
 # See 'KID2_msg.txt' for warnings, results and other information
 
 # Explanation of extra flags and formats - 
