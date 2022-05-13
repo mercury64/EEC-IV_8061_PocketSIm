@@ -36,9 +36,13 @@
 2126 # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#9
 
 2134 # 0x9c / 2 functions = 78
+
+21bf # 3e bytes to "Task_List_2"
+21c6 # 64 bytes to "Task_List_3"
+21ca # 0 bytes to "Task_List_1"
+
 21cd \n# "Task_List_1"
 220b \n# "Task_List_2"
-
 2231 \n# "Task_List_3"
 
 2270 #  A/C CLUTCH STATUS (ACCFLG)

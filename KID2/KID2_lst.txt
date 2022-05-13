@@ -183,14 +183,14 @@
 21b4: b1,0f,42            ldb   R42,f            R42 = f;
 21b7: c7,01,ff,1f,42      stb   R42,[R0+1fff]    [1fff] = R42;
 21bc: 36,2a,04            jnb   B6,R2a,21c3      if (B6_NO_START_2a = 1)  {
-21bf: b1,3e,d7            ldb   Rd7,3e           Rd7 = 3e;
+21bf: b1,3e,d7            ldb   Rd7,3e           Rd7 = 3e;                         # 3e bytes to "Task_List_2"
 21c2: f0                  ret                    return; }
 
 21c3: 35,2a,04            jnb   B5,R2a,21ca      if (?RUNNING? = 1)  {
-21c6: b1,64,d7            ldb   Rd7,64           Rd7 = 64;
+21c6: b1,64,d7            ldb   Rd7,64           Rd7 = 64;                         # 64 bytes to "Task_List_3"
 21c9: f0                  ret                    return; }
 
-21ca: b1,00,d7            ldb   Rd7,0            Rd7 = 0;
+21ca: b1,00,d7            ldb   Rd7,0            Rd7 = 0;                          # 0 bytes to "Task_List_1"
 21cd: f0                  ret                    return;
 
 # "Task_List_1"
