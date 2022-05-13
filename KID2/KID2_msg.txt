@@ -1,6 +1,6 @@
 
 # ----------------------------
-# SAD Version 4.0.7.16 (16 Jun 2021)
+# SAD Version 4.0.7.16b (11 Apr 2022)
 # ----------------------------
 
 # Input file is 'KID2.bin'
@@ -1312,7 +1312,7 @@ sub  ab92  "DataLoggingPatch"   #cmd
 # ------------ Symbol list ----
 sym 2  "CPU_OK" :B 6
 sym 2  "LSO_Port"
-sym 3  "LIO_Port"
+sym 3  "BIO_Port"
 sym 4  "AD_Cmd" : W
 sym 4  "AD_Low"
 sym 5  "WDG_Timer" : W
@@ -1332,7 +1332,8 @@ sym b  "HSI_Sample"
 sym c  "HSI_Mask"
 sym d  "HSO_Cmd" : W
 sym d  "HSI_Data"
-sym e  "HSI_Time"
+sym e  "HSI_Time_lo"
+sym f  "HSI_Time_hi"
 sym 10  "StackPtr"
 sym 12  "Tmr_OVF_cnt"
 sym 14  "B7_BPKFLG_14" :B 7

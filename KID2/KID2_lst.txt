@@ -1,7 +1,7 @@
 
 ####################################################################################################
 #
-# Disassembly listing of binary 'KID2'    8061  1 bank     SAD Version 4.0.7.16 (16 Jun 2021)
+# Disassembly listing of binary 'KID2'    8061  1 bank     SAD Version 4.0.7.16b (11 Apr 2022)
 # See 'KID2_msg.txt' for warnings, results and other information
 
 # Explanation of extra flags and formats - 
@@ -130,14 +130,14 @@
 2112: 20,03               sjmp  2117             goto 2117; }
 
 2114: b1,b5,0c            ldb   Rc,b5            HSI_Mask = b5;
-2117: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
-211c: b1,2a,0d            ldb   Rd,2a            HSO_Cmd = 2a;
+2117: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
+211c: b1,2a,0d            ldb   Rd,2a            HSO_Cmd = 2a;                     # GENERATE "OUTPUT INTERRUPT #1", at specified time
 211f: fb                  ei                     interrupts ON;
 2120: f0                  ret                    return;
 
    Initialize:
-2121: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
-2126: b1,19,0d            ldb   Rd,19            HSO_Cmd = 19;
+2121: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
+2126: b1,19,0d            ldb   Rd,19            HSO_Cmd = 19;                     # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#9
 2129: 11,2a               clrb  R2a              R2a = 0;
 212b: a1,00,09,10         ldw   R10,900          StackPtr = 900;
 212f: 2f,01               scall 2032             Reset_All ();
@@ -1066,8 +1066,8 @@
 29f7: 89,83,06,76         cmpw  R76,683          
 29fb: d9,2b               jgtu  2a28             if (R76 > 683) goto 2a28;
 29fd: 38,0a,1e            jb    B0,Ra,2a1e       if (B0_HSO_OVF = 1) goto 2a1e;
-2a00: 49,01,00,72,0e      sb3w  Re,R72,1         HSI_Time = HSO_time - 1;
-2a05: b0,6f,0d            ldb   Rd,R6f           HSO_Cmd = R6f;
+2a00: 49,01,00,72,0e      sb3w  Re,R72,1         HSI_Time_lo = HSO_time - 1;
+2a05: b0,6f,0d            ldb   Rd,R6f           HSO_Cmd = R6f;                    # 
 2a08: 71,77,4c            an2b  R4c,77           B3_Immediate = 0;
                                                  B7_R4c = 0;
 2a0b: f0                  ret                    return;
@@ -1136,7 +1136,7 @@
 2a89: 64,76,84            ad2w  R84,R76          Reftime += R76;
 2a8c: b4,00,86            adcb  R86,R0           ReftimeH += CY;
 2a8f: b0,86,6e            ldb   R6e,R86          DATA_TIMEH = ReftimeH;
-2a92: 48,0e,84,76         sb3w  R76,R84,Re       R76 = Reftime - HSI_Time;
+2a92: 48,0e,84,76         sb3w  R76,R84,Re       R76 = Reftime - HSI_Time_lo;
 2a96: 65,02,00,76         ad2w  R76,2            R76 += 2;
 2a9a: 48,76,84,6c         sb3w  R6c,R84,R76      DATA_TIME = Reftime - R76;
 2a9e: b8,00,6e            sbbb  R6e,R0           DATA_TIMEH -= CY;
@@ -1209,19 +1209,19 @@ EVR FOREGROUND REPEATER MODULE
 2b5b: 20,17               sjmp  2b74             goto 2b74; }
 
 2b5d: 39,50,14            jb    B1,R50,2b74      if (B1_Undsp_trans = 0)  {
-2b60: b1,12,6f            ldb   R6f,12           R6f = 12;
+2b60: b1,12,6f            ldb   R6f,12           R6f = 12;                         # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#2
 2b63: 30,d6,03            jnb   B0,Rd6,2b69      if (B0_Rd6 = 1)  {
-2b66: b1,02,6f            ldb   R6f,2            R6f = 2; }
-2b69: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
+2b66: b1,02,6f            ldb   R6f,2            R6f = 2; }                        # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#2
+2b69: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
 2b6e: b0,6f,0d            ldb   Rd,R6f           HSO_Cmd = R6f;
 2b71: 95,01,d6            xorb  Rd6,1            B0_Rd6 ^= 1; } }
 2b74: c3,e4,7e,56         stw   R56,[Re4+7e]     DOL_COUNT = R56; }
 2b78: 31,9e,17            jnb   B1,R9e,2b92      if (B1_E4OD_9e = 1)  {
 2b7b: 30,a2,14            jnb   B0,Ra2,2b92      if (B0_Ra2 = 1)  {
-2b7e: b1,03,6f            ldb   R6f,3            R6f = 3;
+2b7e: b1,03,6f            ldb   R6f,3            R6f = 3;                          # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#3
 2b81: 37,a2,03            jnb   B7,Ra2,2b87      if (B7_FLG_CS_CM_a2 = 1)  {
-2b84: b1,13,6f            ldb   R6f,13           R6f = 13; }
-2b87: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
+2b84: b1,13,6f            ldb   R6f,13           R6f = 13; }                       # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#3
+2b87: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
 2b8c: b0,6f,0d            ldb   Rd,R6f           HSO_Cmd = R6f;
 2b8f: 71,fe,a2            an2b  Ra2,fe           B0_Ra2 = 0; } }
 2b92: 8b,e8,a8,c2         cmpw  Rc2,[Re8+a8]     
@@ -1235,18 +1235,18 @@ EVR FOREGROUND REPEATER MODULE
 2ba6: 33,dd,06            jnb   B3,Rdd,2baf      if (B3_FLG_HS_LK_dd = 1)  {
 2ba9: 71,f7,dd            an2b  Rdd,f7           B3_FLG_HS_LK_dd = 0;
 2bac: 71,fe,dd            an2b  Rdd,fe           B0_FLG_SFT_UNLK_dd = 0; } }
-2baf: b1,11,6f            ldb   R6f,11           R6f = 11;
+2baf: b1,11,6f            ldb   R6f,11           R6f = 11;                         # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#1
 2bb2: 3b,a2,03            jb    B3,Ra2,2bb8      if (B3_FLG_LK_CM_a2 = 0)  {
-2bb5: b1,01,6f            ldb   R6f,1            R6f = 1; }
-2bb8: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
+2bb5: b1,01,6f            ldb   R6f,1            R6f = 1; }                        # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#1
+2bb8: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
 2bbd: b0,6f,0d            ldb   Rd,R6f           HSO_Cmd = R6f;
 2bc0: 31,9e,13            jnb   B1,R9e,2bd6      if (B1_E4OD_9e = 1)  {
 2bc3: 3a,44,05            jb    B2,R44,2bcb      if (B2_R44 = 0)  {
-2bc6: b1,00,6f            ldb   R6f,0            R6f = 0;
+2bc6: b1,00,6f            ldb   R6f,0            R6f = 0;                          # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#0
 2bc9: 20,03               sjmp  2bce             goto 2bce; }
 
-2bcb: b1,10,6f            ldb   R6f,10           R6f = 10;
-2bce: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
+2bcb: b1,10,6f            ldb   R6f,10           R6f = 10;                         # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#0
+2bce: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
 2bd3: b0,6f,0d            ldb   Rd,R6f           HSO_Cmd = R6f; }
 2bd6: 35,e0,40            jnb   B5,Re0,2c19      if (B5_Re0 = 1)  {
 2bd9: 71,df,e0            an2b  Re0,df           B5_Re0 = 0;
@@ -1276,15 +1276,15 @@ EVR FOREGROUND REPEATER MODULE
 
    Sub_2c19:
 2c19: a0,80,54            ldw   R54,R80          R54 = 235e;
-2c1c: 45,a1,01,54,0e      ad3w  Re,R54,1a1       HSI_Time = R54 + 1a1;
-2c21: b1,2a,0d            ldb   Rd,2a            HSO_Cmd = 2a;
+2c1c: 45,a1,01,54,0e      ad3w  Re,R54,1a1       HSI_Time_lo = R54 + 1a1;
+2c21: b1,2a,0d            ldb   Rd,2a            HSO_Cmd = 2a;                     # GENERATE "OUTPUT INTERRUPT #1", at specified time
 2c24: 91,0d,47            orb   R47,d            B0_Flags47 = 1;
                                                  B2_Flags_47 = 1;
                                                  B3_Flags_47 = 1;
 2c27: a0,46,54            ldw   R54,R46          R54 = R46;
 2c2a: 85,00,00,54         xrw   R54,0            R54 = R54;
 2c2e: b0,54,02            ldb   R2,R54           LSO_Port = R54;
-2c31: b0,55,03            ldb   R3,R55           LIO_Port = R55;
+2c31: b0,55,03            ldb   R3,R55           BIO_Port = R55;
 2c34: 18,02,55            shrb  R55,2            R55 >>= 2;
 2c37: c7,01,2f,09,55      stb   R55,[R0+92f]     [92f] = R55;
 2c3c: 95,02,50            xorb  R50,2            B1_Undsp_trans ^= 1;
@@ -1340,7 +1340,7 @@ EVR FOREGROUND REPEATER MODULE
 2cc7: 39,50,3c            jb    B1,R50,2d06      if (B1_Undsp_trans = 0)  {
 2cca: b3,01,2f,09,55      ldb   R55,[R0+92f]     R55 = [92f];
 2ccf: 19,02,55            shlb  R55,2            R55 <<= 2;
-2cd2: b0,03,56            ldb   R56,R3           R56 = LIO_Port;
+2cd2: b0,03,56            ldb   R56,R3           R56 = BIO_Port;
 2cd5: 71,03,56            an2b  R56,3            R56 &= 3;
 2cd8: 90,56,55            orb   R55,R56          R55 |= R56;
 2cdb: b3,01,30,09,56      ldb   R56,[R0+930]     R56 = [930];
@@ -9397,7 +9397,7 @@ ERROR CODE DESCRIPTION
 7cf8: f0                  ret                    return;
 
    Sub_7cf9:
-7cf9: b1,19,0d            ldb   Rd,19            HSO_Cmd = 19;
+7cf9: b1,19,0d            ldb   Rd,19            HSO_Cmd = 19;                     # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#9  # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
 7cfc: 28,06               scall 7d04             Sub_7d04 ();
 7cfe: b1,09,0d            ldb   Rd,9             HSO_Cmd = 9;
 7d01: 28,01               scall 7d04             Sub_7d04 ();
@@ -9406,7 +9406,7 @@ ERROR CODE DESCRIPTION
    Sub_7d04:
 7d04: 65,42,03,3a         ad2w  R3a,342          R3a += ETVOCM;
    Sub_7d08:
-7d08: a0,3a,0e            ldw   Re,R3a           HSI_Time = R3a;
+7d08: a0,3a,0e            ldw   Re,R3a           HSI_Time_lo = R3a;
 7d0b: f0                  ret                    return;
 
 ############################################################
@@ -9737,13 +9737,13 @@ ERROR CODE DESCRIPTION
 7f78: 28,1d               scall 7f97             Sub_7f97 ();
 7f7a: fa                  di                     interrupts OFF;
 7f7b: ff                  nop                    
-7f7c: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
+7f7c: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
 7f81: 55,10,1c,0d         ad3b  Rd,R1c,10        HSO_Cmd = R1c + 10;
 7f85: fb                  ei                     interrupts ON;
 7f86: 28,2b               scall 7fb3             Sub_7fb3 ();
 7f88: fa                  di                     interrupts OFF;
 7f89: ff                  nop                    
-7f8a: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
+7f8a: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
 7f8f: 51,0f,1c,0d         an3b  Rd,R1c,f         HSO_Cmd = R1c & f;
 7f93: fb                  ei                     interrupts ON;
 7f94: cc,34               pop   R34              R34 = pop();
@@ -9790,10 +9790,10 @@ ERROR CODE DESCRIPTION
    Sub_7fe5:
 7fe5: 01,46               clrw  R46              R46 = 0;
 7fe7: fa                  di                     interrupts OFF;
-7fe8: 45,0f,00,06,0e      ad3w  Re,R6,f          HSI_Time = IO_Timer + f;
+7fe8: 45,0f,00,06,0e      ad3w  Re,R6,f          HSI_Time_lo = IO_Timer + f;
 7fed: 71,fb,44            an2b  R44,fb           B2_R44 = 0;
 7ff0: 71,f7,a2            an2b  Ra2,f7           B3_FLG_LK_CM_a2 = 0;
-7ff3: b1,03,0d            ldb   Rd,3             HSO_Cmd = 3;
+7ff3: b1,03,0d            ldb   Rd,3             HSO_Cmd = 3;                      # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#3
 7ff6: fb                  ei                     interrupts ON;
 7ff7: 01,92               clrw  R92              ISCDTY = 0;
 7ff9: c3,e4,76,00         stw   R0,[Re4+76]      PURGDC = 0;
@@ -9843,8 +9843,8 @@ ERROR CODE DESCRIPTION
 805a: 17,38               incb  R38              R38++;
 805c: 2f,87               scall 7fe5             Sub_7fe5 ();
 805e: 85,00,00,46         xrw   R46,0            R46 = R46;
-8062: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
-8067: b1,09,0d            ldb   Rd,9             HSO_Cmd = 9;
+8062: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
+8067: b1,09,0d            ldb   Rd,9             HSO_Cmd = 9;                      # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
 806a: 71,fd,45            an2b  R45,fd           STO_STATE = 0; }
 806d: c3,e4,02,00         stw   R0,[Re4+2]       [182] = 0;
 8071: 71,f7,2d            an2b  R2d,f7           B3_R2d = 0;
@@ -9873,11 +9873,11 @@ ERROR CODE DESCRIPTION
 809c: c0,92,42            stw   R42,R92          ISCDTY = R42;
 809f: c3,e4,76,42         stw   R42,[Re4+76]     PURGDC = R42;
 80a3: fa                  di                     interrupts OFF;
-80a4: 45,0f,00,06,0e      ad3w  Re,R6,f          HSI_Time = IO_Timer + f;
+80a4: 45,0f,00,06,0e      ad3w  Re,R6,f          HSI_Time_lo = IO_Timer + f;
 80a9: 91,04,44            orb   R44,4            B2_R44 = 1;
 80ac: 91,08,a2            orb   Ra2,8            B3_FLG_LK_CM_a2 = 1;
-80af: b1,13,0d            ldb   Rd,13            HSO_Cmd = 13;
-80b2: b1,19,0d            ldb   Rd,19            HSO_Cmd = 19;
+80af: b1,13,0d            ldb   Rd,13            HSO_Cmd = 13;                     # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#3
+80b2: b1,19,0d            ldb   Rd,19            HSO_Cmd = 19;                     # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#9
 80b5: 91,02,45            orb   R45,2            STO_STATE = 1;
 80b8: fb                  ei                     interrupts ON;
 80b9: 27,b2               sjmp  806d             goto 806d; } }
@@ -10542,8 +10542,8 @@ ERROR CODE DESCRIPTION
    HW_Check:
 8640: fa                  di                     interrupts OFF;
 8641: ff                  nop                    
-8642: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
-8647: b1,09,0d            ldb   Rd,9             HSO_Cmd = 9;
+8642: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
+8647: b1,09,0d            ldb   Rd,9             HSO_Cmd = 9;                      # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
 864a: c3,e6,c2,10         stw   R10,[Re6+c2]     [242] = StackPtr;
 864e: a1,5c,00,10         ldw   R10,5c           StackPtr = 5c;
 8652: a1,7c,a1,3c         ldw   R3c,a17c         R3c = a17c;
@@ -10791,10 +10791,10 @@ ERROR CODE DESCRIPTION
 883f: a1,68,02,70         ldw   R70,268          Rtab = 268;
 8843: 3d,2b,31            jb    B5,R2b,8877      if (STO_code = 1) goto 8877;
 8846: 91,80,4c            orb   R4c,80           B7_R4c = 1;
-8849: b1,09,6f            ldb   R6f,9            R6f = 9;
+8849: b1,09,6f            ldb   R6f,9            R6f = 9;                          # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
 884c: 3e,2b,06            jb    B6,R2b,8855      if (STO_off = 0)  {
 884f: 37,2b,03            jnb   B7,R2b,8855      if (STO_on = 1)  {
-8852: b1,19,6f            ldb   R6f,19           R6f = 19; } }
+8852: b1,19,6f            ldb   R6f,19           R6f = 19; } }                     # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#9
 8855: ef,79,a1            call  29d1             Sub_29d1 ();
 8858: 71,3f,2b            an2b  R2b,3f           STO_off = 0;
                                                  STO_on = 0;
@@ -10802,9 +10802,9 @@ ERROR CODE DESCRIPTION
 885e: f0                  ret                    return;
 
    Sub_885f:
-885f: b1,19,6f            ldb   R6f,19           R6f = 19;
+885f: b1,19,6f            ldb   R6f,19           R6f = 19;                         # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#9
 8862: 38,ae,03            jb    B0,Rae,8868      if (B0_Rae = 0)  {
-8865: b1,09,6f            ldb   R6f,9            R6f = 9; }
+8865: b1,09,6f            ldb   R6f,9            R6f = 9; }                        # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
 8868: ef,66,a1            call  29d1             Sub_29d1 ();
 886b: 08,01,ae            shrw  Rae,1            Rae >>= 1;
 886e: e0,ab,38            djnz  Rab,88a9         Rab--;
@@ -14074,8 +14074,8 @@ a9e4: 38,0a,1b            jb    B0,Ra,aa02       if (B0_HSO_OVF = 0)  {         
 a9e7: 47,01,0e,20,06,72   ad3w  R72,R6,[R0+200e] HSO_time = IO_Timer + [200e];     # add 5D to current IOTime
 a9ed: d7,02               jne   a9f1             if (HSO_time = 0)  {
 a9ef: 07,72               incw  R72              HSO_time++; }
-a9f1: a0,72,0e            ldw   Re,R72           HSI_Time = HSO_time;
-a9f4: b1,0f,0d            ldb   Rd,f             HSO_Cmd = f;                      # request interrupt (in 5D IOtimes)
+a9f1: a0,72,0e            ldw   Re,R72           HSI_Time_lo = HSO_time;           # request interrupt (in 5D IOtimes)
+a9f4: b1,0f,0d            ldb   Rd,f             HSO_Cmd = f;                      # NO INTERRUPT OUT, SET OUTPUT LOW, OUTPUT INTERRUPT #2
 a9f7: c9,02,aa            push  aa02             push(Console_Routine);
 a9fa: ad,04,30            ldzbw R30,4            wR30 = 4;
 a9fd: cb,31,ca,a9         push  [R30+a9ca]       push([R30+a9ca]);                 # R30=4, a9ca+4 = a9ce, [a9ce]=e006
