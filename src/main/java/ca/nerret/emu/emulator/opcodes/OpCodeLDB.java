@@ -21,6 +21,13 @@ public class OpCodeLDB extends OpCode implements IOpCode {
 		// TODO Auto-generated constructor stub
 	}
 
+    public OpCodeLDB(int opcode, String mnemonic, int numBytes) {
+    	this(opcode, mnemonic);
+    	this.setNumberOfBytes(numBytes);
+		
+		// TODO Auto-generated constructor stub
+	}
+    
 	@Override
     public final void exec(State state_) {
 		
@@ -184,6 +191,27 @@ public class OpCodeLDB extends OpCode implements IOpCode {
         */
 
     }
+	
+	public int execDirect()
+	{
+    	// LDB areg,breg
+    	// InstructionOperation: (Rb)<-(Ra)
+    	// Machine Format: [ ^B0 ], [ Source Ra ] [ Dest Rb ]
+		
+    	this.setNumberOfBytes(3);
+    	setExecutionStates(4);
+    	
+    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+    	
+    	byte data = getByteRegister((byte)operands[1]);
+    	byte dest_dwreg = (byte)operands[2];
+    	
+        this.setResult(data);
+     	this.setOperandLocation(dest_dwreg);
+  	
+    	
+		return getExecutionStates();
+	}
 	
 	public int execImmediate()
 	{

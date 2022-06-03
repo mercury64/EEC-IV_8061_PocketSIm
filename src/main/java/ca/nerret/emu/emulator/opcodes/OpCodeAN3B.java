@@ -23,6 +23,14 @@ public class OpCodeAN3B  extends OpCode implements IOpCode {
 		super(opcode, mnemonic);
 		// TODO Auto-generated constructor stub
 	}
+    
+    
+    public OpCodeAN3B(int opcode, String mnemonic, int numBytes) {
+    	this(opcode, mnemonic);
+    	this.setNumberOfBytes(numBytes);
+		
+		// TODO Auto-generated constructor stub
+	}
 
 	/* (non-Javadoc)
      * @see ca.nerret.emu.emulator.opcodes.IOpcode#exec(ca.nerret.emu.emulator.State)
@@ -30,6 +38,17 @@ public class OpCodeAN3B  extends OpCode implements IOpCode {
     @Override
     public final void exec(State state_)
     {
+    	
+    	super.exec(state_);
+        
+    	byte result = (byte) state_.doANB(this.getSourceRB(), this.getDataByte());
+
+        state_.setWordRegister(this.getDestinationRD(),result);
+        
+        return;
+        /**
+         * 
+
         int[] memory = state_.getMemory();
         final int pc = state_.getPc();
 
@@ -158,5 +177,27 @@ public class OpCodeAN3B  extends OpCode implements IOpCode {
         state_.setByteRegister(dest_dwreg, (byte) result);    
         
         System.out.println( state_ );
+        */
     }
+    
+	public int execImmediate()
+	{
+    	setExecutionStates(5);
+    	
+    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+    	
+    	// AN3B =data, breg, dreg
+    	//(Rd) <- DATA && (Rb)
+    	
+    	byte data = operands[1];
+    	byte breg = operands[2];
+    	byte dreg = operands[3];
+    	
+    	this.setDataByte(data);
+    	this.setSourceRB(this.getByteRegister(breg));
+    	this.setDestinationRD(dreg);
+    	
+	 	return getExecutionStates();
+	}
+
 }

@@ -9,7 +9,9 @@ public class OpCodeJE  extends OpCode implements IOpCode {
 
 	 public OpCodeJE(int opcode, String mnemonic) {
 			super(opcode, mnemonic);
-			// TODO Auto-generated constructor stub
+			
+			this.setNumberOfBytes(2);
+			this.setExecutionStates(4);
 		}
 
 		/* (non-Javadoc)
@@ -19,16 +21,12 @@ public class OpCodeJE  extends OpCode implements IOpCode {
 	    public final void exec(State state_)
 	    {
    
-	    	int[] memory = state_.getMemory();
+	    	super.exec(state_);
 	        
-	        int pc = state_.getPc();
+	        boolean zeroFlag = state_.getPswBit((byte)ProgramStatusWord.ZERO);
 	        
-	        byte offset = (byte) memory[pc + 1];
-	      
-	        int newPC = pc + 2;
-	        
-	        boolean zeroFlag = state_.getPswBit(ProgramStatusWord.ZERO);
-	        
+	    	byte displacement = this.getByteResult();
+	    	
 	       // System.out.println(state_.pswFlagsToString());
 	        // Jump on =
 	        // Instruction Operation: (PC)<-(PC)+Displacement if Z=1,or (PC) unchanged if Z=0.
@@ -39,20 +37,37 @@ public class OpCodeJE  extends OpCode implements IOpCode {
 	        	// Take jump
 	            // If jump taken, state_.updateStateTime(4);
 	        	
-	        	
+	        	setExecutionStates(8);
 		        // 8 bit relative
 		        // 7 6 5 4 3 2 1 0 | 7 6 5 4 3 2 1 0 
 		        //      opcode     |       offset
-		        if( (offset & 0x80 >> 8)== 1 )
+		        if( (displacement & 0x80 >> 8)== 1 )
 		        {
-		        	offset = (byte) (offset | ~0xff);
+		        	displacement = (byte) (displacement | ~0xff);
 		        }
 		        
-		        newPC = pc + offset + 2;
+		        state_.setPc(state_.getPc() + displacement);
 	        }
 
-	        state_.setPc(newPC);
+
 
 	    }
+	    
+		public int execDirect()
+		{	
+	    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+
+	    	this.setByteResult(operands[1]);
+	    	
+		 	return getExecutionStates();
+		}
+
+		public void setAddressMode(AddressMode addressMode) {
+			// TODO Auto-generated method stub
+		    AddressMode am = new AddressMode();
+		    am.setType(AddressMode.DIRECT);
+			super.setAddressMode(am);
+			
+		}
 
 }

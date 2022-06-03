@@ -9,7 +9,9 @@ public class OpCodeJC  extends OpCode implements IOpCode {
 
 	 public OpCodeJC(int opcode, String mnemonic) {
 			super(opcode, mnemonic);
-			// TODO Auto-generated constructor stub
+			
+			this.setNumberOfBytes(2);
+			this.setExecutionStates(4);
 		}
 
 		/* (non-Javadoc)
@@ -19,15 +21,10 @@ public class OpCodeJC  extends OpCode implements IOpCode {
 	    public final void exec(State state_)
 	    {
 	    	   
-	    	int[] memory = state_.getMemory();
-	        
-	        int pc = state_.getPc();
-	        
-	        byte offset = (byte) memory[pc + 1];
-	      
-	        int newPC = pc + 2;
-	        
-	        boolean carryFlag = state_.getPswBit(ProgramStatusWord.CARRY);
+	    	super.exec(state_);
+	    	
+	        boolean carryFlag = state_.getPswBit((byte) ProgramStatusWord.CARRY);
+	        byte offset = this.getByteResult();
 	        
 	        // Jump on Carry
 	        // If C=1
@@ -37,7 +34,7 @@ public class OpCodeJC  extends OpCode implements IOpCode {
 	        {
 	        	// Take jump
 	            // If jump taken, state_.updateStateTime(4);
-	        	
+	        	setExecutionStates(8);
 	        	
 		        // 8 bit relative
 		        // 7 6 5 4 3 2 1 0 | 7 6 5 4 3 2 1 0 
@@ -47,10 +44,27 @@ public class OpCodeJC  extends OpCode implements IOpCode {
 		        	offset = (byte) (offset | ~0xff);
 		        }
 		        
-		        newPC = pc + offset + 2;
+		        state_.setPc(state_.getPc() + offset);
 	        }
 
-	        state_.setPc(newPC);
 	    }
+	    
+	    
+		public int execDirect()
+		{	
+	    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+
+	    	this.setByteResult(operands[1]);
+	    	
+		 	return getExecutionStates();
+		}
+	    
+		public void setAddressMode(AddressMode addressMode) {
+			// TODO Auto-generated method stub
+		    AddressMode am = new AddressMode();
+		    am.setType(AddressMode.DIRECT);
+			super.setAddressMode(am);
+			
+		}
 
 }

@@ -194,13 +194,13 @@ public class State {
 	public void setByteRegister(short reg, byte value) {
 
 		
-		/*System.out.println(
+		System.out.println(
 				" Set Byte Register:" + 
 				String.format("R%02X", (byte)reg) + 
 				" = " + 
 				String.format("0x%02X", value)
 				);
-				*/
+				
 		int index = (byte)reg & 0xff;
 		if ( index > 0x1fff )
 		{
@@ -211,7 +211,7 @@ public class State {
 		
 	}
 	
-    public void setPswBit(byte bit, boolean value)
+    public void setPswBit(int bit, boolean value)
     {
     	this.psw.setBit(bit, value);
     }
@@ -313,7 +313,7 @@ public class State {
 		
 		byte value = register_memory[regIndex];
 		
-		System.out.println(" Get Register:" + String.format("R%02X",regIndex) + " = " + String.format("0x%02X",value));
+		System.out.println(" Get Byte Register:" + String.format("R%02X",regIndex) + " = " + String.format("0x%02X",value));
 		
 		return value; 
 	}
@@ -371,6 +371,25 @@ public class State {
         {
         	this.setRAM(dest_dwreg, value);
         }
+	}
+	public void setByteRegister(byte dest_dwreg, byte value) {
+        
+		int index = dest_dwreg & 0xff;
+		
+        byte lo = (byte) (value  & 0xff) ;
+        
+        
+		register_memory[index] = lo;
+		
+		System.out.println(
+				" Set Byte Register:" + 
+						String.format("0x%02X",dest_dwreg) + 
+						" = " + 
+						String.format("0x%04X",value) +
+						String.format("[lo: 0x%02X]",lo) +
+						String.format("= 0x%02X",lo)
+				);
+				
 	}
 	
 	private void setRAM(short dest_dwreg, short value)
@@ -584,6 +603,19 @@ public class State {
 
 		return ProgramStatusWord.SET;
 	}
+	
+	public boolean getCarryFlag()
+	{
+		int bit = ((this.PSW_FLAGS & ProgramStatusWord.F_C) >>> ProgramStatusWord.CARRY);
+		
+		if (bit == 0)
+		{
+			return ProgramStatusWord.CLEAR;
+		}
+
+		return ProgramStatusWord.SET;
+	}
+	
 	public String pswFlagsToString()
 	{
 		String pswTableHeader 			= "________________________\n";

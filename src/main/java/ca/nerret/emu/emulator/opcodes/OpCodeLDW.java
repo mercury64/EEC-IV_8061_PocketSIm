@@ -21,6 +21,13 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
 		super(opcode, mnemonic);
 		// TODO Auto-generated constructor stub
 	}
+    
+    public OpCodeLDW(int opcode, String mnemonic, int numBytes) {
+    	this(opcode, mnemonic);
+    	this.setNumberOfBytes(numBytes);
+		
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
     public final void exec(State state_) {
@@ -232,8 +239,28 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
 	}
 	public int execIndirectAutoInc()
 	{
-    	System.err.println("Indirect Auto Increment Not Implemented yet. "+ this.getClass().getSimpleName());
-    	System.exit(1);
+    	this.setNumberOfBytes(3);
+    	setExecutionStates(7);
+    	
+    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+    	
+		// LDW (indirreg)+, breg
+ 	    // (RB) <- ([RA]); (RA) <- (RA) + 2
+ 	   
+		short indirectRegRA = (short)(operands[1]  & 0xfe);
+		short destRegRB = operands[2];
+		   
+		// [RA]
+		short RA = this.getWordRegister(indirectRegRA);
+		   
+		//value = this.getWordValue(memory, RA);
+		   
+		// (RB) <- ([RA])
+		this.setWordRegister(destRegRB, (short)RA);
+		   
+		// (RA) <- (RA) + 2
+		this.setWordRegister(indirectRegRA, (short)(RA + 2));
+
 		return getExecutionStates();
 	}
 

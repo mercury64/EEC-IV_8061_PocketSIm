@@ -2,19 +2,19 @@ package ca.nerret.emu.env;
 
 public class Bit {
 	
-	byte bitNo;
+	int bitNo;
 	String symbol;
 	String meaning;
 	public boolean value;
 	
-	public Bit(byte bitNo, String symbol, String meaning, boolean value) {
+	public Bit(int bitNo, String symbol, String meaning, boolean value) {
 		this.bitNo = bitNo;
 		this.symbol = symbol;
 		this.meaning = meaning;
 		this.value = value;
 	}
 	
-	public byte getBitNo() {
+	public int getBitNo() {
 		return bitNo;
 	}
 

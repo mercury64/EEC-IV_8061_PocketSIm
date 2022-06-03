@@ -17,8 +17,25 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 	private State state;
 	
 	private short result;
+	private byte byteResult;
 	private short operandLocation;
-
+	
+	/* Word Registers */
+	protected byte sourceRA;
+	private byte sourceRB;
+	private byte dataLo;
+	private byte dataHi;
+	protected byte indirectRA;
+	protected byte baseRA;
+	protected byte offset;
+	protected byte indexRA;
+	protected byte offsetLo;
+	protected byte offsetHi;
+	
+	/* Byte Registers */
+	private byte dataByte;
+	private byte destinationRD; 
+	
 	public OpCode(int opcode, String mnemonic)
 	{
 		this.setOpcode(opcode);
@@ -266,6 +283,11 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 	public short getWordRegister(short register) {
 		return this.state.getWordRegister(register);
 	}
+	
+	public void setWordRegister(short s, short t) {
+		this.state.setWordRegister((short) (s), (short) (t));
+		
+	}
 
 
 	public int getIntRegister(byte operandRB) {
@@ -280,6 +302,14 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 
 	public void setResult(short result) {
 		this.result = result;
+	}
+	
+	public byte getByteResult() {
+		return byteResult;
+	}
+	
+	public void setByteResult(byte byteResult) {
+		this.byteResult = byteResult;
 	}
 	
 	protected void setOperandLocation(short operandLocation)
@@ -311,5 +341,55 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 
 	public void setNumberOfBytes(int numberOfBytes) {
 		this.numberOfBytes = numberOfBytes;
+	}
+
+	public byte getDataLo() {
+		return dataLo;
+	}
+
+	public void setDataLo(byte dataLo) {
+		this.dataLo = dataLo;
+	}
+
+	public byte getDataHi() {
+		return dataHi;
+	}
+
+	public void setDataHi(byte dataHi) {
+		this.dataHi = dataHi;
+	}
+	
+	public byte getDataByte() {
+		return dataByte;
+	}
+
+	public void setDataByte(byte dataByte) {
+		this.dataByte = dataByte;
+	}
+
+	public byte getSourceRB() {
+		return sourceRB;
+	}
+
+	public void setSourceRB(byte sourceRB) {
+		this.sourceRB = sourceRB;
+	}
+	
+	public byte getSourceRA() {
+		return sourceRA;
+	}
+
+	public void setSourceRA(byte sourceRA) {
+		this.sourceRA = sourceRA;
+	}
+	
+	public byte getDestinationRD() {
+		return destinationRD;
+		
+	}
+
+	public void setDestinationRD(byte dreg) {
+		this.destinationRD = dreg;
+		
 	}
 }

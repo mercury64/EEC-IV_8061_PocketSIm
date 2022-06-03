@@ -14,6 +14,13 @@ public class OpCodeORRB  extends OpCode<OpCodeORRB> implements IOpCode {
 		super(opcode, mnemonic);
 		// TODO Auto-generated constructor stub
 	}
+    
+    public OpCodeORRB(int opcode, String mnemonic, int numBytes) {
+    	this(opcode, mnemonic);
+    	this.setNumberOfBytes(numBytes);
+		
+		// TODO Auto-generated constructor stub
+	}
 
 	/* (non-Javadoc)
      * @see ca.nerret.emu.emulator.opcodes.IOpcode#exec(ca.nerret.emu.emulator.State)
@@ -21,6 +28,23 @@ public class OpCodeORRB  extends OpCode<OpCodeORRB> implements IOpCode {
     @Override
     public final void exec(State state_)
     {
+    	
+    	super.exec(state_);
+        
+		byte RbValue = state_.getByteRegister((short) (this.getDestinationRD() & 0xff));
+    	byte data = this.getDataByte();
+    	byte result = (byte) (data | RbValue);
+    	
+    	
+    	
+    	System.out.print(" ORRB: " + result +":");
+    	result =  (byte) state_.doORRB(RbValue, data);
+    	System.out.print(" ORRB: " + result +":");
+    	
+    	state_.setByteRegister(this.getDestinationRD(),result);
+        
+        return;
+        /**
         int[] memory = state_.getMemory();
         final int pc = state_.getPc();
 
@@ -156,6 +180,32 @@ public class OpCodeORRB  extends OpCode<OpCodeORRB> implements IOpCode {
         
 		state_.setPswBit(ProgramStatusWord.OVERFLOW, false);
 		state_.setPswBit(ProgramStatusWord.CARRY, false);
-        
+        */
     }
+    
+	public int execDirect()
+	{
+    	this.setNumberOfBytes(3);
+    	setExecutionStates(4);
+    	System.err.println("Not Implemented yet.");
+    	System.exit(1);
+    	return getExecutionStates();
+    		
+	}
+	
+	public int execImmediate()
+	{
+		// Assembler Format: ORRB =data,breg
+    	// Instruction Operation: (Rb) <- Data + (Rb)
+    	// Execution States: 4
+    	// Machine Format: [ ^91 ], [ Data Byte ], [ Dest Rb ]
+    	
+		byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+    	
+		this.setDataByte(operands[1]);
+		this.setDestinationRD(operands[2]);
+
+    	return getExecutionStates();
+    		
+	}
 }
