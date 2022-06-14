@@ -879,14 +879,10 @@ word    b934 b935
 word    b936 b937
 byte    b938 b938
 byte    b939 b939
-byte    b93c b93c
-word    b93e b93f
-word    b940 b941
-word    b942 b943
-byte    b944 b944
-word    b946 b947
-byte    b948 b948
-byte    b949 b949
+word    b93c b947
+
+byte    b948 b949
+
 word    b94a b94b
 byte    b94c b94c
 byte    b94d b94d
@@ -905,16 +901,7 @@ byte    b95c b95c
 byte    b95d b95d
 byte    b95e b95e
 byte    b95f b95f
-byte    b960 b960
-byte    b961 b961
-byte    b962 b962
-byte    b963 b963
-byte    b964 b964
-byte    b965 b965
-byte    b966 b966
-byte    b967 b967
-byte    b968 b968
-byte    b96f b96f
+byte    b960 b96f
 byte    b970 b970
 byte    b971 b971
 word    b972 b973
@@ -961,8 +948,7 @@ byte    bb92 bb92
 byte    bb93 bb93
 byte    bb94 bb94
 word    bb96 bb97
-byte    bb98 bb98
-byte    bb9f bb9f
+byte    bb98 bb9f
 byte    bba0 bba0
 byte    bba1 bba1
 byte    bba2 bba2
@@ -1038,9 +1024,8 @@ byte    c0c1 c0c1
 word    c0c2 c0c3
 word    c0c4 c0c5
 word    c0c6 c0c7
-word    c0c8 c0c9
-byte    c0ca c0ca
-byte    c0cb c0cb
+word    c0c8 c0cb
+
 word    c0d0 c0d1
 word    c0d6 c0d7
 word    c0d8 c0d9
@@ -1124,22 +1109,11 @@ byte    c19c c19c
 byte    c19d c19d
 word    c19e c19f
 byte    c1a0 c1a3
-word    c1a4 c1a5
-word    c1a6 c1a7
-word    c1a8 c1a9
-word    c1aa c1ab
-byte    c1af c1af
-byte    c1b0 c1b0
-byte    c1ba c1ba
-word    c1bc c1bd
-word    c1be c1bf
-byte    c1c1 c1c1
-byte    c1c3 c1c3
-word    c1c4 c1c5
-word    c1c6 c1c7
-word    c1c8 c1c9
-word    c1ca c1cb
-word    c1cc c1cd
+word    c1a4 c1bf
+byte    c1c0 c1c1
+
+word    c1c2 c1cd
+
 byte    c1ce c1ce
 byte    c1cf c1cf
 byte    c1d0 c1d0
@@ -3013,10 +2987,15 @@ sym b4f6 "TARMAX"
 
 sym b916 "CTHIGH"
 sym b917 "CTLOW"
-
+sym b918 "NUBASE_ALT"
 sym b919 "ENGCYL"
+sym b91a "SPKSWH"
+sym b91c "SPKSWL"
 sym b91e "MHPFD"
 
+sym b920 "TRSRPM"
+sym b922 "TRSRPH
+sym b923 "TEMPFB"
 sym b924 "DFMIN0"
 sym b925 "DFMIN1"
 sym b926 "TOTMIN"
@@ -3036,8 +3015,10 @@ sym b93e "TKYON1"
 
 sym b940 "TKYON2"
 sym b942 "TKYON3"
+sym b944 "PURECT1"
 sym b946 "PRG_DEC"
 sym b948 "PURG_ADP_SF"
+sym b949 "PURECT"
 sym b94a "EVTDOT"
 sym b94c "PURGSW"
 sym b94d "FULPRGTM"
@@ -3047,17 +3028,41 @@ sym b950 "ACTFMM"
 sym b951 "ECTFMM"
 sym b952 "FMECNT"
 sym b953 "MAPFMM"
+sym b954 "BYMAP"
 sym b955 "BYPWOT"
+
+sym b956 "BYRPM"
+sym b957 "BYRPMH"
+sym b958 "BYSTM1"
+sym b959 "BYSTM2"
+sym b95a "BYSTM3"
+sym b95b "BYSTM4"
+sym b95c "BYSTM8"
+sym b95d "CHKASW"
 sym b95e "CTBYS"
 sym b95f "CTBYSH"
 
+sym b960 "DSFTSW"
+sym b961 "HIMAPF"
 sym b962 "HMUMAP"
 sym b963 "HMUMPH"
 sym b964 "LMBMAP"
+sym b965 "LOMAPF"
 sym b966 "SW_MPD"
 sym b967 "T70LSW"
-sym b972 "SMTPDL"
+sym b968 "UPSMAP=0"
+sym b969 "UPSTM1"
+sym b96a "UPSTM2"
+sym b96b "UPSTM3"
+sym b96c "UPSTM4"
+sym b96d "UPSTM5"
+sym b96e "UPSTM6"
+sym b96f "UPSWOT=0"
 
+sym b970 "AEDLMP"
+sym b971 "MAXAET"
+sym b972 "SMTPDL"
+sym b974 "MAXTTM"
 
 #sym bab0 "RF8"
 sym bab2 "TCBPA"
@@ -3077,6 +3082,7 @@ sym baca "TCMBAR"
 sym bacc "TC"
 sym bace "TCNDT_ISC"
 
+sym bad0 "TCTAR"
 sym bad2 "TCTP"
 sym bad4 "TCTPT"
 sym bad6 "TCTOT"
@@ -3115,6 +3121,12 @@ sym bb93 "VSOMXH"
 sym bb94 "Y"
 sym bb96 "SHFDLT"
 sym bb98 "OSCDLY"
+sym bb99 "EGRTD1"
+sym bb9a "EGRTD2"
+sym bb9b "EGRTD3"
+sym bb9c "EGRTD4"
+sym bb9d "EGRTD5"
+sym bb9e "EGRTD6"
 sym bb9f "KPEI"
 
 sym bba0 "MAP_WOT_EGRC"
@@ -3148,10 +3160,11 @@ sym bbc7 "KNKCYL"
 sym bbc8 "WINCLD"
 
 # sym c0a8 "RFc"
-sym c0aa "trans_max_torque_limit1"
-sym c0ac "trans_max_torque_limit2"
-sym c0ae "trans_max_tq_hysterisis"
+sym c0aa "TQMAX1"
+sym c0ac "TQMAX2"
+sym c0ae "TQMAXH"
 
+sym c0b0 "PIPFIL"
 sym c0b2 "TOT_OTEMP"
 sym c0b4 "HYS_OTEMP"
 sym c0b6 "EPC_OTEMP"
@@ -3160,11 +3173,13 @@ sym c0ba "NE_OTEMP_MAX"
 sym c0bc "SRLK_FM"
 sym c0be "NELK_FM"
 
-sym c0c2 "trans_ratio_1"
-sym c0c4 "trans_ratio_2"
-sym c0c6 "trans_ratio_3"
-sym c0c8 "trans_ratio_4"
-sym c0ca "trans_ratio_5"
+sym c0c0 "TCIL_TM_DLY"
+sym c0c1 "TCIL_TM1"
+sym c0c2 "GRRAT1"
+sym c0c4 "GRRAT2"
+sym c0c6 "GRRAT3"
+sym c0c8 "GRRAT4"
+# sym c0ca "trans_ratio_5"
 
 sym c0e5 "trans_tv_engagement_high"
 sym c0e6 "trans_tv_engagement_moderate"
@@ -3177,8 +3192,8 @@ sym c156 "ETV_BIAS
 sym c158 "ETV_GAIN"
 sym c159 "ETV_GAIN_BAT"
 
-sym c15a "VTABFL"
-sym c15b "VTCEGO"
+sym c15a "TVCDLT"
+# sym c15b "VTCEGO"
 sym c15c "TV_SLT_TM"
 sym c15e "TVFMMN"
 
@@ -3186,11 +3201,14 @@ sym c160 "TCMAPW"
 sym c162 "TCNE"
 sym c164 "TCTPTE"
 sym c166 "TCVST"
+sym c168 "TCTPTC"
 sym c16a "TCTTA"
 sym c16c "TM4X4L"
 sym c16e "V_BOO_SPD"
 sym c16f "V_BOOSPD_TM"
 
+#sym c16e "DELTAT"
+sym c174 "SPD_PM"
 sym c176 "CS_MAX_TIME"
 sym c178 "CS_MUL"
 sym c179 "OFM_MUL"
@@ -3216,18 +3234,33 @@ sym c198 "S_VAL_TPADD"
 sym c19a "S_VAL_TPSUB"
 sym c19c "S_VAL_VSADD"
 sym c19d "S_VAL_VSSUB"
-
 sym c19e "TP_SH_VALID"
+
 sym c1a0 "VS_SH_VAL2"
 sym c1a1 "VS_SH_VAL3"
 sym c1a2 "VS_SH_VAL4"
 sym c1a4 "NOV_ERR_BAND"
 sym c1a6 "CCE_TPMN"
+sym c1a8 "MAN1LO"
+sym c1aa "MAN1HI"
+sym c1ac "MLPS_2LO"
+sym c1ae "MLPS_2HI"
 
-sym c1af "?VECT3_wrong?"
+sym c1b0 "ODLO"
+sym c1b2 "ODHI"
+sym c1b4 "NEULO"
+sym c1b6 "NEUHI"
+sym c1b8 "REVLO"
+sym c1ba "REVHI"
+sym c1bc "PARKLO"
+sym c1be "PARKHI"
+
+sym c1c0 "MLPS_2"
+sym c1c1 "MLPS_2hobyte"
 
 sym c1ce "VS_NEU"
 sym c1cf "GR_NEU"
+
 sym c1d0 "GRMSFT"
 sym c1d1 "SW_MSF"
 
