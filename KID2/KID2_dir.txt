@@ -1127,11 +1127,7 @@ byte    c1a0 c1a3
 word    c1a4 c1a5
 word    c1a6 c1a7
 word    c1a8 c1a9
-word    c1aa c1ab
-byte    c1af c1af
-byte    c1b0 c1b0
-byte    c1ba c1ba
-word    c1bc c1bd
+word    c1aa c1bd
 word    c1be c1bf
 byte    c1c1 c1c1
 byte    c1c3 c1c3
@@ -3222,8 +3218,6 @@ sym c1a1 "VS_SH_VAL3"
 sym c1a2 "VS_SH_VAL4"
 sym c1a4 "NOV_ERR_BAND"
 sym c1a6 "CCE_TPMN"
-
-sym c1af "?VECT3_wrong?"
 
 sym c1ce "VS_NEU"
 sym c1cf "GR_NEU"
