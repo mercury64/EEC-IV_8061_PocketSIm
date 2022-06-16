@@ -13,10 +13,25 @@ public class OpCodeSTW extends OpCode implements IOpCode {
 		super(opcode, mnemonic);
 		// TODO Auto-generated constructor stub
 	}
+	
+    public OpCodeSTW(int opcode, String mnemonic, int numBytes) {
+    	this(opcode, mnemonic);
+    	this.setNumberOfBytes(numBytes);
+		
+		// TODO Auto-generated constructor stub
+	}
 
 	// RA <-- RB
     @Override
     public final void exec(State state_) {
+    	
+    	super.exec(state_);
+        
+        state_.setWordRegister(this.getOperandLocation(),this.getResult());
+        
+        return;
+        
+        /**
         int[] memory = state_.getMemory();
         final int pc = state_.getPc();
 
@@ -40,11 +55,11 @@ public class OpCodeSTW extends OpCode implements IOpCode {
 	        	stateTime = 4;
 	        	break;
 	       // Does not exist for this opcode
-	       /* case AddressMode.IMMEDIATE:
-	        	numberOfBytes = 4;
-	        	stateTime = 5; 
-	        	break;
-	        */
+	       // case AddressMode.IMMEDIATE:
+	       // 	numberOfBytes = 4;
+	       // 	stateTime = 5; 
+	       // 	break;
+	        
 	        case AddressMode.INDIRECT:
 	        	numberOfBytes = 3;
 	        	stateTime = 7;
@@ -107,43 +122,7 @@ public class OpCodeSTW extends OpCode implements IOpCode {
         
         if (this.getAddressModeType() == AddressMode.INDIRECT_AUTO_INC)
         {
-        	// aa30: c2,19,1c            stw   R1c,[R18++]      [R18++] = R1c;
         	
-        	// AssemblerFormat: STW breg, (indirreg)+
-        	// Instruction operation: ([RA])<-(RB); (RA)<-(RA) + 1
-        	// Execution states: 8/13
-        	// Machine Format: [ ^C2 ],[ DestRA |1_MB],[ SourceRB ]
-        	registerRA = (short) (registerRA & 0xfe);
-    		
-        	// [RA]
-    		short valueRA = (short) state_.getWordRegister((byte) (registerRA));
-    		
-    		// RB
-    		short valueRB = (short) state_.getWordRegister((byte) (registerRB));
-    		 
-    		// ([RA])<-(RB);
-    		state_.setWordRegister((short) (valueRA), (short) (valueRB));
-
-		 	// (RA) <- (RA) + 1
-		 	//state_.setWordRegister(registerRA, (short) (registerRA + 2));
-		 	   value = (short) (valueRA + 2);
-		 	  dest_reg = registerRA;
-		 	/*   byte indirectRegRA = operands[numberOfBytes-2];
-		 	   indirectRegRA = (byte) (indirectRegRA &  0xfe);
-		 	   short destRegRB = operands[numberOfBytes-1];
-		 	   
-		 	   // [RA]
-		 	   short RA = state_.getWordRegister(indirectRegRA);
-		 	   
-		 	   // (RB) <- ([RA])
-		 	  // state_.setByteRegister(destRegRB, RA);
-		 	   areg = getByteValue(memory, RA);
-		 	   breg = destRegRB;
-		 	   
-		 	   // (RA) <- (RA) + 1
-		 	   state_.setWordRegister(indirectRegRA, (short) (RA + 1));
-*/
-		 	 state_.setWordRegister(dest_reg, value);
 
         }
 
@@ -181,7 +160,58 @@ public class OpCodeSTW extends OpCode implements IOpCode {
 
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
-       
-
+       */
     }
+    
+	public int execIndirectAutoInc()
+	{
+		// aa30: c2,19,1c            stw   R1c,[R18++]      [R18++] = R1c;
+    	
+    	// AssemblerFormat: STW breg, (indirreg)+
+    	// Instruction operation: ([RA])<-(RB); (RA)<-(RA) + 1
+    	// Execution states: 8/13
+    	// Machine Format: [ ^C2 ],[ DestRA |1_MB],[ SourceRB ]
+		
+    	this.setNumberOfBytes(3);
+    	setExecutionStates(8);
+    	
+    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+    	
+    	//registerRA = (short) (registerRA & 0xfe);
+    	byte dest_ra = (byte)(operands[1]  &  0xfe);
+    	byte source_rb = (byte)operands[2];
+    	
+    	// [RA]
+		short valueRA = (short) getWordRegister((byte) (dest_ra));
+		
+		// RB
+		short valueRB = (short) getWordRegister((byte) (source_rb));
+		 
+		// ([RA])<-(RB);
+		this.setWordRegister((short) (valueRA), (short) (valueRB));
+
+	 	// (RA) <- (RA) + 1
+		this.setWordRegister(dest_ra, (short) (valueRA + 2));
+	 	//short valueRAinc = (short) (valueRA + 2);
+	 	 
+	 	//dest_reg = registerRA;
+	 	 //  byte indirectRegRA = (byte)operands[1];
+	 	 //  indirectRegRA = (byte) (indirectRegRA &  0xfe);
+	 	 //  short destRegRB = (byte)operands[2];
+	 	   
+	 	   // [RA]
+	 	 //  short RA = this.getWordRegister(indirectRegRA);
+	 	   
+	 	   // (RB) <- ([RA])
+	 	  // state_.setByteRegister(destRegRB, RA);
+	 	   //areg = getByteValue(memory, RA);
+	 	  // breg = destRegRB;
+	 	   
+	 	   // (RA) <- (RA) + 1
+	 	  // this.setWordRegister(indirectRegRA, (short) (RA + 2));
+
+	 	 //state_.setWordRegister(dest_reg, value);
+	 	   
+	 	  return getExecutionStates();
+	}
 }

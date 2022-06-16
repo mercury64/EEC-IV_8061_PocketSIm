@@ -1,6 +1,10 @@
 
 # ----------------------------
+<<<<<<< HEAD
 # SAD Version 4.0.7.6 (13 Sep 2020)
+=======
+# SAD Version 4.0.7.16b (11 Apr 2022)
+>>>>>>> f9df5f18f2b46d6b5243576c0f8912a9f1c89053
 # ----------------------------
 
 # Input file is 'KID2.bin'
@@ -820,6 +824,7 @@ table   b891 b8a9: O 5 UY X 16
 table   b8aa b8c2: O 5 UY X 16 
 table   b8c3 b912: O 10 UY X 16 
 word    b914 b915
+<<<<<<< HEAD
 byte    b916 b916
 byte    b917 b917
 byte    b918 b918
@@ -850,10 +855,20 @@ byte    b944 b944
 word    b946 b947
 byte    b948 b948
 byte    b949 b949
+=======
+byte    b916 b919
+word    b91a b923
+byte    b924 b925
+word    b926 b937
+byte    b938 b939
+word    b93c b947
+byte    b948 b949
+>>>>>>> f9df5f18f2b46d6b5243576c0f8912a9f1c89053
 word    b94a b94b
 byte    b94c b94c
 byte    b94d b94d
 word    b94e b94f
+<<<<<<< HEAD
 byte    b950 b950
 byte    b951 b951
 byte    b952 b952
@@ -880,6 +895,9 @@ byte    b968 b968
 byte    b96f b96f
 byte    b970 b970
 byte    b971 b971
+=======
+byte    b950 b971
+>>>>>>> f9df5f18f2b46d6b5243576c0f8912a9f1c89053
 word    b972 b973
 byte    b974 b974
 func    b975 b97e: SY X 16 : UY X 16 
@@ -924,6 +942,7 @@ byte    bb92 bb92
 byte    bb93 bb93
 byte    bb94 bb94
 word    bb96 bb97
+<<<<<<< HEAD
 byte    bb98 bb98
 byte    bb9f bb9f
 byte    bba0 bba0
@@ -942,6 +961,13 @@ byte    bbb3 bbb3
 byte    bbb4 bbb4
 byte    bbb5 bbb5
 byte    bbb6 bbb6
+=======
+byte    bb98 bba2
+word    bba4 bbab
+byte    bbac bbad
+word    bbae bbb1
+byte    bbb2 bbb6
+>>>>>>> f9df5f18f2b46d6b5243576c0f8912a9f1c89053
 word    bbb8 bbb9
 byte    bbba bbba
 byte    bbbb bbbb
@@ -992,6 +1018,7 @@ byte    c0b0 c0b0
 word    c0b2 c0b3
 word    c0b4 c0b5
 byte    c0b6 c0b6
+<<<<<<< HEAD
 word    c0b8 c0b9
 word    c0ba c0bb
 word    c0bc c0bd
@@ -1004,6 +1031,11 @@ word    c0c6 c0c7
 word    c0c8 c0c9
 byte    c0ca c0ca
 byte    c0cb c0cb
+=======
+word    c0b8 c0bf
+byte    c0c0 c0c1
+word    c0c2 c0cb
+>>>>>>> f9df5f18f2b46d6b5243576c0f8912a9f1c89053
 word    c0d0 c0d1
 word    c0d6 c0d7
 word    c0d8 c0d9
@@ -1086,6 +1118,7 @@ byte    c19c c19c
 byte    c19d c19d
 word    c19e c19f
 byte    c1a0 c1a3
+<<<<<<< HEAD
 word    c1a4 c1a5
 word    c1a6 c1a7
 word    c1a8 c1a9
@@ -1112,6 +1145,14 @@ word    c1d8 c1d9
 word    c1da c1db
 byte    c1dc c1dc
 byte    c1dd c1dd
+=======
+word    c1a4 c1bf
+byte    c1c0 c1c1
+word    c1c2 c1cd
+byte    c1ce c1d5
+word    c1d6 c1db
+byte    c1dc c1dd
+>>>>>>> f9df5f18f2b46d6b5243576c0f8912a9f1c89053
 word    c1de c1df
 byte    c1e0 c1e0
 byte    c1e1 c1e1
@@ -1384,9 +1425,16 @@ word    cc82 cc83
 word    cc84 cc85
 word    cc86 cc87
 word    cc92 cc97
+<<<<<<< HEAD
 byte    cc98 cc9a
 byte    cc9b cca7
 word    cca8 ccb9
+=======
+byte    cc98 cc9d
+word    ccae ccb7
+word    cc9e ccb9
+byte    cc98 cca7
+>>>>>>> f9df5f18f2b46d6b5243576c0f8912a9f1c89053
 byte    ccba cce1
 func    cd22 cd35: UW X 16 : UW X 16 
 func    cd36 cd3d: UY X 16 : UY X 16 
@@ -1777,8 +1825,13 @@ sub  ab92 "DataLoggingPatch"   #cmd
 
 # ------------ Symbol list ----
 sym 2  "LSO_Port"
+<<<<<<< HEAD
 sym 2  "CPU_OK" :B 6
 sym 3  "LIO_Port"
+=======
+sym 3  "BIO_Port"
+sym 4  "AD_Cmd" : W
+>>>>>>> f9df5f18f2b46d6b5243576c0f8912a9f1c89053
 sym 4  "AD_Low"
 sym 4  "AD_Cmd" : W
 sym 5  "AD_High"
@@ -1797,8 +1850,13 @@ sym a  "B5_INT_Priority" :B 5
 sym b  "HSI_Sample"
 sym c  "HSI_Mask"
 sym d  "HSI_Data"
+<<<<<<< HEAD
 sym d  "HSO_Cmd" : W
 sym e  "HSI_Time"
+=======
+sym e  "HSI_Time_lo"
+sym f  "HSI_Time_hi"
+>>>>>>> f9df5f18f2b46d6b5243576c0f8912a9f1c89053
 sym 10  "StackPtr"
 sym 12  "Tmr_OVF_cnt"
 sym 14  "B7_BPKFLG_14" :B 7
@@ -2806,8 +2864,14 @@ sym b8aa  "FN1350"
 sym b8c3  "FN1360"
 sym b916  "CTHIGH"
 sym b917  "CTLOW"
+sym b918  "NUBASE_ALT"
 sym b919  "ENGCYL"
+sym b91a  "SPKSWH"
+sym b91c  "SPKSWL"
 sym b91e  "MHPFD"
+sym b920  "TRSRPM"
+sym b922  "TRSRPH"
+sym b923  "TEMPFB"
 sym b924  "DFMIN0"
 sym b925  "DFMIN1"
 sym b926  "TOTMIN"
@@ -2825,8 +2889,10 @@ sym b93c  "TKYON4"
 sym b93e  "TKYON1"
 sym b940  "TKYON2"
 sym b942  "TKYON3"
+sym b944  "PURECT1"
 sym b946  "PRG_DEC"
 sym b948  "PURG_ADP_SF"
+sym b949  "PURECT"
 sym b94a  "EVTDOT"
 sym b94c  "PURGSW"
 sym b94d  "FULPRGTM"
@@ -2835,15 +2901,38 @@ sym b950  "ACTFMM"
 sym b951  "ECTFMM"
 sym b952  "FMECNT"
 sym b953  "MAPFMM"
+sym b954  "BYMAP"
 sym b955  "BYPWOT"
+sym b956  "BYRPM"
+sym b957  "BYRPMH"
+sym b958  "BYSTM1"
+sym b959  "BYSTM2"
+sym b95a  "BYSTM3"
+sym b95b  "BYSTM4"
+sym b95c  "BYSTM8"
+sym b95d  "CHKASW"
 sym b95e  "CTBYS"
 sym b95f  "CTBYSH"
+sym b960  "DSFTSW"
+sym b961  "HIMAPF"
 sym b962  "HMUMAP"
 sym b963  "HMUMPH"
 sym b964  "LMBMAP"
+sym b965  "LOMAPF"
 sym b966  "SW_MPD"
 sym b967  "T70LSW"
+sym b968  "UPSMAP=0"
+sym b969  "UPSTM1"
+sym b96a  "UPSTM2"
+sym b96b  "UPSTM3"
+sym b96c  "UPSTM4"
+sym b96d  "UPSTM5"
+sym b96e  "UPSTM6"
+sym b96f  "UPSWOT=0"
+sym b970  "AEDLMP"
+sym b971  "MAXAET"
 sym b972  "SMTPDL"
+sym b974  "MAXTTM"
 sym b975  "FN305"
 sym b97f  "FN326"
 sym b989  "FN367"
@@ -2870,6 +2959,7 @@ sym bac8  "TCEGR"
 sym baca  "TCMBAR"
 sym bacc  "TC"
 sym bace  "TCNDT_ISC"
+sym bad0  "TCTAR"
 sym bad2  "TCTP"
 sym bad4  "TCTPT"
 sym bad6  "TCTOT"
@@ -2908,6 +2998,12 @@ sym bb93  "VSOMXH"
 sym bb94  "Y"
 sym bb96  "SHFDLT"
 sym bb98  "OSCDLY"
+sym bb99  "EGRTD1"
+sym bb9a  "EGRTD2"
+sym bb9b  "EGRTD3"
+sym bb9c  "EGRTD4"
+sym bb9d  "EGRTD5"
+sym bb9e  "EGRTD6"
 sym bb9f  "KPEI"
 sym bba0  "MAP_WOT_EGRC"
 sym bba1  "MAP_WOT_EGRS"
@@ -2967,9 +3063,10 @@ sym c03c  "FN144"
 sym c074  "FN145"
 sym c088  "FN146A"
 sym c0a0  "FN190"
-sym c0aa  "trans_max_torque_limit1"
-sym c0ac  "trans_max_torque_limit2"
-sym c0ae  "trans_max_tq_hysterisis"
+sym c0aa  "TQMAX1"
+sym c0ac  "TQMAX2"
+sym c0ae  "TQMAXH"
+sym c0b0  "PIPFIL"
 sym c0b2  "TOT_OTEMP"
 sym c0b4  "HYS_OTEMP"
 sym c0b6  "EPC_OTEMP"
@@ -2977,11 +3074,12 @@ sym c0b8  "NE_OTEMP_MIN"
 sym c0ba  "NE_OTEMP_MAX"
 sym c0bc  "SRLK_FM"
 sym c0be  "NELK_FM"
-sym c0c2  "trans_ratio_1"
-sym c0c4  "trans_ratio_2"
-sym c0c6  "trans_ratio_3"
-sym c0c8  "trans_ratio_4"
-sym c0ca  "trans_ratio_5"
+sym c0c0  "TCIL_TM_DLY"
+sym c0c1  "TCIL_TM1"
+sym c0c2  "GRRAT1"
+sym c0c4  "GRRAT2"
+sym c0c6  "GRRAT3"
+sym c0c8  "GRRAT4"
 sym c0e5  "trans_tv_engagement_high"
 sym c0e6  "trans_tv_engagement_moderate"
 sym c142  "SARCHG"
@@ -2989,18 +3087,19 @@ sym c154  "trans_min_tv_pressure"
 sym c156  "ETV_BIAS"
 sym c158  "ETV_GAIN"
 sym c159  "ETV_GAIN_BAT"
-sym c15a  "VTABFL"
-sym c15b  "VTCEGO"
+sym c15a  "TVCDLT"
 sym c15c  "TV_SLT_TM"
 sym c15e  "TVFMMN"
 sym c160  "TCMAPW"
 sym c162  "TCNE"
 sym c164  "TCTPTE"
 sym c166  "TCVST"
+sym c168  "TCTPTC"
 sym c16a  "TCTTA"
 sym c16c  "TM4X4L"
 sym c16e  "V_BOO_SPD"
 sym c16f  "V_BOOSPD_TM"
+sym c174  "SPD_PM"
 sym c176  "CS_MAX_TIME"
 sym c178  "CS_MUL"
 sym c179  "OFM_MUL"
@@ -3029,6 +3128,23 @@ sym c1a1  "VS_SH_VAL3"
 sym c1a2  "VS_SH_VAL4"
 sym c1a4  "NOV_ERR_BAND"
 sym c1a6  "CCE_TPMN"
+<<<<<<< HEAD
+=======
+sym c1a8  "MAN1LO"
+sym c1aa  "MAN1HI"
+sym c1ac  "MLPS_2LO"
+sym c1ae  "MLPS_2HI"
+sym c1b0  "ODLO"
+sym c1b2  "ODHI"
+sym c1b4  "NEULO"
+sym c1b6  "NEUHI"
+sym c1b8  "REVLO"
+sym c1ba  "REVHI"
+sym c1bc  "PARKLO"
+sym c1be  "PARKHI"
+sym c1c0  "MLPS_2"
+sym c1c1  "MLPS_2hobyte"
+>>>>>>> f9df5f18f2b46d6b5243576c0f8912a9f1c89053
 sym c1ce  "VS_NEU"
 sym c1cf  "GR_NEU"
 sym c1d0  "GRMSFT"

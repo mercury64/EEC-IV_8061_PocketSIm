@@ -10,8 +10,15 @@ import ca.nerret.emu.emulator.State;
  */
 public class OpCodeCLRB extends OpCode implements IOpCode {
 
-    public OpCodeCLRB(int opcode, String mnemonic) {
+	public OpCodeCLRB(int opcode, String mnemonic) {
 		super(opcode, mnemonic);
+		// TODO Auto-generated constructor stub
+	}
+    
+    public OpCodeCLRB(int opcode, String mnemonic, int numBytes) {
+    	this(opcode, mnemonic);
+    	this.setNumberOfBytes(numBytes);
+		
 		// TODO Auto-generated constructor stub
 	}
 
@@ -24,7 +31,7 @@ public class OpCodeCLRB extends OpCode implements IOpCode {
 		
     	super.exec(state_);
         
-        state_.setWordRegister(this.getOperandLocation(),this.getResult());
+        state_.setByteRegister(this.getOperandLocation(),(byte) this.getResult());
         
         return;
         
@@ -50,7 +57,7 @@ public class OpCodeCLRB extends OpCode implements IOpCode {
         */
     }
     
-	public int execImmediate()
+	public int execDirect()
 	{
     	this.setNumberOfBytes(2);
     	setExecutionStates(4);
@@ -62,6 +69,13 @@ public class OpCodeCLRB extends OpCode implements IOpCode {
     	
     	this.setOperandLocation(operands[1]);
 		return getExecutionStates();
+	}
+	
+	public void setAddressMode(AddressMode mode) {
+		// TODO Auto-generated method stub
+	    
+	    this.addressMode = new AddressMode();
+	    this.addressMode.setType(AddressMode.DIRECT);
 	}
 
 }

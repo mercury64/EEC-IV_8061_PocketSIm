@@ -17,6 +17,13 @@ public class OpCodeAD3W  extends OpCode implements IOpCode {
 		super(opcode, mnemonic);
 		// TODO Auto-generated constructor stub
 	}
+    
+    public OpCodeAD3W(int opcode, String mnemonic, int numBytes) {
+    	this(opcode, mnemonic);
+    	this.setNumberOfBytes(numBytes);
+		
+		// TODO Auto-generated constructor stub
+	}
 
 	/* (non-Javadoc)
      * @see ca.nerret.emu.emulator.opcodes.IOpcode#exec(ca.nerret.emu.emulator.State)
@@ -121,10 +128,27 @@ public class OpCodeAD3W  extends OpCode implements IOpCode {
         
     }
     
+	public int execDirect()
+	{
+    	this.setNumberOfBytes(4);
+    	setExecutionStates(5);
+    	
+    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+    	byte areg = operands[1];
+    	byte breg = operands[2];
+    	byte dreg = operands[3];
+    	
+    	short destValue =  (short) (this.getWordRegister(areg) + this.getWordRegister(breg));
+    	
+    	this.setResult(destValue);
+    	this.setOperandLocation(dreg);
+		return getExecutionStates();
+	}
+	
 	public int execImmediate()
 	{
 		
-    	this.setNumberOfBytes(5);
+    	
     	setExecutionStates(6);
     	
     	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());

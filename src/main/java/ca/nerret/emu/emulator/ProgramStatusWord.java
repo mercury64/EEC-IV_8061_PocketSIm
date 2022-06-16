@@ -8,22 +8,22 @@ public class ProgramStatusWord {
 
 	private short register;
 			
-	public final static byte STICKY_BIT = 0x0;
-	public final static byte UNSIGNED = 0x1;
-	public final static byte SIGNED = 0x2;
-	public final static byte CARRY = 0x3;
-	public final static byte OVERFLOW_TRAP = 0x4;
-	public final static byte OVERFLOW = 0x5;
-	public final static byte NEGATIVE = 0x6;
-	public final static byte ZERO = 0x7;
-	public final static byte FIXED_LOGIC_ONE1 = 0x8;
-	public final static byte FIXED_LOGIC_ONE2 = 0x9;
-	public final static byte FIXED_LOGIC_ONE3 = 0xa;
-	public final static byte FIXED_LOGIC_ONE4 = 0xb;
-	public final static byte FIXED_LOGIC_ONE5 = 0xc;
-	public final static byte FIXED_LOGIC_ONE6 = 0xd;
-	public final static byte FIXED_LOGIC_ONE7 = 0xe;
-	public final static byte INTERRUPT_SERVICE = 0xf;
+	public final static int STICKY_BIT = 0x0;
+	public final static int UNSIGNED = 0x1;
+	public final static int SIGNED = 0x2;
+	public final static int CARRY = 0x3;
+	public final static int OVERFLOW_TRAP = 0x4;
+	public final static int OVERFLOW = 0x5;
+	public final static int NEGATIVE = 0x6;
+	public final static int ZERO = 0x7;
+	public final static int FIXED_LOGIC_ONE1 = 0x8;
+	public final static int FIXED_LOGIC_ONE2 = 0x9;
+	public final static int FIXED_LOGIC_ONE3 = 0xa;
+	public final static int FIXED_LOGIC_ONE4 = 0xb;
+	public final static int FIXED_LOGIC_ONE5 = 0xc;
+	public final static int FIXED_LOGIC_ONE6 = 0xd;
+	public final static int FIXED_LOGIC_ONE7 = 0xe;
+	public final static int INTERRUPT_SERVICE = 0xf;
 	
 	public final static boolean SET = true; 
 	public final static boolean CLEAR = false;
@@ -76,7 +76,7 @@ public class ProgramStatusWord {
 		psw[INTERRUPT_SERVICE] = new Bit(INTERRUPT_SERVICE,"I", "Interrupt Enable", false);
 	}
 	
-	public void setBit(byte index, boolean value)
+	public void setBit(int index, boolean value)
 	{
 		this.psw[index].value = value;
 		

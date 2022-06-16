@@ -70,7 +70,7 @@ public final class OpcodeCache {
         _OPCODES.put((byte) 0x02, new OpCodeCPLW(0x02, "CPLW"));
         _OPCODES.put((byte) 0x12, new OpCodeCPLB(0x12, "CPLB"));
         
-        _OPCODES.put((byte) 0x11, new OpCodeCLRB(0x11, "CLRB"));
+        _OPCODES.put((byte) 0x11, new OpCodeCLRB(0x11, "CLRB", 2));
         _OPCODES.put((byte) 0x01, new OpCodeCLRW(0x01, "CLRW"));
         
         _OPCODES.put((byte) 0xE7, new OpCodeJUMP(0xe7, "JUMP"));
@@ -110,20 +110,20 @@ public final class OpcodeCache {
         _OPCODES.put((byte) 0x9a, new OpCodeCMPB(0x9a, "CMPB"));
         _OPCODES.put((byte) 0x9b, new OpCodeCMPB(0x9b, "CMPB"));
         
-        _OPCODES.put((byte) 0x88, new OpCodeCMPW(0x88, "CMPW"));
-        _OPCODES.put((byte) 0x89, new OpCodeCMPW(0x89, "CMPW"));
-        _OPCODES.put((byte) 0x8a, new OpCodeCMPW(0x8a, "CMPW"));
-        _OPCODES.put((byte) 0x8b, new OpCodeCMPW(0x8b, "CMPW"));
+        _OPCODES.put((byte) 0x88, new OpCodeCMPW(0x88, "CMPW",3));
+        _OPCODES.put((byte) 0x89, new OpCodeCMPW(0x89, "CMPW",4));
+        _OPCODES.put((byte) 0x8a, new OpCodeCMPW(0x8a, "CMPW",3));
+        _OPCODES.put((byte) 0x8b, new OpCodeCMPW(0x8b, "CMPW",4));
         
         _OPCODES.put((byte) 0x64, new OpCodeAD2W(0x64, "AD2W"));
         _OPCODES.put((byte) 0x65, new OpCodeAD2W(0x65, "AD2W"));
         _OPCODES.put((byte) 0x66, new OpCodeAD2W(0x66, "AD2W"));
         _OPCODES.put((byte) 0x67, new OpCodeAD2W(0x67, "AD2W"));
  
-        _OPCODES.put((byte) 0x44, new OpCodeAD3W(0x44, "AD3W"));
-        _OPCODES.put((byte) 0x45, new OpCodeAD3W(0x45, "AD3W"));
-        _OPCODES.put((byte) 0x46, new OpCodeAD3W(0x46, "AD3W"));
-        _OPCODES.put((byte) 0x47, new OpCodeAD3W(0x47, "AD3W"));
+        _OPCODES.put((byte) 0x44, new OpCodeAD3W(0x44, "AD3W", 4));
+        _OPCODES.put((byte) 0x45, new OpCodeAD3W(0x45, "AD3W", 5));
+        _OPCODES.put((byte) 0x46, new OpCodeAD3W(0x46, "AD3W", 4));
+        _OPCODES.put((byte) 0x47, new OpCodeAD3W(0x47, "AD3W", 5));
         
         _OPCODES.put((byte) 0x68, new OpCodeSB2W(0x68, "SB2W"));
         _OPCODES.put((byte) 0x69, new OpCodeSB2W(0x69, "SB2W"));
@@ -145,20 +145,20 @@ public final class OpcodeCache {
         _OPCODES.put((byte) 0x76, new OpCodeAD2B(0x76, "AD2B"));
         _OPCODES.put((byte) 0x77, new OpCodeAD2B(0x77, "AD2B"));
         
-        _OPCODES.put((byte) 0x50, new OpCodeAN3B(0x50, "AN3B"));
-        _OPCODES.put((byte) 0x51, new OpCodeAN3B(0x51, "AN3B"));
-        _OPCODES.put((byte) 0x52, new OpCodeAN3B(0x52, "AN3B"));
-        _OPCODES.put((byte) 0x53, new OpCodeAN3B(0x53, "AN3B"));
+        _OPCODES.put((byte) 0x50, new OpCodeAN3B(0x50, "AN3B",4));
+        _OPCODES.put((byte) 0x51, new OpCodeAN3B(0x51, "AN3B",4));
+        _OPCODES.put((byte) 0x52, new OpCodeAN3B(0x52, "AN3B",4));
+        _OPCODES.put((byte) 0x53, new OpCodeAN3B(0x53, "AN3B",5));
                         
-        _OPCODES.put((byte) 0xB0, new OpCodeLDB(0xb0, "LDB"));
-        _OPCODES.put((byte) 0xB1, new OpCodeLDB(0xb1, "LDB"));
-        _OPCODES.put((byte) 0xB2, new OpCodeLDB(0xb2, "LDB"));
-        _OPCODES.put((byte) 0xB3, new OpCodeLDB(0xb3, "LDB"));
+        _OPCODES.put((byte) 0xB0, new OpCodeLDB(0xb0, "LDB",3));
+        _OPCODES.put((byte) 0xB1, new OpCodeLDB(0xb1, "LDB",3));
+        _OPCODES.put((byte) 0xB2, new OpCodeLDB(0xb2, "LDB",3));
+        _OPCODES.put((byte) 0xB3, new OpCodeLDB(0xb3, "LDB",4));
         
-        _OPCODES.put((byte) 0xA0, new OpCodeLDW(0xa0, "LDW"));
-        _OPCODES.put((byte) 0xA1, new OpCodeLDW(0xa1, "LDW"));
-        _OPCODES.put((byte) 0xA2, new OpCodeLDW(0xa2, "LDW"));
-        _OPCODES.put((byte) 0xA3, new OpCodeLDW(0xa3, "LDW"));
+        _OPCODES.put((byte) 0xA0, new OpCodeLDW(0xa0, "LDW",3));
+        _OPCODES.put((byte) 0xA1, new OpCodeLDW(0xa1, "LDW",4));
+        _OPCODES.put((byte) 0xA2, new OpCodeLDW(0xa2, "LDW",3));
+        _OPCODES.put((byte) 0xA3, new OpCodeLDW(0xa3, "LDW",4));
         
         _OPCODES.put((byte) 0xAC, new OpCodeLDZBW(0xac, "LDZBW"));
         _OPCODES.put((byte) 0xAD, new OpCodeLDZBW(0xad, "LDZBW"));
@@ -177,9 +177,9 @@ public final class OpcodeCache {
         _OPCODES.put((byte) 0xC6, new OpCodeSTB(0xc6, "STB"));
         _OPCODES.put((byte) 0xC7, new OpCodeSTB(0xc7, "STB"));
         
-        _OPCODES.put((byte) 0xC0, new OpCodeSTW(0xc0, "STW"));
-        _OPCODES.put((byte) 0xC2, new OpCodeSTW(0xc2, "STW"));
-        _OPCODES.put((byte) 0xC3, new OpCodeSTW(0xc3, "STW"));
+        _OPCODES.put((byte) 0xC0, new OpCodeSTW(0xc0, "STW",3));
+        _OPCODES.put((byte) 0xC2, new OpCodeSTW(0xc2, "STW",3));
+        _OPCODES.put((byte) 0xC3, new OpCodeSTW(0xc3, "STW",3));
 
         _OPCODES.put((byte) 0xCC, new OpCodePOPW(0xcc, "POPW"));
         _OPCODES.put((byte) 0xCE, new OpCodePOPW(0xce, "POPW"));
@@ -221,10 +221,10 @@ public final class OpcodeCache {
         _OPCODES.put((byte) 0x3F, new OpCodeJB(0x3f, "JB"));
 
 
-        _OPCODES.put((byte) 0x90, new OpCodeORRB(0x90, "ORRB"));
-        _OPCODES.put((byte) 0x91, new OpCodeORRB(0x91, "ORRB"));
-        _OPCODES.put((byte) 0x92, new OpCodeORRB(0x92, "ORRB"));
-        _OPCODES.put((byte) 0x93, new OpCodeORRB(0x93, "ORRB"));
+        _OPCODES.put((byte) 0x90, new OpCodeORRB(0x90, "ORRB",3));
+        _OPCODES.put((byte) 0x91, new OpCodeORRB(0x91, "ORRB",3));
+        _OPCODES.put((byte) 0x92, new OpCodeORRB(0x92, "ORRB",3));
+        _OPCODES.put((byte) 0x93, new OpCodeORRB(0x93, "ORRB",4));
 
     }
 
@@ -251,13 +251,13 @@ public final class OpcodeCache {
     	
         try 
         {
-        	//if( opc.getNumberOfBytes() > 1)
+        	if( opc.getNumberOfBytes() > 1)
         	{
         		opc.setAddressMode(new AddressMode((byte)instruction_, firstByte));
         	}
-        	//else
+        	else
         	{
-        	//	opc.setAddressMode(new AddressMode((byte)instruction_));
+        		opc.setAddressMode(new AddressMode((byte)instruction_));
         	}
     	}
         catch(Exception e)

@@ -1,5 +1,6 @@
 package ca.nerret.emu.emulator.opcodes;
 
+import ca.nerret.emu.emulator.AddressMode;
 import ca.nerret.emu.emulator.OpCode;
 import ca.nerret.emu.emulator.State;
 
@@ -28,12 +29,24 @@ public class OpCodeSCALL extends OpCode implements IOpCode {
      */
     @Override
     public final void exec(State state_) {
+    	
+    	//AddressMode direct = new AddressMode();
+    	//direct.setType(AddressMode.DIRECT);
+    	
+    	//this.setAddressMode(direct);
+    	
+    	//super.exec(state_);
+        
+       // state_.setWordRegister(this.getOperandLocation(),this.getResult());
+        
+        //return;
+        ///**
         int[] memory = state_.getMemory();
 
         final int pc = state_.getPc();
 
-        final int ret = pc + 2; // We need to return to the instruction 2 ahead.
-
+        final int ret = pc + 1; 
+        
         int stateTime = 0;
         
         byte byte1 = (byte)memory[pc];
@@ -97,8 +110,22 @@ public class OpCodeSCALL extends OpCode implements IOpCode {
         state_.setPc(offset);
         
         state_.updateStateTime(stateTime);
+        //*/
         
     }
+    
+	//public int execDirect()
+	//{
+		
+		//int[] memory = state_.getMemory();
+
+       // final int pc = state_.getPc();
+
+       // byte byte1 = (byte)memory[pc];
+       // byte byte2 = (byte)memory[pc + 1];
+//
+		//return getExecutionStates();
+	//}
     
     public String toString()
     {
@@ -107,4 +134,5 @@ public class OpCodeSCALL extends OpCode implements IOpCode {
     	
     	return out+ System.lineSeparator();
     }
+
 }

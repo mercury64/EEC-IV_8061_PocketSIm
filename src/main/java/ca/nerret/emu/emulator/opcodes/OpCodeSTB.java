@@ -17,6 +17,14 @@ public class OpCodeSTB extends OpCode implements IOpCode {
 	// RA <-- RB
     @Override
     public final void exec(State state_) {
+    	
+    	super.exec(state_);
+        
+        state_.setWordRegister(this.getOperandLocation(),this.getResult());
+        
+        return;
+        
+        /**
         int[] memory = state_.getMemory();
         final int pc = state_.getPc();
 
@@ -37,11 +45,11 @@ public class OpCodeSTB extends OpCode implements IOpCode {
 	        	stateTime = 4;
 	        	break;
 	       // Does not exist for this opcode
-	       /* case AddressMode.IMMEDIATE:
-	        	numberOfBytes = 4;
-	        	stateTime = 5; 
-	        	break;
-	        */
+	       //case AddressMode.IMMEDIATE:
+	        //	numberOfBytes = 4;
+	        //	stateTime = 5; 
+	        //	break;
+	        
 	        case AddressMode.INDIRECT:
 	        	numberOfBytes = 3;
 	        	stateTime = 7;
@@ -159,7 +167,8 @@ public class OpCodeSTB extends OpCode implements IOpCode {
 
         state_.setPc(pc + numberOfBytes);
         state_.updateStateTime(stateTime);
-       
+        * 
+        */
 
     }
 }

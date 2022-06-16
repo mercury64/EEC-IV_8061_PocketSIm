@@ -10,6 +10,8 @@ public class OpCodeJNE  extends OpCode implements IOpCode {
 	 public OpCodeJNE(int opcode, String mnemonic) {
 			super(opcode, mnemonic);
 			// TODO Auto-generated constructor stub
+			this.setNumberOfBytes(2);
+			this.setExecutionStates(4);
 		}
 
 		/* (non-Javadoc)
@@ -18,14 +20,13 @@ public class OpCodeJNE  extends OpCode implements IOpCode {
 	    @Override
 	    public final void exec(State state_)
 	    {
-	    	int[] memory = state_.getMemory();
+	    	
+	    	super.exec(state_);
 	        
-	        int pc = state_.getPc();
-	        
-	        byte offset = (byte) memory[pc + 1];
-	      
-	        int newPC = pc + 2;
-	        
+	        //state_.setWordRegister(this.getOperandLocation(),this.getResult());
+
+	        byte offset = this.getByteResult();
+
 	        boolean zeroFlag = state_.getZeroFlag();
 	        // (this.PSW_FLAGS & ProgramStatusWord.F_Z)  >>> ProgramStatusWord.ZERO);
 
@@ -47,13 +48,19 @@ public class OpCodeJNE  extends OpCode implements IOpCode {
 		        	offset = (byte) (offset | ~0xff);
 		        }
 		        
-		        newPC = pc + offset + 2;
+		        state_.setPc(state_.getPc() + offset);
 	        }
 
-	        state_.setPc(newPC);
-
-
 	    }
+	    
+		public int execDirect()
+		{
+	    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+
+	    	this.setByteResult(operands[1]);
+			return getExecutionStates();
+		}
+		
 		public void setAddressMode(AddressMode addressMode) {
 			// TODO Auto-generated method stub
 		    AddressMode am = new AddressMode();

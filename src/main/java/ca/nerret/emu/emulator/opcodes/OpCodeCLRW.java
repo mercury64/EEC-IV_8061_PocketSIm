@@ -14,12 +14,33 @@ public class OpCodeCLRW extends OpCode implements IOpCode {
 		super(opcode, mnemonic);
 		// TODO Auto-generated constructor stub
 	}
+    
+    public OpCodeCLRW(int opcode, String mnemonic, int numBytes) {
+    	this(opcode, mnemonic);
+    	this.setNumberOfBytes(numBytes);
+		
+		// TODO Auto-generated constructor stub
+	}
 
 	/* (non-Javadoc)
      * @see ca.nerret.emu.emulator.opcodes.IOpcode#exec(ca.nerret.emu.emulator.State)
      */
     @Override
     public final void exec(State state_) {
+    	
+    	super.exec(state_);
+        
+        state_.setWordRegister(this.getOperandLocation(),this.getResult());
+        
+        // set program status word (PSW)
+        state_.setPswBit(ProgramStatusWord.ZERO, true);
+        state_.setPswBit(ProgramStatusWord.NEGATIVE, false);
+        state_.setPswBit(ProgramStatusWord.OVERFLOW, false);
+        state_.setPswBit(ProgramStatusWord.CARRY, false);   
+        
+        return;
+        
+        /**
         int[] memory = state_.getMemory();
         int pc = state_.getPc();
         
@@ -41,6 +62,8 @@ public class OpCodeCLRW extends OpCode implements IOpCode {
         state_.setPswBit(ProgramStatusWord.NEGATIVE, false);
         state_.setPswBit(ProgramStatusWord.OVERFLOW, false);
         state_.setPswBit(ProgramStatusWord.CARRY, false);        
+        
+        */
     }
     
 	public void setAddressMode(AddressMode mode) {
@@ -59,6 +82,13 @@ public class OpCodeCLRW extends OpCode implements IOpCode {
 
 		setExecutionStates(4);
 		setNumberOfBytes(2);
+
+		byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+    	
+    	byte value = 0;
+    	this.setResult(value);
+    	
+    	this.setOperandLocation(operands[1]);
 
 		return getExecutionStates();
 	}

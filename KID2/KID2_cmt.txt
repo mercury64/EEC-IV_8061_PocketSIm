@@ -32,10 +32,17 @@
 20fe # 0x0Fh = 15, XFRAME Block?
 
 2101 # error register is initialized to BC1FH on EEC power-up/initialize
+211c # GENERATE "OUTPUT INTERRUPT #1", at specified time
+2126 # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#9
+
 2134 # 0x9c / 2 functions = 78
+
+21bf # 3e bytes to "Task_List_2"
+21c6 # 64 bytes to "Task_List_3"
+21ca # 0 bytes to "Task_List_1"
+
 21cd \n# "Task_List_1"
 220b \n# "Task_List_2"
-
 2231 \n# "Task_List_3"
 
 2270 #  A/C CLUTCH STATUS (ACCFLG)
@@ -225,7 +232,19 @@
 29c7 #PDL               38    byte      bin 1       N/A
 29ca #***NOT USED***    39    
 
+2a05 # 
 2aed \n\nEVR FOREGROUND REPEATER MODULE
+
+2b60 # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#2
+2b66 # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#2
+2b7e # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#3
+2b84 # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#3
+2baf # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#1
+2bb5 # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#1
+2bc6 # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#0
+2bcb # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#0
+ 
+2c21 # GENERATE "OUTPUT INTERRUPT #1", at specified time
 
 2d5c # reset int mask
 2d5c \w# a1 = 1010 0001
@@ -1386,6 +1405,8 @@
 7c85 # (ETV_BIAS - (ETV_GAIN * TV_COUNTS))
 7c8a #  (Clip to zero)
 
+7cf9 # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#9
+7cf3 # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
 
 7d0b \n############################################################
 7d0b \n# ROM Checksum
@@ -1437,9 +1458,14 @@
 
 7fd3 # loop until 5161 IO times have passed(12.4ms)
 
+7ff3 # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#3
 803c # (V_ETVOCM_SAV - ETVOCM)
 8042 # ABS(V_ETVOCM_SAV - ETVOCM)
 8048 # VETVDT
+
+8067 # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
+80af # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#3
+80b2 # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#9
 
 8112 # 998,FMEM failure/Failed (open)EPC Output Driver
 811c # 128,MAP vacuum circuit failure
@@ -1460,12 +1486,15 @@
 824b # 172,EGO sensor ckt. ind. system lean.
 
 840e # SET TV_COUNTS =0 
+
 84d5 # 538,Operator error-dyn response test.
 84df # 129,Insuff. MAP change-dyn resp. test.
 
 84f4 \n\n STRATEGY MODULE: VC_BOO_COM1
 
 856e # EGOBAR = EGOBAR UROLAV(IEGO1,R36)
+
+8647 # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
 
 8754 \n#############################################################
 8754 \n# memory RAM test from 100 to 8FF
@@ -1480,6 +1509,11 @@
 8801 \n# switch out of self test to run mode ?
 8801 \n## function/maps/scalars
 8801 \n################################################################
+
+8849 # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
+8852 # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#9
+885f # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#9
+8865 # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
 
 88cf # 1 = Thick Film Ignition - Improved Computer Control Dwell (TFI_ICCD)
 
@@ -1856,7 +1890,8 @@ a9e4 # HSO PORT CAM or OUTPUT HOLD BUFFER FULL goto aa02
 
 a9e7 # add 5D to current IOTime
 
-a9f4 # request interrupt (in 5D IOtimes)
+a9f1 # request interrupt (in 5D IOtimes)
+a9f4 # NO INTERRUPT OUT, SET OUTPUT LOW, OUTPUT INTERRUPT #2
 
 a9fd # R30=4, a9ca+4 = a9ce, [a9ce]=e006
 

@@ -1,7 +1,11 @@
 
 ####################################################################################################
 #
+<<<<<<< HEAD
 # Disassembly listing of binary 'KID2'    8061  1 bank    SAD Version 4.0.7.6 (13 Sep 2020)
+=======
+# Disassembly listing of binary 'KID2'    8061  1 bank     SAD Version 4.0.7.16b (11 Apr 2022)
+>>>>>>> f9df5f18f2b46d6b5243576c0f8912a9f1c89053
 # See 'KID2_msg.txt' for warnings, results and other information
 
 # Explanation of extra flags and formats - 
@@ -94,7 +98,7 @@
 20a0: 3b,30,04            jb    B3,R30,20a7      if (B3_R30 = 0)  {
 20a3: a1,55,d5,42         ldw   R42,d555         R42 = d555; }                     # = 0xD555h / 0x8000h 1.66666 for  30%  duty cycle signature PIP 
 20a7: c3,e6,4c,42         stw   R42,[Re6+4c]     SIGKAL = R42;
-20ab: a3,fc,1a,30         ldw   R30,[Rfc+1a]     R30 = trans_ratio_1;
+20ab: a3,fc,1a,30         ldw   R30,[Rfc+1a]     R30 = GRRAT1;
 20af: c3,e8,9c,30         stw   R30,[Re8+9c]     RT_GR_CUR = R30;
 20b3: c3,e8,9e,30         stw   R30,[Re8+9e]     RT_GR_OLD = R30;
 20b7: b3,fd,ec,00,30      ldb   R30,[Rfc+ec]     R30 = NVBASE;
@@ -130,14 +134,14 @@
 2112: 20,03               sjmp  2117             goto 2117; }
 
 2114: b1,b5,0c            ldb   Rc,b5            HSI_Mask = b5;
-2117: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
-211c: b1,2a,0d            ldb   Rd,2a            HSO_Cmd = 2a;
+2117: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
+211c: b1,2a,0d            ldb   Rd,2a            HSO_Cmd = 2a;                     # GENERATE "OUTPUT INTERRUPT #1", at specified time
 211f: fb                  ei                     interrupts ON;
 2120: f0                  ret                    return;
 
    Initialize:
-2121: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
-2126: b1,19,0d            ldb   Rd,19            HSO_Cmd = 19;
+2121: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
+2126: b1,19,0d            ldb   Rd,19            HSO_Cmd = 19;                     # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#9
 2129: 11,2a               clrb  R2a              R2a = 0;
 212b: a1,00,09,10         ldw   R10,900          StackPtr = 900;
 212f: 2f,01               scall 2032             Reset_All ();
@@ -183,14 +187,14 @@
 21b4: b1,0f,42            ldb   R42,f            R42 = f;
 21b7: c7,01,ff,1f,42      stb   R42,[R0+1fff]    [1fff] = R42;
 21bc: 36,2a,04            jnb   B6,R2a,21c3      if (B6_NO_START_2a = 1)  {
-21bf: b1,3e,d7            ldb   Rd7,3e           Rd7 = 3e;
+21bf: b1,3e,d7            ldb   Rd7,3e           Rd7 = 3e;                         # 3e bytes to "Task_List_2"
 21c2: f0                  ret                    return; }
 
 21c3: 35,2a,04            jnb   B5,R2a,21ca      if (?RUNNING? = 1)  {
-21c6: b1,64,d7            ldb   Rd7,64           Rd7 = 64;
+21c6: b1,64,d7            ldb   Rd7,64           Rd7 = 64;                         # 64 bytes to "Task_List_3"
 21c9: f0                  ret                    return; }
 
-21ca: b1,00,d7            ldb   Rd7,0            Rd7 = 0;
+21ca: b1,00,d7            ldb   Rd7,0            Rd7 = 0;                          # 0 bytes to "Task_List_1"
 21cd: f0                  ret                    return;
 
 # "Task_List_1"
@@ -1066,8 +1070,8 @@
 29f7: 89,83,06,76         cmpw  R76,683          
 29fb: d9,2b               jgtu  2a28             if (R76 > 683) goto 2a28;
 29fd: 38,0a,1e            jb    B0,Ra,2a1e       if (B0_HSO_OVF = 1) goto 2a1e;
-2a00: 49,01,00,72,0e      sb3w  Re,R72,1         HSI_Time = HSO_time - 1;
-2a05: b0,6f,0d            ldb   Rd,R6f           HSO_Cmd = R6f;
+2a00: 49,01,00,72,0e      sb3w  Re,R72,1         HSI_Time_lo = HSO_time - 1;
+2a05: b0,6f,0d            ldb   Rd,R6f           HSO_Cmd = R6f;                    # 
 2a08: 71,77,4c            an2b  R4c,77           B3_Immediate = 0;
                                                  B7_R4c = 0;
 2a0b: f0                  ret                    return;
@@ -1136,7 +1140,7 @@
 2a89: 64,76,84            ad2w  R84,R76          Reftime += R76;
 2a8c: b4,00,86            adcb  R86,R0           ReftimeH += CY;
 2a8f: b0,86,6e            ldb   R6e,R86          DATA_TIMEH = ReftimeH;
-2a92: 48,0e,84,76         sb3w  R76,R84,Re       R76 = Reftime - HSI_Time;
+2a92: 48,0e,84,76         sb3w  R76,R84,Re       R76 = Reftime - HSI_Time_lo;
 2a96: 65,02,00,76         ad2w  R76,2            R76 += 2;
 2a9a: 48,76,84,6c         sb3w  R6c,R84,R76      DATA_TIME = Reftime - R76;
 2a9e: b8,00,6e            sbbb  R6e,R0           DATA_TIMEH -= CY;
@@ -1209,19 +1213,19 @@ EVR FOREGROUND REPEATER MODULE
 2b5b: 20,17               sjmp  2b74             goto 2b74; }
 
 2b5d: 39,50,14            jb    B1,R50,2b74      if (B1_Undsp_trans = 0)  {
-2b60: b1,12,6f            ldb   R6f,12           R6f = 12;
+2b60: b1,12,6f            ldb   R6f,12           R6f = 12;                         # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#2
 2b63: 30,d6,03            jnb   B0,Rd6,2b69      if (B0_Rd6 = 1)  {
-2b66: b1,02,6f            ldb   R6f,2            R6f = 2; }
-2b69: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
+2b66: b1,02,6f            ldb   R6f,2            R6f = 2; }                        # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#2
+2b69: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
 2b6e: b0,6f,0d            ldb   Rd,R6f           HSO_Cmd = R6f;
 2b71: 95,01,d6            xorb  Rd6,1            B0_Rd6 ^= 1; } }
 2b74: c3,e4,7e,56         stw   R56,[Re4+7e]     DOL_COUNT = R56; }
 2b78: 31,9e,17            jnb   B1,R9e,2b92      if (B1_E4OD_9e = 1)  {
 2b7b: 30,a2,14            jnb   B0,Ra2,2b92      if (B0_Ra2 = 1)  {
-2b7e: b1,03,6f            ldb   R6f,3            R6f = 3;
+2b7e: b1,03,6f            ldb   R6f,3            R6f = 3;                          # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#3
 2b81: 37,a2,03            jnb   B7,Ra2,2b87      if (B7_FLG_CS_CM_a2 = 1)  {
-2b84: b1,13,6f            ldb   R6f,13           R6f = 13; }
-2b87: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
+2b84: b1,13,6f            ldb   R6f,13           R6f = 13; }                       # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#3
+2b87: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
 2b8c: b0,6f,0d            ldb   Rd,R6f           HSO_Cmd = R6f;
 2b8f: 71,fe,a2            an2b  Ra2,fe           B0_Ra2 = 0; } }
 2b92: 8b,e8,a8,c2         cmpw  Rc2,[Re8+a8]     
@@ -1235,18 +1239,18 @@ EVR FOREGROUND REPEATER MODULE
 2ba6: 33,dd,06            jnb   B3,Rdd,2baf      if (B3_FLG_HS_LK_dd = 1)  {
 2ba9: 71,f7,dd            an2b  Rdd,f7           B3_FLG_HS_LK_dd = 0;
 2bac: 71,fe,dd            an2b  Rdd,fe           B0_FLG_SFT_UNLK_dd = 0; } }
-2baf: b1,11,6f            ldb   R6f,11           R6f = 11;
+2baf: b1,11,6f            ldb   R6f,11           R6f = 11;                         # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#1
 2bb2: 3b,a2,03            jb    B3,Ra2,2bb8      if (B3_FLG_LK_CM_a2 = 0)  {
-2bb5: b1,01,6f            ldb   R6f,1            R6f = 1; }
-2bb8: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
+2bb5: b1,01,6f            ldb   R6f,1            R6f = 1; }                        # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#1
+2bb8: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
 2bbd: b0,6f,0d            ldb   Rd,R6f           HSO_Cmd = R6f;
 2bc0: 31,9e,13            jnb   B1,R9e,2bd6      if (B1_E4OD_9e = 1)  {
 2bc3: 3a,44,05            jb    B2,R44,2bcb      if (B2_R44 = 0)  {
-2bc6: b1,00,6f            ldb   R6f,0            R6f = 0;
+2bc6: b1,00,6f            ldb   R6f,0            R6f = 0;                          # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#0
 2bc9: 20,03               sjmp  2bce             goto 2bce; }
 
-2bcb: b1,10,6f            ldb   R6f,10           R6f = 10;
-2bce: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
+2bcb: b1,10,6f            ldb   R6f,10           R6f = 10;                         # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#0
+2bce: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
 2bd3: b0,6f,0d            ldb   Rd,R6f           HSO_Cmd = R6f; }
 2bd6: 35,e0,40            jnb   B5,Re0,2c19      if (B5_Re0 = 1)  {
 2bd9: 71,df,e0            an2b  Re0,df           B5_Re0 = 0;
@@ -1276,16 +1280,21 @@ EVR FOREGROUND REPEATER MODULE
 
    Sub_2c19:
 2c19: a0,80,54            ldw   R54,R80          R54 = 235e;
-2c1c: 45,a1,01,54,0e      ad3w  Re,R54,1a1       HSI_Time = R54 + 1a1;
-2c21: b1,2a,0d            ldb   Rd,2a            HSO_Cmd = 2a;
+2c1c: 45,a1,01,54,0e      ad3w  Re,R54,1a1       HSI_Time_lo = R54 + 1a1;
+2c21: b1,2a,0d            ldb   Rd,2a            HSO_Cmd = 2a;                     # GENERATE "OUTPUT INTERRUPT #1", at specified time
 2c24: 91,0d,47            orb   R47,d            B0_Flags47 = 1;
                                                  B2_Flags_47 = 1;
                                                  B3_Flags_47 = 1;
 2c27: a0,46,54            ldw   R54,R46          R54 = R46;
 2c2a: 85,00,00,54         xrw   R54,0            R54 = R54;
 2c2e: b0,54,02            ldb   R2,R54           LSO_Port = R54;
+<<<<<<< HEAD
 2c31: b0,55,03            ldb   R3,R55           LIO_Port = R55;
 2c34: 18,02,55            shrb  R55,2            R55 >>= 2;                        #[ R55 /= 4] 
+=======
+2c31: b0,55,03            ldb   R3,R55           BIO_Port = R55;
+2c34: 18,02,55            shrb  R55,2            R55 >>= 2;
+>>>>>>> f9df5f18f2b46d6b5243576c0f8912a9f1c89053
 2c37: c7,01,2f,09,55      stb   R55,[R0+92f]     [92f] = R55;
 2c3c: 95,02,50            xorb  R50,2            B1_Undsp_trans ^= 1;
 2c3f: 31,50,65            jnb   B1,R50,2ca7      if (B1_Undsp_trans = 1)  {
@@ -1339,8 +1348,13 @@ EVR FOREGROUND REPEATER MODULE
 2cc4: ef,66,5b            call  882d             Sub_882d (); }
 2cc7: 39,50,3c            jb    B1,R50,2d06      if (B1_Undsp_trans = 0)  {
 2cca: b3,01,2f,09,55      ldb   R55,[R0+92f]     R55 = [92f];
+<<<<<<< HEAD
 2ccf: 19,02,55            shlb  R55,2            R55 <<= 2;                        #[ R55 *= 4] 
 2cd2: b0,03,56            ldb   R56,R3           R56 = LIO_Port;
+=======
+2ccf: 19,02,55            shlb  R55,2            R55 <<= 2;
+2cd2: b0,03,56            ldb   R56,R3           R56 = BIO_Port;
+>>>>>>> f9df5f18f2b46d6b5243576c0f8912a9f1c89053
 2cd5: 71,03,56            an2b  R56,3            R56 &= 3;
 2cd8: 90,56,55            orb   R55,R56          R55 |= R56;
 2cdb: b3,01,30,09,56      ldb   R56,[R0+930]     R56 = [930];
@@ -1478,7 +1492,7 @@ EVR FOREGROUND REPEATER MODULE
 2e2d: 20,15               sjmp  2e44             goto 2e44; }
 
 2e2f: a0,c2,56            ldw   R56,Rc2          R56 = Rc2;
-2e32: af,fc,08,58         ldzbw R58,[Rfc+8]      wR58 = [c0b0];
+2e32: af,fc,08,58         ldzbw R58,[Rfc+8]      wR58 = PIPFIL;
 2e36: 08,58,56            shrw  R56,R58          R56 >>= R58;
 2e39: 48,56,c2,5a         sb3w  R5a,Rc2,R56      R5a = Rc2 - R56;
 2e3d: 08,58,54            shrw  R54,R58          R54 >>= R58;
@@ -1694,10 +1708,10 @@ RISING EDGE CALCULATIONS
 3069: 09,01,54            shlw  R54,1            R54 <<= 1;                        #[ R54 *= 2] 
 306c: b3,e6,48,56         ldb   R56,[Re6+48]     R56 = TLOFLG;
 3070: 37,56,36            jnb   B7,R56,30a9      if (B7_R56 = 1)  {
-3073: a3,f6,0c,56         ldw   R56,[Rf6+c]      R56 = [b920];
+3073: a3,f6,0c,56         ldw   R56,[Rf6+c]      R56 = TRSRPM;
 3077: 88,56,b4            cmpw  Rb4,R56          
 307a: d9,11               jgtu  308d             if (N_RPM <= R56)  {
-307c: 6b,f6,0e,56         sb2w  R56,[Rf6+e]      R56 -= [b922];
+307c: 6b,f6,0e,56         sb2w  R56,[Rf6+e]      R56 -= TRSRPH;
 3080: d3,08               jnc   308a             if (R56 >= 0)  {
 3082: 88,56,b4            cmpw  Rb4,R56          
 3085: db,03               jc    308a             if (N_RPM < R56)  {
@@ -1739,7 +1753,7 @@ RISING EDGE CALCULATIONS
 30f7: 89,a1,01,56         cmpw  R56,1a1          
 30fb: d1,06               jleu  3103             if (R56 > 1a1)  {
 30fd: 8b,f6,06,c4         cmpw  Rc4,[Rf6+6]      
-3101: db,03               jc    3106             if (DT12S >= [b91a]) goto 3106; }
+3101: db,03               jc    3106             if (DT12S >= SPKSWH) goto 3106; }
 3103: 71,fb,50            an2b  R50,fb           B2_Douple_edge = 0; }
 3106: 20,13               sjmp  311b             goto 311b; }
 
@@ -1747,7 +1761,7 @@ RISING EDGE CALCULATIONS
 310c: 89,f4,01,54         cmpw  R54,1f4          
 3110: da,09               jle   311b             if (R54 > 1f4)  {
 3112: 8b,f6,08,c4         cmpw  Rc4,[Rf6+8]      
-3116: d1,03               jleu  311b             if (DT12S > [b91c])  {
+3116: d1,03               jleu  311b             if (DT12S > SPKSWL)  {
 3118: 91,04,50            orb   R50,4            B2_Douple_edge = 1; } }
 311b: c3,e6,d6,56         stw   R56,[Re6+d6]     [256] = R56;
 311f: 71,bf,9e            an2b  R9e,bf           B6_Reg_9e = 0;
@@ -3633,9 +3647,13 @@ FIRST_RPM and REFLG LOGIC
 43be: 91,04,4b            orb   R4b,4            B2_R4b = 1;
 43c1: 71,fe,4b            an2b  R4b,fe           B0_R4b = 0;
 43c4: a3,e4,98,42         ldw   R42,[Re4+98]     R42 = INDS;
+<<<<<<< HEAD
 43c8: 45,00,01,fc,30      ad3w  R30,Rfc,100      R30 = B0_R31 ;
+=======
+43c8: 45,00,01,fc,30      ad3w  R30,Rfc,100      R30 = MAN1LO;
+>>>>>>> f9df5f18f2b46d6b5243576c0f8912a9f1c89053
 43cd: ad,06,32            ldzbw R32,6            wR32 = 6;
-43d0: b3,fd,19,01,34      ldb   R34,[Rfc+119]    R34 = [c1c1];
+43d0: b3,fd,19,01,34      ldb   R34,[Rfc+119]    R34 = MLPS_2hobyte;
 43d5: 8a,31,42            cmpw  R42,[R30++]      
 43d8: d1,31               jleu  440b             if (R42 > [R30++])  {
 43da: 8a,31,42            cmpw  R42,[R30++]      
@@ -3654,7 +3672,7 @@ FIRST_RPM and REFLG LOGIC
 
 43f8: 99,05,32            cmpb  R32,5            
 43fb: d7,06               jne   4403             if (R32 = 5)  {
-43fd: b3,e2,fc,34         ldb   R34,[Re2+fc]     R34 = [c1c0];
+43fd: b3,e2,fc,34         ldb   R34,[Re2+fc]     R34 = MLPS_2;
 4401: 20,05               sjmp  4408             goto 4408; } }
 
 4403: b3,33,ab,43,34      ldb   R34,[R32+43ab]   R34 = [R32+43ab];
@@ -3662,7 +3680,7 @@ FIRST_RPM and REFLG LOGIC
 440b: 99,08,34            cmpb  R34,8            
 440e: d7,0f               jne   441f             if (R34 = 8)  {
 4410: 37,e0,0c            jnb   B7,Re0,441f      if (B7_Re0 = 1)  {
-4413: b3,e2,fc,30         ldb   R30,[Re2+fc]     R30 = [c1c0];
+4413: b3,e2,fc,30         ldb   R30,[Re2+fc]     R30 = MLPS_2;
 4417: 99,04,30            cmpb  R30,4            
 441a: d7,03               jne   441f             if (R30 = 4)  {
 441c: b1,06,34            ldb   R34,6            R34 = 6; } } }
@@ -3690,7 +3708,7 @@ FIRST_RPM and REFLG LOGIC
 4454: 7b,e6,ae,36         sb2b  R36,[Re6+ae]     R36 -= AEMAP;
 4458: d3,0b               jnc   4465             if (R36 >= 0)  {
 445a: 9b,f6,5c,36         cmpb  R36,[Rf6+5c]     
-445e: d3,07               jnc   4467             if (R36 < [b970]) goto 4467;
+445e: d3,07               jnc   4467             if (R36 < AEDLMP) goto 4467;
 4460: 91,20,29            orb   R29,20           B5_TARFLG_29 = 1;
 4463: 20,18               sjmp  447d             goto 447d; }
 
@@ -3705,7 +3723,7 @@ FIRST_RPM and REFLG LOGIC
 447d: 8b,fe,12,38         cmpw  R38,[Rfe+12]     
 4481: d3,52               jnc   44d5             if (R38 >= TPDLTA)  {
 4483: 9b,f6,5c,36         cmpb  R36,[Rf6+5c]     
-4487: db,03               jc    448c             if (R36 < [b970])  {
+4487: db,03               jc    448c             if (R36 < AEDLMP)  {
 4489: 3d,29,b2            jb    B5,R29,443e      if (B5_TARFLG_29 = 1) goto 443e; }
 448c: fa                  di                     interrupts OFF;
 448d: 4d,15,00,38,30      ml3w  R30,R38,15       lR30 = wR38 * 15;
@@ -3726,7 +3744,7 @@ FIRST_RPM and REFLG LOGIC
 44be: d3,10               jnc   44d0             if (TAR >= R30)  {
 44c0: a0,b0,32            ldw   R32,Rb0          R32 = TAR;
 44c3: a0,30,34            ldw   R34,R30          R34 = R30;
-44c6: a3,f8,20,36         ldw   R36,[Rf8+20]     R36 = [bad0];
+44c6: a3,f8,20,36         ldw   R36,[Rf8+20]     R36 = TCTAR;
 44ca: ef,82,04            call  494f             UROLAV ();
 44cd: a0,3e,30            ldw   R30,R3e          R30 = R3e; }
 44d0: a0,30,b0            ldw   Rb0,R30          TAR = R30;
@@ -3735,16 +3753,16 @@ FIRST_RPM and REFLG LOGIC
 44d5: 88,00,38            cmpw  R38,R0           
 44d8: d1,14               jleu  44ee             if (R38 > 0)  {
 44da: 9b,f6,5c,36         cmpb  R36,[Rf6+5c]     
-44de: db,03               jc    44e3             if (R36 < [b970])  {
+44de: db,03               jc    44e3             if (R36 < AEDLMP)  {
 44e0: 3d,29,0b            jb    B5,R29,44ee      if (B5_TARFLG_29 = 1) goto 44ee; }
 44e3: b3,e4,d1,33         ldb   R33,[Re4+d1]     R33 = [151];
 44e7: 9b,f6,60,33         cmpb  R33,[Rf6+60]     
-44eb: db,01               jc    44ee             if (R33 < [b974])  {
+44eb: db,01               jc    44ee             if (R33 < MAXTTM)  {
 44ed: f0                  ret                    return; } } }
 
 44ee: 35,29,06            jnb   B5,R29,44f7      if (B5_TARFLG_29 = 1)  {
 44f1: 9b,f6,5c,36         cmpb  R36,[Rf6+5c]     
-44f5: d3,1d               jnc   4514             if (R36 < [b970]) goto 4514; }
+44f5: d3,1d               jnc   4514             if (R36 < AEDLMP) goto 4514; }
 44f7: 8b,fe,12,3a         cmpw  R3a,[Rfe+12]     
 44fb: db,17               jc    4514             if (R3a < TPDLTA)  {
 44fd: 4b,e4,ae,b2,38      sb3w  R38,Rb2,[Re4+ae] R38 = TP - AETP;
@@ -3753,7 +3771,7 @@ FIRST_RPM and REFLG LOGIC
 4508: d3,0a               jnc   4514             if (R38 >= SMTPDL)  {
 450a: b3,e4,d1,33         ldb   R33,[Re4+d1]     R33 = [151];
 450e: 9b,f6,5d,33         cmpb  R33,[Rf6+5d]     
-4512: d1,06               jleu  451a             if (R33 <= [b971]) goto 451a; } } } }
+4512: d1,06               jleu  451a             if (R33 <= MAXAET) goto 451a; } } } }
 4514: 01,b0               clrw  Rb0              TAR = 0;
 4516: c7,e4,d1,00         stb   R0,[Re4+d1]      [151] = 0; }
 451a: fa                  di                     interrupts OFF;
@@ -5369,7 +5387,7 @@ DETERMINE BASE EM (BASE_EM)
 5577: 20,03               sjmp  557c             goto 557c; } }
 
 5579: 91,08,4a            orb   R4a,8            B3_TLS_NV_FLG_4a = 1;
-557c: a3,fc,02,32         ldw   R32,[Rfc+2]      R32 = trans_max_torque_limit1;
+557c: a3,fc,02,32         ldw   R32,[Rfc+2]      R32 = TQMAX1;
 5580: 29,f9               scall 577b             Sub_577b ();
 5582: 98,00,42            cmpb  R42,R0           
 5585: d7,05               jne   558c             if (R42 = 0)  {
@@ -5379,7 +5397,7 @@ DETERMINE BASE EM (BASE_EM)
 558c: 8b,e8,b0,32         cmpw  R32,[Re8+b0]     
 5590: d9,03               jgtu  5595             if (R32 <= TQ_OFM)  {
 5592: 71,df,4a            an2b  R4a,df           B5_R4a = 0; }
-5595: a3,fc,04,32         ldw   R32,[Rfc+4]      R32 = trans_max_torque_limit2;
+5595: a3,fc,04,32         ldw   R32,[Rfc+4]      R32 = TQMAX2;
 5599: 8b,e8,b0,32         cmpw  R32,[Re8+b0]     
 559d: d9,05               jgtu  55a4             if (R32 <= TQ_OFM)  {
 559f: 91,01,4a            orb   R4a,1            B0_R4a = 1;
@@ -5549,7 +5567,7 @@ DETERMINE BASE EM (BASE_EM)
 
    Sub_577b:
 577b: 11,42               clrb  R42              R42 = 0;
-577d: 4b,fc,06,32,30      sb3w  R30,R32,[Rfc+6]  R30 = R32 - trans_max_tq_hysterisis;
+577d: 4b,fc,06,32,30      sb3w  R30,R32,[Rfc+6]  R30 = R32 - TQMAXH;
 5782: db,02               jc    5786             if (R30 < 0)  {
 5784: 17,42               incb  R42              R42++; }
 5786: 8b,e8,b0,30         cmpw  R30,[Re8+b0]     
@@ -6688,9 +6706,9 @@ KNOCK STRATEGY ENABLE LOGIC
 6336: 9b,fa,26,42         cmpb  R42,[Rfa+26]     
 633a: db,03               jc    633f             if (R42 < MAP_WOT_EGRC)  {
 633c: 71,fd,2a            an2b  R2a,fd           B1_WOT_EGR_FLG_2a = 0; }
-633f: 45,1f,00,fa,30      ad3w  R30,Rfa,1f       R30 = bb99;
+633f: 45,1f,00,fa,30      ad3w  R30,Rfa,1f       R30 = EGRTD1;
 6344: 32,8f,05            jnb   B2,R8f,634c      if (B2_R8f = 1)  {
-6347: 45,22,00,fa,30      ad3w  R30,Rfa,22       R30 = bb9c; }
+6347: 45,22,00,fa,30      ad3w  R30,Rfa,22       R30 = EGRTD4; }
 634c: ef,cf,e6            call  4a1e             Sub_4a1e ();
 634f: d3,3b               jnc   638c             if (R42 >= [R30+2])  {
 6351: 3f,a5,38            jb    B7,Ra5,638c      if (b7_CRKFLG_a5 = 0)  {
@@ -7781,11 +7799,11 @@ PSFLAG Logic: (Last state of POWSFG)
 6e33: d7,63               jne   6e98             if (R32 = 0)  {
 6e35: b3,e4,ce,30         ldb   R30,[Re4+ce]     R30 = [14e];
 6e39: 9b,f6,47,30         cmpb  R30,[Rf6+47]     
-6e3d: db,59               jc    6e98             if (R30 < [b95b])  {
+6e3d: db,59               jc    6e98             if (R30 < BYSTM4)  {
 6e3f: 31,27,06            jnb   B1,R27,6e48      if (B1_DFSFLG_R27 = 1)  {
 6e42: 9b,f6,4c,00         cmpb  R0,[Rf6+4c]      
-6e46: d7,50               jne   6e98             if ([b960] != 0) goto 6e98; }
-6e48: 45,44,00,f6,30      ad3w  R30,Rf6,44       R30 = b958;
+6e46: d7,50               jne   6e98             if (DSFTSW != 0) goto 6e98; }
+6e48: 45,44,00,f6,30      ad3w  R30,Rf6,44       R30 = BYSTM1;
 6e4d: ef,ce,db            call  4a1e             Sub_4a1e ();
 6e50: d3,46               jnc   6e98             if (R42 >= [R30+2])  {
 6e52: 3d,a4,43            jb    B5,Ra4,6e98      if (TAQ1 = 0)  {
@@ -7804,30 +7822,30 @@ PSFLAG Logic: (Last state of POWSFG)
 6e7b: 32,9f,1a            jnb   B2,R9f,6e98      if (B2_OLFLG = 0) goto 6e98; }
 6e7e: b3,e4,cf,30         ldb   R30,[Re4+cf]     R30 = LMBTMR;
 6e82: 9b,f6,48,30         cmpb  R30,[Rf6+48]     
-6e86: db,0a               jc    6e92             if (R30 < [b95c])  {
+6e86: db,0a               jc    6e92             if (R30 < BYSTM8)  {
 6e88: b3,e4,ca,30         ldb   R30,[Re4+ca]     R30 = [14a];
 6e8c: 9b,f6,40,30         cmpb  R30,[Rf6+40]     
-6e90: d7,10               jne   6ea2             if (R30 != [b954]) goto 6ea2; }
+6e90: d7,10               jne   6ea2             if (R30 != BYMAP) goto 6ea2; }
 6e92: 9b,f6,49,00         cmpb  R0,[Rf6+49]      
-6e96: df,03               je    6e9b             if ([b95d] = 0) goto 6e9b; } } } } } } } } } } } }
+6e96: df,03               je    6e9b             if (CHKASW = 0) goto 6e9b; } } } } } } } } } } } }
 6e98: 91,04,25            orb   R25,4            CHKAIR = 1; }                     # (not forced O.L.)
 6e9b: 71,bf,47            an2b  R47,bf           AM2 = 0;
 6e9e: 71,fe,46            an2b  R46,fe           AM1 = 0;
 6ea1: f0                  ret                    return; }                         # (bypass air)
 
-6ea2: 45,58,00,f6,30      ad3w  R30,Rf6,58       R30 = b96c;
+6ea2: 45,58,00,f6,30      ad3w  R30,Rf6,58       R30 = UPSTM4;
 6ea7: 3a,8f,05            jb    B2,R8f,6eaf      if (B2_R8f = 0)  {
-6eaa: 45,55,00,f6,30      ad3w  R30,Rf6,55       R30 = b969; }
+6eaa: 45,55,00,f6,30      ad3w  R30,Rf6,55       R30 = UPSTM1; }
 6eaf: ef,6c,db            call  4a1e             Sub_4a1e ();
 6eb2: d3,2b               jnc   6edf             if (R42 >= [R30+2])  {
 6eb4: b3,e4,c9,30         ldb   R30,[Re4+c9]     R30 = [149];
 6eb8: 9b,f6,5b,30         cmpb  R30,[Rf6+5b]     
-6ebc: db,03               jc    6ec1             if (R30 < [b96f])  {
+6ebc: db,03               jc    6ec1             if (R30 < UPSWOT=0)  {
 6ebe: 3a,a5,1e            jb    B2,Ra5,6edf      if (B2_APT_a5 = 1) goto 6edf; }
 6ec1: 37,24,0a            jnb   B7,R24,6ece      if (B7_HUMTMR_FLG_24 = 1)  {
 6ec4: b3,e4,cc,30         ldb   R30,[Re4+cc]     R30 = HMUTMR;
 6ec8: 9b,f6,54,30         cmpb  R30,[Rf6+54]     
-6ecc: d3,11               jnc   6edf             if (R30 < [b968]) goto 6edf; }
+6ecc: d3,11               jnc   6edf             if (R30 < UPSMAP=0) goto 6edf; }
 6ece: 9b,f6,53,00         cmpb  R0,[Rf6+53]      
 6ed2: df,03               je    6ed7             if (T70LSW != 0)  {
 6ed4: 3a,9f,08            jb    B2,R9f,6edf      if (B2_OLFLG = 1) goto 6edf; }
@@ -7849,7 +7867,7 @@ PSFLAG Logic: (Last state of POWSFG)
 6ef9: df,24               je    6f1f             if (PURGSW = 0) goto 6f1f; }
 6efb: 3a,a0,06            jb    B2,Ra0,6f04      if (B2_WRMEGO_a0 = 0)  {
 6efe: 9b,f6,35,b6         cmpb  Rb6,[Rf6+35]     
-6f02: da,1b               jle   6f1f             if (ECT <= [b949]) goto 6f1f; }
+6f02: da,1b               jle   6f1f             if (ECT <= PURECT) goto 6f1f; }
 6f04: 38,a6,18            jb    B0,Ra6,6f1f      if (B0_ETV_ERROR_a6 = 0)  {
 6f07: a3,f4,58,38         ldw   R38,[Rf4+58]     R38 = NLMT;
 6f0b: 88,38,b4            cmpw  Rb4,R38          
@@ -7895,7 +7913,7 @@ PSFLAG Logic: (Last state of POWSFG)
 6f76: 37,a7,0c            jnb   B7,Ra7,6f85      if (B7_FMEM_FLAG2 = 0) goto 6f85; }
 6f79: b0,b6,42            ldb   R42,Rb6          R42 = ECT;
 6f7c: 9b,f6,30,42         cmpb  R42,[Rf6+30]     
-6f80: d1,0d               jleu  6f8f             if (R42 <= [b944]) goto 6f8f;
+6f80: d1,0d               jleu  6f8f             if (R42 <= PURECT1) goto 6f8f;
 6f82: 3a,a0,0a            jb    B2,Ra0,6f8f      if (B2_WRMEGO_a0 = 1) goto 6f8f; } } }
 6f85: 6b,f6,32,3c         sb2w  R3c,[Rf6+32]     R3c -= PRG_DEC;
 6f89: db,08               jc    6f93             if (R3c >= 0) goto 6f93;
@@ -9398,7 +9416,7 @@ ERROR CODE DESCRIPTION
 7cf8: f0                  ret                    return;
 
    Sub_7cf9:
-7cf9: b1,19,0d            ldb   Rd,19            HSO_Cmd = 19;
+7cf9: b1,19,0d            ldb   Rd,19            HSO_Cmd = 19;                     # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#9  # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
 7cfc: 28,06               scall 7d04             Sub_7d04 ();
 7cfe: b1,09,0d            ldb   Rd,9             HSO_Cmd = 9;
 7d01: 28,01               scall 7d04             Sub_7d04 ();
@@ -9407,7 +9425,7 @@ ERROR CODE DESCRIPTION
    Sub_7d04:
 7d04: 65,42,03,3a         ad2w  R3a,342          R3a += ETVOCM;
    Sub_7d08:
-7d08: a0,3a,0e            ldw   Re,R3a           HSI_Time = R3a;
+7d08: a0,3a,0e            ldw   Re,R3a           HSI_Time_lo = R3a;
 7d0b: f0                  ret                    return;
 
 ############################################################
@@ -9738,13 +9756,13 @@ ERROR CODE DESCRIPTION
 7f78: 28,1d               scall 7f97             Sub_7f97 ();
 7f7a: fa                  di                     interrupts OFF;
 7f7b: ff                  nop                    
-7f7c: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
+7f7c: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
 7f81: 55,10,1c,0d         ad3b  Rd,R1c,10        HSO_Cmd = R1c + 10;
 7f85: fb                  ei                     interrupts ON;
 7f86: 28,2b               scall 7fb3             Sub_7fb3 ();
 7f88: fa                  di                     interrupts OFF;
 7f89: ff                  nop                    
-7f8a: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
+7f8a: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
 7f8f: 51,0f,1c,0d         an3b  Rd,R1c,f         HSO_Cmd = R1c & f;
 7f93: fb                  ei                     interrupts ON;
 7f94: cc,34               pop   R34              R34 = pop();
@@ -9791,10 +9809,10 @@ ERROR CODE DESCRIPTION
    Sub_7fe5:
 7fe5: 01,46               clrw  R46              R46 = 0;
 7fe7: fa                  di                     interrupts OFF;
-7fe8: 45,0f,00,06,0e      ad3w  Re,R6,f          HSI_Time = IO_Timer + f;
+7fe8: 45,0f,00,06,0e      ad3w  Re,R6,f          HSI_Time_lo = IO_Timer + f;
 7fed: 71,fb,44            an2b  R44,fb           B2_R44 = 0;
 7ff0: 71,f7,a2            an2b  Ra2,f7           B3_FLG_LK_CM_a2 = 0;
-7ff3: b1,03,0d            ldb   Rd,3             HSO_Cmd = 3;
+7ff3: b1,03,0d            ldb   Rd,3             HSO_Cmd = 3;                      # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#3
 7ff6: fb                  ei                     interrupts ON;
 7ff7: 01,92               clrw  R92              ISCDTY = 0;
 7ff9: c3,e4,76,00         stw   R0,[Re4+76]      PURGDC = 0;
@@ -9844,8 +9862,8 @@ ERROR CODE DESCRIPTION
 805a: 17,38               incb  R38              R38++;
 805c: 2f,87               scall 7fe5             Sub_7fe5 ();
 805e: 85,00,00,46         xrw   R46,0            R46 = R46;
-8062: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
-8067: b1,09,0d            ldb   Rd,9             HSO_Cmd = 9;
+8062: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
+8067: b1,09,0d            ldb   Rd,9             HSO_Cmd = 9;                      # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
 806a: 71,fd,45            an2b  R45,fd           STO_STATE = 0; }
 806d: c3,e4,02,00         stw   R0,[Re4+2]       [182] = 0;
 8071: 71,f7,2d            an2b  R2d,f7           B3_R2d = 0;
@@ -9874,11 +9892,11 @@ ERROR CODE DESCRIPTION
 809c: c0,92,42            stw   R42,R92          ISCDTY = R42;
 809f: c3,e4,76,42         stw   R42,[Re4+76]     PURGDC = R42;
 80a3: fa                  di                     interrupts OFF;
-80a4: 45,0f,00,06,0e      ad3w  Re,R6,f          HSI_Time = IO_Timer + f;
+80a4: 45,0f,00,06,0e      ad3w  Re,R6,f          HSI_Time_lo = IO_Timer + f;
 80a9: 91,04,44            orb   R44,4            B2_R44 = 1;
 80ac: 91,08,a2            orb   Ra2,8            B3_FLG_LK_CM_a2 = 1;
-80af: b1,13,0d            ldb   Rd,13            HSO_Cmd = 13;
-80b2: b1,19,0d            ldb   Rd,19            HSO_Cmd = 19;
+80af: b1,13,0d            ldb   Rd,13            HSO_Cmd = 13;                     # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#3
+80b2: b1,19,0d            ldb   Rd,19            HSO_Cmd = 19;                     # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#9
 80b5: 91,02,45            orb   R45,2            STO_STATE = 1;
 80b8: fb                  ei                     interrupts ON;
 80b9: 27,b2               sjmp  806d             goto 806d; } }
@@ -10543,8 +10561,8 @@ ERROR CODE DESCRIPTION
    HW_Check:
 8640: fa                  di                     interrupts OFF;
 8641: ff                  nop                    
-8642: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
-8647: b1,09,0d            ldb   Rd,9             HSO_Cmd = 9;
+8642: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time_lo = IO_Timer + 3;
+8647: b1,09,0d            ldb   Rd,9             HSO_Cmd = 9;                      # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
 864a: c3,e6,c2,10         stw   R10,[Re6+c2]     [242] = StackPtr;
 864e: a1,5c,00,10         ldw   R10,5c           StackPtr = 5c;
 8652: a1,7c,a1,3c         ldw   R3c,a17c         R3c = a17c;
@@ -10792,10 +10810,10 @@ ERROR CODE DESCRIPTION
 883f: a1,68,02,70         ldw   R70,268          Rtab = 268;
 8843: 3d,2b,31            jb    B5,R2b,8877      if (STO_code = 1) goto 8877;
 8846: 91,80,4c            orb   R4c,80           B7_R4c = 1;
-8849: b1,09,6f            ldb   R6f,9            R6f = 9;
+8849: b1,09,6f            ldb   R6f,9            R6f = 9;                          # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
 884c: 3e,2b,06            jb    B6,R2b,8855      if (STO_off = 0)  {
 884f: 37,2b,03            jnb   B7,R2b,8855      if (STO_on = 1)  {
-8852: b1,19,6f            ldb   R6f,19           R6f = 19; } }
+8852: b1,19,6f            ldb   R6f,19           R6f = 19; } }                     # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#9
 8855: ef,79,a1            call  29d1             Sub_29d1 ();
 8858: 71,3f,2b            an2b  R2b,3f           STO_off = 0;
                                                  STO_on = 0;
@@ -10803,9 +10821,9 @@ ERROR CODE DESCRIPTION
 885e: f0                  ret                    return;
 
    Sub_885f:
-885f: b1,19,6f            ldb   R6f,19           R6f = 19;
+885f: b1,19,6f            ldb   R6f,19           R6f = 19;                         # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#9
 8862: 38,ae,03            jb    B0,Rae,8868      if (B0_Rae = 0)  {
-8865: b1,09,6f            ldb   R6f,9            R6f = 9; }
+8865: b1,09,6f            ldb   R6f,9            R6f = 9; }                        # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
 8868: ef,66,a1            call  29d1             Sub_29d1 ();
 886b: 08,01,ae            shrw  Rae,1            Rae >>= 1;                        #[ Rae /= 2] 
 886e: e0,ab,38            djnz  Rab,88a9         Rab--;
@@ -10889,7 +10907,7 @@ ERROR CODE DESCRIPTION
 8932: f0                  ret                    return;
 
    INTRN_E4OD_SYS_EQU_COM1:
-8933: 45,16,01,fc,e2      ad3w  Re2,Rfc,116      Re2 = c1be;
+8933: 45,16,01,fc,e2      ad3w  Re2,Rfc,116      Re2 = PARKHI;
 8938: ef,35,bf            call  4870             UUYFuncLU_4870 (                  # BP INTERPOLATION FACTOR
 893b: d2,c1                     #arg 1              FN615,
 893d: bb,00                     #arg 2              BP );
@@ -10968,11 +10986,11 @@ ERROR CODE DESCRIPTION
 8a25: d1,03               jleu  8a2a             if (TP_REL > R30)  {
 8a27: 71,fd,53            an2b  R53,fd           B1_R53 = 0; } }
 8a2a: 8b,e2,b6,14         cmpw  R14,[Re2+b6]     
-8a2e: d3,05               jnc   8a35             if (R14 >= [c174])  {
+8a2e: d3,05               jnc   8a35             if (R14 >= SPD_PM)  {
 8a30: 91,01,53            orb   R53,1            B0_R53 = 1;
 8a33: 20,12               sjmp  8a47             goto 8a47; }
 
-8a35: a3,e2,b6,30         ldw   R30,[Re2+b6]     R30 = [c174];
+8a35: a3,e2,b6,30         ldw   R30,[Re2+b6]     R30 = SPD_PM;
 8a39: 6b,e2,b4,30         sb2w  R30,[Re2+b4]     R30 -= [c172];
 8a3d: d1,08               jleu  8a47             if (R30 > 0)  {
 8a3f: 88,30,14            cmpw  R14,R30          
@@ -10992,7 +11010,7 @@ ERROR CODE DESCRIPTION
 8a66: c3,e8,b2,3e         stw   R3e,[Re8+b2]     [332] = R3e;
 8a6a: a3,e8,aa,32         ldw   R32,[Re8+aa]     R32 = [32a];
 8a6e: a0,b2,34            ldw   R34,Rb2          R34 = TP;
-8a71: a3,e2,aa,36         ldw   R36,[Re2+aa]     R36 = [c168];
+8a71: a3,e2,aa,36         ldw   R36,[Re2+aa]     R36 = TCTPTC;
 8a75: ef,d7,be            call  494f             UROLAV ();
 8a78: c3,e8,aa,3e         stw   R3e,[Re8+aa]     [32a] = R3e;
 8a7c: a3,e8,94,30         ldw   R30,[Re8+94]     R30 = TOT;
@@ -11723,7 +11741,7 @@ ERROR CODE DESCRIPTION
 918a: 91,20,46            orb   R46,20           B5_R46 = 1;
 918d: fb                  ei                     interrupts ON;
 918e: c4,da,30            stb   R30,Rda          GEAR_CUR = R30;
-9191: 45,1a,00,fc,34      ad3w  R34,Rfc,1a       R34 = trans_ratio_1;
+9191: 45,1a,00,fc,34      ad3w  R34,Rfc,1a       R34 = GRRAT1;
 9196: 64,34,32            ad2w  R32,R34          R32 += R34;
 9199: a2,32,34            ldw   R34,[R32]        R34 = [R32];
 919c: c3,e8,9c,34         stw   R34,[Re8+9c]     RT_GR_CUR = R34;
@@ -12208,7 +12226,7 @@ Clip TV_PRES as necessary:
 968b: c7,e8,d1,40         stb   R40,[Re8+d1]     TV_COUNTS = R40;
 968f: 91,20,e0            orb   Re0,20           B5_Re0 = 1;
 9692: 9b,fd,b2,00,30      cmpb  R30,[Rfc+b2]     
-9697: d1,04               jleu  969d             if (R30 > VTABFL)  {
+9697: d1,04               jleu  969d             if (R30 > TVCDLT)  {
 9699: c3,e8,e4,00         stw   R0,[Re8+e4]      TM_TV_SS = 0; }
 969d: 99,a0,91            cmpb  R91,a0           
 96a0: d3,3e               jnc   96e0             if (VBAT >= a0)  {
@@ -13539,10 +13557,10 @@ a3f8: 71,df,4b            an2b  R4b,df           B5_OTEMP_FM_FLG_4b = 0; }
 a3fb: 3b,45,1d            jb    B3,R45,a41b      if (STIFLG = 0)  {
 a3fe: b3,e8,f8,42         ldb   R42,[Re8+f8]     R42 = [378];
 a402: 9b,fc,18,42         cmpb  R42,[Rfc+18]     
-a406: d1,13               jleu  a41b             if (R42 > [c0c0])  {
+a406: d1,13               jleu  a41b             if (R42 > TCIL_TM_DLY)  {
 a408: b3,e8,f7,42         ldb   R42,[Re8+f7]     R42 = [377];
 a40c: 9b,fc,19,42         cmpb  R42,[Rfc+19]     
-a410: d3,18               jnc   a42a             if (R42 < [c0c1]) goto a42a;
+a410: d3,18               jnc   a42a             if (R42 < TCIL_TM1) goto a42a;
 a412: c7,e8,f7,00         stb   R0,[Re8+f7]      [377] = 0;
 a416: 3a,44,09            jb    B2,R44,a422      if (B2_R44 = 1) goto a422;
 a419: 20,0c               sjmp  a427             goto a427; } }
@@ -13610,14 +13628,14 @@ a4a9: 20,04               sjmp  a4af             goto a4af; }
 
 a4ab: c7,ea,b6,00         stb   R0,[Rea+b6]      CTTMR = 0;
 a4af: 9b,f6,51,a9         cmpb  Ra9,[Rf6+51]     
-a4b3: d1,25               jleu  a4da             if (MAPPA > [b965])  {
+a4b3: d1,25               jleu  a4da             if (MAPPA > LOMAPF)  {
 a4b5: 9b,f6,4d,a9         cmpb  Ra9,[Rf6+4d]     
-a4b9: db,1f               jc    a4da             if (MAPPA < [b961])  {
+a4b9: db,1f               jc    a4da             if (MAPPA < HIMAPF)  {
 a4bb: 3f,a8,1c            jb    B7,Ra8,a4da      if (APT_Closed_Throttle = 0)  {
 a4be: 32,a0,19            jnb   B2,Ra0,a4da      if (B2_WRMEGO_a0 = 1)  {
 a4c1: 71,fd,a1            an2b  Ra1,fd           B1_Flags_a1 = 0;
 a4c4: 91,04,a1            orb   Ra1,4            B2_Flags_a1 = 1;
-a4c7: b3,f6,40,38         ldb   R38,[Rf6+40]     R38 = [b954];
+a4c7: b3,f6,40,38         ldb   R38,[Rf6+40]     R38 = BYMAP;
 a4cb: 9b,e4,ca,38         cmpb  R38,[Re4+ca]     
 a4cf: d9,0f               jgtu  a4e0             if (R38 > [14a]) goto a4e0;
 a4d1: c7,e4,ca,38         stb   R38,[Re4+ca]     [14a] = R38;
@@ -13627,20 +13645,20 @@ a4d8: 20,06               sjmp  a4e0             goto a4e0; } } } }
 a4da: 91,02,a1            orb   Ra1,2            B1_Flags_a1 = 1;
 a4dd: 71,fb,a1            an2b  Ra1,fb           B2_Flags_a1 = 0; }
 a4e0: 37,a8,39            jnb   B7,Ra8,a51c      if (APT_Closed_Throttle = 1)  {
-a4e3: b3,f6,42,16         ldb   R16,[Rf6+42]     R16 = [b956];
+a4e3: b3,f6,42,16         ldb   R16,[Rf6+42]     R16 = BYRPM;
 a4e7: 9b,e4,6a,16         cmpb  R16,[Re4+6a]     
 a4eb: d1,19               jleu  a506             if (R16 > N_BYTE)  {
 a4ed: 71,f7,a1            an2b  Ra1,f7           B3_Flags_a1 = 0;
 a4f0: 91,10,a1            orb   Ra1,10           B4_Flags_a1 = 1;
-a4f3: b3,f6,47,38         ldb   R38,[Rf6+47]     R38 = [b95b];
+a4f3: b3,f6,47,38         ldb   R38,[Rf6+47]     R38 = BYSTM4;
 a4f7: 9b,e4,ce,38         cmpb  R38,[Re4+ce]     
 a4fb: d9,07               jgtu  a504             if (R38 <= [14e])  {
 a4fd: c7,e4,ce,38         stb   R38,[Re4+ce]     [14e] = R38;
 a501: 71,ef,a1            an2b  Ra1,ef           B4_Flags_a1 = 0; }
 a504: 20,14               sjmp  a51a             goto a51a; }
 
-a506: b3,f6,42,38         ldb   R38,[Rf6+42]     R38 = [b956];
-a50a: 77,f6,43,38         ad2b  R38,[Rf6+43]     R38 += [b957];
+a506: b3,f6,42,38         ldb   R38,[Rf6+42]     R38 = BYRPM;
+a50a: 77,f6,43,38         ad2b  R38,[Rf6+43]     R38 += BYRPMH;
 a50e: 9b,e4,6a,38         cmpb  R38,[Re4+6a]     
 a512: db,06               jc    a51a             if (R38 < N_BYTE)  {
 a514: 91,08,a1            orb   Ra1,8            B3_Flags_a1 = 1;
@@ -13652,7 +13670,7 @@ a51f: 71,ef,a1            an2b  Ra1,ef           B4_Flags_a1 = 0;
 a522: 3a,a5,04            jb    B2,Ra5,a529      if (B2_APT_a5 = 0)  {
 a525: c7,e4,c9,00         stb   R0,[Re4+c9]      [149] = 0; }
 a529: 9b,f6,04,b6         cmpb  Rb6,[Rf6+4]      
-a52d: da,0a               jle   a539             if (ECT > [b918])  {
+a52d: da,0a               jle   a539             if (ECT > NUBASE_ALT)  {
 a52f: 3e,24,07            jb    B6,R24,a539      if (B6_R24 = 0)  {
 a532: 91,40,24            orb   R24,40           B6_R24 = 1;
 a535: c7,e8,05,00         stb   R0,[Re8+5]       [385] = 0; } }
@@ -14112,8 +14130,8 @@ a9e4: 38,0a,1b            jb    B0,Ra,aa02       if (B0_HSO_OVF = 0)  {         
 a9e7: 47,01,0e,20,06,72   ad3w  R72,R6,[R0+200e] HSO_time = IO_Timer + [200e];     # add 5D to current IOTime
 a9ed: d7,02               jne   a9f1             if (HSO_time = 0)  {
 a9ef: 07,72               incw  R72              HSO_time++; }
-a9f1: a0,72,0e            ldw   Re,R72           HSI_Time = HSO_time;
-a9f4: b1,0f,0d            ldb   Rd,f             HSO_Cmd = f;                      # request interrupt (in 5D IOtimes)
+a9f1: a0,72,0e            ldw   Re,R72           HSI_Time_lo = HSO_time;           # request interrupt (in 5D IOtimes)
+a9f4: b1,0f,0d            ldb   Rd,f             HSO_Cmd = f;                      # NO INTERRUPT OUT, SET OUTPUT LOW, OUTPUT INTERRUPT #2
 a9f7: c9,02,aa            push  aa02             push(Console_Routine);
 a9fa: ad,04,30            ldzbw R30,4            wR30 = 4;
 a9fd: cb,31,ca,a9         push  [R30+a9ca]       push([R30+a9ca]);                 # R30=4, a9ca+4 = a9ce, [a9ce]=e006
@@ -15471,13 +15489,13 @@ b913: ff                  ???
 b914: b0,ba               word   bab0                                              # Register Rf6 
 b916: 4b                  byte     4b            CTHIGH
 b917: 1e                  byte     1e            CTLOW
-b918: 07                  byte      7
+b918: 07                  byte      7            NUBASE_ALT
 b919: 08                  byte      8            ENGCYL
-b91a: 16,04               word    416
-b91c: 16,04               word    416
+b91a: 16,04               word    416            SPKSWH
+b91c: 16,04               word    416            SPKSWL
 b91e: 33,33               word   3333            MHPFD                             # If 8-cyl & Signature PIP duty cycle <= 35%, then set MHPFD = .20
-b920: 20,4e               word   4e20
-b922: 90,01               word    190
+b920: 20,4e               word   4e20            TRSRPM
+b922: 90,01               word    190            TRSRPH
 b924: 02                  byte      2            DFMIN0
 b925: 02                  byte      2            DFMIN1
 b926: 80,03               word    380            TOTMIN
@@ -15494,20 +15512,14 @@ b939: 02                  byte      2            SSMAP
 
 b93a: 00,06               ???   
 
-b93c: 0a                  byte      a            TKYON4
-
-b93d: ff                  ???   
-
+b93c: 0a,ff               word   ff0a            TKYON4
 b93e: 33,00               word     33            TKYON1
 b940: 71,00               word     71            TKYON2
 b942: 0a,02               word    20a            TKYON3
-b944: 76                  byte     76
-
-b945: ff                  ???   
-
+b944: 76,ff               word   ff76            PURECT1
 b946: 27,00               word     27            PRG_DEC
 b948: 04                  byte      4            PURG_ADP_SF
-b949: 58                  byte     58
+b949: 58                  byte     58            PURECT
 b94a: 08,00               word      8            EVTDOT
 b94c: 01                  byte      1            PURGSW
 b94d: 3c                  byte     3c            FULPRGTM
@@ -15516,8 +15528,9 @@ b950: 3c                  byte     3c            ACTFMM
 b951: 5f                  byte     5f            ECTFMM
 b952: b9                  byte     b9            FMECNT
 b953: 98                  byte     98            MAPFMM
-b954: 01                  byte      1
+b954: 01                  byte      1            BYMAP
 b955: 00                  byte      0            BYPWOT
+<<<<<<< HEAD
 b956: 0d                  byte      d
 b957: 02                  byte      2
 b958: 00                  byte      0
@@ -15527,25 +15540,38 @@ b959: 00,00               ???
 b95b: b3                  byte     b3
 b95c: 88                  byte     88
 b95d: 01                  byte      1
+=======
+b956: 0d                  byte      d            BYRPM
+b957: 02                  byte      2            BYRPMH
+b958: 00                  byte      0            BYSTM1
+b959: 00                  byte      0            BYSTM2
+b95a: 00                  byte      0            BYSTM3
+b95b: b3                  byte     b3            BYSTM4
+b95c: 88                  byte     88            BYSTM8
+b95d: 01                  byte      1            CHKASW
+>>>>>>> f9df5f18f2b46d6b5243576c0f8912a9f1c89053
 b95e: 6a                  byte     6a            CTBYS
 b95f: 03                  byte      3            CTBYSH
-b960: 01                  byte      1
-b961: 8d                  byte     8d
+b960: 01                  byte      1            DSFTSW
+b961: 8d                  byte     8d            HIMAPF
 b962: 80                  byte     80            HMUMAP
 b963: 06                  byte      6            HMUMPH
 b964: 50                  byte     50            LMBMAP
-b965: 5a                  byte     5a
+b965: 5a                  byte     5a            LOMAPF
 b966: 01                  byte      1            SW_MPD
 b967: 00                  byte      0            T70LSW
-b968: 00                  byte      0
-
-b969: 14,2d,5a,14,2d,5a   ???   
-
-b96f: 00                  byte      0
-b970: 10                  byte     10
-b971: 96                  byte     96
+b968: 00                  byte      0            UPSMAP=0
+b969: 14                  byte     14            UPSTM1
+b96a: 2d                  byte     2d            UPSTM2
+b96b: 5a                  byte     5a            UPSTM3
+b96c: 14                  byte     14            UPSTM4
+b96d: 2d                  byte     2d            UPSTM5
+b96e: 5a                  byte     5a            UPSTM6
+b96f: 00                  byte      0            UPSWOT=0
+b970: 10                  byte     10            AEDLMP
+b971: 96                  byte     96            MAXAET
 b972: 00,05               word    500            SMTPDL
-b974: 96                  byte     96
+b974: 96                  byte     96            MAXTTM
 
    FN305:
 b975: 7f,8c               func    7f,  8c
@@ -15664,7 +15690,7 @@ bac8: 00,08               word    800            TCEGR
 baca: 71,01               word    171            TCMBAR
 bacc: b8,06               word    6b8            TC
 bace: 9a,00               word     9a            TCNDT_ISC
-bad0: 71,01               word    171
+bad0: 71,01               word    171            TCTAR
 bad2: 00,08               word    800            TCTP
 bad4: 48,02               word    248            TCTPT
 bad6: cd,04               word    4cd            TCTOT
@@ -15769,9 +15795,12 @@ bb95: ff                  ???
 
 bb96: 80,da               word   da80            SHFDLT
 bb98: 00                  byte      0            OSCDLY
-
-bb99: 0f,3c,b4,0f,3c,b4   ???   
-
+bb99: 0f                  byte      f            EGRTD1
+bb9a: 3c                  byte     3c            EGRTD2
+bb9b: b4                  byte     b4            EGRTD3
+bb9c: 0f                  byte      f            EGRTD4
+bb9d: 3c                  byte     3c            EGRTD5
+bb9e: b4                  byte     b4            EGRTD6
 bb9f: 00                  byte      0            KPEI
 bba0: ff                  byte     ff            MAP_WOT_EGRC
 bba1: ff                  byte     ff            MAP_WOT_EGRS
@@ -16116,10 +16145,10 @@ c0a4: 00,00               func    0,   0
 c0a6: 00,00               func    0,   0
 
 c0a8: 5a,cb               word   cb5a                                              # Register Rfc 
-c0aa: e0,15               word   15e0            trans_max_torque_limit1
-c0ac: 20,1c               word   1c20            trans_max_torque_limit2
-c0ae: 20,03               word    320            trans_max_tq_hysterisis
-c0b0: 03                  byte      3
+c0aa: e0,15               word   15e0            TQMAX1
+c0ac: 20,1c               word   1c20            TQMAX2
+c0ae: 20,03               word    320            TQMAXH
+c0b0: 03                  byte      3            PIPFIL
 
 c0b1: ff                  ???   
 
@@ -16133,14 +16162,13 @@ c0b8: 60,22               word   2260            NE_OTEMP_MIN
 c0ba: 80,25               word   2580            NE_OTEMP_MAX
 c0bc: 00,30               word   3000            SRLK_FM
 c0be: c0,2b               word   2bc0            NELK_FM
-c0c0: 08                  byte      8
-c0c1: 04                  byte      4
-c0c2: 71,ad               word   ad71            trans_ratio_1
-c0c4: 6f,62               word   626f            trans_ratio_2
-c0c6: 00,40               word   4000            trans_ratio_3
-c0c8: 91,2d               word   2d91            trans_ratio_4
-c0ca: 50                  byte     50            trans_ratio_5
-c0cb: 29                  byte     29
+c0c0: 08                  byte      8            TCIL_TM_DLY
+c0c1: 04                  byte      4            TCIL_TM1
+c0c2: 71,ad               word   ad71            GRRAT1
+c0c4: 6f,62               word   626f            GRRAT2
+c0c6: 00,40               word   4000            GRRAT3
+c0c8: 91,2d               word   2d91            GRRAT4
+c0ca: 50,29               word   2950
 
 c0cc: 1a,00,00,04         ???   
 
@@ -16232,8 +16260,8 @@ c155: ff                  ???
 c156: 80,70               word   7080            ETV_BIAS
 c158: 80                  byte     80            ETV_GAIN
 c159: 5a                  byte     5a            ETV_GAIN_BAT
-c15a: 19                  byte     19            VTABFL
-c15b: ff                  byte     ff            VTCEGO
+c15a: 19                  byte     19            TVCDLT
+c15b: ff                  byte     ff
 c15c: cd,00               word     cd            TV_SLT_TM
 c15e: 8c                  byte     8c            TVFMMN
 c15f: ff                  byte     ff
@@ -16241,7 +16269,7 @@ c160: 10,00               word     10            TCMAPW
 c162: 1f,00               word     1f            TCNE
 c164: 1f,00               word     1f            TCTPTE
 c166: 1f,00               word     1f            TCVST
-c168: 12,00               word     12
+c168: 12,00               word     12            TCTPTC
 c16a: 33,01               word    133            TCTTA
 c16c: 00                  byte      0            TM4X4L
 c16d: 03                  byte      3
@@ -16252,7 +16280,7 @@ c172: 8f                  byte     8f
 
 c173: 02                  ???   
 
-c174: 8f,42               word   428f
+c174: 8f,42               word   428f            SPD_PM
 c176: b0,04               word    4b0            CS_MAX_TIME
 c178: 69                  byte     69            CS_MUL
 c179: 9a                  byte     9a            OFM_MUL
@@ -16291,6 +16319,7 @@ c1a2: 5a                  byte     5a            VS_SH_VAL4
 c1a3: ff                  byte     ff
 c1a4: 1f,05               word    51f            NOV_ERR_BAND
 c1a6: 00,2d               word   2d00            CCE_TPMN
+<<<<<<< HEAD
 c1a8: 00,0f               word    f00
 c1aa: c0,3b               word   3bc0
 c1ac: 80,3b               word   3b80
@@ -16309,6 +16338,23 @@ c1c1: 08                  byte      8
 c1c2: 9a                  ???   
 
 c1c3: 00                  byte      0
+=======
+c1a8: 00,0f               word    f00            MAN1LO
+c1aa: c0,3b               word   3bc0            MAN1HI
+c1ac: 80,3b               word   3b80            MLPS_2LO
+c1ae: c0,5f               word   5fc0            MLPS_2HI                          # coolant temp.  limit to trigger warm up counters (150 deg.  F).
+c1b0: 80,5f               word   5f80            ODLO
+c1b2: 00,86               word   8600            ODHI
+c1b4: c0,85               word   85c0            NEULO
+c1b6: 80,ae               word   ae80            NEUHI
+c1b8: 40,ae               word   ae40            REVLO
+c1ba: 00,db               word   db00            REVHI
+c1bc: c0,da               word   dac0            PARKLO
+c1be: 80,f2               word   f280            PARKHI
+c1c0: 04                  byte      4            MLPS_2
+c1c1: 08                  byte      8            MLPS_2hobyte
+c1c2: 9a,00               word     9a
+>>>>>>> f9df5f18f2b46d6b5243576c0f8912a9f1c89053
 c1c4: 00,28               word   2800
 c1c6: 00,01               word    100
 c1c8: 66,00               word     66
@@ -17333,6 +17379,7 @@ cc9a: 05                  byte      5
 cc9b: 14                  byte     14
 cc9c: f0                  byte     f0
 cc9d: 1e                  byte     1e
+<<<<<<< HEAD
 cc9e: b0                  byte     b0
 cc9f: 04                  byte      4
 cca0: 40                  byte     40
@@ -17346,12 +17393,19 @@ cca7: 0a                  byte      a
 cca8: 66,04               word    466            V_ISCMOD_MAX
 ccaa: 9a,03               word    39a            V_ISCMOD_MIN
 ccac: 0a,00               word      a            V_KDNDT
+=======
+
+cc9e: b0,04,40,b3,00,0a,40,b3,00,0a,66,04,9a,03,0a,00  ???  
+
+>>>>>>> f9df5f18f2b46d6b5243576c0f8912a9f1c89053
 ccae: 58,02               word    258
 ccb0: 90,01               word    190
 ccb2: 60,04               word    460
 ccb4: ac,0d               word    dac
 ccb6: 28,01               word    128
-ccb8: 20,46               word   4620
+
+ccb8: 20,46               ???   
+
 ccba: 08                  byte      8
 ccbb: 01                  byte      1
 ccbc: 10                  byte     10

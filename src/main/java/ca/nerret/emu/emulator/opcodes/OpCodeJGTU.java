@@ -9,7 +9,9 @@ public class OpCodeJGTU  extends OpCode implements IOpCode {
 
 	 public OpCodeJGTU(int opcode, String mnemonic) {
 			super(opcode, mnemonic);
-			// TODO Auto-generated constructor stub
+			
+			this.setNumberOfBytes(2);
+			this.setExecutionStates(4);
 		}
 
 		/* (non-Javadoc)
@@ -18,17 +20,12 @@ public class OpCodeJGTU  extends OpCode implements IOpCode {
 	    @Override
 	    public final void exec(State state_)
 	    {
-   
-	    	int[] memory = state_.getMemory();
+	    	super.exec(state_);
+	    	
+	        boolean notZeroFlag = !(state_.getPswBit((byte) ProgramStatusWord.ZERO));
+	        boolean carryFlag = state_.getPswBit((byte) ProgramStatusWord.CARRY);
 	        
-	        int pc = state_.getPc();
-	        
-	        byte offset = (byte) memory[pc + 1];
-	      
-	        int newPC = pc + 2;
-	        
-	        boolean notZeroFlag = !(state_.getPswBit(ProgramStatusWord.ZERO));
-	        boolean carryFlag = state_.getPswBit(ProgramStatusWord.CARRY);
+	        byte displacement = this.getByteResult();
 	        
 	        // Jump on (PC)<-(PC)+ Displacement if (C*!Z)=1,or
 	        // (PC)unchanged if(C*!Z)=0.
@@ -38,21 +35,36 @@ public class OpCodeJGTU  extends OpCode implements IOpCode {
 	        {
 	        	// Take jump
 	            // If jump taken, state_.updateStateTime(4);
-	        	
+	        	this.setExecutionStates(8);
 	        	
 		        // 8 bit relative
 		        // 7 6 5 4 3 2 1 0 | 7 6 5 4 3 2 1 0 
 		        //      opcode     |       offset
-		        if( (offset & 0x80 >> 8)== 1 )
+		        if( (displacement & 0x80 >> 8)== 1 )
 		        {
-		        	offset = (byte) (offset | ~0xff);
+		        	displacement = (byte) (displacement | ~0xff);
 		        }
-		        
-		        newPC = pc + offset + 2;
+		        state_.setPc(state_.getPc() + displacement);
 	        }
 
-	        state_.setPc(newPC);
 
 	    }
+	    
+		public int execDirect()
+		{	
+	    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+
+	    	this.setByteResult(operands[1]);
+	    	
+		 	return getExecutionStates();
+		}
+	    
+		public void setAddressMode(AddressMode addressMode) {
+			// TODO Auto-generated method stub
+		    AddressMode am = new AddressMode();
+		    am.setType(AddressMode.DIRECT);
+			super.setAddressMode(am);
+			
+		}
 
 }

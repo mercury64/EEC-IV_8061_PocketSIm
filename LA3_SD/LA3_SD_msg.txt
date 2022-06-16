@@ -1,6 +1,6 @@
 
 # ----------------------------
-# SAD Version 4.0.7.6 (13 Sep 2020)
+# SAD Version 4.0.7.16b (11 Apr 2022)
 # ----------------------------
 
 # Input file is 'LA3_SD.bin'
@@ -8,7 +8,13 @@
 # File is 56K (0xe000) bytes
 
 
-# ----- No directive file. Use default options
+# Read commands from directive file at 'LA3_SD_dir.txt'
+
+## xcode   769b ffff     # auto
+ Error - Invalid Address
+
+## fill    769b ffff     # auto
+ Error - Invalid Address
 
 # ----- Start Disassembly phase 1 -----
 
@@ -23,131 +29,68 @@
 
 
 # ---------------------------------------------------------------------------------------------
-# The disassembler has scanned the binary and arrived at the following final command list.
+# The disassembler has scanned the binary and produced the following command list.
 # This list is not guaranteed to be perfect, but should be a good base.
-# Extra gap and data scans (Phase 2) are shown above as they may be incorrect
-# This following list can be copied and pasted into a directives file from here.
+# Commented lines for information bu may be uncommented for use (e.g. banks)
+# This following list can be copied and pasted into a directives file.
 # ---------------------------------------------------------------------------------------------
 
 
 setopts  : default 
 
-# Banks Found.  For information, can uncomment to modify
+# Banks Found.  For information, can uncomment to manually override
 
-# bank  8     0  2000  ffff
+# bank  8     0 2000 ffff 
 
-rbase 26 180
-rbase 92 fffe
+rbase 26 180        # cmd
+rbase 92 fffe        # cmd
 
 
 
 code    2000 2003
+word    200a 200f
+vect    2010 201f
 code    2020 21a6
-code    2210 23c3
-code    3716 40f8
-code    4177 43dc
-code    440f 47d4
-code    47fa 4f57
-code    4f63 67fe
-code    6818 6c0c
-code    6c9c 6e55
-code    6e98 704f
-code    7065 70c5
-code    712c 75bc
-code    766e 7698
-xcode   769b ffff     # auto
-
-
-word    200a 200f     # auto
-vect    2010 201f     # auto
 vect    21a8 21fd
 byte    21fe 21fe
-func    23dc 23ff: UW : SW 
-byte    2400 2400
-byte    2401 2401
+byte    2200 2200
+code    2210 23c3
+func    23dc 23ff: UW X 10 : SW X 10 
+byte    2400 2401
 word    2404 2405
-byte    2406 2406
-byte    2407 2407
+byte    2406 2407
 word    2408 2409
-byte    240a 240a
-byte    240b 240b
-byte    240c 240c
-byte    240d 240d
-func    240e 2429: UW : UW 
-func    242a 2435: SY : UY 
-byte    2436 2436
-byte    2437 2437
-byte    2438 2438
-byte    2439 2439
+byte    240a 240d
+func    240e 2429: UW X 10 : UW X 10 
+func    242a 2435: SY X 10 : UY X 10 
+byte    2436 2439
 word    243a 243b
 byte    243c 243c
-word    243e 243f
-word    2440 2441
-word    2442 2443
+word    243e 2443
 byte    2444 2444
-word    2462 2463
-word    2464 2465
-word    2466 2467
-word    2468 2469
-word    246a 246b
-word    246c 246d
-byte    246e 246e
-byte    246f 246f
-word    2470 2471
-word    2472 2473
-word    2474 2475
-word    2476 2477
-word    2478 2479
-word    247a 247b
-word    247c 247d
-word    247e 247f
-word    2480 2481
-word    2482 2483
-byte    2484 2484
-byte    2485 2485
-byte    2486 2486
-byte    2487 2487
-word    2488 2489
-word    248a 248b
-word    248c 248d
-word    248e 248f
-byte    2490 2490
-byte    2491 2491
-func    2492 24b5: UW : UW 
-func    24b6 24cd: SW : SW 
-byte    24ce 24ce
-byte    24cf 24cf
-word    24d0 24d1
-word    24d2 24d3
-word    24d4 24d5
-word    24d6 24d7
-word    24d8 24d9
-word    24da 24db
-word    24dc 24dd
-byte    24de 24de
-byte    24df 24df
-byte    24e0 24e0
-byte    24e1 24e1
-byte    24e2 24e2
-word    24e4 24e5
-word    24e6 24e7
-word    24e8 24e9
-word    24ea 24eb
+word    2462 246d
+byte    246e 246f
+word    2470 2483
+byte    2484 2487
+word    2488 248f
+byte    2490 2491
+func    2492 24b5: UW X 10 : UW X 10 
+func    24b6 24cd: SW X 10 : SW X 10 
+byte    24ce 24cf
+word    24d0 24dd
+byte    24de 24e2
+word    24e4 24eb
 byte    24ec 24ec
 word    24ee 24ef
-func    24f0 24fb: UY : UY 
-func    24fc 252b: SW : UW 
-func    252c 2553: UW : UW 
-func    2554 255f: SY : UY 
-func    2560 257f: UW : UW 
-table   2580 25af: O 8 UY 
-table   25b0 25df: O 8 UY 
-table   25e0 269a: O 11 UY 
-word    269c 269d
-word    269e 269f
-word    26a0 26a1
-word    26a2 26a3
-word    26a4 26a5
+func    24f0 24fb: UY X 10 : UY X 10 
+func    24fc 252b: SW X 10 : UW X 10 
+func    252c 2553: UW X 10 : UW X 10 
+func    2554 255f: SY X 10 : UY X 10 
+func    2560 257f: UW X 10 : UW X 10 
+table   2580 25af: O 8 UY X 10 
+table   25b0 25df: O 8 UY X 10 
+table   25e0 269a: O 11 UY X 10 
+word    269c 26a5
 byte    26a6 26a6
 word    26a8 26a9
 byte    26aa 26aa
@@ -155,560 +98,360 @@ word    26ac 26ad
 byte    26ae 26ae
 word    26b0 26b1
 byte    26b2 26b2
-table   26b3 26e2: O 8 UY 
-table   26e3 2712: O 8 UY 
-table   2713 2742: O 8 UY 
-word    2744 2745
-word    2746 2747
-word    2748 2749
-word    274a 274b
-word    274c 274d
-word    274e 274f
+table   26b3 26e2: O 8 UY X 10 
+table   26e3 2712: O 8 UY X 10 
+table   2713 2742: O 8 UY X 10 
+word    2744 274f
 byte    2750 2750
-func    2752 2771: SW : UW 
-func    2772 2795: SW : UW 
-func    2796 27a3: UY : UY 
-word    27a4 27a5
-word    27a6 27a7
-word    27a8 27a9
-word    27aa 27ab
-word    27ac 27ad
-word    27ae 27af
-word    27b0 27b1
-word    27b2 27b3
-word    27b4 27b5
-word    27b6 27b7
-word    27b8 27b9
-word    27ba 27bb
-word    27bc 27bd
-word    27be 27bf
-word    27c0 27c1
-word    27c2 27c3
-word    27c4 27c5
-word    27c6 27c7
-word    27c8 27c9
-word    27ca 27cb
-word    27cc 27cd
-word    27ce 27cf
-word    27d0 27d1
-byte    27d2 27d2
-byte    27d3 27d3
-func    27d4 27fb: UW : UW 
-func    27fc 2817: UW : UW 
-func    2818 2833: UW : UW 
-func    2834 284f: UW : UW 
-func    2850 286b: UW : UW 
-func    286c 2887: SW : SW 
-func    2888 2893: SY : UY 
-func    2894 289f: SY : UY 
-byte    28a0 28a0
-byte    28a1 28a1
-byte    28a2 28a2
-byte    28a3 28a3
-word    28a4 28a5
-word    28a6 28a7
-word    28a8 28a9
-word    28aa 28ab
-byte    28ac 28ac
-byte    28ad 28ad
-byte    28ae 28ae
-byte    28af 28af
-byte    28b0 28b0
-byte    28b1 28b1
-byte    28b2 28b2
-word    28b4 28b5
-word    28b6 28b7
-word    28b8 28b9
-word    28ba 28bb
-byte    28bc 28bc
-byte    28bd 28bd
-byte    28be 28be
-byte    28bf 28bf
-word    28c0 28c1
-word    28c2 28c3
-word    28c4 28c5
-byte    28c6 28c6
-byte    28c7 28c7
-word    28c8 28c9
-word    28ca 28cb
-byte    28cc 28cc
-byte    28cd 28cd
-byte    28ce 28ce
-func    28d0 28eb: UW : UW 
-func    28ec 2907: UW : UW 
-func    2908 291f: UW : UW 
-table   2982 29b2: O 7 UY 
-table   29b3 29e3: O 7 UY 
-table   29e4 2a14: O 7 UY 
-table   2a15 2a45: O 7 UY 
-word    2a46 2a47
-word    2a48 2a49
-byte    2a4a 2a4a
-byte    2a4b 2a4b
-byte    2a4c 2a4c
-byte    2a4d 2a4d
-word    2a4e 2a4f
-word    2a50 2a51
-word    2a52 2a53
-byte    2a54 2a54
-byte    2a55 2a55
-byte    2a56 2a56
-byte    2a57 2a57
-byte    2a58 2a58
-byte    2a59 2a59
-byte    2a5a 2a5a
-byte    2a5b 2a5b
-byte    2a5c 2a5c
+func    2752 2771: SW X 10 : UW X 10 
+func    2772 2795: SW X 10 : UW X 10 
+func    2796 27a3: UY X 10 : UY X 10 
+word    27a4 27d1
+byte    27d2 27d3
+func    27d4 27fb: UW X 10 : UW X 10 
+func    27fc 2817: UW X 10 : UW X 10 
+func    2818 2833: UW X 10 : UW X 10 
+func    2834 284f: UW X 10 : UW X 10 
+func    2850 286b: UW X 10 : UW X 10 
+func    286c 2887: SW X 10 : SW X 10 
+func    2888 2893: SY X 10 : UY X 10 
+func    2894 289f: SY X 10 : UY X 10 
+byte    28a0 28a3
+word    28a4 28ab
+byte    28ac 28b2
+word    28b4 28bb
+byte    28bc 28bf
+word    28c0 28c5
+byte    28c6 28c7
+word    28c8 28cb
+byte    28cc 28ce
+func    28d0 28eb: UW X 10 : UW X 10 
+func    28ec 2907: UW X 10 : UW X 10 
+func    2908 291f: UW X 10 : UW X 10 
+table   2982 29b2: O 7 UY X 10 
+table   29b3 29e3: O 7 UY X 10 
+table   29e4 2a14: O 7 UY X 10 
+table   2a15 2a45: O 7 UY X 10 
+word    2a46 2a49
+byte    2a4a 2a4d
+word    2a4e 2a53
+byte    2a54 2a5c
 word    2a5e 2a5f
-byte    2a60 2a60
-byte    2a61 2a61
-byte    2a62 2a62
-byte    2a63 2a63
-byte    2a64 2a64
-byte    2a65 2a65
-byte    2a66 2a66
-word    2a68 2a69
-word    2a6a 2a6b
-word    2a6c 2a6d
-word    2a6e 2a6f
-func    2a70 2a9b: UW : UW 
-func    2a9c 2ab3: UW : UW 
-func    2ab4 2ac1: UY : UY 
-func    2ac2 2acf: SY : UY 
-func    2ad0 2aef: UW : UW 
-func    2af0 2b05: SY : SY 
-table   2b06 2b68: O 11 UY 
-table   2b69 2bcb: O 11 UY 
-table   2bcc 2be4: O 5 UY 
-table   2be5 2bfd: O 5 UY 
+byte    2a60 2a66
+word    2a68 2a6f
+func    2a70 2a9b: UW X 10 : UW X 10 
+func    2a9c 2ab3: UW X 10 : UW X 10 
+func    2ab4 2ac1: UY X 10 : UY X 10 
+func    2ac2 2acf: SY X 10 : UY X 10 
+func    2ad0 2aef: UW X 10 : UW X 10 
+func    2af0 2b05: SY X 10 : SY X 10 
+table   2b06 2b68: O 11 UY X 10 
+table   2b69 2bcb: O 11 UY X 10 
+table   2bcc 2be4: O 5 UY X 10 
+table   2be5 2bfd: O 5 UY X 10 
 word    2bfe 2bff
 byte    2c00 2c00
-word    2c02 2c03
-word    2c04 2c05
-word    2c06 2c07
-func    2c08 2c47: UW : UW 
-func    2c48 2c55: SY : SY 
-func    2c56 2c63: SY : SY 
-func    2c64 2c71: SY : SY 
-func    2c72 2c7f: SY : SY 
-func    2c80 2c8b: UY : UY 
-table   2c8c 2d46: O 11 UY 
-table   2d47 2e01: O 11 UY 
-table   2e02 2e64: O 11 UY 
-word    2e66 2e67
-word    2e68 2e69
-word    2e6a 2e6b
+word    2c02 2c07
+func    2c08 2c47: UW X 10 : UW X 10 
+func    2c48 2c55: SY X 10 : SY X 10 
+func    2c56 2c63: SY X 10 : SY X 10 
+func    2c64 2c71: SY X 10 : SY X 10 
+func    2c72 2c7f: SY X 10 : SY X 10 
+func    2c80 2c8b: UY X 10 : UY X 10 
+table   2c8c 2d46: O 11 UY X 10 
+table   2d47 2e01: O 11 UY X 10 
+table   2e02 2e64: O 11 UY X 10 
+word    2e66 2e6b
 byte    2e6c 2e6c
-word    2e6e 2e6f
-word    2e70 2e71
-word    2e72 2e73
-word    2e74 2e75
-byte    2e76 2e76
-byte    2e77 2e77
-byte    2e78 2e78
-word    2e7a 2e7b
-word    2e7c 2e7d
-word    2e7e 2e7f
-word    2e80 2e81
-byte    2e82 2e82
-byte    2e83 2e83
-word    2e84 2e85
-word    2e86 2e87
-byte    2e88 2e88
-byte    2e89 2e89
-word    2e8a 2e8b
-word    2e8c 2e8d
-func    2e8e 2ea9: UW : UW 
-func    2eaa 2ebd: UW : UW 
-func    2ebe 2ec9: UY : UY 
-func    2eca 2ed7: UY : UY 
-byte    2ed8 2ed8
-byte    2ed9 2ed9
-byte    2eda 2eda
-byte    2edb 2edb
-byte    2edc 2edc
-byte    2edd 2edd
-byte    2ede 2ede
-word    2ee0 2ee1
-word    2ee2 2ee3
-word    2ee4 2ee5
-byte    2ee6 2ee6
-byte    2ee7 2ee7
+word    2e6e 2e75
+byte    2e76 2e78
+word    2e7a 2e81
+byte    2e82 2e83
+word    2e84 2e87
+byte    2e88 2e89
+word    2e8a 2e8d
+func    2e8e 2ea9: UW X 10 : UW X 10 
+func    2eaa 2ebd: UW X 10 : UW X 10 
+func    2ebe 2ec9: UY X 10 : UY X 10 
+func    2eca 2ed7: UY X 10 : UY X 10 
+byte    2ed8 2ede
+word    2ee0 2ee5
+byte    2ee6 2ee7
 word    2ee8 2ee9
-func    2eea 2f05: SW : SW 
-func    2f06 2f21: UW : UW 
-byte    2f22 2f22
-byte    2f23 2f23
-byte    2f24 2f24
-byte    2f25 2f25
-byte    2f26 2f26
-byte    2f27 2f27
-byte    2f28 2f28
-byte    2f29 2f29
-byte    2f2a 2f2a
+func    2eea 2f05: SW X 10 : SW X 10 
+func    2f06 2f21: UW X 10 : UW X 10 
+byte    2f22 2f2a
 word    2f2c 2f2d
-byte    2f2e 2f2e
-byte    2f2f 2f2f
-byte    2f30 2f30
-byte    2f31 2f31
-word    2f32 2f33
-word    2f34 2f35
-byte    2f36 2f36
-byte    2f37 2f37
-word    2f38 2f39
-word    2f3a 2f3b
-word    2f3c 2f3d
+byte    2f2e 2f31
+word    2f32 2f35
+byte    2f36 2f37
+word    2f38 2f3d
 byte    2f3e 2f3e
-byte    2f4c 2f4c
-byte    2f4d 2f4d
+byte    2f4c 2f4d
 byte    2f4f 2f4f
-byte    2f60 2f60
-byte    2f61 2f61
-byte    2f62 2f62
-byte    2f63 2f63
-byte    2f64 2f64
+byte    2f60 2f64
 word    2f66 2f67
 byte    2f68 2f68
-word    2f6a 2f6b
-word    2f6c 2f6d
-byte    2f6e 2f6e
-byte    2f6f 2f6f
+word    2f6a 2f6d
+byte    2f6e 2f6f
 word    2f70 2f71
-byte    2f72 2f72
-byte    2f73 2f73
+byte    2f72 2f73
 word    2f74 2f75
 word    2f82 2f83
 byte    2f84 2f84
-word    2f86 2f87
-word    2f88 2f89
+word    2f86 2f89
 byte    2f8a 2f8a
-word    2f8e 2f8f
-word    2f90 2f91
-word    2f92 2f93
-word    2f94 2f95
-word    2f96 2f97
-word    2f98 2f99
-byte    2f9a 2f9a
-byte    2f9b 2f9b
+word    2f8e 2f99
+byte    2f9a 2f9b
 word    2f9c 2f9d
 byte    2f9e 2f9e
 word    2fa0 2fa1
-byte    2fa2 2fa2
-byte    2fa3 2fa3
-byte    2fa4 2fa4
-byte    2fa5 2fa5
-byte    2fa6 2fa6
-byte    2fa7 2fa7
-word    2fa8 2fa9
-word    2faa 2fab
-word    2fac 2fad
-word    2fae 2faf
-byte    2fb0 2fb0
-byte    2fb1 2fb1
-word    2fb2 2fb3
-word    2fb4 2fb5
-word    2fb6 2fb7
-word    2fb8 2fb9
-byte    2fba 2fba
-byte    2fbb 2fbb
-byte    2fbc 2fbc
+byte    2fa2 2fa7
+word    2fa8 2faf
+byte    2fb0 2fb1
+word    2fb2 2fb9
+byte    2fba 2fbc
 word    2fc0 2fc1
-byte    2fc2 2fc2
-byte    2fc3 2fc3
-word    2fc4 2fc5
-word    2fc6 2fc7
-word    2fc8 2fc9
-word    2fca 2fcb
-word    2fcc 2fcd
-byte    2fce 2fce
-byte    2fcf 2fcf
-word    2fd0 2fd1
-word    2fd2 2fd3
-byte    2fd4 2fd4
-byte    2fd5 2fd5
-byte    2fd6 2fd6
-byte    2fd7 2fd7
-func    2fd8 2feb: UW : UW 
-func    2fec 300f: UW : SW 
-func    3010 3027: UW : UW 
-func    3028 3053: UW : UW 
-table   3070 311f: O 11 UY 
-word    3120 3121
-word    3122 3123
-func    3124 3157: UW : UW 
-byte    3158 3158
-byte    3159 3159
-byte    315a 315a
-byte    315b 315b
-word    315c 315d
-word    315e 315f
-word    3160 3161
-word    3162 3163
-word    3164 3165
-word    3166 3167
-word    3168 3169
-word    316a 316b
-word    316c 316d
-word    316e 316f
-word    3170 3171
-word    3172 3173
-word    3174 3175
-word    3176 3177
-word    3178 3179
-word    317a 317b
+byte    2fc2 2fc3
+word    2fc4 2fcd
+byte    2fce 2fcf
+word    2fd0 2fd3
+byte    2fd4 2fd7
+func    2fd8 2feb: UW X 10 : UW X 10 
+func    2fec 300f: UW X 10 : SW X 10 
+func    3010 3027: UW X 10 : UW X 10 
+func    3028 3053: UW X 10 : UW X 10 
+table   3070 311f: O 11 UY X 10 
+word    3120 3123
+func    3124 3157: UW X 10 : UW X 10 
+byte    3158 315b
+word    315c 317b
 byte    317c 317c
-func    317e 31a5: SW : SW 
-func    31a6 31c1: UW : UW 
-func    31c2 31d5: UW : UW 
+func    317e 31a5: SW X 10 : SW X 10 
+func    31a6 31c1: UW X 10 : UW X 10 
+func    31c2 31d5: UW X 10 : UW X 10 
 byte    31d6 31d6
-func    31d8 31ef: UW : SW 
-table   31f0 3207: O 4 UY 
-table   3208 321f: O 4 UY 
+func    31d8 31ef: UW X 10 : SW X 10 
+table   31f0 3207: O 4 UY X 10 
+table   3208 321f: O 4 UY X 10 
 word    3222 3223
 byte    3224 3224
-func    3226 324d: SW : SW 
-func    324e 3279: UW : UW 
-table   327a 32d1: O 8 UY 
-func    32d2 32e9: SW : UW 
-func    32ea 3301: SW : UW 
-func    3302 330d: UY : UY 
-func    330e 3319: UY : UY 
-func    331a 3341: UW : UW 
-func    3342 3351: SY : SY 
-func    3352 3361: UY : SY 
-table   3362 341c: O 11 UY 
-byte    341d 341d
-byte    341e 341e
-byte    341f 341f
-byte    3420 3420
-byte    3421 3421
+func    3226 324d: SW X 10 : SW X 10 
+func    324e 3279: UW X 10 : UW X 10 
+table   327a 32d1: O 8 UY X 10 
+func    32d2 32e9: SW X 10 : UW X 10 
+func    32ea 3301: SW X 10 : UW X 10 
+func    3302 330d: UY X 10 : UY X 10 
+func    330e 3319: UY X 10 : UY X 10 
+func    331a 3341: UW X 10 : UW X 10 
+func    3342 3351: SY X 10 : SY X 10 
+func    3352 3361: UY X 10 : SY X 10 
+table   3362 341c: O 11 UY X 10 
+byte    341d 3421
 word    3422 3423
-func    3424 344f: UW : UW 
-func    3450 3477: SW : UW 
-func    3478 348b: SW : SW 
-func    348c 3499: SY : SY 
-func    349a 34ad: UW : UW 
-func    34ae 34bf: UY : SY 
+func    3424 344f: UW X 10 : UW X 10 
+func    3450 3477: SW X 10 : UW X 10 
+func    3478 348b: SW X 10 : SW X 10 
+func    348c 3499: SY X 10 : SY X 10 
+func    349a 34ad: UW X 10 : UW X 10 
+func    34ae 34bf: UY X 10 : SY X 10 
 byte    34c0 34c0
-table   3518 359f: O 8 UY 
-table   35a0 3627: O 8 UY 
-byte    3628 3628
-byte    3629 3629
-byte    362a 362a
-func    362c 3657: UW : UW 
-func    3658 366b: SW : SW 
+table   3518 359f: O 8 UY X 10 
+table   35a0 3627: O 8 UY X 10 
+byte    3628 362a
+func    362c 3657: UW X 10 : UW X 10 
+func    3658 366b: SW X 10 : SW X 10 
 byte    366c 366c
-func    366e 368d: SW : SW 
-table   368e 36cf: O 11 UY 
-word    36d0 36d1
-word    36d2 36d3
-word    36d4 36d5
-word    36d6 36d7
-word    36d8 36d9
-byte    36da 36da
-byte    36db 36db
-word    36dc 36dd
-word    36de 36df
-word    36e0 36e1
-word    36e2 36e3
-word    36e4 36e5
-word    36e6 36e7
-word    36e8 36e9
-word    36ea 36eb
-word    36ec 36ed
-word    36ee 36ef
-word    36f0 36f1
-word    36f2 36f3
-word    36f4 36f5
-word    36f6 36f7
+func    366e 368d: SW X 10 : SW X 10 
+table   368e 36cf: O 11 UY X 10 
+word    36d0 36d9
+byte    36da 36db
+word    36dc 36f7
 byte    36f8 36f8
-word    36fa 36fb
-word    36fc 36fd
-word    36fe 36ff
-word    3700 3701
-word    3702 3703
-word    3704 3705
-word    3706 3707
-word    3708 3709
-word    370a 370b
-word    370c 370d
-word    370e 370f
-word    3710 3711
-word    3712 3713
-word    3714 3715
+word    36fa 3715
+code    3716 40f8
 # timer   40f9 4176: UW 
+code    4177 43dc
+code    440f 47d4
 vect    47d6 47f9
+code    47fa 4f57
+code    4f63 67fe
 vect    6800 6817
+code    6818 6c0c
 word    6c0e 6c0f
+byte    6c16 6c16
+word    6c34 6c37
 byte    6c38 6c38
-byte    6c4d 6c4d
+byte    6c4b 6c4d
 vect    6c52 6c9b
-word    6e56 6e57
-word    6e58 6e59
+code    6c9c 6e55
+word    6e56 6e59
+code    6e98 704f
 byte    705e 705e
+code    7065 70c5
 vect    70c6 712b
-word    75be 75bf
-word    75c0 75c1
-byte    75c2 75c2
-byte    75c3 75c3
-word    75c4 75c5
-word    75c6 75c7
+code    712c 75bc
+word    75be 75c1
+byte    75c2 75c3
+word    75c4 75c7
+code    766e 7698
+xcode   769b ffff     # auto
 fill    769b ffff     # auto
 
 
 # ------------ Subroutine list----------
-sub  589b "SUYFuncLU_589b"   $ F suyflu 32
-sub  58a0 "SSYFuncLU_58a0"   $ F ssyflu 32
-sub  58a3 "USYFuncLU_58a3"   $ F usyflu 32
-sub  58a6 "UUYFuncLU_58a6"   $ F uuyflu 32
-sub  58f0 "SUWFuncLU_58f0"   $ F suwflu 32
-sub  58f5 "SSWFuncLU_58f5"   $ F sswflu 32
-sub  58f8 "USWFuncLU_58f8"   $ F uswflu 32
-sub  58fb "UUWFuncLU_58fb"   $ F uuwflu 32
-sub  5943 "UYTabLU_5943"   $ F uytlu 38 34
+sub  589b  "SUYFuncLU_589b"   $ F suyflu 32 #cmd
+sub  58a0  "SSYFuncLU_58a0"   $ F ssyflu 32 #cmd
+sub  58a3  "USYFuncLU_58a3"   $ F usyflu 32 #cmd
+sub  58a6  "UUYFuncLU_58a6"   $ F uuyflu 32 #cmd
+sub  58f0  "SUWFuncLU_58f0"   $ F suwflu 32 #cmd
+sub  58f5  "SSWFuncLU_58f5"   $ F sswflu 32 #cmd
+sub  58f8  "USWFuncLU_58f8"   $ F uswflu 32 #cmd
+sub  58fb  "UUWFuncLU_58fb"   $ F uuwflu 32 #cmd
+sub  5943  "UYTabLU_5943"   $ F uytlu 38 34 #cmd
 
 
 # ------------ Symbol list ----
-sym 2  "LSO_Port"                  # auto
-sym 2  "CPU_OK" :B 6                  # auto
-sym 3  "LIO_Port"                  # auto
-sym 4  "AD_Low"                  # auto
-sym 4  "AD_Cmd" : W                  # auto
-sym 5  "AD_High"                  # auto
-sym 5  "WDG_Timer" : W                  # auto
-sym 6  "IO_Timer"                  # auto
-sym 7  "IO_Timer_Hi"                  # auto
-sym 8  "INT_Mask"                  # auto
-sym 9  "INT_Pend"                  # auto
-sym a  "IO_Status"                  # auto
-sym a  "HSO_OVF" :B 0                  # auto
-sym a  "HSI_OVF" :B 1                  # auto
-sym a  "HSI_Ready" :B 2                  # auto
-sym a  "AD_Ready" :B 3                  # auto
-sym a  "INT_Handling" :B 4                  # auto
-sym a  "INT_Priority" :B 5                  # auto
-sym b  "HSI_Sample"                  # auto
-sym c  "HSI_Mask"                  # auto
-sym d  "HSI_Data"                  # auto
-sym d  "HSO_Cmd" : W                  # auto
-sym e  "HSI_Time"                  # auto
-sym 10  "StackPtr"                  # auto
-sym 2000  "Sub_2000"                  # auto
-sym 202a  "Sub_202a"                  # auto
-sym 211c  "Sub_211c"                  # auto
+sym 2  "CPU_OK" :B 6
+sym 2  "LSO_Port"
+sym 3  "LIO_Port"
+sym 4  "AD_Cmd" : W
+sym 4  "AD_Low"
+sym 5  "WDG_Timer" : W
+sym 5  "AD_High"
+sym 6  "IO_Timer"
+sym 7  "IO_Timer_Hi"
+sym 8  "INT_Mask"
+sym 9  "INT_Pend"
+sym a  "HSO_OVF" :B 0
+sym a  "HSI_OVF" :B 1
+sym a  "HSI_Ready" :B 2
+sym a  "AD_Ready" :B 3
+sym a  "INT_Handling" :B 4
+sym a  "INT_Priority" :B 5
+sym a  "IO_Status"
+sym b  "HSI_Sample"
+sym c  "HSI_Mask"
+sym d  "HSO_Cmd" : W
+sym d  "HSI_Data"
+sym e  "HSI_Time"
+sym 10  "StackPtr"
+sym 2000  "Sub_2000"
+sym 202a  "Sub_202a"
+sym 211c  "Sub_211c"
 sym 2302  "Sub_2302"                  # auto
-sym 23dc  "Func_23dc"                  # auto
-sym 240e  "Func_240e"                  # auto
-sym 242a  "Func_242a"                  # auto
-sym 2492  "Func_2492"                  # auto
-sym 24b6  "Func_24b6"                  # auto
-sym 24f0  "Func_24f0"                  # auto
-sym 24fc  "Func_24fc"                  # auto
-sym 252c  "Func_252c"                  # auto
-sym 2554  "Func_2554"                  # auto
-sym 2560  "Func_2560"                  # auto
-sym 2580  "Table_2580"                  # auto
-sym 25b0  "Table_25b0"                  # auto
-sym 25e0  "Table_25e0"                  # auto
-sym 26b3  "Table_26b3"                  # auto
-sym 26e3  "Table_26e3"                  # auto
-sym 2713  "Table_2713"                  # auto
-sym 2752  "Func_2752"                  # auto
-sym 2772  "Func_2772"                  # auto
-sym 2796  "Func_2796"                  # auto
-sym 27d4  "Func_27d4"                  # auto
-sym 27fc  "Func_27fc"                  # auto
-sym 2818  "Func_2818"                  # auto
-sym 2834  "Func_2834"                  # auto
-sym 2850  "Func_2850"                  # auto
-sym 286c  "Func_286c"                  # auto
-sym 2888  "Func_2888"                  # auto
-sym 2894  "Func_2894"                  # auto
-sym 28d0  "Func_28d0"                  # auto
-sym 28ec  "Func_28ec"                  # auto
-sym 2908  "Func_2908"                  # auto
-sym 2982  "Table_2982"                  # auto
-sym 29b3  "Table_29b3"                  # auto
-sym 29e4  "Table_29e4"                  # auto
-sym 2a15  "Table_2a15"                  # auto
-sym 2a70  "Func_2a70"                  # auto
-sym 2a9c  "Func_2a9c"                  # auto
-sym 2ab4  "Func_2ab4"                  # auto
-sym 2ac2  "Func_2ac2"                  # auto
-sym 2ad0  "Func_2ad0"                  # auto
-sym 2af0  "Func_2af0"                  # auto
-sym 2b06  "Table_2b06"                  # auto
-sym 2b69  "Table_2b69"                  # auto
-sym 2bcc  "Table_2bcc"                  # auto
-sym 2be5  "Table_2be5"                  # auto
-sym 2c08  "Func_2c08"                  # auto
-sym 2c48  "Func_2c48"                  # auto
-sym 2c56  "Func_2c56"                  # auto
-sym 2c64  "Func_2c64"                  # auto
-sym 2c72  "Func_2c72"                  # auto
-sym 2c80  "Func_2c80"                  # auto
-sym 2c8c  "Table_2c8c"                  # auto
-sym 2d47  "Table_2d47"                  # auto
-sym 2e02  "Table_2e02"                  # auto
-sym 2e8e  "Func_2e8e"                  # auto
-sym 2eaa  "Func_2eaa"                  # auto
-sym 2ebe  "Func_2ebe"                  # auto
-sym 2eca  "Func_2eca"                  # auto
-sym 2eea  "Func_2eea"                  # auto
-sym 2f06  "Func_2f06"                  # auto
-sym 2fd8  "Func_2fd8"                  # auto
-sym 2fec  "Func_2fec"                  # auto
-sym 3010  "Func_3010"                  # auto
-sym 3028  "Func_3028"                  # auto
-sym 3070  "Table_3070"                  # auto
-sym 3124  "Func_3124"                  # auto
-sym 317e  "Func_317e"                  # auto
-sym 31a6  "Func_31a6"                  # auto
-sym 31c2  "Func_31c2"                  # auto
-sym 31d8  "Func_31d8"                  # auto
-sym 31f0  "Table_31f0"                  # auto
-sym 3208  "Table_3208"                  # auto
-sym 3226  "Func_3226"                  # auto
-sym 324e  "Func_324e"                  # auto
-sym 327a  "Table_327a"                  # auto
-sym 32d2  "Func_32d2"                  # auto
-sym 32ea  "Func_32ea"                  # auto
-sym 3302  "Func_3302"                  # auto
-sym 330e  "Func_330e"                  # auto
-sym 331a  "Func_331a"                  # auto
-sym 3342  "Func_3342"                  # auto
-sym 3352  "Func_3352"                  # auto
-sym 3362  "Table_3362"                  # auto
-sym 3424  "Func_3424"                  # auto
-sym 3450  "Func_3450"                  # auto
-sym 3478  "Func_3478"                  # auto
-sym 348c  "Func_348c"                  # auto
-sym 349a  "Func_349a"                  # auto
-sym 34ae  "Func_34ae"                  # auto
-sym 3518  "Table_3518"                  # auto
-sym 35a0  "Table_35a0"                  # auto
-sym 362c  "Func_362c"                  # auto
-sym 3658  "Func_3658"                  # auto
-sym 366e  "Func_366e"                  # auto
-sym 368e  "Table_368e"                  # auto
-sym 3716  "I_HSI_0"                  # auto
-sym 371a  "I_HSI_1"                  # auto
-sym 3733  "I_HSO_1"                  # auto
-sym 374b  "I_Timer_OVF"                  # auto
-sym 3758  "I_Ignore"                  # auto
-sym 3759  "I_AD_Rdy"                  # auto
-sym 377a  "I_HSI_Data"                  # auto
-sym 39c6  "Sub_39c6"                  # auto
-sym 39ef  "Sub_39ef"                  # auto
-sym 3b23  "Sub_3b23"                  # auto
-sym 3c48  "Sub_3c48"                  # auto
-sym 3cc8  "Sub_3cc8"                  # auto
-sym 3cf9  "Sub_3cf9"                  # auto
-sym 3d53  "Sub_3d53"                  # auto
-sym 3d67  "Sub_3d67"                  # auto
-sym 3de1  "Sub_3de1"                  # auto
-sym 3e23  "Sub_3e23"                  # auto
-sym 3e7d  "Sub_3e7d"                  # auto
+sym 23dc  "Func_23dc"
+sym 240e  "Func_240e"
+sym 242a  "Func_242a"
+sym 2492  "Func_2492"
+sym 24b6  "Func_24b6"
+sym 24f0  "Func_24f0"
+sym 24fc  "Func_24fc"
+sym 252c  "Func_252c"
+sym 2554  "Func_2554"
+sym 2560  "Func_2560"
+sym 2580  "Table_2580"
+sym 25b0  "Table_25b0"
+sym 25e0  "Table_25e0"
+sym 26b3  "Table_26b3"
+sym 26e3  "Table_26e3"
+sym 2713  "Table_2713"
+sym 2752  "Func_2752"
+sym 2772  "Func_2772"
+sym 2796  "Func_2796"
+sym 27d4  "Func_27d4"
+sym 27fc  "Func_27fc"
+sym 2818  "Func_2818"
+sym 2834  "Func_2834"
+sym 2850  "Func_2850"
+sym 286c  "Func_286c"
+sym 2888  "Func_2888"
+sym 2894  "Func_2894"
+sym 28d0  "Func_28d0"
+sym 28ec  "Func_28ec"
+sym 2908  "Func_2908"
+sym 2982  "Table_2982"
+sym 29b3  "Table_29b3"
+sym 29e4  "Table_29e4"
+sym 2a15  "Table_2a15"
+sym 2a70  "Func_2a70"
+sym 2a9c  "Func_2a9c"
+sym 2ab4  "Func_2ab4"
+sym 2ac2  "Func_2ac2"
+sym 2ad0  "Func_2ad0"
+sym 2af0  "Func_2af0"
+sym 2b06  "Table_2b06"
+sym 2b69  "Table_2b69"
+sym 2bcc  "Table_2bcc"
+sym 2be5  "Table_2be5"
+sym 2c08  "Func_2c08"
+sym 2c48  "Func_2c48"
+sym 2c56  "Func_2c56"
+sym 2c64  "Func_2c64"
+sym 2c72  "Func_2c72"
+sym 2c80  "Func_2c80"
+sym 2c8c  "Table_2c8c"
+sym 2d47  "Table_2d47"
+sym 2e02  "Table_2e02"
+sym 2e8e  "Func_2e8e"
+sym 2eaa  "Func_2eaa"
+sym 2ebe  "Func_2ebe"
+sym 2eca  "Func_2eca"
+sym 2eea  "Func_2eea"
+sym 2f06  "Func_2f06"
+sym 2fd8  "Func_2fd8"
+sym 2fec  "Func_2fec"
+sym 3010  "Func_3010"
+sym 3028  "Func_3028"
+sym 3070  "Table_3070"
+sym 3124  "Func_3124"
+sym 317e  "Func_317e"
+sym 31a6  "Func_31a6"
+sym 31c2  "Func_31c2"
+sym 31d8  "Func_31d8"
+sym 31f0  "Table_31f0"
+sym 3208  "Table_3208"
+sym 3226  "Func_3226"
+sym 324e  "Func_324e"
+sym 327a  "Table_327a"
+sym 32d2  "Func_32d2"
+sym 32ea  "Func_32ea"
+sym 3302  "Func_3302"
+sym 330e  "Func_330e"
+sym 331a  "Func_331a"
+sym 3342  "Func_3342"
+sym 3352  "Func_3352"
+sym 3362  "Table_3362"
+sym 3424  "Func_3424"
+sym 3450  "Func_3450"
+sym 3478  "Func_3478"
+sym 348c  "Func_348c"
+sym 349a  "Func_349a"
+sym 34ae  "Func_34ae"
+sym 3518  "Table_3518"
+sym 35a0  "Table_35a0"
+sym 362c  "Func_362c"
+sym 3658  "Func_3658"
+sym 366e  "Func_366e"
+sym 368e  "Table_368e"
+sym 3716  "Sub_3716"                  # auto
+sym 371a  "Sub_371a"                  # auto
+sym 3733  "Sub_3733"                  # auto
+sym 374b  "Sub_374b"                  # auto
+sym 3758  "Sub_3758"                  # auto
+sym 3759  "Sub_3759"                  # auto
+sym 377a  "Sub_377a"                  # auto
+sym 39c6  "Sub_39c6"
+sym 39ef  "Sub_39ef"
+sym 3b23  "Sub_3b23"
+sym 3c48  "Sub_3c48"
+sym 3cc8  "Sub_3cc8"
+sym 3cf9  "Sub_3cf9"
+sym 3d53  "Sub_3d53"
+sym 3d67  "Sub_3d67"
+sym 3de1  "Sub_3de1"
+sym 3e23  "Sub_3e23"
+sym 3e7d  "Sub_3e7d"
 sym 3eb7  "Sub_3eb7"                  # auto
 sym 3eef  "Sub_3eef"                  # auto
 sym 3fdf  "Sub_3fdf"                  # auto
@@ -724,40 +467,40 @@ sym 4851  "Sub_4851"                  # auto
 sym 4866  "Sub_4866"                  # auto
 sym 48b6  "Sub_48b6"                  # auto
 sym 48d2  "Sub_48d2"                  # auto
-sym 49d8  "Sub_49d8"                  # auto
-sym 49e2  "Sub_49e2"                  # auto
+sym 49d8  "Sub_49d8"
+sym 49e2  "Sub_49e2"
 sym 4a09  "Sub_4a09"                  # auto
 sym 4af9  "Sub_4af9"                  # auto
 sym 4b6b  "Sub_4b6b"                  # auto
-sym 4d9d  "Sub_4d9d"                  # auto
-sym 4f63  "Sub_4f63"                  # auto
-sym 4fa7  "Sub_4fa7"                  # auto
-sym 5047  "Sub_5047"                  # auto
-sym 510e  "Sub_510e"                  # auto
+sym 4d9d  "Sub_4d9d"
+sym 4f63  "Sub_4f63"
+sym 4fa7  "Sub_4fa7"
+sym 5047  "Sub_5047"
+sym 510e  "Sub_510e"
 sym 5179  "Sub_5179"                  # auto
 sym 5270  "Sub_5270"                  # auto
 sym 52d6  "Sub_52d6"                  # auto
 sym 5485  "Sub_5485"                  # auto
 sym 54ec  "Sub_54ec"                  # auto
 sym 5751  "Sub_5751"                  # auto
-sym 584b  "Sub_584b"                  # auto
-sym 587f  "Sub_587f"                  # auto
-sym 5972  "Sub_5972"                  # auto
-sym 5985  "Sub_5985"                  # auto
-sym 598a  "Sub_598a"                  # auto
+sym 584b  "Sub_584b"
+sym 587f  "Sub_587f"
+sym 5972  "Sub_5972"
+sym 5985  "Sub_5985"
+sym 598a  "Sub_598a"
 sym 59bb  "Sub_59bb"                  # auto
 sym 5ac9  "Sub_5ac9"                  # auto
 sym 5b3a  "Sub_5b3a"                  # auto
-sym 5dac  "Sub_5dac"                  # auto
-sym 5dc1  "Sub_5dc1"                  # auto
-sym 5e42  "Sub_5e42"                  # auto
-sym 5e4f  "Sub_5e4f"                  # auto
+sym 5dac  "Sub_5dac"
+sym 5dc1  "Sub_5dc1"
+sym 5e42  "Sub_5e42"
+sym 5e4f  "Sub_5e4f"
 sym 5ef9  "Sub_5ef9"                  # auto
 sym 5ffd  "Sub_5ffd"                  # auto
 sym 6099  "Sub_6099"                  # auto
 sym 610c  "Sub_610c"                  # auto
-sym 615b  "Sub_615b"                  # auto
-sym 6163  "Sub_6163"                  # auto
+sym 615b  "Sub_615b"
+sym 6163  "Sub_6163"
 sym 6339  "Sub_6339"                  # auto
 sym 642a  "Sub_642a"                  # auto
 sym 64a6  "Sub_64a6"                  # auto
@@ -780,16 +523,16 @@ sym 6a41  "Sub_6a41"                  # auto
 sym 6a66  "Sub_6a66"                  # auto
 sym 6ad1  "Sub_6ad1"                  # auto
 sym 6b39  "Sub_6b39"                  # auto
-sym 6b5d  "Sub_6b5d"                  # auto
+sym 6b5d  "Sub_6b5d"
 sym 6c9c  "Sub_6c9c"                  # auto
-sym 6d97  "Sub_6d97"                  # auto
+sym 6d97  "Sub_6d97"
 sym 6daa  "Sub_6daa"                  # auto
 sym 6df0  "Sub_6df0"                  # auto
 sym 6dfb  "Sub_6dfb"                  # auto
 sym 6e98  "Sub_6e98"                  # auto
 sym 6f8f  "Sub_6f8f"                  # auto
 sym 6fb6  "Sub_6fb6"                  # auto
-sym 7038  "Sub_7038"                  # auto
+sym 7038  "Sub_7038"
 sym 7065  "Sub_7065"                  # auto
 sym 7074  "Sub_7074"                  # auto
 sym 712c  "Sub_712c"                  # auto
@@ -829,7 +572,7 @@ sym 75a2  "Sub_75a2"                  # auto
 sym 75a7  "Sub_75a7"                  # auto
 sym 75ad  "Sub_75ad"                  # auto
 sym 766e  "Sub_766e"                  # auto
-sym d004  "I_HSO_2"                  # auto
+sym d004  "I_HSO_2"
 
 
 

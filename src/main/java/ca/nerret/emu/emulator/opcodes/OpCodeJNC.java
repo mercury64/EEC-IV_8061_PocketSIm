@@ -1,5 +1,7 @@
 package ca.nerret.emu.emulator.opcodes;
 
+import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
+
 import ca.nerret.emu.emulator.AddressMode;
 import ca.nerret.emu.emulator.OpCode;
 import ca.nerret.emu.emulator.ProgramStatusWord;
@@ -15,31 +17,32 @@ public class OpCodeJNC extends OpCode implements IOpCode {
 
     public OpCodeJNC(int opcode, String mnemonic) {
 		super(opcode, mnemonic);
-		// TODO Auto-generated constructor stub
+		this.setNumberOfBytes(2);
+		this.setExecutionStates(4);
 	}
-
 
 	/* (non-Javadoc)
      * @see ca.nerret.emu.emulator.opcodes.IOpcode#exec(ca.nerret.emu.emulator.State)
      */
     @Override
     public final void exec(State state_) {
-        int[] memory = state_.getMemory();
         
-        int pc = state_.getPc();
+    	super.exec(state_);
+    	
+    	
+        //state_.setWordRegister(this.getOperandLocation(),this.getResult());
+    	byte offset = this.getByteResult();
+    	
+        //boolean carryFlag = state_.getPswBit(ProgramStatusWord.CARRY);
+        boolean carryFlag = state_.getPswBit((byte) ProgramStatusWord.CARRY);
         
-        byte offset = (byte) memory[pc + 1];
-      
-        int newPC = pc + 2;
-        
-        boolean carryFlag = state_.getPswBit(ProgramStatusWord.CARRY);
         // Jump on Not Carry
         // if C=0
         if ( carryFlag == ProgramStatusWord.CLEAR)
         {
         	// Take jump
-            // If jump taken, state_.updateStateTime(4);
-        	
+            // If jump taken
+        	setExecutionStates(8);
         	
 	        // 8 bit relative
 	        // 7 6 5 4 3 2 1 0 | 7 6 5 4 3 2 1 0 
@@ -49,14 +52,19 @@ public class OpCodeJNC extends OpCode implements IOpCode {
 	        	offset = (byte) (offset | ~0xff);
 	        }
 	        
-	        newPC = pc + offset + 2;
+	        state_.setPc(state_.getPc() + offset);
         }
-
-        state_.setPc(newPC);
-        
     }
     
-    
+	public int execDirect()
+	{	
+    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+
+    	this.setByteResult(operands[1]);
+    	
+	 	return getExecutionStates();
+	}
+
 	public void setAddressMode(AddressMode addressMode) {
 		// TODO Auto-generated method stub
 	    AddressMode am = new AddressMode();

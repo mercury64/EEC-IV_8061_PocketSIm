@@ -1,0 +1,1022 @@
+
+# ----------------------------
+# SAD Version 4.0.7.16b (11 Apr 2022)
+# ----------------------------
+
+# Input file is 'A9L2_220405.bin'
+
+# File is 56K (0xe000) bytes
+
+
+# ----- No directive file. Use default options
+
+# ----- Start Disassembly phase 1 -----
+
+# ----- End   Disassembly phase 1 -----
+
+# ----- Start Disassembly phase 2 -----
+
+# ----- End   Disassembly phase 2  -----
+
+# ----- Output Listing to file A9L2_220405_lst.txt
+
+
+
+# ---------------------------------------------------------------------------------------------
+# The disassembler has scanned the binary and produced the following command list.
+# This list is not guaranteed to be perfect, but should be a good base.
+# Commented lines for information bu may be uncommented for use (e.g. banks)
+# This following list can be copied and pasted into a directives file.
+# ---------------------------------------------------------------------------------------------
+
+
+setopts  : default 
+
+# Banks Found.  For information, can uncomment to manually override
+
+# bank  8     0 2000 ffff 
+
+rbase 72 180 
+rbase 74 27e 
+rbase 76 37a 
+rbase 78 8eda 
+rbase f0 8c00 
+rbase f2 8e5a 
+rbase f4 8fd6 
+rbase f6 93a8 
+rbase f8 9430 
+rbase fa 97a8 
+rbase fc 9a7e 
+rbase fe 9e5a 
+
+
+
+code    2000 2003
+word    200a 200f     # auto
+vect    2010 201f     # auto
+byte    2020 2021     # auto
+word    2022 2031     # auto
+code    2032 2188
+vect    218a 222d
+code    222e 225e
+byte    225f 2264
+byte    2289 228c
+word    228e 228f
+byte    2296 2296
+byte    2298 229b
+byte    22a0 22a3
+byte    22a8 22a8
+byte    22ab 22ac
+word    22ae 22b1
+byte    22b4 22b4
+byte    22b7 22b8
+word    22ba 22bb
+code    235d 2528
+code    2530 27c2
+vect    27c8 27c8
+code    27ca 2a31
+word    2a36 2a37
+word    2a3c 2a3d
+code    2a3e 2c60
+code    2c6e 2c87
+code    2c8f 2fc1
+word    2fc6 2fc7
+code    2fc8 317e
+code    3181 36d7
+code    36db 399c
+code    399f 3d9f
+args    3a12 3a13: E 1 e0 N 
+args    3c4e 3c4f: E 1 e0 N 
+args    3d46 3d47: E 1 e0 N 
+args    3d53 3d54: E 1 e0 N 
+word    3da4 3da5
+word    3daa 3dab
+code    3dac 5594
+args    3e2b 3e30: E 1 e0 N : E 1 e0 N : E 1 e0 N 
+args    3e38 3e3d: E 1 e0 N : E 1 e0 N : E 1 e0 N 
+args    40af 40b4: E 1 e0 N : E 1 e0 N : E 1 e0 N 
+args    40c3 40c8: E 1 e0 N : E 1 e0 N : E 1 e0 N 
+args    40ef 40f4: E 1 e0 N : E 1 e0 N : E 1 e0 N 
+args    410f 4114: E 1 e0 N : E 1 e0 N : E 1 e0 N 
+args    4126 412b: E 1 e0 N : E 1 e0 N : E 1 e0 N 
+args    4d7f 4d84: E 1 e0 N : E 1 e0 N : E 1 e0 N 
+args    525c 525d: E 1 e0 N 
+args    5403 5408: E 1 e0 N : E 1 e0 N : E 1 e0 N 
+byte    559a 559a
+code    559b 5a6c
+args    59cc 59cd: E 1 e0 N 
+code    5a7d 5aa1
+code    5aa5 5b60
+code    5b62 5ba6
+code    5ba8 69b0
+# timer   69b1 6a7a: UW 
+code    6a7b 6cd7
+code    6ce5 6d10
+code    6d17 7142
+args    6dad 6db2: E 1 e0 N : E 1 e0 N : E 1 e0 N 
+args    6e94 6e95: UW N 
+args    6f8e 6f8e: UY 
+args    6f92 6f92: UY 
+byte    7143 7144
+vect    7168 71f3
+code    71f4 729d
+args    723f 7240: E 3 f0 N 
+args    7251 7251: UY 
+args    7256 7256: UY 
+args    725b 725b: UY 
+args    7264 7264: UY 
+args    726a 726a: UY 
+args    7270 7270: UY 
+args    727b 727e: O 2 UY : O 2 UY 
+args    7289 728c: O 2 UY : O 2 UY 
+code    72a3 749c
+args    72c2 72c3: E 3 f0 N 
+args    72c6 72c6: UY 
+args    72ea 72ea: UY 
+args    72f8 72f8: UY 
+args    72fe 72ff: E 3 f0 N 
+args    7312 7313: E 3 f0 N 
+args    7316 7316: UY 
+args    7364 7366: O 2 UY : UY 
+args    737b 737e: O 2 UY : O 2 UY 
+args    7397 7399: O 2 UY : UY 
+args    739d 739f: O 2 UY : UY 
+args    73ad 73b0: E 3 f0 N : E 3 f0 N 
+args    73b4 73b6: O 2 UY : UY 
+args    73ba 73bd: E 3 f0 N : E 3 f0 N 
+args    73c1 73c3: O 2 UY : UY 
+args    73c7 73ca: E 3 f0 N : E 3 f0 N 
+args    73cd 73cf: O 2 UY : UY 
+args    73d3 73d6: E 3 f0 N : E 3 f0 N 
+args    73d9 73db: O 2 UY : UY 
+args    73f5 73f8: E 3 f0 N : E 3 f0 N 
+args    73ff 7402: E 3 f0 N : E 3 f0 N 
+args    7405 7407: O 2 UY : UY 
+args    7412 7415: E 3 f0 N : E 3 f0 N 
+args    7418 741a: O 2 UY : UY 
+args    742c 742f: E 3 f0 N : E 3 f0 N 
+args    7432 7434: O 2 UY : UY 
+args    7438 743b: E 3 f0 N : E 3 f0 N 
+args    743e 7440: O 2 UY : UY 
+args    7444 7447: E 3 f0 N : E 3 f0 N 
+args    744a 744c: O 2 UY : UY 
+code    749f 750f
+args    74bb 74bd: O 2 UY : UY 
+args    74df 74e1: O 2 UY : UY 
+code    7512 7513
+code    7516 7530
+code    7533 7868
+args    7551 7553: O 2 UY : UY 
+args    755f 7566: UW N : E 3 f0 N : E 3 f0 N : O 2 UY 
+args    757b 757c: UW N 
+args    7580 7587: UW N : E 3 f0 N : E 3 f0 N : O 2 UY 
+args    758d 758d: UY 
+args    7590 7592: O 2 UY : UY 
+args    7595 7595: UY 
+args    7598 759a: O 2 UY : UY 
+args    75a8 75a8: UY 
+args    75ab 75ad: O 2 UY : UY 
+args    75b3 75b3: UY 
+args    75b6 75b8: O 2 UY : UY 
+args    75d3 75d6: E 3 f0 N : E 3 f0 N 
+args    75e6 75e8: O 2 UY : UY 
+args    760f 7612: E 3 f0 N : E 3 f0 N 
+args    7617 7618: UW N 
+args    761c 761f: E 3 f0 N : E 3 f0 N 
+args    762f 7631: O 2 UY : UY 
+args    763f 7642: E 3 f0 N : E 3 f0 N 
+args    7653 7655: O 2 UY : UY 
+args    765b 765e: E 3 f0 N : E 3 f0 N 
+args    7661 7663: O 2 UY : UY 
+args    7679 767b: O 2 UY : UY 
+args    767e 7680: O 2 UY : UY 
+args    7683 7685: O 2 UY : UY 
+args    7688 768a: O 2 UY : UY 
+args    768d 768f: O 2 UY : UY 
+args    7692 7694: O 2 UY : UY 
+args    76e2 76e2: UY 
+args    77d9 77d9: UY 
+args    77ef 77ef: UY 
+args    77fb 77fb: UY 
+args    7866 7866: UY 
+word    786a 786f
+code    7870 79f8
+args    7875 7879: E 3 f0 N : E 3 f0 N : UY 
+args    787c 7880: E 3 f0 N : E 3 f0 N : UY 
+args    7888 788e: UW N : E 3 f0 N : E 3 f0 N : UY 
+args    78a2 78a2: UY 
+args    78a8 78ae: UW N : E 3 f0 N : E 3 f0 N : UY 
+args    78d9 78dd: E 3 f0 N : E 3 f0 N : UY 
+args    78e0 78e4: E 3 f0 N : E 3 f0 N : UY 
+args    78ec 78f2: UW N : E 3 f0 N : E 3 f0 N : UY 
+args    78fc 7903: UW N : E 3 f0 N : E 3 f0 N : O 2 UY 
+args    7909 7910: UW N : E 3 f0 N : E 3 f0 N : O 2 UY 
+args    7924 7924: UY 
+args    792a 792a: UY 
+args    793a 793a: UY 
+args    793d 7941: E 3 f0 N : E 3 f0 N : UY 
+args    7949 794d: E 3 f0 N : E 3 f0 N : UY 
+args    7950 7954: E 3 f0 N : E 3 f0 N : UY 
+args    795c 7962: UW N : E 3 f0 N : E 3 f0 N : UY 
+args    7969 7969: UY 
+args    796e 796e: UY 
+args    7971 7972: UW N 
+args    7975 7976: UW N 
+args    7991 7991: UY 
+args    79c4 79c5: E 3 f0 N 
+args    79cb 79cb: UY 
+args    79d1 79d2: E 3 f0 N 
+args    79d8 79d8: UY 
+code    7a76 7a90
+code    7a9e 829b
+args    7aa7 7aa7: UY 
+args    7bb1 7bb1: UY 
+args    7bc3 7bc3: UY 
+args    7bc6 7bc7: UW N 
+args    7bca 7bcb: UW N 
+args    7c02 7c02: UY 
+args    7c0d 7c0d: UY 
+args    7c13 7c13: UY 
+args    7c19 7c19: UY 
+args    7c1f 7c1f: UY 
+args    7c25 7c25: UY 
+args    7c2b 7c2b: UY 
+args    7c31 7c31: UY 
+args    7c37 7c37: UY 
+args    7c86 7c87: E 3 f0 N 
+args    7c99 7c9d: E 3 f0 N : E 3 f0 N : UY 
+args    7ca5 7cab: UW N : E 3 f0 N : E 3 f0 N : UY 
+args    7cae 7cb4: UW N : E 3 f0 N : E 3 f0 N : UY 
+args    7cb7 7cbd: UW N : E 3 f0 N : E 3 f0 N : UY 
+args    7cc0 7cc6: UW N : E 3 f0 N : E 3 f0 N : UY 
+args    7cfd 7cfe: E 3 f0 N 
+args    7d01 7d02: E 3 f0 N 
+args    7d08 7d08: UY 
+args    7d0e 7d0e: UY 
+args    7d27 7d28: E 3 f0 N 
+args    7d3a 7d3b: E 3 f0 N 
+args    7d41 7d41: UY 
+args    7d47 7d47: UY 
+args    7d5a 7d5b: E 3 f0 N 
+args    7d5e 7d5f: E 3 f0 N 
+args    7d7c 7d7d: E 3 f0 N 
+args    7d83 7d83: UY 
+args    7d89 7d89: UY 
+args    7d9d 7d9e: E 3 f0 N 
+args    7da1 7da1: UY 
+args    7db3 7db4: E 3 f0 N 
+args    7dc1 7dc1: UY 
+args    7dee 7dee: UY 
+args    7df2 7df3: UW N 
+args    7e3e 7e3e: UY 
+args    7e42 7e43: UW N 
+args    7e58 7e5f: UW N : E 3 f0 N : E 3 f0 N : O 2 UY 
+args    7e73 7e7a: UW N : E 3 f0 N : E 3 f0 N : O 2 UY 
+args    7ec6 7ec6: UY 
+args    7ed2 7ed2: UY 
+args    7ed6 7ed7: UW N 
+args    7edb 7edc: UW N 
+args    7f26 7f27: E 3 f0 N 
+args    7f39 7f3a: E 3 f0 N 
+args    7f47 7f4b: E 3 f0 N : E 3 f0 N : UY 
+args    7f64 7f65: E 3 f0 N 
+args    7f78 7f7c: E 3 f0 N : E 3 f0 N : UY 
+args    7fb3 7fb4: E 3 f0 N 
+args    8013 8014: E 3 f0 N 
+args    802c 802c: UY 
+args    8035 8035: UY 
+args    803f 803f: UY 
+args    8058 8058: UY 
+args    805f 805f: UY 
+args    8078 8078: UY 
+args    8097 8098: UW N 
+args    80c7 80c8: E 3 f0 N 
+args    80f7 80f8: E 3 f0 N 
+args    8103 8104: E 3 f0 N 
+args    8126 8127: E 3 f0 N 
+args    8132 8133: E 3 f0 N 
+args    816e 816e: UY 
+args    81d7 81d7: UY 
+code    829d 82a6
+code    82a9 82ac
+code    82ae 8397
+code    839a 8628
+args    8593 8594: E 1 e0 N 
+word    862a 862d
+byte    862e 8631
+word    8650 8651
+word    865a 865d
+byte    865e 865f
+code    8800 885e
+xcode   8c00 8e59     # auto
+word    8c00 8c0f
+byte    8c10 8c11
+func    8c18 8c25: SY X 10 : UY X 10 
+func    8c26 8c33: SY X 10 : UY X 10 
+func    8c34 8c4f: SW X 10 : UW X 10 
+func    8c50 8c77: UW X 10 : UW X 10 
+func    8c78 8c8f: UW X 10 : UW X 10 
+func    8c90 8c9d: UY X 10 : UY X 10 
+func    8c9e 8ca7: UY X 10 : UY X 10 
+func    8ca8 8cb1: SY X 10 : UY X 10 
+func    8cb2 8cd1: UW X 10 : UW X 10 V 256 
+func    8cd2 8cdd: SY X 10 : UY X 10 
+func    8cde 8cf9: UW X 10 : UW X 10 V 256 
+func    8d16 8d31: UW X 10 : UW X 10 
+func    8d32 8d45: UW X 10 : UW X 10 V 256 
+func    8d46 8d55: UW X 10 : UW X 10 V 256 
+func    8d56 8d6d: UW X 10 : UW X 10 
+func    8d6e 8d77: UY X 10 : UY X 10 
+func    8d78 8d85: UY X 10 : UY X 10 
+func    8d86 8d8f: UY X 10 : UY X 10 
+func    8d90 8da5: UY X 10 : UY X 10 
+func    8da6 8daf: UY X 10 : UY X 10 
+func    8db0 8dc3: UY X 10 : SY X 10 
+func    8dc4 8dd3: SY X 10 : UY X 10 
+func    8dd4 8de1: SY X 10 : UY X 10 
+word    8de2 8de5
+xcode   8e5a 9ea1     # auto
+word    8e5a 8e5b     # auto
+byte    8e5c 8e5c
+word    8e5e 8e9b
+byte    8e9c 8ea3
+byte    8ea6 8ea8
+word    8eaa 8eb3
+word    8eb6 8ec5
+byte    8ec6 8ec6
+word    8ec8 8ecb
+byte    8ecc 8ecd
+word    8ece 8ecf
+byte    8ed0 8ed0
+word    8ed2 8ee5
+byte    8ee6 8ee8
+word    8eea 8eeb
+byte    8eec 8eec
+word    8eee 8efd
+byte    8efe 8f06
+word    8f08 8f15
+byte    8f16 8f16
+byte    8f19 8f1a
+byte    8f23 8f23
+byte    8f2d 8f2d
+byte    8f2f 8f2f
+byte    8f45 8f45
+word    8f48 8f57
+byte    8f58 8f59
+word    8f5a 8f6f
+byte    8f70 8f70
+word    8f72 8f77
+word    8f8c 8f9b
+word    8f9e 8fa5
+byte    8fa6 8fa6
+word    8fa8 8fad
+byte    8fae 8fae
+word    8fb0 8fc3
+word    8fc6 8fcb
+byte    8fcc 8fcc
+word    8fce 8fd1
+byte    8fd2 8fd4
+word    8fd6 8fd7     # auto
+byte    8fdd 8fe3
+word    8fe4 8feb
+byte    8fec 8fec
+word    8fee 8ff5
+byte    8ff6 8ff8
+word    8ffa 8fff
+byte    9000 9000
+word    9002 9003
+word    9006 9009
+byte    900a 900c
+word    900e 900f
+byte    9010 9015
+word    9016 9033
+word    9036 903b
+byte    903c 903c
+word    903e 9041
+byte    9042 9049
+word    904a 9065
+byte    9066 9068
+table   9069 90b8: O 10 UY X 10 
+func    90b9 90c4: UY X 10 : UY X 10 
+func    90c6 90e1: UW X 10 : UW X 10 V 256 
+func    90e2 9101: UW X 10 : UW X 10 
+func    9148 915f: UW X 10 : UW X 10 
+table   9160 91b9: O 9 UY X 10 
+func    91c1 91ca: UY X 10 : UY X 10 
+table   91cb 922a: O 8 UY X 10 
+func    922c 924b: UW X 10 : UW X 10 
+func    924c 9255: SY X 10 : UY X 10 
+func    9256 9285: UW X 10 : UW X 10 
+func    9286 9299: UW X 10 : UW X 10 
+func    929a 92b1: UW X 10 : UW X 10 
+func    92b2 92bf: UY X 10 : UY X 10 
+func    92c0 92cd: SY X 10 : UY X 10 
+func    92ce 92d5: UY X 10 : UY X 10 
+func    92d6 930d: SW X 10 : UW X 10 
+func    930e 9329: SW X 10 : UW X 10 
+func    932a 9345: UW X 10 : UW X 10 
+func    935a 9365: SY X 10 : UY X 10 
+table   9366 93a7: O 6 UY X 10 
+word    93a8 93af
+byte    93b0 93b0
+word    93b2 93b5
+byte    93b6 93b6
+byte    93bb 93c0
+word    93c2 93c5
+byte    93c6 93c8
+word    93ca 93cd
+byte    93d3 93d3
+word    93d4 93d7
+byte    93d8 93d8
+word    93da 93dd
+byte    93de 93e7
+byte    93ed 93f0
+byte    93fb 93fd
+word    93fe 9401
+byte    9402 9403
+word    9404 940b
+byte    940c 940c
+byte    940e 940e
+word    9410 9413
+byte    9414 9419
+word    941a 941b
+byte    941c 9421
+word    9422 9425
+byte    9426 9428
+word    942a 942d
+byte    942e 942e
+word    9430 943b
+byte    943c 9440
+word    9442 9447
+byte    9448 944a
+word    944c 9459
+byte    945a 945b
+word    945c 945f
+byte    9460 9463
+word    9464 946b
+byte    946c 946e
+word    9470 9477
+byte    9478 947c
+word    947e 9485
+byte    9486 9486
+func    9488 94ab: SW X 10 : UW X 10 V 256 
+func    94c0 94cd: SY X 10 : SY X 10 
+func    94ce 94d9: UY X 10 : SY X 10 
+func    94da 94ed: UW X 10 : UW X 10 V 256 
+func    94ee 94f7: SY X 10 : SY X 10 
+func    94f8 9503: UY X 10 : UY X 10 
+func    9504 9527: UW X 10 : UW X 10 V 256 
+func    9528 9531: UY X 10 : SY X 10 
+func    9532 953f: SY X 10 : SY X 10 
+func    9540 954d: SY X 10 : SY X 10 
+func    954e 9559: UY X 10 : UY X 10 
+func    955a 9567: UY X 10 : UY X 10 
+func    9568 9573: SY X 10 : UY X 10 
+table   9574 95c3: O 10 UY X 10 
+table   95c4 9663: O 10 UY X 10 
+table   9664 96b3: O 10 UY X 10 
+table   96b4 96bf: O 4 UY X 10 
+table   96c0 970f: O 10 UY X 10 
+table   9710 9747: O 7 SY X 10 
+func    9748 975f: UW X 10 : UW X 10 
+func    9760 9777: UW X 10 : UW X 10 
+func    9778 9783: UY X 10 : UY X 10 
+func    9784 9791: UY X 10 : UY X 10 
+func    9792 979b: UY X 10 : UY X 10 
+func    979c 97a7: UY X 10 : UY X 10 
+word    97a8 97b1
+byte    97b2 97b3
+byte    97b5 97b5
+word    97b6 97bb
+byte    97bc 97bc
+word    97be 97c5
+byte    97c6 97c6
+byte    97cc 97cd
+word    97ce 97d1
+byte    97d2 97d2
+word    97d4 97d7
+byte    97d8 97d9
+word    97da 97db
+byte    97dc 97dc
+word    97de 980b
+func    980d 981a: UY X 10 : UY X 10 
+func    981b 9828: UY X 10 : UY X 10 
+func    982a 9845: UW X 10 : UW X 10 
+func    9846 9861: UW X 10 : UW X 10 
+func    987a 989d: SW X 10 : UW X 10 
+func    989e 98af: SY X 10 : UY X 10 
+func    98b0 98b9: UY X 10 : UY X 10 
+func    98ba 98e1: UW X 10 : UW X 10 
+func    98e2 98ed: SY X 10 : SY X 10 
+func    98ee 98f7: UY X 10 : UY X 10 
+func    98f8 9903: UY X 10 : UY X 10 
+func    9904 991b: UW X 10 : UW X 10 
+func    991c 9925: SY X 10 : UY X 10 
+func    9926 9941: UW X 10 : UW X 10 
+func    9942 995d: SW X 10 : SW X 10 
+func    995e 9985: UW X 10 : UW X 10 
+func    9986 99a9: UW X 10 : UW X 10 
+table   99ae 9a4d: O 10 UY X 10 
+table   9a4e 9a59: O 4 UY X 10 
+func    9a5a 9a65: UY X 10 : UY X 10 
+func    9a66 9a71: UY X 10 : UY X 10 
+func    9a72 9a7d: UY X 10 : UY X 10 
+word    9a7e 9a7f     # auto
+byte    9a80 9a80
+word    9a82 9a87
+byte    9a88 9a89
+word    9a8a 9a8b
+byte    9a8c 9a8e
+byte    9a90 9a91
+word    9a92 9a93
+byte    9a98 9a98
+word    9a9c 9a9f
+byte    9aa0 9aa0
+word    9aa2 9aa5
+byte    9aa8 9aa8
+word    9aaa 9aad
+byte    9aae 9ab4
+word    9ab6 9ab9
+byte    9aba 9abc
+byte    9ac2 9ac3
+word    9ac4 9acb
+byte    9acc 9ad1
+word    9ad4 9ad7
+byte    9ada 9adb
+word    9adc 9adf
+byte    9ae0 9ae5
+word    9ae6 9aed
+byte    9aee 9aef
+word    9af0 9af5
+byte    9af6 9af8
+byte    9afa 9afa
+func    9afc 9b0f: UW X 10 : UW X 10 V 256 
+func    9b10 9b2f: UW X 10 : UW X 10 V 256 
+func    9b30 9b47: UY X 10 : UY X 10 
+func    9b48 9b53: SY X 10 : UY X 10 
+func    9b54 9b6b: UW X 10 : UW X 10 
+func    9b6c 9b7f: UW X 10 : UW X 10 
+func    9b80 9b9f: UW X 10 : UW X 10 
+table   9ba0 9bef: O 10 UY X 10 
+table   9bf0 9c3f: O 10 UY X 10 
+table   9c40 9ca3: O 10 UY X 10 
+func    9cac 9cc7: SW X 10 : UW X 10 
+func    9cc8 9ce7: SW X 10 : UW X 10 V 256 
+table   9ce8 9d37: O 10 UY X 10 
+table   9d38 9d87: O 10 UY X 10 
+table   9d88 9da7: O 4 UY X 10 
+table   9da8 9dc7: O 4 UY X 10 
+table   9dc8 9de7: O 4 SY X 10 
+func    9de8 9dff: UW X 10 : UW X 10 V 256 
+byte    9e01 9e01
+byte    9e50 9e50
+word    9e5a 9e5b     # auto
+byte    9e5c 9e61
+byte    9e64 9e67
+word    9e68 9e6d
+byte    9e6e 9e70
+word    9e72 9e77
+byte    9e78 9e7c
+word    9e7e 9e9f
+byte    9ea0 9ea0
+table   9ea2 9ef1: O 10 UY X 10 
+func    9ef2 9eff: SY X 10 : UY X 10 
+byte    9f1f 9f1f
+func    9f3e 9f61: UW X 10 : UW X 10 V 256 
+func    9f62 9f99: UW X 10 : UW X 10 
+func    9f9a 9fe1: UW X 10 : UW X 10 
+func    9fe2 9ffd: UW X 10 : UW X 10 V 256 
+code    a000 a025
+code    a0f0 a15f
+byte    c000 c000
+word    c11a c11b
+word    c3d8 c3d9
+code    d4f0 d55b
+func    d55c d57b: UW X 10 : UW X 10 V 256 
+table   d57c d65f: O 19 UY X 10 
+func    d660 d68f: UW X 10 : UW X 10 
+func    d690 d6bf: UW X 10 : UW X 10 
+func    d6c0 d6ef: UW X 10 : UW X 10 
+func    d6f0 d71f: UW X 10 : UW X 10 
+func    d74a d791: SW X 10 : SW X 10 
+word    edfc ee07
+xcode   ee6a ffff     # auto
+fill    ee6a ffff     # auto
+
+
+# ------------ Subroutine list----------
+sub  35ac  "SUYFuncLU_35ac"   $ F suyflu 32
+sub  35b1  "SSYFuncLU_35b1"   $ F ssyflu 32
+sub  35b4  "USYFuncLU_35b4"   $ F usyflu 32
+sub  35b7  "UUYFuncLU_35b7"   $ F uuyflu 32
+sub  3601  "SUWFuncLU_3601"   $ F suwflu 32
+sub  3606  "SSWFuncLU_3606"   $ F sswflu 32
+sub  360c  "UUWFuncLU_360c"   $ F uuwflu 32
+sub  36db  "UYTabLU_36db"   $ F uytlu 38 34
+sub  36e7  "SYTabLU_36e7"   $ F sytlu 38 34
+sub  36ea  "UYTabLU_36ea"   $ F uytlu 38 34
+
+
+# ------------ Symbol list ----
+sym 2  "CPU_OK" :B 6                  # auto
+sym 2  "LSO_Port"                  # auto
+sym 3  "LIO_Port"                  # auto
+sym 4  "AD_Cmd" : W                  # auto
+sym 4  "AD_Low"                  # auto
+sym 5  "WDG_Timer" : W                  # auto
+sym 5  "AD_High"                  # auto
+sym 6  "IO_Timer"                  # auto
+sym 7  "IO_Timer_Hi"                  # auto
+sym 8  "INT_Mask"                  # auto
+sym 9  "INT_Pend"                  # auto
+sym a  "HSO_OVF" :B 0                  # auto
+sym a  "HSI_OVF" :B 1                  # auto
+sym a  "HSI_Ready" :B 2                  # auto
+sym a  "AD_Ready" :B 3                  # auto
+sym a  "INT_Handling" :B 4                  # auto
+sym a  "INT_Priority" :B 5                  # auto
+sym a  "IO_Status"                  # auto
+sym b  "HSI_Sample"                  # auto
+sym c  "HSI_Mask"                  # auto
+sym d  "HSO_Cmd" : W                  # auto
+sym d  "HSI_Data"                  # auto
+sym e  "HSI_Time"                  # auto
+sym 10  "StackPtr"                  # auto
+sym 2032  "Sub_2032"                  # auto
+sym 2151  "Sub_2151"                  # auto
+sym 2174  "Sub_2174"                  # auto
+sym 222e  "Sub_222e"                  # auto
+sym 235d  "Sub_235d"                  # auto
+sym 23bd  "Sub_23bd"                  # auto
+sym 245d  "Sub_245d"                  # auto
+sym 24f9  "Sub_24f9"                  # auto
+sym 2509  "Sub_2509"                  # auto
+sym 2520  "Sub_2520"                  # auto
+sym 2533  "Sub_2533"                  # auto
+sym 25b9  "I_HSO_1"                  # auto
+sym 268a  "Sub_268a"                  # auto
+sym 272b  "I_HSI_0"                  # auto
+sym 273d  "I_Timer_OVF"                  # auto
+sym 2750  "I_Ignore"                  # auto
+sym 2751  "I_HSO_2"                  # auto
+sym 27a6  "Sub_27a6"                  # auto
+sym 27ca  "Sub_27ca"                  # auto
+sym 29ce  "Sub_29ce"                  # auto
+sym 2a15  "Sub_2a15"                  # auto
+sym 2a3e  "Sub_2a3e"                  # auto
+sym 2a4c  "Sub_2a4c"                  # auto
+sym 2c6e  "Sub_2c6e"                  # auto
+sym 2c91  "Sub_2c91"                  # auto
+sym 2d29  "Sub_2d29"                  # auto
+sym 2d37  "Sub_2d37"                  # auto
+sym 2dc7  "Sub_2dc7"                  # auto
+sym 2e5b  "Sub_2e5b"                  # auto
+sym 2fc8  "Sub_2fc8"                  # auto
+sym 318a  "Sub_318a"                  # auto
+sym 319a  "Sub_319a"                  # auto
+sym 31c4  "Sub_31c4"                  # auto
+sym 32cd  "Sub_32cd"                  # auto
+sym 333e  "Sub_333e"                  # auto
+sym 334b  "Sub_334b"                  # auto
+sym 3590  "Sub_3590"                  # auto
+sym 3654  "Sub_3654"                  # auto
+sym 365e  "Sub_365e"                  # auto
+sym 3663  "Sub_3663"                  # auto
+sym 3665  "Sub_3665"                  # auto
+sym 366a  "Sub_366a"                  # auto
+sym 3695  "Sub_3695"                  # auto
+sym 36b8  "Sub_36b8"                  # auto
+sym 371f  "Sub_371f"                  # auto
+sym 374f  "Sub_374f"                  # auto
+sym 3786  "Sub_3786"                  # auto
+sym 37f3  "Sub_37f3"                  # auto
+sym 384e  "Sub_384e"                  # auto
+sym 3ccf  "Sub_3ccf"                  # auto
+sym 3cd3  "Sub_3cd3"                  # auto
+sym 3ce4  "Sub_3ce4"                  # auto
+sym 3d5a  "Sub_3d5a"                  # auto
+sym 3dac  "Sub_3dac"                  # auto
+sym 3e7c  "Sub_3e7c"                  # auto
+sym 40ba  "Sub_40ba"                  # auto
+sym 4141  "Sub_4141"                  # auto
+sym 41a1  "Sub_41a1"                  # auto
+sym 42c6  "Sub_42c6"                  # auto
+sym 434b  "Sub_434b"                  # auto
+sym 4366  "Sub_4366"                  # auto
+sym 44fe  "Sub_44fe"                  # auto
+sym 4513  "Sub_4513"                  # auto
+sym 46e8  "Sub_46e8"                  # auto
+sym 4700  "Sub_4700"                  # auto
+sym 4897  "Sub_4897"                  # auto
+sym 493b  "Sub_493b"                  # auto
+sym 4a87  "Sub_4a87"                  # auto
+sym 4a9e  "Sub_4a9e"                  # auto
+sym 4ad7  "Sub_4ad7"                  # auto
+sym 4b5b  "Sub_4b5b"                  # auto
+sym 4b85  "Sub_4b85"                  # auto
+sym 4c68  "Sub_4c68"                  # auto
+sym 4c7f  "Sub_4c7f"                  # auto
+sym 4c88  "Sub_4c88"                  # auto
+sym 4ca6  "Sub_4ca6"                  # auto
+sym 4cae  "Sub_4cae"                  # auto
+sym 4cbd  "Sub_4cbd"                  # auto
+sym 4cca  "Sub_4cca"                  # auto
+sym 4cfd  "Sub_4cfd"                  # auto
+sym 4d8a  "Sub_4d8a"                  # auto
+sym 4ef4  "Sub_4ef4"                  # auto
+sym 4f8d  "Sub_4f8d"                  # auto
+sym 50ee  "Sub_50ee"                  # auto
+sym 5103  "Sub_5103"                  # auto
+sym 5136  "Sub_5136"                  # auto
+sym 5293  "Sub_5293"                  # auto
+sym 54d9  "Sub_54d9"                  # auto
+sym 5587  "Sub_5587"                  # auto
+sym 55c3  "Sub_55c3"                  # auto
+sym 584a  "Sub_584a"                  # auto
+sym 5852  "Sub_5852"                  # auto
+sym 58b0  "Sub_58b0"                  # auto
+sym 5ec4  "Sub_5ec4"                  # auto
+sym 5ee7  "Sub_5ee7"                  # auto
+sym 5f71  "Sub_5f71"                  # auto
+sym 6087  "Sub_6087"                  # auto
+sym 60cf  "Sub_60cf"                  # auto
+sym 6191  "Sub_6191"                  # auto
+sym 62b5  "Sub_62b5"                  # auto
+sym 6335  "Sub_6335"                  # auto
+sym 63ca  "Sub_63ca"                  # auto
+sym 63dd  "Sub_63dd"                  # auto
+sym 648c  "Sub_648c"                  # auto
+sym 6566  "Sub_6566"                  # auto
+sym 65a1  "Sub_65a1"                  # auto
+sym 65d4  "Sub_65d4"                  # auto
+sym 68fe  "Sub_68fe"                  # auto
+sym 6a7b  "Sub_6a7b"                  # auto
+sym 6add  "Sub_6add"                  # auto
+sym 6b09  "Sub_6b09"                  # auto
+sym 6c14  "Sub_6c14"                  # auto
+sym 6c8f  "Sub_6c8f"                  # auto
+sym 6c9f  "Sub_6c9f"                  # auto
+sym 6ce5  "Sub_6ce5"                  # auto
+sym 6d17  "Sub_6d17"                  # auto
+sym 6e49  "Sub_6e49"                  # auto
+sym 6f48  "Sub_6f48"                  # auto
+sym 6f4e  "Sub_6f4e"                  # auto
+sym 6f65  "Sub_6f65"                  # auto
+sym 6f74  "Sub_6f74"                  # auto
+sym 6f77  "Sub_6f77"                  # auto
+sym 6f7a  "Sub_6f7a"                  # auto
+sym 6f83  "Sub_6f83"                  # auto
+sym 6fe6  "Sub_6fe6"                  # auto
+sym 7009  "Sub_7009"                  # auto
+sym 700f  "Sub_700f"                  # auto
+sym 7012  "Sub_7012"                  # auto
+sym 701b  "Sub_701b"                  # auto
+sym 7026  "Sub_7026"                  # auto
+sym 7050  "Sub_7050"                  # auto
+sym 7075  "Sub_7075"                  # auto
+sym 7096  "Sub_7096"                  # auto
+sym 711d  "Sub_711d"                  # auto
+sym 7122  "Sub_7122"                  # auto
+sym 71f4  "Sub_71f4"                  # auto
+sym 71fa  "Sub_71fa"                  # auto
+sym 71ff  "Sub_71ff"                  # auto
+sym 7273  "Sub_7273"                  # auto
+sym 727f  "Sub_727f"                  # auto
+sym 728d  "Sub_728d"                  # auto
+sym 728f  "Sub_728f"                  # auto
+sym 7292  "Sub_7292"                  # auto
+sym 7297  "Sub_7297"                  # auto
+sym 72a3  "Sub_72a3"                  # auto
+sym 72a6  "Sub_72a6"                  # auto
+sym 72cc  "Sub_72cc"                  # auto
+sym 72d6  "Sub_72d6"                  # auto
+sym 72dc  "Sub_72dc"                  # auto
+sym 7300  "Sub_7300"                  # auto
+sym 7304  "Sub_7304"                  # auto
+sym 7319  "Sub_7319"                  # auto
+sym 7325  "Sub_7325"                  # auto
+sym 732e  "Sub_732e"                  # auto
+sym 737f  "Sub_737f"                  # auto
+sym 76e0  "Sub_76e0"                  # auto
+sym 77a0  "Sub_77a0"                  # auto
+sym 77ac  "Sub_77ac"                  # auto
+sym 77b4  "Sub_77b4"                  # auto
+sym 77be  "Sub_77be"                  # auto
+sym 77c2  "Sub_77c2"                  # auto
+sym 77d7  "Sub_77d7"                  # auto
+sym 77ed  "Sub_77ed"                  # auto
+sym 77f9  "Sub_77f9"                  # auto
+sym 780d  "Sub_780d"                  # auto
+sym 7844  "Sub_7844"                  # auto
+sym 7870  "Sub_7870"                  # auto
+sym 78d2  "Sub_78d2"                  # auto
+sym 7944  "Sub_7944"                  # auto
+sym 7964  "Sub_7964"                  # auto
+sym 796c  "Sub_796c"                  # auto
+sym 798b  "Sub_798b"                  # auto
+sym 79ad  "Sub_79ad"                  # auto
+sym 79ce  "Sub_79ce"                  # auto
+sym 79e4  "Sub_79e4"                  # auto
+sym 7a76  "Sub_7a76"                  # auto
+sym 7aa1  "Sub_7aa1"                  # auto
+sym 7abd  "Sub_7abd"                  # auto
+sym 7ad6  "Sub_7ad6"                  # auto
+sym 7aef  "Sub_7aef"                  # auto
+sym 7b01  "Sub_7b01"                  # auto
+sym 7b1b  "Sub_7b1b"                  # auto
+sym 7bae  "Sub_7bae"                  # auto
+sym 7bb2  "Sub_7bb2"                  # auto
+sym 7bc0  "Sub_7bc0"                  # auto
+sym 7be0  "Sub_7be0"                  # auto
+sym 7c84  "Sub_7c84"                  # auto
+sym 7ca3  "Sub_7ca3"                  # auto
+sym 7cc9  "Sub_7cc9"                  # auto
+sym 7ce5  "Sub_7ce5"                  # auto
+sym 7d11  "Sub_7d11"                  # auto
+sym 7d4a  "Sub_7d4a"                  # auto
+sym 7d68  "Sub_7d68"                  # auto
+sym 7d91  "Sub_7d91"                  # auto
+sym 7daa  "Sub_7daa"                  # auto
+sym 7ddb  "Sub_7ddb"                  # auto
+sym 7de3  "Sub_7de3"                  # auto
+sym 7de8  "Sub_7de8"                  # auto
+sym 7e36  "Sub_7e36"                  # auto
+sym 7e3b  "Sub_7e3b"                  # auto
+sym 7e4c  "Sub_7e4c"                  # auto
+sym 7e8f  "Sub_7e8f"                  # auto
+sym 7ecf  "Sub_7ecf"                  # auto
+sym 7f15  "Sub_7f15"                  # auto
+sym 7f24  "Sub_7f24"                  # auto
+sym 7f37  "Sub_7f37"                  # auto
+sym 7f55  "Sub_7f55"                  # auto
+sym 7f62  "Sub_7f62"                  # auto
+sym 7f7f  "Sub_7f7f"                  # auto
+sym 7fb1  "Sub_7fb1"                  # auto
+sym 7fc8  "Sub_7fc8"                  # auto
+sym 8079  "Sub_8079"                  # auto
+sym 807e  "Sub_807e"                  # auto
+sym 8085  "Sub_8085"                  # auto
+sym 808c  "Sub_808c"                  # auto
+sym 80a6  "Sub_80a6"                  # auto
+sym 80c4  "Sub_80c4"                  # auto
+sym 80f2  "Sub_80f2"                  # auto
+sym 80fe  "Sub_80fe"                  # auto
+sym 8121  "Sub_8121"                  # auto
+sym 812d  "Sub_812d"                  # auto
+sym 8177  "Sub_8177"                  # auto
+sym 818a  "Sub_818a"                  # auto
+sym 81ba  "Sub_81ba"                  # auto
+sym 81ca  "Sub_81ca"                  # auto
+sym 81e0  "Sub_81e0"                  # auto
+sym 81f8  "Sub_81f8"                  # auto
+sym 8228  "Sub_8228"                  # auto
+sym 823f  "Sub_823f"                  # auto
+sym 827d  "Sub_827d"                  # auto
+sym 8383  "Sub_8383"                  # auto
+sym 83dd  "Sub_83dd"                  # auto
+sym 83e0  "Sub_83e0"                  # auto
+sym 841b  "Sub_841b"                  # auto
+sym 8434  "Sub_8434"                  # auto
+sym 8485  "Sub_8485"                  # auto
+sym 848f  "Sub_848f"                  # auto
+sym 84b1  "Sub_84b1"                  # auto
+sym 84b2  "Sub_84b2"                  # auto
+sym 852c  "Sub_852c"                  # auto
+sym 8530  "Sub_8530"                  # auto
+sym 85a3  "Sub_85a3"                  # auto
+sym 85d3  "Sub_85d3"                  # auto
+sym 85f5  "Sub_85f5"                  # auto
+sym 8800  "Sub_8800"                  # auto
+sym 8c18  "Func_8c18"                  # auto
+sym 8c26  "Func_8c26"                  # auto
+sym 8c34  "Func_8c34"                  # auto
+sym 8c50  "Func_8c50"                  # auto
+sym 8c78  "Func_8c78"                  # auto
+sym 8c90  "Func_8c90"                  # auto
+sym 8c9e  "Func_8c9e"                  # auto
+sym 8ca8  "Func_8ca8"                  # auto
+sym 8cb2  "Func_8cb2"                  # auto
+sym 8cd2  "Func_8cd2"                  # auto
+sym 8cde  "Func_8cde"                  # auto
+sym 8d16  "Func_8d16"                  # auto
+sym 8d32  "Func_8d32"                  # auto
+sym 8d46  "Func_8d46"                  # auto
+sym 8d56  "Func_8d56"                  # auto
+sym 8d6e  "Func_8d6e"                  # auto
+sym 8d78  "Func_8d78"                  # auto
+sym 8d86  "Func_8d86"                  # auto
+sym 8d90  "Func_8d90"                  # auto
+sym 8da6  "Func_8da6"                  # auto
+sym 8db0  "Func_8db0"                  # auto
+sym 8dc4  "Func_8dc4"                  # auto
+sym 8dd4  "Func_8dd4"                  # auto
+sym 9069  "Table_9069"                  # auto
+sym 90b9  "Func_90b9"                  # auto
+sym 90c6  "Func_90c6"                  # auto
+sym 90e2  "Func_90e2"                  # auto
+sym 9148  "Func_9148"                  # auto
+sym 9160  "Table_9160"                  # auto
+sym 91c1  "Func_91c1"                  # auto
+sym 91cb  "Table_91cb"                  # auto
+sym 922c  "Func_922c"                  # auto
+sym 924c  "Func_924c"                  # auto
+sym 9256  "Func_9256"                  # auto
+sym 9286  "Func_9286"                  # auto
+sym 929a  "Func_929a"                  # auto
+sym 92b2  "Func_92b2"                  # auto
+sym 92c0  "Func_92c0"                  # auto
+sym 92ce  "Func_92ce"                  # auto
+sym 92d6  "Func_92d6"                  # auto
+sym 930e  "Func_930e"                  # auto
+sym 932a  "Func_932a"                  # auto
+sym 935a  "Func_935a"                  # auto
+sym 9366  "Table_9366"                  # auto
+sym 9488  "Func_9488"                  # auto
+sym 94c0  "Func_94c0"                  # auto
+sym 94ce  "Func_94ce"                  # auto
+sym 94da  "Func_94da"                  # auto
+sym 94ee  "Func_94ee"                  # auto
+sym 94f8  "Func_94f8"                  # auto
+sym 9504  "Func_9504"                  # auto
+sym 9528  "Func_9528"                  # auto
+sym 9532  "Func_9532"                  # auto
+sym 9540  "Func_9540"                  # auto
+sym 954e  "Func_954e"                  # auto
+sym 955a  "Func_955a"                  # auto
+sym 9568  "Func_9568"                  # auto
+sym 9574  "Table_9574"                  # auto
+sym 95c4  "Table_95c4"                  # auto
+sym 9664  "Table_9664"                  # auto
+sym 96b4  "Table_96b4"                  # auto
+sym 96c0  "Table_96c0"                  # auto
+sym 9710  "Table_9710"                  # auto
+sym 9748  "Func_9748"                  # auto
+sym 9760  "Func_9760"                  # auto
+sym 9778  "Func_9778"                  # auto
+sym 9784  "Func_9784"                  # auto
+sym 9792  "Func_9792"                  # auto
+sym 979c  "Func_979c"                  # auto
+sym 980d  "Func_980d"                  # auto
+sym 981b  "Func_981b"                  # auto
+sym 982a  "Func_982a"                  # auto
+sym 9846  "Func_9846"                  # auto
+sym 987a  "Func_987a"                  # auto
+sym 989e  "Func_989e"                  # auto
+sym 98b0  "Func_98b0"                  # auto
+sym 98ba  "Func_98ba"                  # auto
+sym 98e2  "Func_98e2"                  # auto
+sym 98ee  "Func_98ee"                  # auto
+sym 98f8  "Func_98f8"                  # auto
+sym 9904  "Func_9904"                  # auto
+sym 991c  "Func_991c"                  # auto
+sym 9926  "Func_9926"                  # auto
+sym 9942  "Func_9942"                  # auto
+sym 995e  "Func_995e"                  # auto
+sym 9986  "Func_9986"                  # auto
+sym 99ae  "Table_99ae"                  # auto
+sym 9a4e  "Table_9a4e"                  # auto
+sym 9a5a  "Func_9a5a"                  # auto
+sym 9a66  "Func_9a66"                  # auto
+sym 9a72  "Func_9a72"                  # auto
+sym 9afc  "Func_9afc"                  # auto
+sym 9b10  "Func_9b10"                  # auto
+sym 9b30  "Func_9b30"                  # auto
+sym 9b48  "Func_9b48"                  # auto
+sym 9b54  "Func_9b54"                  # auto
+sym 9b6c  "Func_9b6c"                  # auto
+sym 9b80  "Func_9b80"                  # auto
+sym 9ba0  "Table_9ba0"                  # auto
+sym 9bf0  "Table_9bf0"                  # auto
+sym 9c40  "Table_9c40"                  # auto
+sym 9cac  "Func_9cac"                  # auto
+sym 9cc8  "Func_9cc8"                  # auto
+sym 9ce8  "Table_9ce8"                  # auto
+sym 9d38  "Table_9d38"                  # auto
+sym 9d88  "Table_9d88"                  # auto
+sym 9da8  "Table_9da8"                  # auto
+sym 9dc8  "Table_9dc8"                  # auto
+sym 9de8  "Func_9de8"                  # auto
+sym 9ea2  "Table_9ea2"                  # auto
+sym 9ef2  "Func_9ef2"                  # auto
+sym 9f3e  "Func_9f3e"                  # auto
+sym 9f62  "Func_9f62"                  # auto
+sym 9f9a  "Func_9f9a"                  # auto
+sym 9fe2  "Func_9fe2"                  # auto
+sym a000  "Sub_a000"                  # auto
+sym a017  "Sub_a017"                  # auto
+sym a0f0  "Sub_a0f0"                  # auto
+sym d006  "Sub_d006"                  # auto
+sym d009  "Sub_d009"                  # auto
+sym d4f0  "Sub_d4f0"                  # auto
+sym d55c  "Func_d55c"                  # auto
+sym d57c  "Table_d57c"                  # auto
+sym d660  "Func_d660"                  # auto
+sym d690  "Func_d690"                  # auto
+sym d6c0  "Func_d6c0"                  # auto
+sym d6f0  "Func_d6f0"                  # auto
+sym d74a  "Func_d74a"                  # auto
+
+
+
+# ----- END of disassembly run -----
+
