@@ -1,0 +1,80 @@
+ 7615 \nERROR CODE DESCRIPTION
+ # 111,"PASS  	"
+ 7616 # 112,254 deg. ind. ACT-ckt. grounded.
+ 7618 # 113,-40 deg. ind. ACT-sensor ckt. open.
+ # 114,ACT out of S-T range.
+ # 116,ECT out of S-T range.
+ 761a # 117,254 deg. ind. ECT-ckt. grounded.
+ 761c # 118,-40 deg. ind. ECT-sensor ckt. open.
+ # 121,TP out of S-T range.
+ 761e # 122,TPS ckt. below minimum voltage.
+ 7620 # 123,TPS ckt. above max. voltage.
+ 7622 # 126,MAP/BP out of S-T range.
+ 7624 # 128,MAP vacuum circuit failure
+ # 129,Insuff. MAP change-dyn resp. test.
+ # 167,Insuff. TP change-dyn resp. test.
+ 7626 # 171,Heated oxygen sensor fault/not switching bank #1 or fuel system at adaptive limits
+ 7628 # 172,EGO sensor ckt. ind. system lean.
+ 762a # 173,EGO sensor ckt. ind. system rich.
+ 762c # 179,Adaptive Fuel Limit Lean
+ 762e # 181,Adaptive Fuel Limit Rich
+ 7630 # 182,Adaptive Fuel Limit Lean @idle
+ 7632 # 183,Adaptive Fuel Limit Rich @idle
+ # 194,Hego switch rate too fast
+ 7634 # 211,PIP ckt. fault.
+ 7636 # 212,Loss of tach input to processor.
+ # 213,Spark control fault present
+ # 225,Knock not sensed-dyn response test.
+ # 311,Themactor air system inop.
+ # 312,Thermactor air upstream during S-T.
+ # 313,Therm. air not bypassed during S-T.
+ 7638 # ??????
+ 763a # 327,EPT/EVP below min. voltage.
+ 763c # 328,EVP volt below closed lim (SONIC)
+ 763e # 332,EGR valve not opening (SONIC).
+ 7640 # 334,EVP volt. above closed limit.
+ 7642 # 336, Pressure Feedback EGR Circuit Voltage Higher Than Expected
+ 7644 # 337,EVP ckt. above max volt.
+ 7646 # 338,Cooling System not Heating
+ 7648 # 339,Cooling System not Cooling
+ # 411,RPM not within S-T lower band limit
+ # 412,RPM not within S-T upper band limit
+ 764a # 452,Insufficient input from VSS.
+ # 511,ROM test failed
+ # 512,KAM Test Failed
+ # 513,Failure in EEC ref. voltage.
+ # 519,PSPS ckt. open.
+ # 521,PSPS did not change states.
+ 764c # 528, Clutch Position Switch Circuit Failure
+ # 536,BOO Sw. Ckt failed open/closed -ECA input open or brake not actuated during test
+ # 538,Operator error-dyn response test.
+ # 539,A/C Swith error
+ 764e # 542,FP Ckt Open -ECA to Motor Ground
+ 7650 # 543,FP Ckt Open Bat. to Relay
+ # 552,Air Management 1 (AM1) ckt. failure
+ # 553,Air Management 2 (AM2) ckt. failure
+ 7652 # 556,Fuel pump ckt. failure.
+ # 558,Elect. vac. reg. (EVR) ckt. failure
+ # 565,Canister Purge (CANP) ckt. failure.
+ # 617,1-2 Shift Error
+ # 618,2-3 Shift Error
+ # 619,3-4 Shift Error
+ # 621,SS1 Sol Ckt Failure
+ # 622,SS2 Sol. Ckt. Failure
+ # 624,EPC Solenoid Circuit Failure/Shor-Output Driver
+ # 626,CCS Sol Ckt Failure
+ # 628,Converter Clutch Failure
+ # 629,CCC Sol. Ckt. Failure
+ # 631,OCIL Ckt. Failure
+ # 632,OCS Not Changing State
+ # 633,4X4 Switch closed
+ # 634,MLPS Out of Range
+ # 636,TOT Out of S-T range
+ # 637,-40 deg. ind. TOT sensor ckt open
+ # 638,315 Deg ind. TOT sensor ckt grounded    X
+ # 654,MLPS not in park
+ # 655,MLPS not in neutral
+ # ,
+ # ,
+ # ,
+ # 998,FMEM failure/Failed (open)EPC Output Driver
