@@ -1,7 +1,7 @@
 
 ####################################################################################################
 #
-# Disassembly listing of binary 'JOY0'    8061  1 bank     SAD Version 4.0.7.16b (11 Apr 2022)
+# Disassembly listing of binary 'JOY0'    8061  1 bank     SAD Version 4.0.7.16 (16 Jun 2021)
 # See 'JOY0_msg.txt' for warnings, results and other information
 
 # Explanation of extra flags and formats - 
@@ -19,7 +19,7 @@
 
 2000: ff                  nop                    
 2001: fa                  di                     interrupts OFF;
-2002: 21,51               sjmp  2155             goto 2155;
+2002: 21,51               sjmp  2155             goto INITIALIZE;
 
 2004: 00,00,ff,df,00,ff   ???   
 
@@ -27,14 +27,14 @@
 200c: 00,e0               word   e000
 200e: 5d,00               word     5d
 
-2010: 03,2d               vect  2d03             Sub_2d03
-2012: e5,2c               vect  2ce5             Sub_2ce5
-2014: 02,2d               vect  2d02             Sub_2d02
-2016: 02,2d               vect  2d02             Sub_2d02
-2018: ae,23               vect  23ae             Sub_23ae
-201a: fe,2a               vect  2afe             Sub_2afe
-201c: 02,2d               vect  2d02             Sub_2d02
-201e: 8f,2a               vect  2a8f             Sub_2a8f
+2010: 03,2d               vect  2d03             I_HSO_2
+2012: e5,2c               vect  2ce5             I_Timer_OVF
+2014: 02,2d               vect  2d02             I_Ignore
+2016: 02,2d               vect  2d02             I_Ignore
+2018: ae,23               vect  23ae             I_External
+201a: fe,2a               vect  2afe             I_HSO_1
+201c: 02,2d               vect  2d02             I_Ignore
+201e: 8f,2a               vect  2a8f             I_HSI_0
 
 2020: 08                  byte      8
 2021: 01                  byte      1
@@ -47,7 +47,7 @@
 202e: d4,d1               word   d1d4
 2030: d6,d1               word   d1d6
 
-   Sub_2032:
+   RESET_ALL:
 2032: fa                  di                     interrupts OFF;
 2033: ff                  nop                    
 2034: 11,0c               clrb  Rc               HSI_Mask = 0;
@@ -77,7 +77,7 @@
 2076: c6,1a,1c            stb   R1c,[R1a]        [R1a] = R1c;
 2079: 27,ed               sjmp  2068             goto 2068; }
 
-207b: d9,b5               jgtu  2032             if (R1c > 0) goto Sub_2032;
+207b: d9,b5               jgtu  2032             if (R1c > 0) goto RESET_ALL;
 207d: a2,16,14            ldw   R14,[R16]        R14 = [R16];
 2080: 27,da               sjmp  205c             goto 205c; }
 
@@ -86,8 +86,8 @@
 2088: 3e,2a,03            jb    B6,R2a,208e      if (B6_R2a = 0)  {
 208b: 91,01,9e            orb   R9e,1            B0_R9e = 1; } }
 208e: 91,10,45            orb   R45,10           B4_R45 = 1;
-2091: ef,37,6e            call  8ecb             Sub_8ecb ();
-2094: 28,e6               scall 217c             Sub_217c ();
+2091: ef,37,6e            call  8ecb             CHECK_CONSOLE ();
+2094: 28,e6               scall 217c             RESET_RAM_PTR ();
 2096: b3,f4,1c,30         ldb   R30,[Rf4+1c]     R30 = [c452];
 209a: c7,e4,fe,30         stb   R30,[Re4+fe]     [17e] = R30;
 209e: a1,db,b6,42         ldw   R42,b6db         R42 = b6db;
@@ -115,7 +115,7 @@
 
 20e6: b0,0b,86            ldb   R86,Rb           R86 = HSI_Sample;
 20e9: b1,a1,08            ldb   R8,a1            INT_Mask = a1;
-20ec: b3,f0,03,42         ldb   R42,[Rf0+3]      R42 = [c003];
+20ec: b3,f0,03,42         ldb   R42,[Rf0+3]      R42 = LINK_SW;
 20f0: 30,42,03            jnb   B0,R42,20f6      if (B0_R42 = 1)  {
 20f3: 91,01,49            orb   R49,1            B0_R49 = 1; }
 20f6: 31,42,26            jnb   B1,R42,211f      if (B1_R42 = 1)  {
@@ -152,21 +152,22 @@
 2153: fb                  ei                     interrupts ON;
 2154: f0                  ret                    return;
 
+   INITIALIZE:
 2155: 45,03,00,06,0e      ad3w  Re,R6,3          HSI_Time = IO_Timer + 3;
 215a: b1,19,0d            ldb   Rd,19            HSO_Cmd = 19;
 215d: 11,2a               clrb  R2a              R2a = 0;
 215f: a1,62,06,10         ldw   R10,662          StackPtr = 662;
-2163: 2e,cd               scall 2032             Sub_2032 ();
-   Sub_2165:
+2163: 2e,cd               scall 2032             RESET_ALL ();
+   BACKGROUND_LOOP:
 2165: 99,9c,da            cmpb  Rda,9c           
 2168: db,27               jc    2191             if (Rda < 9c)  {
 216a: b1,ff,aa            ldb   Raa,ff           Raa = ff;
 216d: ac,da,30            ldzbw R30,Rda          wR30 = yRda;
 2170: 65,fe,21,30         ad2w  R30,21fe         R30 += 21fe;
-2174: c9,65,21            push  2165             push(Sub_2165);
+2174: c9,65,21            push  2165             push(BACKGROUND_LOOP);
 2177: ca,30               push  [R30]            push([R30]);
 2179: 75,02,da            ad2b  Rda,2            Rda += 2;
-   Sub_217c:
+   RESET_RAM_PTR:
 217c: a1,80,01,e4         ldw   Re4,180          Re4 = 180;
 2180: a1,80,02,e6         ldw   Re6,280          Re6 = 280;
 2184: a1,80,03,e8         ldw   Re8,380          Re8 = 380;
@@ -174,8 +175,9 @@
 218c: a1,00,08,ec         ldw   Rec,800          Rec = 800;
 2190: f0                  ret                    return; }
 
+   DEAD_LOOP_DEAD:
 2191: fa                  di                     interrupts OFF;
-2192: 27,fd               sjmp  2191             goto 2191;
+2192: 27,fd               sjmp  2191             goto DEAD_LOOP_DEAD;
 
    Sub_2194:
 2194: c3,01,00,1f,00      stw   R0,[R0+1f00]     [1f00] = 0;
@@ -208,7 +210,7 @@
 21fd: f0                  ret                    return;
 
 21fe: c9,6d               vect  6dc9             Sub_6dc9
-2200: ca,8e               vect  8eca             Sub_8eca
+2200: ca,8e               vect  8eca             CHECK_CONSOLE_DI
 2202: 98,3a               vect  3a98             Sub_3a98
 2204: a1,5e               vect  5ea1             Sub_5ea1
 2206: 3b,3b               vect  3b3b             Sub_3b3b
@@ -239,7 +241,7 @@
 2238: c0,6c               vect  6cc0             Sub_6cc0
 223a: 54,76               vect  7654             Sub_7654
 223c: 94,21               vect  2194             Sub_2194
-223e: ca,8e               vect  8eca             Sub_8eca
+223e: ca,8e               vect  8eca             CHECK_CONSOLE_DI
 2240: 3b,3b               vect  3b3b             Sub_3b3b
 2242: 04,3c               vect  3c04             READ_AD
 2244: 2f,59               vect  592f             Sub_592f
@@ -258,7 +260,7 @@
 225e: ce,64               vect  64ce             Sub_64ce
 2260: f2,6f               vect  6ff2             Sub_6ff2
 2262: 94,21               vect  2194             Sub_2194
-2264: ca,8e               vect  8eca             Sub_8eca
+2264: ca,8e               vect  8eca             CHECK_CONSOLE_DI
 2266: 37,3b               vect  3b37             Sub_3b37
 2268: 04,3c               vect  3c04             READ_AD
 226a: 2f,59               vect  592f             Sub_592f
@@ -390,8 +392,11 @@
 
 237d: 6d                  byte     6d
 
-237e: 65,2a,00,98,08,2e,23,38,77,2a,00,88,08,2e,0a,38  ???  
-238e: 07,00,10,8e,00,99,08???   
+237e: 65,2a,00,98,08,2e,23,38,77,2a,00,88,08  ???  
+
+238b: 2e                  byte     2e
+
+238c: 0a,38,07,00,10,8e,00,99,08  ???  
 
 2395: 28                  byte     28
 
@@ -406,7 +411,7 @@
 
 23a8: 7e,02,6c,02,84,02   ???   
 
-   Sub_23ae:
+   I_External:
 23ae: 3d,4b,01            jb    B5,R4b,23b2      if (B5_R4b = 0)  {
 23b1: f1                  reti                   return; }
 
@@ -797,7 +802,7 @@
 2a8a: c7,70,01,00         stb   R0,[R70+1]       [R70+1] = 0; } }
 2a8e: f0                  ret                    return;
 
-   Sub_2a8f:
+   I_HSI_0:
 2a8f: 3a,0a,01            jb    B2,Ra,2a93       if (HSI_Ready = 0)  {
 2a92: f1                  reti                   return; }
 
@@ -840,9 +845,9 @@
 2afa: 3a,0a,a1            jb    B2,Ra,2a9e       if (HSI_Ready = 1) goto Sub_2a9e;
 2afd: f0                  ret                    return;
 
-   Sub_2afe:
+   I_HSO_1:
 2afe: f2                  pushp                  push(PSW);
-2aff: c0,80,06            stw   R6,R80           0 = IO_Timer;
+2aff: c0,80,06            stw   R6,R80           7c = IO_Timer;
 2b02: c3,e6,c6,10         stw   R10,[Re6+c6]     [246] = StackPtr;
 2b06: ad,6c,10            ldzbw R10,6c           StackPtr = 6c;
 2b09: 3e,2a,2f            jb    B6,R2a,2b3b      if (B6_R2a = 0)  {
@@ -1006,7 +1011,7 @@
 2ce3: f3                  popp                   PSW = pop();
 2ce4: f1                  reti                   return;
 
-   Sub_2ce5:
+   I_Timer_OVF:
 2ce5: f2                  pushp                  push(PSW);
 2ce6: 07,12               incw  R12              R12++;
 2ce8: d7,03               jne   2ced             if (R12 = 0)  {
@@ -1015,14 +1020,14 @@
 2cf0: a0,06,82            ldw   R82,R6           R82 = IO_Timer;
 2cf3: fa                  di                     interrupts OFF;
 2cf4: b1,a1,08            ldb   R8,a1            INT_Mask = a1;
-2cf7: b3,f0,03,54         ldb   R54,[Rf0+3]      R54 = [c003];
+2cf7: b3,f0,03,54         ldb   R54,[Rf0+3]      R54 = LINK_SW;
 2cfb: 31,54,03            jnb   B1,R54,2d01      if (B1_R54 = 1)  {
 2cfe: b1,b1,08            ldb   R8,b1            INT_Mask = b1; }
 2d01: f3                  popp                   PSW = pop();
-   Sub_2d02:
+   I_Ignore:
 2d02: f1                  reti                   return;
 
-   Sub_2d03:
+   I_HSO_2:
 2d03: f2                  pushp                  push(PSW);
 2d04: fa                  di                     interrupts OFF;
 2d05: ff                  nop                    
@@ -5156,7 +5161,7 @@
 595c: f0                  ret                    return;
 
    Sub_595d:
-595d: b3,f0,03,42         ldb   R42,[Rf0+3]      R42 = [c003];
+595d: b3,f0,03,42         ldb   R42,[Rf0+3]      R42 = LINK_SW;
 5961: 39,42,04            jb    B1,R42,5968      if (B1_R42 = 0)  {
 5964: 71,df,4b            an2b  R4b,df           B5_R4b = 0;
 5967: f0                  ret                    return; }
@@ -5209,7 +5214,7 @@
 59e9: f0                  ret                    return;
 
    Sub_59ea:
-59ea: b3,f0,03,18         ldb   R18,[Rf0+3]      R18 = [c003];
+59ea: b3,f0,03,18         ldb   R18,[Rf0+3]      R18 = LINK_SW;
 59ee: 38,18,04            jb    B0,R18,59f5      if (B0_R18 = 0)  {
 59f1: 71,fe,49            an2b  R49,fe           B0_R49 = 0;
 59f4: f0                  ret                    return; }
@@ -5841,7 +5846,7 @@
 
    Sub_609d:
 609d: 9b,fe,22,00         cmpb  R0,[Rfe+22]      
-60a1: d7,05               jne   60a8             if ([d1f8] = 0)  {
+60a1: d7,05               jne   60a8             if (KIHP = 0)  {
 60a3: 71,7f,9c            an2b  R9c,7f           B7_R9c = 0;
 60a6: 20,03               sjmp  60ab             return; }
 
@@ -5850,7 +5855,7 @@
 
    Sub_60ac:
 60ac: 9b,fe,22,00         cmpb  R0,[Rfe+22]      
-60b0: df,05               je    60b7             if ([d1f8] != 0)  {
+60b0: df,05               je    60b7             if (KIHP != 0)  {
 60b2: b1,b7,0c            ldb   Rc,b7            HSI_Mask = b7;
 60b5: 20,03               sjmp  60ba             return; }
 
@@ -6475,7 +6480,7 @@
 671b: a3,f0,5c,18         ldw   R18,[Rf0+5c]     R18 = [c05c];
 671f: 29,0d               scall 682e             Sub_682e (); } }
 6721: 9b,fe,24,00         cmpb  R0,[Rfe+24]      
-6725: df,1f               je    6746             if ([d1fa] != 0)  {
+6725: df,1f               je    6746             if (PSPS != 0)  {
 6727: 30,8b,12            jnb   B0,R8b,673c      if (B0_R8b = 1)  {
 672a: 67,f0,4e,40         ad2w  R40,[Rf0+4e]     R40 += [c04e];
 672e: a3,f0,54,18         ldw   R18,[Rf0+54]     R18 = [c054];
@@ -6554,7 +6559,7 @@
 6811: bd,ff,20            ldsbw R20,ff           swR20 = ff; } }
 6814: 3e,87,09            jb    B6,R87,6820      if (B6_R87 = 0)  {
 6817: 9b,fe,24,00         cmpb  R0,[Rfe+24]      
-681b: df,06               je    6823             if ([d1fa] = 0) return;
+681b: df,06               je    6823             if (PSPS = 0) return;
 681d: 30,8b,03            jnb   B0,R8b,6823      if (B0_R8b = 0) return; }
 6820: 91,80,26            orb   R26,80           B7_R26 = 1; } }
 6823: f0                  ret                    return;
@@ -7826,13 +7831,38 @@
 7610: 85,24,02,02,9e      timer 85,   224,  B1_9e
 7615: 00                  byte  # Terminator
 
-7616: 12,01               word    112
-7618: 13,01               word    113
-
-761a: 17,01,18,01,22,01,23,01,26,01,28,01,71,01,72,01  ???  
-762a: 73,01,79,01,81,01,82,01,83,01,11,02,12,02,26,03  ???  
-763a: 27,03,28,03,32,03,34,03,36,03,37,03,38,03,39,03  ???  
-764a: 52,04,28,05,42,05,43,05,56,05  ???  
+ERROR CODE DESCRIPTION
+7616: 12,01               word    112                                              # 112,254 deg. ind. ACT-ckt. grounded.
+7618: 13,01               word    113                                              # 113,-40 deg. ind. ACT-sensor ckt. open.
+761a: 17,01               word    117                                              # 117,254 deg. ind. ECT-ckt. grounded.
+761c: 18,01               word    118                                              # 118,-40 deg. ind. ECT-sensor ckt. open.
+761e: 22,01               word    122                                              # 122,TPS ckt. below minimum voltage.
+7620: 23,01               word    123                                              # 123,TPS ckt. above max. voltage.
+7622: 26,01               word    126                                              # 126,MAP/BP out of S-T range.
+7624: 28,01               word    128                                              # 128,MAP vacuum circuit failure
+7626: 71,01               word    171                                              # 171,Heated oxygen sensor fault/not switching bank #1 or fuel system at adaptive limits
+7628: 72,01               word    172                                              # 172,EGO sensor ckt. ind. system lean.
+762a: 73,01               word    173                                              # 173,EGO sensor ckt. ind. system rich.
+762c: 79,01               word    179                                              # 179,Adaptive Fuel Limit Lean
+762e: 81,01               word    181                                              # 181,Adaptive Fuel Limit Rich
+7630: 82,01               word    182                                              # 182,Adaptive Fuel Limit Lean @idle
+7632: 83,01               word    183                                              # 183,Adaptive Fuel Limit Rich @idle
+7634: 11,02               word    211                                              # 211,PIP ckt. fault.
+7636: 12,02               word    212                                              # 212,Loss of tach input to processor.
+7638: 26,03               word    326                                              # ??????
+763a: 27,03               word    327                                              # 327,EPT/EVP below min. voltage.
+763c: 28,03               word    328                                              # 328,EVP volt below closed lim (SONIC)
+763e: 32,03               word    332                                              # 332,EGR valve not opening (SONIC).
+7640: 34,03               word    334                                              # 334,EVP volt. above closed limit.
+7642: 36,03               word    336                                              # 336, Pressure Feedback EGR Circuit Voltage Higher Than Expected
+7644: 37,03               word    337                                              # 337,EVP ckt. above max volt.
+7646: 38,03               word    338                                              # 338,Cooling System not Heating
+7648: 39,03               word    339                                              # 339,Cooling System not Cooling
+764a: 52,04               word    452                                              # 452,Insufficient input from VSS.
+764c: 28,05               word    528                                              # 528, Clutch Position Switch Circuit Failure
+764e: 42,05               word    542                                              # 542,FP Ckt Open -ECA to Motor Ground
+7650: 43,05               word    543                                              # 543,FP Ckt Open Bat. to Relay
+7652: 56,05               word    556                                              # 556,Fuel pump ckt. failure.
 
    Sub_7654:
 7654: 71,fb,2c            an2b  R2c,fb           B2_R2c = 0;
@@ -9349,7 +9379,7 @@
 845b: 1a,f1                     #arg 2              d2f0,
 845d: 1c,f1                     #arg 3              d2f2,
 845f: 22,05                     #arg 4              522 );
-8461: b3,fe,24,42         ldb   R42,[Rfe+24]     R42 = [d1fa];
+8461: b3,fe,24,42         ldb   R42,[Rfe+24]     R42 = PSPS;
 8465: e0,42,08            djnz  R42,8470         R42--;
                                                  if (R42 != 0) goto 8470;
 8468: 30,8b,05            jnb   B0,R8b,8470      if (B0_R8b = 1)  {
@@ -9996,7 +10026,7 @@
 
 8a09: 71,bf,2f            an2b  R2f,bf           B6_R2f = 0;
 8a0c: 9b,fe,22,00         cmpb  R0,[Rfe+22]      
-8a10: df,17               je    8a29             if ([d1f8] != 0)  {
+8a10: df,17               je    8a29             if (KIHP != 0)  {
 8a12: 91,40,2f            orb   R2f,40           B6_R2f = 1;
 8a15: a3,ee,f5,ce         ldw   Rce,[Ree+f5]     Rce = [d2ca];
 8a19: a3,ee,f7,92         ldw   R92,[Ree+f7]     R92 = [d2cc];
@@ -10068,7 +10098,7 @@
 8ad0: b3,ee,39,42         ldb   R42,[Ree+39]     R42 = [d30e];
 8ad4: e0,42,12            djnz  R42,8ae9         R42--;
                                                  if (R42 != 0) goto Sub_8ae9;
-8ad7: b3,fe,24,42         ldb   R42,[Rfe+24]     R42 = [d1fa];
+8ad7: b3,fe,24,42         ldb   R42,[Rfe+24]     R42 = PSPS;
 8adb: e0,42,0b            djnz  R42,8ae9         R42--;
                                                  if (R42 != 0) goto Sub_8ae9;
 8ade: 30,29,03            jnb   B0,R29,8ae4      if (B0_R29 = 1)  {
@@ -10375,7 +10405,7 @@
 8dba: ff                  nop                    
 8dbb: a1,62,06,10         ldw   R10,662          StackPtr = 662;
 8dbf: ef,30,f8            call  85f2             Sub_85f2 ();
-8dc2: ef,6d,92            call  2032             Sub_2032 ();
+8dc2: ef,6d,92            call  2032             RESET_ALL ();
 8dc5: 35,2a,06            jnb   B5,R2a,8dce      if (B5_R2a = 1)  {
 8dc8: 71,db,2a            an2b  R2a,db           R2a &= db;
 8dcb: 91,18,2a            orb   R2a,18           R2a |= 18; }
@@ -10383,7 +10413,7 @@
 8dd1: 71,bb,2a            an2b  R2a,bb           R2a &= bb;
 8dd4: 91,10,2a            orb   R2a,10           B4_R2a = 1; }
 8dd7: ef,99,f4            call  8273             Sub_8273 ();
-8dda: e7,88,93            jump  2165             goto Sub_2165; } }
+8dda: e7,88,93            jump  2165             goto BACKGROUND_LOOP; } }
 
 8ddd: f0                  ret                    return;
 
@@ -10461,19 +10491,24 @@
 8eac: c7,e6,a2,00         stb   R0,[Re6+a2]      [222] = 0; }
 8eb0: f0                  ret                    return;
 
-8eb1: ff,00,c0,00,10      ???   
+8eb1: ff                  ???   
 
+8eb2: 00,c0               word   c000
+8eb4: 00,10               word   1000
 8eb6: 00,10               word   1000
-
-8eb8: 00,c2,00,12         ???   
-
+8eb8: 00,c2               word   c200
+8eba: 00,12               word   1200
 8ebc: 00,12               word   1200
+8ebe: 06,d0               word   d006
+8ec0: 06,c0               word   c006
+8ec2: 06,e0               word   e006
+8ec4: 09,d0               word   d009
+8ec6: 09,c0               word   c009
+8ec8: 09,e0               word   e009
 
-8ebe: 06,d0,06,c0,06,e0,09,d0,09,c0,09,e0  ???  
-
-   Sub_8eca:
+   CHECK_CONSOLE_DI:
 8eca: fa                  di                     interrupts OFF;
-   Sub_8ecb:
+   CHECK_CONSOLE:
 8ecb: a3,01,00,0d,14      ldw   R14,[R0+d00]     R14 = [d00];
 8ed0: 99,2a,15            cmpb  R15,2a           
 8ed3: d7,3b               jne   8f10             if (R15 = 2a)  {
@@ -10484,12 +10519,12 @@
 8ee3: 07,72               incw  R72              R72++; }
 8ee5: a0,72,0e            ldw   Re,R72           HSI_Time = R72;
 8ee8: b1,0f,0d            ldb   Rd,f             HSO_Cmd = f;
-8eeb: c9,f6,8e            push  8ef6             push(Sub_8ef6);
+8eeb: c9,f6,8e            push  8ef6             push(CONSOLE_ROUTINE);
 8eee: ad,04,30            ldzbw R30,4            wR30 = 4;
 8ef1: cb,31,be,8e         push  [R30+8ebe]       push([R30+8ebe]);
 8ef5: f0                  ret                    return; } }
 
-   Sub_8ef6:
+   CONSOLE_ROUTINE:
 8ef6: a3,01,80,0c,14      ldw   R14,[R0+c80]     R14 = [c80];
 8efb: ad,04,30            ldzbw R30,4            wR30 = 4;
 8efe: a3,31,b2,8e,42      ldw   R42,[R30+8eb2]   R42 = [R30+8eb2];
@@ -10607,7 +10642,7 @@ c000: 28,c4               word   c428
 
 c002: 03                  ???   
 
-c003: 06                  byte      6
+c003: 06                  byte      6            LINK_SW
 c004: 01                  byte      1
 c005: c0                  byte     c0
 c006: 10                  byte     10
@@ -12292,9 +12327,9 @@ d1f4: 00                  byte      0
 d1f5: 00                  byte      0
 d1f6: 01                  byte      1
 d1f7: 00                  byte      0
-d1f8: 01                  byte      1
+d1f8: 01                  byte      1            KIHP
 d1f9: 00                  byte      0
-d1fa: 00                  byte      0
+d1fa: 00                  byte      0            PSPS
 d1fb: 01                  byte      1
 d1fc: 00                  byte      0
 d1fd: 00                  byte      0
@@ -12660,19 +12695,13 @@ d458: 28,cd               func    40, 205
 d45a: 00,b3               func     0, 179
 d45c: 80,b3               func  -128, 179
 
-d45e: 07                  byte      7
-
-d45f: 07,07,07,07,06,06,06,06  ???  
-
-d467: 06                  byte      6
-d468: 07                  byte      7
-
-d469: 07,07,07,07,06,06,06,06,06,07,07,07,07,07,06,06  ???  
-d479: 06,06,06,06,06,06,06,06,05,05,05,05,05,06,06,06  ???  
-d489: 06,06,05,05,05,05,05,06,06,06,06,06,05,05,05,05  ???  
-d499: 05,05,05,05,05,05,04,04,04,04,04,05,05,05,05,05  ???  
-d4a9: 04,04,04,04,04,05,05,05,05,05,04,04,04,04,04,a6  ???  
-d4b9: a5,a4,a3,a2,a1,a0,9f,9e  ???  
+d45e: 07,07,07,07,07,06,06,06,06,06,07,07,07,07,07,06  ???  
+d46e: 06,06,06,06,07,07,07,07,07,06,06,06,06,06,06,06  ???  
+d47e: 06,06,06,05,05,05,05,05,06,06,06,06,06,05,05,05  ???  
+d48e: 05,05,06,06,06,06,06,05,05,05,05,05,05,05,05,05  ???  
+d49e: 05,04,04,04,04,04,05,05,05,05,05,04,04,04,04,04  ???  
+d4ae: 05,05,05,05,05,04,04,04,04,04,a6,a5,a4,a3,a2,a1  ???  
+d4be: a0,9f,9e            ???   
 
 d4c1: 9d                  byte     9d
 d4c2: 14                  byte     14

@@ -185,8 +185,10 @@ args    6f95 6f98: E 2 f0 N : UW N
 args    70a1 70a4: E 2 f0 N : UW N 
 args    70ae 70b1: E 2 f0 N : UW N 
 args    7243 7246: E 2 f0 N : UW N 
-# timer   7509 7615: UW 
-word    7616 7619
+
+# timer   7509 7615: UW
+
+word    7616 7653
 code    7654 7924
 args    76be 76bf: UW N 
 args    7761 7762: UW N 
@@ -341,8 +343,7 @@ code    8c1c 8cf8
 code    8cfb 8e0f
 code    8e28 8e51
 code    8e5a 8eb0
-word    8eb6 8eb7
-word    8ebc 8ebd
+word	8eb2 8ec9
 code    8eca 8f64
 word    8f66 8f69
 byte    8f6a 8f6d
@@ -662,6 +663,17 @@ fill    d50c ffff     # auto
 
 
 # ------------ Subroutine list----------
+sub 2032  "RESET_ALL"                  # auto
+sub 2155 "INITIALIZE"
+sub 2165 "BACKGROUND_LOOP"
+sub 217c "RESET_RAM_PTR"
+sub 2191 "DEAD_LOOP_DEAD"
+sub 23ae  "I_External"                  # auto
+sub 2a8f  "I_HSI_0"                  # auto
+sub 2afe  "I_HSO_1"                  # auto
+sub 2ce5  "I_Timer_OVF"                  # auto
+sub 2d02  "I_Ignore"                  # auto
+sub 2d03  "I_HSO_2"                  # auto
 sub  3c04  "READ_AD"
 sub  459e  "SUYFuncLU_459e"   $ F suyflu 32
 sub  45a9  "UUYFuncLU_45a9"   $ F uuyflu 32
@@ -677,6 +689,9 @@ sub  46f2  "UYTabLU_46f2"   $ F uytlu 38 34
 sub  4ea6  "UYTabLU_4ea6"   $ F uytlu 38 34
 sub  5c7a  "UYTabLU_5c7a"   $ F uytlu 38 34
 
+sub 8eca  "CHECK_CONSOLE_DI"
+sub 8ecb  "CHECK_CONSOLE"
+sub 8ef6  "CONSOLE_ROUTINE"
 
 # ------------ Symbol list ----
 sym 2  "CPU_OK" :B 6                  # auto
@@ -703,12 +718,13 @@ sym d  "HSO_Cmd" : W                  # auto
 sym d  "HSI_Data"                  # auto
 sym e  "HSI_Time"                  # auto
 sym 10  "StackPtr"                  # auto
-sym 2032  "Sub_2032"                  # auto
+
+
 sym 2165  "Sub_2165"                  # auto
 sym 217c  "Sub_217c"                  # auto
 sym 2194  "Sub_2194"                  # auto
 sym 229a  "Sub_229a"                  # auto
-sym 23ae  "I_External"                  # auto
+
 sym 259c  "Sub_259c"                  # auto
 sym 2689  "Sub_2689"                  # auto
 sym 26a4  "Sub_26a4"                  # auto
@@ -720,14 +736,12 @@ sym 2a63  "Sub_2a63"                  # auto
 sym 2a65  "Sub_2a65"                  # auto
 sym 2a75  "Sub_2a75"                  # auto
 sym 2a77  "Sub_2a77"                  # auto
-sym 2a8f  "I_HSI_0"                  # auto
+
 sym 2a9e  "Sub_2a9e"                  # auto
-sym 2afe  "I_HSO_1"                  # auto
+
 sym 2bde  "Sub_2bde"                  # auto
 sym 2cde  "Sub_2cde"                  # auto
-sym 2ce5  "I_Timer_OVF"                  # auto
-sym 2d02  "I_Ignore"                  # auto
-sym 2d03  "I_HSO_2"                  # auto
+
 sym 2d24  "Sub_2d24"                  # auto
 sym 2efa  "Sub_2efa"                  # auto
 sym 2f08  "Sub_2f08"                  # auto
@@ -945,10 +959,11 @@ sym 8db3  "Sub_8db3"                  # auto
 sym 8dde  "Sub_8dde"                  # auto
 sym 8e70  "Sub_8e70"                  # auto
 sym 8e8f  "Sub_8e8f"                  # auto
-sym 8eca  "Sub_8eca"                  # auto
-sym 8ecb  "Sub_8ecb"                  # auto
-sym 8ef6  "Sub_8ef6"                  # auto
+
 sym 8ff4  "Sub_8ff4"                  # auto
+
+sym c003  "LINK_SW"
+
 sym c076  "Func_c076"                  # auto
 sym c08e  "Func_c08e"                  # auto
 sym c09a  "Func_c09a"                  # auto
@@ -1072,6 +1087,10 @@ sym d168  "Func_d168"                  # auto
 sym d1a0  "Func_d1a0"                  # auto
 sym d1b4  "Func_d1b4"                  # auto
 sym d1cc  "Func_d1cc"                  # auto
+
+sym d1f8  "KIHP"
+sym d1fa  "PSPS"
+
 sym d392  "Func_d392"                  # auto
 sym d3a6  "Func_d3a6"                  # auto
 sym d3b0  "Func_d3b0"                  # auto

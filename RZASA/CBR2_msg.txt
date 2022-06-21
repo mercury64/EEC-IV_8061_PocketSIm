@@ -1,6 +1,6 @@
 
 # ----------------------------
-# SAD Version 4.0.7.16b (11 Apr 2022)
+# SAD Version 4.0.7.16 (16 Jun 2021)
 # ----------------------------
 
 # Input file is 'CBR2.bin'
@@ -162,6 +162,7 @@ vect    12010 1205f     # auto
 xcode   12060 18cd1     # auto
 word    12060 12061     # auto
 byte    12062 12066
+byte    120bf 120bf
 word    120d8 120df
 word    12166 12167
 word    1216a 12171
@@ -225,8 +226,8 @@ word    138c4 138c5
 byte    138c6 138ca
 word    138d0 138d1
 word    138d4 138db
-byte    138e8 138e8
-byte    138f2 138f2
+byte    138df 138df
+byte    138e9 138e9
 byte    13900 13902
 word    13904 13909
 word    13926 13927
@@ -337,6 +338,7 @@ table   1501a 150d4: O 11 UY X 10
 table   150dc 15147: O 12 SY X 10 
 table   15148 151a1: O 9 SY X 10 
 table   151a6 15259: O 6 SY X 10 
+byte    1525c 1525c
 table   1525e 1527b: O 6 SY X 10 
 table   1527c 15299: O 5 UY X 10 
 word    1529a 1529b
@@ -708,8 +710,7 @@ byte    19a1b 19a1b
 byte    19a1d 19a1d
 byte    19a21 19a21
 byte    19a29 19a29
-byte    19a39 19a39
-byte    19a3b 19a3b
+byte    19a39 19a3a
 byte    19a3d 19a3d
 byte    19a41 19a41
 byte    19a49 19a49
@@ -725,6 +726,7 @@ byte    19a99 19a99
 byte    19a9d 19a9d
 byte    19aa1 19aa1
 byte    19aa9 19aa9
+byte    19aac 19aac
 byte    19ab0 19ab0
 byte    19ab8 19ab9
 byte    19ac9 19ad1
@@ -742,12 +744,12 @@ byte    19e92 19e92
 byte    1a6e8 1a6e8
 byte    1a6ef 1a6ef
 byte    1a6f1 1a6f1
+word    1a778 1a779
 vect    1a98e 1aaf2: K 8 
-word    1abbc 1abbf
+word    1ac7c 1ac7f
 byte    1af1f 1af1f
 byte    1af2d 1af2d
 word    1af4e 1af4f
-word    1af78 1af79
 word    1af7e 1af7f
 code    1afa8 1d24d
 args    1b09b 1b09c: UW N 
