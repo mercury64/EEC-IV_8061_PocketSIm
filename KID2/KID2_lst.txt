@@ -16273,7 +16273,7 @@ c1a6: 00,2d               word   2d00            CCE_TPMN
 c1a8: 00,0f               word    f00            MAN1LO
 c1aa: c0,3b               word   3bc0            MAN1HI
 c1ac: 80,3b               word   3b80            MLPS_2LO
-c1ae: c0,5f               word   5fc0            MLPS_2HI                          # coolant temp.  limit to trigger warm up counters (150 deg.  F).
+c1ae: c0,5f               word   5fc0            MLPS_2HI
 c1b0: 80,5f               word   5f80            ODLO
 c1b2: 00,86               word   8600            ODHI
 c1b4: c0,85               word   85c0            NEULO

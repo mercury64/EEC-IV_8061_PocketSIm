@@ -1,6 +1,6 @@
 
 # ----------------------------
-# SAD Version 4.0.7.16b (11 Apr 2022)
+# SAD Version 4.0.7.16 (16 Jun 2021)
 # ----------------------------
 
 # Input file is 'JOY0.bin'
@@ -79,6 +79,7 @@ word    234a 234b
 byte    2355 2355
 byte    235d 235d
 byte    237d 237d
+byte    238b 238b
 byte    2395 2395
 word    239c 23a7
 code    23ae 25c4
@@ -219,7 +220,7 @@ args    70a1 70a4: E 2 f0 N : UW N
 args    70ae 70b1: E 2 f0 N : UW N 
 args    7243 7246: E 2 f0 N : UW N 
 # timer   7509 7615: UW 
-word    7616 7619
+word    7616 7653
 code    7654 7924
 args    76be 76bf: UW N 
 args    7761 7762: UW N 
@@ -375,8 +376,7 @@ code    8c1c 8cf8
 code    8cfb 8e0f
 code    8e28 8e51
 code    8e5a 8eb0
-word    8eb6 8eb7
-word    8ebc 8ebd
+word    8eb2 8ec9
 code    8eca 8f64
 word    8f66 8f69
 byte    8f6a 8f6d
@@ -685,8 +685,6 @@ table   d3de d415: O 8 UY X 10
 func    d416 d435: UW X 10 : UW X 10 V 256 
 func    d436 d451: UW X 10 : UW X 10 V 256 
 func    d452 d45d: SY X 10 : UY X 10 
-byte    d45e d45e
-byte    d467 d468
 byte    d4c1 d4c2
 byte    d4ca d4cb
 func    d4cc d4ff: SW X 10 : UW X 10 
@@ -695,6 +693,17 @@ fill    d50c ffff     # auto
 
 
 # ------------ Subroutine list----------
+sub  2032  "RESET_ALL"   #cmd
+sub  2155  "INITIALIZE"   #cmd
+sub  2165  "BACKGROUND_LOOP"   #cmd
+sub  217c  "RESET_RAM_PTR"   #cmd
+sub  2191  "DEAD_LOOP_DEAD"   #cmd
+sub  23ae  "I_External"   #cmd
+sub  2a8f  "I_HSI_0"   #cmd
+sub  2afe  "I_HSO_1"   #cmd
+sub  2ce5  "I_Timer_OVF"   #cmd
+sub  2d02  "I_Ignore"   #cmd
+sub  2d03  "I_HSO_2"   #cmd
 sub  3c04  "READ_AD"   #cmd
 sub  459e  "SUYFuncLU_459e"   $ F suyflu 32 #cmd
 sub  45a9  "UUYFuncLU_45a9"   $ F uuyflu 32 #cmd
@@ -709,6 +718,9 @@ sub  46ef  "SYTabLU_46ef"   $ F sytlu 38 34 #cmd
 sub  46f2  "UYTabLU_46f2"   $ F uytlu 38 34 #cmd
 sub  4ea6  "UYTabLU_4ea6"   $ F uytlu 38 34 #cmd
 sub  5c7a  "UYTabLU_5c7a"   $ F uytlu 38 34 #cmd
+sub  8eca  "CHECK_CONSOLE_DI"   #cmd
+sub  8ecb  "CHECK_CONSOLE"   #cmd
+sub  8ef6  "CONSOLE_ROUTINE"   #cmd
 
 
 # ------------ Symbol list ----
@@ -736,12 +748,8 @@ sym d  "HSO_Cmd" : W
 sym d  "HSI_Data"
 sym e  "HSI_Time"
 sym 10  "StackPtr"
-sym 2032  "Sub_2032"
-sym 2165  "Sub_2165"
-sym 217c  "Sub_217c"
 sym 2194  "Sub_2194"                  # auto
 sym 229a  "Sub_229a"                  # auto
-sym 23ae  "Sub_23ae"                  # auto
 sym 259c  "Sub_259c"
 sym 2689  "Sub_2689"
 sym 26a4  "Sub_26a4"
@@ -753,14 +761,9 @@ sym 2a63  "Sub_2a63"
 sym 2a65  "Sub_2a65"
 sym 2a75  "Sub_2a75"
 sym 2a77  "Sub_2a77"
-sym 2a8f  "Sub_2a8f"                  # auto
 sym 2a9e  "Sub_2a9e"
-sym 2afe  "Sub_2afe"                  # auto
 sym 2bde  "Sub_2bde"
 sym 2cde  "Sub_2cde"
-sym 2ce5  "Sub_2ce5"                  # auto
-sym 2d02  "Sub_2d02"                  # auto
-sym 2d03  "Sub_2d03"                  # auto
 sym 2d24  "Sub_2d24"
 sym 2efa  "Sub_2efa"
 sym 2f08  "Sub_2f08"
@@ -977,10 +980,8 @@ sym 8db3  "Sub_8db3"                  # auto
 sym 8dde  "Sub_8dde"
 sym 8e70  "Sub_8e70"
 sym 8e8f  "Sub_8e8f"                  # auto
-sym 8eca  "Sub_8eca"                  # auto
-sym 8ecb  "Sub_8ecb"
-sym 8ef6  "Sub_8ef6"
 sym 8ff4  "Sub_8ff4"
+sym c003  "LINK_SW"
 sym c076  "Func_c076"
 sym c08e  "Func_c08e"
 sym c09a  "Func_c09a"
@@ -1104,6 +1105,8 @@ sym d168  "Func_d168"
 sym d1a0  "Func_d1a0"
 sym d1b4  "Func_d1b4"
 sym d1cc  "Func_d1cc"
+sym d1f8  "KIHP"
+sym d1fa  "PSPS"
 sym d392  "Func_d392"
 sym d3a6  "Func_d3a6"
 sym d3b0  "Func_d3b0"

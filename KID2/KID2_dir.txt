@@ -1109,6 +1109,7 @@ byte    c19c c19c
 byte    c19d c19d
 word    c19e c19f
 byte    c1a0 c1a3
+
 word    c1a4 c1bf
 byte    c1c0 c1c1
 
@@ -3245,6 +3246,7 @@ sym c1a1 "VS_SH_VAL3"
 sym c1a2 "VS_SH_VAL4"
 sym c1a4 "NOV_ERR_BAND"
 sym c1a6 "CCE_TPMN"
+
 sym c1a8 "MAN1LO"
 sym c1aa "MAN1HI"
 sym c1ac "MLPS_2LO"
