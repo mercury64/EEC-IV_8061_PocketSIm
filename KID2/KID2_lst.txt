@@ -8447,22 +8447,22 @@ ERROR CODE DESCRIPTION
 
 7423: ef,17,0a            call  7e3d             Sub_7e3d (
 7426: 00,02                     #arg 1              MDELTA,
-7428: 14,f1                     #arg 2              VMDEL2 );
+7428: 14,f1                     #arg 2              VMDEL6 );
 742a: 3a,2f,07            jb    B2,R2f,7434      if (B2_VIP_flags4 = 0)  {
 742d: ef,0d,0a            call  7e3d             Sub_7e3d (
-7430: 12,f1                     #arg 1              VMDEL1,
+7430: 12,f1                     #arg 1              VMDEL5,
 7432: 00,02                     #arg 2              MDELTA ); }
 7434: ef,c7,06            call  7afe             ?Fault_Filter_Routine? (
 7437: 06                        #arg 1              6,
 7438: 80                        #arg 2              80 );
-7439: 77,e2,1c,00         ad2b  R0,[Re2+1c]      R0 = [cc75];
-743d: df,43               je    7482             if ([cc75] != 0)  {
+7439: 77,e2,1c,00         ad2b  R0,[Re2+1c]      R0 = V_MAPFLG;
+743d: df,43               je    7482             if (V_MAPFLG != 0)  {
 743f: ac,bb,42            ldzbw R42,Rbb          wR42 = BP;
 7442: 09,05,42            shlw  R42,5            R42 <<= 5;
 7445: 6b,e4,a6,42         sb2w  R42,[Re4+a6]     R42 -= IMAP_WORD;
 7449: d3,06               jnc   7451             if (R42 >= 0)  {
 744b: 8b,e2,19,42         cmpw  R42,[Re2+19]     
-744f: db,31               jc    7482             if (R42 >= [cc72]) goto 7482; }
+744f: db,31               jc    7482             if (R42 >= V_MAPDIF) goto 7482; }
 7451: 37,a8,22            jnb   B7,Ra8,7476      if (APT_Closed_Throttle = 1)  {
 7454: 3c,2e,1f            jb    B4,R2e,7476      if (WIGFLG = 0)  {
 7457: 3e,a5,1c            jb    B6,Ra5,7476      if (UNDSP = 0)  {
@@ -8471,10 +8471,10 @@ ERROR CODE DESCRIPTION
 7461: d7,13               jne   7476             if ([406] = 0)  {
 7463: b0,bb,42            ldb   R42,Rbb          R42 = BP;
 7466: 9b,e2,1b,42         cmpb  R42,[Re2+1b]     
-746a: d1,0a               jleu  7476             if (R42 > [cc74])  {
+746a: d1,0a               jleu  7476             if (R42 > V_BPMIN)  {
 746c: a3,e4,c2,30         ldw   R30,[Re4+c2]     R30 = TSLPIP;
 7470: 8b,e2,17,30         cmpw  R30,[Re2+17]     
-7474: d1,09               jleu  747f             if (R30 <= [cc70]) goto 747f; } } } } } }
+7474: d1,09               jleu  747f             if (R30 <= V_PIPMAP_LMT) goto 747f; } } } } } }
 7476: 38,a7,0e            jb    B0,Ra7,7487      if (B0_V_VACFLG_a7 = 1) goto 7487;
 7479: c7,ea,87,00         stb   R0,[Rea+87]      [407] = 0;
 747d: 20,08               sjmp  7487             goto 7487; }
@@ -9473,8 +9473,8 @@ ERROR CODE DESCRIPTION
 
 7d8c: ef,4e,03            call  80dd             Sub_80dd (
 7d8f: 00,02                     #arg 1              MDELTA,
-7d91: 0a,f1                     #arg 2              cc64,
-7d93: 0c,f1                     #arg 3              cc66,
+7d91: 0a,f1                     #arg 2              VMDEL1,
+7d93: 0c,f1                     #arg 3              VMDEL2,
 7d95: 26,01                     #arg 4              126 );
    EXIT_THIS_TEST:
 7d97: c7,e4,41,00         stb   R0,[Re4+41]      VIP_TIMER_EX = 0;
@@ -10022,8 +10022,8 @@ ERROR CODE DESCRIPTION
 
 81dc: ef,fe,fe            call  80dd             Sub_80dd (
 81df: 00,02                     #arg 1              200,
-81e1: 0e,f1                     #arg 2              cc68,
-81e3: 10,f1                     #arg 3              cc6a,
+81e1: 0e,f1                     #arg 2              VMDEL3,
+81e3: 10,f1                     #arg 3              VMDEL4,
 81e5: 26,01                     #arg 4              126 );
 81e7: 2e,f4               scall 80dd             Sub_80dd (
 81e9: 1c,01                     #arg 1              11c,
@@ -10092,7 +10092,7 @@ ERROR CODE DESCRIPTION
 825c: 28,57               scall 82b5             Sub_82b5 (
 825e: 58,f0                     #arg 1              cbb2 );
 8260: 28,99               scall 82fb             DELAY_SEC (
-8262: 39,f1                     #arg 1              cc93 );
+8262: 39,f1                     #arg 1              VDLY1 );
 8264: 81,01,40,46         orw   R46,4001         AM1 = 1;
                                                  AM2 = 1;
 8268: 21,9a               sjmp  8404             goto EXIT;
@@ -10213,7 +10213,7 @@ ERROR CODE DESCRIPTION
 
    DELAY_SEC(VSPTD):
 835a: 2f,9f               scall 82fb             DELAY_SEC (
-835c: 38,f1                     #arg 1              cc92 );
+835c: 38,f1                     #arg 1              VSPTDL );
 835e: b1,0e,38            ldb   R38,e            R38 = e;
 8361: 20,a1               sjmp  8404             goto EXIT; }
 
@@ -10504,7 +10504,7 @@ ERROR CODE DESCRIPTION
 
    Sub_85e3:
 85e3: ef,15,fd            call  82fb             DELAY_SEC (
-85e6: 5e,f1                     #arg 1              ccb8 ); }
+85e6: 5e,f1                     #arg 1              VDLY_ENTER ); }
 85e8: a3,e4,02,1a         ldw   R1a,[Re4+2]      R1a = [182];
 85ec: 8b,e2,55,1a         cmpw  R1a,[Re2+55]     
 85f0: db,48               jc    863a             if (R1a < [Re2+55])  {
@@ -12221,7 +12221,7 @@ Clip TV_PRES as necessary:
 96f8: 12,06               word    612
 
 96fa: ef,73,b1            call  4870             UUYFuncLU_4870 (
-96fd: f6,c6                     #arg 1              Func_c79e,
+96fd: f6,c6                     #arg 1              FN616,
 96ff: bd,00                     #arg 2              TP_REL_H );
 9701: 34,e1,08            jnb   B4,Re1,970c      if (B4_CCD? = 1)  {
 9704: 3a,e0,05            jb    B2,Re0,970c      if (B2_FLG_FRST_TV_e0 = 0)  {
@@ -12232,14 +12232,14 @@ Clip TV_PRES as necessary:
 9711: 3c,22,04            jb    B4,R22,9718      if (B4_R22 = 0)  {
 9714: 59,02,da,14         sb3b  R14,Rda,2        R14 = GEAR_CUR - 2; }
 9718: 7d,06,14            ml2b  R14,6            wR14 *= 6;
-971b: 45,d2,06,fc,32      ad3w  R32,Rfc,6d2      R32 = Func_c77a;
+971b: 45,d2,06,fc,32      ad3w  R32,Rfc,6d2      R32 = FN1CB;
 9720: 64,14,32            ad2w  R32,R14          R32 += R14;
 9723: b3,e8,d7,34         ldb   R34,[Re8+d7]     R34 = VSBART_RT;
 9727: ef,67,b1            call  4891             UUYFuncLU_4891 ();
 972a: 25,fa               sjmp  9526             goto 9526;
 
 972c: ef,41,b1            call  4870             UUYFuncLU_4870 (
-972f: f6,c6                     #arg 1              Func_c79e,
+972f: f6,c6                     #arg 1              FN616,
 9731: bd,00                     #arg 2              TP_REL_H );
 9733: 9b,fd,ab,00,00      cmpb  R0,[Rfc+ab]      
 9738: df,05               je    973f             if ([c153] != 0)  {
@@ -16830,23 +16830,137 @@ c684: 68,00               func  104,   0
 c686: 00,80               func    0, 128
 c688: 68,00               func  104,   0
 
-c68a: ff,7f,8a,00,f0,07,8a,00,a8,07,88,00,08,07,80,00  ???  
-c69a: 10,04,80,00,18,01,7b,00,50,00,77,00,00,80,77,00  ???  
-c6aa: 00,80,77,00,00,80,77,00,00,80,77,00,00,80,77,00  ???  
-c6ba: ff,7f,9a,00,a8,07,9a,00,30,07,8d,00,b8,06,86,00  ???  
-c6ca: 90,06,80,00,f0,05,80,00,a0,05,7d,00,d8,04,7a,00  ???  
-c6da: f0,00,6d,00,00,80,6d,00,00,80,6d,00,00,80,6d,00  ???  
-c6ea: ff,7f,80,00,00,80,80,00,00,80,80,00,00,80,80,00  ???  
-c6fa: 00,80,80,00,00,80,80,00,00,80,80,00,00,80,80,00  ???  
-c70a: 00,80,80,00,00,80,80,00,00,80,80,00,00,80,80,00  ???  
-c71a: ff,7f,80,00,00,80,80,00,00,80,80,00,00,80,80,00  ???  
-c72a: 00,80,80,00,00,80,80,00,00,80,80,00,00,80,80,00  ???  
-c73a: 00,80,80,00,00,80,80,00,00,80,80,00,00,80,80,00  ???  
-c74a: ff,7f,80,00,00,80,80,00,00,80,80,00,00,80,80,00  ???  
-c75a: 00,80,80,00,00,80,80,00,00,80,80,00,00,80,80,00  ???  
-c76a: 00,80,80,00,00,80,80,00,00,80,80,00,00,80,80,00  ???  
+   Func_c68a:
+c68a: ff,7f               func  255, 127
+c68c: 8a,00               func  138,   0
+c68e: f0,07               func  240,   7
+c690: 8a,00               func  138,   0
+c692: a8,07               func  168,   7
+c694: 88,00               func  136,   0
+c696: 08,07               func    8,   7
+c698: 80,00               func  128,   0
+c69a: 10,04               func   16,   4
+c69c: 80,00               func  128,   0
+c69e: 18,01               func   24,   1
+c6a0: 7b,00               func  123,   0
+c6a2: 50,00               func   80,   0
+c6a4: 77,00               func  119,   0
+c6a6: 00,80               func    0, 128
+c6a8: 77,00               func  119,   0
+c6aa: 00,80               func    0, 128
+c6ac: 77,00               func  119,   0
+c6ae: 00,80               func    0, 128
+c6b0: 77,00               func  119,   0
+c6b2: 00,80               func    0, 128
+c6b4: 77,00               func  119,   0
+c6b6: 00,80               func    0, 128
+c6b8: 77,00               func  119,   0
 
-   Func_c77a:
+   Func_c6ba:
+c6ba: ff,7f               func  255, 127
+c6bc: 9a,00               func  154,   0
+c6be: a8,07               func  168,   7
+c6c0: 9a,00               func  154,   0
+c6c2: 30,07               func   48,   7
+c6c4: 8d,00               func  141,   0
+c6c6: b8,06               func  184,   6
+c6c8: 86,00               func  134,   0
+c6ca: 90,06               func  144,   6
+c6cc: 80,00               func  128,   0
+c6ce: f0,05               func  240,   5
+c6d0: 80,00               func  128,   0
+c6d2: a0,05               func  160,   5
+c6d4: 7d,00               func  125,   0
+c6d6: d8,04               func  216,   4
+c6d8: 7a,00               func  122,   0
+c6da: f0,00               func  240,   0
+c6dc: 6d,00               func  109,   0
+c6de: 00,80               func    0, 128
+c6e0: 6d,00               func  109,   0
+c6e2: 00,80               func    0, 128
+c6e4: 6d,00               func  109,   0
+c6e6: 00,80               func    0, 128
+c6e8: 6d,00               func  109,   0
+
+   Func_c6ea:
+c6ea: ff,7f               func  255, 127
+c6ec: 80,00               func  128,   0
+c6ee: 00,80               func    0, 128
+c6f0: 80,00               func  128,   0
+c6f2: 00,80               func    0, 128
+c6f4: 80,00               func  128,   0
+c6f6: 00,80               func    0, 128
+c6f8: 80,00               func  128,   0
+c6fa: 00,80               func    0, 128
+c6fc: 80,00               func  128,   0
+c6fe: 00,80               func    0, 128
+c700: 80,00               func  128,   0
+c702: 00,80               func    0, 128
+c704: 80,00               func  128,   0
+c706: 00,80               func    0, 128
+c708: 80,00               func  128,   0
+c70a: 00,80               func    0, 128
+c70c: 80,00               func  128,   0
+c70e: 00,80               func    0, 128
+c710: 80,00               func  128,   0
+c712: 00,80               func    0, 128
+c714: 80,00               func  128,   0
+c716: 00,80               func    0, 128
+c718: 80,00               func  128,   0
+
+   Func_c71a:
+c71a: ff,7f               func  255, 127
+c71c: 80,00               func  128,   0
+c71e: 00,80               func    0, 128
+c720: 80,00               func  128,   0
+c722: 00,80               func    0, 128
+c724: 80,00               func  128,   0
+c726: 00,80               func    0, 128
+c728: 80,00               func  128,   0
+c72a: 00,80               func    0, 128
+c72c: 80,00               func  128,   0
+c72e: 00,80               func    0, 128
+c730: 80,00               func  128,   0
+c732: 00,80               func    0, 128
+c734: 80,00               func  128,   0
+c736: 00,80               func    0, 128
+c738: 80,00               func  128,   0
+c73a: 00,80               func    0, 128
+c73c: 80,00               func  128,   0
+c73e: 00,80               func    0, 128
+c740: 80,00               func  128,   0
+c742: 00,80               func    0, 128
+c744: 80,00               func  128,   0
+c746: 00,80               func    0, 128
+c748: 80,00               func  128,   0
+
+   Func_c74a:
+c74a: ff,7f               func  255, 127
+c74c: 80,00               func  128,   0
+c74e: 00,80               func    0, 128
+c750: 80,00               func  128,   0
+c752: 00,80               func    0, 128
+c754: 80,00               func  128,   0
+c756: 00,80               func    0, 128
+c758: 80,00               func  128,   0
+c75a: 00,80               func    0, 128
+c75c: 80,00               func  128,   0
+c75e: 00,80               func    0, 128
+c760: 80,00               func  128,   0
+c762: 00,80               func    0, 128
+c764: 80,00               func  128,   0
+c766: 00,80               func    0, 128
+c768: 80,00               func  128,   0
+c76a: 00,80               func    0, 128
+c76c: 80,00               func  128,   0
+c76e: 00,80               func    0, 128
+c770: 80,00               func  128,   0
+c772: 00,80               func    0, 128
+c774: 80,00               func  128,   0
+c776: 00,80               func    0, 128
+c778: 80,00               func  128,   0
+
+   FN1CB:
 c77a: ff,12               func  255,  18
 c77c: 1e,12               func   30,  18
 c77e: 00,00               func    0,   0
@@ -16854,7 +16968,7 @@ c780: 00,00               func    0,   0
 c782: 00,00               func    0,   0
 c784: 00,00               func    0,   0
 
-   Func_c786:
+   FN2CB:
 c786: ff,6e               func  255, 110
 c788: 78,50               func  120,  80
 c78a: 3c,14               func   60,  20
@@ -16862,7 +16976,7 @@ c78c: 00,00               func    0,   0
 c78e: 00,00               func    0,   0
 c790: 00,00               func    0,   0
 
-   Func_c792:
+   FN3CB:
 c792: ff,8c               func  255, 140
 c794: 8c,42               func  140,  66
 c796: 64,34               func  100,  52
@@ -16870,7 +16984,7 @@ c798: 50,1e               func   80,  30
 c79a: 00,00               func    0,   0
 c79c: 00,00               func    0,   0
 
-   Func_c79e:
+   FN616:
 c79e: ff,aa               func  255, 170
 c7a0: 8a,a0               func  138, 160
 c7a2: 3f,a0               func   63, 160
@@ -17296,16 +17410,16 @@ cc62: 19                  byte     19
 
 cc63: ff                  ???   
 
-cc64: b0,04               word    4b0
-cc66: 1e,06               word    61e
-cc68: 1d,07               word    71d
-cc6a: 91,08               word    891
-cc6c: 00,00               word      0            VMDEL1
-cc6e: ff,ff               word   ffff            VMDEL2
-cc70: 10,00               word     10
-cc72: 00,02               word    200
-cc74: a0                  byte     a0
-cc75: 01                  byte      1
+cc64: b0,04               word    4b0            VMDEL1
+cc66: 1e,06               word    61e            VMDEL2
+cc68: 1d,07               word    71d            VMDEL3
+cc6a: 91,08               word    891            VMDEL4
+cc6c: 00,00               word      0            VMDEL5
+cc6e: ff,ff               word   ffff            VMDEL6
+cc70: 10,00               word     10            V_PIPMAP_LMT
+cc72: 00,02               word    200            V_MAPDIF
+cc74: a0                  byte     a0            V_BPMIN
+cc75: 01                  byte      1            V_MAPFLG
 cc76: 9a                  byte     9a            VMPMAX
 cc77: ff                  byte     ff
 cc78: 24,00               word     24            FMDTM
@@ -17319,14 +17433,13 @@ cc80: c0,de               word   dec0            VND1
 cc82: 00,e4               word   e400            VND2
 cc84: 40,22               word   2240            VND3
 cc86: 40,39               word   3940            VND4
-cc88: 01                  byte      1
-cc89: 00                  byte      0
-cc8a: 58,02               word    258
-cc8c: 18,00               word     18
-cc8e: a0,00               word     a0
-cc90: 01                  byte      1
-cc91: 0e                  byte      e
-cc92: 18,08               word    818
+cc88: 01                  byte      1            V_SW_PRK
+cc89: 00                  byte      0            VPSSW
+cc8a: 58,02               word    258            VSPRPM
+cc8c: 18,00               word     18            V_SPK_FINAL
+cc8e: a0,00               word     a0            V_SPK_INIT
+cc90: 01,0e               word    e01            V_SPK_ENABL
+cc92: 18,08               word    818            VSPTDL
 cc94: 28,40               word   4028            VDLY2
 cc96: 40,00               word     40            VATMR2
 cc98: 73                  byte     73
@@ -17335,17 +17448,20 @@ cc9a: 05                  byte      5
 cc9b: 14                  byte     14
 cc9c: f0                  byte     f0
 cc9d: 1e                  byte     1e
-
-cc9e: b0,04,40,b3,00,0a,40,b3,00,0a,66,04,9a,03,0a,00  ???  
-
+cc9e: b0,04               word    4b0
+cca0: 40,b3               word   b340
+cca2: 00,0a               word    a00
+cca4: 40,b3               word   b340
+cca6: 00,0a               word    a00
+cca8: 66,04               word    466            V_ISCMOD_MAX
+ccaa: 9a,03               word    39a            V_ISCMOD_MIN
+ccac: 0a,00               word      a            V_KDNDT
 ccae: 58,02               word    258
 ccb0: 90,01               word    190
 ccb2: 60,04               word    460
 ccb4: ac,0d               word    dac
 ccb6: 28,01               word    128
-
-ccb8: 20,46               ???   
-
+ccb8: 20,46               word   4620            VDLY_ENTER
 ccba: 08                  byte      8
 ccbb: 01                  byte      1
 ccbc: 10                  byte     10

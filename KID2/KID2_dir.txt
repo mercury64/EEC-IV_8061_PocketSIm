@@ -1220,12 +1220,16 @@ func c606 c621 "Func_c606"  : UW : UW
 func c622 c63d "Func_c622"  : UW : UW
 func c63e c659 "Func_c63e"  : UW : UW
 func c65a c689 "Func_c65a"  : UY : UY
+func c68a c6b9 "Func_c68a"  : UY : UY
+func c6ba c6e9 "Func_c6ba"  : UY : UY
+func c6ea c719 "Func_c6ea"  : UY : UY
+func c71a c749 "Func_c71a"  : UY : UY
+func c74a c779 "Func_c74a"  : UY : UY
 
-
-func    c77a c785  "Func_c77a"   : UY  : UY 
-func    c786 c791  "Func_c786"   : UY  : UY
-func    c792 c79d  "Func_c792"   : UY  : UY
-func    c79e c7ad  "Func_c79e"   : UY  : UY 
+func    c77a c785  "FN1CB"   : UY  : UY 
+func    c786 c791  "FN2CB"   : UY  : UY
+func    c792 c79d  "FN3CB"   : UY  : UY
+func    c79e c7ad  "FN616"   : UY  : UY 
 func    c7ae c7dd  "FN617"   : UW  : UW 
 func    c7de c7f3  "FN620"   : UY  : UY 
 func    c7f6 c825  "FN622"   : SW  : SW 
@@ -1332,7 +1336,7 @@ word    cc50 cc51
 word    cc52 cc53
 byte    cc54 cc54
 byte    cc76 cc76
-word    cc92 cc97
+word    cc8a cc97
 byte    cc98 cc9a
 
 
@@ -3306,11 +3310,13 @@ sym cb86 "TSTRAT"
 sym cb87 "TRLOAD"
 sym cb88 "GOVHP"
 sym cb89 "VSTYPE"
-
 sym cb8a "IGN_TYPE"
+
+
 
 sym cb8e "AFECT1"
 sym cb8f "AFECT2"
+
 sym cb90 "AFACT1"
 sym cb91 "AFACT2"
 sym cb92 "ADAPTM"
@@ -3318,6 +3324,7 @@ sym cb94 "AMPMUL"
 sym cb96 "DELAMB"
 sym cb98 "DELROW"
 sym cb9a "DELCOL"
+
 
 sym cb9d "MINADP"
 sym cb9e "MAXADP"
@@ -3391,10 +3398,18 @@ sym cc52 "VSIBRN"
 
 sym cc54 "V820A"
 
-sym cc6c "VMDEL1"
-sym cc6e "VMDEL2"
-sym cc76 "VMPMAX"
+sym cc64 "VMDEL1"
+sym cc66 "VMDEL2"
+sym cc68 "VMDEL3"
+sym cc6a "VMDEL4"
+sym cc6c "VMDEL5"
+sym cc6e "VMDEL6"
 
+sym cc70 "V_PIPMAP_LMT"
+sym cc72 "V_MAPDIF"
+sym cc74 "V_BPMIN"
+sym cc75 "V_MAPFLG"
+sym cc76 "VMPMAX"
 sym cc78 "FMDTM"
 sym cc7a "MILLIM"
 sym cc7c "V_MILONTM"
@@ -3404,7 +3419,14 @@ sym cc80 "VND1"
 sym cc82 "VND2"
 sym cc84 "VND3"
 sym cc86 "VND4"
-
+sym cc88 "V_SW_PRK"
+sym cc89 "VPSSW
+sym cc8a "VSPRPM
+sym cc8c "V_SPK_FINAL
+sym cc8e "V_SPK_INIT
+sym cc90 "V_SPK_ENABL
+sym cc92 "VSPTDL
+sym cc93 "VDLY1
 sym cc94 "VDLY2"
 sym cc95 "VIPTM2"
 sym cc96 "VATMR2"
@@ -3412,7 +3434,7 @@ sym cc96 "VATMR2"
 sym cca8 "V_ISCMOD_MAX"
 sym ccaa "V_ISCMOD_MIN"
 sym ccac "V_KDNDT"
-
+sym ccb8 "VDLY_ENTER"
 
 # ----- END of disassembly run -----
 

@@ -822,6 +822,11 @@ func    c606 c621: UW X 10 : UW X 10
 func    c622 c63d: UW X 10 : UW X 10 
 func    c63e c659: UW X 10 : UW X 10 
 func    c65a c689: UY X 10 : UY X 10 
+func    c68a c6b9: UY X 10 : UY X 10 
+func    c6ba c6e9: UY X 10 : UY X 10 
+func    c6ea c719: UY X 10 : UY X 10 
+func    c71a c749: UY X 10 : UY X 10 
+func    c74a c779: UY X 10 : UY X 10 
 func    c77a c785: UY X 10 : UY X 10 
 func    c786 c791: UY X 10 : UY X 10 
 func    c792 c79d: UY X 10 : UY X 10 
@@ -899,13 +904,11 @@ word    cc78 cc7d
 byte    cc7e cc7e
 word    cc80 cc87
 byte    cc88 cc89
-word    cc8a cc8f
-byte    cc90 cc91
-word    cc92 cc97
+word    cc8a cc97
 byte    cc98 cc9d
-word    ccae ccb7
 word    cc9e ccb9
 byte    cc98 cca7
+word    ccb6 ccb7
 byte    ccba cce1
 byte    cced cced
 byte    ccf6 ccf6
@@ -2660,10 +2663,15 @@ sym c606  "Func_c606"
 sym c622  "Func_c622"
 sym c63e  "Func_c63e"
 sym c65a  "Func_c65a"
-sym c77a  "Func_c77a"
-sym c786  "Func_c786"
-sym c792  "Func_c792"
-sym c79e  "Func_c79e"
+sym c68a  "Func_c68a"
+sym c6ba  "Func_c6ba"
+sym c6ea  "Func_c6ea"
+sym c71a  "Func_c71a"
+sym c74a  "Func_c74a"
+sym c77a  "FN1CB"
+sym c786  "FN2CB"
+sym c792  "FN3CB"
+sym c79e  "FN616"
 sym c7ae  "FN617"
 sym c7de  "FN620"
 sym c7f6  "FN622"
@@ -2775,8 +2783,16 @@ sym cc4e  "SETLNG_TM"
 sym cc50  "VSIBRM"
 sym cc52  "VSIBRN"
 sym cc54  "V820A"
-sym cc6c  "VMDEL1"
-sym cc6e  "VMDEL2"
+sym cc64  "VMDEL1"
+sym cc66  "VMDEL2"
+sym cc68  "VMDEL3"
+sym cc6a  "VMDEL4"
+sym cc6c  "VMDEL5"
+sym cc6e  "VMDEL6"
+sym cc70  "V_PIPMAP_LMT"
+sym cc72  "V_MAPDIF"
+sym cc74  "V_BPMIN"
+sym cc75  "V_MAPFLG"
 sym cc76  "VMPMAX"
 sym cc78  "FMDTM"
 sym cc7a  "MILLIM"
@@ -2786,12 +2802,21 @@ sym cc80  "VND1"
 sym cc82  "VND2"
 sym cc84  "VND3"
 sym cc86  "VND4"
+sym cc88  "V_SW_PRK"
+sym cc89  "VPSSW"
+sym cc8a  "VSPRPM"
+sym cc8c  "V_SPK_FINAL"
+sym cc8e  "V_SPK_INIT"
+sym cc90  "V_SPK_ENABL"
+sym cc92  "VSPTDL"
+sym cc93  "VDLY1"
 sym cc94  "VDLY2"
 sym cc95  "VIPTM2"
 sym cc96  "VATMR2"
 sym cca8  "V_ISCMOD_MAX"
 sym ccaa  "V_ISCMOD_MIN"
 sym ccac  "V_KDNDT"
+sym ccb8  "VDLY_ENTER"
 sym cd22  "FN331A"
 sym cd36  "FN332"
 sym cd40  "FN378"
