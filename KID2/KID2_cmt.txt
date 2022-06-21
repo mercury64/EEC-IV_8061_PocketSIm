@@ -548,6 +548,8 @@
 400d # (transmission engaged)
 401d # (transmission disengaged)
 
+4020 # EGOBAR <=855 counts-->EGOSTE (side)=rich(0)
+
 4089 \n# BATTERY VOLTAGE (VBAT)
 
 4089 \n# 
@@ -1422,6 +1424,7 @@
 7e1c #519   | PSPS ckt. open.                    |    X    |      |       |
 7e21 #VO_IVPWR_COM1
 7e27 #513   | Failure in EEC ref. voltage.       |    X    |      |       |
+7e27 \n\n# VO_4X4L_SWITCH_COM2
 7e2f #633   | 4X4 Switch closed                  |    X    |      |       |
 
 7e85 \n#######################################################
@@ -1459,6 +1462,10 @@
 7fd3 # loop until 5161 IO times have passed(12.4ms)
 
 7ff3 # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#3
+
+8005 # V_ETV_TEST
+8007 # TV1CNTS_TEST
+
 803c # (V_ETVOCM_SAV - ETVOCM)
 8042 # ABS(V_ETVOCM_SAV - ETVOCM)
 8048 # VETVDT
@@ -1485,14 +1492,19 @@
 
 824b # 172,EGO sensor ckt. ind. system lean.
 
-840e # SET TV_COUNTS =0 
+840e # NGOOSE [Re2+a7]??
 
 84d5 # 538,Operator error-dyn response test.
 84df # 129,Insuff. MAP change-dyn resp. test.
 
-84f4 \n\n STRATEGY MODULE: VC_BOO_COM1
+84f4 \n\n# SERVICE CODE SET-UP
+853b \n\n# STRATEGY MODULE: VR_BOO_COM1
+8545 \n\n# STRATEGY MODULE: VR_PSPS_COM2
+8550 \n\n# STRATEGY MODULE: VR_TCS_COM4
 
-856e # EGOBAR = EGOBAR UROLAV(IEGO1,R36)
+856e # EGOBAR = EGOBAR UROLAV(IEGO1,VTCEGO)
+
+857c # EGOBAR > 855 counts-->EGOSTE (side)=lean(1)
 
 8647 # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
 
@@ -1953,7 +1965,9 @@ ab7d # ADAPTIVE FUEL TABLE
 ab85 # KAM checksum, 0x3500 = 0x80 x 0x6a = (128 * (10*10+6))
 ab85 \w# SET CHKSUM = 13568
 
-ac31 \n## Payloads - Datalogging Lists!
+ab91 \n## DataLoggingPatch
+
+ac32 \n## Payloads - Datalogging Lists!
 
 b000 # Register Rf0 
 b033 # 2 " Hg (engine specific parameter).

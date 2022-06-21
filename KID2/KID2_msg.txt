@@ -309,7 +309,7 @@ args    8142 8143: UW
 args    8149 814a: UW 
 args    8150 8151: UW 
 args    8197 8198: E 3 f0 N 
-args    819b 81a0: E 3 f0 N : E 3 f0 N : O 2 UY 
+args    819b 81a0: E 3 f0 N : E 3 f0 N : UW 
 args    81ba 81c1: UW : E 3 f0 N : E 3 f0 N : UW 
 args    81c4 81cb: UW : E 3 f0 N : E 3 f0 N : UW 
 args    81d8 81d9: UW 
@@ -344,7 +344,7 @@ args    83c5 83c5: UY
 args    83c9 83ca: O 2 UY 
 args    83ce 83cf: O 2 UY 
 args    841a 841b: E 3 f0 N 
-args    841e 8423: E 3 f0 N : E 3 f0 N : O 2 UY 
+args    841e 8423: E 3 f0 N : E 3 f0 N : UW 
 args    844f 8450: E 3 f0 N 
 args    84c6 84c7: E 3 f0 N 
 args    84d5 84d6: UW 
@@ -507,9 +507,10 @@ word    aae8 aaed
 byte    aaee ab1f
 word    ab20 ab25
 byte    ab26 ab29
-code    ab2a ac30
-word    ac32 acbf
-byte    ae27 ae27
+code    ab2a ab91
+fill    ab92 ac31
+byte    ac32 ac32
+fill    ac33 afff
 word    b000 b001
 byte    b002 b008
 word    b00a b017
@@ -520,8 +521,7 @@ byte    b035 b037
 word    b038 b03d
 byte    b03e b03f
 byte    b041 b041
-word    b042 b045
-word    b048 b051
+word    b042 b051
 byte    b052 b053
 word    b054 b055
 byte    b056 b05c
@@ -574,7 +574,7 @@ byte    b444 b444
 word    b446 b449
 byte    b44a b44a
 word    b44c b451
-byte    b455 b455
+byte    b452 b455
 word    b456 b459
 byte    b45a b463
 word    b464 b465
@@ -783,6 +783,7 @@ byte    c25d c25d
 func    c25e c279: UW X 10 : UW X 10 
 func    c27a c285: UY X 10 : UY X 10 
 func    c286 c29d: SW X 10 : SW X 10 
+func    c29e c2b1: UY X 10 : UY X 10 
 func    c2b2 c2c5: UY X 10 : UY X 10 
 func    c2c6 c2d9: UY X 10 : UY X 10 
 func    c2da c309: UW X 10 : UW X 10 
@@ -792,7 +793,9 @@ func    c332 c361: UW X 10 : UW X 10
 func    c362 c375: UY X 10 : UY X 10 
 func    c376 c389: UW X 10 : UW X 10 
 func    c38a c39d: UY X 10 : UY X 10 
+func    c39e c3b1: UY X 10 : UY X 10 
 func    c3b2 c3c5: UY X 10 : UY X 10 
+func    c3c6 c3d9: UY X 10 : UY X 10 
 func    c3da c3ed: UY X 10 : UY X 10 
 func    c3ee c401: UW X 10 : UW X 10 
 func    c402 c41d: UW X 10 : UW X 10 
@@ -800,10 +803,14 @@ func    c41e c431: UY X 10 : UY X 10
 func    c432 c445: UY X 10 : UY X 10 
 func    c446 c44d: UY X 10 : UY X 10 
 func    c44e c461: UY X 10 : UY X 10 
+func    c462 c475: UY X 10 : UY X 10 
+func    c476 c47d: UY X 10 : UY X 10 
 func    c47e c491: UY X 10 : UY X 10 
 func    c492 c4a5: UY X 10 : UY X 10 
 func    c4a6 c4ad: UY X 10 : UY X 10 
 func    c4ae c4c1: UY X 10 : UY X 10 
+func    c4c2 c4d5: UY X 10 : UY X 10 
+func    c4d6 c4dd: UY X 10 : UY X 10 
 func    c4de c4f9: UW X 10 : UW X 10 
 func    c4fa c515: UW X 10 : UW X 10 
 func    c516 c531: UW X 10 : UW X 10 
@@ -832,7 +839,7 @@ func    c786 c791: UY X 10 : UY X 10
 func    c792 c79d: UY X 10 : UY X 10 
 func    c79e c7ad: UY X 10 : UY X 10 
 func    c7ae c7dd: UW X 10 : UW X 10 
-func    c7de c7f3: UY X 10 : UY X 10 
+func    c7de c7f5: UY X 10 : UY X 10 
 func    c7f6 c825: SW X 10 : SW X 10 
 func    c826 c845: SW X 10 : UW X 10 
 func    c846 c851: SY X 10 : UY X 10 
@@ -847,6 +854,21 @@ table   c92e c951: O 6 UY X 10
 table   c952 c975: O 6 UY X 10 
 table   c976 c999: O 6 UY X 10 
 func    c99a c9b5: UY X 10 : UY X 10 
+func    c9b6 c9d1: UY X 10 : UY X 10 
+func    c9d2 c9ed: UY X 10 : UY X 10 
+func    c9ee ca09: UY X 10 : UY X 10 
+func    ca0a ca25: UY X 10 : UY X 10 
+func    ca26 ca41: UY X 10 : UY X 10 
+func    ca42 ca5d: UY X 10 : UY X 10 
+func    ca5e ca79: UY X 10 : UY X 10 
+func    ca7a ca95: UY X 10 : UY X 10 
+func    ca96 cab1: UY X 10 : UY X 10 
+func    cab2 cacd: UY X 10 : UY X 10 
+func    cace cae9: UY X 10 : UY X 10 
+func    caea cb05: UY X 10 : UY X 10 
+func    cb06 cb21: UY X 10 : UY X 10 
+func    cb22 cb3d: UY X 10 : UY X 10 
+func    cb3e cb59: UY X 10 : UY X 10 
 word    cb5a cb61
 byte    cb62 cb63
 word    cb64 cb65
@@ -884,8 +906,7 @@ word    cbfc cc07
 byte    cc08 cc0e
 byte    cc10 cc1b
 word    cc1c cc1d
-byte    cc1e cc24
-byte    cc26 cc28
+byte    cc1e cc28
 word    cc2a cc31
 word    cc34 cc35
 byte    cc38 cc38
@@ -906,9 +927,10 @@ word    cc80 cc87
 byte    cc88 cc89
 word    cc8a cc97
 byte    cc98 cc9d
+word    ccae ccb9
 word    cc9e ccb9
 byte    cc98 cca7
-word    ccb6 ccb7
+word    ccac ccad
 byte    ccba cce1
 byte    cced cced
 byte    ccf6 ccf6
@@ -1171,8 +1193,8 @@ sub  7e40  "Sub_7e40"   #cmd
 sub  7e7c  "Sub_7e7c"   #cmd
 sub  7e86  "GET_ADDRESS"   #cmd
 sub  7ea1  "VO_FPM_COM2"   #cmd
-sub  7ec3  "Sub_7ec3"   #cmd
-sub  7ed7  "Sub_7ed7"   #cmd
+sub  7ec3  "VO_FPM_COM2_FPM_TEST_2_PROCESS"   #cmd
+sub  7ed7  "VO_OCC_COM12"   #cmd
 sub  7f51  "VO_OCC_COM12_Func1"   #cmd
 sub  7f69  "VO_OCC_COM12_Func2"   #cmd
 sub  7f78  "VO_OCC_COM12_Func4"   #cmd
@@ -1192,7 +1214,7 @@ sub  80dd  "Sub_80dd"   #cmd
 sub  80fc  "Sub_80fc"   #cmd
 sub  8102  "VR_RUN_INIT_COM8"   #cmd
 sub  810e  "FMEM_FAULT_PRESENT_and_INITIALATION_LOGIC"   #cmd
-sub  8195  "Sub_8195"   #cmd
+sub  8195  "VR_HICAM_ISC_COM2"   #cmd
 sub  81a6  "Sub_81a6"   #cmd
 sub  81b8  "Sub_81b8"   #cmd
 sub  81fd  "VR_EGO_COM1"   #cmd
@@ -1300,7 +1322,6 @@ sub  a9d6  "Check_ConsoleDI"   #cmd
 sub  a9d7  "Check_Console"   #cmd
 sub  aa02  "Console_Routine"   #cmd
 sub  ab2a  "KAM_VALIDATION_PROCEDURE"   #cmd
-sub  ab92  "DataLoggingPatch"   #cmd
 
 
 # ------------ Symbol list ----
@@ -1362,6 +1383,8 @@ sym 28  "B4_EGRFLG_28" :B 4
 sym 28  "EGOSTE" :B 5
 sym 28  "B6_FPWQ3_Q_28" :B 6
 sym 28  "B7_KAMOK_28" :B 7
+sym 29  "B0_POWOFF_29" :B 0
+sym 29  "B1_POWON_29" :B 1
 sym 29  "B2_FLG_DFSO_NOVS_Q_29" :B 2
 sym 29  "IECT_IN_RANGE" :B 3
 sym 29  "B4_CSSFLG_29" :B 4
@@ -1388,7 +1411,7 @@ sym 2b  "STO_Flags"
 sym 2c  "B0_?CODE_?" :B 0
 sym 2c  "B1_CODE_" :B 1
 sym 2c  "B2_VIP_FP_OVERRIDE" :B 2
-sym 2c  "B3_CODE_" :B 3
+sym 2c  "B3_CODE_556" :B 3
 sym 2c  "B4_CODE_538" :B 4
 sym 2c  "B5_CODE_167" :B 5
 sym 2c  "B6_CODE_129" :B 6
@@ -1454,6 +1477,8 @@ sym 48  "STO_TRIGGER" :B 5
 sym 48  "V_STABLFLG" :B 6
 sym 48  "V_CST_PASS" :B 7
 sym 48  "Flags_48"
+sym 49  "B1_TCS_SHORT_49" :B 1
+sym 49  "B2_TCS_OPEN_49" :B 2
 sym 49  "DWLELD" :B 3
 sym 49  "B5_NEW_DWLIDM_49" :B 5
 sym 4a  "B1_TLS_34_FLG_4a" :B 1
@@ -1534,10 +1559,10 @@ sym 8d  "VSBAR"
 sym 8e  "B4_A3C_8e" :B 4
 sym 8f  "B0_POWSFG_8f" :B 0
 sym 8f  "B3_ACD_8f" :B 3
+sym 90  "B0_ITCS_90" :B 0
 sym 90  "B2_I4X4L_90" :B 2
 sym 90  "B3_FPM_90" :B 3
 sym 90  "B4_BRAKE_INPUT_90" :B 4
-sym 90  "Flags_90"
 sym 91  "VBAT"
 sym 92  "ISCDTY"
 sym 94  "FUELPW1"
@@ -1740,6 +1765,7 @@ sym 184  "OCCSAV"
 sym 18a  "VIP_NRM_EX"
 sym 18c  "VIP_NRM2_EX"
 sym 18e  "CODE_OUT_L_EX"
+sym 190  "SHIFT_CNT_EX"
 sym 192  "IBETA"
 sym 193  "INJCNT"
 sym 194  "TOTAL_DELAY"
@@ -1751,6 +1777,8 @@ sym 19c  "TBART"
 sym 19e  "LAST_MAP2"
 sym 1a0  "LAST_MAP"
 sym 1a9  "VIP_CNT_EX"
+sym 1aa  "VIP_STACK_EX"
+sym 1ac  "VIP_STACK_X2"
 sym 1ae  "V_ETVOCM_SAV"
 sym 1b2  "CODE_CNT_EX"
 sym 1b6  "RVIPRPM"
@@ -1761,8 +1789,12 @@ sym 1be  "MILTMR"
 sym 1c1  "VIP_TIMER_EX"
 sym 1c4  "NSAV"
 sym 1c6  "TPSAV"
-sym 1cc  "V_LEGOTMR"
-sym 1d0  "SparkAdvance"
+sym 1cb  "R30_HM?"
+sym 1cc  "IEVPSV"
+sym 1cd  "V_ECTCTL"
+sym 1ce  "V_ECTHI"
+sym 1cf  "V_ECT_CTR"
+sym 1d0  "V_ATMR2"
 sym 1e4  "DELOPT"
 sym 1e6  "EGRERR"
 sym 1e8  "MULTMR"
@@ -1924,9 +1956,11 @@ sym 398  "DNDT_ISC"
 sym 39a  "DNDTI"
 sym 39c  "FKEXIT"
 sym 39e  "ISCMOD"
+sym 3a0  "ISCMOD-1"
 sym 3a2  "KSPARK"
 sym 3a4  "N_PREV"
 sym 3a6  "SPK_IDLE"
+sym 3a8  "SPK_RAMP"
 sym 3aa  "SPK_NORM"
 sym 3ac  "DT_DNDT"
 sym 3ae  "RPMERR"
@@ -1984,7 +2018,7 @@ sym 436  "CTTMR"
 sym 43e  "AC_PPM"
 sym 443  "OPEN_TMR"
 sym 444  "KAMREF"
-sym 447  "V_PRG_DLYTMR"
+sym 447  "V_LEGOTMR"
 sym 448  "V_LESTMR"
 sym 449  "V_EGR_DLYTMR"
 sym 509  "XDCL_BAUD"
@@ -2214,6 +2248,10 @@ sym b448  "V_RUNUP_DIFF"
 sym b44a  "SETLNG_TM"
 sym b44c  "DPNEU_MUL"
 sym b44e  "A0"
+sym b450  "VCAL"
+sym b452  "OPCLT3"
+sym b453  "OPCLT2"
+sym b454  "OPCLT1"
 sym b455  "EGOCL1"
 sym b456  "TP_HYS_OL"
 sym b458  "DFSLAM"
@@ -2229,6 +2267,7 @@ sym b462  "LAMRHYS"
 sym b463  "OLIDRV"
 sym b464  "OLMCL"
 sym b466  "OLINEUT"
+sym b467  "EGO_CNT_OL"
 sym b468  "LAMDLT_OL"
 sym b46a  "TIME_OL"
 sym b46b  "JMPMUL"
@@ -2613,6 +2652,7 @@ sym c1bc  "PARKLO"
 sym c1be  "PARKHI"
 sym c1c0  "MLPS_2"
 sym c1c1  "MLPS_2hobyte"
+sym c1c4  "VSPMIN"
 sym c1ce  "VS_NEU"
 sym c1cf  "GR_NEU"
 sym c1d0  "GRMSFT"
@@ -2620,31 +2660,40 @@ sym c1d1  "SW_MSF"
 sym c1d6  "RTNVMN"
 sym c1d8  "RTNVMX"
 sym c1db  "VMPMAX"
+sym c200  "SW_MLK"
+sym c201  "SW_RLK"
 sym c202  "UP_TIP_RATE"
-sym c25e  "Func_c25e"
+sym c25e  "FN689V"
 sym c27a  "FN615"
 sym c286  "FN690"
-sym c2b2  "trans_shift_12"
-sym c2c6  "Func_c2c6"
-sym c2da  "Func_c2da"
-sym c30a  "trans_shift_23"
-sym c31e  "Func_c31e"
-sym c332  "Func_c332"
-sym c362  "trans_shift_34"
-sym c376  "Func_c376"
-sym c38a  "trans_shift_21"
-sym c3b2  "trans_shift_32"
-sym c3da  "trans_shift_43"
+sym c29e  "FN12A"
+sym c2b2  "FN12S"
+sym c2c6  "FN23A"
+sym c2da  "FN23PPH"
+sym c30a  "FN23S"
+sym c31e  "FN34A"
+sym c332  "FN34PPH"
+sym c362  "FN34S"
+sym c376  "FN21A"
+sym c38a  "FN21S"
+sym c39e  "FN32A:"
+sym c3b2  "FN32S"
+sym c3c6  "FN43A"
+sym c3da  "FN32A"
 sym c3ee  "FN689D"
 sym c402  "FN689U"
-sym c41e  "trans_converter_lock_2nd"
-sym c432  "trans_converter_lock_3rd"
-sym c446  "trans_converter_lock_4th"
-sym c44e  "Func_c44e"
-sym c47e  "trans_converter_unlock_2nd"
-sym c492  "trans_converter_unlock_3rd"
-sym c4a6  "trans_converter_unlock_4th"
-sym c4ae  "Func_c4ae"
+sym c41e  "FN2LS"
+sym c432  "FN3LS"
+sym c446  "FN4LS"
+sym c44e  "FN2LA"
+sym c462  "FN3LA"
+sym c476  "FN4LA"
+sym c47e  "FN2US"
+sym c492  "FN3US"
+sym c4a6  "FN4US"
+sym c4ae  "FN2UA"
+sym c4c2  "FN3UA"
+sym c4d6  "FN4UA"
 sym c4de  "FN2ULK"
 sym c4fa  "FN2LK"
 sym c516  "FN3ULK"
@@ -2653,21 +2702,21 @@ sym c54e  "FN4ULK"
 sym c56a  "FN4LK"
 sym c586  "FN624"
 sym c59e  "FN689L"
-sym c5b2  "trans_tv_pressure_21"
-sym c5ba  "trans_tv_pressure_12"
-sym c5ce  "trans_tv_pressure_32"
-sym c5d6  "trans_tv_pressure_23"
-sym c5ea  "trans_tv_pressure_43"
-sym c5f2  "trans_tv_pressure_34"
-sym c606  "Func_c606"
-sym c622  "Func_c622"
-sym c63e  "Func_c63e"
-sym c65a  "Func_c65a"
-sym c68a  "Func_c68a"
-sym c6ba  "Func_c6ba"
-sym c6ea  "Func_c6ea"
-sym c71a  "Func_c71a"
-sym c74a  "Func_c74a"
+sym c5b2  "FN21_DC"
+sym c5ba  "FN12_DC"
+sym c5ce  "FN32_DC"
+sym c5d6  "FN23_DC"
+sym c5ea  "FN43_DC"
+sym c5f2  "FN34_DC"
+sym c606  "FN12CA"
+sym c622  "FN23CA"
+sym c63e  "FN34CA"
+sym c65a  "FN12T"
+sym c68a  "FN23T"
+sym c6ba  "FN34T"
+sym c6ea  "FN21T"
+sym c71a  "FN32T"
+sym c74a  "FN43T"
 sym c77a  "FN1CB"
 sym c786  "FN2CB"
 sym c792  "FN3CB"
@@ -2687,7 +2736,22 @@ sym c8ca  "FN1420"
 sym c92e  "FN1615A"
 sym c952  "FN1616"
 sym c976  "FN1617"
-sym c99a  "Func_c99a"
+sym c99a  "FN46B_T"
+sym c9b6  "FN54B_T"
+sym c9d2  "FN56B_T"
+sym c9ee  "FN64B_T"
+sym ca0a  "FN46S_T"
+sym ca26  "FN54S_T"
+sym ca42  "FN56S_T"
+sym ca5e  "FN64S_T"
+sym ca7a  "FN46F_T"
+sym ca96  "FN54F_T"
+sym cab2  "FN56F_T"
+sym cace  "FN64F_T"
+sym caea  "FN46NE"
+sym cb06  "FN54NE"
+sym cb22  "FN56NE"
+sym cb3e  "FN64NE"
 sym cb5c  "VTC_OVER"
 sym cb5e  "VTC_UNDER"
 sym cb60  "FKMKAY"
@@ -2743,10 +2807,21 @@ sym cba7  "XAPT"
 sym cba8  "XMAPPA"
 sym cbaa  "VKYPWR"
 sym cbac  "VIPSPK"
+sym cbae  "REQV"
+sym cbb0  "LEQV"
+sym cbb2  "VIPRR1"
+sym cbb4  "VIPLR1"
 sym cbb6  "VNMIN"
+sym cbb8  "VDLY8"
 sym cbba  "VRLAM"
+sym cbbc  "VIPTM3"
+sym cbbd  "VIPTM4"
 sym cbbe  "VTAP1"
 sym cbc0  "VTAP2"
+sym cbc2  "VTAP3"
+sym cbc4  "VTAP4"
+sym cbc6  "VTAP5"
+sym cbc8  "VTAP6"
 sym cbca  "ACTMIN"
 sym cbcc  "ACTMAX"
 sym cbce  "V_EGOHP"
@@ -2755,14 +2830,29 @@ sym cbd0  "TAPMAX"
 sym cbd2  "TAPMIN"
 sym cbd4  "WIGLVL"
 sym cbd5  "V_FPMFLG"
+sym cbd6  "V_FPMDLY"
+sym cbd7  "V_FPMTM"
 sym cbd8  "ECTMIN"
 sym cbda  "ECTMAX"
 sym cbdc  "V_HICKOKTM"
 sym cbde  "V_LANSDTM"
+sym cbea  "V_LAMAV_MIN"
+sym cbec  "V_LAMAV_MAX"
+sym cbee  "V_ADPMP_MAX"
+sym cbef  "V_ADPMP_MIN"
+sym cbf0  "V_ADPN_MAX"
+sym cbf2  "V_ADPN_MIN"
+sym cbf4  "VAIRFL"
+sym cbf5  "VTABFL"
+sym cbf6  "VTCEGO"
 sym cbf8  "TCN"
 sym cbfc  "ISLBND"
 sym cbfe  "ISUBND"
+sym cc00  "V_TCDSN"
+sym cc04  "VISDL1"
+sym cc05  "VISDL3"
 sym cc06  "VTCDSN"
+sym cc08  "VBISW"
 sym cc09  "V_BOO_SPD"
 sym cc15  "V_EGORNTM"
 sym cc18  "V_LESTM"
@@ -2771,7 +2861,15 @@ sym cc1b  "V_EGOMAP_MIN"
 sym cc1c  "V_EGOTP_MIN"
 sym cc1e  "V_EGOAEMAX"
 sym cc20  "VCRTDC"
+sym cc21  "VEGRAT"
+sym cc22  "VDCMIN"
+sym cc23  "VDCMAX"
 sym cc24  "VEGVAC"
+sym cc25  "ETV_TEST_SEC"
+sym cc26  "TV1CNTS_TEST"
+sym cc27  "TV2CNTS_TEST"
+sym cc28  "V_ETV_TEST"
+sym cc2a  "VETVDT"
 sym cc2c  "EVPMIN"
 sym cc2e  "EVPMAX"
 sym cc30  "VEVPLL"
