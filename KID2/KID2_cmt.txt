@@ -1444,6 +1444,16 @@
 7e98 # R42 += Rbase register (as pointer)
 7e9d # update input pointer to new address
 
+7ea1 # VFPMFLG = 1 (Test enabled)
+7ea5 \w# (Skip to next test)
+7ea5 \n# BEGIN: FPM TEST 1 PROCESS
+7ea8 # (No fuel pump OCC failure)
+7eab # VIP_CNT_EX = fpm_test_3 + 1
+7ead # (Next test)
+7ead \n# BEGIN: FPM TEST 2 PROCESS
+7eb2 # (Command fuel pump on)
+
+7eba # (Indicates pump off)
 
 7ebd #543   | FP Ckt Open Bat. to Relay          |    X    |      |   X   |
 7ecb #542   | FP Ckt Open -ECA to Motor Ground   |    X    |      |   X   |

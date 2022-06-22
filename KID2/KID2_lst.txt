@@ -8307,8 +8307,8 @@ ERROR CODE DESCRIPTION
 72e2: 3a,7d               vect  7d3a             TEST_AD_SWITCHES_1
 72e4: 9e,7d               vect  7d9e             TEST_AD_SWITCHES_2
 72e6: d7,7e               vect  7ed7             VO_OCC_COM12
-72e8: a1,7e               vect  7ea1             VO_FPM_COM2
-72ea: c3,7e               vect  7ec3             VO_FPM_COM2_FPM_TEST_2_PROCESS
+72e8: a1,7e               vect  7ea1             VO_FPM_COM2_TEST_1_2
+72ea: c3,7e               vect  7ec3             VO_FPM_COM2_TEST_3
 72ec: fe,7f               vect  7ffe             VO_EPC_SOLENOID_COM1
 72ee: 16,80               vect  8016             VO_EPC_SOLENOID_COM1_624
 72f0: 32,80               vect  8032             Sub_8032
@@ -9386,13 +9386,13 @@ ERROR CODE DESCRIPTION
 7ce6: 28,11               scall 7cf9             Sub_7cf9 ();
 7ce8: 28,0f               scall 7cf9             Sub_7cf9 ();
 7cea: fb                  ei                     interrupts ON; }
-7ceb: 20,aa               sjmp  7d97             goto EXIT_THIS_TEST;
+7ceb: 20,aa               sjmp  7d97             goto SET_VIP_TIMER_EX;
 
    Sub_7ced:
 7ced: 3f,46,08            jb    B7,R46,7cf8      if (PUMP = 0)  {
 7cf0: 32,2a,05            jnb   B2,R2a,7cf8      if (VIP_ENABLE = 1)  {
 7cf3: ef,ef,02            call  7fe5             Sub_7fe5 ();
-7cf6: 20,9f               sjmp  7d97             goto EXIT_THIS_TEST; } } } }
+7cf6: 20,9f               sjmp  7d97             goto SET_VIP_TIMER_EX; } } } }
 
 7cf8: f0                  ret                    return;
 
@@ -9427,7 +9427,7 @@ ERROR CODE DESCRIPTION
 7d2b: df,05               je    7d32             if (R3c != 0)  {
 7d2d: ef,99,03            call  80c9             SET_SERVICE_CODE (                #511   | ROM test failed                    |    X    |      |       |
 7d30: 11,05                     #arg 1              511 ); }
-7d32: 20,63               sjmp  7d97             goto EXIT_THIS_TEST;
+7d32: 20,63               sjmp  7d97             goto SET_VIP_TIMER_EX;
 
 7d34: 00,20               word   2000            CheckSumBase                      # Start address (0x2000)
 7d36: fe,df               word   dffe            CheckSumEnd                       # End address  (0xdffe)
@@ -9469,14 +9469,14 @@ ERROR CODE DESCRIPTION
 7d84: d1,06               jleu  7d8c             if (R42 > VMPMAX)  {
 7d86: 2b,41               scall 80c9             SET_SERVICE_CODE (                #126   | MAP/BP out of S-T range.           |    X    |  XX  |   X   |
 7d88: 26,01                     #arg 1              126 );
-7d8a: 20,0b               sjmp  7d97             goto EXIT_THIS_TEST; }
+7d8a: 20,0b               sjmp  7d97             goto SET_VIP_TIMER_EX; }
 
 7d8c: ef,4e,03            call  80dd             Sub_80dd (
 7d8f: 00,02                     #arg 1              MDELTA,
 7d91: 0a,f1                     #arg 2              VMDEL1,
 7d93: 0c,f1                     #arg 3              VMDEL2,
 7d95: 26,01                     #arg 4              126 );
-   EXIT_THIS_TEST:
+   SET_VIP_TIMER_EX:
 7d97: c7,e4,41,00         stb   R0,[Re4+41]      VIP_TIMER_EX = 0;
 7d9b: 17,38               incb  R38              R38++;
 7d9d: f0                  ret                    return;
@@ -9615,33 +9615,35 @@ ERROR CODE DESCRIPTION
 7e9d: c2,3e,42            stw   R42,[R3e]        [R3e] = R42; }                    # update input pointer to new address
 7ea0: f0                  ret                    return;
 
-   VO_FPM_COM2:
-7ea1: b3,fe,7b,3a         ldb   R3a,[Rfe+7b]     R3a = V_FPMFLG;
+   VO_FPM_COM2_TEST_1_2:
+7ea1: b3,fe,7b,3a         ldb   R3a,[Rfe+7b]     R3a = V_FPMFLG;                   # VFPMFLG = 1 (Test enabled)
 7ea5: e0,3a,03            djnz  R3a,7eab         R3a--;
-                                                 if (R3a != 0) goto 7eab;
-7ea8: 33,2c,04            jnb   B3,R2c,7eaf      if (B3_CODE_556 = 0) goto 7eaf; }
-7eab: 17,38               incb  R38              R38++;
-7ead: 26,e8               sjmp  7d97             goto EXIT_THIS_TEST; }
+                                                 if (R3a != 0) goto 7eab;          # (Skip to next test)
+# BEGIN: FPM TEST 1 PROCESS
+7ea8: 33,2c,04            jnb   B3,R2c,7eaf      if (B3_CODE_556 = 0) goto 7eaf; } # (No fuel pump OCC failure)
+7eab: 17,38               incb  R38              R38++;                            # VIP_CNT_EX = fpm_test_3 + 1
+7ead: 26,e8               sjmp  7d97             goto SET_VIP_TIMER_EX; }          # (Next test)
 
+# BEGIN: FPM TEST 2 PROCESS
 7eaf: 91,04,2c            orb   R2c,4            B2_VIP_FP_OVERRIDE = 1;
-7eb2: 91,80,46            orb   R46,80           PUMP = 1;
+7eb2: 91,80,46            orb   R46,80           PUMP = 1;                         # (Command fuel pump on)
 7eb5: ef,43,04            call  82fb             DELAY_SEC (
 7eb8: 7c,f0                     #arg 1              V_FPMDLY );
-7eba: 3b,90,04            jb    B3,R90,7ec1      if (B3_FPM_90 = 0)  {
+7eba: 3b,90,04            jb    B3,R90,7ec1      if (B3_FPM_90 = 0)  {             # (Indicates pump off)
 7ebd: 2a,0a               scall 80c9             SET_SERVICE_CODE (                #543   | FP Ckt Open Bat. to Relay          |    X    |      |   X   |
 7ebf: 43,05                     #arg 1              543 ); }
-7ec1: 26,d4               sjmp  7d97             goto EXIT_THIS_TEST;
+7ec1: 26,d4               sjmp  7d97             goto SET_VIP_TIMER_EX;
 
-   VO_FPM_COM2_FPM_TEST_2_PROCESS:
+   VO_FPM_COM2_TEST_3:
 7ec3: ef,35,04            call  82fb             DELAY_SEC (
 7ec6: 7c,f0                     #arg 1              V_FPMDLY );
 7ec8: 33,90,04            jnb   B3,R90,7ecf      if (B3_FPM_90 = 1)  {
 7ecb: 29,fc               scall 80c9             SET_SERVICE_CODE (                #542   | FP Ckt Open -ECA to Motor Ground   |    X    |      |   X   |
 7ecd: 42,05                     #arg 1              542 ); }
-7ecf: 26,c6               sjmp  7d97             goto EXIT_THIS_TEST;
+7ecf: 26,c6               sjmp  7d97             goto SET_VIP_TIMER_EX;
 
 7ed1: a1,dc,7e,34         ldw   R34,7edc         R34 = 7edc;
-7ed5: 26,c0               sjmp  7d97             goto EXIT_THIS_TEST;
+7ed5: 26,c0               sjmp  7d97             goto SET_VIP_TIMER_EX;
 
    VO_OCC_COM12:
 7ed7: 29,0c               scall 7fe5             Sub_7fe5 ();
@@ -9704,7 +9706,7 @@ ERROR CODE DESCRIPTION
 7f4a: 26,06                     #arg 1              626,
 7f4c: 03,00                     #arg 2              3,
 7f4e: 06                        #arg 3              6 );
-7f4f: 26,46               sjmp  7d97             goto EXIT_THIS_TEST;
+7f4f: 26,46               sjmp  7d97             goto SET_VIP_TIMER_EX;
 
 #################################################################
 # Five data bytes follow calls to this function (R1A,1B,1C,1D,1E)
@@ -9809,7 +9811,7 @@ ERROR CODE DESCRIPTION
 800b: c7,e8,d1,42         stb   R42,[Re8+d1]     TV_COUNTS = R42;
 800f: ef,e9,02            call  82fb             DELAY_SEC (
 8012: cb,f0                     #arg 1              ETV_TEST_SEC );
-8014: 25,81               sjmp  7d97             goto EXIT_THIS_TEST;
+8014: 25,81               sjmp  7d97             goto SET_VIP_TIMER_EX;
 
    VO_EPC_SOLENOID_COM1_624:
 8016: ef,f7,f1            call  7210             Set_DiagCodes ();
@@ -9838,7 +9840,7 @@ ERROR CODE DESCRIPTION
 804c: 25,06                     #arg 1              625 ); }
 804e: c7,e8,d1,00         stb   R0,[Re8+d1]      TV_COUNTS = 0; } }
 8052: b1,0a,38            ldb   R38,a            R38 = a; }
-8055: 25,40               sjmp  7d97             goto EXIT_THIS_TEST;
+8055: 25,40               sjmp  7d97             goto SET_VIP_TIMER_EX;
 
    Sub_8057:
 8057: 3b,2b,13            jb    B3,R2b,806d      if (STO_WORKING = 0)  {
