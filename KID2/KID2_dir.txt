@@ -16,9 +16,9 @@ rbase e2 c1be 8f94 901e
 rbase e2 c1be 8d5f 8eb4
 rbase e2 c1be 9308 93b1
 #rbase e2 c1be 9c92 9cb3
+rbase e2 c1be 9cfb 9e94
 
 # rbase e2 cc59 8038 8055
-
 
 rbase e4 180
 rbase e6 280
@@ -263,7 +263,7 @@ args    7493 7498 : E 3 f0 N : E 3 f0 N :UW N
 byte    75ed 75ed
 byte    75ee 75ee
 byte    75ef 75ef
-
+byte 	75f0 75f0
 
 code    75f1 7696
 word    7698 7699
@@ -1133,8 +1133,7 @@ byte    c1e0 c1e0
 byte    c1e1 c1e1
 byte    c1e2 c1e2
 byte    c1e3 c1e3
-word    c1e4 c1e5
-byte    c1e6 c1e6
+word    c1e4 c1eb
 byte    c1ec c1ec
 byte    c1ed c1ed
 byte    c1ee c1ee
@@ -1307,7 +1306,7 @@ byte    cb87 cb87
 byte    cb88 cb88
 byte    cb89 cb89
 byte    cb8a cb8a
-byte    cb8e cb8e
+byte    cb8c cb8e
 byte    cb8f cb8f
 byte    cb90 cb90
 byte    cb91 cb91
@@ -1332,9 +1331,7 @@ word    cbd8 cbd9
 word    cbda cbdb
 
 byte    cbe0 cbe0
-word    cbe2 cbe5
-byte    cbe8 cbe8
-word    cbea cbed
+word    cbe2 cbed
 byte    cbee cbef
 
 word    cbf8 cbf9
@@ -1352,14 +1349,16 @@ byte    cc4e cc4e
 word    cc50 cc51
 word    cc52 cc53
 byte    cc54 cc54
+word 	cc56 cc5d
+byte	cc5e cc61
+word	cc62 cc75
 byte    cc76 cc76
-word    cc8a cc97
-byte    cc98 cc9a
-
-
-
-byte  cc9b cca7
-word    cca8 ccb9
+skip	cc77 cc77
+word	cc78 cc7d
+byte 	cc7e cc7e
+word    cc80 cc97
+byte    cc98 cc9d
+word    cc9e ccb9
 byte	ccba cce1
 
 
@@ -1919,7 +1918,7 @@ sym 2f "B2_VIP_flags4" : B 2
 sym 2f "B3_VIP_flags4" : B 3
 sym 2f "B4_VRUN_ISCFLG_2f" : B 4
 sym 2f "B5_DISABLE_ISC_2f" : B 5
-sym 2f "B6_VIP_flags4" : B 6
+sym 2f "B6_KIHP?_2f" : B 6
 sym 2f "B7_V_EGR_RDY_2f" : B 7
 
 #sym 30 "DCL_ErrorFlag" only for DCL??
@@ -2241,7 +2240,26 @@ sym d6 "B7_FLG_FMM_CC_d6" : B 7
 sym d8 "GR_DS"
 sym d9 "GR_CM"
 sym da "GEAR_CUR"
+
+sym dc "FLG_UN_ULSF" : B0
+sym dc "FLG_UN_ALT" : B1
+sym dc "FLG_UN_MDN" : B2
+sym dc "FLG_UN_TEMP" : B3
+sym dc "FLG_UN_PRN" : B4
+sym dc "FLG_UN_BRK" : B5
+sym dc "FLG_UN_TRD" : B6
+sym dc "FLG_UN_TRA" : B7
+
 sym db "PDL"
+
+sym de "FLG_RLK_WOT" : B0
+sym de "FLG_FRST_CM" : B1
+sym de "FLG_UNC_UNLK" : B2
+sym de "FLG_UN_CT" : B3
+sym de "FLG_SCHD_DLY" : B4
+sym de "FLG_CRV_LST" : B5
+sym de "FLG_CRV_DS" : B6
+sym de "FLG_CRV_LK" : B7
 
 sym dd "FLG_dd"
 sym dd "B0_FLG_SFT_UNLK_dd" : B 0
@@ -2265,12 +2283,17 @@ sym df "B7_FLG_SFT_IN_df" : B 7
 sym e0 "B2_FLG_FRST_TV_e0" : B 2
 sym e0 "B4_FLG_ENG_TV_e0" : B 4
 
-sym e1 "CCD?"
+
 sym e1 "B0_FLG_SFT_VAL_e1" : B0
 sym e1 "B1_CCV_STRT_SFT_e1" : B1
 sym e1 "B2_CCD_HP" : B 2
+sym e1 "FLG_UN_NE" : B3
+sym e1 "FLG_TVSTR_CD" : B4
+sym e1 "FLG_TVENG_MD" : B5
+sym e1 "FLG_TVENG_CD" : B6
+sym e1 "FLG_FRST_NOV" : B7
 
-sym 100 "TPBAR"
+#sym 100 "TPBAR"
 
 sym 104 "EGRBAR"
 sym 106 "EGOBAR"
@@ -2345,7 +2368,9 @@ sym 17f "HLTMR"
 
 sym 180 "CRKPIP_CTR"
 sym 181 "CRKPIP_CTR_BG"
+sym 182 "OUTTMR"
 sym 184 "OCCSAV"
+sym 186 "VIPLATM"
 
 sym 18a "VIP_NRM_EX"
 sym 18c "VIP_NRM2_EX"
@@ -2545,14 +2570,15 @@ sym 31e "RT_GR_OLD"
 sym 322 "SPD_RATIO"
 sym 326 "SPD_RT_STRT"
 sym 328 "SR_PP_LIM"
+sym 32a "TPBARTC"
 sym 32c "TPBART"
 sym 32e "TP_RATE"
 
 sym 330 "TQ_OFM"
+sym 332 "TPBARTV"
 sym 334 "NE_STRT_SFT"
 sym 336 "TR_STRT_SFT"
 sym 338 "TQ_IALPHA"
-
 sym 33a "TQ_STAT_CAP"
 sym 33c "ARCHG"
 sym 33e "LOAD"
@@ -2560,11 +2586,8 @@ sym 33e "LOAD"
 sym 340 "ETV_OCM_MIN"
 sym 342 "ETVOCM"
 sym 344 "IETVOCM"
-
 sym 346 "FN072A_MAPPA_y"
-
 sym 348 "VSBART"
-
 sym 34a "BP_INTR"
 sym 34b "CS_SFT_MULT"
 sym 34c "GEAR_OLD"
@@ -2573,7 +2596,6 @@ sym 34e "GR_DS_LST
 sym 34f "GR_OLD"
 
 sym 350 "GR_DS_TV"
-
 sym 351 "TV_COUNTS"
 sym 353 "VSV_STRT_SFT"
 sym 354 "NOV_ACT"
@@ -2602,9 +2624,12 @@ sym 37a "TM_CS_DLY"
 sym 37b "TM_CS_ENG"
 sym 37e "TP_STRT_SFT"
 
+sym 380 "TM_UN_CT"
+sym 381 "TM_LK_CONV"
+sym 382 "TM_SFT_12MN"
 sym 383 "MPHCNT"
 sym 384 "TSLMPH"
-#sym 386 "CTTMR"
+sym 385 "ATMR2"
 sym 386 "ATMR3"
 sym 388 "FFULC"
 sym 38a "FFULM"
@@ -3362,9 +3387,38 @@ sym c1d8 "RTNVMX"
 
 sym c1db "VMPMAX"
 
+sym c1e1 "BPUNMH"
+sym c1e2 "BPUNMN"
+sym c1e3 "BPUNMX"
+sym c1e4 "NELUMN"
+sym c1ec "CRVDLY"
+sym c1ed "D21DLY"
+sym c1ee "D32DLY"
+sym c1ef "D43DLY"
+
 sym c200 "SW_MLK"
 sym c201 "SW_RLK"
 sym c202 "UP_TIP_RATE"
+sym c204  "NELKWH"
+sym c206  "NELKWO"
+sym c208  "RTLKWH"
+sym c20a  "RTLKWO"
+
+
+sym c210 "TPUNCH"
+sym c212 "TPUNSC"
+sym c214 "TPUNBRK"
+sym c216 "TPUNCT"
+sym c218 "TPUNTR"
+sym c21a "TRUHAC"
+sym c21c "TRUHDC"
+sym c21e "TRULAC"
+
+sym c220 "TRULDC"
+sym c222 "U12DLY"
+sym c223 "U23DLY"
+sym c224 "U34DLY"
+sym c225 "VSCTDY"
 
 sym cb5c "VTC_OVER"
 sym cb5e "VTC_UNDER"
@@ -3415,7 +3469,7 @@ sym cb94 "AMPMUL"
 sym cb96 "DELAMB"
 sym cb98 "DELROW"
 sym cb9a "DELCOL"
-
+sym cb9c "CHKFLG"
 
 sym cb9d "MINADP"
 sym cb9e "MAXADP"
@@ -3464,6 +3518,11 @@ sym cbda "ECTMAX"
 sym cbdc "V_HICKOKTM"
 sym cbde "V_LANSDTM"
 
+sym cbe0 "VIDMST"
+sym cbe2 "VIDMTM"
+sym cbe4 "VLORPM"
+sym cbe6 "VPIPTM"
+sym cbe8 "V_ADAPTV_ENA2"
 sym cbea "V_LAMAV_MIN"
 sym cbec "V_LAMAV_MAX"
 sym cbee "V_ADPMP_MAX"
@@ -3475,17 +3534,19 @@ sym cbf4 "VAIRFL"
 sym cbf5 "VTABFL"
 sym cbf6 "VTCEGO"
 sym cbf8 "TCN"
-
+sym cbfa "V_GOOSMP"
 sym cbfc "ISLBND"
 sym cbfe "ISUBND"
 
 sym cc00 "V_TCDSN"
-
+sym cc02 "VISCN"
 sym cc04 "VISDL1"
 sym cc05 "VISDL3"
 sym cc06 "VTCDSN"
 sym cc08 "VBISW"
 sym cc09 "V_BOO_SPD"
+sym cc0a "V_BOOSPD_TM"
+
 sym cc15 "V_EGORNTM"
 sym cc18 "V_LESTM"
 sym cc1a "V_EGOMAP_MAX"
@@ -3510,17 +3571,29 @@ sym cc30 "VEVPLL"
 
 sym cc3a "VIACT1"
 sym cc3c "VIACT2"
-
+sym cc3e "VIACT3"
+sym cc40 "VIACT4"
+sym cc42 "VIECT1"
+sym cc44 "VIECT2"
+sym cc46 "VIECT3"
+sym cc48 "VIECT4"
 sym cc4a "VECT3" 
 sym cc4c "V_879_MULT"
-
 sym cc4e "SETLNG_TM"
 
 sym cc50 "VSIBRM"
 sym cc52 "VSIBRN" 
-
 sym cc54 "V820A"
+sym cc56 "V_GOOSTP"
+sym cc58 "V_GOOSN"
+sym cc5a "V_GOOSPK"
+sym cc5c "V_KNK_FUEL"
+sym cc5e "V_GOOS_DELAY"
+sym cc5f "V_GOOSEC"
 
+sym cc60 "V_GOOSW"
+sym cc61 "V_KNK_DLY"
+sym cc62 "V_KTS"
 sym cc64 "VMDEL1"
 sym cc66 "VMDEL2"
 sym cc68 "VMDEL3"
@@ -3547,17 +3620,40 @@ sym cc89 "VPSSW
 sym cc8a "VSPRPM
 sym cc8c "V_SPK_FINAL
 sym cc8e "V_SPK_INIT
+
 sym cc90 "V_SPK_ENABL
 sym cc92 "VSPTDL
 sym cc93 "VDLY1
 sym cc94 "VDLY2"
 sym cc95 "VIPTM2"
 sym cc96 "VATMR2"
+sym cc98 "V_ECTCTMAX"
+sym cc99 "V_ECTCTMIN"
+sym cc9a "V_ECT_DEL"
+sym cc9b "V_ECTLIM"
+sym cc9c "V_ECT_TIME"
+sym cc9d "V_STABLTIM"
+sym cc9e "V_TIME_LIM"
+
+sym cca0 "VITOT1"
+sym cca2 "VITOT2"
+sym cca4 "VITOT4"
+sym cca6 "VITOT3"
 
 sym cca8 "V_ISCMOD_MAX"
 sym ccaa "V_ISCMOD_MIN"
 sym ccac "V_KDNDT"
+sym ccae "V_MODE_END"
+
+sym ccb0 "V_NLOW"
+sym ccb2 "V_NHIGH"
+sym ccb4 "V_RPM_SET"
+#sym ccbc
 sym ccb8 "VDLY_ENTER"
+#sym ccb9 ""
+sym ccba "V_STO_DELAY"
+#sym ccbb
+#sym ccbc "V_
 
 # ----- END of disassembly run -----
 
