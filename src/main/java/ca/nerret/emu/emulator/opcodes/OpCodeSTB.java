@@ -13,6 +13,12 @@ public class OpCodeSTB extends OpCode implements IOpCode {
 		super(opcode, mnemonic);
 		// TODO Auto-generated constructor stub
 	}
+    public OpCodeSTB(int opcode, String mnemonic, int numBytes) {
+    	this(opcode, mnemonic);
+    	this.setNumberOfBytes(numBytes);
+		
+		// TODO Auto-generated constructor stub
+	}
 
 	// RA <-- RB
     @Override
@@ -171,4 +177,53 @@ public class OpCodeSTB extends OpCode implements IOpCode {
         */
 
     }
+    
+	public int execDirect()
+	{
+    	// numberOfBytes = 3;
+    	// stateTime = 4;
+		this.setNumberOfBytes(3);
+    	setExecutionStates(4);
+    	
+		// Assembler Format: STB breg, areg
+		// Instruction Operation: (Ra) <- (Rb)
+		// Execution States: 4
+		// Machine Format:[ ^C4 ], [ Dest Ra ], [ Source Rb ]
+		
+    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+    	
+		byte destRa = (byte) operands[1];
+		byte sourceRb =  (byte) operands[2];
+		
+		byte areg = this.getByteRegister((short) (sourceRb  & 0xff));
+		
+		this.setByteRegister((byte)destRa, (byte)areg);
+    	
+		return getExecutionStates();
+	}
+	
+	public int execIndirect()
+	{
+		this.setNumberOfBytes(3);
+    	setExecutionStates(7);
+    	
+    	// Assembler Format: STB breg, @indirreg
+    	// Instruction Operation: ([Ra])<- (Rb)
+    	// Execution States: 7/12 
+    	// MachineFormat: [ ^C6 ], [ Dest Ra | 1 MB ], [ Source Rb ]
+    	
+    	// 2076: c6,1a,1c            stb   R1c,[R1a]        [R1a] = R1c;
+
+    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+    	
+		byte destRa = (byte) operands[1];
+		byte sourceRb =  (byte) operands[2];
+
+    	short value = this.getWordRegister((short) (destRa));
+    	sourceRb = this.getByteRegister((short) (sourceRb & 0xff));
+		
+    	this.setWordRegister(value, (byte)sourceRb);
+    	
+		return getExecutionStates();
+	}
 }

@@ -228,5 +228,65 @@ public class OpCodeLDB extends OpCode implements IOpCode {
   	
 		return getExecutionStates();
 	}
+	
+	public int execIndirect()
+	{
+		//	        	numberOfBytes = 3;
+    	//stateTime = 6;
+		this.setNumberOfBytes(3);
+    	setExecutionStates(6);
+    	
+    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+    	// LDB @indlrreg, breg
+    	// (Rb) <- ([Ra])
+    	// [ ^B2 ], [ Indirect Ra | 0 MB ], [ Dest Rb ]
+    	// 2070: b2,1a,1c            ldb   R1c,[R1a]        R1c = [R1a];
+    	
+    	// (Ra)
+    	byte indirectRegRA = operands[1];
+    	byte destRegRB = operands[2];
+    	
+    	indirectRegRA = (byte) (indirectRegRA &  0xfe);
+
+  	   // [Ra]
+  	   short Ra = this.getWordRegister(indirectRegRA);
+	
+  	   byte value = this.getByteValue(Ra);
+		
+  	   // (Rb) <- ([Ra])
+		this.setByteRegister(destRegRB, (byte)value);
+	
+		return getExecutionStates();
+	}
+	
+	
+	public int execIndirectAutoInc()
+	{
+		this.setNumberOfBytes(3);
+    	setExecutionStates(7);
+
+    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+    	
+ 	   byte indirectRegRA = operands[1];
+ 	   byte destRegRB = operands[2];
+ 	   
+ 	   indirectRegRA = (byte) (indirectRegRA &  0xfe);
+ 	 
+ 	   
+ 	   // [RA]
+ 	   short RA = this.getWordRegister(indirectRegRA);
+ 	   
+
+		byte value = this.getByteValue(RA);
+		   
+		// (RB) <- ([RA])
+		this.setByteRegister(destRegRB, (byte)value);
+		   
+		// (RA) <- (RA) + 1
+		this.setWordRegister(indirectRegRA, (short)(RA + 1));
+
+		
+		return getExecutionStates();
+	}
 
 }

@@ -85,6 +85,7 @@ public class OpCodeCMPW extends OpCode implements IOpCode {
 		//state_.doSub(breg	, data);
 		//long cmpResult = doSub(breg, data);
 		System.out.println(" COMPARE Results: " + compare);
+		
 		if ( compare == 0) // Z Flag
 		{
 			state_.setPswBit(ProgramStatusWord.ZERO, true);

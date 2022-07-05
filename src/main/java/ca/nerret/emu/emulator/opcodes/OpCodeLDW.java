@@ -34,7 +34,11 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
 		
     	super.exec(state_);
         
-        state_.setWordRegister(this.getOperandLocation(),this.getResult());
+    	if((this.getOperandLocation() != 0 && this.getResult() != 0))
+    	{
+    		state_.setWordRegister(this.getOperandLocation(),this.getResult());
+    	}
+       
         
         return;
         
@@ -231,10 +235,34 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
 
 		return getExecutionStates();
 	}
+	
+	
 	public int execIndirect()
-	{
-    	System.err.println("Indirect Not Implemented yet. "+ this.getClass().getSimpleName());
-    	System.exit(1);
+		{
+			//	        	numberOfBytes = 3;
+	    	//stateTime = 6;
+			this.setNumberOfBytes(3);
+	    	setExecutionStates(6);
+	    	
+	    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+	          // AssemblerFormat: LDW @lndlrrag, breg
+	          // Instruction Operation: (RB)<-([RA])
+	          // Execution States: 6/11
+	          // Machine Format: [ ^A2 ] [ Indirect RA | 0 MB ], [ Dest RB ]
+	           
+	    	short indirectRegRA = operands[1];
+	    	short destRegRB = operands[2];
+	    	
+	    	indirectRegRA = (byte) (indirectRegRA &  0xfe);
+
+	  	   // [RA]
+	  	   short RA = this.getWordRegister(indirectRegRA);
+		
+	  	   short value = this.getWordValue(RA);
+			
+	  	   // (RB) <- ([RA])
+		 this.setWordRegister(destRegRB, value);
+
 		return getExecutionStates();
 	}
 	public int execIndirectAutoInc()
@@ -253,10 +281,10 @@ public class OpCodeLDW extends OpCode<OpCodeLDW> implements IOpCode {
 		// [RA]
 		short RA = this.getWordRegister(indirectRegRA);
 		   
-		//value = this.getWordValue(memory, RA);
+		short value = this.getWordValue(RA);
 		   
 		// (RB) <- ([RA])
-		this.setWordRegister(destRegRB, (short)RA);
+		this.setWordRegister(destRegRB, (short)value);
 		   
 		// (RA) <- (RA) + 2
 		this.setWordRegister(indirectRegRA, (short)(RA + 2));

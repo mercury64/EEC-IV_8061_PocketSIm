@@ -25,7 +25,6 @@ public class OpCodeSJMP extends OpCode implements IOpCode {
 	public OpCodeSJMP(int opcode, String mnemonic) {
 		super(opcode, mnemonic);
 		setNumberOfBytes(2);
-		// TODO Auto-generated constructor stub
 	}
 
 	/* (non-Javadoc)

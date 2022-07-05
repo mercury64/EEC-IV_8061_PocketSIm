@@ -705,7 +705,11 @@ public class Diag324 {
 		TCCR2A = 0;			// basic T2 mode, TCCR2B init with prescaler
 		timerAttach(TIMER2OVERFLOW_INT, cartTimerService);
 
-		if (demoMode) {InitDemoPIDMap();} else {InitDefaultPIDMap();}
+		if (demoMode) {
+			InitDemoPIDMap();
+		} else {
+			InitDefaultPIDMap();
+		}
 
 		sei();
 

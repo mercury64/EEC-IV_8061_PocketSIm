@@ -206,6 +206,56 @@ public class OpCodeORRB  extends OpCode<OpCodeORRB> implements IOpCode {
 		this.setDestinationRD(operands[2]);
 
     	return getExecutionStates();
-    		
+	}
+	
+	public int execIndirectAutoInc()
+	{
+    	//numberOfBytes = 3;
+    	//stateTime = 7;
+    	this.setNumberOfBytes(3);
+    	setExecutionStates(7);
+    	
+		byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+		
+		byte indirectRegRa = operands[1];
+	 	byte destRegRb = operands[2];
+	 	   
+	 	indirectRegRa = (byte) (indirectRegRa &  0xfe);
+
+	 	// [RA]
+	 	short Ra = this.getWordRegister(indirectRegRa);
+	 	   
+	 	byte value = this.getByteValue(Ra);
+
+	 	// (RA) <- (RA) + 1
+	 	this.setWordRegister(indirectRegRa, (short)(Ra + 1));
+
+		// AssemblerFormat: ORRB (lndirreg)+,brag
+		// instruction Operation: (Rb)<-([Ra])+(Rb); (Ra)<-(Ra) + 1
+		// ([Ra]) the value stored in Ra
+		// )+( logical OR operation.
+		
+		// Execution Sfafes; 7/12
+		// MachineFormat: [ ^92 ], [ Indeirect Ra | 1 MB ], [ Dest Rb ]
+
+		//2073: 92,15,1c            orb   R1c,[R14++]      R1c |= [R14++]; R1c | [R14++]
+		// register [R14++]
+		
+		// (Ra)
+		//Ra = (byte) (Ra & 0xfe);
+		//short RaAddress = state_.getWordRegister( Ra );// [R32]
+		 
+		// [(Ra)]
+		//byte value = getByteValue(memory, RaAddress);
+		
+		// (Ra)<-(Ra) + 1
+		//state_.setWordRegister((short) Ra, (short) (RaAddress + 1));	
+	 
+		
+		//result = (byte) state_.doORRB(state_.getByteRegister(Rb), value);
+		
+		this.setDataByte(value);
+		this.setDestinationRD(destRegRb);
+		return getExecutionStates();
 	}
 }

@@ -77,10 +77,10 @@ public class EECIV_PocketSIM {
 			}
 			
 			
-			if (state.getPc() == 0x6131)
+			if (state.getPc() == 0x2039)
 			{
 				//pause
-				System.out.println(String.format("** LOG 0x%04X", state.getWordRegister((short) 0x0410)));
+				System.out.println(String.format("** LOG 0x%04X", state.getWordRegister((short) 0x14)));
 			}
 			
 			//logger.info( String.format("0x%04X: ", state.getPc()) );
@@ -102,7 +102,7 @@ public class EECIV_PocketSIM {
 			System.out.println("Scalar 0x2005: " + state.getMemory()[0x2005]);
 			*/
 			//System.out.println(state.pswFlagsToString());
-			if (count == 200000) {
+			if (count == 4500) {
 				System.err.println("Count reached, ending");
 				break;
 			}

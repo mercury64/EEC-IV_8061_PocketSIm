@@ -174,7 +174,7 @@ public final class OpcodeCache {
         
         
         _OPCODES.put((byte) 0xC4, new OpCodeSTB(0xc4, "STB"));
-        _OPCODES.put((byte) 0xC6, new OpCodeSTB(0xc6, "STB"));
+        _OPCODES.put((byte) 0xC6, new OpCodeSTB(0xc6, "STB", 3));
         _OPCODES.put((byte) 0xC7, new OpCodeSTB(0xc7, "STB"));
         
         _OPCODES.put((byte) 0xC0, new OpCodeSTW(0xc0, "STW",3));

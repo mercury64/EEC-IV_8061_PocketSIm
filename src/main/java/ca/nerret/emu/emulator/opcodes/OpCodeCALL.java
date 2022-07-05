@@ -21,6 +21,9 @@ public class OpCodeCALL extends OpCode implements IOpCode {
 
 	public OpCodeCALL(int opcode, String mnemonic) {
 		super(opcode, mnemonic);
+		
+		setNumberOfBytes(3);
+		//this.setAddressMode(null);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -29,7 +32,29 @@ public class OpCodeCALL extends OpCode implements IOpCode {
      */
     @Override
     public final void exec(State state_) {
-        int[] memory = state_.getMemory();
+    	
+    	super.exec(state_);
+        
+
+    	 int ret = state_.getPc();
+    	 
+    	  offset = ret + offset;
+
+          // SP <- SP-2; 
+          state_.decrementSP();
+          
+          short stack = state_.getWordRegister((short)0x10);
+          // Stack <- PC;
+          state_.setWordRegister(stack, (short)ret);
+          this.setOffset((short)offset & 0xffff);
+          
+          
+          state_.setPc((short)offset  & 0x0000ffff);
+          
+          System.out.println(" Call to: " + String.format("0x%02X",this.getOffset()));
+    	 
+        return;
+       /* int[] memory = state_.getMemory();
 
         final int pc = state_.getPc();
 
@@ -45,7 +70,7 @@ public class OpCodeCALL extends OpCode implements IOpCode {
         int offset  = (short) (byteHi << 8);
         offset = offset  | ((byteLo) & 0xff);
         
-        
+        */
         //2088: ef,4c,89            call  a9d7
         
         // SP <- SP-2; Stack <- PC;
@@ -62,7 +87,7 @@ public class OpCodeCALL extends OpCode implements IOpCode {
         // = 894c + 208b = a9d7
 
 
-     
+     /*
         // Handle negative
         if ( ((byteHi & 0x4) >> 2) == 1)
         {
@@ -85,9 +110,37 @@ public class OpCodeCALL extends OpCode implements IOpCode {
         state_.updateStateTime(stateTime);
         
         System.out.println(" Call to: " + String.format("0x%02X",this.getOffset()));
+        */
         
     }
     
+	public int execDirect()
+	{
+
+		setExecutionStates(13);
+		setNumberOfBytes(3);
+		
+    	byte[] operands = this.getOperands(getNumberOfBytes(), getExecutionStates());
+		
+    	// [RA]
+		short RA = this.getWordRegister(operands[1]);
+		byte byteLo = operands[1];
+	    byte byteHi = operands[2];
+	    
+	    int offset  = (short) (byteHi << 8);
+        offset = offset  | ((byteLo) & 0xff);
+        
+     // Handle negative
+        if ( ((byteHi & 0x4) >> 2) == 1)
+        {
+        	offset = offset | ~0x03ff;
+        }
+
+        this.setOffset(offset);
+        
+		return getExecutionStates();
+	}
+	
 	public void setAddressMode(AddressMode addressMode) {
 		// TODO Auto-generated method stub
 	    

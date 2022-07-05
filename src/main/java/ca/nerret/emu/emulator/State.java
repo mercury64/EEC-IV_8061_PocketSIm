@@ -190,10 +190,8 @@ public class State {
 		this._state_time += _state_time;
 	}
 
-
 	public void setByteRegister(short reg, byte value) {
 
-		
 		System.out.println(
 				" Set Byte Register:" + 
 				String.format("R%02X", (byte)reg) + 
@@ -207,8 +205,8 @@ public class State {
 			System.err.println("RAM buffer out of range :" + String.format("R0x%04X", (short)reg));
 			System.exit(1);
 		}
-		register_memory[index] = value;
 		
+		register_memory[index] = value;	
 	}
 	
     public void setPswBit(int bit, boolean value)
@@ -221,7 +219,6 @@ public class State {
 		return this.psw.getBit(bit);
 	}
 	
-	
 	public void setZNFlag(long result)
 	{
 		// check if result is zero
@@ -232,8 +229,7 @@ public class State {
 		{
 			this.setPswBit(ProgramStatusWord.ZERO, false);
 		}
-        
-		
+        	
         // check if result is negative
 		if (result < 0) {
 			this.setPswBit(ProgramStatusWord.NEGATIVE, true);
@@ -242,14 +238,13 @@ public class State {
 		{
 			this.setPswBit(ProgramStatusWord.NEGATIVE, false);
 		}
-		
-
 	}
 	
 	public void setCFlag(long RB, long RA)
 	{
 		
 	}
+	
 	public void setPswFlags(long result, boolean Z, boolean N, boolean C, boolean V, boolean VT, boolean ST) {
 
 		

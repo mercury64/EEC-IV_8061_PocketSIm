@@ -718,9 +718,7 @@ byte    c0c0 c0c1
 word    c0c2 c0cb
 word    c0d0 c0d1
 word    c0d6 c0d9
-byte    c0da c0dd
-byte    c0e0 c0e1
-byte    c0e4 c0e6
+byte    c0da c0e6
 word    c0e8 c0e9
 word    c0ec c0ef
 word    c0f4 c0fb
@@ -1352,6 +1350,8 @@ sym f  "HSI_Time_hi"
 sym 10  "StackPtr"
 sym 12  "Tmr_OVF_cnt"
 sym 14  "B7_BPKFLG_14" :B 7
+sym 23  "IDLE_SPARK_ENTRY_CONDS_TRUE" :B 0
+sym 23  "IDLE_SPARK_EXIT_CONDS_TRUE" :B 1
 sym 24  "B2_EGRTPQ_Q_24" :B 2
 sym 24  "B5_FLG_LAMRICH_Q_24" :B 5
 sym 24  "B7_HUMTMR_FLG_24" :B 7
@@ -1465,8 +1465,10 @@ sym 45  "Flags_45"
 sym 46  "AM1" :B 0
 sym 46  "WOT_AC" :B 6
 sym 46  "PUMP" :B 7
-sym 47  "B0_Flags47" :B 0
-sym 47  "AM2" :B 6
+sym 47  "B1_CANP_OUT_47" :B 1
+sym 47  "B4_FLG_TV_CLK_47" :B 4
+sym 47  "B5_FLG_TV_DATA_47" :B 5
+sym 47  "B6_AM2_47" :B 6
 sym 47  "Flags_47"
 sym 48  "V_WARM_FLG" :B 0
 sym 48  "V_THMOPN" :B 1
@@ -1841,19 +1843,40 @@ sym 239  "Pip_counter"
 sym 23a  "ATMR1_LST"
 sym 23b  "VSCTR"
 sym 23c  "TSLIDM"
+sym 23e  "LST_data"
 sym 240  "HSOQ"
 sym 285  "GMAPDC"
+sym 286  "GOV_ON_CLOCKS"
 sym 288  "DOL_DUTY"
+sym 28a  "DOL_DUTY_ontime"
 sym 28c  "DT23S"
 sym 28e  "PHFDLT"
+sym 290  "Fault_Code_Buffer02"
+sym 292  "Fault_Code_Buffer03"
+sym 294  "Fault_Code_Buffer04"
+sym 296  "Fault_Code_Buffer05"
+sym 298  "Fault_Code_Buffer06"
+sym 29a  "Fault_Code_Buffer07"
+sym 29c  "Fault_Code_Buffer08"
+sym 29e  "Fault_Code_Buffer09"
+sym 2a0  "Fault_Code_Buffer0A"
+sym 2a2  "Fault_Code_Buffer0B"
+sym 2a4  "Fault_Code_Buffer0C"
+sym 2a6  "Fault_Code_Buffer0E"
+sym 2a8  "Fault_Code_Buffer0F"
+sym 2aa  "Fault_Code_Buffer10"
+sym 2ac  "Fault_Code_Buffer11"
+sym 2ae  "Fault_Code_Buffer12"
+sym 2b0  "Fault_Code_Buffer13"
 sym 2b8  "Xram1L"
 sym 2b9  "Xram1H"
 sym 2ba  "Xram2L"
-sym 2bb  "Xram1H"
+sym 2bb  "Xram2H"
 sym 2bc  "Xram3L"
-sym 2bd  "Xram1H"
+sym 2bd  "Xram3H"
 sym 2be  "Xram4L"
 sym 2bf  "Xram4H"
+sym 2c2  "DSLMBS"
 sym 2c4  "EGRACT"
 sym 2c5  "EGRATE"
 sym 2c6  "COLTBU"
@@ -1883,6 +1906,10 @@ sym 2f0  "HFPCYC"
 sym 2f2  "FUEL_PIPS"
 sym 2f3  "VOLTMR"
 sym 2ff  "EPC_TQ_CONV"
+sym 300  "TE_ULK_UP"
+sym 302  "TE_LK_UP"
+sym 304  "TE_ULK_PWR"
+sym 306  "TE_LK_PWR"
 sym 308  "RT_ULK_PWR"
 sym 30a  "RT_LK_PWR"
 sym 30c  "NEBART"
@@ -2333,6 +2360,9 @@ sym b4d2  "TP_AIR_OFF_H"
 sym b4d4  "D_TP_DT_F"
 sym b4d6  "FRCHIC"
 sym b4d8  "PUL_PER_GAL"
+sym b4da  "DELTA_SPK"
+sym b4dc  "ENTRY_T"
+sym b4de  "FBS_MIN"
 sym b4e0  "FKEXIT_MAX"
 sym b4e2  "FKEXIT_MIN"
 sym b4e4  "KSPKDO"
@@ -2345,6 +2375,7 @@ sym b4f0  "SPKINU"
 sym b4f2  "SPK_RUNUP"
 sym b4f4  "STTIM"
 sym b4f6  "TARMAX"
+sym b4f8  "TCRAMP"
 sym b4fa  "?FN839?"
 sym b512  "FN852"
 sym b52a  "FN884"
@@ -2590,8 +2621,25 @@ sym c0c2  "GRRAT1"
 sym c0c4  "GRRAT2"
 sym c0c6  "GRRAT3"
 sym c0c8  "GRRAT4"
+sym c0db  "NEUTIM"
+sym c0de  "TVPMX1"
+sym c0df  "TVPMN1"
+sym c0e0  "TVPMX2"
+sym c0e1  "TVPMN2"
+sym c0e2  "TVPMX3"
+sym c0e3  "TVPMN3"
 sym c0e5  "trans_tv_engagement_high"
 sym c0e6  "trans_tv_engagement_moderate"
+sym c0f8  "TQCONVINT"
+sym c0fa  "TQCONVSLP"
+sym c0fc  "EPC_TQMAX"
+sym c0fe  "MUINT"
+sym c100  "MUSLP"
+sym c11e  "TOTTV1"
+sym c120  "TOTTV2"
+sym c122  "TOTTV3"
+sym c124  "TOTTV4"
+sym c126  "TOTTV5"
 sym c142  "SARCHG"
 sym c154  "trans_min_tv_pressure"
 sym c156  "ETV_BIAS"

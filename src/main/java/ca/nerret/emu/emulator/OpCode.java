@@ -265,6 +265,7 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 		}
 	
 	protected byte getByteValue(short location) {
+		
 	 	   int index = (int)location & 0x0000ffff; // byte index, LSB
 	 	   //int index2 = (int)location+1 & 0xffff;// byte index2, MSB
 	 	   
@@ -280,6 +281,12 @@ public abstract class OpCode <T extends OpCode <T>> implements IOpCode {
 	public byte getByteRegister(short register) {
 		return this.state.getByteRegister(register);
 	}
+	
+	public void setByteRegister(short register, byte value) {
+		this.state.setByteRegister(register, value);
+	}
+	
+	
 	public short getWordRegister(short register) {
 		return this.state.getWordRegister(register);
 	}
