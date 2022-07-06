@@ -615,6 +615,10 @@
 4397 # NOVS = N/VSBAR
 43a4 # NOVS = 255
 
+4403 # FMMMLP = IPDL value when PDL_ERROR is present.
+4435 # TM_PDL_RES = 0(MLPS reading is stable)
+4437 # PDL = IPDL (let input value pass through)
+
 455c # AM is used to calculate fuel flow in the FUELPW calculation
 456f # Previous value of REFFLG = 0
 4571 # FUEL STRATEGY, IDLE FUEL MODULATION
@@ -1371,6 +1375,10 @@
 
 757b # Set PSW Flags
 
+7767 \n\n BEGIN: STABILIZATION CHECK
+777c # EXIT: VC_COOLING_SYS_TEST
+777d \n\n DO: STARTING POINT CHECK
+
 78ab \n\n BEGIN: BOO_SPD_TMR
 78b4 \n END: BOO_SPD_TMR\n
 
@@ -1747,6 +1755,8 @@
 9cd4 # (FMEM lock-up activated this power-up)
 
 9ceb # (Engine Speed above failure  mode minimum)
+
+9e98 # 
 9e9e # (Shift desired this pass)
 9ea4 # (Downshift)  
 9eaa # (Shift commanded this pass)

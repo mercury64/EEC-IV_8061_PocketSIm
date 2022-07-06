@@ -16,9 +16,11 @@ rbase e2 c1be 8f94 901e
 rbase e2 c1be 8d5f 8eb4
 rbase e2 c1be 9308 93b1
 #rbase e2 c1be 9c92 9cb3
-rbase e2 c1be 9cfb 9e94
+rbase e2 c1be 9cfb 9f03
 
 # rbase e2 cc59 8038 8055
+
+rbase e2 c1be a163 a205
 
 rbase e4 180
 rbase e6 280
@@ -132,7 +134,7 @@ word	436a 436b
 
 code    436c 43ab
 args    436f 4372 : E 2 f0 N  : UW N 
-byte    43ac 43ac
+byte    43ac 43b1
 
 code    43b2 657d
 args    4544 4547 : E 2 f0 N  : UW N  
@@ -1133,7 +1135,8 @@ byte    c1e0 c1e0
 byte    c1e1 c1e1
 byte    c1e2 c1e2
 byte    c1e3 c1e3
-word    c1e4 c1eb
+word    c1e4 c1e5
+byte    c1e6 c1eb
 byte    c1ec c1ec
 byte    c1ed c1ed
 byte    c1ee c1ee
@@ -1143,13 +1146,11 @@ word    c1f4 c1f5
 word    c1f6 c1f7
 word    c1f8 c1f9
 word    c1fa c1fb
-byte    c1fc c1fc
-byte    c1fd c1fd
-byte    c1fe c1fe
+word    c1fc c1ff
+
 byte    c200 c200
 byte    c201 c201
-byte    c202 c202
-word    c204 c205
+word    c202 c205
 byte    c206 c206
 word    c208 c209
 word    c20a c20b
@@ -1761,7 +1762,7 @@ sub  89c56   "Sub_9c56"
 sub  89c85   "CCC_COM1"  
 sub  89cbe   "CCC_FMEM_COM2"  
 sub  89cfb   "CCC_UNCOND_UNLCK_COM1"  
-sub  89e95   "Sub_9e95"  
+sub  89e95   "TM_LK_DLY_<[R32]"  
 sub  89e9e   "CCC_SHFT_UNLCK_COM1"  
 sub  89ece   "CCC_INI_DWN_COM1"  
 sub  89ed9   "CCC_DWN_CNVR_CLCH_COM1"  
@@ -1991,7 +1992,9 @@ sym 4a "B3_TLS_NV_FLG_4a" : B 3
 sym 4a "B4_ETV_TEST_4a" : B 4
 sym 4a "B7_FLG_DEL_MDN_4a" : B7
 
-sym 4b "B1_EPC_OPEN_FLG_4b" : B4
+sym 4b "B0_PARK_ERR_4b" : B0
+sym 4b "B1_EPC_OPEN_FLG_4b" : B1
+sym 4b "B2_PDL_ERROR_4b" : B2
 sym 4b "B3_CC_FM_FLG_4b" : B3
 sym 4b "B4_SFT_ERROR_4b" : B4
 sym 4b "B5_OTEMP_FM_FLG_4b" : B5
@@ -2266,7 +2269,10 @@ sym dd "B0_FLG_SFT_UNLK_dd" : B 0
 sym dd "B1_FLG_WOT_LK_dd" : B 1
 sym dd "B2_FLG_HS_UNLK_dd" : B 2
 sym dd "B3_FLG_HS_LK_dd" : B 3
+sym dd "B4_FLG_DN_UNLK_dd" : B 4
+sym dd "B5_FLG_DN_LK_dd" : B 5
 sym dd "B6_FLG_UP_UNLK_dd" : B 6
+sym dd "B7_FLG_UP_LK_dd" : B 7
 
 sym de "B0_FLG_RLK_WOT_de" : B 0
 sym de "B1_FLG_FRST_CM_de" : B 1
@@ -2280,8 +2286,13 @@ sym df "B5_FLG_SF_AUTO_df" : B 5
 sym df "B6_FLG_PWR_df" : B 6
 sym df "B7_FLG_SFT_IN_df" : B 7
 
+sym e0 "B0_I4X4L_LAST_e0" : B 0
+sym e0 "B1_FLG_4X4L_e0" : B 1
 sym e0 "B2_FLG_FRST_TV_e0" : B 2
 sym e0 "B4_FLG_ENG_TV_e0" : B 4
+sym e0 "B5_VFS_OUT_FLG_e0" : B 5
+sym e0 "B6_FLG_FRST_TCS_e0" : B 6
+sym e0 "B7_FLG_TCS_e0" : B 7
 
 
 sym e1 "B0_FLG_SFT_VAL_e1" : B0
@@ -2602,17 +2613,21 @@ sym 354 "NOV_ACT"
 sym 355 "NOV_ACT_LST"
 sym 356 "NOVCTR"
 sym 357 "VSBART_RT"
+sym 358 "IPDL_LST"
 sym 359 "PDL_LST"
+sym 35a "RLKCTR"
 sym 35b "TV_PRES"
 sym 35c "TV_STAT"
+sym 35d "TV_DYN"
 sym 35e "TQ_NET"
 sym 35f "SPK_DELTA"
 
+sym 360 "CTR_VSRATE"
 sym 362 "DNUN_TM"
 sym 364 "TM_TV_SS"
-
+sym 366 "TM_PDL_RES"
 sym 368 "TM_SFT_CCO"
-
+sym 36a "TM_UNLK_CONV"
 sym 36c "TM_SFT_IN"
 sym 36e "TM_DEL_SFT"
 
@@ -2622,6 +2637,7 @@ sym 376 "CYCCTR"
 
 sym 37a "TM_CS_DLY"
 sym 37b "TM_CS_ENG"
+sym 37c "TM_LK_DLY"
 sym 37e "TP_STRT_SFT"
 
 sym 380 "TM_UN_CT"
@@ -3373,7 +3389,7 @@ sym c1be "PARKHI"
 
 sym c1c0 "MLPS_2"
 sym c1c1 "MLPS_2hobyte"
-
+sym c1c2 "PDLTIM"
 sym c1c4 "VSPMIN"
 
 sym c1ce "VS_NEU"
@@ -3391,19 +3407,37 @@ sym c1e1 "BPUNMH"
 sym c1e2 "BPUNMN"
 sym c1e3 "BPUNMX"
 sym c1e4 "NELUMN"
+
+sym c1e6 "CTDLY"
+sym c1e7 "TRADLY"
+sym c1e8 "TRDDLY"
+sym c1e9 "BRKDLY"
+sym c1ea "PRNDLY"
+sym c1eb "LUDLY"
+
 sym c1ec "CRVDLY"
 sym c1ed "D21DLY"
 sym c1ee "D32DLY"
 sym c1ef "D43DLY"
 
+sym c1f2 "NELKWH"
+sym c1f4 "NELKWO"
+sym c1f6 "RTLKWH"
+sym c1f8 "RTLKWO"
+sym c1fa "SRLK2"
+sym c1fc "SRLK3"
+sym c1fe "SRLK4"
+
 sym c200 "SW_MLK"
 sym c201 "SW_RLK"
 sym c202 "UP_TIP_RATE"
-sym c204  "NELKWH"
-sym c206  "NELKWO"
-sym c208  "RTLKWH"
-sym c20a  "RTLKWO"
+sym c204 "TM_ACT_SFT"
+sym c206  "TMCTDY"
+sym c208  "TPLKWO"
+sym c20a  "TPLKWH"
+sym c20c  "TMDNLK"
 
+sym c20e "TMTCS"
 
 sym c210 "TPUNCH"
 sym c212 "TPUNSC"
@@ -3547,12 +3581,15 @@ sym cc08 "VBISW"
 sym cc09 "V_BOO_SPD"
 sym cc0a "V_BOOSPD_TM"
 
+sym cc13 "V_LEGOMAX2"
 sym cc15 "V_EGORNTM"
+sym cc17 "V_ADAPTV_ENA"
 sym cc18 "V_LESTM"
 sym cc1a "V_EGOMAP_MAX"
 sym cc1b "V_EGOMAP_MIN"
 sym cc1c "V_EGOTP_MIN"
 sym cc1e "V_EGOAEMAX"
+sym cc1f "V_EGR_CTMR"
 
 sym cc20 "VCRTDC"
 sym cc21 "VEGRAT"
