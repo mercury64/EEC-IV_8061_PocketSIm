@@ -1,6 +1,6 @@
 
 # ----------------------------
-# SAD Version 4.0.7.16b (11 Apr 2022)
+# SAD Version 4.0.12 (12 Mar 2023)
 # ----------------------------
 
 # Input file is 'KID2.bin'
@@ -10,8 +10,6 @@
 
 # Read commands from directive file at 'KID2_dir.txt'
 
-## skip	cc77 cc77
- Error -   Invalid  Command
 # ----- Start Disassembly phase 1 -----
 
 # ----- End   Disassembly phase 1 -----
@@ -38,6 +36,7 @@ setopts  : default
 
 # bank  8     0 2000 ffff 
 
+rbase 22 0   76ef 7730       # cmd
 rbase 80 235e 
 rbase e4 180        # cmd
 rbase e6 280        # cmd
@@ -81,8 +80,7 @@ struct  2922 29cc: UW N : UY
 code    29cd 2d84
 word    2d8a 2d8b
 code    2d8c 2f77
-word    2f78 2f79
-word    2f7c 2f7d
+word    2f78 2f7d
 code    2f7e 3cfc
 struct  3cfd 3d1d: UY : UW N 
 code    3d1e 435f
@@ -389,9 +387,7 @@ args    96fd 9700: E 2 f0 N : UW N
 args    972f 9732: E 2 f0 N : UW N 
 args    98bb 98be: E 2 f0 N : UW N 
 args    9b13 9b16: UW N : UW N 
-word    9c44 9c47
-word    9c4c 9c4d
-word    9c50 9c51
+word    9c44 9c55
 code    9c56 a3d8
 args    9ce4 9ce7: E 2 f0 N : UW N 
 args    9f1a 9f1d: E 2 f0 N : UW N 
@@ -499,15 +495,15 @@ code    a99b a9bc
 word    a9be a9d5
 code    a9d6 aa67
 word    aa68 aa6b
-byte    aa6c aa97
+struct  aa6c aa97: UY N : UY V 16 
 word    aa98 aa9d
-byte    aa9e aadd
+struct  aa9e aadd: UY N : UY 
 word    aade aae3
-byte    aae4 aae7
+struct  aae4 aae7: UY N : UY 
 word    aae8 aaed
-byte    aaee ab1f
+struct  aaee ab1f: UY N : UY 
 word    ab20 ab25
-byte    ab26 ab29
+struct  ab26 ab29: UY N : UY 
 code    ab2a ab91
 fill    ab92 ac31
 byte    ac32 ac32
@@ -716,7 +712,8 @@ word    c0b2 c0b5
 byte    c0b6 c0b6
 word    c0b8 c0bf
 byte    c0c0 c0c1
-word    c0c2 c0cb
+word    c0c2 c0c9
+byte    c0ca c0cb
 word    c0d0 c0d1
 word    c0d6 c0d9
 byte    c0da c0e6
@@ -772,10 +769,8 @@ word    c202 c205
 byte    c206 c206
 word    c208 c21d
 byte    c21e c225
-byte    c235 c236
-byte    c23a c23a
-word    c23e c23f
-word    c24e c24f
+word    c226 c22d
+word    c23e c245
 byte    c25d c25d
 func    c25e c279: UW X 10 : UW X 10 
 func    c27a c285: UY X 10 : UY X 10 
@@ -914,18 +909,14 @@ byte    cc54 cc54
 word    cc56 cc5d
 byte    cc5e cc61
 word    cc62 cc75
-byte    cc76 cc77
+byte    cc76 cc76
+xcode   cc77 cc77
 word    cc78 cc7d
 byte    cc7e cc7e
 word    cc80 cc97
 byte    cc98 cc9d
 word    cc9e ccb9
-byte    ccba cce1
-byte    cced cced
-byte    ccf6 ccf6
-byte    cd02 cd02
-byte    cd0b cd0b
-byte    cd1b cd1b
+byte    ccba cd21
 func    cd22 cd35: UW X 10 : UW X 10 
 func    cd36 cd3d: UY X 10 : UY X 10 
 func    cd40 cd49: UY X 10 : UY X 10 
@@ -961,17 +952,17 @@ sub  25c5  "Sub_25c5"   #cmd
 sub  25d9  "DCL_DM_ParameterRefByAddressOffset"   #cmd
 sub  25e2  "DCL_DM_ParameterRefByName"   #cmd
 sub  2601  "DCL_DM_A-D_SensorValueSubstitution"   #cmd
-sub  2630  "Sub_2630"   #cmd
-sub  264b  "Sub_264b"   #cmd
+sub  2630  "Vertical_Nibble_Parity_Check"   #cmd
+sub  264b  "Data_Parity_Generator"   #cmd
 sub  266a  "DCL_DM_ClearContinuousVIPCodes"   #cmd
 sub  2682  "DCL_DM_ClearDCLErrorFlags"   #cmd
-sub  268f  "Sub_268f"   #cmd
+sub  268f  "Vertical_Nibble_Parity_Error"   #cmd
 sub  269e  "DCL_DM_TransmitDMRMap"   #cmd
 sub  26a4  "DCL_DM_TransmitPIDMap"   #cmd
 sub  26ba  "DCL_DM_TransmitDMR"   #cmd
 sub  26f1  "DCL_DM_ProgramDataDownload"   #cmd
 sub  2747  "DCL_DM_ProgramExecution"   #cmd
-sub  2787  "Sub_2787"   #cmd
+sub  2787  "DCL_Diagnostic_Slot"   #cmd
 sub  27a4  "DCL_DM_DisplayDCLStatusInformation"   #cmd
 sub  27a5  "DCL_DM_RunningOnDemand_SelfTest"   #cmd
 sub  282d  "DCL_DM_TransmitContinuous_SelfTestCodes"   #cmd
@@ -1125,7 +1116,7 @@ sub  6d5b  "ACC_GOV_MAP_COM2"   #cmd
 sub  6de0  "THERMACTOR_AIR_STRATEGY"   #cmd
 sub  6ee6  "CANP_COM4"   #cmd
 sub  6fb2  "Update_Can_Purge"   #cmd
-sub  7016  "Do_Self_Test"   #cmd
+sub  7016  "VO_I_EXEC_COM2"   #cmd
 sub  70d8  "Sub_70d8"   #cmd
 sub  70de  "Sub_70de"   #cmd
 sub  70f5  "Sub_70f5"   #cmd
@@ -1157,7 +1148,7 @@ sub  7afe  "?Fault_Filter_Routine?"   #cmd
 sub  7b00  "Sub_7b00"   #cmd
 sub  7b08  "Sub_7b08"   #cmd
 sub  7baf  "Clear_KAM"   #cmd
-sub  7bb4  "Clear_Kam_SelfTest"   #cmd
+sub  7bb4  "VIP_CODE_ERASE"   #cmd
 sub  7bc0  "Set_STO"   #cmd
 sub  7bc8  "Reset_STO"   #cmd
 sub  7bd2  "GetBytes_R1a"   #cmd
@@ -1244,7 +1235,7 @@ sub  873d  "Disable_No_Start"   #cmd
 sub  8742  "POP_test"   #cmd
 sub  8755  "VO_KAMRAM_COM1"   #cmd
 sub  8794  "RAM_ERROR"   #cmd
-sub  8797  "Sub_8797"   #cmd
+sub  8797  "VC_MIL_SD_COM1"   #cmd
 sub  879a  "ZERO_MILTMR"   #cmd
 sub  87ea  "Sub_87ea"   #cmd
 sub  8802  "Sub_8802"   #cmd
@@ -1428,16 +1419,6 @@ sym 2f  "B5_DISABLE_ISC_2f" :B 5
 sym 2f  "B6_KIHP?_2f" :B 6
 sym 2f  "B7_V_EGR_RDY_2f" :B 7
 sym 2f  "VIP_flags4"
-sym 3c  "Free_run" :B 0
-sym 3c  "Word_tmr" :B 1
-sym 3c  "Decrement" :B 2
-sym 3c  "Inverse" :B 3
-sym 3c  "Millisecs" :B 5
-sym 3c  "Eighths" :B 6
-sym 3c  "Seconds" :B 7
-sym 3d  "Bit_8" :B 0
-sym 3e  "Lmillis" :B 5
-sym 3e  "Leighths" :B 6
 sym 44  "B0_FLG_DASMNQ_44" :B 0
 sym 44  "B1_FN311_Q_44" :B 1
 sym 44  "B3_FLIPFLOP_Q_44" :B 3
@@ -1454,6 +1435,11 @@ sym 45  "B6_ISC_LATCH_45" :B 6
 sym 45  "B7_REFLG_45" :B 7
 sym 45  "Flags_45"
 sym 46  "AM1" :B 0
+sym 46  "B1_??_R46" :B 1
+sym 46  "EVR" :B 2
+sym 46  "B3_??_R46" :B 3
+sym 46  "FLG_SS_1" :B 4
+sym 46  "FLG_SS_2" :B 5
 sym 46  "WOT_AC" :B 6
 sym 46  "PUMP" :B 7
 sym 47  "B1_CANP_OUT_47" :B 1
@@ -1470,6 +1456,7 @@ sym 48  "STO_TRIGGER" :B 5
 sym 48  "V_STABLFLG" :B 6
 sym 48  "V_CST_PASS" :B 7
 sym 48  "Flags_48"
+sym 49  "B0_FLG_NEW_NOV_49" :B 0
 sym 49  "B1_TCS_SHORT_49" :B 1
 sym 49  "B2_TCS_OPEN_49" :B 2
 sym 49  "DWLELD" :B 3
@@ -1994,7 +1981,9 @@ sym 376  "CYCCTR"
 sym 37a  "TM_CS_DLY"
 sym 37b  "TM_CS_ENG"
 sym 37c  "TM_LK_DLY"
+sym 37d  "TM_NOV_CALC"
 sym 37e  "TP_STRT_SFT"
+sym 37f  "TM_SS1_GR2"
 sym 380  "TM_UN_CT"
 sym 381  "TM_LK_CONV"
 sym 382  "TM_SFT_12MN"
@@ -2099,7 +2088,7 @@ sym 510  "B5_BITMAP_1" :B 5
 sym 510  "B6_BITMAP_1" :B 6
 sym 510  "B7_BITMAP_1" :B 7
 sym 510  "BITMAP_1"
-sym 51a  "UART_MSG_51a"
+sym 51a  "MODULE_ID"
 sym 51b  "CMD_CODE_51b"
 sym 51c  "BYTE_8"
 sym 51d  "BYTE_9"
@@ -2158,11 +2147,68 @@ sym 747  "KWUCTR"
 sym 748  "KAMQC"
 sym 74a  "LTMTBLrc"
 sym 74c  "KAM_CHKSUM"
-sym 901  "UART_tx_buff_901"
-sym 903  "UART_rx_buff_903"
-sym 928  "B0_CART_Status" :B 0
-sym 928  "B5_CART_Status" :B 5
-sym 928  "CART_Status_928"
+sym 900  "IW0"
+sym 901  "UART_Tx_BUFFER"
+sym 902  "IW1"
+sym 903  "UART_Rx_BUFFER"
+sym 904  "IW2"
+sym 905  "IW2_hi"
+sym 906  "IW3"
+sym 907  "IW3_hi"
+sym 908  "IW4"
+sym 909  "IW4_hi"
+sym 90a  "IW5"
+sym 90b  "IW5_hi"
+sym 90c  "IW6"
+sym 90d  "IW6_hi"
+sym 90e  "IW7"
+sym 90f  "IW7_hi"
+sym 910  "IW8"
+sym 911  "IW8_hi"
+sym 912  "IW9"
+sym 913  "IW9_hi"
+sym 914  "IWA"
+sym 915  "IWA_hi"
+sym 916  "IWB"
+sym 917  "IWB_hi"
+sym 918  "IWC"
+sym 919  "IWC_hi"
+sym 91a  "IWD"
+sym 91b  "IWD_hi"
+sym 91c  "IWE"
+sym 91d  "IWE_hi"
+sym 920  "TX_CONTROL_L"
+sym 921  "TX_CONTROL_H"
+sym 922  "TX_ERROR_VERIFY_STATUS_L"
+sym 923  "TX_ERROR_VERIFY_STATUS_H"
+sym 924  "RX_ERROR_STATUS_L"
+sym 925  "RX_ERROR_STATUS_H"
+sym 926  "SLOT_COUNT"
+sym 927  "FRAME_LENGTH"
+sym 928  "CSR_UART_RX_BUFFER_FULL_B0" :B 0
+sym 928  "CSR_UART_TX_BUFFER_EMPTY_B1" :B 1
+sym 928  "CSR_UART_CART_MODE_B2" :B 2
+sym 928  "CSR_CART_INTERUPT_ENABLE_B3" :B 3
+sym 928  "CSR_UART_TX_VERIFY_ERROR" :B 4
+sym 928  "CSR_UART_RECEIVE_OVERRUN_ERROR_B5" :B 5
+sym 928  "CSR_UART_CART_PAUSE_STATUS_B6" :B 6
+sym 928  "CSR_UART_CART_TEST_MODE_STATUS_B7" :B 7
+sym 928  "CART_STATUS_REGISTER_read"
+sym 929  "CCR_BAUD_B0" :B 0
+sym 929  "CCR_BAUD_B1" :B 1
+sym 929  "CCR_NOT_USED" :B 2
+sym 929  "CCR_UART_CART_MODE" :B 3
+sym 929  "CCR_INT_ENABLE" :B 4
+sym 929  "CCR_TEST_MODE_REQUEST" :B 5
+sym 929  "CCR_UART_CART_PAUSE" :B 6
+sym 929  "CCR_UART_CART_RESET" :B 7
+sym 929  "CART_CONTROL_write"
+sym 92a  "CCR_TEST_MODE_CONTROL_w"
+sym 92b  "NOT_USED"
+sym 93a  "TEST_STATUS_#0"
+sym 93b  "TEST_STATUS_#1"
+sym 93c  "TEST_STATUS_#2"
+sym 93d  "NOT_USED"
 sym c80  "ConsoleMode" :B 6
 sym 2004  "FIXSUM"
 sym 22c8  "HSO_Table"
@@ -2334,6 +2380,8 @@ sym b46c  "MAPAHI"
 sym b46d  "MPAHIH"
 sym b46e  "MAPLO"
 sym b46f  "MAPLOH"
+sym b470  "MPGGR"
+sym b471  "O_8500_SW"
 sym b472  "MPGLSW"
 sym b473  "MPGNOV"
 sym b474  "MPNOVH"
@@ -2358,8 +2406,9 @@ sym b48d  "INJOUT"
 sym b48e  "NUMOUT"
 sym b49a  "NLMT"
 sym b49c  "NLMTH"
-sym b49e  "speed_limiter1"
-sym b49f  "speed_limiter1_hysteresis"
+sym b49e  "VSLIM"
+sym b49f  "VSLIMH"
+sym b4a0  "BFULSW"
 sym b4a1  "T75LSW"
 sym b4a4  "OLITD1"
 sym b4a5  "OLITD3"
@@ -2371,7 +2420,14 @@ sym b4ae  "WOTRPH"
 sym b4b0  "LAMDLT"
 sym b4b2  "KFT"
 sym b4b3  "TFCTM"
+sym b4b4  "MTEISF"
 sym b4b5  "KFTMPG"
+sym b4b6  "TFCISW"
+sym b4b7  "MEFTRD"
+sym b4b8  "MEFTRA"
+sym b4ba  "TFCBITS"
+sym b4bc  "TFCDED"
+sym b4bf  "AISFM"
 sym b4c0  "DFNOVS"
 sym b4c1  "DFNOVH"
 sym b4c2  "DFSECT"
@@ -2653,6 +2709,8 @@ sym c0c2  "GRRAT1"
 sym c0c4  "GRRAT2"
 sym c0c6  "GRRAT3"
 sym c0c8  "GRRAT4"
+sym c0ca  "CLDCTM"
+sym c0cb  "TMS1G2"
 sym c0db  "NEUTIM"
 sym c0de  "TVPMX1"
 sym c0df  "TVPMN1"
@@ -2673,6 +2731,7 @@ sym c122  "TOTTV3"
 sym c124  "TOTTV4"
 sym c126  "TOTTV5"
 sym c142  "SARCHG"
+sym c153  "STALLTV_SW"
 sym c154  "trans_min_tv_pressure"
 sym c156  "ETV_BIAS"
 sym c158  "ETV_GAIN"
@@ -2693,6 +2752,7 @@ sym c174  "SPD_PM"
 sym c176  "CS_MAX_TIME"
 sym c178  "CS_MUL"
 sym c179  "OFM_MUL"
+sym c17a  "PUL_PER_REV"
 sym c17b  "MBTEGR"
 sym c182  "NE12A"
 sym c184  "NE12S"
@@ -2738,9 +2798,12 @@ sym c1ce  "VS_NEU"
 sym c1cf  "GR_NEU"
 sym c1d0  "GRMSFT"
 sym c1d1  "SW_MSF"
+sym c1d4  "NOVCNT"
 sym c1d6  "RTNVMN"
 sym c1d8  "RTNVMX"
 sym c1db  "VMPMAX"
+sym c1dc  "TMNVLK"
+sym c1dd  "TMNVCAL"
 sym c1e1  "BPUNMH"
 sym c1e2  "BPUNMN"
 sym c1e3  "BPUNMX"
@@ -2984,6 +3047,7 @@ sym cc06  "VTCDSN"
 sym cc08  "VBISW"
 sym cc09  "V_BOO_SPD"
 sym cc0a  "V_BOOSPD_TM"
+sym cc0b  "V_CBOO_ENA"
 sym cc13  "V_LEGOMAX2"
 sym cc15  "V_EGORNTM"
 sym cc17  "V_ADAPTV_ENA"
@@ -3078,6 +3142,7 @@ sym ccb0  "V_NLOW"
 sym ccb2  "V_NHIGH"
 sym ccb4  "V_RPM_SET"
 sym ccb8  "VDLY_ENTER"
+sym ccb9  "V_VSS_MULT"
 sym ccba  "V_STO_DELAY"
 sym cd22  "FN331A"
 sym cd36  "FN332"
@@ -3086,7 +3151,7 @@ sym cd4a  "FN379"
 sym cd62  "FN324"
 sym cd6e  "FN1303"
 sym cda6  "FN031"
-sym cdc6  "FN070L"
+sym cdc6  "FN070?L?"
 sym cde2  "FN371"
 sym cdee  "FN1325L"
 sym ce5c  "FN348"

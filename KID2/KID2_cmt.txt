@@ -29,6 +29,8 @@
 20d9 # HSI0, HSI1, HSI2?
 20dc # HSI line select
 
+20f5 # 0x98 = 1001 1000 for CCR and CSR
+20f9 # Cart Control (CCR) and Cart Status(CSR) byte registers.
 20fe # 0x0Fh = 15, XFRAME Block?
 
 2101 # error register is initialized to BC1FH on EEC power-up/initialize
@@ -54,7 +56,7 @@
 2382 # R34 = 1818h (CART_Status = R34 later, may change to 4040 or 9393)
 2386 # R30 = current CART_Status
 
-238b # If the buffer is not full
+238b # If the buffer is not full: B0_UART_RECEIVE_BUFFER_FULL
 238e # message check logic is exited
 
 
@@ -122,11 +124,33 @@
 2464 # 527 = 1
 2467 # 528,529 = 0
 
+246a # counter, count down
+246d # R30 = address 522, R31 = 523
+2471 # R32 = 52a, R33=52b
+2471 \w# Loop 4 times
+2475 # R3a = 522, R3b = 523
+
+2478 # [52a] = 522;
+2478 \w# [52c] = 524;
+2478 \w# [52e] = 526;
+2478 \w# [530] = 528;
+
+
+
 #2481 # <= 3 bit 0 and/or bit 1 set, meaning:
 ##2481 \w# 0     Read Bytes           Load Address (low byte) Parity
 2481 \w# 1     Read Bytes           Load Address (high byte) Bad Value
 
 24da # clear request for self test
+
+251c \w# The 8-bit FLR is used to specify
+251c \w#  the number of user slots (0 to 15) per frame.
+251c \w#0x00  0  IDLE & SYNC WORDS ONLY
+251c \w#0x00  1  IDLE & SYNC WORDS & IW0
+251c \w#....  ...  ......................
+251c \w#0x00  14  IDLE & SYNC WORDS & IW0 -> IWD
+251c \w#0x00  15  IDLE & SYNC WORDS & IW0 -> IWE
+
 
 254a # address of DEFINED EEC-IV DIAGNOSTIC MODES
 254e # 0x11h = 17 DiagModes
@@ -243,7 +267,8 @@
 2bb5 # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#1
 2bc6 # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#0
 2bcb # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#0
- 
+
+2bd3 \n\nEPC_VFS_OUT_COM2
 2c21 # GENERATE "OUTPUT INTERRUPT #1", at specified time
 
 2d5c # reset int mask
@@ -631,6 +656,8 @@
 45a4 # NOTE:  MAPOPE = MAP/PEXH
 
 45b0 # R3c is either FN305 or FN405
+
+45c9 # R1e = FN1420 or FN1320
 
 463a \n\n KEY-ON BAROMETRIC PRESSURE UPDATE LOGIC
 463e \n\n MANIFOLD ABSOLUTE PRESSURE FILTER (MAPBAR)
@@ -1416,7 +1443,7 @@
 7c8a #  (Clip to zero)
 
 7cf9 # NO INTERRUPT OUT, SET OUTPUT HIGH, HSO#9
-7cf3 # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
+7cfe # NO INTERRUPT OUT, SET OUTPUT LOW, HSO#9
 
 7d0b \n############################################################
 7d0b \n# ROM Checksum
@@ -1506,6 +1533,7 @@
 
 81d8 # 126,MAP/BP out of S-T range.
 
+8210 # NBAR >= VMIN ?
 822f # (RICH) ? 
 
 824b # 172,EGO sensor ckt. ind. system lean.
@@ -1950,6 +1978,7 @@ aa30 \n# R1a = 1, R1c = cb5a, R18 = fe, Rfe = cb5a
 aa64 # Original: 71,ef,45     an2b  R45,ef    Disable_isc = 0;
 
 aa6a # initialise data lists
+aa8a # 12.5 VOLTS
 aa98 # next data list
 aa9a # Addresses + 0x100 for this list
 

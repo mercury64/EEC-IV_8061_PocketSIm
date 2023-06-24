@@ -54,8 +54,8 @@ args    27ec 27ef: E 2 f0 N : UW N
 args    29e5 29e8: E 2 f0 N : O 2 UY 
 args    2a06 2a09: E 2 f0 N : UW N 
 args    2aaf 2ab2: E 2 f0 N : UW N 
-struct  2ade 2aff: UY 
-struct  2b00 2b1d: UY 
+struct  2ade 2aff: UW
+#struct  2b00 2b1d: UY 
 struct  2b1e 2b2d: O 4 UY 
 struct  2b2e 2b39: O 4 UY 
 struct  2b3a 2b42: O 3 UY 

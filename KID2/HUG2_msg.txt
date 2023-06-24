@@ -1,6 +1,6 @@
 
 # ----------------------------
-# SAD Version 4.0.7.14 (22 Mar 2021)
+# SAD Version 4.0.7.16 (16 Jun 2021)
 # ----------------------------
 
 # Input file is 'HUG2.bin'
@@ -103,8 +103,7 @@ args    27ec 27ef: E 2 f0 N : UW N
 args    29e5 29e8: E 2 f0 N : O 2 UY 
 args    2a06 2a09: E 2 f0 N : UW N 
 args    2aaf 2ab2: E 2 f0 N : UW N 
-struct  2ade 2aff: UY 
-struct  2b00 2b1d: UY 
+struct  2ade 2aff: UW 
 struct  2b1e 2b2d: O 4 UY 
 struct  2b2e 2b39: O 4 UY 
 struct  2b3a 2b42: O 3 UY 
@@ -200,7 +199,6 @@ args    3ee5 3ee6: O 2 UY
 args    3eea 3eeb: O 2 UY 
 args    40a8 40a8: UY 
 args    4185 4186: UW N 
-fill    4189 4189
 word    418a 418f
 code    4190 41a0
 struct  41a1 41a9: O 3 UY 
@@ -333,39 +331,21 @@ args    4de5 4de6: UW N
 args    4dff 4e00: UW N 
 struct  5128 5139: O 3 UY 
 struct  513a 514b: O 3 UY 
-word    514c 5152
+word    514c 514f
 byte    5153 5153
-struct  5154 5159: UY 
-struct  515a 515b: UY 
-byte    515c 515f
-struct  5160 5165: UY 
-word    5166 516a
-byte    516b 516d
+byte    515f 515f
+byte    5161 5161
+byte    516b 516b
+byte    516d 516d
 byte    5175 5177
 word    5178 517b
-struct  517c 517d: UY 
-byte    517e 5182
+byte    5181 5182
 word    5184 5185
-struct  5186 5187: UY 
-byte    5188 518b
-struct  518c 519a: O 5 UY 
-struct  519b 51a3: O 3 UY 
-struct  51a4 51ac: O 3 UY 
-struct  51ad 51b5: O 3 UY 
-struct  51b6 51be: O 3 UY 
-struct  51bf 51c7: O 3 UY 
-struct  51c8 51d0: O 3 UY 
-struct  51d1 51d9: O 3 UY 
-struct  51da 51e2: O 3 UY 
+byte    518b 518b
+byte    51af 51af
 byte    51e3 51e3
-struct  51e4 51ec: O 3 UY 
-struct  51ed 51f5: O 3 UY 
-byte    51f6 51f9
-struct  51fa 5202: O 3 UY 
-struct  5203 520b: O 3 UY 
-struct  520c 5214: O 3 UY 
-struct  5215 521d: O 3 UY 
-struct  521e 5226: O 3 UY 
+byte    51f9 51f9
+byte    5213 5213
 code    5227 53f0
 fill    53f1 53f1
 struct  53f2 5405: UY 
@@ -397,7 +377,6 @@ struct  5c0f 5c1a: O 4 UY
 struct  5c1b 5c23: O 3 UY 
 struct  5c24 5c2c: O 3 UY 
 struct  5c2d 5c35: O 3 UY 
-word    5c36 5c36
 code    5c37 5c54
 struct  5c55 5c60: O 4 UY 
 struct  5c61 5c69: O 3 UY 
@@ -692,7 +671,6 @@ struct  d309 d311: O 3 UY
 struct  d312 d317: UY 
 code    d318 d373
 struct  d374 d379: UY 
-word    d37a d37a
 code    d37b d6aa
 args    d5ba d5bd: E 2 f0 N : O 2 UY 
 args    d5cc d5cf: E 2 f0 N : UW N 
@@ -905,7 +883,6 @@ func    e7f4 e801: SY X 10 : UY X 10
 func    e802 e821: UW X 10 : UW X 10 V 256 
 func    e822 e845: UW X 10 : UW X 10 V 256 
 struct  e846 e847: UY 
-word    e848 e849
 func    e84a e869: UW X 10 : UW X 10 
 func    e86a e877: SY X 10 : UY X 10 
 func    e878 e88f: UW X 10 : UW X 10 V 256 
@@ -1116,7 +1093,6 @@ struct  f788 f790: O 3 UY
 struct  f791 f799: O 3 UY 
 struct  f79a f7b5: O 4 UY 
 struct  f7b6 f7c9: O 4 UY 
-word    f7ca f7cb
 func    f7cc f7eb: UW X 10 : UW X 10 V 256 
 func    f7ec f80b: UW X 10 : UW X 10 
 func    f80c f82b: UW X 10 : UW X 10 
@@ -1187,7 +1163,6 @@ struct  fdea fdf2: O 3 UY
 fill    fdf3 fdf3
 word    fdf4 fe03
 byte    fe04 fe08
-fill    fe09 fe09
 word    fe0a fe1b
 struct  fe1c fe21: UY 
 word    fe22 fe25

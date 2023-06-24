@@ -1,9 +1,8 @@
-package ca.nerret.emu.emulator;
 
 public class BUS {
 	
 	public CPU cpu;
-
+	
 	//public Memory ram;
 	private byte[] ram;
 	
@@ -14,7 +13,6 @@ public class BUS {
 		this.cpu = cpu;
 		ram = new byte[64 * 1024]; // 0xFFFF = 64k
 		cpu.connectBus(this);
-
 	}
 	
 	public BUS() {
@@ -62,11 +60,11 @@ public class BUS {
 		
 	}
 
-	public Calibration getCalibration() {
+	public Calibration getCal() {
 		return cal;
 	}
 
-	public void setCalibration(Calibration cal) {
+	public void setCal(Calibration cal) {
 		this.cal = cal;
 		this.ram = cal.read();
 		

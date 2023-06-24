@@ -1,7 +1,7 @@
 
 ####################################################################################################
 #
-# Disassembly listing of binary 'HUG2'    8061  1 bank     SAD Version 4.0.7.14 (22 Mar 2021)
+# Disassembly listing of binary 'HUG2'    8061  1 bank     SAD Version 4.0.7.16 (16 Jun 2021)
 # See 'HUG2_msg.txt' for warnings, results and other information
 
 # Explanation of extra flags and formats - 
@@ -13,8 +13,7 @@
 
 # Processor status flags (for conditional jumps)
 #   CY=carry, STC=sticky, OVF=overflow, OVT=overflow trap
-
-# - - - -  DEBUG  - - - - - #
+#
 ####################################################################################################
 
 
@@ -1081,71 +1080,26 @@
 2ad9: c3,7a,da,1a         stw   R1a,[R7a+da]     [55a] = R1a;
 2add: f0                  ret                    return;
 
-2ade: 12                  struct   12
-2adf: 01                  struct    1
-2ae0: 13                  struct   13
-2ae1: 01                  struct    1
-2ae2: 17                  struct   17
-2ae3: 01                  struct    1
-2ae4: 18                  struct   18
-2ae5: 01                  struct    1
-2ae6: 21                  struct   21
-2ae7: 01                  struct    1
-2ae8: 22                  struct   22
-2ae9: 01                  struct    1
-2aea: 23                  struct   23
-2aeb: 01                  struct    1
-2aec: 24                  struct   24
-2aed: 01                  struct    1
-2aee: 25                  struct   25
-2aef: 01                  struct    1
-2af0: 57                  struct   57
-2af1: 01                  struct    1
-2af2: 58                  struct   58
-2af3: 01                  struct    1
-2af4: 71                  struct   71
-2af5: 01                  struct    1
-2af6: 72                  struct   72
-2af7: 01                  struct    1
-2af8: 73                  struct   73
-2af9: 01                  struct    1
-2afa: 75                  struct   75
-2afb: 01                  struct    1
-2afc: 76                  struct   76
-2afd: 01                  struct    1
-2afe: 77                  struct   77
-2aff: 01                  struct    1
+2ade: 12,01               struct    112
+2ae0: 13,01               struct    113
+2ae2: 17,01               struct    117
+2ae4: 18,01               struct    118
+2ae6: 21,01               struct    121
+2ae8: 22,01               struct    122
+2aea: 23,01               struct    123
+2aec: 24,01               struct    124
+2aee: 25,01               struct    125
+2af0: 57,01               struct    157
+2af2: 58,01               struct    158
+2af4: 71,01               struct    171
+2af6: 72,01               struct    172
+2af8: 73,01               struct    173
+2afa: 75,01               struct    175
+2afc: 76,01               struct    176
+2afe: 77,01               struct    177
 
-2b00: 79                  struct   79
-2b01: 01                  struct    1
-2b02: 81                  struct   81
-2b03: 01                  struct    1
-2b04: 82                  struct   82
-2b05: 01                  struct    1
-2b06: 83                  struct   83
-2b07: 01                  struct    1
-2b08: 84                  struct   84
-2b09: 01                  struct    1
-2b0a: 85                  struct   85
-2b0b: 01                  struct    1
-2b0c: 86                  struct   86
-2b0d: 01                  struct    1
-2b0e: 87                  struct   87
-2b0f: 01                  struct    1
-2b10: 88                  struct   88
-2b11: 01                  struct    1
-2b12: 89                  struct   89
-2b13: 01                  struct    1
-2b14: 91                  struct   91
-2b15: 01                  struct    1
-2b16: 92                  struct   92
-2b17: 01                  struct    1
-2b18: 11                  struct   11
-2b19: 02                  struct    2
-2b1a: 12                  struct   12
-2b1b: 02                  struct    2
-2b1c: 26                  struct   26
-2b1d: 03                  struct    3
+2b00: 79,01,81,01,82,01,83,01,84,01,85,01,86,01,87,01  ???  
+2b10: 88,01,89,01,91,01,92,01,11,02,12,02,26,03  ???  
 
 2b1e: 27,03,28,03         struct   27,   3,  28,   3
 2b22: 32,03,34,03         struct   32,   3,  34,   3
@@ -3444,7 +3398,7 @@
 4185: 11,05                     #arg 1              511 ); }
 4187: 21,fe               sjmp  4387             goto 4387;
 
-4189: ff                  fill  
+4189: ff                  ???   
 
 418a: 00,20               word   2000
 418c: fc,ff               word   fffc
@@ -5175,37 +5129,25 @@
 
 514c: ff,ff               word   ffff
 514e: 22,52               word   5222
-5150: 53,53               word   5353
-5152: 00                  byte      0
+
+5150: 53,53,00            ???   
+
 5153: 59                  byte     59
 
-5154: 0b                  struct    b
-5155: 5c                  struct   5c
-5156: a3                  struct   a3
-5157: d5                  struct   d5
-5158: 65                  struct   65
-5159: 53                  struct   53
+5154: 0b,5c,a3,d5,65,53,00,c9,0b,5c,6d  ???  
 
-515a: 00                  struct    0
-515b: c9                  struct   c9
-
-515c: 0b                  byte      b
-515d: 5c                  byte     5c
-515e: 6d                  byte     6d
 515f: d5                  byte     d5
 
-5160: 53                  struct   53
-5161: 53                  struct   53
-5162: 00                  struct    0
-5163: 58                  struct   58
-5164: 0c                  struct    c
-5165: 02                  struct    2
+5160: 53                  ???   
 
-5166: bc,64               word   64bc
-5168: 65,53               word   5365
-516a: 00                  byte      0
+5161: 53                  byte     53
+
+5162: 00,58,0c,02,bc,64,65,53,00  ???  
+
 516b: c8                  byte     c8
-516c: 0c                  byte      c
+
+516c: 0c                  ???   
+
 516d: 02                  byte      2
 
 516e: 5d,64,d5,6f,00,10,0a???   
@@ -5216,12 +5158,8 @@
 5178: 01,00               word      1
 517a: 01,00               word      1
 
-517c: ee                  struct   ee
-517d: 6f                  struct   6f
+517c: ee,6f,00,00,0c      ???   
 
-517e: 00                  byte      0
-517f: 00                  byte      0
-5180: 0c                  byte      c
 5181: 0e                  byte      e
 5182: 01                  byte      1
 
@@ -5229,84 +5167,35 @@
 
 5184: 01,00               word      1
 
-5186: d5                  struct   d5
-5187: 6f                  struct   6f
+5186: d5,6f,00,11,0a      ???   
 
-5188: 00                  byte      0
-5189: 11                  byte     11
-518a: 0a                  byte      a
 518b: 1a                  byte     1a
 
-518c: 02,fd,02,00,02      struct    2,  fd,   2,   0,   2
-5191: 00,ee,6f,00,01      struct    0,  ee,  6f,   0,   1
-5196: 0c,1a,02,fd,02      struct    c,  1a,   2,  fd,   2
+518c: 02,fd,02,00,02,00,ee,6f,00,01,0c,1a,02,fd,02,00  ???  
+519c: d5,6f,00,12,0a,24,04,fb,03,00,04,00,ee,6f,00,02  ???  
+51ac: 0c,24,04            ???   
 
-519b: 00,d5,6f            struct    0,  d5,  6f
-519e: 00,12,0a            struct    0,  12,   a
-51a1: 24,04,fb            struct   24,   4,  fb
+51af: fb                  byte     fb
 
-51a4: 03,00,04            struct    3,   0,   4
-51a7: 00,ee,6f            struct    0,  ee,  6f
-51aa: 00,02,0c            struct    0,   2,   c
-
-51ad: 24,04,fb            struct   24,   4,  fb
-51b0: 03,00,d5            struct    3,   0,  d5
-51b3: 6f,00,13            struct   6f,   0,  13
-
-51b6: 0a,2e,08            struct    a,  2e,   8
-51b9: f7,04,00            struct   f7,   4,   0
-51bc: 08,00,ee            struct    8,   0,  ee
-
-51bf: 6f,00,03            struct   6f,   0,   3
-51c2: 0c,2e,08            struct    c,  2e,   8
-51c5: f7,04,00            struct   f7,   4,   0
-
-51c8: d5,6f,00            struct   d5,  6f,   0
-51cb: 14,0a,38            struct   14,   a,  38
-51ce: 10,ef,05            struct   10,  ef,   5
-
-51d1: 00,10,00            struct    0,  10,   0
-51d4: ee,6f,00            struct   ee,  6f,   0
-51d7: 04,0c,38            struct    4,   c,  38
-
-51da: 10,ef,05            struct   10,  ef,   5
-51dd: 00,d5,6f            struct    0,  d5,  6f
-51e0: 00,15,0a            struct    0,  15,   a
+51b0: 03,00,d5,6f,00,13,0a,2e,08,f7,04,00,08,00,ee,6f  ???  
+51c0: 00,03,0c,2e,08,f7,04,00,d5,6f,00,14,0a,38,10,ef  ???  
+51d0: 05,00,10,00,ee,6f,00,04,0c,38,10,ef,05,00,d5,6f  ???  
+51e0: 00,15,0a            ???   
 
 51e3: 42                  byte     42
 
-51e4: 20,df,06            struct   20,  df,   6
-51e7: 00,20,00            struct    0,  20,   0
-51ea: ee,6f,00            struct   ee,  6f,   0
+51e4: 20,df,06,00,20,00,ee,6f,00,05,0c,42,20,df,06,00  ???  
+51f4: d5,6f,00,16,0a      ???   
 
-51ed: 05,0c,42            struct    5,   c,  42
-51f0: 20,df,06            struct   20,  df,   6
-51f3: 00,d5,6f            struct    0,  d5,  6f
-
-51f6: 00                  byte      0
-51f7: 16                  byte     16
-51f8: 0a                  byte      a
 51f9: 4c                  byte     4c
 
-51fa: 40,bf,07            struct   40,  bf,   7
-51fd: 00,40,00            struct    0,  40,   0
-5200: ee,6f,00            struct   ee,  6f,   0
+51fa: 40,bf,07,00,40,00,ee,6f,00,06,0c,4c,40,bf,07,00  ???  
+520a: d5,6f,00,17,0a,56,80,7f,08  ???  
 
-5203: 06,0c,4c            struct    6,   c,  4c
-5206: 40,bf,07            struct   40,  bf,   7
-5209: 00,d5,6f            struct    0,  d5,  6f
+5213: 00                  byte      0
 
-520c: 00,17,0a            struct    0,  17,   a
-520f: 56,80,7f            struct   56,  80,  7f
-5212: 08,00,80            struct    8,   0,  80
-
-5215: 00,ee,6f            struct    0,  ee,  6f
-5218: 00,07,0c            struct    0,   7,   c
-521b: 56,80,7f            struct   56,  80,  7f
-
-521e: 08,00,07            struct    8,   0,   7
-5221: 00,c7,94            struct    0,  c7,  94
-5224: 01,00,f0            struct    1,   0,  f0
+5214: 80,00,ee,6f,00,07,0c,56,80,7f,08,00,07,00,c7,94  ???  
+5224: 01,00,f0            ???   
 
    Sub_5227:
 5227: 71,7f,28            an2b  R28,7f           B7_R28 = 0;
@@ -6293,7 +6182,7 @@
 5c30: fa,01,32            struct   fa,   1,  32
 5c33: c2,38,32            struct   c2,  38,  32
 
-5c36: f0                  byte     f0
+5c36: f0                  ???   
 
    Sub_5c37:
 5c37: 5d,02,4f,42         ml3b  R42,R4f,2        wR42 = yR4f * 2;
@@ -17540,7 +17429,7 @@ d377: 03                  struct    3
 d378: bc                  struct   bc
 d379: 02                  struct    2
 
-d37a: 00                  byte      0
+d37a: 00                  ???   
 
    Sub_d37b:
 d37b: 6f,33,08,d3,34      ml2w  R34,[R32+d308]   lR34 *= [R32+d308];
@@ -19337,7 +19226,7 @@ e842: 00,00,00,01         func      0,         1
 e846: 00                  struct    0
 e847: 00                  struct    0
 
-e848: 00,00               word      0
+e848: 00,00               ???   
 
    Func_e84a:
 e84a: ff,ff,00,00         func  65535,     0
@@ -20851,7 +20740,7 @@ f7be: 00,00,00,00         struct    0,   0,   0,   0
 f7c2: 00,00,00,00         struct    0,   0,   0,   0
 f7c6: 00,00,00,00         struct    0,   0,   0,   0
 
-f7ca: 00,00               word      0
+f7ca: 00,00               ???   
 
    Func_f7cc:
 f7cc: ff,ff,00,06         func  65535,         6    
@@ -21469,7 +21358,7 @@ fe06: 3c                  byte     3c
 fe07: 0a                  byte      a
 fe08: 05                  byte      5
 
-fe09: ff                  fill  
+fe09: ff                  ???   
 
 fe0a: 66,66               word   6666
 fe0c: 33,13               word   1333
